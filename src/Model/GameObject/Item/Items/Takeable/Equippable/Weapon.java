@@ -4,6 +4,7 @@ import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takeable.Takeable;
 import Model.Location;
 import Model.Requirement;
+import Model.Effect;
 
 /**
  * Created by Wimberley on 2/25/16.

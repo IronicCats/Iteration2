@@ -3,6 +3,7 @@ package Model.GameObject.Item.Items.Takeable;
 import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Model.Requirement;
+import Model.Effect;
 
 /**
  * Created by Wimberley on 2/25/16.
