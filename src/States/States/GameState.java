@@ -24,7 +24,6 @@ public class GameState extends State {
 
     public GameState() {
         // read createItem class!
-        //cool
         Item item = createItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStruc(StatsEnum.LIFE, -5)); // null for now. Stats has not been created
         ItemView itemView = new ItemView(item);
     }
