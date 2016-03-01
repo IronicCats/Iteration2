@@ -5,7 +5,7 @@ package Model;
  */
 public class Location {
 
-    public Location(int x, int y){
+    public Location(int x, int y, int dir){
       // some code
     };
 }
