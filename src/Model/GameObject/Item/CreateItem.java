@@ -73,7 +73,7 @@ public class CreateItem {
 
     public Interactable addInteractable(String name, String description, int x, int y, int level, Quest requiredItem) {
         id = ItemEnum.INTERACTABLE;
-        location = new Location(x, y);
+        location = new Location(x,y);
         requirement = new Requirement(level, requiredItem);
         return new Interactable(id, name, description, location, requirement);
     }

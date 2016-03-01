@@ -5,6 +5,10 @@ package Model;
  */
 public class Location {
 
+    public Location(int x, int y){
+        //some code, set dir to 0
+    }
+
     public Location(int x, int y, int dir){
       // some code
     };
