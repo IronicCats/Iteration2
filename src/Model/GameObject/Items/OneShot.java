@@ -1,14 +1,14 @@
-package Model.GameObject.Item.Items;
+package Model.GameObject.Items;
 
-import Model.GameObject.Item.Item;
-import Model.GameObject.Item.ItemEnum;
+import Model.GameObject.Item;
+import Model.GameObject.ItemEnum;
 import Model.Location;
 import Model.Effect;
 
 /**
  * Created by Wimberley on 2/25/16.
  */
-public class OneShot extends Item{
+public class OneShot extends Item {
 
     Effect []effects;
 

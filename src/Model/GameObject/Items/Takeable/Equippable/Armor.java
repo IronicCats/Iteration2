@@ -1,7 +1,7 @@
-package Model.GameObject.Item.Items.Takeable.Equippable;
+package Model.GameObject.Items.Takeable.Equippable;
 
-import Model.GameObject.Item.ItemEnum;
-import Model.GameObject.Item.Items.Takeable.Takeable;
+import Model.GameObject.ItemEnum;
+import Model.GameObject.Items.Takeable.Takeable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effect;

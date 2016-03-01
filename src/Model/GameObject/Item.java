@@ -1,4 +1,4 @@
-package Model.GameObject.Item;
+package Model.GameObject;
 
 import Model.Location;
 

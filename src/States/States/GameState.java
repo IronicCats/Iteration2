@@ -1,6 +1,9 @@
 package States.States;
 
 
+import Model.GameObject.Item;
+import Model.GameObject.ItemEnum;
+import Model.GameObject.Items.OneShot;
 import States.State;
 
 import java.awt.*;
@@ -12,7 +15,7 @@ import java.awt.*;
 public class GameState extends State {
 
     public GameState() {
-
+        Item item = new OneShot(ItemEnum.ONESHOT, "HitPoition", "Adds Health to Player", );
     }
 
     public void switchState() {
@@ -20,6 +23,7 @@ public class GameState extends State {
     }
 
     public void tick() {
+
     }
 
     public void render(Graphics g) {

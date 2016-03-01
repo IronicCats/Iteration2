@@ -1,6 +1,6 @@
 package Model;
 
-import Model.GameObject.Item.Item;
+import Model.GameObject.Item;
 
 /**
  * Created by Wimberley on 2/25/16.
