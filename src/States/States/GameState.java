@@ -1,10 +1,10 @@
 package States.States;
 
 
-import Model.Effect;
-import Model.GameObject.Item;
-import Model.GameObject.ItemEnum;
-import Model.GameObject.Items.OneShot;
+import Model.Effects.Effect;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.ItemEnum;
+import Model.GameObject.Item.Item.OneShot;
 import Model.Location;
 import States.State;
 import View.Views.ItemView;

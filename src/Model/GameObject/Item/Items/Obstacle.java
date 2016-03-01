@@ -1,7 +1,7 @@
-package Model.GameObject.Items;
+package Model.GameObject.Item.Items;
 
-import Model.GameObject.Item;
-import Model.GameObject.ItemEnum;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Utitlies.Observer;
 
@@ -10,12 +10,11 @@ import Utitlies.Observer;
  */
 public class Obstacle extends Item {
 
-    Obstacle(ItemEnum id, String name, String description, Location location, int imageId){
+    public Obstacle(ItemEnum id, String name, String description, Location location){
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
-        this.imageId = imageId;
     }
 
     @Override
