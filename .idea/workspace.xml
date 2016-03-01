@@ -2,41 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39d5016b-993d-4559-8ed6-c80a9ab26ee4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/Effects/Effect.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Entity/StatsEnum.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/CreateItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takables/Equippable/Armor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takables/Equippable/Weapon.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takables/Quest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takables/Usable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/PopulateItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/StatStruc.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utitlies/Observer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utitlies/Subject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/View/Views/ItemView.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/Effect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takeable/Equippable/Armor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takeable/Equippable/Weapon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takeable/Quest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takeable/Takeable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Takeable/Usable.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Iteration2.iml" afterPath="$PROJECT_DIR$/Iteration2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Item.java" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Interactable.java" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Interactable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Obstacle.java" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/Obstacle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/OneShot.java" afterPath="$PROJECT_DIR$/src/Model/GameObject/Item/Items/OneShot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Location.java" afterPath="$PROJECT_DIR$/src/Model/Location.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Requirement.java" afterPath="$PROJECT_DIR$/src/Model/Requirement.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/States/States/GameState.java" afterPath="$PROJECT_DIR$/src/States/States/GameState.java" />
     </list>
     <ignored path="Iteration2.iws" />
@@ -57,12 +22,33 @@
   <component name="FavoritesManager">
     <favorites_list name="Iteration2" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/States/States/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6912029">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/States/States/GameState.java" />
+      </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -127,6 +113,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Iteration2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Iteration2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="States" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Iteration2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Iteration2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="States" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="States" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -428,7 +454,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -440,7 +466,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -464,5 +490,15 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/States/States/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6912029">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
