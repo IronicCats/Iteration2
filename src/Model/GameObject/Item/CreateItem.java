@@ -24,6 +24,10 @@ import Model.GameObject.Item.Items.Takables.Equippable.*;
 
 public class CreateItem {
 
+    public CreateItem(){
+
+    }
+
     private Location location;
     private Effect effect;
     private ItemEnum id;

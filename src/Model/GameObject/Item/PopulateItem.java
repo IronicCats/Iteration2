@@ -11,5 +11,5 @@ import Model.GameObject.Item.Items.OneShot;
    at start of new game.
  */
 public class PopulateItem {
-    // waiting for map view 
+    // waiting for map view
 }
