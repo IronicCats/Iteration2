@@ -4,6 +4,8 @@ import Model.Location;
 import Utitlies.Observer;
 import Utitlies.Subject;
 
+import View.Views.ItemView;
+
 
 /**
  * Created by Wimberley on 2/25/16.
