@@ -1,4 +1,4 @@
-package Model.GameObject;
+package Model.GameObject.Item;
 
 /**
  * Created by Wimberley on 2/25/16.

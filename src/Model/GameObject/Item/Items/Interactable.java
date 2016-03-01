@@ -1,7 +1,7 @@
-package Model.GameObject.Items;
+package Model.GameObject.Item.Items;
 
-import Model.GameObject.Item;
-import Model.GameObject.ItemEnum;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Model.Requirement;
 import Utitlies.Observer;
@@ -11,19 +11,18 @@ import Utitlies.Observer;
  */
 public class Interactable extends Item {
 
-    Requirement requirements;
+    Requirement requirement;
 
-    Interactable(ItemEnum id, String name, String description, Location location, int imageId, Requirement requirements){
+    public Interactable(ItemEnum id, String name, String description, Location location, Requirement requirement){
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
-        this.imageId = imageId;
-        this.requirements = requirements;
+        this.requirement = requirement;
     }
 
     public Requirement getRequirements() {
-        return requirements;
+        return requirement;
     }
 
 
