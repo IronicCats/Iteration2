@@ -5,6 +5,7 @@ import Model.GameObject.Items.Takeable.Takeable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effect;
+import Utitlies.Observer;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -24,5 +25,22 @@ public class Armor extends Takeable {
 
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+
+
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void alert() {
+
     }
 }

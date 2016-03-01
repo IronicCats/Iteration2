@@ -4,6 +4,7 @@ import Model.GameObject.Item;
 import Model.GameObject.ItemEnum;
 import Model.Location;
 import Model.Requirement;
+import Utitlies.Observer;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -23,5 +24,21 @@ public class Interactable extends Item {
 
     public Requirement getRequirements() {
         return requirements;
+    }
+
+
+    @Override
+    public void addObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void alert() {
+
     }
 }

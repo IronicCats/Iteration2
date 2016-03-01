@@ -1,10 +1,13 @@
 package States.States;
 
 
+import Model.Effect;
 import Model.GameObject.Item;
 import Model.GameObject.ItemEnum;
 import Model.GameObject.Items.OneShot;
+import Model.Location;
 import States.State;
+import View.Views.ItemView;
 
 import java.awt.*;
 
@@ -15,7 +18,8 @@ import java.awt.*;
 public class GameState extends State {
 
     public GameState() {
-        Item item = new OneShot(ItemEnum.ONESHOT, "HitPoition", "Adds Health to Player", );
+        Item item = new OneShot(ItemEnum.ONESHOT, "HitPoition", "Adds Health to Player", new Location(), new Effect[5] );
+        ItemView itemView = new ItemView(item);
     }
 
     public void switchState() {
