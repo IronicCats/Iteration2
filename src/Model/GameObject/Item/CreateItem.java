@@ -39,7 +39,7 @@ public class CreateItem {
 
     public OneShot addOneShot(String name, String description, int x, int y, StatStruc modify){
         id = ItemEnum.ONESHOT;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         effect = new Effect(modify);
         return new OneShot(id, name, description, location, effect);
     }
@@ -49,7 +49,7 @@ public class CreateItem {
 
     public Obstacle addObstacle(String name, String description, int x, int y){
         id = ItemEnum.OBSTACLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         return new Obstacle(id, name, description, location);
     }
 
@@ -59,21 +59,21 @@ public class CreateItem {
 
     public Interactable addInteractable(String name, String description, int x, int y, int requiredLevel){
         id = ItemEnum.INTERACTABLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel);
         return new Interactable(id, name, description, location, requirement);
     }
 
     public Interactable addInteractable(String name, String description, int x, int y, Quest requiredItem){
         id = ItemEnum.INTERACTABLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredItem);
         return new Interactable(id, name, description, location, requirement);
     }
 
     public Interactable addInteractable(String name, String description, int x, int y, int level, Quest requiredItem) {
         id = ItemEnum.INTERACTABLE;
-        location = new Location(x, y);
+        location = new Location(x,y,0);
         requirement = new Requirement(level, requiredItem);
         return new Interactable(id, name, description, location, requirement);
     }
@@ -84,7 +84,7 @@ public class CreateItem {
 
     public Quest addQuest(String name, String description, int x, int y, int requiredLevel, StatStruc modify){
         id = ItemEnum.QUEST;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel);
         effect = new Effect(modify);
         return new Quest(id, name, description, location, requirement, effect);
@@ -92,7 +92,7 @@ public class CreateItem {
 
     public Quest addQuest(String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
         id = ItemEnum.QUEST;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredItem);
         effect = new Effect(modify);
         return new Quest(id, name, description, location, requirement, effect);
@@ -100,7 +100,7 @@ public class CreateItem {
 
     public Quest addQuest(String name, String description, int x, int y, int level, Quest requiredItem, StatStruc modify){
         id = ItemEnum.QUEST;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(level, requiredItem);
         effect = new Effect(modify);
         return new Quest(id, name, description, location, requirement, effect);
@@ -112,7 +112,7 @@ public class CreateItem {
 
     public Usable addUsable(String name, String description, int x, int y, int requiredLevel, StatStruc modify){
         id = ItemEnum.USABLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel);
         effect = new Effect(modify);
         return new Usable(id, name, description, location, requirement, effect);
@@ -120,7 +120,7 @@ public class CreateItem {
 
     public Usable addUsable(String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
         id = ItemEnum.USABLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredItem);
         effect = new Effect(modify);
         return new Usable(id, name, description, location, requirement, effect);
@@ -128,7 +128,7 @@ public class CreateItem {
 
     public Usable addUsable(String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
         id = ItemEnum.USABLE;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel, requiredItem);
         effect = new Effect(modify);
         return new Usable(id, name, description, location, requirement, effect);
@@ -140,7 +140,7 @@ public class CreateItem {
 
     public Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel);
         effect = new Effect(modify);
         return new Weapon(id, name, description, location, requirement, effect);
@@ -148,7 +148,7 @@ public class CreateItem {
 
     public Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredItem);
         effect = new Effect(modify);
         return new Weapon(id, name, description, location, requirement, effect);
@@ -156,7 +156,7 @@ public class CreateItem {
 
     public Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel, requiredItem);
         effect = new Effect(modify);
         return new Weapon(id, name, description, location, requirement, effect);
@@ -168,7 +168,7 @@ public class CreateItem {
 
     public Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel);
         effect = new Effect(modify);
         return new Armor(id, name, description, location, requirement, effect);
@@ -176,7 +176,7 @@ public class CreateItem {
 
     public Armor addArmor(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredItem);
         effect = new Effect(modify);
         return new Armor(id, name, description, location, requirement, effect);
@@ -184,7 +184,7 @@ public class CreateItem {
 
     public Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
         this.id = id;
-        location = new Location(x,y);
+        location = new Location(x,y,0);
         requirement = new Requirement(requiredLevel, requiredItem);
         effect = new Effect(modify);
         return new Armor(id, name, description, location, requirement, effect);
