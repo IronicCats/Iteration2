@@ -4,40 +4,30 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Model.Requirement;
-import Utitlies.Observer;
+import Model.Effects.Effect;
 
 /**
  * Created by Wimberley on 2/25/16.
  */
-public class Interactable extends Item {
+public abstract class Takable extends Item{
 
-    Requirement requirement;
+    private Requirement requirement;
+    protected Effect effect;
 
-    public Interactable(ItemEnum id, String name, String description, Location location, Requirement requirement){
+    public Takable(ItemEnum id, String name, String description, Location location, Requirement requirement, Effect effect){
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
         this.requirement = requirement;
+        this.effect = effect;
     }
 
     public Requirement getRequirements() {
         return requirement;
     }
 
-
-    @Override
-    public void addObserver(Observer o) {
-
-    }
-
-    @Override
-    public void removeObserver(Observer o) {
-
-    }
-
-    @Override
-    public void alert() {
-
+    public Effect getEffect() {
+        return effect;
     }
 }
