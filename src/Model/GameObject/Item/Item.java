@@ -1,8 +1,9 @@
-package Model.GameObject;
+package Model.GameObject.Item;
 
 import Model.Location;
 import Utitlies.Observer;
 import Utitlies.Subject;
+
 import View.Views.ItemView;
 
 
@@ -15,7 +16,6 @@ public abstract class Item implements Subject {
     protected String name;
     protected String description;
     protected Location location; // location of item on map
-    protected int imageId; // used so view can assign image to item
     protected Observer observer;
 
     public ItemEnum getId() {
@@ -33,10 +33,5 @@ public abstract class Item implements Subject {
     public Location getLocation() {
         return location;
     }
-
-    public int getImageId() {
-        return imageId;
-    }
-
 
 }

@@ -1,6 +1,6 @@
 package View.Views;
 
-import Model.GameObject.Item;
+import Model.GameObject.Item.Item;
 import Utitlies.Observer;
 import View.ViewUtilities.Renderable;
 
