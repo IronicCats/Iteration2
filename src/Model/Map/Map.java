@@ -1,15 +1,19 @@
 package Model.Map;
 
 import Model.Location;
+import Utilities.Subject;
+import Utilities.Observer;
 
 /**
  * Created by Aidan on 3/1/2016.
  */
-public class Map {
+public class Map implements Subject {
+
     private Tile tiles[][];
     private int width;
     private int height;
     private Location spawn;
+    protected Observer observer;
 
     public Map(Tile tiles[][], int width, int height, Location spawn){
         this.tiles = tiles;
@@ -24,10 +28,6 @@ public class Map {
         }
         return tiles[x][y];
     }
-
-    /*public Tile getTile(Location location) {
-        return getTile(location.getX(), location.getY());
-    }*/
 
     public Location getSpawn(){
         return spawn;
@@ -50,5 +50,19 @@ public class Map {
         this.height = height;
     }
 
+    @Override
+    public void addObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void alert() {
+
+    }
 
 }

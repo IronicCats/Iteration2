@@ -3,7 +3,6 @@ package View.Views;
 import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
-import Utilities.Settings;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
