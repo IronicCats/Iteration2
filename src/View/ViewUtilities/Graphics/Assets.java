@@ -15,7 +15,7 @@ public class Assets {
 
     public static void init() {
         //Tiles
-        SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/textures/grassHex.png"));
+        SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
         GRASSHEXTILE = HexTileGrassSheet.crop(0,0,32,28);
 
 
