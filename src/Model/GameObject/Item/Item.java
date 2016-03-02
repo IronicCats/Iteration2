@@ -1,5 +1,6 @@
 package Model.GameObject.Item;
 
+import Model.GameObject.GameObject;
 import Model.Location;
 import Utilities.Observer;
 import Utilities.Subject;
@@ -11,16 +12,19 @@ import java.util.ArrayList;
 /**
  * Created by Wimberley on 2/25/16.
  */
-public abstract class Item implements Subject {
+public abstract class Item extends GameObject implements Subject {
 
-    protected ItemEnum id; // used to determine type of item
-    protected String name;
-    protected String description;
-    protected Location location; // location of item on map
-    protected ArrayList<Observer> observers;
+    private ItemEnum id; // used to determine type of item
+    private String name;
+    private String description;
+    private ArrayList<Observer> observers;
 
-    public Item() {
+    public Item(ItemEnum id, String name, String description, Location location) {
+        super(location);
         observers = new ArrayList<>();
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
     public ItemEnum getId() {
@@ -35,9 +39,6 @@ public abstract class Item implements Subject {
         return description;
     }
 
-    public Location getLocation() {
-        return location;
-    }
 
     @Override
     public void addObserver(Observer o) {

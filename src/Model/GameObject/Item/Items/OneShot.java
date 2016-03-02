@@ -14,11 +14,7 @@ public class OneShot extends Item {
     Effect effect;
 
     public OneShot(ItemEnum id, String name, String description, Location location, Effect effect){
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.location = location;
+        super(id, name, description, location);
         this.effect = effect;
     }
 
