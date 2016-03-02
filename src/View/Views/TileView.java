@@ -1,6 +1,6 @@
 package View.Views;
 
-import Model.Map.Tiles.Tile;
+import Model.Map.Tile;
 import Utilities.Observer;
 
 /**

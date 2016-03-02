@@ -1,11 +1,12 @@
 package States.States;
 
-
 import Model.GameObject.Entity.StatsEnum;
+import Model.Map.Map;
 import Model.StatStruc;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.CreateItem;
 import States.State;
+import Utilities.MapUtilities.MakeMap;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
@@ -19,9 +20,11 @@ public class GameState extends State {
 
     private CreateItem createItem = new CreateItem();
     ItemView itemView;
+    Map map;
 
     public GameState() {
         // read createItem class!
+        map = MakeMap.makeMap();
         Item item = createItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStruc(StatsEnum.LIFE, -5)); // null for now. Stats has not been created
         itemView = new ItemView(item, Assets.POTION);
     }
