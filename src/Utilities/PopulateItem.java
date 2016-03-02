@@ -1,4 +1,4 @@
-package Model.GameObject.Item;
+package Utilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.Items.OneShot;
