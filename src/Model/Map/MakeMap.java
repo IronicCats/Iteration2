@@ -3,7 +3,6 @@ package Model.Map;
 import Model.Location;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Tile;
-import Utitlies.Subject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

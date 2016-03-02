@@ -5,7 +5,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
-import Utitlies.Observer;
+import Utilities.Observer;
 import Model.GameObject.Entity.StatsEnum;
 
 /**

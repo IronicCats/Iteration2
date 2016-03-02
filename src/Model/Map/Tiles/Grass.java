@@ -1,7 +1,7 @@
 package Model.Map.Tiles;
 
 import Model.Location;
-import Utitlies.Observer;
+import Utilities.Observer;
 
 /**
  * Created by Aidan on 3/1/2016.

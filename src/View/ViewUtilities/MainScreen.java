@@ -1,5 +1,6 @@
 package View.ViewUtilities;
 
+import Utilities.Settings;
 import View.View;
 import sun.util.locale.provider.JRELocaleConstants;
 
@@ -15,10 +16,10 @@ public class MainScreen extends JFrame {
     private int windowHeight, windowWidth;
     Canvas canvas;
 
-    public MainScreen(String title, int windowWidth, int windowHeight) {
-        this.title = title;
-        this.windowHeight = windowHeight;
-        this.windowWidth = windowWidth;
+    public MainScreen() {
+        this.title = Settings.TITLE;
+        this.windowHeight = Settings.GAMEHEIGHT;
+        this.windowWidth = Settings.GAMEWIDTH;
         setTitle(title);
         setSize(new Dimension(windowWidth, windowHeight));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

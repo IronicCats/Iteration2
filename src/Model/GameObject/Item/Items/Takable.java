@@ -15,6 +15,7 @@ public abstract class Takable extends Item{
     protected Effect effect;
 
     public Takable(ItemEnum id, String name, String description, Location location, Requirement requirement, Effect effect){
+        super();
         this.id = id;
         this.name = name;
         this.description = description;
