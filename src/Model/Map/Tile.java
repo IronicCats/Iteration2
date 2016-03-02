@@ -1,4 +1,4 @@
-package Model.Map.Tiles;
+package Model.Map;
 
 import Model.Location;
 import Utilities.Observer;
