@@ -65,9 +65,6 @@ public class DerivedStats {
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
         switch(s) {
-            case LEVEL:
-                    this.level += amount;
-                break;
             case LIFE:
                 if(m.equals(ModificationEnum.PERCENT))
                     this.life += this.life * amount/100;
@@ -101,5 +98,19 @@ public class DerivedStats {
             default:
                 break;
         }
-    }
+    } // end modifyStat
+
+    public int getLevel() { return level; }
+    public int getLife() { return life; }
+    public int getBaseLife() { return baseLife; }
+    public int getMana() { return mana; }
+    public int getBaseMana() { return baseMana; }
+    public int getOffensiveRating() { return offensiveRating; }
+    public int getDefensiveRating() { return defensiveRating; }
+    public int getArmorRating() { return armorRating; }
+
+    public void resetLife() { this.life = this.baseLife; }
+    public void resetMana() { this.mana = this.baseMana; }
+
+    public void emptyMana() { this.mana = 0; }
 } // end class DerivedStats
