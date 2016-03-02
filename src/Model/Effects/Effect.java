@@ -1,6 +1,6 @@
 package Model.Effects;
 
-import Model.StatStruc;
+import Model.GameObject.Entity.Stats.StatStruc;
 
 /**
  * Created by Wimberley on 2/25/16.
