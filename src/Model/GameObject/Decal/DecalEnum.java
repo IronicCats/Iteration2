@@ -6,3 +6,4 @@ package Model.GameObject.Decal;
 public enum DecalEnum {
     REDCROSS, SKULLANDCROSSBONES, GOLDSTAR, FIRE, PORTAL, TRAP
 }
+

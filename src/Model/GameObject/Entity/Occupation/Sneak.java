@@ -10,3 +10,4 @@ public class Sneak extends Occupation{
         super("Sneak", "Specializes in ranged weapons,evading detection, and removing traps ", new int [] {5,5,7,5,5,0,5});
     }
 }
+
