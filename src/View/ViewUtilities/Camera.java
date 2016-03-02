@@ -58,7 +58,7 @@ public class Camera implements Observer {
 
     @Override
     public void update() {
-        //set the loacation to the player's loaction so the camera can be updated of player postition
+        //set the location to the player's location so the camera can be updated of player position
     }
 
     @Override

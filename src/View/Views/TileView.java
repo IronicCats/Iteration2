@@ -3,6 +3,7 @@ package View.Views;
 import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
+import Utilities.Settings;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
@@ -15,12 +16,13 @@ public class TileView implements Observer, Renderable {
 
     private Tile tile;
     private BufferedImage sprite;
-    //I don't think the TileView needs a location because TileLocations will never change.
+    Location location;
 
-    public TileView(Tile tile, BufferedImage sprite, Location location) {
+    public TileView(Tile tile, BufferedImage sprite) {
         this.tile = tile;
         tile.addObserver(this);
         this.sprite = sprite;
+        this.location = tile.getLocation();
     }
 
     public BufferedImage getSprite(){ return sprite; }
@@ -37,7 +39,11 @@ public class TileView implements Observer, Renderable {
 
     @Override
     public void render(Graphics g) {
-        //render tile
+
+    }
+
+    public void render(Graphics g, int xOffset, int yOffset) {
+        g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
     }
 
 }

@@ -9,7 +9,6 @@ import Utilities.Subject;
  */
 public abstract class Tile implements Subject {
 
-    public static final int TILEWIDTH = 64, TILEHEIGHT = 56;
     private Location location;
     protected Observer observer;
     public boolean IsWalkable;
@@ -19,5 +18,23 @@ public abstract class Tile implements Subject {
         this.IsWalkable = IsWalkable;
     }
 
+    public Location getLocation(){
+        return location;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void alert() {
+
+    }
 
 }

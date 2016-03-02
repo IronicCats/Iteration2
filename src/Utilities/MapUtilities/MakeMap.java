@@ -5,6 +5,9 @@ import Model.Map.Map;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tile;
 import Utilities.Utilities;
+import View.ViewUtilities.Graphics.Assets;
+import View.Views.MapView;
+import View.Views.TileView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -56,9 +59,25 @@ public class MakeMap {
                         break;
                 }
                 tiles[x][y] = tile;
+
             }
         }
         return new Map(tiles,width,height,spawn);
+    }
+
+    public static MapView MakeMapView(Map map){
+        TileView tileViews[][] = new TileView [map.getWidth()][map.getHeight()];
+        for(int x = 0; x < map.getWidth(); x++){
+            for(int y = 0; y < map.getHeight(); y++) {
+                Tile tile = map.getTile(x, y);
+                if (tile instanceof Grass) {
+                    tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
+                } else {
+                    tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
+                }
+            }
+        }
+        return new MapView(map,tileViews);
     }
 
 }
