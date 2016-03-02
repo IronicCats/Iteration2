@@ -23,7 +23,7 @@ public class Camera implements Observer {
         yOffset = 100;
         xOffset = 100;
     }
-
+    //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraonMap() {
         if (xOffset < 0) {
             setxOffset(0);
@@ -39,6 +39,15 @@ public class Camera implements Observer {
         }
     }
 
+    //once we make the player we need to uncomment the center on player method
+
+    /*public void centerOnPlayer(Player player) {
+        xOffset = player.getLocation().getPixelX() - gameWidth/2 + player.getWidth()/2;
+        yOffset = player.getLocation().getPixelY() - gameHeight/2 + player.getHeight()/2;
+        keepCameraonMap();
+    }*/
+
+    //Every time you change the offset of x or y keepcameronMap makes sure you didnt cross the boundary
     public float getxOffset() {
         return xOffset;
     }

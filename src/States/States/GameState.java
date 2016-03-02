@@ -28,7 +28,7 @@ public class GameState extends State {
     public GameState() {
         // read createItem class!
         map = MakeMap.makeMap();
-        MapView mapView = MakeMap.MakeMapView(map);
+        mapView = MakeMap.MakeMapView(map);
         Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStruc(StatsEnum.LIFE, -5)); // null for now. Stats has not been created
         itemView = new ItemView(item, Assets.POTION);
     }
@@ -42,8 +42,8 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
+        mapView.render(g,-160,-20);
         itemView.render(g);
-        //mapView.render(g,0,0);
     }
 
     @Override
