@@ -28,7 +28,7 @@ public class MakeMap {
         StringBuilder builder = new StringBuilder();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/MapFiles/Map.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("res/MapFiles/Map.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 builder.append(line + "\n");
