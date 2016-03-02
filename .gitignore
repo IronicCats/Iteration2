@@ -6,6 +6,7 @@ Iteration1.iml
 out
 _mac
 out/
+*.iml
 ironiccats.iml
 debugger.renderers.xml
 debugger.xml
