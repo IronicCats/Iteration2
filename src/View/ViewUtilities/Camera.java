@@ -4,6 +4,7 @@ import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Utilities.Observer;
+import Utilities.Settings;
 
 /**
  * Created by Aidan on 3/2/2016.
@@ -26,14 +27,14 @@ public class Camera implements Observer {
     public void keepCameraonMap() {
         if (xOffset < 0) {
             setxOffset(0);
-        } else if (xOffset > (map.getWidth() / 2 * (Tile.TILEWIDTH) - gameWidth)) {
-            xOffset = map.getWidth() / 2 * (Tile.TILEWIDTH) - gameWidth;
+        } else if (xOffset > (map.getWidth() / 2 * (Settings.TILEWIDTH) - gameWidth)) {
+            xOffset = map.getWidth() / 2 * (Settings.TILEWIDTH) - gameWidth;
         }
         if (yOffset < 0) {
             yOffset = 0;
         }
-        else if (yOffset > ((map.getHeight() / 2 * Tile.TILEHEIGHT) - gameHeight) + 20) {
-            yOffset = (map.getHeight() / 2 * Tile.TILEHEIGHT) - gameHeight + 20;
+        else if (yOffset > ((map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight) + 20) {
+            yOffset = (map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight + 20;
 
         }
     }

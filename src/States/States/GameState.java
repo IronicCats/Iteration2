@@ -23,6 +23,7 @@ public class GameState extends State {
     private ArrayList<Item> items;
     ItemView itemView;
     Map map;
+    MapView mapView;
 
     public GameState() {
         // read createItem class!
@@ -42,6 +43,7 @@ public class GameState extends State {
 
     public void render(Graphics g) {
         itemView.render(g);
+        //mapView.render(g,0,0);
     }
 
     @Override
