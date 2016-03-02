@@ -6,7 +6,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
-import Utitlies.Observer;
+import Utilities.Observer;
 
 /**
  * Created by Wimberley on 2/25/16.

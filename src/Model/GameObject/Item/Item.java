@@ -1,10 +1,11 @@
 package Model.GameObject.Item;
 
 import Model.Location;
-import Utitlies.Observer;
-import Utitlies.Subject;
-
+import Utilities.Observer;
+import Utilities.Subject;
 import View.Views.ItemView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -16,7 +17,11 @@ public abstract class Item implements Subject {
     protected String name;
     protected String description;
     protected Location location; // location of item on map
-    protected Observer observer;
+    protected ArrayList<Observer> observers;
+
+    public Item() {
+        observers = new ArrayList<>();
+    }
 
     public ItemEnum getId() {
         return id;
@@ -34,4 +39,20 @@ public abstract class Item implements Subject {
         return location;
     }
 
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void alert() {
+        for(int i = 0; i < observers.size(); ++i) {
+            observers.get(i).update();
+        }
+    }
 }

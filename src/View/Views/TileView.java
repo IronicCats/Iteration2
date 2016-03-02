@@ -1,8 +1,7 @@
 package View.Views;
 
-import Model.GameObject.Item.Item;
 import Model.Map.Tiles.Tile;
-import Utitlies.Observer;
+import Utilities.Observer;
 
 /**
  * Created by Aidan on 3/1/2016.
@@ -17,6 +16,11 @@ public class TileView implements Observer {
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void remove() {
 
     }
 

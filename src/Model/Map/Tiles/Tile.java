@@ -1,8 +1,8 @@
 package Model.Map.Tiles;
 
 import Model.Location;
-import Utitlies.Observer;
-import Utitlies.Subject;
+import Utilities.Observer;
+import Utilities.Subject;
 
 /**
  * Created by Aidan on 3/1/2016.
