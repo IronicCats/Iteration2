@@ -11,10 +11,6 @@ import Utilities.Observer;
 public class Obstacle extends Item {
 
     public Obstacle(ItemEnum id, String name, String description, Location location){
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.location = location;
+        super(id, name, description, location);
     }
 }

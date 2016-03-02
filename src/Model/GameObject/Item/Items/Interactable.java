@@ -14,11 +14,7 @@ public class Interactable extends Item {
     Requirement requirement;
 
     public Interactable(ItemEnum id, String name, String description, Location location, Requirement requirement){
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.location = location;
+        super(id, name, description, location);
         this.requirement = requirement;
     }
 
