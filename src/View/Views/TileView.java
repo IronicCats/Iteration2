@@ -16,7 +16,7 @@ public class TileView implements Observer, Renderable {
 
     private Tile tile;
     private BufferedImage sprite;
-    //I don't think the TileView needs a location because TileLocations will never change. Correct me if I'm wrong.
+    //I don't think the TileView needs a location because TileLocations will never change.
 
     public TileView(Tile tile, BufferedImage sprite, Location location) {
         this.tile = tile;

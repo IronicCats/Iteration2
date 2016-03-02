@@ -15,7 +15,7 @@ public class Map {
         this.tiles = tiles;
         this.width = width;
         this.height = height;
-        this. spawn = spawn;
+        this.spawn = spawn;
     }
 
     public Tile getTile(int x , int y) {
