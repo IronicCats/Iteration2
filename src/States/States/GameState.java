@@ -2,7 +2,7 @@ package States.States;
 
 import Model.GameObject.Entity.StatsEnum;
 import Model.Map.Map;
-import Model.StatStruc;
+import Model.GameObject.Entity.Stats.StatStruc;
 import Model.GameObject.Item.Item;
 import Utilities.CreateItem;
 import States.State;
@@ -11,7 +11,6 @@ import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 

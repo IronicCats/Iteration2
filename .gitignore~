@@ -2,7 +2,6 @@
 .idea
 .idea/workspace.xml
 Iteration1.iml
-Iteration2.iml
 .out/
 out
 _mac
@@ -34,5 +33,3 @@ Intellij.xml
 .DS_Store
 res/saveFiles/*.sav
 Player test.txt
-
-
