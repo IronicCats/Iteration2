@@ -1,7 +1,7 @@
 package View;
 
 import States.State;
-import Utitlies.Settings;
+import Utilities.Settings;
 import View.ViewUtilities.MainScreen;
 
 import java.awt.*;
@@ -50,6 +50,8 @@ public class View implements Runnable {
         g = bs.getDrawGraphics();
 
         g.clearRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
 
         if(State.getState() != null ) {
             State.getState().render(g);

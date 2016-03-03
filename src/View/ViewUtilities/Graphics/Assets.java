@@ -9,11 +9,21 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
-    public static BufferedImage HexTileGrass;
+    public static BufferedImage GRASSHEXTILE;
+
+    public static BufferedImage POTION;
 
     public static void init() {
-        SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/textures/grassHex.png"));
+        //Tiles
+        SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
+        GRASSHEXTILE = HexTileGrassSheet.crop(0,0,32,28);
 
-        HexTileGrass = HexTileGrassSheet.crop(0,0,32,28);
+
+
+        //Items
+        SpriteSheet potionSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PotionSprite.png"));
+        POTION = potionSheet.crop(0,0,32,32);
+
+
     }
 }

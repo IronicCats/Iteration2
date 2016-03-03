@@ -49,4 +49,13 @@ public class Requirement {
             return true;
         }
     }*/
+
+    /*public boolean meetsRequirements(int playerLevel, Inventory inventory){
+        if(hasRequiredItem(inventory && meetsLevel(playerLevel)){
+            return true;
+        }
+        else{
+            return false;
+        }
+     */
 }
