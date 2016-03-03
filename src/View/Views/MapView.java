@@ -34,7 +34,7 @@ public class MapView implements Observer, Renderable {
             int totaloffsetX = 0;                          //adds total offset because anytime you shiftover left
             for (int x = 0; x < Settings.MAPWIDTH; ++x) {  //you have to shiftover all tiles to the left
                 int offsetX = 16; //a quarter of a tile
-                int offsetY = 32; //a half of a tile
+                int offsetY = 28; //a half of a tile
                 if(x%2 == 0) {
                     offsetY = 0;  //dont offset if x is even
                     offsetX = 0;
