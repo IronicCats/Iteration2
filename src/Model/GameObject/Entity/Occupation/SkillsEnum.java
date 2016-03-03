@@ -5,5 +5,5 @@ package Model.GameObject.Entity.Occupation;
  */
 
 public enum SkillsEnum {
-
+    //enumeration of skills
 }
