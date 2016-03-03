@@ -1,6 +1,6 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
-import Model.GameObject.Entity.StatsEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
@@ -11,10 +11,19 @@ import Utilities.Observer;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+/* This item adds attack rating to the player. The value of the attack rating added is held within the statStruc
+   in the effect attribute.
+ */
 public class Weapon extends Takable {
 
     public Weapon(ItemEnum id, String name, String description, Location location, Requirement requirement, Effect effect) {
         super(id, name, description, location, requirement, effect);
+    }
+
+    // returns value in the effect's statStruc associated with life
+    public int getDamage(){
+        return effect.getModification().getStat(StatsEnum.LIFE);
     }
 
     // used if weapon is worn out to lessen damage it inflicts

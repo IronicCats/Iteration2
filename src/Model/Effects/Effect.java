@@ -1,10 +1,14 @@
 package Model.Effects;
 
-import Model.GameObject.Entity.Stats.ModificationEnum;
-import Model.GameObject.Entity.Stats.StatStruc;
+import Model.GameObject.MobileObjects.Entities.Stats.ModificationEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
 
 /**
  * Created by Wimberley on 2/25/16.
+ */
+
+/* This is a long way from complete :(
+   ...
  */
 public class Effect {
 

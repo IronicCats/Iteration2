@@ -1,7 +1,6 @@
-package Model.GameObject.Entity.Stats;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 import Model.Effects.Effect;
-import Model.GameObject.Entity.StatsEnum;
 
 import java.util.ArrayList;
 

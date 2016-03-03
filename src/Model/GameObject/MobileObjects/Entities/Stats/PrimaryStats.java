@@ -1,6 +1,4 @@
-package Model.GameObject.Entity.Stats;
-
-import Model.GameObject.Entity.StatsEnum;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 /**
  * Created by broskj on 3/2/16.

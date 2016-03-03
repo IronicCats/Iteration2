@@ -9,6 +9,8 @@ import Utilities.Observer;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+// This shot triggers an effect on the player immediately when the player steps onto the same tile
 public class OneShot extends Item {
 
     Effect effect;

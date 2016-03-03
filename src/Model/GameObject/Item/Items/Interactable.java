@@ -9,9 +9,11 @@ import Utilities.Observer;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+// Item that holds no effects. Simply is interactable with player e.g., treasure chest
 public class Interactable extends Item {
 
-    Requirement requirement;
+    Requirement requirement; // Holds requirements player must meet in order to trigger interaction
 
     public Interactable(ItemEnum id, String name, String description, Location location, Requirement requirement){
         super(id, name, description, location);

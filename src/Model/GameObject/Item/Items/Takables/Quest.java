@@ -10,6 +10,9 @@ import Utilities.Observer;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+// A quest item can be added to the inventory but not used. It is simply held for "quest" purposes
+// e.g., a key. This item inherits all attributes and methods from Takable and Item
 public class Quest extends Takable {
 
     // Note: effect in this case can be used to add experience to player when quest item is successfully used to
