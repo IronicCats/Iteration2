@@ -5,6 +5,9 @@ import Model.Map.Map;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tile;
 import Utilities.Utilities;
+import View.ViewUtilities.Graphics.Assets;
+import View.Views.MapView;
+import View.Views.TileView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -38,7 +41,7 @@ public class MakeMap {
             System.out.println("Failed");
 
         }
-
+        //Reads in map from map.txt
         String[] tokens = builder.toString().split("\\s+");
         width = Utilities.parseInt(tokens[0]);
         height = Utilities.parseInt(tokens[1]);
@@ -59,6 +62,21 @@ public class MakeMap {
             }
         }
         return new Map(tiles,width,height,spawn);
+    }
+    //does same thing map does but also makes a coinciding tileview for every tile. all the tileview make a mapview
+    public static MapView MakeMapView(Map map){
+        TileView tileViews[][] = new TileView [map.getWidth()][map.getHeight()];
+        for(int x = 0; x < map.getWidth(); x++){
+            for(int y = 0; y < map.getHeight(); y++) {
+                Tile tile = map.getTile(x, y);
+                if (tile instanceof Grass) {
+                    tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
+                } else {
+                    tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
+                }
+            }
+        }
+        return new MapView(map,tileViews);
     }
 
 }
