@@ -34,8 +34,7 @@ public class Map implements Subject {
     }
 
     public int getWidth() {
-
-        return width * 2;
+        return width;
     }
 
     public void setWidth(int width) {
@@ -43,7 +42,7 @@ public class Map implements Subject {
     }
 
     public int getHeight() {
-        return height * 2;
+        return height;
     }
 
     public void setHeight(int height) {
