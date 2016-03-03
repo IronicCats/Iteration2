@@ -5,9 +5,15 @@ import Model.GameObject.Item.Items.Takables.Quest;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+/* This class is used to tell if player is a high enough level or has the necessary
+   quest item in order to trigger some type of interaction. The requirements are initally set
+   through the constructor and will be held for the duration of the item's existence. Methods
+   to check if player meets requirements are listed below.
+ */
 public class Requirement {
 
-    private int requiredLevel = 0; // used to tell if player is high enough level
+    private int requiredLevel = 0; // used to tell if player is high enough level. Intialized to 0
     private Quest requiredItem = null; // used to tell if player has required item
 
     // constructor for requirement needing both item level and specific item
@@ -51,7 +57,7 @@ public class Requirement {
     }*/
 
     /*public boolean meetsRequirements(int playerLevel, Inventory inventory){
-        if(hasRequiredItem(inventory && meetsLevel(playerLevel)){
+        if(hasRequiredItem(inventory) && meetsLevel(playerLevel)){
             return true;
         }
         else{

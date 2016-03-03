@@ -6,15 +6,24 @@ import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
 import Utilities.Observer;
-import Model.GameObject.Entity.StatsEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 
 /**
  * Created by Wimberley on 2/25/16.
+ */
+
+/* This item adds defense rating to the player. The value of the defense rating added is held within the statStruc
+   in the effect attribute.
  */
 public class Armor extends Takable {
 
     public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, Effect effect) {
         super(id, name, description, location, requirements, effect);
+    }
+
+    // returns value in effect's statStruc associated with defensive rating
+    public int getDefense(){
+        return effect.getModification().getStat(StatsEnum.DEFENSIVE_RATING);
     }
 
     // used if armor is worn out to adjust defensive rating

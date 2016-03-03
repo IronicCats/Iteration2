@@ -1,10 +1,9 @@
-package Model.GameObject.Entity.Stats;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
-import Model.GameObject.Entity.StatsEnum;
 
 /**
  * Created by broskj on 1/31/16.
