@@ -2,6 +2,7 @@ package States.States;
 
 
 import States.State;
+import States.States.GameState.GameState;
 
 import java.awt.*;
 
