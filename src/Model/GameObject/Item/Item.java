@@ -12,6 +12,8 @@ import java.util.ArrayList;
 /**
  * Created by Wimberley on 2/25/16.
  */
+
+// Parent class of all items. Holds attributes common to ALL items
 public abstract class Item extends GameObject implements Subject {
 
     private ItemEnum id; // used to determine type of item

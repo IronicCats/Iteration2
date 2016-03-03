@@ -1,7 +1,7 @@
-package Model.GameObject.Entity.Occupation;
+package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.GameObject.Entity.Stats.StatStruc;
-import Model.GameObject.Entity.StatsEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
+import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 
 /**
  * Created by mazumderm on 3/1/2016.
