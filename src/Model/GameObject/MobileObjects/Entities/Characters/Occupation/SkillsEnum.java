@@ -5,5 +5,5 @@ package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
  */
 
 public enum SkillsEnum {
-
+    BINDWOUNDS, BARGAIN, OBSERVATION, ONEHANDWEAP, TWOHANDWEAP, BRAWL, ENCHANT, BOON, BANE, STAFF, PICKPOCK, DRTRAP, CREEP, RANGEWEAP
 }
