@@ -1,8 +1,8 @@
 package States.States.GameState;
 
-import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import Model.Map.Map;
-import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
 import Model.GameObject.Item.Item;
 import Utilities.CreateItem;
 import States.State;
@@ -28,7 +28,7 @@ public class GameState extends State {
     public GameState() {
         map = MakeMap.makeMap();
         mapView = MakeMap.MakeMapView(map);
-        Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStruc(StatsEnum.LIFE, -5));
+        Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStructure(StatsEnum.LIFE, -5));
         itemView = new ItemView(item, Assets.POTION);
     }
 
