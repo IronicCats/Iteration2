@@ -1,4 +1,4 @@
-package States.States;
+package States.States.GameState;
 
 import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 import Model.Map.Map;
@@ -41,7 +41,7 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        mapView.render(g,-160,-20);
+        mapView.render(g, -160, -20);
         itemView.render(g);
     }
 
