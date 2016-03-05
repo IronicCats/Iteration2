@@ -146,7 +146,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredLevel),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 
@@ -157,7 +157,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredItem),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 
@@ -168,7 +168,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredLevel, requiredItem),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 
@@ -179,7 +179,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredLevel),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 
@@ -190,7 +190,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredItem),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 
@@ -201,7 +201,7 @@ public class CreateItem {
                 description,
                 new Location(x,y),
                 new Requirement(requiredLevel, requiredItem),
-                new Effect(modify)
+                new EquipmentModification(modify)
         );
     }
 }
