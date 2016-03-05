@@ -34,7 +34,7 @@ public class GameState extends State {
         entities = new HashMap<>();
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
-        Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStructure(StatsEnum.LIFE, -5));
+        Item item = CreateItem.addOneShot("some name", "removes 5 life", 5, 1, new StatStructure(StatsEnum.LIFE, -5));
         mapItems.put(item, new ItemView(item, Assets.POTION));
     }
 
@@ -50,7 +50,7 @@ public class GameState extends State {
         mapView.render(g, -160, -20);
         //keyset for keys, values for values
         for (ItemView itemView : mapItems.values()) {
-            itemView.render(g);
+            itemView.render(g, -160, -20);
         }
     }
 
