@@ -1,6 +1,6 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
-import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
+import Model.Stats.StatsEnum;
 import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
