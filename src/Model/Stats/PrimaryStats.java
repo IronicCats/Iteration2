@@ -96,7 +96,7 @@ public class PrimaryStats implements Subject {
         livesLeft = baseLives;
 
         baseStr *= statMultiplier;
-        baseAgi*= statMultiplier;
+        baseAgi *= statMultiplier;
         baseIntel *= statMultiplier;
         baseHard *= statMultiplier;
 
@@ -104,6 +104,8 @@ public class PrimaryStats implements Subject {
         agility = baseAgi;
         intellect = baseIntel;
         hardiness = baseHard;
+
+        alert();
     } // end levelUp
 
     public void kill() {
@@ -117,6 +119,8 @@ public class PrimaryStats implements Subject {
         intellect = baseIntel;
         hardiness = baseHard;
         movement = baseMovement;
+
+        alert();
     } // end kill
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
@@ -165,6 +169,8 @@ public class PrimaryStats implements Subject {
             default:
                 break;
         }
+        System.out.println(s + " modified by " + amount + " (" + m + ").");
+        alert();
     } // end modifyStats
 
     public int getLivesLeft() { return livesLeft; }
@@ -180,4 +186,5 @@ public class PrimaryStats implements Subject {
     public int getExperience() { return experience; }
     public int getMovement() { return movement; }
     public int getBaseMovement() { return baseMovement; }
+    public int getXpThreshhold() { return xpThreshhold; }
 } // end class PrimaryStats
