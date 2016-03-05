@@ -1,7 +1,7 @@
 package Model.Stats;
 
 import Model.Effects.ModificationEnum;
-import Utilities.EquipmentModification;
+import Model.Effects.EquipmentModification;
 import Utilities.Observer;
 import Utilities.Subject;
 

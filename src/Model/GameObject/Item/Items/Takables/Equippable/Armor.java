@@ -4,8 +4,7 @@ import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
-import Model.Effects.Effect;
-import Utilities.EquipmentModification;
+import Model.Effects.EquipmentModification;
 import Utilities.Observer;
 import Model.Stats.StatsEnum;
 

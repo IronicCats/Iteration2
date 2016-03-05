@@ -1,6 +1,7 @@
 package Utilities;
 
 import Model.Effects.Effect;
+import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.ItemEnum;
 import Model.Stats.StatStructure;
 import Model.Location;
