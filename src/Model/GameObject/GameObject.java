@@ -20,6 +20,13 @@ public abstract class GameObject {
         location = l;
     }
 
+    public int getX() {
+        return location.getX();
+    }
+
+    public int getY() {
+        return location.getY();
+    }
     public String toString() {
         return "GameObject with Location: " + location.toString();
     }

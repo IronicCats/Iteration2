@@ -45,8 +45,7 @@ public class ItemView implements Observer, Renderable {
     @Override
     public void render(Graphics g) {
         //draw it
-        System.out.println("Drawing Item");
-        g.drawImage(sprite, Settings.GAMEWIDTH /2 + 25, Settings.GAMEHEIGHT /2 + 25, 50, 50, null);
+        g.drawImage(sprite, location.getX(), location.getY(), 50, 50, null);
     }
 
 
