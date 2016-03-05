@@ -1,5 +1,6 @@
 package Utilities.MapUtilities;
 
+import Model.GameObject.Item.Item;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tiles.Grass;
@@ -64,7 +65,7 @@ public class MakeMap {
         return new Map(tiles,width,height,spawn);
     }
     //does same thing map does but also makes a coinciding tileview for every tile. all the tileview make a mapview
-    public static MapView MakeMapView(Map map){
+    public static MapView makeMapView(Map map){
         TileView tileViews[][] = new TileView [map.getWidth()][map.getHeight()];
         for(int x = 0; x < map.getWidth(); x++){
             for(int y = 0; y < map.getHeight(); y++) {
@@ -79,4 +80,9 @@ public class MakeMap {
         return new MapView(map,tileViews);
     }
 
+    public static void populateItems(Item items[], Map map) {
+        for(Item item:items) {
+            map.placeItem(item);
+        }
+    }
 }
