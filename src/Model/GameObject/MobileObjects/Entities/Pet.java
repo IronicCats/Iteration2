@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities;
 
+import Model.Stats.PetStats;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 
@@ -11,9 +12,10 @@ import Model.Location;
 
  */
 public class Pet extends MobileObject {
+    // inventory = pet Inventory();
+    PetStats stats;
 
     public Pet(Location location) {
         super(location);
     }
-    // inventory = pet Inventory();
 }

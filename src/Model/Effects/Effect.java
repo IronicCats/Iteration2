@@ -17,6 +17,13 @@ public class Effect {
     private long duration;
 
     /*Default Constructor*/
+    public Effect() {
+        this.modification = new StatStructure();
+        this.type = ModificationEnum.REAL;
+        this.duration = 0;
+    }
+
+    /*Constructor*/
     public Effect(StatStructure modification){
         duration = 0;
         this.modification = modification;

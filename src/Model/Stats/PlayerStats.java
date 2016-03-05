@@ -1,6 +1,7 @@
 package Model.Stats;
 
 import Model.Effects.Effect;
+import Utilities.EquipmentModification;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -23,6 +24,9 @@ public class PlayerStats implements Subject, Observer {
         this.effects = new ArrayList<>();
         this.finishTimes = new ArrayList<>();
         observers = new ArrayList<>();
+
+        primaryStats.addObserver(this);
+        derivedStats.addObserver(this);
     } // end default constructor
 
     public PlayerStats(StatStructure ss) {
@@ -31,6 +35,9 @@ public class PlayerStats implements Subject, Observer {
         effects = new ArrayList<>();
         finishTimes = new ArrayList<>();
         observers = new ArrayList<>();
+
+        primaryStats.addObserver(this);
+        derivedStats.addObserver(this);
     } // end constructor
 
     /*
@@ -62,13 +69,44 @@ public class PlayerStats implements Subject, Observer {
 
     } // end remove
 
+    public void tick() {
+        checkExpiredEffect();
+        checkLevelUp();
+    } // end tick
+
+    public void checkExpiredEffect() {
+        /*
+        Stats game tick.
+        Each tick, check for expired Effects and check if player's XP is greater than the threshhold to level up
+         */
+        if (!effects.isEmpty()) {
+            for (int i = effects.size()-1; i >= 0; --i) {
+                if (System.currentTimeMillis() >= finishTimes.get(i)) {
+                    System.out.println("Effect expired.");
+                    removeEffect(effects.get(i));
+                    effects.remove(i);
+                    finishTimes.remove(i);
+                }
+            }
+        }
+    } // end checkExpiredEffect
+
+    public void checkLevelUp() {
+        /*
+        check for level up
+         */
+        if(primaryStats.getExperience() >= primaryStats.getXpThreshhold()) {
+            levelUp();
+        }
+    } // end checkLevelUp
+
     public void levelUp() {
         /*
         calls levelup methods of each of its members
          */
+        System.out.println("Level up!");
         primaryStats.levelUp();
         derivedStats.levelUp();
-
     } // end levelUp
 
     public void kill() {
@@ -77,6 +115,7 @@ public class PlayerStats implements Subject, Observer {
          kill methods of each of its members, and exits game if player is
          out of lives
          */
+        System.out.println("Oh dear, you are dead!");
         effects.clear();
         finishTimes.clear();
         primaryStats.kill();
@@ -131,12 +170,17 @@ public class PlayerStats implements Subject, Observer {
         }
 
         for(StatsEnum s : e.getModification().getKeySet()) {
+            System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
             switch (s){
                 // primary stats
                 case LIVES_LEFT:
-                    for(int i = 0; i < Math.abs(e.getModification().getStat(s)); i++)
-                        kill();
-                    derivedStats.update();
+                    if(e.getModification().getStat(s) < 0) {
+                        for (int i = 0; i < Math.abs(e.getModification().getStat(s)); i++) {
+                            kill();
+                        }
+                    } else {
+                        primaryStats.modifyStat(s, e.getType(), e.getModification().getStat(s));
+                    }
                     break;
                 case STRENGTH:
                 case AGILITY:
@@ -145,13 +189,14 @@ public class PlayerStats implements Subject, Observer {
                 case EXPERIENCE:
                 case MOVEMENT:
                     primaryStats.modifyStat(s, e.getType(), e.getModification().getStat(s));
-                    derivedStats.update();
                     break;
                 // derived stats
                 case LEVEL:
-                    primaryStats.modifyStat(StatsEnum.EXPERIENCE, null, 0);
-                    for(int i = 0; i < e.getModification().getStat(s); i++)
-                        levelUp();
+                    if(e.getModification().getStat(s) > 0) {
+                        for (int i = 0; i < e.getModification().getStat(s); i++) {
+                            levelUp();
+                        }
+                    }
                     break;
                 case LIFE:
                     if(e.getModification().getStat(s) + getLife() > getBaseLife())
@@ -174,7 +219,6 @@ public class PlayerStats implements Subject, Observer {
                 case OFFENSIVE_RATING:
                 case DEFENSIVE_RATING:
                 case ARMOR_RATING:
-                    primaryStats.modifyStat(s, e.getType(), e.getModification().getStat(s));
                     break;
                 // default
                 default:
@@ -182,6 +226,51 @@ public class PlayerStats implements Subject, Observer {
             }
         }
     } // end applyEffect
+
+    public void removeEffect(Effect e) {
+        for(StatsEnum s : e.getModification().getKeySet()) {
+            System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
+            switch (s){
+                // primary stats
+                case LIVES_LEFT:
+                    if(e.getModification().getStat(s) < 0) {
+                        for (int i = 0; i < Math.abs(e.getModification().getStat(s)); i++) {
+                            kill();
+                        }
+                    } else {
+                        primaryStats.modifyStat(s, e.getType(), -1 * e.getModification().getStat(s));
+                    }
+                    break;
+                case STRENGTH:
+                case AGILITY:
+                case INTELLECT:
+                case HARDINESS:
+                case EXPERIENCE:
+                case MOVEMENT:
+                    primaryStats.modifyStat(s, e.getType(), -1 * e.getModification().getStat(s));
+                    break;
+                // derived stats
+                case OFFENSIVE_RATING:
+                case DEFENSIVE_RATING:
+                case ARMOR_RATING:
+                    break;
+                // default
+                default:
+                    break;
+            }
+
+        }
+    } // end removeEffect
+
+    public void applyEquipmentModification(EquipmentModification e) {
+        derivedStats.applyEquipmentModification(e);
+        applyEffect(new Effect(e.getStats(), e.getType(), 0));
+    } // end applyEquipmentModification
+
+    public void removeEquipmentModification(EquipmentModification e) {
+        derivedStats.removeEquipmentModification(e);
+        removeEffect(new Effect(e.getStats(), e.getType(), 0));
+    } // end removeEquipmentModification
 
     public PrimaryStats getPrimaryStats(){return primaryStats;}
     public DerivedStats getDerivedStats(){return derivedStats;}
