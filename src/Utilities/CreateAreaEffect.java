@@ -16,11 +16,43 @@ public class CreateAreaEffect {
         );
     }
 
-    public static AreaEffect addHeal(String name, String description){
+    public static AreaEffect addHeal(String name, String description) {
         return new AreaEffect(
                 name,
                 description,
                 AreaEffectEnum.HEAL
+        );
+    }
+
+    public static AreaEffect addDeath(String name, String description) {
+        return new AreaEffect(
+                name,
+                description,
+                AreaEffectEnum.DEATH
+        );
+    }
+
+    public static AreaEffect addLevelUp(String name, String description){
+        return new AreaEffect(
+                name,
+                description,
+                AreaEffectEnum.LEVELUP
+        );
+    }
+
+    public static AreaEffect addTeleport(String name, String description){
+        return new AreaEffect(
+                name,
+                description,
+                AreaEffectEnum.TELEPORT
+        );
+    }
+
+    public static AreaEffect addTrap(String name, String description){
+        return new AreaEffect(
+                name,
+                description,
+                AreaEffectEnum.TRAP
         );
     }
 }
