@@ -1,15 +1,9 @@
-package Model.Stats;
-
-import Model.Effects.ModificationEnum;
-import Utilities.Observer;
-import Utilities.Subject;
-
-import java.util.ArrayList;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 /**
  * Created by broskj on 3/2/16.
  */
-public class PrimaryStats implements Subject {
+public class PrimaryStats {
     private int livesLeft;
     private int strength;
     private int agility;
@@ -26,7 +20,6 @@ public class PrimaryStats implements Subject {
     private int xpThreshhold;
     private double xpMultiplier,
             statMultiplier;
-    private ArrayList<Observer> observers;
 
     public PrimaryStats() {
         this.livesLeft = 0;
@@ -35,56 +28,7 @@ public class PrimaryStats implements Subject {
         this.intellect = 0;
         this.hardiness = 0;
         this.baseLives = 0;
-        observers = new ArrayList<>();
     } // end default constructor
-
-    public PrimaryStats(StatStructure ss) {
-        /*
-        initialize stats
-         */
-        baseLives = ss.getStat(StatsEnum.LIVES_LEFT);
-        baseStr = ss.getStat(StatsEnum.STRENGTH);
-        baseAgi = ss.getStat(StatsEnum.AGILITY);
-        baseIntel = ss.getStat(StatsEnum.INTELLECT);
-        baseHard = ss.getStat(StatsEnum.HARDINESS);
-        baseMovement = ss.getStat(StatsEnum.MOVEMENT);
-
-        livesLeft = baseLives;
-        strength = baseStr;
-        agility = baseAgi;
-        intellect = baseIntel;
-        hardiness = baseHard;
-        experience = ss.getStat(StatsEnum.EXPERIENCE);
-        movement = baseMovement;
-
-        observers = new ArrayList<>();
-
-        /*
-        predefined multipliers
-            xpThreshhold: total amount of xp until level up
-            xpMultiplier: amount xpThreshhold is multiplied by on level up
-            statMultiplier: amount stats are multiplied by on level up
-         */
-        xpThreshhold = 10;
-        xpMultiplier = 1.5;
-        statMultiplier = 1.2;
-    } // end constructor
-
-    /*
-    implement subject methods
-     */
-    @Override
-    public void addObserver(Utilities.Observer o) { observers.add(o); }
-
-    @Override
-    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
-
-    @Override
-    public void alert() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
-    } // end alert
 
     public void levelUp() {
         /*
@@ -118,6 +62,36 @@ public class PrimaryStats implements Subject {
         hardiness = baseHard;
         movement = baseMovement;
     } // end kill
+
+    public PrimaryStats(StatStruc ss) {
+        /*
+        initialize stats
+         */
+        baseLives = ss.getStat(StatsEnum.LIVES_LEFT);
+        baseStr = ss.getStat(StatsEnum.STRENGTH);
+        baseAgi = ss.getStat(StatsEnum.AGILITY);
+        baseIntel = ss.getStat(StatsEnum.INTELLECT);
+        baseHard = ss.getStat(StatsEnum.HARDINESS);
+        baseMovement = ss.getStat(StatsEnum.MOVEMENT);
+
+        livesLeft = baseLives;
+        strength = baseStr;
+        agility = baseAgi;
+        intellect = baseIntel;
+        hardiness = baseHard;
+        experience = ss.getStat(StatsEnum.EXPERIENCE);
+        movement = baseMovement;
+
+        /*
+        predefined multipliers
+            xpThreshhold: total amount of xp until level up
+            xpMultiplier: amount xpThreshhold is multiplied by on level up
+            statMultiplier: amount stats are multiplied by on level up
+         */
+        xpThreshhold = 10;
+        xpMultiplier = 1.5;
+        statMultiplier = 1.2;
+    } // end constructor
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
         switch (s) {

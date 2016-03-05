@@ -1,10 +1,11 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.Stats.StatStructure;
-import Model.Stats.StatsEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
+import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mazumderm on 3/1/2016.
@@ -12,7 +13,7 @@ import java.util.Map;
 public abstract class Occupation {
     private String name;
     private String description;
-    private StatStructure initialStats;
+    private StatStruc initialStats;
     //player stats maybe
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
@@ -24,7 +25,7 @@ public abstract class Occupation {
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH,StatsEnum.AGILITY,
                 StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
-        initialStats = new StatStructure(stats, val);
+        initialStats = new StatStruc(stats, val);
         //player stats maybe?
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
@@ -36,7 +37,7 @@ public abstract class Occupation {
 
     public String getDescription() {return description;}
 
-    public StatStructure getInitialStats() {return initialStats;}
+    public StatStruc getInitialStats() {return initialStats;}
 
     public Map<SkillsEnum, Integer> getBasicSkills(){return basicSkills;}
 

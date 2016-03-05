@@ -6,7 +6,7 @@ import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
 import Utilities.Observer;
-import Model.Stats.StatsEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
 
 /**
  * Created by Wimberley on 2/25/16.
