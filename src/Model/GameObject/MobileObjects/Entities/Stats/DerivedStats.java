@@ -1,15 +1,9 @@
-package Model.Stats;
-
-import Model.Effects.ModificationEnum;
-import Utilities.Observer;
-import Utilities.Subject;
-
-import java.util.ArrayList;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 /**
  * Created by broskj on 3/2/16.
  */
-public class DerivedStats implements Subject {
+public class DerivedStats {
     private PrimaryStats primaryStats;
     private int level;
     private int life;
@@ -19,7 +13,6 @@ public class DerivedStats implements Subject {
     private int armorRating;
     private int baseLife,
             baseMana;
-    private ArrayList<Observer> observers;
 
     public DerivedStats(PrimaryStats ps) {
         /*
@@ -36,25 +29,7 @@ public class DerivedStats implements Subject {
 
         offensiveRating = 0;
         armorRating = 0;
-
-        observers = new ArrayList<>();
     } // end constructor
-
-    /*
-    implement subject methods
-     */
-    @Override
-    public void addObserver(Utilities.Observer o) { observers.add(o); }
-
-    @Override
-    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
-
-    @Override
-    public void alert() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
-    } // end alert
 
     public void levelUp() {
         /*

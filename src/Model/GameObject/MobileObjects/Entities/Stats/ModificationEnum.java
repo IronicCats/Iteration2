@@ -1,4 +1,4 @@
-package Model.Effects;
+package Model.GameObject.MobileObjects.Entities.Stats;
 
 /**
  * Created by broskj on 3/2/16.

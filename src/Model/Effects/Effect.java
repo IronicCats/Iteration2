@@ -1,6 +1,7 @@
 package Model.Effects;
 
-import Model.Stats.StatStructure;
+import Model.GameObject.MobileObjects.Entities.Stats.ModificationEnum;
+import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -12,25 +13,25 @@ import Model.Stats.StatStructure;
 public class Effect {
 
     /*Variables*/
-    private StatStructure modification;
+    private StatStruc modification;
     private ModificationEnum type;
     private long duration;
 
     /*Default Constructor*/
-    public Effect(StatStructure modification){
+    public Effect(StatStruc modification){
         duration = 0;
         this.modification = modification;
         this.type = ModificationEnum.REAL;
     }
 
     /*Constructor*/
-    public Effect(StatStructure modification, ModificationEnum type, long duration){
+    public Effect(StatStruc modification, ModificationEnum type, long duration){
         this.modification = modification;
         this.duration = duration;
         this.type = type;
     }
 
-    public StatStructure getModification() {
+    public StatStruc getModification() {
         return modification;
     }
     public long getDuration() { return duration; }
