@@ -5,11 +5,19 @@ package Model;
  */
 public class Location {
 
+    private int x,y;
+    int dir;
+
     public Location(int x, int y){
-        //some code, set dir to 0
+        this.x = x;
+        this.y = y;
+        this.dir = 0;
     }
 
     public Location(int x, int y, int dir){
-      // some code
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
     };
+    
 }
