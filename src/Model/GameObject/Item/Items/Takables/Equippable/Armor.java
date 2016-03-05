@@ -5,6 +5,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
+import Utilities.EquipmentModification;
 import Utilities.Observer;
 import Model.Stats.StatsEnum;
 
@@ -17,8 +18,8 @@ import Model.Stats.StatsEnum;
  */
 public class Armor extends Takable {
 
-    public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, Effect effect) {
-        super(id, name, description, location, requirements, effect);
+    public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, EquipmentModification e) {
+        super(id, name, description, location, requirements, e);
     }
 
     // returns value in effect's statStruc associated with defensive rating
