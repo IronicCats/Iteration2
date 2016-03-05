@@ -12,4 +12,13 @@ public class Utilities {
             return 0;
         }
     }
+
+    public static int calculateHexXLocation(int x, int y) {
+
+        return x * 48;
+    }
+
+    public static int calculateHexYLocation(int x, int y) {
+        return 0;
+    }
 }

@@ -30,17 +30,20 @@ public class MapView implements Observer, Renderable {
     }
 
     public void render(Graphics g, int xOffset, int yOffset) {
-        for(int y = 0; y <  Settings.MAPHEIGHT; ++y){
+        for(int y = 0; y <  map.getHeight(); ++y){
             int totaloffsetX = 0;                          //adds total offset because anytime you shiftover left
-            for (int x = 0; x < Settings.MAPWIDTH; ++x) {  //you have to shiftover all tiles to the left
-                int offsetX = 16; //a quarter of a tile
-                int offsetY = 28; //a half of a tile
+            for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
+                int offsetX = Settings.TILEWIDTH / 4; //a quarter of a tile
+                int offsetY = Settings.TILEHEIGHT / 2; //a half of a tile
                 if(x%2 == 0) {
                     offsetY = 0;  //dont offset if x is even
                     offsetX = 0;
                     if(x != 0)
-                        totaloffsetX += 2 * 16; //offset if x is odd
+                        totaloffsetX += Settings.TILEWIDTH / 2; //offset if x is odd
                 }
+                System.out.print(x + ": " + (x * Settings.TILEWIDTH - offsetX - totaloffsetX));
+                System.out.println(", " + y + ": " + (y * Settings.TILEHEIGHT + offsetY));
+
                 tileViews[x][y].render(g,
                         (x * Settings.TILEWIDTH - xOffset - offsetX - totaloffsetX),
                         (y * Settings.TILEHEIGHT - yOffset + offsetY)

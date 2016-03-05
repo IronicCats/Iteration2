@@ -5,6 +5,8 @@ import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tile;
+import Model.Map.Tiles.Mountain;
+import Model.Map.Tiles.Water;
 import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.MapView;
@@ -55,6 +57,12 @@ public class MakeMap {
                     case -1:
                         tile = new Grass(new Location(x,y,0));
                         break;
+                    case 10:
+                        tile = new Water(new Location(x,y,0));
+                        break;
+                    case 20:
+                        tile = new Mountain(new Location(x,y,0));
+                        break;
                     default:
                         tile = new Grass(new Location(x,y,0));
                         break;
@@ -72,7 +80,12 @@ public class MakeMap {
                 Tile tile = map.getTile(x, y);
                 if (tile instanceof Grass) {
                     tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
-                } else {
+                } else if(tile instanceof Water){
+                    tileViews[x][y] = new TileView(tile, Assets.WATERHEXTILE);
+                } else if(tile instanceof Mountain){
+                    tileViews[x][y] = new TileView(tile, Assets.MOUNTAINHEXTILE);
+                }
+                else {
                     tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
                 }
             }
