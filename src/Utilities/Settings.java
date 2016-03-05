@@ -10,7 +10,7 @@ public class Settings {
     public static int MAPWIDTH = 10;
     public static int MAPHEIGHT = 10;
     //MAP WIDTH AND HEIGHT CAN CHANGE, SHOULD BE STATIC
-    public static int TILEWIDTH = 164;
+    public static int TILEWIDTH = 64;
     public static int TILEHEIGHT = 56;
 
     public static String TITLE = "Ironic Cats";
