@@ -1,23 +1,28 @@
-package Model.GameObject.MobileObjects.Entities.Stats;
+package Model.Stats;
 
 import Model.Effects.Effect;
+import Utilities.Observer;
+import Utilities.Subject;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by broskj on 3/2/16.
  */
-public class PlayerStats {
+public class PlayerStats implements Subject, Observer {
     private PrimaryStats primaryStats;
     private DerivedStats derivedStats;
     private ArrayList<Effect> effects;
     private ArrayList<Long> finishTimes;
+    private ArrayList<Observer> observers;
 
     public PlayerStats() {
         this.primaryStats = new PrimaryStats();
         this.derivedStats = new DerivedStats(primaryStats);
         this.effects = new ArrayList<>();
         this.finishTimes = new ArrayList<>();
+        observers = new ArrayList<>();
     } // end default constructor
 
     public PlayerStats(StatStruc ss) {
@@ -25,7 +30,37 @@ public class PlayerStats {
         derivedStats = new DerivedStats(primaryStats);
         effects = new ArrayList<>();
         finishTimes = new ArrayList<>();
+        observers = new ArrayList<>();
     } // end constructor
+
+    /*
+    implement subject methods
+     */
+    @Override
+    public void addObserver(Utilities.Observer o) { observers.add(o); }
+
+    @Override
+    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
+
+    @Override
+    public void alert() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    } // end alert
+
+    /*
+    implement observer methods
+     */
+    @Override
+    public void update() {
+        derivedStats.update();
+    } // end update
+
+    @Override
+    public void remove() {
+
+    } // end remove
 
     public void levelUp() {
         /*

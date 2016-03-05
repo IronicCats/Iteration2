@@ -1,4 +1,4 @@
-package Model.GameObject.MobileObjects.Entities.Stats;
+package Model.Stats;
 
 
 import java.util.EnumMap;

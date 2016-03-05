@@ -2,7 +2,7 @@ package Utilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.ItemEnum;
-import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
+import Model.Stats.StatStruc;
 import Model.Location;
 import Model.Requirement;
 import Model.GameObject.Item.Items.*;

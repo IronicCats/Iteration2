@@ -1,7 +1,7 @@
 package Model.Effects;
 
-import Model.GameObject.MobileObjects.Entities.Stats.ModificationEnum;
-import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
+import Model.Stats.ModificationEnum;
+import Model.Stats.StatStruc;
 
 /**
  * Created by Wimberley on 2/25/16.

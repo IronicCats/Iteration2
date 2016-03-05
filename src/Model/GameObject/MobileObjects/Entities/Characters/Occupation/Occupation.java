@@ -1,11 +1,10 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.GameObject.MobileObjects.Entities.Stats.StatStruc;
-import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
+import Model.Stats.StatStruc;
+import Model.Stats.StatsEnum;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by mazumderm on 3/1/2016.
