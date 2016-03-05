@@ -1,5 +1,6 @@
 package Model.Stats;
 
+import Model.Effects.ModificationEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -37,7 +38,7 @@ public class PrimaryStats implements Subject {
         observers = new ArrayList<>();
     } // end default constructor
 
-    public PrimaryStats(StatStruc ss) {
+    public PrimaryStats(StatStructure ss) {
         /*
         initialize stats
          */

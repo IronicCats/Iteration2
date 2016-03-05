@@ -25,7 +25,7 @@ public class PlayerStats implements Subject, Observer {
         observers = new ArrayList<>();
     } // end default constructor
 
-    public PlayerStats(StatStruc ss) {
+    public PlayerStats(StatStructure ss) {
         primaryStats = new PrimaryStats(ss);
         derivedStats = new DerivedStats(primaryStats);
         effects = new ArrayList<>();
@@ -93,6 +93,12 @@ public class PlayerStats implements Subject, Observer {
         }
          */
     } // end kill()
+
+    public void applyEffect(Effect[] e) {
+        for (Effect effect : e){
+            applyEffect(effect);
+        }
+    } // end applyEffect
 
     public void applyEffect(Effect e) {
         /*

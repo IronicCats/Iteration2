@@ -2,7 +2,7 @@ package Utilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.ItemEnum;
-import Model.Stats.StatStruc;
+import Model.Stats.StatStructure;
 import Model.Location;
 import Model.Requirement;
 import Model.GameObject.Item.Items.*;
@@ -19,13 +19,13 @@ import Model.GameObject.Item.Items.Takables.Equippable.*;
         to the respective items creation function.
     2.) Requirements for certain items are created by either passing an int for required level,
         a Quest item for required item, or both, into the creation function for said item.
-    3.) Effect is created for each item that needs it by passing in a StatStruc with neccesary
-        stat adjustments held within the passed StatStruc
+    3.) Effect is created for each item that needs it by passing in a StatStructure with neccesary
+        stat adjustments held within the passed StatStructure
  */
 
 public class CreateItem {
 
-    public static OneShot addOneShot(String name, String description, int x, int y, StatStruc modify){
+    public static OneShot addOneShot(String name, String description, int x, int y, StatStructure modify){
         return new OneShot(
                 ItemEnum.ONESHOT,
                 name,
@@ -74,7 +74,7 @@ public class CreateItem {
         );
     }
 
-    public static Quest addQuest(String name, String description, int x, int y, int requiredLevel, StatStruc modify){
+    public static Quest addQuest(String name, String description, int x, int y, int requiredLevel, StatStructure modify){
         return new Quest(
                 ItemEnum.QUEST,
                 name,
@@ -85,7 +85,7 @@ public class CreateItem {
         );
     }
 
-    public static Quest addQuest(String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
+    public static Quest addQuest(String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
         return new Quest(
                 ItemEnum.QUEST,
                 name,
@@ -96,7 +96,7 @@ public class CreateItem {
         );
     }
 
-    public static Quest addQuest(String name, String description, int x, int y, int level, Quest requiredItem, StatStruc modify){
+    public static Quest addQuest(String name, String description, int x, int y, int level, Quest requiredItem, StatStructure modify){
         return new Quest(
                 ItemEnum.QUEST,
                 name,
@@ -107,7 +107,7 @@ public class CreateItem {
         );
     }
 
-    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, StatStruc modify){
+    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, StatStructure modify){
         return new Usable(
                 ItemEnum.USABLE,
                 name,
@@ -118,7 +118,7 @@ public class CreateItem {
         );
     }
 
-    public static Usable addUsable(String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
+    public static Usable addUsable(String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
         return new Usable(
                 ItemEnum.USABLE,
                 name,
@@ -128,7 +128,7 @@ public class CreateItem {
                 new Effect(modify));
     }
 
-    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
+    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
         return new Usable(
                 ItemEnum.USABLE,
                 name,
@@ -139,7 +139,7 @@ public class CreateItem {
         );
     }
 
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStruc modify){
+    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStructure modify){
         return new Weapon(
                 id,
                 name,
@@ -150,7 +150,7 @@ public class CreateItem {
         );
     }
 
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
+    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
         return new Weapon(
                 id,
                 name,
@@ -161,7 +161,7 @@ public class CreateItem {
         );
     }
 
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
+    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
         return new Weapon(
                 id,
                 name,
@@ -172,7 +172,7 @@ public class CreateItem {
         );
     }
 
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStruc modify){
+    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStructure modify){
         return new Armor(
                 id,
                 name,
@@ -183,7 +183,7 @@ public class CreateItem {
         );
     }
 
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStruc modify){
+    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
         return new Armor(
                 id,
                 name,
@@ -194,7 +194,7 @@ public class CreateItem {
         );
     }
 
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStruc modify){
+    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
         return new Armor(
                 id,
                 name,

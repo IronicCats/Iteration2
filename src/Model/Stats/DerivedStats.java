@@ -1,5 +1,6 @@
 package Model.Stats;
 
+import Model.Effects.ModificationEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
