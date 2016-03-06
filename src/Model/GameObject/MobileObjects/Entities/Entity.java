@@ -40,6 +40,7 @@ public abstract class Entity extends MobileObject {
     public PlayerStats getStats() {
         return stats;
     }
+    public int getMovement() { return stats.getMovement(); }
 
     public Occupation getOccupation() {
         return occupation;
