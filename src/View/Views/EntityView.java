@@ -51,8 +51,8 @@ public class EntityView implements Renderable {
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         g.drawImage(sprites.get(active),
-                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - (Settings.TILEWIDTH / (2*2))),
-                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 -(Settings.TILEHEIGHT / (2*2))),
+                Utilities.calculateTileCenterXLocation(location) - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
+                Utilities.calculateTileCenterYLocation(location) - cameraYOffset - (Settings.TILEHEIGHT / (2*2)),
                 Settings.TILEWIDTH / 2,
                 Settings.TILEHEIGHT / 2,
                 null

@@ -46,4 +46,17 @@ public class Utilities {
         return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2);
     }
 
+    public static int calculateTileCenterXLocation(Location location) {
+        int x = location.getX();
+        int y = location.getY();
+        int pixelX = (x/2) * (Settings.TILEWIDTH / 2);
+        return ((x * Settings.TILEWIDTH) - (x % 2 == 0 ? 0:Settings.TILEWIDTH / 4) - pixelX) + Settings.TILEWIDTH/2;
+
+    }
+    public static int calculateTileCenterYLocation(Location location) {
+        int x = location.getX();
+        int y = location.getY();
+        return (y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2)) + Settings.TILEHEIGHT/2;
+    }
+
 }
