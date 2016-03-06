@@ -2,12 +2,19 @@ package Utilities;
 
 import Model.Location;
 
+import java.awt.*;
 import java.util.Set;
 
 /**
  * Created by Aidan on 3/1/2016.
  */
 public class Utilities {
+    public static int getFontWidth(Graphics g, Font font, String text) {
+        FontMetrics fontMetrics = g.getFontMetrics(font);
+        //...
+        return fontMetrics.stringWidth(text);
+    }
+
     public static int parseInt(String string){
         try {
             return Integer.parseInt(string);
@@ -38,7 +45,5 @@ public class Utilities {
         int y = location.getY();
         return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2);
     }
-//  (x * Settings.TILEWIDTH - xOffset - offsetX - ((x/2)* (Settings.TILEWIDTH / 2)))
-//  (y * Settings.TILEHEIGHT - yOffset + offsetY)
 
 }

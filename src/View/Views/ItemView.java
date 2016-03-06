@@ -52,10 +52,10 @@ public class ItemView implements Observer, Renderable {
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,
-                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - sprite.getWidth()/2),
-                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 - sprite.getHeight()/2),
-                sprite.getWidth(),
-                sprite.getHeight(),
+                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - 16),
+                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 - 16),
+                32,
+                32,
                 null
         );
     }
