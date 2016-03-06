@@ -117,6 +117,23 @@ public class SaveLoad {
         return type;                //returns it so it can be used in XML
     }
 
+    private static Node getMap(Document doc, Map m){
+        Element map = doc.createElement("map"); //creates a map element for the doc
+        int getWidth = m.getWidth();               //gets width
+        int getHeight = m.getHeight();             //gets height
+
+        Attr width = doc.createAttribute("width");  //creates an attribute for width
+        width.setValue(Integer.toString(getWidth)); //sets the value of attribute to width of map
+        map.setAttributeNode(width);                //setsAttributeNode on element
+
+        Attr height = doc.createAttribute("height");//creates an attribute for height
+        height.setValue(Integer.toString(getHeight));//sets the value of the attribute to height of map
+        map.setAttributeNode(height);               //setsAttributeNode on element
+
+        return map;
+
+    }
+
     public static void toXML(Document doc, String fileName){
         TransformerFactory tf = TransformerFactory.newInstance(); //creates an instance of a Transformer factory for xml shenanigans
         try{
