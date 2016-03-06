@@ -1,8 +1,8 @@
 package Utilities;
 
 import Model.Location;
-import Model.Map.AreaEffect.AreaEffect;
-import Model.Map.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.AreaEffect.AreaEffectEnum;
 
 /**
  * Created by mazumderm on 3/3/2016.
