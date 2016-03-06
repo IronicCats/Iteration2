@@ -1,6 +1,7 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
 import Model.GameObject.Item.Items.Takable;
+import Model.Inventory.EquipmentTypeEnum;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.EquipmentModification;
@@ -15,13 +16,16 @@ import Model.Stats.StatsEnum;
    in the effect attribute.
  */
 public class Armor extends Takable {
+    private EquipmentTypeEnum type;
 
     public Armor() {
         super();
+        this.type = null;
     } // end default constructor
 
-    public Armor(int id, String name, String description, Location location, Requirement requirements, EquipmentModification e) {
+    public Armor(int id, String name, String description, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
         super(id, name, description, location, requirements, e);
+        this.type = type;
     } // end constructor
 
     // returns value in effect's statStruc associated with defensive rating
@@ -33,6 +37,7 @@ public class Armor extends Takable {
     public void setDefense(int defense) {
         effect.getModification().modifyStat(StatsEnum.ARMOR_RATING, defense);
     }
+    public EquipmentTypeEnum getType() { return type; }
 
     @Override
     public void addObserver(Observer o) {

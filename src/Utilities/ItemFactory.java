@@ -3,12 +3,15 @@ package Utilities;
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.*;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
+import Model.Inventory.EquipmentTypeEnum;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
@@ -80,88 +83,88 @@ public class ItemFactory {
                         "A sword made from a stick",
                         location,
                         new Requirement(new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
-                        1);
+                        EquipmentTypeEnum.ONE_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)));
             case STICK_GREATSWORD:
                 return new Weapon(id,
                         "Stick Greatsword",
                         "A sword made from a big stick",
                         location,
                         new Requirement(new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)));
             case SWORDFISH_DAGGER:
                 return new Weapon(id,
                         "Swordfish dagger",
                         "A dagger made from a swordfish bill",
                         location,
                         new Requirement(5, new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 5)),
-                        1);
+                        EquipmentTypeEnum.ONE_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 5)));
             case SWORDFISH_LANCE:
                 return new Weapon(id,
                         "Swordfish lance",
                         "A large lance made from a swordfish bill",
                         location,
                         new Requirement(5, new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)));
             case PUFFER_FISH_MACE:
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A mace made from a deadly puffer fish",
                         location,
                         new Requirement(15, new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 9)),
-                        1);
+                        EquipmentTypeEnum.ONE_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 9)));
             case PUFFER_FISH_FLAIL:
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A heavy mace made from a deadly puffer fish",
                         location,
                         new Requirement(15, new Smasher()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 18)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 18)));
             case MOUSE_ON_A_STRING_WAND:
                 return new Weapon(id,
                         "Mouse on a string wand",
                         "A magical stick with a mouse attached",
                         location,
                         new Requirement(new Summoner()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
-                        1);
+                        EquipmentTypeEnum.ONE_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 2)));
             case CATNIP_STAFF:
                 return new Weapon(id,
                         "Catnip staff",
                         "A staff imbued with the magic of catnip",
                         location,
                         new Requirement(new Summoner()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)));
             case HAIRBALL:
                 return new Weapon(id,
                         "Hairball",
                         "A hairball projectile",
                         location,
                         new Requirement(new Sneak()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)));
             case LASER_POINTER:
                 return new Weapon(id,
                         "Laser pointer",
                         "A powerful laser pointer",
                         location,
                         new Requirement(5, new Sneak()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 8)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 8)));
             case FISH_BOOMERANG:
                 return new Weapon(id,
                         "Fish boomerang",
                         "A sharp fish carcass boomerang",
                         location,
                         new Requirement(15, new Sneak()),
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 14)),
-                        2);
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 14)));
             case CHEST_KEY:
                 return new Quest(id,
                         "Chest key",
@@ -206,6 +209,7 @@ public class ItemFactory {
                         "To protect your head",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.HEAD,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 3)));
             case CHESTPLATE:
                 return new Armor(id,
@@ -213,6 +217,7 @@ public class ItemFactory {
                         "A sturdy piece of chest armor",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.CHEST,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 5)));
             case PLATELEGS:
                 return new Armor(id,
@@ -220,6 +225,7 @@ public class ItemFactory {
                         "A set of armored leggings",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.LEGS,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 4)));
             case GAUNTLETS:
                 return new Armor(id,
@@ -227,6 +233,7 @@ public class ItemFactory {
                         "Made to protect your hands",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.GLOVES,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 2)));
             case BOOTS:
                 return new Armor(id,
@@ -234,6 +241,7 @@ public class ItemFactory {
                         "Foot protection",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.BOOTS,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 2)));
             case SHIELD:
                 return new Armor(id,
@@ -241,7 +249,29 @@ public class ItemFactory {
                         "A thick shield",
                         location,
                         new Requirement(),
+                        EquipmentTypeEnum.SHIELD,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 4)));
+            case MILDLY_COOL_RING:
+                return new Armor(id,
+                        "Mildly cool ring",
+                        "A mildly cool imbued ring",
+                        location,
+                        new Requirement(),
+                        EquipmentTypeEnum.ACCESSORY,
+                        new EquipmentModification(new StatStructure(
+                                new StatsEnum[] {StatsEnum.AGILITY, StatsEnum.INTELLECT},
+                                new int[] {2, 2})));
+            case DOPE_RING:
+                return new Armor(id,
+                        "Dope ring",
+                        "A dope imbued ring",
+                        location,
+                        new Requirement(),
+                        EquipmentTypeEnum.ACCESSORY,
+                        new EquipmentModification(new StatStructure(
+                                new StatsEnum[] {StatsEnum.STRENGTH, StatsEnum.AGILITY, StatsEnum.INTELLECT,
+                                        StatsEnum.HARDINESS},
+                                new int[] {4, 4, 4, 4})));
             default:
                 return null;
         }
