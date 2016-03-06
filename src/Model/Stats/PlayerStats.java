@@ -62,6 +62,7 @@ public class PlayerStats implements Subject, Observer {
     @Override
     public void update() {
         derivedStats.update();
+        alert();
     } // end update
 
     @Override

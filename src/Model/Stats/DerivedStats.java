@@ -142,6 +142,7 @@ public class DerivedStats implements Subject {
             equippedArmor += e.getArmorRating();
             System.out.println("Armor modification applied: " + e.getArmorRating());
         }
+        alert();
     } // end applyEquipmentModification
 
     public void removeEquipmentModification(EquipmentModification e) {
@@ -154,6 +155,7 @@ public class DerivedStats implements Subject {
             equippedArmor -= e.getArmorRating();
             System.out.println("Armor modification removed: " + e.getArmorRating());
         }
+        alert();
     } // end removeEquipmentModification
 
     public int getLevel() { return level; }
