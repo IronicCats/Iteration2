@@ -5,7 +5,6 @@ import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Stats.*;
 import Model.Location;
-import com.sun.org.glassfish.external.statistics.Stats;
 
 /**
  * Created by Wimberley on 3/3/16.

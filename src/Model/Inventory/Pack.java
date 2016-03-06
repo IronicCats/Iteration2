@@ -12,20 +12,17 @@ public class Pack {
     private Item[] items;
     private int count;
     private final int cap;
-    private ArrayList<Observer> observers;
 
     public Pack() {
         items = new Item[]{};
         count = 0;
         cap = 16;
-        observers = new ArrayList<>();
     } // end default constructor
 
     public Pack(Item[] items) {
         this.items = items;
         count = items.length;
         cap = 16;
-        observers = new ArrayList<>();
     } // end constructor
 
     public void place(Item item) {
