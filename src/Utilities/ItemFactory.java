@@ -4,13 +4,17 @@ import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.*;
+import Model.GameObject.Item.Items.Interactable;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Quest;
+import Model.GameObject.Item.Items.Takables.Usable;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
-import Utilities.ItemUtilities.CreateItem;
 
 /**
  * Created by broskj on 3/5/16.
@@ -23,55 +27,55 @@ public class ItemFactory {
         int id = itemsEnum.ordinal();
         switch(itemsEnum) {
             case HEALTH_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Health potion",
                         "A potion that restores health",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.LIFE, 10)));
             case MANA_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Mana potion",
                         "A potion that restores mana",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.MANA, 10)));
             case STRENGTH_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Strength potion",
                         "A potion that boosts strength",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.STRENGTH, 10)));
             case AGILITY_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Agility potion",
                         "A potion that boosts agility",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.AGILITY, 10)));
             case INTELLECT_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Intellect potion",
                         "A potion that boosts intellect",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.INTELLECT, 10)));
             case HARDINESS_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Hardiness potion",
                         "A potion that boosts hardiness",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.HARDINESS, 10)));
             case EXPERIENCE_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Experience potion",
                         "A potion that raises experience",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.EXPERIENCE, 10)));
             case MOVEMENT_POTION:
-                return CreateItem.addUsable(id,
+                return new Usable(id,
                         "Movement potion",
                         "A potion that raises movement",
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.MOVEMENT, 10)));
             case STICK_SWORD:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Stick Sword",
                         "A sword made from a stick",
                         location,
@@ -79,7 +83,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
                         1);
             case STICK_GREATSWORD:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Stick Greatsword",
                         "A sword made from a big stick",
                         location,
@@ -87,7 +91,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)),
                         2);
             case SWORDFISH_DAGGER:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Swordfish dagger",
                         "A dagger made from a swordfish bill",
                         location,
@@ -95,7 +99,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 5)),
                         1);
             case SWORDFISH_LANCE:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Swordfish lance",
                         "A large lance made from a swordfish bill",
                         location,
@@ -103,7 +107,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)),
                         2);
             case PUFFER_FISH_MACE:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Puffer fish mace",
                         "A mace made from a deadly puffer fish",
                         location,
@@ -111,7 +115,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 9)),
                         1);
             case PUFFER_FISH_FLAIL:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Puffer fish mace",
                         "A heavy mace made from a deadly puffer fish",
                         location,
@@ -119,7 +123,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 18)),
                         2);
             case MOUSE_ON_A_STRING_WAND:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Mouse on a string wand",
                         "A magical stick with a mouse attached",
                         location,
@@ -127,7 +131,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
                         1);
             case CATNIP_STAFF:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Catnip staff",
                         "A staff imbued with the magic of catnip",
                         location,
@@ -135,7 +139,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 3)),
                         2);
             case HAIRBALL:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Hairball",
                         "A hairball projectile",
                         location,
@@ -143,7 +147,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)),
                         2);
             case LASER_POINTER:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Laser pointer",
                         "A powerful laser pointer",
                         location,
@@ -151,7 +155,7 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 8)),
                         2);
             case FISH_BOOMERANG:
-                return CreateItem.addWeapon(id,
+                return new Weapon(id,
                         "Fish boomerang",
                         "A sharp fish carcass boomerang",
                         location,
@@ -159,80 +163,80 @@ public class ItemFactory {
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 14)),
                         2);
             case CHEST_KEY:
-                return CreateItem.addQuest(id,
+                return new Quest(id,
                         "Chest key",
                         "A key to a chest",
                         location,
                         new Requirement(),
                         new Effect());
             case OPEN_TREASURE_CHEST:
-                return CreateItem.addInteractable(id,
+                return new Interactable(id,
                         "Unlocked chest",
                         "An unlocked chest",
                         location,
                         new Requirement());
             case CLOSED_TREASURE_CHEST:
-                return CreateItem.addInteractable(id,
+                return new Interactable(id,
                         "Closed chest",
                         "A locked chest",
                         location,
                         new Requirement(makeItem(ItemsEnum.CHEST_KEY, null)));
             case DOOR_KEY:
-                return CreateItem.addQuest(id,
+                return new Quest(id,
                         "Door key",
                         "A key to a door",
                         location,
                         new Requirement(),
                         new Effect());
             case OPEN_DOOR:
-                return CreateItem.addInteractable(id,
+                return new Interactable(id,
                         "Open door",
                         "An open door",
                         location,
                         new Requirement());
             case CLOSED_DOOR:
-                return CreateItem.addInteractable(id,
+                return new Interactable(id,
                         "Closed door",
                         "A locked door",
                         location,
                         new Requirement(makeItem(ItemsEnum.DOOR_KEY, null)));
             case HELMET:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Helmet",
                         "To protect your head",
                         location,
                         new Requirement(),
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 3)));
             case CHESTPLATE:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Chestplate",
                         "A sturdy piece of chest armor",
                         location,
                         new Requirement(),
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 5)));
             case PLATELEGS:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Platelegs",
                         "A set of armored leggings",
                         location,
                         new Requirement(),
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 4)));
             case GAUNTLETS:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Gauntlets",
                         "Made to protect your hands",
                         location,
                         new Requirement(),
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 2)));
             case BOOTS:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Boots",
                         "Foot protection",
                         location,
                         new Requirement(),
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 2)));
             case SHIELD:
-                return CreateItem.addArmor(id,
+                return new Armor(id,
                         "Shield",
                         "A thick shield",
                         location,
@@ -243,8 +247,8 @@ public class ItemFactory {
         }
     } // end makeItem
 
-    public static ItemView makeAsset(ItemsEnum itemsEnumm, Item item) {
-        switch(itemsEnumm) {
+    public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
+        switch(itemsEnum) {
             case HEALTH_POTION:
             case MANA_POTION:
             case STRENGTH_POTION:
