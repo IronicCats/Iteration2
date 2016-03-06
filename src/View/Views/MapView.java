@@ -3,10 +3,13 @@ package View.Views;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Utilities.Settings;
+import Utilities.Utilities;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
+import java.util.Set;
+
 import Utilities.Observer;
 
 /**
@@ -30,20 +33,16 @@ public class MapView implements Observer, Renderable {
     }
 
     public void render(Graphics g, int xOffset, int yOffset) {
-        for(int y = 0; y <  Settings.MAPHEIGHT; ++y){
-            int totaloffsetX = 0;                          //adds total offset because anytime you shiftover left
-            for (int x = 0; x < Settings.MAPWIDTH; ++x) {  //you have to shiftover all tiles to the left
-                int offsetX = 16; //a quarter of a tile
-                int offsetY = 28; //a half of a tile
-                if(x%2 == 0) {
-                    offsetY = 0;  //dont offset if x is even
-                    offsetX = 0;
-                    if(x != 0)
-                        totaloffsetX += 2 * 16; //offset if x is odd
-                }
+        for(int y = 0; y <  map.getHeight(); ++y){
+            for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
                 tileViews[x][y].render(g,
-                        (x * Settings.TILEWIDTH - xOffset - offsetX - totaloffsetX),
-                        (y * Settings.TILEHEIGHT - yOffset + offsetY)
+                        ((Utilities.calculateHexXLocation(x, y)) - xOffset),
+                        (Utilities.calculateHexYLocation(x, y) - yOffset)
+                );
+                g.setColor(Color.WHITE);
+                g.drawString(x + "," + y,
+                        ((Utilities.calculateHexXLocation(x, y)) - xOffset) + Settings.TILEWIDTH/2,
+                        ((Utilities.calculateHexYLocation(x, y) - yOffset)  + Settings.TILEHEIGHT/2)
                 );
             }
         }

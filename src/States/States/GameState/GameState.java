@@ -1,5 +1,6 @@
 package States.States.GameState;
 
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 import Model.Map.Map;
@@ -8,11 +9,14 @@ import Utilities.CreateItem;
 import States.State;
 import Utilities.MapUtilities.MakeMap;
 import View.ViewUtilities.Graphics.Assets;
+import View.Views.EntityView;
 import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
@@ -20,16 +24,18 @@ import java.util.ArrayList;
  */
 public class GameState extends State {
 
-    private ArrayList<Item> items;
-    ItemView itemView;
-    Map map;
-    MapView mapView;
+    private HashMap<Item, ItemView> mapItems;
+    private HashMap<Entity, EntityView> entities;
+    private Map map;
+    private MapView mapView;
 
     public GameState() {
+        mapItems = new HashMap<>();
+        entities = new HashMap<>();
         map = MakeMap.makeMap();
-        mapView = MakeMap.MakeMapView(map);
-        Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStructure(StatsEnum.LIFE, -5));
-        itemView = new ItemView(item, Assets.POTION);
+        mapView = MakeMap.makeMapView(map);
+        Item item = CreateItem.addOneShot("some name", "removes 5 life", 5, 1, new StatStructure(StatsEnum.LIFE, -5));
+        mapItems.put(item, new ItemView(item, Assets.POTION));
     }
 
     public void switchState() {
@@ -42,7 +48,10 @@ public class GameState extends State {
 
     public void render(Graphics g) {
         mapView.render(g, -160, -20);
-        itemView.render(g);
+        //keyset for keys, values for values
+        for (ItemView itemView : mapItems.values()) {
+            itemView.render(g, -160, -20);
+        }
     }
 
     @Override

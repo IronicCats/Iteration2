@@ -1,5 +1,6 @@
 package Model.Map;
 
+import Model.GameObject.Item.Item;
 import Model.Location;
 import Utilities.Subject;
 import Utilities.Observer;
@@ -23,11 +24,19 @@ public class Map implements Subject {
     }
 
     public Tile getTile(int x , int y) {
-        if(x < 0 || y < 0 || x >= width  || y >= height){
-            return tiles[2][2];
-        }
+
         return tiles[x][y];
     }
+
+    public void placeItem(Item item) {
+        try {
+            tiles[item.getX()][item.getY()].addItem(item);
+        }catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Error while adding Item to Map");
+        }
+    }
+
 
     public Location getSpawn(){
         return spawn;
