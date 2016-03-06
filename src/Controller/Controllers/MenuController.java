@@ -16,7 +16,9 @@ public class MenuController extends Controller {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
+        if(!canGetInput()) { return; }
+
         System.out.println("Menu: " + e.getKeyCode());
 
         if(e.getKeyCode() == 10) {

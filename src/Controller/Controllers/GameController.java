@@ -17,6 +17,7 @@ public class GameController extends Controller {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(!canGetInput()) { return; }
         System.out.println("Game: " + e.getKeyCode());
 
         switch (e.getKeyCode()) {

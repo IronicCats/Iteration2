@@ -5,12 +5,17 @@ import State.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Joshua Kegley on 2/24/2016.
  */
 public abstract class Controller implements KeyListener {
     public State state;
+    protected long lastPressProcessed = 0;
+
+
     public Controller(State state) {
         this.state = state;
     }
@@ -33,7 +38,16 @@ public abstract class Controller implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Released: " + e.getKeyCode());
+        lastPressProcessed = 0;
     }
+
+    public boolean canGetInput() {
+        if(System.currentTimeMillis() - lastPressProcessed > 500) {
+            lastPressProcessed = System.currentTimeMillis();
+            return true;
+        }
+        return false;
+    }
+
 
 }
