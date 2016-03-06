@@ -1,12 +1,11 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
+import Model.Inventory.EquipmentTypeEnum;
 import Model.Stats.StatsEnum;
-import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
-import Model.Effects.Effect;
-import Utilities.EquipmentModification;
+import Model.Effects.EquipmentModification;
 import Utilities.Observer;
 
 /**
@@ -17,20 +16,29 @@ import Utilities.Observer;
    in the effect attribute.
  */
 public class Weapon extends Takable {
+    EquipmentTypeEnum type;
 
-    public Weapon(ItemEnum id, String name, String description, Location location, Requirement requirement, EquipmentModification e) {
+    public Weapon() {
+        super();
+        type = null;
+    } // end default constructor
+
+    public Weapon(int id, String name, String description, Location location, Requirement requirement, EquipmentTypeEnum type, EquipmentModification e) {
         super(id, name, description, location, requirement, e);
-    }
+        this.type = type;
+    } // end constructor
 
     // returns value in the effect's statStruc associated with life
     public int getDamage(){
-        return effect.getModification().getStat(StatsEnum.LIFE);
+        return effect.getModification().getStat(StatsEnum.OFFENSIVE_RATING);
     }
 
     // used if weapon is worn out to lessen damage it inflicts
     public void setDamage(int damage) {
-        effect.getModification().modifyStat(StatsEnum.LIFE, damage);
+        effect.getModification().modifyStat(StatsEnum.OFFENSIVE_RATING, damage);
     }
+
+    public EquipmentTypeEnum getType() { return type; }
 
     @Override
     public void addObserver(Observer o) {

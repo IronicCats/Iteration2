@@ -40,9 +40,11 @@ public class MapView implements Observer, Renderable {
                         (Utilities.calculateHexYLocation(x, y) - yOffset)
                 );
                 g.setColor(Color.WHITE);
+                int textW = Utilities.getFontWidth(g, new Font("Arial", Font.PLAIN, 12), "0,0");
+
                 g.drawString(x + "," + y,
-                        ((Utilities.calculateHexXLocation(x, y)) - xOffset) + Settings.TILEWIDTH/2,
-                        ((Utilities.calculateHexYLocation(x, y) - yOffset)  + Settings.TILEHEIGHT/2)
+                        ((Utilities.calculateHexXLocation(x, y)) - xOffset) + Settings.TILEWIDTH/2 - textW/2,
+                        ((Utilities.calculateHexYLocation(x, y) - yOffset)) + 10
                 );
             }
         }

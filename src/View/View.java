@@ -1,6 +1,6 @@
 package View;
 
-import States.State;
+import State.State;
 import Utilities.Settings;
 import View.ViewUtilities.MainScreen;
 
@@ -67,5 +67,6 @@ public class View implements Runnable {
     }
 
 
-    public Canvas getCanvas() { return canvas; };
+    public Canvas getCanvas() { return canvas; }
+
 }

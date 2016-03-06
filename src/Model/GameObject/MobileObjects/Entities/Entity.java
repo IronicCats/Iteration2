@@ -1,9 +1,11 @@
 package Model.GameObject.MobileObjects.Entities;
 
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Stats.*;
 import Model.Location;
+import com.sun.org.glassfish.external.statistics.Stats;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -17,10 +19,14 @@ It also inherits location from MobileObject
 
 public abstract class Entity extends MobileObject {
 
-    private PlayerStats stats;
-    private Occupation occupation;
-    //private Inventory inventory;
-    //private Nav nav;
+    protected PlayerStats stats;
+    protected Occupation occupation;
+
+    public Entity() {
+        super();
+        stats = new PlayerStats();
+        occupation = new Smasher();
+    }
 
     public Entity(Location location, PlayerStats stats, Occupation occupation){
         super(location);
@@ -31,6 +37,7 @@ public abstract class Entity extends MobileObject {
     public PlayerStats getStats() {
         return stats;
     }
+    public int getMovement() { return stats.getMovement(); }
 
     public Occupation getOccupation() {
         return occupation;
