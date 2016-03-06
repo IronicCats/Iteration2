@@ -1,7 +1,7 @@
 package Model.Stats;
 
 import Model.Effects.ModificationEnum;
-import Utilities.EquipmentModification;
+import Model.Effects.EquipmentModification;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -142,6 +142,7 @@ public class DerivedStats implements Subject {
             equippedArmor += e.getArmorRating();
             System.out.println("Armor modification applied: " + e.getArmorRating());
         }
+        alert();
     } // end applyEquipmentModification
 
     public void removeEquipmentModification(EquipmentModification e) {
@@ -154,6 +155,7 @@ public class DerivedStats implements Subject {
             equippedArmor -= e.getArmorRating();
             System.out.println("Armor modification removed: " + e.getArmorRating());
         }
+        alert();
     } // end removeEquipmentModification
 
     public int getLevel() { return level; }

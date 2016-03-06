@@ -1,7 +1,6 @@
 package Model.GameObject.Item.Items;
 
 import Model.GameObject.Item.Item;
-import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
@@ -17,11 +16,16 @@ public abstract class Takable extends Item{
     private Requirement requirement;
     protected Effect effect;
 
-    public Takable(ItemEnum id, String name, String description, Location location, Requirement requirement, Effect effect){
+    public Takable() {
+        super();
+        this.requirement = new Requirement();
+    } // end default constructor
+
+    public Takable(int id, String name, String description, Location location, Requirement requirement, Effect effect){
         super(id, name, description, location);
         this.requirement = requirement;
         this.effect = effect;
-    }
+    } // end default constructor
 
     public Requirement getRequirements() {
         return requirement;

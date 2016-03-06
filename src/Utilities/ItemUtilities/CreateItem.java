@@ -1,7 +1,7 @@
 package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
-import Model.GameObject.Item.ItemEnum;
+import Model.Effects.EquipmentModification;
 import Model.Stats.StatStructure;
 import Model.Location;
 import Model.Requirement;
@@ -26,183 +26,78 @@ import Utilities.EquipmentModification;
 
 public class CreateItem {
 
-    public static OneShot addOneShot(String name, String description, int x, int y, StatStructure modify){
+    public static OneShot addOneShot(int id, String name, String description, Location location, Effect effect){
         return new OneShot(
-                ItemEnum.ONESHOT,
+                id,
                 name,
                 description,
-                new Location(x,y),
-                new Effect(modify)
+                location,
+                effect
         );
     }
 
-    public static Obstacle addObstacle(String name, String description, int x, int y){
+    public static Obstacle addObstacle(int id, String name, String description, Requirement requirement, Location location){
         return new Obstacle(
-                ItemEnum.OBSTACLE,
+                id,
                 name,
                 description,
-                new Location(x,y)
+                requirement,
+                location
         );
     }
 
-    public  static Interactable addInteractable(String name, String description, int x, int y, int requiredLevel){
+    public  static Interactable addInteractable(int id, String name, String description, Location location, Requirement requirement){
         return new Interactable(
-                ItemEnum.INTERACTABLE,
+                id,
                 name,
                 description,
-                new Location(x,y),
-                new Requirement(requiredLevel)
+                location,
+                requirement
         );
     }
 
-    public static Interactable addInteractable(String name, String description, int x, int y, Quest requiredItem){
-        return new Interactable(
-                ItemEnum.INTERACTABLE,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredItem)
-        );
-    }
-
-    public static Interactable addInteractable(String name, String description, int x, int y, int level, Quest requiredItem) {
-        return new Interactable(
-                ItemEnum.INTERACTABLE,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(level, requiredItem)
-        );
-    }
-
-    public static Quest addQuest(String name, String description, int x, int y, int requiredLevel, StatStructure modify){
+    public static Quest addQuest(int id, String name, String description, Location location, Requirement requirement, Effect effect){
         return new Quest(
-                ItemEnum.QUEST,
+                id,
                 name,
                 description,
-                new Location(x,y),
-                new Requirement(requiredLevel),
-                new Effect(modify)
+                location,
+                requirement,
+                effect
         );
     }
 
-    public static Quest addQuest(String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
-        return new Quest(
-                ItemEnum.QUEST,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredItem),
-                new Effect(modify)
-        );
-    }
-
-    public static Quest addQuest(String name, String description, int x, int y, int level, Quest requiredItem, StatStructure modify){
-        return new Quest(
-                ItemEnum.QUEST,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(level, requiredItem),
-                new Effect(modify)
-        );
-    }
-
-    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, StatStructure modify){
+    public static Usable addUsable(int id, String name, String description, Location location, Requirement requirement, Effect effect){
         return new Usable(
-                ItemEnum.USABLE,
+                id,
                 name,
                 description,
-                new Location(x,y),
-                new Requirement(requiredLevel),
-                new Effect(modify)
+                location,
+                requirement,
+                effect
         );
     }
 
-    public static Usable addUsable(String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
-        return new Usable(
-                ItemEnum.USABLE,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredItem),
-                new Effect(modify));
-    }
-
-    public static Usable addUsable(String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
-        return new Usable(
-                ItemEnum.USABLE,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredLevel, requiredItem),
-                new Effect(modify)
-        );
-    }
-
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStructure modify){
+    public static Weapon addWeapon(int id, String name, String description, Location location, Requirement requirement, EquipmentModification modification, int hands){
         return new Weapon(
                 id,
                 name,
                 description,
-                new Location(x,y),
-                new Requirement(requiredLevel),
-                new EquipmentModification(modify)
+                location,
+                requirement,
+                modification,
+                hands
         );
     }
 
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
-        return new Weapon(
-                id,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredItem),
-                new EquipmentModification(modify)
-        );
-    }
-
-    public static Weapon addWeapon(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
-        return new Weapon(
-                id,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredLevel, requiredItem),
-                new EquipmentModification(modify)
-        );
-    }
-
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, StatStructure modify){
+    public static Armor addArmor(int id, String name, String description, Location location, Requirement requirement, EquipmentModification modification){
         return new Armor(
                 id,
                 name,
                 description,
-                new Location(x,y),
-                new Requirement(requiredLevel),
-                new EquipmentModification(modify)
-        );
-    }
-
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, Quest requiredItem, StatStructure modify){
-        return new Armor(
-                id,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredItem),
-                new EquipmentModification(modify)
-        );
-    }
-
-    public static Armor addArmor(ItemEnum id, String name, String description, int x, int y, int requiredLevel, Quest requiredItem, StatStructure modify){
-        return new Armor(
-                id,
-                name,
-                description,
-                new Location(x,y),
-                new Requirement(requiredLevel, requiredItem),
-                new EquipmentModification(modify)
+                location,
+                requirement,
+                modification
         );
     }
 }

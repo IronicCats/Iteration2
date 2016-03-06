@@ -3,8 +3,7 @@ package StatesEnum.States.GameState;
 import Controller.Controllers.GameController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
-import Model.Stats.StatStructure;
-import Model.Stats.StatsEnum;
+import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
 <<<<<<< HEAD:src/States/States/GameState/GameState.java
@@ -12,11 +11,11 @@ import Utilities.ItemUtilities.CreateItem;
 import States.State;
 =======
 import StatesEnum.StatesEnum;
-import Utilities.CreateItem;
+import Utilities.ItemFactory;
+import Utilities.ItemsEnum;
 import StatesEnum.State;
 >>>>>>> 94719e4c99d7d40bd2810e6efef61422e2335a31:src/StatesEnum/States/GameState/GameState.java
 import Utilities.MapUtilities.MakeMap;
-import View.ViewUtilities.Graphics.Assets;
 import View.Views.EntityView;
 import View.Views.ItemView;
 import View.Views.MapView;
@@ -41,8 +40,9 @@ public class GameState extends State {
         entities = new HashMap<>();
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
-        Item item = CreateItem.addOneShot("some name", "removes 5 life", 5, 1, new StatStructure(StatsEnum.LIFE, -5));
-        mapItems.put(item, new ItemView(item, Assets.POTION));
+
+        Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
+        mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         Player player = new Player();
     }
 

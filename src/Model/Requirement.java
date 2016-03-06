@@ -1,6 +1,8 @@
 package Model;
 
+import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Quest;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -13,32 +15,54 @@ import Model.GameObject.Item.Items.Takables.Quest;
  */
 public class Requirement {
 
-    private int requiredLevel = 0; // used to tell if player is high enough level. Intialized to 0
-    private Quest requiredItem = null; // used to tell if player has required item
+    private int requiredLevel; // used to tell if player is high enough level. Intialized to 0
+    private Item requiredItem; // used to tell if player has required item
+    private Occupation requiredOccupation;
+
+    public Requirement() {
+        this.requiredLevel = 0;
+        this.requiredItem = null;
+        this.requiredOccupation = null;
+    } // end default constructor
+
+    public Requirement(int requiredLevel, Occupation requiredOccupation) {
+        this.requiredLevel = requiredLevel;
+        this.requiredItem = null;
+        this.requiredOccupation = requiredOccupation;
+    } // end constructor
+
+    public Requirement(Item requiredItem, Occupation requiredOccupation) {
+        this.requiredLevel = 0;
+        this.requiredItem = requiredItem;
+        this.requiredOccupation = requiredOccupation;
+    } // end constructor
 
     // constructor for requirement needing both item level and specific item
-    public Requirement(int requiredLevel, Quest requiredItem){
+    public Requirement(int requiredLevel, Item requiredItem){
         this.requiredLevel = requiredLevel;
         this.requiredItem = requiredItem;
-    }
+        this.requiredOccupation = null;
+    } // end constructor
 
     // constructor for requirement needing only player level
     public Requirement(int requiredLevel){
         this.requiredLevel = requiredLevel;
-    }
+        this.requiredItem = null;
+        this.requiredOccupation = null;
+    } // end constructor
 
     // constructor for requirement needing only specific item
-    public Requirement(Quest requiredItem){
+    public Requirement(Item requiredItem){
+        this.requiredLevel = 0;
         this.requiredItem = requiredItem;
-    }
+        this.requiredOccupation = null;
+    } // end constructor
 
-    public boolean meetsLevel(int playerLevel){ // pass in player level, returns true if player meets required level
-        if(playerLevel >= requiredLevel){
-           return true;
-        }
-        else return false;
-    }
-
+    public Requirement(Occupation requiredOccupation) {
+        this.requiredLevel = 0;
+        this.requiredItem = null;
+        this.requiredOccupation = requiredOccupation;
+    } // end constructor
 
     /* takes in players inventory and iterates through pack to determine if player
        has required item*/
