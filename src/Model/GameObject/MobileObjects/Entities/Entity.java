@@ -21,8 +21,6 @@ public abstract class Entity extends MobileObject {
 
     protected PlayerStats stats;
     protected Occupation occupation;
-    //private Inventory inventory;
-    //private Nav nav;
 
     public Entity() {
         super();

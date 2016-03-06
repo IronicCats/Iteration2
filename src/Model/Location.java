@@ -23,34 +23,58 @@ public class Location {
     // returns appropriate location based on degrees and current location
     // used to check tile through navigation
     public static Location newLocation(int degrees, Location location){
+        Location newLocation = new Location(0,0);
+        System.out.println(degrees);
         switch(degrees){
-            case 45: if(location.getX() % 2 == 0){
-                        location.setY(location.getY() - 1);
-                     }
-                     location.setX(location.getX() + 1);
+            case 45:
+                if (location.getX() % 2 == 0) {
+                    newLocation.setY(location.getY() - 1);
+                }
+                else{
+                    newLocation.setY(location.getY());
+                }
+                newLocation.setX(location.getX() + 1);
                 break;
-            case 90: location.setY(location.getY() - 1);
+            case 90:
+                newLocation.setY(location.getY() - 1);
+                newLocation.setX(location.getX());
                 break;
-            case 135: if(location.getX() % 2 == 0){
-                location.setY(location.getY() - 1);
-            }
-                location.setX(location.getX() - 1);
+            case 135:
+                if (location.getX() % 2 == 0) {
+                    newLocation.setY(location.getY() - 1);
+                }
+                else{
+                    newLocation.setY(location.getY());
+                }
+                newLocation.setX(location.getX() - 1);
                 break;
-            case 225: if(location.getX() % 2 != 0){
-                            location.setY(location.getY() + 1);
-                        }
-                location.setX(location.getX() - 1);
+            case 225:
+                if (location.getX() % 2 != 0) {
+                    newLocation.setY(location.getY() + 1);
+                }
+                else{
+                    newLocation.setY(location.getY());
+                }
+                newLocation.setX(location.getX() - 1);
                 break;
-            case 270: location.setY(location.getY() + 1);
+            case 270:
+                newLocation.setY(location.getY() + 1);
+                newLocation.setX(location.getX());
                 break;
-            case 315: if(location.getX() % 2 != 0){
-                        location.setY(location.getY() + 1);
-                      }
-                location.setX(location.getX() + 1);
+            case 315:
+                if (location.getX() % 2 != 0) {
+                    newLocation.setY(location.getY() + 1);
+                }
+                else{
+                    newLocation.setY(location.getY());
+                }
+                newLocation.setX(location.getX() + 1);
+
                 break;
-            default: break;
+            default:
+                break;
         }
-        return location;
+        return newLocation;
     }
 
     public int getX() {
@@ -71,6 +95,15 @@ public class Location {
 
     public int getDir() {
         return dir;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "x=" + x +
+                ", y=" + y +
+                ", dir=" + dir +
+                '}';
     }
 
     public void setDir(int dir) {
