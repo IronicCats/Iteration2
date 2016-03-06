@@ -4,7 +4,6 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Stats.PlayerStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
-import Model.Location;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -25,6 +24,7 @@ public class Player extends Entity{
         super(location, stats, occupation);
     }
 
+    // takes in the degrees associated with key press and updates player location
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
         if (degrees == 45) {
