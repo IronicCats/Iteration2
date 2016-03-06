@@ -1,5 +1,6 @@
 package States.States;
 
+import Controller.Controllers.MenuController;
 import States.State;
 import java.awt.*;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 public class MenuState extends State {
 
         public MenuState() {
-
+                setController(new MenuController());
         }
 
         public void switchState() {

@@ -11,14 +11,16 @@ import java.awt.*;
  */
 public class InitialState extends State {
 
-    public void init() {
+    public void init(Canvas canvas) {
+        State.canvas = canvas;
         //Create the MainMenu
         MenuState menu = new MenuState();
         State.addState(States.MenuState, menu);
         //Create the Game
         GameState gameState = new GameState();
         State.addState(States.GameState, gameState);
-        State.setState(States.GameState);
+
+        State.setState(States.MenuState);
 
     }
 

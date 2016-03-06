@@ -1,5 +1,6 @@
 package States.States.GameState;
 
+import Controller.Controllers.GameController;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
@@ -30,6 +31,8 @@ public class GameState extends State {
     private MapView mapView;
 
     public GameState() {
+        System.out.println("Creating Controller");
+        setController(new GameController());
         mapItems = new HashMap<>();
         entities = new HashMap<>();
         map = MakeMap.makeMap();
