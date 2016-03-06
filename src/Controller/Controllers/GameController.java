@@ -1,6 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import Utilities.Settings;
 import State.States.GameState.GameState;
 
 import java.awt.event.KeyEvent;
@@ -20,36 +21,18 @@ public class GameController extends Controller {
         if(!canGetInput()) { return; }
         System.out.println("Game: " + e.getKeyCode());
 
-        switch (e.getKeyCode()) {
-            case 38:
-            case 104:
-                //up key 8
-                ((GameState) state).movePlayer(90);
-                break;
-            case 103:
-                //leftup key 7
-                ((GameState) state).movePlayer(135);
-                break;
-            case 105:
-                //righttup key 9
-                ((GameState) state).movePlayer(45);
-                break;
-            case 97:
-                //leftup key 1
-                ((GameState) state).movePlayer(225);
-                break;
-            case 40:
-            case 98:
-                //down key 2
-                ((GameState) state).movePlayer(270);
-                break;
-            case 99:
-                //rightdown key 3
-                ((GameState) state).movePlayer(315);
-                break;
-            default:
-                break;
+        if(e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
+            ((GameState) state).movePlayer(90);
+        } else if(e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 37) {
+            ((GameState) state).movePlayer(135);
+        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {
+            ((GameState) state).movePlayer(225);
+        } else if(e.getKeyCode() == Settings.DOWN || e.getKeyCode() == 40) {
+            ((GameState) state).movePlayer(270);
+        } else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == 39) {
+            ((GameState) state).movePlayer(315);
+        }  else if(e.getKeyCode() == Settings.UP_RIGHT) {
+            ((GameState) state).movePlayer(45);
         }
-
     }
 }
