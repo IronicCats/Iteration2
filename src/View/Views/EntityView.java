@@ -53,8 +53,8 @@ public class EntityView implements Renderable {
         g.drawImage(sprites.get(active),
                 Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - (Settings.TILEWIDTH / (2*2))),
                 Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 -(Settings.TILEHEIGHT / (2*2))),
-                Settings.TILEWIDTH / 2,
-                Settings.TILEHEIGHT / 2,
+                Settings.PLAYERWIDTH,
+                Settings.PLAYERHEIGHT,
                 null
         );
     }
