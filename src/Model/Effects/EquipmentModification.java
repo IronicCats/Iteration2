@@ -1,7 +1,5 @@
-package Utilities;
+package Model.Effects;
 
-import Model.Effects.Effect;
-import Model.Effects.ModificationEnum;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 
