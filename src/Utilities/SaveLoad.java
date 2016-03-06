@@ -3,7 +3,14 @@ package Utilities;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Map.Map;
 
-import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -18,11 +25,12 @@ import java.io.File;
 public class SaveLoad {
 
 
+    private static String fileName;
     public static SaveLoad instance = new SaveLoad();
     private static Entity avatar;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
 
-    public static Entity getEntity(){// this will be changed later
+    public static Entity getAvatar(){// this will be changed later
         return avatar;
     }
     public static Map getGameMap(){
@@ -38,6 +46,34 @@ public class SaveLoad {
 
     public static SaveLoad getInstance() {
         return instance;
+    }
+
+    public static void save(){
+
+        try{
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+
+            String filePath = "/res/saveFiles" + fileName;
+
+            Element rootElement = doc.createElementNS(filePath,"SaveFile");
+            doc.appendChild(rootElement);
+
+            rootElement.appendChild(getEntity(doc,avatar));
+           // rootElement.appendChild(getMap(doc,gameMap));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private static Node getEntity(Document doc, Entity e){
+        Element entity = doc.createElement("entities");
+
+        //entity.appendChild(getEntityInfo(doc,e));//need to make Entity info
+        return entity;
     }
 
     public static void toXML(Document doc, String fileName){
