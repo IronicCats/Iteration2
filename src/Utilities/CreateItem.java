@@ -2,7 +2,6 @@ package Utilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
-import Model.Stats.StatStructure;
 import Model.Location;
 import Model.Requirement;
 import Model.GameObject.Item.Items.*;

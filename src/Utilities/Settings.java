@@ -13,5 +13,12 @@ public class Settings {
     public static int TILEWIDTH = 64;
     public static int TILEHEIGHT = 56;
 
+    public static int UP_RIGHT = 45;
+    public static int UP = 90;
+    public static int UP_LEFT = 135;
+    public static int DOWN_LEFT = 225;
+    public static int DOWN = 270;
+    public static int DOWN_RIGHT = 315;
+
     public static String TITLE = "Ironic Cats";
 }
