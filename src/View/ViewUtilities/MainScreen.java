@@ -32,7 +32,7 @@ public class MainScreen extends JFrame {
         canvas.setPreferredSize(canvasDimension);
         canvas.setMaximumSize(canvasDimension);
         canvas.setMinimumSize(canvasDimension);
-        canvas.setFocusable(false);
+        canvas.setFocusable(true);
 
         add(canvas);
         pack();

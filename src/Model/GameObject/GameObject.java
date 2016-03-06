@@ -7,8 +7,7 @@ import Model.Location;
  */
 public abstract class GameObject {
     private Location location;
-
-
+    public GameObject() { location = new Location(0,0);}
     public GameObject(Location location) {
         this.location = location;
     }
@@ -18,6 +17,13 @@ public abstract class GameObject {
     }
     public void setLocation(Location l) {
         location = l;
+    }
+
+    public int getX() {
+        return location.getX();
+    }
+    public int getY() {
+        return location.getY();
     }
 
     public String toString() {
