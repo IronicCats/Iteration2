@@ -1,6 +1,6 @@
 package Model;
 
-import States.State;
+import StatesEnum.State;
 
 /**
  * Created by Joshua Kegley on 2/24/2016.

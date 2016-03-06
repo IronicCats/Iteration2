@@ -1,11 +1,10 @@
 package View;
 
-import States.State;
+import StatesEnum.State;
 import Utilities.Settings;
 import View.ViewUtilities.MainScreen;
 
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 /**
