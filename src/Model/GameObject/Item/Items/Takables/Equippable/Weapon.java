@@ -1,5 +1,6 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
+import Model.Inventory.EquipmentEnum;
 import Model.Stats.StatsEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
@@ -15,16 +16,16 @@ import Utilities.Observer;
    in the effect attribute.
  */
 public class Weapon extends Takable {
-    int hands;
+    EquipmentEnum type;
 
     public Weapon() {
         super();
-        hands = 1;
+        type = null;
     } // end default constructor
 
-    public Weapon(int id, String name, String description, Location location, Requirement requirement, EquipmentModification e, int hands) {
+    public Weapon(int id, String name, String description, Location location, Requirement requirement, EquipmentEnum type, EquipmentModification e) {
         super(id, name, description, location, requirement, e);
-        this.hands = hands;
+        this.type = type;
     } // end constructor
 
     // returns value in the effect's statStruc associated with life
@@ -37,7 +38,7 @@ public class Weapon extends Takable {
         effect.getModification().modifyStat(StatsEnum.OFFENSIVE_RATING, damage);
     }
 
-    public int getHands() { return hands; }
+    public EquipmentEnum getType() { return type; }
 
     @Override
     public void addObserver(Observer o) {
