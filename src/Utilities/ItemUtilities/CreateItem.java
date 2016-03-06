@@ -1,4 +1,4 @@
-package Utilities;
+package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.ItemEnum;
@@ -9,6 +9,7 @@ import Model.GameObject.Item.Items.*;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.Item.Items.Takables.Equippable.*;
+import Utilities.Utilities;
 
 /**
  * Created by Wimberley on 3/1/16.

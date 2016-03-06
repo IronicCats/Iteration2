@@ -1,7 +1,8 @@
-package Utilities;
+package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.Items.OneShot;
+import Utilities.Utilities;
 
 /**
  * Created by Wimberley on 3/1/16.

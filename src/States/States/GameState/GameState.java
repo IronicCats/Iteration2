@@ -4,7 +4,7 @@ import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Utilities.CreateItem;
+import Utilities.ItemUtilities.CreateItem;
 import States.State;
 import Utilities.MapUtilities.MakeMap;
 import View.ViewUtilities.Graphics.Assets;
