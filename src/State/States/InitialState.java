@@ -1,8 +1,9 @@
-package States.States;
+package State.States;
 
 
-import States.State;
-import States.States.GameState.GameState;
+import State.State;
+import State.States.GameState.GameState;
+import State.StatesEnum;
 
 import java.awt.*;
 
@@ -15,12 +16,12 @@ public class InitialState extends State {
         State.canvas = canvas;
         //Create the MainMenu
         MenuState menu = new MenuState();
-        State.addState(States.MenuState, menu);
+        State.addState(StatesEnum.MenuState, menu);
         //Create the Game
         GameState gameState = new GameState();
-        State.addState(States.GameState, gameState);
+        State.addState(StatesEnum.GameState, gameState);
 
-        State.setState(States.MenuState);
+        State.setState(StatesEnum.MenuState);
 
     }
 
@@ -35,7 +36,7 @@ public class InitialState extends State {
     }
 
     @Override
-    public void switchState(States s) {
+    public void switchState(StatesEnum s) {
 
     }
 }

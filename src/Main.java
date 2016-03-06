@@ -2,10 +2,7 @@ import Model.Game;
 import View.View;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.MainScreen;
-import States.States.InitialState;
-import Utilities.Settings;
-
-import java.awt.*;
+import State.States.InitialState;
 
 /**
  * Created by Joshua Kegley on 2/24/2016.

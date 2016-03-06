@@ -37,7 +37,6 @@ public class Map implements Subject {
         }
     }
 
-
     public Location getSpawn(){
         return spawn;
     }

@@ -1,7 +1,7 @@
 package Model.Stats;
 
 import Model.Effects.Effect;
-import Utilities.EquipmentModification;
+import Model.Effects.EquipmentModification;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -62,6 +62,7 @@ public class PlayerStats implements Subject, Observer {
     @Override
     public void update() {
         derivedStats.update();
+        alert();
     } // end update
 
     @Override

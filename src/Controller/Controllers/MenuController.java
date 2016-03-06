@@ -1,21 +1,29 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import States.State;
+import State.States.MenuState;
+import State.StatesEnum;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Joshua Kegley on 3/5/2016.
  */
 public class MenuController extends Controller {
 
-
-    public void doSomething(int keyCode) {
-        System.out.println("Menu: " + keyCode);
-
-        if(keyCode == 10) {
-            State.setState(State.States.GameState);
-        }
-
-
+    public MenuController(MenuState state) {
+        super(state);
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(!canGetInput()) { return; }
+
+        System.out.println("Menu: " + e.getKeyCode());
+
+        if(e.getKeyCode() == 10) {
+            state.switchState(StatesEnum.GameState);
+        }
+    }
+
 }
