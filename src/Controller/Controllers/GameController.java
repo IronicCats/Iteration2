@@ -34,7 +34,7 @@ public class GameController extends Controller {
                 ((GameState) state).movePlayer(45);
                 break;
             case 97:
-                //leftup key 1
+                //leftdown key 1
                 ((GameState) state).movePlayer(225);
                 break;
             case 40:

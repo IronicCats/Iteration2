@@ -15,7 +15,6 @@ Also inherits location from GameObject
 */
 public abstract class MobileObject extends GameObject{
 
-    private Location location;
     private float speed;
     // private Nav navigation
 
