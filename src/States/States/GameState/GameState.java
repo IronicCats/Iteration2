@@ -1,12 +1,15 @@
 package States.States.GameState;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.Location;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
 import Utilities.CreateItem;
 import States.State;
+import Utilities.ItemFactory;
+import Utilities.ItemsEnum;
 import Utilities.MapUtilities.MakeMap;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.EntityView;
@@ -34,8 +37,8 @@ public class GameState extends State {
         entities = new HashMap<>();
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
-        Item item = CreateItem.addOneShot("some name", "removes 5 life", 0, 0, new StatStructure(StatsEnum.LIFE, -5));
-        mapItems.put(item, new ItemView(item, Assets.POTION));
+        Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
+        mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
     }
 
     public void switchState() {
