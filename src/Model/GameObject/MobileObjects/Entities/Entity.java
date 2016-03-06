@@ -19,8 +19,8 @@ It also inherits location from MobileObject
 
 public abstract class Entity extends MobileObject {
 
-    private PlayerStats stats;
-    private Occupation occupation;
+    protected PlayerStats stats;
+    protected Occupation occupation;
     //private Inventory inventory;
     //private Nav nav;
 
@@ -28,7 +28,6 @@ public abstract class Entity extends MobileObject {
         super();
         stats = new PlayerStats();
         occupation = new Smasher();
-
     }
 
     public Entity(Location location, PlayerStats stats, Occupation occupation){
