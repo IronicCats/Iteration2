@@ -2,14 +2,12 @@ package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
-import Model.Stats.StatStructure;
 import Model.Location;
 import Model.Requirement;
 import Model.GameObject.Item.Items.*;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.Item.Items.Takables.Equippable.*;
-import Utilities.EquipmentModification;
 
 /**
  * Created by Wimberley on 3/1/16.

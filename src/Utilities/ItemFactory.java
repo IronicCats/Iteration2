@@ -3,15 +3,14 @@ package Utilities;
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.*;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
+import Utilities.ItemUtilities.CreateItem;
 
 /**
  * Created by broskj on 3/5/16.

@@ -24,7 +24,33 @@ public class Player extends Entity{
         super(location, stats, occupation);
     }
 
-    public void move(){
-        // still to be determined
-    }
+    /*public void move(int x){
+        if(!navigation.isMoving) {
+            if (x == 0) {
+                location.setDir(0);
+                navigation.move(x);
+            } else if (x == 1) {
+                location.setDir(1);
+                navigation.move(x);
+            } else if (x == 2) {
+                location.setDir(2);
+                navigation.move(x);
+            } else if (x == 3) {
+                location.setDir(3);
+                navigation.move(x);
+            } else if (x == 4) {
+                location.setDir(4);
+                navigation.move(x);
+            } else if (x == 5) {
+                location.setDir(5);
+                navigation.move(x);
+            } else if (x == 6) {
+                location.setDir(6);
+                navigation.move(x);
+            } else if (x == 7) {
+                location.setDir(7);
+                navigation.move(x);
+            }
+        }
+    }*/
 }

@@ -6,15 +6,10 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-<<<<<<< HEAD:src/States/States/GameState/GameState.java
-import Utilities.ItemUtilities.CreateItem;
-import States.State;
-=======
 import StatesEnum.StatesEnum;
 import Utilities.ItemFactory;
 import Utilities.ItemsEnum;
 import StatesEnum.State;
->>>>>>> 94719e4c99d7d40bd2810e6efef61422e2335a31:src/StatesEnum/States/GameState/GameState.java
 import Utilities.MapUtilities.MakeMap;
 import View.Views.EntityView;
 import View.Views.ItemView;
