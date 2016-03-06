@@ -1,6 +1,7 @@
-package States.States.GameState;
+package StatesEnum.States.GameState;
 
-import States.State;
+import StatesEnum.State;
+import StatesEnum.StatesEnum;
 
 import java.awt.*;
 
@@ -25,7 +26,7 @@ public class SaveState extends State {
     }
 
     @Override
-    public void switchState(States state) {
+    public void switchState(StatesEnum state) {
 
     }
 }

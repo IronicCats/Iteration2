@@ -16,7 +16,10 @@ character will need.
 public class Player extends Entity{
 
     // Player inventory needed
+    public Player() {
+        super();
 
+    }
     public Player(Location location, PlayerStats stats, Occupation occupation){
         super(location, stats, occupation);
     }

@@ -19,7 +19,10 @@ public abstract class MobileObject extends GameObject{
     private float speed;
     // private Nav navigation
 
-
+    public MobileObject() {
+        super();
+        speed = 0;
+    }
     public MobileObject(Location location) {
         super(location);
     }

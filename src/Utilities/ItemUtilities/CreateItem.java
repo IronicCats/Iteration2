@@ -9,7 +9,7 @@ import Model.GameObject.Item.Items.*;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.Item.Items.Takables.Equippable.*;
-import Utilities.Utilities;
+import Utilities.EquipmentModification;
 
 /**
  * Created by Wimberley on 3/1/16.
