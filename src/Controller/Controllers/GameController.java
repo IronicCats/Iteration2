@@ -22,15 +22,15 @@ public class GameController extends Controller {
 
         if(e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
             ((GameState) state).movePlayer(90);
-        } else if(e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 37) {
+        } else if(e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 33) {
             ((GameState) state).movePlayer(135);
-        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {
+        } else if(e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == 37) {
             ((GameState) state).movePlayer(225);
         } else if(e.getKeyCode() == Settings.DOWN || e.getKeyCode() == 40) {
             ((GameState) state).movePlayer(270);
         } else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == 39) {
             ((GameState) state).movePlayer(315);
-        }  else if(e.getKeyCode() == Settings.UP_RIGHT) {
+        }  else if(e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
             ((GameState) state).movePlayer(45);
         }
     }
