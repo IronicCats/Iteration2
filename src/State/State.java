@@ -1,8 +1,7 @@
-package StatesEnum;
+package State;
 
 import Controller.*;
 import Model.*;
-import Model.Stats.StatsEnum;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;

@@ -1,8 +1,8 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import StatesEnum.States.GameState.GameState;
 import Utilities.Settings;
+import State.States.GameState.GameState;
 
 import java.awt.event.KeyEvent;
 

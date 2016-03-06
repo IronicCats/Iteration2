@@ -1,4 +1,4 @@
-package StatesEnum;
+package State;
 
 /**
  * Created by Joshua Kegley on 3/5/2016.

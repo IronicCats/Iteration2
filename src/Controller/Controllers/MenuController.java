@@ -1,9 +1,8 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import StatesEnum.State;
-import StatesEnum.States.MenuState;
-import StatesEnum.StatesEnum;
+import State.States.MenuState;
+import State.StatesEnum;
 
 import java.awt.event.KeyEvent;
 

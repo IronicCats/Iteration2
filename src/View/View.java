@@ -1,6 +1,6 @@
 package View;
 
-import StatesEnum.State;
+import State.State;
 import Utilities.Settings;
 import View.ViewUtilities.MainScreen;
 

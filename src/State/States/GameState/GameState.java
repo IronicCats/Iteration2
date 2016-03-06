@@ -1,4 +1,4 @@
-package StatesEnum.States.GameState;
+package State.States.GameState;
 
 import Controller.Controllers.GameController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -6,10 +6,10 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import StatesEnum.StatesEnum;
+import State.StatesEnum;
 import Utilities.ItemFactory;
 import Utilities.ItemsEnum;
-import StatesEnum.State;
+import State.State;
 import Utilities.MapUtilities.MakeMap;
 import View.Views.EntityView;
 import View.Views.ItemView;
