@@ -15,7 +15,6 @@ Also inherits location from GameObject
 */
 public abstract class MobileObject extends GameObject{
 
-    private Location location;
     private float speed;
     // private Nav navigation
 
@@ -31,9 +30,6 @@ public abstract class MobileObject extends GameObject{
 
     }
 
-    public Location getLocation() {
-        return location;
-    }
 
     public float getSpeed() {
         return speed;
@@ -43,8 +39,4 @@ public abstract class MobileObject extends GameObject{
         this.speed = speed;
     }
 
-    @Override
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 }
