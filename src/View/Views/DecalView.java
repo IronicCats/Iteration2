@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by TARIT on 3/5/2016.
+ * Created by mazumderm on 3/5/2016.
  */
 public class DecalView implements Observer, Renderable {
     private Decal decal;
