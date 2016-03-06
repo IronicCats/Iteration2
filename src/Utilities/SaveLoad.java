@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,11 +28,11 @@ public class SaveLoad {
 
     private static String fileName;
     public static SaveLoad instance = new SaveLoad();
-    private static Entity avatar;   //will probably need an Entity list
+    private static Entity player;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
 
-    public static Entity getAvatar(){// this will be changed later
-        return avatar;
+    public static Entity getPlayer(){// this will be changed later
+        return player;
     }
     public static Map getGameMap(){
         return gameMap;
@@ -40,8 +41,8 @@ public class SaveLoad {
     public static void setGameMap(Map map){
         gameMap = map;
     }
-    public static void setAvatar(Entity a){
-        avatar = a;
+    public static void setPlayer(Entity a){
+        player = a;
     }
 
     public static SaveLoad getInstance() {
@@ -60,7 +61,7 @@ public class SaveLoad {
             Element rootElement = doc.createElementNS(filePath,"SaveFile");
             doc.appendChild(rootElement);
 
-            rootElement.appendChild(getEntity(doc,avatar));
+            rootElement.appendChild(getEntity(doc,player));
            // rootElement.appendChild(getMap(doc,gameMap));
         }catch(Exception e){
             e.printStackTrace();
@@ -74,6 +75,31 @@ public class SaveLoad {
 
         //entity.appendChild(getEntityInfo(doc,e));//need to make Entity info
         return entity;
+    }
+
+    private static Node getEntityInfo(Document doc, Entity e){
+        Element type = doc.createElement("player");
+
+       // Attr etype = doc.createAttribute("type");
+       // etype.setValue(e.getType());
+
+        Attr x = doc.createAttribute("locX");
+        x.setValue(Integer.toString(e.getLocation().getX()));
+        type.setAttributeNode(x);
+
+        Attr y = doc.createAttribute("locY");
+        y.setValue(Integer.toString(e.getLocation().getY()));
+        type.setAttributeNode(y);
+
+        Attr direction = doc.createAttribute("direction");
+        direction.setValue(Integer.toString(e.getLocation().getDir()));
+        type.setAttributeNode(direction);
+
+        Attr occupation = doc.createAttribute("occupation");
+        occupation.setValue(e.getOccupation().getName());
+        type.setAttributeNode(occupation);
+
+        return type;
     }
 
     public static void toXML(Document doc, String fileName){
