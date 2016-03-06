@@ -1,5 +1,6 @@
 package Utilities;
 
+import Model.Location;
 import Model.Map.AreaEffect.AreaEffect;
 import Model.Map.AreaEffect.AreaEffectEnum;
 
@@ -8,51 +9,57 @@ import Model.Map.AreaEffect.AreaEffectEnum;
  */
 public class CreateAreaEffect {
 
-    public static AreaEffect addDamage(String name, String description){
+    public static AreaEffect addDamage(String name, String description, Location location){
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.DAMAGE
+                AreaEffectEnum.DAMAGE,
+                location
         );
     }
 
-    public static AreaEffect addHeal(String name, String description) {
+    public static AreaEffect addHeal(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.HEAL
+                AreaEffectEnum.HEAL,
+                location
         );
     }
 
-    public static AreaEffect addDeath(String name, String description) {
+    public static AreaEffect addDeath(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.DEATH
+                AreaEffectEnum.DEATH,
+                location
         );
     }
 
-    public static AreaEffect addLevelUp(String name, String description){
+    public static AreaEffect addLevelUp(String name, String description, Location location){
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.LEVELUP
+                AreaEffectEnum.LEVELUP,
+                location
         );
     }
 
-    public static AreaEffect addTeleport(String name, String description){
+    public static AreaEffect addTeleport(String name, String description, Location location){
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.TELEPORT
+                AreaEffectEnum.TELEPORT,
+                location
         );
     }
 
-    public static AreaEffect addTrap(String name, String description){
+    public static AreaEffect addTrap(String name, String description, Location location){
         return new AreaEffect(
                 name,
                 description,
-                AreaEffectEnum.TRAP
+                AreaEffectEnum.TRAP,
+                location
         );
     }
 }

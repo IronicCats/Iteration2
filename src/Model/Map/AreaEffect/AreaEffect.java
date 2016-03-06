@@ -17,12 +17,12 @@ public class AreaEffect {
     Decal decal;
 
     //constructor
-    public AreaEffect(String name, String description, AreaEffectEnum areaEffect)
+    public AreaEffect(String name, String description, AreaEffectEnum areaEffect, Location location)
     {
         this.name = name;
         this.description = description;
         this.areaEffect = areaEffect;
-
+        this.location = location;
 
         //modifications will be made based on changes to effects, stats, and rendering
         /**
