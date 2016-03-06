@@ -40,5 +40,7 @@ public class Player extends Entity{
         } else if (degrees == 315) {
             location.setDir(2);
         }
+        System.out.print(location);
+        alert();
     }
 }

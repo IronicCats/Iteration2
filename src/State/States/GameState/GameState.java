@@ -31,7 +31,6 @@ public class GameState extends State {
     private Map map;
     private MapView mapView;
 
-    private Navigation navigation;
     private Player player;
     private EntityView playerView;
 
@@ -54,7 +53,7 @@ public class GameState extends State {
     }
 
     public void movePlayer(int degrees) {
-        if(navigation.checkMove(Location.newLocation(degrees,player.getLocation()))){ // returns if new location is walkable
+        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map)){ // returns if new location is walkable
             player.move(degrees);
         }
     }
