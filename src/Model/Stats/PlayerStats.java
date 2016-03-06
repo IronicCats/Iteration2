@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by broskj on 3/2/16.
  */
-public class PlayerStats implements Subject, Observer {
+public class PlayerStats extends Stats implements Subject, Observer {
     private PrimaryStats primaryStats;
     private DerivedStats derivedStats;
     private ArrayList<Effect> effects;
@@ -51,9 +51,7 @@ public class PlayerStats implements Subject, Observer {
 
     @Override
     public void alert() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
+        observers.forEach(Observer::update);
     } // end alert
 
     /*
