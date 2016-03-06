@@ -9,8 +9,8 @@ import Model.GameObject.Item.Item;
 import State.StatesEnum;
 import Utilities.ItemFactory;
 import Utilities.ItemsEnum;
+import Utilities.MapUtilities.*;
 import State.State;
-import Utilities.MapUtilities.MakeMap;
 import View.Views.EntityView;
 import View.Views.ItemView;
 import View.Views.MapView;
@@ -28,6 +28,8 @@ public class GameState extends State {
     private HashMap<Entity, EntityView> entities;
     private Map map;
     private MapView mapView;
+    private Navigation navigation;
+    Player player;
 
     public GameState() {
         setController(new GameController(this));
@@ -38,16 +40,17 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
-        Player player = new Player();
+        player = new Player();
     }
 
     public void switchState() {
 
     }
 
-
     public void movePlayer(int degrees) {
-        System.out.println("Moving :" + degrees + " degrees");
+        if(navigation.checkMove(Location.newLocation(degrees,player.getLocation()))){ // returns if new location is walkable
+            player.move(degrees);
+        }
     }
 
     public void tick() {
