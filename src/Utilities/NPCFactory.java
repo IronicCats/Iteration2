@@ -1,6 +1,7 @@
 package Utilities;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import View.Views.EntityView;
 
 /**
  * Created by broskj on 3/6/16.
@@ -20,7 +21,7 @@ public class NPCFactory {
         }
     } // end makeNPC
 
-    public static void /*NPCView*/ makeAsset(NPCEnum npcEnum, Entity entity) {
+    public static EntityView makeAsset(NPCEnum npcEnum, Entity entity) {
         switch (npcEnum) {
             case KITTEN:
             case SMALL_CAT:
@@ -30,7 +31,8 @@ public class NPCFactory {
             case DAVE_PET:
             case SHEEP_VEHICLE:
             default:
-                break; /* return null; */
+                break;
         }
+        return null;
     } // end makeAsset
 } // end class NPCFactory
