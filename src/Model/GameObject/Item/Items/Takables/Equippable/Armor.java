@@ -5,8 +5,9 @@ import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
+import Utilities.EquipmentModification;
 import Utilities.Observer;
-import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
+import Model.Stats.StatsEnum;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -17,8 +18,8 @@ import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
  */
 public class Armor extends Takable {
 
-    public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, Effect effect) {
-        super(id, name, description, location, requirements, effect);
+    public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, EquipmentModification e) {
+        super(id, name, description, location, requirements, e);
     }
 
     // returns value in effect's statStruc associated with defensive rating

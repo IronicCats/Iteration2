@@ -1,11 +1,12 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
-import Model.GameObject.MobileObjects.Entities.Stats.StatsEnum;
+import Model.Stats.StatsEnum;
 import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
 import Model.Effects.Effect;
+import Utilities.EquipmentModification;
 import Utilities.Observer;
 
 /**
@@ -17,8 +18,8 @@ import Utilities.Observer;
  */
 public class Weapon extends Takable {
 
-    public Weapon(ItemEnum id, String name, String description, Location location, Requirement requirement, Effect effect) {
-        super(id, name, description, location, requirement, effect);
+    public Weapon(ItemEnum id, String name, String description, Location location, Requirement requirement, EquipmentModification e) {
+        super(id, name, description, location, requirement, e);
     }
 
     // returns value in the effect's statStruc associated with life

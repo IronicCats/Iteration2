@@ -1,9 +1,12 @@
 package Utilities.MapUtilities;
 
+import Model.GameObject.Item.Item;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tile;
+import Model.Map.Tiles.Mountain;
+import Model.Map.Tiles.Water;
 import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.MapView;
@@ -54,6 +57,12 @@ public class MakeMap {
                     case -1:
                         tile = new Grass(new Location(x,y,0));
                         break;
+                    case 10:
+                        tile = new Water(new Location(x,y,0));
+                        break;
+                    case 20:
+                        tile = new Mountain(new Location(x,y,0));
+                        break;
                     default:
                         tile = new Grass(new Location(x,y,0));
                         break;
@@ -64,14 +73,19 @@ public class MakeMap {
         return new Map(tiles,width,height,spawn);
     }
     //does same thing map does but also makes a coinciding tileview for every tile. all the tileview make a mapview
-    public static MapView MakeMapView(Map map){
+    public static MapView makeMapView(Map map){
         TileView tileViews[][] = new TileView [map.getWidth()][map.getHeight()];
         for(int x = 0; x < map.getWidth(); x++){
             for(int y = 0; y < map.getHeight(); y++) {
                 Tile tile = map.getTile(x, y);
                 if (tile instanceof Grass) {
                     tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
-                } else {
+                } else if(tile instanceof Water){
+                    tileViews[x][y] = new TileView(tile, Assets.WATERHEXTILE);
+                } else if(tile instanceof Mountain){
+                    tileViews[x][y] = new TileView(tile, Assets.MOUNTAINHEXTILE);
+                }
+                else {
                     tileViews[x][y] = new TileView(tile, Assets.GRASSHEXTILE);
                 }
             }
@@ -79,4 +93,9 @@ public class MakeMap {
         return new MapView(map,tileViews);
     }
 
+    public static void populateItems(Item items[], Map map) {
+        for(Item item:items) {
+            map.placeItem(item);
+        }
+    }
 }

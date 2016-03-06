@@ -1,4 +1,4 @@
-package Model.GameObject.MobileObjects.Entities.Stats;
+package Model.Stats;
 
 
 import java.util.EnumMap;
@@ -10,16 +10,16 @@ import java.util.Set;
  *
  * This is a class intended to be used to handle stat modifications and initial settings.
  *
- * In general, a StatStruc contains a mapping of a skill to a value.  You can use this to:
+ * In general, a StatStructure contains a mapping of a skill to a value.  You can use this to:
  *      initialize an entity's stats
  *      create an effect to apply on an entity (i.e. a stat boost, damage, grant experience, ...)
  *      create an array of effects to apply on an entity
- * A StatStruc mapping looks like:
+ * A StatStructure mapping looks like:
  *      {StatsEnum.STAT, (int)value}
  *  where STAT is the stat you wish to modify (either Primary or Derived) and value is an integer modifier to apply on
  *  that stat.  Value can be negative (in the case of taking damage -> subtracting amount from health)
  *
- * Use a StatStruc when you want to:
+ * Use a StatStructure when you want to:
  *      create a player
  *      damage/heal an entity
  *      apply an Effect on an entity:
@@ -31,20 +31,20 @@ import java.util.Set;
  *          apply damage-over-time
  *      modify an entity's stats in any other way
  *
- * To create a StatStruc:
- *      initialize an empty StatStruc and use modifyStat() to add/replace modifier
- *      initialize a StatStruc with a single modifier (can add/replace/remove later)
- *      initialize a StatStruc with an array of modifiers (each of which can be replaced/removed and you can still
+ * To create a StatStructure:
+ *      initialize an empty StatStructure and use modifyStat() to add/replace modifier
+ *      initialize a StatStructure with a single modifier (can add/replace/remove later)
+ *      initialize a StatStructure with an array of modifiers (each of which can be replaced/removed and you can still
  *       add new ones)
  */
-public class StatStruc {
+public class StatStructure {
     private Map<StatsEnum, Integer> map;
 
-    public StatStruc() {
+    public StatStructure() {
         map = new EnumMap(StatsEnum.class);
     } // end default constructor
 
-    public StatStruc(StatsEnum stat, int val) {
+    public StatStructure(StatsEnum stat, int val) {
         /*
         constructor for single stat modifier
          */
@@ -52,7 +52,7 @@ public class StatStruc {
         map.put(stat, val);
     } // end single constructor
 
-    public StatStruc(StatsEnum[] stats, int[] vals){
+    public StatStructure(StatsEnum[] stats, int[] vals){
         /*
         constructor for multiple stat modifiers
          */
@@ -86,4 +86,4 @@ public class StatStruc {
     public Set<StatsEnum> getKeySet() { return map.keySet(); } // end getKeyset
 
     public int getSize() { return map.size(); }
-} // end class StatStruc
+} // end class StatStructure

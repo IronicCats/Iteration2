@@ -5,6 +5,7 @@ import Utilities.Settings;
 import View.ViewUtilities.MainScreen;
 
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 /**
@@ -67,5 +68,6 @@ public class View implements Runnable {
     }
 
 
-    public Canvas getCanvas() { return canvas; };
+    public Canvas getCanvas() { return canvas; }
+
 }

@@ -1,9 +1,16 @@
-package Model.GameObject.MobileObjects.Entities.Stats;
+package Model.Stats;
+
+import Model.Effects.ModificationEnum;
+import Utilities.EquipmentModification;
+import Utilities.Observer;
+import Utilities.Subject;
+
+import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/2/16.
  */
-public class DerivedStats {
+public class DerivedStats implements Subject {
     private PrimaryStats primaryStats;
     private int level;
     private int life;
@@ -13,6 +20,9 @@ public class DerivedStats {
     private int armorRating;
     private int baseLife,
             baseMana;
+    private int equippedWeapon, equippedArmor;
+    private ArrayList<EquipmentModification> equipmentModifications;
+    private ArrayList<Observer> observers;
 
     public DerivedStats(PrimaryStats ps) {
         /*
@@ -25,18 +35,39 @@ public class DerivedStats {
 
         life = baseLife;
         mana = baseMana;
-        defensiveRating = ps.getAgility() + level;
 
-        offensiveRating = 0;
+        equippedWeapon = 0;
         armorRating = 0;
+        offensiveRating = equippedWeapon + ps.getBaseStr() + level;
+        defensiveRating = ps.getAgility() + level;
+        armorRating = equippedArmor + ps.getBaseHard();
+
+        equipmentModifications = new ArrayList<>();
+        observers = new ArrayList<>();
     } // end constructor
+
+    /*
+    implement subject methods
+     */
+    @Override
+    public void addObserver(Utilities.Observer o) { observers.add(o); }
+
+    @Override
+    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
+
+    @Override
+    public void alert() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    } // end alert
 
     public void levelUp() {
         /*
         increase level and reset health and mana
          */
+        alert();
         level++;
-        update();
         life = baseLife;
         mana = baseMana;
     } // end levelUp
@@ -45,6 +76,7 @@ public class DerivedStats {
         /*
         kills the player; resets life and mana
          */
+        alert();
         life = baseLife;
         mana = baseMana;
     } // end kill
@@ -56,9 +88,9 @@ public class DerivedStats {
          */
         baseLife = primaryStats.getHardiness() + level;
         baseMana = primaryStats.getIntellect() + level;
-        //offensiveRating = equipmentStats.getWeaponStats() + primaryStats.getBaseStr() + level;
+        offensiveRating = equippedWeapon + primaryStats.getBaseStr() + level;
         defensiveRating = primaryStats.getAgility() + level;
-        //armorRating = equipmentStats.getArmorStats() + primaryStats.getBaseHard();
+        armorRating = equippedArmor + primaryStats.getBaseHard();
     } // end update
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
@@ -96,7 +128,33 @@ public class DerivedStats {
             default:
                 break;
         }
+        System.out.println(s + " modified by " + amount + " (" + m + ").");
+        alert();
     } // end modifyStat
+
+    public void applyEquipmentModification(EquipmentModification e) {
+        equipmentModifications.add(e);
+        if(e.hasWeaponValue()) {
+            equippedWeapon += e.getWeaponRating();
+            System.out.println("Weapon modification applied: " + e.getWeaponRating());
+        }
+        if(e.hasArmorValue()) {
+            equippedArmor += e.getArmorRating();
+            System.out.println("Armor modification applied: " + e.getArmorRating());
+        }
+    } // end applyEquipmentModification
+
+    public void removeEquipmentModification(EquipmentModification e) {
+        equipmentModifications.remove(e);
+        if(e.hasWeaponValue()) {
+            equippedWeapon -= e.getWeaponRating();
+            System.out.println("Weapon modification removed: " + e.getWeaponRating());
+        }
+        if(e.hasArmorValue()) {
+            equippedArmor -= e.getArmorRating();
+            System.out.println("Armor modification removed: " + e.getArmorRating());
+        }
+    } // end removeEquipmentModification
 
     public int getLevel() { return level; }
     public int getLife() { return life; }
@@ -106,9 +164,7 @@ public class DerivedStats {
     public int getOffensiveRating() { return offensiveRating; }
     public int getDefensiveRating() { return defensiveRating; }
     public int getArmorRating() { return armorRating; }
-
     public void resetLife() { this.life = this.baseLife; }
     public void resetMana() { this.mana = this.baseMana; }
-
     public void emptyMana() { this.mana = 0; }
 } // end class DerivedStats
