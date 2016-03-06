@@ -2,8 +2,7 @@ package View.Views;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
-import Utilities.Utilities;
-import Utilities.Settings;
+import Utilities.*;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Joshua Kegley on 3/5/2016.
  */
-public class EntityView implements Renderable {
+public class EntityView implements Renderable, Observer {
 
     private Entity entity;
     private ArrayList<BufferedImage> sprites;
@@ -23,6 +22,7 @@ public class EntityView implements Renderable {
     private int width;
     private int height;
     public EntityView(Entity entity, ArrayList<BufferedImage> sprites) {
+        entity.addObserver(this);
         this.entity = entity;
         this.sprites = sprites;
         this.location = entity.getLocation();
@@ -57,6 +57,16 @@ public class EntityView implements Renderable {
                 Settings.TILEHEIGHT / 2,
                 null
         );
+    }
+
+    @Override
+    public void update() {
+        location = entity.getLocation();
+    }
+
+    @Override
+    public void remove() {
+
     }
 }
 
