@@ -5,6 +5,7 @@ import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
 import View.ViewUtilities.Renderable;
+import Utilities.Utilities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -48,5 +49,15 @@ public class ItemView implements Observer, Renderable {
         g.drawImage(sprite, location.getX(), location.getY(), 50, 50, null);
     }
 
+    public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
+        //draw it
+        g.drawImage(sprite,
+                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - 16),
+                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 - 16),
+                32,
+                32,
+                null
+        );
+    }
 
 }

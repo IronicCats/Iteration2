@@ -7,11 +7,7 @@ import Model.Location;
  */
 public abstract class GameObject {
     private Location location;
-
-    public GameObject() {
-        location = new Location(-1, -1);
-    } // end default constructor
-
+    public GameObject() { location = new Location(0,0);}
     public GameObject(Location location) {
         this.location = location;
     }
