@@ -1,9 +1,9 @@
-package StatesEnum.States;
+package State.States;
 
 
-import StatesEnum.State;
-import StatesEnum.States.GameState.GameState;
-import StatesEnum.StatesEnum;
+import State.State;
+import State.States.GameState.GameState;
+import State.StatesEnum;
 
 import java.awt.*;
 

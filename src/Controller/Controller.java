@@ -1,7 +1,7 @@
 package Controller;
 
 
-import StatesEnum.State;
+import State.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

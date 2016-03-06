@@ -1,8 +1,8 @@
-package StatesEnum.States;
+package State.States;
 
 import Controller.Controllers.MenuController;
-import StatesEnum.State;
-import StatesEnum.StatesEnum;
+import State.State;
+import State.StatesEnum;
 
 import java.awt.*;
 

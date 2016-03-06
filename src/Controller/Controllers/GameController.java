@@ -1,7 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import StatesEnum.States.GameState.GameState;
+import State.States.GameState.GameState;
 
 import java.awt.event.KeyEvent;
 
