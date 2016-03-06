@@ -1,10 +1,8 @@
 package Model.GameObject.Item.Items;
 
 import Model.GameObject.Item.Item;
-import Model.GameObject.Item.ItemEnum;
 import Model.Location;
 import Model.Effects.Effect;
-import Utilities.Observer;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -15,10 +13,15 @@ public class OneShot extends Item {
 
     Effect effect;
 
-    public OneShot(ItemEnum id, String name, String description, Location location, Effect effect){
+    public OneShot() {
+        super();
+        this.effect = new Effect();
+    } // end default constructor
+
+    public OneShot(int id, String name, String description, Location location, Effect effect){
         super(id, name, description, location);
         this.effect = effect;
-    }
+    } // end constructor
 
     public Effect getEffect() {
         return effect;

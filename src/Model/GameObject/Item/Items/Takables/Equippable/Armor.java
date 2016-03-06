@@ -1,6 +1,5 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
-import Model.GameObject.Item.ItemEnum;
 import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
@@ -17,24 +16,26 @@ import Model.Stats.StatsEnum;
  */
 public class Armor extends Takable {
 
-    public Armor(ItemEnum id, String name, String description, Location location, Requirement requirements, EquipmentModification e) {
+    public Armor() {
+        super();
+    } // end default constructor
+
+    public Armor(int id, String name, String description, Location location, Requirement requirements, EquipmentModification e) {
         super(id, name, description, location, requirements, e);
-    }
+    } // end constructor
 
     // returns value in effect's statStruc associated with defensive rating
     public int getDefense(){
-        return effect.getModification().getStat(StatsEnum.DEFENSIVE_RATING);
+        return effect.getModification().getStat(StatsEnum.ARMOR_RATING);
     }
 
     // used if armor is worn out to adjust defensive rating
     public void setDefense(int defense) {
-        effect.getModification().modifyStat(StatsEnum.DEFENSIVE_RATING, defense);
+        effect.getModification().modifyStat(StatsEnum.ARMOR_RATING, defense);
     }
 
     @Override
     public void addObserver(Observer o) {
-
-
 
     }
 
