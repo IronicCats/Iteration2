@@ -40,13 +40,8 @@ public class Inventory implements Subject{
         alert();
     } // end equip
 
-    public void unequip(Weapon weapon) {
-        pack.place(equipment.unequip(weapon));
-        alert();
-    } // end unequip
-
-    public void unequip(Armor armor) {
-        pack.place(equipment.unequip(armor));
+    public void unequip(EquipmentSlotEnum slot) {
+        pack.place(equipment.unequip(slot));
         alert();
     } // end unequip
 
