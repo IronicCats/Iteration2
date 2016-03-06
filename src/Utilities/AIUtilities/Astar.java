@@ -5,5 +5,5 @@ package Utilities.AIUtilities;
  */
 public class Astar {
 
-    
+
 }
