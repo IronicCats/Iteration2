@@ -1,6 +1,7 @@
 package Utilities;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.Location;
 import Model.Map.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -11,10 +12,7 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -57,7 +55,35 @@ public class SaveLoad {
     public static void load(String fileName){
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
-        String filePath = "src/res/saveFiles" + fileName;
+        String filePath = "src/res/saveFiles/" + fileName;
+        loadMap(gameMap,filePath);  //gameMap may be wrong, need to check this
+        loadPlayer(filePath);
+    }
+
+    public static void loadMap(Map inputMap,String fileName)
+    {
+        String filepath = "src/res/saveFiles/" + fileName;
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(new File(filepath));
+
+            doc.getDocumentElement().normalize(); //this normalizes it, idk what that means though lol
+
+            NodeList mapList = doc.getElementsByTagName("map");
+            Element map = (Element)mapList.item(0); //need to change this for working with multiple maps
+            int mapWidth = Integer.parseInt(map.getAttribute("width"));
+            int mapHeight = Integer.parseInt(map.getAttribute("height"));
+
+           // Map recreateMap = new Map();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadPlayer(String fileName)
+    {
+
     }
 
 
@@ -79,7 +105,7 @@ public class SaveLoad {
             doc.appendChild(rootElement);                                   //adds the child to the doc
 
             rootElement.appendChild(getEntity(doc,player));                 //adds the next root element which is entities
-           // rootElement.appendChild(getMap(doc,gameMap));
+            rootElement.appendChild(getMap(doc,gameMap));
 
             toXML(doc,filePath);                                            //turns the document into an XML
         }catch(Exception e){
@@ -125,6 +151,9 @@ public class SaveLoad {
         Element map = doc.createElement("map"); //creates a map element for the doc
         int getWidth = m.getWidth();               //gets width
         int getHeight = m.getHeight();             //gets height
+        Location l = m.getSpawn();
+        int spawnX = l.getX();
+        int spawnY = l.getY();
 
         Attr width = doc.createAttribute("width");  //creates an attribute for width
         width.setValue(Integer.toString(getWidth)); //sets the value of attribute to width of map
@@ -141,6 +170,15 @@ public class SaveLoad {
             }
             map.appendChild(row);           //adds the node row to element map
         }
+
+        Attr spawnXX = doc.createAttribute("spawnX");   //creates attribute for spawn location X
+        spawnXX.setValue(Integer.toString(spawnX));     //sets the value of the attribute to spawn location x
+        map.setAttributeNode(spawnXX);                  //sets the attribute Node on element
+
+        Attr spawnYY = doc.createAttribute("spawnY");   //creates attribute for spawn location y
+        spawnYY.setValue(Integer.toString(spawnY));     //sets the value of the attribute to spawn location y
+        map.setAttributeNode(spawnYY);                  //sets the attribute Node on element
+        
         return map;                     //returns the element
 
     }
@@ -162,6 +200,16 @@ public class SaveLoad {
         //May have to get Entity? Not 100% sure if that is necessary
 
         //AreaEffect
+        if(t.getHasAreaEffect())// if it has an area effect
+        {
+            Element areaEffect = doc.createElement("areaEffect");   //creates an element and tags it as areaEffect
+
+            Attr areaEnum = doc.createAttribute("enum");            //creates an attribute called areaEnum
+
+            areaEnum.setValue(t.getAreaEffectEnum().toString());    //sets that attribute as AreaEffectEnum as a string
+            areaEffect.setAttributeNode(areaEnum);                  //set AttributeNode of element
+            tile.appendChild(areaEffect);                           //appends Node to element;
+        }
         //if(t.)
         //Decal
 
