@@ -1,5 +1,6 @@
 package Utilities;
 
+import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
@@ -12,6 +13,7 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
+import State.States.GameState.GameState;
 import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
@@ -32,10 +34,13 @@ public class SaveLoad {
     public static SaveLoad instance = new SaveLoad(); //an instance of SaveLoad, only needs one.
     private static Entity player;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
+    private static GameState game;
+
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
     public static Entity getPlayer(){// this will be changed later
         return player;
+
     }
     public static Map getGameMap(){// to save the map
         return gameMap;
@@ -62,6 +67,7 @@ public class SaveLoad {
 
     public static void loadMap(Map inputMap,String fileName)
     {
+
         String filepath = "src/res/saveFiles/" + fileName;
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -87,6 +93,10 @@ public class SaveLoad {
                 for(int j = 0; j < tileNodes.getLength(); j++){
                     Element tileElement = (Element) tileNodes.item(j);
 
+                    AreaEffect areaEffect = null;
+
+                    Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
+
                     
                 }
             }
@@ -108,16 +118,18 @@ public class SaveLoad {
 
     //---------------------------------SAVE--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void save(){//function that will be called when you want to save
+        if(currFileName == null)
+            currFileName = "test";
 
-        try{
+            try{
             //Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance(); //create an instance of a documentBuilderFactory
             //Defines the API to obtain DOM Document instances from an XML document. Using this class, an application programmer can obtain a Document from XML.
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder(); //creates a documentBuilder from Factory
             Document doc = docBuilder.newDocument();                        //and creates a doc from Builder
 
-            String filePath = "/res/saveFiles" + currFileName;              //the filePath is in resource folders plus passed in filename
-
+            //String filePath = "/res/saveFiles/" + currFileName;              //the filePath is in resource folders plus passed in filename
+            String filePath = getSaveFilePath(currFileName);                    //should work for saveFilePath
             //The Element interface represents an element in an XML document
             Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
@@ -233,7 +245,9 @@ public class SaveLoad {
         //Decal
 
         //item
+        System.out.println("Right before it should see item.");
         if(t.hasItems()){
+            System.out.println("It should see the item");
             Element item = doc.createElement("item"); // creates an element and tags it as a document
             //will probably have to go through each item on a tile since we can have multiple
 
@@ -273,5 +287,9 @@ public class SaveLoad {
         }catch(TransformerException e){
             e.printStackTrace();
         }
+    }
+
+    public static String getSaveFilePath(String saveFileName) {
+        return (System.getProperty("user.dir") + File.separatorChar + "res" + File.separatorChar + "saveFiles" + File.separatorChar + saveFileName + ".sav");
     }
 }

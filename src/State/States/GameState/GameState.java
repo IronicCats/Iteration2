@@ -12,6 +12,7 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
@@ -33,6 +34,10 @@ public class GameState extends State {
     private Map map;
     private Camera camera;
     private MapView mapView;
+    SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
+
+
+
 
     private Player player;
     private MobileObjectView playerView;
@@ -61,6 +66,9 @@ public class GameState extends State {
         if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()){ // returns if new location is walkable
             player.move(degrees);
         }
+        sl.setGameMap(map);                     //TODO remove these lines
+        sl.setPlayer(player);
+        sl.save();
     }
 
     public void moveObject(int degrees, MobileObject mobileObject){
