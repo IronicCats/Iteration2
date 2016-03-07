@@ -64,8 +64,6 @@ public class GameState extends State {
         mapView = MakeMap.makeMapView(map);
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(1,1));
-        decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.FIRE)));
         player = new Player();
         Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
         map.placeItem(item);
@@ -74,6 +72,11 @@ public class GameState extends State {
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
+
+        //area effect
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
+        decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
+        map.placeAreaEffect(a);
 
     }
 

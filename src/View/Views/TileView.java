@@ -79,9 +79,11 @@ public class TileView implements Observer, Renderable {
 
 
          */
+        /**
         if(tile.getHasAreaEffect()){
             decalView.render(g, xOffset, yOffset);
         }
+         **/
     }
 
 }

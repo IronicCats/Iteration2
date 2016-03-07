@@ -62,8 +62,11 @@ public class AreaEffectFactory {
         switch(decal.getType()) {
             case FIRE:
             case GOLDSTAR:
+                return new DecalView(decal, Assets.STAR);
             case SKULLANDCROSSBONES:
+                return new DecalView(decal, Assets.SKULL);
             case REDCROSS:
+                return new DecalView(decal, Assets.REDCROSS);
             default:
                 return new DecalView(decal, Assets.HEALTH_POTION);
         }
