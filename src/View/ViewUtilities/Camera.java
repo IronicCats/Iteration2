@@ -44,13 +44,11 @@ public class Camera implements Observer {
     }
 
     public void centerOnPlayer(Player player) {
-        System.out.println(map.getWidth());
 
         //xOffset = player.getX() * Settings.TILEWIDTH - gameWidth/2 - Settings.PLAYERWIDTH/2;
         xOffset = Utilities.calculateHexXLocation(player.getLocation()) - gameWidth/2 + Settings.PLAYERWIDTH;
         //yOffset = player.getY() * Settings.TILEHEIGHT - gameHeight/2 - Settings.PLAYERHEIGHT/2;
         yOffset = Utilities.calculateHexYLocation(player.getLocation()) - gameHeight/2 + Settings.PLAYERWIDTH;
-        System.out.println(this);
         keepCameraOnMap();
     }
 

@@ -1,9 +1,10 @@
-package Utilities;
+package Utilities.AreaEffectUtilities;
 
 
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Utilities.Utilities;
 
 /**
  * Created by mazumderm on 3/6/2016.

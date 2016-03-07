@@ -16,17 +16,23 @@ Also inherits location from GameObject
 public abstract class MobileObject extends GameObject{
 
     private float speed;
+    private boolean canMove;
+    private ViewLocation viewLocation;
     // private Nav navigation
 
     public MobileObject() {
         super();
+        canMove = true;
         speed = 0;
+        viewLocation = new ViewLocation(location.getX(), location.getY());
     }
     public MobileObject(Location location) {
         super(location);
+        canMove = true;
+        viewLocation = new ViewLocation(location.getX(), location.getY());
     }
 
-    public void move(){
+    public void move(int degrees){
 
     }
 
@@ -39,4 +45,23 @@ public abstract class MobileObject extends GameObject{
         this.speed = speed;
     }
 
+    public ViewLocation getViewLocation() {
+        return viewLocation;
+    }
+
+    public void setViewLocation(ViewLocation viewLocation) {
+        this.viewLocation = viewLocation;
+    }
+
+    public boolean canMove() {
+        return canMove;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public void toggleCanMove() {
+        this.canMove = !this.canMove;
+    }
 }
