@@ -23,7 +23,7 @@ public class Astar {
 
         //if end point is blocked return null because there is nothing there
 
-        
+
         openList.add(new Node(start));
 
 

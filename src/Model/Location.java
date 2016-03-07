@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Map.Map;
+import Utilities.Settings;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -91,6 +92,15 @@ public class Location {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getPixelX (){
+        return this.x * Settings.TILEWIDTH;
+    }
+
+    public int getPixelY (){
+
+        return this.y * Settings.TILEHEIGHT;
     }
 
     public int getDir() {

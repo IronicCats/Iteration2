@@ -12,7 +12,7 @@ import Utilities.Settings;
  */
 public class Camera implements Observer {
     private int gameWidth, gameHeight;
-    private float xOffset, yOffset;
+    private int xOffset, yOffset;
     private Map map;
     private Location Playerlocation; //This will keep track of the players location.
                                      // The Camera will also need a Player object. 
@@ -21,8 +21,8 @@ public class Camera implements Observer {
         this.gameHeight = gameHeight;
         this.gameWidth = gameWidth;
         this.map = map;
-        yOffset = 100;
-        xOffset = 100;
+        yOffset = 0;
+        xOffset = 0;
     }
     //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraonMap() {
@@ -34,13 +34,11 @@ public class Camera implements Observer {
         if (yOffset < 0) {
             yOffset = 0;
         }
-        else if (yOffset > ((map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight) + 20) {
-            yOffset = (map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight + 20;
+        else if (yOffset > ((map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight)) {
+            yOffset = (map.getHeight() / 2 * Settings.TILEHEIGHT) - gameHeight;
 
         }
     }
-
-    //once we make the player we need to uncomment the center on player method
 
     public void centerOnPlayer(Player player) {
         xOffset = player.getLocation().getX() * Settings.TILEWIDTH - gameWidth/2 + Settings.PLAYERWIDTH/2;
@@ -49,20 +47,20 @@ public class Camera implements Observer {
     }
 
     //Every time you change the offset of x or y keepcameronMap makes sure you didnt cross the boundary
-    public float getxOffset() {
+    public int getxOffset() {
         return xOffset;
     }
 
-    public void setxOffset(float xOffset) {
+    public void setxOffset(int xOffset) {
         this.xOffset = xOffset;
         keepCameraonMap();
     }
 
-    public float getyOffset() {
+    public int getyOffset() {
         return yOffset;
     }
 
-    public void setyOffset(float yOffset) {
+    public void setyOffset(int yOffset) {
         this.yOffset = yOffset;
         keepCameraonMap();
     }
