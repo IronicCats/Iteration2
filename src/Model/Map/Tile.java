@@ -21,15 +21,18 @@ public abstract class Tile implements Subject {
     protected Observer observer;
     public boolean IsWalkable;
     private ArrayList<Item> items;
-    private AreaEffect areaEffect;
+    private AreaEffect a;
+    private AreaEffectEnum areaEffectEnum;
     private Entity entity;
     private Decal decal;
+    private boolean hasAreaEffect;
 
     public Tile(Location location, boolean IsWalkable){
         items = new ArrayList<>();
         entity = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
+        hasAreaEffect = false;
     }
 
     public void addItem(Item item) {
@@ -37,19 +40,13 @@ public abstract class Tile implements Subject {
     }
 
     public void setAreaEffectTile(AreaEffect a){
-        this.areaEffect = a;
-        if(a.getAreaEffect().equals(AreaEffectEnum.DAMAGE))
-        {
-            decal = new Decal(a.getLocation(), DecalEnum.FIRE);
-        }
-        else if(a.getAreaEffect().equals(AreaEffectEnum.HEAL))
-        {
-            decal = new Decal(a.getLocation(), DecalEnum.REDCROSS);
-        }
-        else if(a.getAreaEffect().equals(AreaEffectEnum.DEATH))
-        {
-            decal = new Decal(a.getLocation(), DecalEnum.SKULLANDCROSSBONES);
-        }
+        this.areaEffectEnum = a.getAreaEffect();
+        this.a = a;
+        hasAreaEffect = true;
+    }
+
+    public AreaEffectEnum getAreaEffectEnum(){
+        return this.areaEffectEnum;
     }
 
     public Decal getDecal(){
@@ -75,6 +72,9 @@ public abstract class Tile implements Subject {
     public Location getLocation(){
         return location;
     }
+
+    public boolean getHasAreaEffect(){return this.hasAreaEffect;}
+
 
     @Override
     public void addObserver(Observer o) {
