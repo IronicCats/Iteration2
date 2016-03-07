@@ -7,6 +7,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import Model.Map.Tile;
+import Model.Map.Tiles.Grass;
+import Model.Map.Tiles.Mountain;
+import Model.Map.Tiles.Water;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -70,7 +74,7 @@ public class SaveLoad {
 
             String filePath = "/res/saveFiles" + currFileName;              //the filePath is in resource folders plus passed in filename
 
-            //The Element interface represents an element in an HTML or XML document
+            //The Element interface represents an element in an XML document
             Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
 
@@ -130,13 +134,43 @@ public class SaveLoad {
         height.setValue(Integer.toString(getHeight));//sets the value of the attribute to height of map
         map.setAttributeNode(height);               //setsAttributeNode on element
 
-        return map;
+        for(int i = 0; i < getWidth; i++){  //for each in map width
+            Element row = doc.createElement("row");//create element row
+            for(int j = 0; j < getHeight; j++){ //for each in height
+                row.appendChild(getTile(doc,m.getTile(i,j)));          //append each tile into row
+            }
+            map.appendChild(row);           //adds the node row to element map
+        }
+        return map;                     //returns the element
 
+    }
+
+    private static Node getTile(Document doc, Tile t){
+        Element tile = doc.createElement("tile"); //Creates an element with tag tile
+        Element terrain = doc.createElement("terrain"); //creates and element for terrain
+
+        Attr type = doc.createAttribute("terrainType");//creates an attribute for terrain
+        if(t instanceof Grass)          //checks if it is an instance of grass
+            type.setValue("grass");     //if so setValue to grass
+        else if(t instanceof Water)     //checks to see if it is an instance of water
+            type.setValue("water");     //if os setValue to water
+        else if(t instanceof Mountain)  //checks to see if it is an instance of mountain
+            type.setValue("mountain");  //if so setValue to mountain
+        terrain.setAttributeNode(type); //sets the attribute node to whatever type it ended up
+        tile.appendChild(terrain);      //appends the child to the element
+
+        //May have to get Entity? Not 100% sure if that is necessary
+
+        //AreaEffect
+        //if(t.)
+
+        return tile; //returns the element
     }
 
     public static void toXML(Document doc, String fileName){
         TransformerFactory tf = TransformerFactory.newInstance(); //creates an instance of a Transformer factory for xml shenanigans
         try{
+            //An instance of this abstract class can transform a source tree into a result tree
             Transformer transformer = tf.newTransformer();      //creates a new tranformer from the factory
 
             //Acts as a holder for a transformation Source tree in the form of a Document Object Model (DOM) tree.
