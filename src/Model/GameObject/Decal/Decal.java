@@ -28,22 +28,6 @@ public class Decal extends GameObject implements Subject {
 
     public DecalEnum getType() {return type;}
 
-    public Location getLocation() {return location;}
 
-    @Override
-    public void addObserver(Observer o) {
-        observers.add(o);
-    }
 
-    @Override
-    public void removeObserver(Observer o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void alert() {
-        for(int i = 0; i < observers.size(); ++i) {
-            observers.get(i).update();
-        }
-    }
 }

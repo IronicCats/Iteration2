@@ -58,14 +58,12 @@ public class AreaEffectFactory {
         }
     }// end
 
-    public static DecalView makeAsset(DecalEnum decalEnum, Decal decal) {
-        switch(decalEnum) {
-            /**
-            case DAMAGE:
-            case HEALTH:
-            case DEATH:
-            case LEVELUP:
-             **/
+    public static DecalView makeAsset(Decal decal) {
+        switch(decal.getType()) {
+            case FIRE:
+            case GOLDSTAR:
+            case SKULLANDCROSSBONES:
+            case REDCROSS:
             default:
                 return new DecalView(decal, Assets.POTION);
         }
