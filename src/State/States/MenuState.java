@@ -11,9 +11,10 @@ import java.awt.*;
  * Created by Joshua Kegley on 2/24/2016.
  */
 public class MenuState extends State {
-        private MenuView menu;
+        private MenuView menuView;
 
         public MenuState() {
+                menuView=new MenuView();
                 setController(new MenuController(this));
         }
 
@@ -22,16 +23,21 @@ public class MenuState extends State {
                         System.out.println(state);
                         setState(state);
                 }
-                menu=new MenuView();
+
 
         }
-
+        public void moveUp(){
+                menuView.previous();
+        }
+        public void moveDown(){
+                menuView.next();
+        }
         public void tick(){
 
         }
 
         public void render(Graphics g) {
-                //menu.render(g);
+                menuView.render(g);
         }
 
 }

@@ -18,13 +18,14 @@ public class MenuView implements Renderable {
     private int currentItem;
 
     public MenuView(){
-    width= Settings.MAPWIDTH;
-    height= Settings.MAPHEIGHT;
+    width= Settings.GAMEWIDTH;
+    height= Settings.GAMEHEIGHT;
     currentItem=0;
     }
 
     @Override
     public void render(Graphics g) {
+
         //g.drawImage(Assets.background, 0, 0, 800, 600, null);
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(0, 0, width, height);
@@ -63,6 +64,20 @@ public class MenuView implements Renderable {
         g.setColor(new Color(255,255,255));
         FontMetrics fm = g.getFontMetrics();
         g.drawString("Ironic Cats",width / 2 - fm.stringWidth("Ironic Cats")/2, 25 + fm.getHeight()/2 );
+
+    }
+    public void next() {
+        ++currentItem;
+        if(currentItem > menuItems.length - 1){
+            currentItem = 0;
+        }
+    }
+
+    public void previous() {
+        --currentItem;
+        if(currentItem < 0){
+            currentItem = menuItems.length - 1;
+        }
     }
 
     public void render() {
