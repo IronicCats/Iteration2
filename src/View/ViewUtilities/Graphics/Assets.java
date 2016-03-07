@@ -34,6 +34,10 @@ public class Assets {
     public static BufferedImage BOOTS;
     public static BufferedImage SHIELD;
 
+    public static BufferedImage SKULL;
+    public static BufferedImage REDCROSS;
+    public static BufferedImage STAR;
+
 
     public static void init() {
         //Tiles
@@ -96,5 +100,15 @@ public class Assets {
         PLAYER.add(player2.crop(0, 0, 32, 32));
         PLAYER.add(player3.crop(0, 0, 32, 32));
         PLAYER.add(player4.crop(0, 0, 32, 32));
+
+        //Decals
+        SpriteSheet skullSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Skull.png"));
+        SKULL = skullSheet.crop(0,0,32,32);
+
+        SpriteSheet redCrossSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/RedCross.png"));
+        REDCROSS = redCrossSheet.crop(0,0,32,32);
+
+        SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
+        STAR = starSheet.crop(0,0,32,32);
     }
 }
