@@ -16,6 +16,7 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
@@ -37,6 +38,10 @@ public class GameState extends State {
     private Map map;
     private Camera camera;
     private MapView mapView;
+    SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
+
+
+
 
     private Player player;
     private MobileObjectView playerView;
@@ -51,6 +56,7 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
+        map.placeItem(item);
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
@@ -67,6 +73,9 @@ public class GameState extends State {
         if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()){ // returns if new location is walkable
             player.move(degrees);
         }
+        sl.setGameMap(map);                     //TODO remove these lines
+        sl.setPlayer(player);
+        sl.save();
     }
 
     public void moveObject(int degrees, MobileObject mobileObject){
