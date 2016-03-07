@@ -1,5 +1,7 @@
 package Utilities.MapUtilities;
 
+import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
 import Model.Location;
 import Model.Map.Map;
@@ -96,6 +98,12 @@ public class MakeMap {
     public static void populateItems(Item items[], Map map) {
         for(Item item:items) {
             map.placeItem(item);
+        }
+    }
+
+    public static void populateAreaEffects(AreaEffect [] areaEffects, Map map){
+        for(AreaEffect a:areaEffects){
+            map.placeAreaEffect(a);
         }
     }
 }

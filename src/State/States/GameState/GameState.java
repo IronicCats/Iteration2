@@ -12,6 +12,8 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.Settings;
+import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.MobileObjectView;
 import View.Views.ItemView;
@@ -29,6 +31,7 @@ public class GameState extends State {
     private HashMap<Item, ItemView> mapItems;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
     private Map map;
+    private Camera camera;
     private MapView mapView;
 
     private Player player;
@@ -39,6 +42,7 @@ public class GameState extends State {
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
         map = MakeMap.makeMap();
+        camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
         mapView = MakeMap.makeMapView(map);
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
@@ -69,12 +73,13 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        mapView.render(g, -160, -20);
+        mapView.render(g, camera.getxOffset(), camera.getyOffset());
         //keyset for keys, values for values
         for (ItemView itemView : mapItems.values()) {
-            itemView.render(g, -160, -20);
+            itemView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        playerView.render(g, -160, -20);
+        camera.centerOnPlayer(player);
+        playerView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
     @Override
