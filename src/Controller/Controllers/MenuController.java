@@ -19,7 +19,6 @@ public class MenuController extends Controller {
     public void keyPressed(KeyEvent e) {
         if(!canGetInput()) { return; }
 
-        System.out.println("Menu: " + e.getKeyCode());
 
         if(e.getKeyCode() == 10) {
             state.switchState(StatesEnum.GameState);

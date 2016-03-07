@@ -56,7 +56,7 @@ public class Utilities {
     public static int calculateTileCenterYLocation(Location location) {
         int x = location.getX();
         int y = location.getY();
-        return (y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2)) + Settings.TILEHEIGHT/2;
+        return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2) + Settings.TILEHEIGHT/2;
     }
 
 }
