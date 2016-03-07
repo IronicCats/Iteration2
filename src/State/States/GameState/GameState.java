@@ -71,13 +71,17 @@ public class GameState extends State {
 
     public void movePlayer(int degrees) {
         if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+            map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
+            map.registerObject(player); // registers player with tile
         }
     }
 
-    public void moveObject(int degrees, MobileObject mobileObject){
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, mobileObject)){ // returns if new location is walkable
-            mobileObject.move(degrees);
+    public void moveObject(int degrees, MobileObject object){
+        if(Navigation.checkMove(Location.newLocation(degrees, object.getLocation()), map, object) & object.canMove()){ // returns if new location is walkable
+            map.deRegister(player.getLocation()); // removes mobile object from tile
+            object.move(degrees);
+            map.registerObject(object); // registers mobile object with tile
         }
     }
 

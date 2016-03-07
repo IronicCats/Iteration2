@@ -28,6 +28,7 @@ public class Assets {
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
     public static BufferedImage CHESTPLATE;
+    public static BufferedImage PANTS;
     public static BufferedImage PLATELEGS;
     public static BufferedImage GAUNTLETS;
     public static BufferedImage BOOTS;
@@ -47,10 +48,13 @@ public class Assets {
         // End of Tiles
 
         //Items
-        SpriteSheet potionSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PotionSprite.png"));
-        HEALTH_POTION = potionSheet.crop(0,0,32,32);
+        SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/HealthPotion.png"));
+        HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
 
-        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Closed_Chest.png"));
+        SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/ManaPotion.png"));
+        MANA_POTION = potionManaSheet.crop(0,0,32,32);
+
+        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/ClosedChest.png"));
         CLOSED_TREASURE_CHEST = chestSheet.crop(0,0,32,28);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
@@ -64,6 +68,21 @@ public class Assets {
 
         SpriteSheet helmetSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Helmet.png"));
         HELMET = helmetSheet.crop(0,0,32,32);
+
+        SpriteSheet chestPlateSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ChestPlate.png"));
+        CHESTPLATE = chestPlateSheet.crop(0,0,32,32);
+
+        SpriteSheet pantsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Pants.png"));
+        PANTS = pantsSheet.crop(0,0,32,32);
+
+        SpriteSheet bootsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Boots.png"));
+        BOOTS = bootsSheet.crop(0,0,32,32);
+
+        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gauntlets.png"));
+        GAUNTLETS = gauntletsSheet.crop(0,0,32,32);
+
+        SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
+        SHIELD = shieldSheet.crop(0,0,32,32);
 
         //End of Tiles
 
