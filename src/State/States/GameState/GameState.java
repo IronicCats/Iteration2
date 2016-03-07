@@ -56,6 +56,7 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
+        map.placeItem(item);
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
@@ -69,13 +70,9 @@ public class GameState extends State {
     }
 
     public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()){ // returns if new location is walkable
+        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
-            player.getLocation().setDir(degrees);
         }
-        sl.setGameMap(map);                     //TODO remove these lines
-        sl.setPlayer(player);
-        sl.save();
     }
 
     public void moveObject(int degrees, MobileObject mobileObject){
