@@ -1,6 +1,7 @@
 package View.ViewUtilities;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Utilities.Observer;
@@ -14,8 +15,7 @@ public class Camera implements Observer {
     private int gameWidth, gameHeight;
     private int xOffset, yOffset;
     private Map map;
-    private Location Playerlocation; //This will keep track of the players location.
-                                     // The Camera will also need a Player object. 
+                                     // The Camera will also need a Player object.
 
     public Camera(int gameWidth, int gameHeight, Map map) {
         this.gameHeight = gameHeight;
@@ -26,13 +26,14 @@ public class Camera implements Observer {
     }
     //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraOnMap() {
-        //gameWidth = Settings.GAMEWIDTH;
-        gameHeight = Settings.GAMEHEIGHT;
+        System.out.println(xOffset);
+        System.out.println(((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250);
+
         if (xOffset < 0) {
-            //setxOffset(0);
             xOffset = 0;
-        } else if (xOffset > ((map.getWidth()-2) * (Settings.TILEWIDTH) - gameWidth)) {
-            xOffset = (map.getWidth()- 2) * (Settings.TILEWIDTH) - gameWidth;
+        } else if (xOffset >  ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250){
+            System.out.println("MAX WIDTH");
+            xOffset = ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250;
         }
         if (yOffset < 0) {
             yOffset = 0;
@@ -44,13 +45,10 @@ public class Camera implements Observer {
     }
 
     public void centerOnPlayer(Player player) {
-        System.out.println(map.getWidth());
-
-        //xOffset = player.getX() * Settings.TILEWIDTH - gameWidth/2 - Settings.PLAYERWIDTH/2;
-        xOffset = Utilities.calculateHexXLocation(player.getLocation()) - gameWidth/2 + Settings.PLAYERWIDTH;
-        //yOffset = player.getY() * Settings.TILEHEIGHT - gameHeight/2 - Settings.PLAYERHEIGHT/2;
-        yOffset = Utilities.calculateHexYLocation(player.getLocation()) - gameHeight/2 + Settings.PLAYERWIDTH;
-        System.out.println(this);
+        gameWidth = Settings.GAMEWIDTH;
+        gameHeight = Settings.GAMEHEIGHT;
+        xOffset = (int)player.getViewLocation().getX() - gameWidth/2 + Settings.PLAYERWIDTH/2;
+        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERWIDTH/2;
         keepCameraOnMap();
     }
 

@@ -10,6 +10,7 @@ public class Location {
 
     private int x, y, dir;
 
+
     public Location(int x, int y){
         this.dir = 270;
         this.x = x;
@@ -74,7 +75,6 @@ public class Location {
             default:
                 break;
         }
-        location.setDir(degrees);
         return newLocation;
     }
 
@@ -92,15 +92,6 @@ public class Location {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public int getPixelX (){
-        return this.x * Settings.TILEWIDTH;
-    }
-
-    public int getPixelY (){
-
-        return this.y * Settings.TILEHEIGHT;
     }
 
     public int getDir() {

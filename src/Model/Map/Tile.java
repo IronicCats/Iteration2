@@ -32,7 +32,6 @@ public abstract class Tile implements Subject {
         entity = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
-        hasAreaEffect = false;
     }
 
     public void addItem(Item item) {
@@ -66,7 +65,7 @@ public abstract class Tile implements Subject {
     }
 
     public boolean hasItems() {
-        return items.size() != 0;
+        return items.size() > 0;
     }
 
     public Location getLocation(){

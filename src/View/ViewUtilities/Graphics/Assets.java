@@ -18,7 +18,25 @@ public class Assets {
     public static ArrayList<BufferedImage> PLAYER;
 
 
-    public static BufferedImage POTION;
+    public static BufferedImage HEALTH_POTION;
+    public static BufferedImage CLOSED_TREASURE_CHEST;
+    public static BufferedImage MANA_POTION;
+    public static BufferedImage STICK_SWORD;
+    public static BufferedImage STICK_GREATSWORD;
+    public static BufferedImage PUFFER_FISH_MACE;
+    public static BufferedImage HAIRBALL;
+    public static BufferedImage LASER_POINTER;
+    public static BufferedImage HELMET;
+    public static BufferedImage CHESTPLATE;
+    public static BufferedImage PLATELEGS;
+    public static BufferedImage GAUNTLETS;
+    public static BufferedImage BOOTS;
+    public static BufferedImage SHIELD;
+
+    public static BufferedImage SKULL;
+    public static BufferedImage REDCROSS;
+    public static BufferedImage STAR;
+
 
     public static void init() {
         //Tiles
@@ -34,7 +52,22 @@ public class Assets {
 
         //Items
         SpriteSheet potionSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PotionSprite.png"));
-        POTION = potionSheet.crop(0,0,32,32);
+        HEALTH_POTION = potionSheet.crop(0,0,32,32);
+
+        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Closed_Chest.png"));
+        CLOSED_TREASURE_CHEST = chestSheet.crop(0,0,32,28);
+
+        SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
+        STICK_SWORD = stickSwordSheet.crop(0,0,32,32);
+
+        SpriteSheet stickGreatSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickGreatSword.png"));
+        STICK_GREATSWORD = stickGreatSwordSheet.crop(0,0,32,32);
+
+        SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
+        LASER_POINTER = laserPointerSheet.crop(0,0,32,32);
+
+        SpriteSheet helmetSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Helmet.png"));
+        HELMET = helmetSheet.crop(0,0,32,32);
 
         //End of Tiles
 
@@ -48,5 +81,15 @@ public class Assets {
         PLAYER.add(player2.crop(0, 0, 32, 32));
         PLAYER.add(player3.crop(0, 0, 32, 32));
         PLAYER.add(player4.crop(0, 0, 32, 32));
+
+        //Decals
+        SpriteSheet skullSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Skull.png"));
+        SKULL = skullSheet.crop(0,0,32,32);
+
+        SpriteSheet redCrossSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/RedCross.png"));
+        REDCROSS = redCrossSheet.crop(0,0,32,32);
+
+        SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
+        STAR = starSheet.crop(0,0,32,32);
     }
 }

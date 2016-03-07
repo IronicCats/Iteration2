@@ -1,4 +1,4 @@
-package Utilities;
+package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
@@ -16,6 +16,7 @@ import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
+import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
@@ -280,7 +281,9 @@ public class ItemFactory {
     public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
         switch(itemsEnum) {
             case HEALTH_POTION:
+                return new ItemView(item, Assets.HEALTH_POTION);
             case MANA_POTION:
+                return new ItemView(item, Assets.MANA_POTION);
             case STRENGTH_POTION:
             case AGILITY_POTION:
             case INTELLECT_POTION:
@@ -301,6 +304,7 @@ public class ItemFactory {
             case CHEST_KEY:
             case OPEN_TREASURE_CHEST:
             case CLOSED_TREASURE_CHEST:
+                return new ItemView(item, Assets.CLOSED_TREASURE_CHEST);
             case DOOR_KEY:
             case OPEN_DOOR:
             case CLOSED_DOOR:
@@ -311,7 +315,7 @@ public class ItemFactory {
             case BOOTS:
             case SHIELD:
             default:
-                return new ItemView(item, Assets.POTION);
+                return null;
         }
     } // end makeAsset
 } // end class ItemFactory
