@@ -28,12 +28,10 @@ public class Equipment {
             shield,
             accessory1,
             accessory2;
-    private ArrayList<Observer> observers;
 
     public Equipment() {
         mainhand = offhand = null;
         head = chest = legs = gloves = boots = shield = accessory1 = accessory2 = null;
-        observers = new ArrayList<>();
     } // end default constructor
 
     public Equipment(Weapon[] weapons, Armor[] armor) {
@@ -49,7 +47,6 @@ public class Equipment {
         for (Armor a : armor) {
             equip(a);
         }
-        observers = new ArrayList<>();
     } // end constructor
 
     /*
