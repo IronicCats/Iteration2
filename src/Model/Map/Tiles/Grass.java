@@ -9,7 +9,7 @@ import Utilities.Observer;
  */
 public class Grass extends Tile {
     public Grass(Location location){
-        super(location, false);
+        super(location, true);
     }
 
 

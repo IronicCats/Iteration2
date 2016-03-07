@@ -220,6 +220,14 @@ public class ItemFactory {
                         new Requirement(),
                         EquipmentTypeEnum.CHEST,
                         new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 5)));
+            case PANTS:
+                return new Armor(id,
+                        "Pants",
+                        "A set of leather leggings",
+                        location,
+                        new Requirement(),
+                        EquipmentTypeEnum.LEGS,
+                        new EquipmentModification(new StatStructure(StatsEnum.ARMOR_RATING, 1)));
             case PLATELEGS:
                 return new Armor(id,
                         "Platelegs",
@@ -291,6 +299,7 @@ public class ItemFactory {
             case EXPERIENCE_POTION:
             case MOVEMENT_POTION:
             case STICK_SWORD:
+                return new ItemView(item, Assets.MANA_POTION);
             case STICK_GREATSWORD:
             case SWORDFISH_DAGGER:
             case SWORDFISH_LANCE:
@@ -310,6 +319,7 @@ public class ItemFactory {
             case CLOSED_DOOR:
             case HELMET:
             case CHESTPLATE:
+            case PANTS:
             case PLATELEGS:
             case GAUNTLETS:
             case BOOTS:

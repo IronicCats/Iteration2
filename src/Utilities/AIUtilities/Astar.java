@@ -30,15 +30,16 @@ public class Astar {
 
         while (!Queue.isEmpty()) {
             Tile current = Queue.remove();
-            Tile neighbors[] = neighbors(current,map);
-            for(int i = 0; i < 6; i++){
-                Tile next = neighbors[i];
-                if(next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null){
-                    Queue.add(next);
-                    parent[next.getLocation().getX()][next.getLocation().getY()] = current;
+            if(current.IsWalkable) {
+                Tile neighbors[] = neighbors(current, map);
+                for (int i = 0; i < 6; i++) {
+                    Tile next = neighbors[i];
+                    if (next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null) {
+                        Queue.add(next);
+                        parent[next.getLocation().getX()][next.getLocation().getY()] = current;
+                    }
                 }
             }
-
         }
 
         ArrayList<Tile> path = new ArrayList<Tile>();
