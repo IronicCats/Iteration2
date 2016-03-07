@@ -3,7 +3,9 @@ package Model.Map;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
@@ -23,15 +25,18 @@ public abstract class Tile implements Subject {
     private ArrayList<Item> items;
     private AreaEffect a;
     private AreaEffectEnum areaEffectEnum;
-    private Entity entity;
+    private MobileObject object;
     private Decal decal;
     private boolean hasAreaEffect;
+    private boolean visited;
 
     public Tile(Location location, boolean IsWalkable){
         items = new ArrayList<>();
-        entity = null;
+        object = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
+        hasAreaEffect = false;
+        visited = false;
     }
 
     public void addItem(Item item) {
@@ -52,16 +57,27 @@ public abstract class Tile implements Subject {
         return this.decal;
     }
 
-    public Entity getEntity() {
-        return entity;
+    public MobileObject getObject() {
+        return object;
+    }
+
+    public void setObject(MobileObject object){
+        this.object = object;
+        if(object instanceof Player){
+            visited = true;
+        }
+    }
+
+    public void leaveTile(){
+        this.object = null;
     }
 
     public ArrayList<Item> getItems() {
         return items;
     }
 
-    public boolean hasEntity() {
-        return entity != null;
+    public boolean hasObject() {
+        return object != null;
     }
 
     public boolean hasItems() {
