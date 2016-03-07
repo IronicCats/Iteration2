@@ -75,6 +75,24 @@ public class SaveLoad {
             int mapWidth = Integer.parseInt(map.getAttribute("width"));
             int mapHeight = Integer.parseInt(map.getAttribute("height"));
 
+            //if there is problem it may be here
+            Tile[][] tiles = new Tile[mapHeight][mapWidth]; //this might not be good in our implementation
+
+            NodeList rows = doc.getElementsByTagName("row");
+
+            for(int i = 0; i <rows.getLength(); i++){
+                Element row = (Element) rows.item(i); //for each row in i
+                NodeList tileNodes = row.getElementsByTagName("tile");
+
+                for(int j = 0; j < tileNodes.getLength(); j++){
+                    Element tileElement = (Element) tileNodes.item(j);
+
+                    
+                }
+            }
+
+
+
            // Map recreateMap = new Map();
         }catch(Exception e){
             e.printStackTrace();
@@ -151,9 +169,9 @@ public class SaveLoad {
         Element map = doc.createElement("map"); //creates a map element for the doc
         int getWidth = m.getWidth();               //gets width
         int getHeight = m.getHeight();             //gets height
-        Location l = m.getSpawn();
-        int spawnX = l.getX();
-        int spawnY = l.getY();
+        Location l = m.getSpawn();                 //gets the spawn Location
+        int spawnX = l.getX();                      //gets the X of the spawn location
+        int spawnY = l.getY();                      //gets the Y of the spawn Location
 
         Attr width = doc.createAttribute("width");  //creates an attribute for width
         width.setValue(Integer.toString(getWidth)); //sets the value of attribute to width of map
@@ -163,6 +181,7 @@ public class SaveLoad {
         height.setValue(Integer.toString(getHeight));//sets the value of the attribute to height of map
         map.setAttributeNode(height);               //setsAttributeNode on element
 
+        //note I did something different than original cause it made mroe sense
         for(int i = 0; i < getWidth; i++){  //for each in map width
             Element row = doc.createElement("row");//create element row
             for(int j = 0; j < getHeight; j++){ //for each in height
@@ -178,7 +197,7 @@ public class SaveLoad {
         Attr spawnYY = doc.createAttribute("spawnY");   //creates attribute for spawn location y
         spawnYY.setValue(Integer.toString(spawnY));     //sets the value of the attribute to spawn location y
         map.setAttributeNode(spawnYY);                  //sets the attribute Node on element
-        
+
         return map;                     //returns the element
 
     }
