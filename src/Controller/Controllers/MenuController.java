@@ -23,15 +23,18 @@ public class MenuController extends Controller {
 
         if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
             currentState--;
+            ((MenuState)state).moveUp();
             //System.out.println("state = " + currentState);
         }
-        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<2){
+        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<3){
             currentState++;
+            ((MenuState)state).moveDown();
             //System.out.println("state =" + currentState);
         }
         if(e.getKeyCode() == 10) {
             if(currentState==1)state.switchState(StatesEnum.GameState);
             else if(currentState==2)System.out.println("this is the load state");
+            else if(currentState==3)System.out.println("this is the exit state");
         }
     }
 
