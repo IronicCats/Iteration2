@@ -61,8 +61,8 @@ public class EntityView implements Renderable, Observer {
         g.drawImage(sprites.get(active),
                 goalX - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
                 goalY - cameraYOffset - (Settings.TILEHEIGHT / (2*2)),
-                Settings.TILEWIDTH / 2,
-                Settings.TILEHEIGHT / 2,
+                Settings.PLAYERWIDTH,
+                Settings.PLAYERHEIGHT,
                 null
         );
     }

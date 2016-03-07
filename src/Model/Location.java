@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Map.Map;
+import Utilities.Settings;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -10,7 +11,7 @@ public class Location {
     private int x, y, dir;
 
     public Location(int x, int y){
-        this.dir = 0;
+        this.dir = 270;
         this.x = x;
         this.y = y;
     }
@@ -24,7 +25,6 @@ public class Location {
     // used to check tile through navigation
     public static Location newLocation(int degrees, Location location){
         Location newLocation = new Location(0,0);
-        System.out.println(degrees);
         switch(degrees){
             case 45:
                 if (location.getX() % 2 == 0) {
@@ -74,6 +74,7 @@ public class Location {
             default:
                 break;
         }
+        location.setDir(degrees);
         return newLocation;
     }
 
@@ -93,6 +94,15 @@ public class Location {
         this.y = y;
     }
 
+    public int getPixelX (){
+        return this.x * Settings.TILEWIDTH;
+    }
+
+    public int getPixelY (){
+
+        return this.y * Settings.TILEHEIGHT;
+    }
+
     public int getDir() {
         return dir;
     }
@@ -109,4 +119,5 @@ public class Location {
     public void setDir(int dir) {
         this.dir = dir;
     }
+
 }

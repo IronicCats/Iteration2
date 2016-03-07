@@ -24,5 +24,6 @@ public class Smasher extends Occupation {
         else {
             //do nothing
         }
+        alert();
     }
 }
