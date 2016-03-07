@@ -1,4 +1,4 @@
-package Utilities;
+package Utilities.AreaEffectUtilities;
 
 
 import Model.GameObject.Decal.Decal;
@@ -8,6 +8,8 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
+import Utilities.Utilities;
+
 
 /**
  * Created by mazumderm on 3/6/2016.

@@ -4,12 +4,13 @@ import Controller.Controllers.GameController;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
 import State.StatesEnum;
-import Utilities.ItemFactory;
-import Utilities.ItemsEnum;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
@@ -18,6 +19,7 @@ import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
 import View.Views.EntityView;
+import View.Views.MobileObjectView;
 import View.Views.ItemView;
 import View.Views.MapView;
 
@@ -33,17 +35,18 @@ public class GameState extends State {
     private HashMap<Item, ItemView> mapItems;
     private HashMap<Entity, EntityView> entities;
     private HashMap<Decal, DecalView> decals;
+    private HashMap<MobileObject, MobileObjectView> mobileObjects;
     private Map map;
     private Camera camera;
     private MapView mapView;
 
     private Player player;
-    private EntityView playerView;
+    private MobileObjectView playerView;
 
     public GameState() {
         setController(new GameController(this));
         mapItems = new HashMap<>();
-        entities = new HashMap<>();
+        mobileObjects = new HashMap<>();
         map = MakeMap.makeMap();
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
         mapView = MakeMap.makeMapView(map);
@@ -51,7 +54,7 @@ public class GameState extends State {
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         player = new Player();
-        playerView = new EntityView(player, Assets.PLAYER);
+        playerView = new MobileObjectView(player, Assets.PLAYER);
 
     }
 
@@ -60,8 +63,15 @@ public class GameState extends State {
     }
 
     public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map)){ // returns if new location is walkable
+
+        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()){ // returns if new location is walkable
             player.move(degrees);
+        }
+    }
+
+    public void moveObject(int degrees, MobileObject mobileObject){
+        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, mobileObject)){ // returns if new location is walkable
+            mobileObject.move(degrees);
         }
     }
 
