@@ -50,10 +50,10 @@ public class DecalView implements Observer, Renderable {
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,
-                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - 16),
-                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 - 16),
-                32,
-                32,
+                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - (Settings.TILEWIDTH / (2*4))),
+                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 -(Settings.TILEHEIGHT / (2*4))),
+                Settings.TILEWIDTH / 4,
+                Settings.TILEHEIGHT / 4,
                 null
         );
     }

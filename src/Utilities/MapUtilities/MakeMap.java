@@ -9,7 +9,7 @@ import Model.Map.Tiles.Grass;
 import Model.Map.Tile;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
-import Utilities.Utilities;
+import Utilities.*;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.MapView;
 import View.Views.TileView;
@@ -48,8 +48,8 @@ public class MakeMap {
         }
         //Reads in map from map.txt
         String[] tokens = builder.toString().split("\\s+");
-        width = Utilities.parseInt(tokens[0]);
-        height = Utilities.parseInt(tokens[1]);
+        Settings.MAPWIDTH= width = Utilities.parseInt(tokens[0]);
+        Settings.MAPHEIGHT = height = Utilities.parseInt(tokens[1]);
         spawn = new Location(Utilities.parseInt(tokens[2]), Utilities.parseInt(tokens[3]), 2);
         tiles = new Tile[width][height];
         for (int x = 0; x < width; ++x) {

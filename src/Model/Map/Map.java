@@ -26,7 +26,7 @@ public class Map implements Subject {
     }
 
     public Tile getTile(int x , int y) {
-        if(x < 0 || y < 0 || x > Settings.MAPWIDTH || y > Settings.MAPHEIGHT ){
+        if(x < 0 || y < 0 || x > Settings.MAPWIDTH-1 || y > Settings.MAPHEIGHT-1 ){
             return null;
         }
         return tiles[x][y];
