@@ -1,5 +1,8 @@
 package View.Views;
 
+import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.Decal.Decal;
+import Model.GameObject.Decal.DecalEnum;
 import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
@@ -17,12 +20,27 @@ public class TileView implements Observer, Renderable {
     private Tile tile;
     private BufferedImage sprite;
     Location location;
+    private Decal decal;
 
     public TileView(Tile tile, BufferedImage sprite) {
         this.tile = tile;
         tile.addObserver(this);
         this.sprite = sprite;
         this.location = tile.getLocation();
+        if(tile.getHasAreaEffect()){
+            if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DAMAGE))
+            {
+                decal = new Decal(location, DecalEnum.FIRE);
+            }
+            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.HEAL))
+            {
+                decal = new Decal(location, DecalEnum.REDCROSS);
+            }
+            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DEATH))
+            {
+                decal = new Decal(location, DecalEnum.SKULLANDCROSSBONES);
+            }
+        }
     }
 
     public BufferedImage getSprite(){ return sprite; }
@@ -44,6 +62,9 @@ public class TileView implements Observer, Renderable {
 
     public void render(Graphics g, int xOffset, int yOffset) {
         g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        if(tile.getHasAreaEffect()){
+
+        }
     }
 
 }

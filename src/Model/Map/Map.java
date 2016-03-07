@@ -1,5 +1,6 @@
 package Model.Map;
 
+import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
 import Model.Location;
 import Utilities.Subject;
@@ -36,6 +37,16 @@ public class Map implements Subject {
             System.out.println("Error while adding Item to Map");
         }
     }
+
+    public void placeAreaEffect(AreaEffect a) {
+        try {
+            tiles[a.getX()][a.getY()].setAreaEffectTile(a);
+        }catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Error while adding AreaEffect to Map");
+        }
+    }
+
 
     public Location getSpawn(){
         return spawn;
