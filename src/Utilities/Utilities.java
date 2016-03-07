@@ -70,7 +70,7 @@ public class Utilities {
 
     public static boolean outOfSite(Location playerLocation, Location tileLocation) {
         int sight = 3;
-        System.out.println(playerLocation.getX() + "  " + tileLocation.getX());
+        //System.out.println(playerLocation.getX() + "  " + tileLocation.getX());
         if(playerLocation.getX() + sight > tileLocation.getX() || playerLocation.getX() - sight < tileLocation.getX() ){
             return true;
         }
