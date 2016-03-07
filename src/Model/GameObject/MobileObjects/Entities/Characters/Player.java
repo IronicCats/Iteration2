@@ -1,11 +1,14 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Utilities.Observer;
+
+import java.util.ArrayList;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -28,20 +31,6 @@ public class Player extends Character implements Observer{
     // takes in the degrees associated with key press and updates player location
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
-        if (degrees == 45) {
-            location.setDir(1);
-        } else if (degrees == 90) {
-            location.setDir(0);
-        } else if (degrees == 135) {
-            location.setDir(5);
-        } else if (degrees == 225) {
-            location.setDir(4);
-        } else if (degrees == 270) {
-            location.setDir(3);
-        } else if (degrees == 315) {
-            location.setDir(2);
-        }
-        System.out.print(location);
         alert();
     }
 
