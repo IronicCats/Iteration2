@@ -9,8 +9,10 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import State.StatesEnum;
+import Utilities.AIUtilities.Astar;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
@@ -25,6 +27,7 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -62,7 +65,14 @@ public class GameState extends State {
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
-
+        //from here down is Aidan's test and imports are because of Aidan if they are related to this
+        /*Astar astar = null;
+        ArrayList<Tile> path;
+        path = astar.Findpath(map.getTile(0,0), map.getTile(0,5));
+        for(int i = 0; i < path.size(); i++){
+            System.out.println(path.get(i).getLocation().getX());
+            System.out.println(path.get(i).getLocation().getY());
+        }*/
     }
 
     public void switchState() {

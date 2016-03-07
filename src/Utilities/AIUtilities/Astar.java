@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Astar {
 
-    Map map;
+    /*Map map;
 
     public ArrayList<Tile> Findpath(Tile start, Tile end) {
 
@@ -70,5 +70,5 @@ public class Astar {
             neighbors[5] = map.getTile(x - 1,y - 1);
         }
         return neighbors;
-    }
+    }*/
 }
