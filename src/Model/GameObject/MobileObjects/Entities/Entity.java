@@ -18,22 +18,22 @@ It also inherits location from MobileObject
 
 public abstract class Entity extends MobileObject {
 
-    protected PlayerStats stats;
+    protected Stats stats;
     protected Occupation occupation;
 
     public Entity() {
         super();
-        stats = new PlayerStats();
+        stats = new Stats();
         occupation = new Smasher();
     }
 
-    public Entity(Location location, PlayerStats stats, Occupation occupation){
+    public Entity(Location location, Stats stats, Occupation occupation){
         super(location);
         this.stats = stats;
         this.occupation = occupation;
     }
 
-    public PlayerStats getStats() {
+    public Stats getStats() {
         return stats;
     }
     public int getMovement() { return stats.getMovement(); }

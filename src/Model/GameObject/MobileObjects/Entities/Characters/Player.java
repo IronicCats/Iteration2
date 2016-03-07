@@ -1,9 +1,11 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.Inventory.Inventory;
 import Model.Location;
-import Model.Stats.PlayerStats;
+import Model.Stats.CharacterStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Utilities.Observer;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -13,15 +15,14 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 This is the player class. This class contains everything the player controlled
 character will need.
  */
-public class Player extends Entity{
+public class Player extends Character implements Observer{
 
     // Player inventory needed
     public Player() {
         super();
-
     }
-    public Player(Location location, PlayerStats stats, Occupation occupation){
-        super(location, stats, occupation);
+    public Player(Location location, CharacterStats stats, Occupation occupation, Inventory inventory){
+        super(location, stats, occupation, inventory);
     }
 
     // takes in the degrees associated with key press and updates player location
@@ -42,5 +43,15 @@ public class Player extends Entity{
         }
         System.out.print(location);
         alert();
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void remove() {
+
     }
 }
