@@ -105,7 +105,7 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        mapView.render(g, camera.getxOffset(), camera.getyOffset());
+        mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         //keyset for keys, values for values
         for (ItemView itemView : mapItems.values()) {
             itemView.render(g, camera.getxOffset(), camera.getyOffset());

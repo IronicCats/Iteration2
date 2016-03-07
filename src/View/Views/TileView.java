@@ -7,6 +7,7 @@ import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
 import Utilities.Settings;
+import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 
@@ -65,20 +66,15 @@ public class TileView implements Observer, Renderable {
 
     }
 
-    public void render(Graphics g, int xOffset, int yOffset) {
+    public void render(Graphics g, int xOffset, int yOffset, Location playerLocation) {
 
         g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
-        /*
-        if(tile is unseen && out of sight) {
-            draw black hex;
-        }else if( out of sight ) {
-            draw transparent black over tile
-        }else {
-           drawTile;
+
+        if(Utilities.outOfSite(playerLocation, this.location)) {//tile.visited
+            //System.out.print("Here");
+            g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }
 
-
-         */
         /**
         if(tile.getHasAreaEffect()){
             decalView.render(g, xOffset, yOffset);

@@ -10,6 +10,9 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
+
+    public static BufferedImage FOGTILE;
+    public static BufferedImage HALFFOGTILE;
     public static BufferedImage GRASSHEXTILE;
     public static BufferedImage WATERHEXTILE;
     public static BufferedImage MOUNTAINHEXTILE;
@@ -41,6 +44,13 @@ public class Assets {
 
     public static void init() {
         //Tiles
+        //Fog Tiles
+        SpriteSheet FogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
+        FOGTILE = FogTileSheet.crop(0,0,32,28);
+        SpriteSheet HalfFogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
+        HALFFOGTILE = HalfFogTileSheet.crop(0,0,32,28);
+
+        //Basic TIles
         SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
         GRASSHEXTILE = HexTileGrassSheet.crop(0,0,32,28);
 

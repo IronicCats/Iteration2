@@ -68,4 +68,15 @@ public class Utilities {
         return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2) + Settings.TILEHEIGHT/2;
     }
 
+    public static boolean outOfSite(Location playerLocation, Location tileLocation) {
+        int sight = 3;
+        if(playerLocation.getX() + sight > tileLocation.getX() || playerLocation.getX() - sight < tileLocation.getX() ){
+            return true;
+        }
+        if(playerLocation.getX() + sight > tileLocation.getX() || playerLocation.getX() - sight < tileLocation.getX() ){
+            return true;
+        }
+        return false;
+    }
+
 }
