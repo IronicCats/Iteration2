@@ -1,4 +1,4 @@
-package Utilities;
+package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
 import View.Views.MobileObjectView;
@@ -7,7 +7,7 @@ import View.Views.MobileObjectView;
  * Created by broskj on 3/6/16.
  */
 public class NPCFactory {
-    public static void /*Entity*/ makeNPC(NPCEnum npcEnum) {
+    public static void /*Entity*/ makeNPC(MobileObjectEnum npcEnum) {
         switch (npcEnum) {
             case KITTEN:
             case SMALL_CAT:
@@ -15,13 +15,12 @@ public class NPCFactory {
             case CORGI_SHOPKEEPER:
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
-            case SHEEP_VEHICLE:
             default:
                 break; /* return null; */
         }
     } // end makeNPC
 
-    public static MobileObjectView makeAsset(NPCEnum npcEnum, Entity entity) {
+    public static MobileObjectView makeAsset(MobileObjectEnum npcEnum, Entity entity) {
         switch (npcEnum) {
             case KITTEN:
             case SMALL_CAT:
@@ -29,7 +28,6 @@ public class NPCFactory {
             case CORGI_SHOPKEEPER:
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
-            case SHEEP_VEHICLE:
             default:
                 break;
         }
