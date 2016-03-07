@@ -15,7 +15,7 @@ public class Astar {
 
     Map map;
 
-    ArrayList<Tile> Findpath(Tile start, Tile end) {
+    public ArrayList<Tile> Findpath(Tile start, Tile end) {
 
 
         Queue<Tile> Queue = new LinkedList<Tile>();
