@@ -26,7 +26,7 @@ public abstract class MobileObject extends GameObject{
         super(location);
     }
 
-    public void move(){
+    public void move(int degrees){
 
     }
 

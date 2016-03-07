@@ -1,5 +1,6 @@
 package Utilities.MapUtilities;
 
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
 import Model.Location;
 import Model.Map.Tiles.*;
@@ -16,19 +17,21 @@ public class Navigation {
     public Navigation(){
     };
 
-    public static boolean checkMove(Location location, Map map){
+    public static boolean checkMove(Location location, Map map, MobileObject type){
         if(location.getY() < 0 || location.getY() >= map.getHeight()) {
             return false;
         }
-        if(location.getX() < 0 || location.getX() >= map.getWidth()) {
+        else if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         }
-        if(map.getTile(location.getX(), location.getY()) instanceof Mountain) {
+        else if(map.getTile(location.getX(), location.getY()) instanceof Mountain) {
             return false;
         }
-        if(map.getTile(location.getX(), location.getY()) instanceof Water) {
+        else if(map.getTile(location.getX(), location.getY()) instanceof Water) {
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
     }
 }

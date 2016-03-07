@@ -1,4 +1,7 @@
-package Utilities;
+package Utilities.ItemUtilities;
+
+
+import Utilities.Utilities;
 
 /**
  * Created by broskj on 3/5/16.
