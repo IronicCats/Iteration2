@@ -27,12 +27,11 @@ public abstract class Controller implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("Typed: " + e.getKeyCode());
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Pressed: " + e.getKeyCode());
     }
 
 

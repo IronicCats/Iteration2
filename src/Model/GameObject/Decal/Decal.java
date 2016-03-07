@@ -1,22 +1,26 @@
 package Model.GameObject.Decal;
 
+import Model.GameObject.GameObject;
 import Model.Location;
+import Utilities.Observer;
+import Utilities.Subject;
+
+import java.util.ArrayList;
 
 /**
  * Created by mazumderm on 3/1/2016.
  */
-public class Decal {
-    private int imageID; // image of decal
+public class Decal extends GameObject implements Subject {
     protected Location location; // location of decal
     private String name;
     private String description;
     private DecalEnum type;
+    private ArrayList<Observer> observers;
 
     //constructor
-    public Decal(int image, Location location, DecalEnum type )
+    public Decal(Location location, DecalEnum type )
     {
-        this.imageID = image;
-        this.location = location;
+        super(location);
         this.type = type;
     }
 
@@ -26,5 +30,20 @@ public class Decal {
 
     public Location getLocation() {return location;}
 
-    public int getImageID(){return imageID;}
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void alert() {
+        for(int i = 0; i < observers.size(); ++i) {
+            observers.get(i).update();
+        }
+    }
 }

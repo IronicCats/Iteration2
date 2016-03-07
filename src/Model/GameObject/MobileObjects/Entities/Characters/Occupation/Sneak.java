@@ -24,6 +24,7 @@ public class Sneak extends Occupation{
         else {
             //do nothing
         }
+        alert();
     }
 }
 
