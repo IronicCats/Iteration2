@@ -10,7 +10,7 @@ public class Location {
     private int x, y, dir;
 
     public Location(int x, int y){
-        this.dir = 0;
+        this.dir = 270;
         this.x = x;
         this.y = y;
     }
@@ -24,7 +24,6 @@ public class Location {
     // used to check tile through navigation
     public static Location newLocation(int degrees, Location location){
         Location newLocation = new Location(0,0);
-        System.out.println(degrees);
         switch(degrees){
             case 45:
                 if (location.getX() % 2 == 0) {
@@ -74,6 +73,7 @@ public class Location {
             default:
                 break;
         }
+        location.setDir(degrees);
         return newLocation;
     }
 
