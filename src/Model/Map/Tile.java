@@ -32,7 +32,6 @@ public abstract class Tile implements Subject {
         entity = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
-        hasAreaEffect = false;
     }
 
     public void addItem(Item item) {
