@@ -70,7 +70,7 @@ public class GameState extends State {
         mapView.render(g, camera.getxOffset(), camera.getyOffset());
         //keyset for keys, values for values
         for (ItemView itemView : mapItems.values()) {
-            itemView.render(g, -160, -20);
+            itemView.render(g, camera.getxOffset(), camera.getyOffset());
         }
         camera.centerOnPlayer(player);
         playerView.render(g, camera.getxOffset(), camera.getyOffset());

@@ -52,10 +52,11 @@ public class View implements Runnable {
         g.clearRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
-
         if(State.getState() != null ) {
             State.getState().render(g);
         }
+        g.setColor(Color.RED);
+        g.fillRect(Settings.GAMEWIDTH/2 - 10, Settings.GAMEHEIGHT/2 - 10, 20, 20);
 
         bs.show();
         g.dispose();
