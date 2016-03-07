@@ -62,6 +62,9 @@ public class Assets {
         SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
         LASER_POINTER = laserPointerSheet.crop(0,0,32,32);
 
+        SpriteSheet helmetSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Helmet.png"));
+        HELMET = helmetSheet.crop(0,0,32,32);
+
         //End of Tiles
 
         //Entities
