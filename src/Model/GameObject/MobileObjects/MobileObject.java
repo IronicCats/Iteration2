@@ -32,7 +32,7 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
     }
 
-    public void move(){
+    public void move(int degrees){
 
     }
 

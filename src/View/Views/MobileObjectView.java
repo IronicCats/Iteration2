@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Joshua Kegley on 3/5/2016.
  */
-public class EntityView implements Renderable, Observer {
+public class MobileObjectView implements Renderable, Observer {
 
     private Entity entity;
     private ArrayList<BufferedImage> sprites;
@@ -28,7 +28,7 @@ public class EntityView implements Renderable, Observer {
     private ViewLocation viewLocation;
     private float goalX, goalY;
 
-    public EntityView(Entity entity, ArrayList<BufferedImage> sprites) {
+    public MobileObjectView(Entity entity, ArrayList<BufferedImage> sprites) {
         entity.addObserver(this);
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
