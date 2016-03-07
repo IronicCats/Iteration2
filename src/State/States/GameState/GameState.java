@@ -75,16 +75,7 @@ public class GameState extends State {
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
-
-        //from here down is Aidan's test and imports are because of Aidan if they are related to this
-        Astar astar = new Astar(map);
-        ArrayList<Tile> path;
-        path = astar.Findpath(map.getTile(0,0), map.getTile(5,4));
-        for(int i = 0; i < path.size(); i++){
-            System.out.println("xLocation " + i + " " + path.get(i).getLocation().getX());
-            System.out.println("yLocation " + i + " " + path.get(i).getLocation().getY());
-        }
-
+        
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
