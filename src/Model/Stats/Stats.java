@@ -3,6 +3,19 @@ package Model.Stats;
 /**
  * Created by broskj on 3/6/16.
  */
-public abstract class Stats {
-    // nothing here
+public class Stats {
+    private int movement,
+            baseMovement;
+
+    public Stats() {
+        movement = 0;
+        baseMovement = 0;
+    } // end default constructor
+
+    public Stats(int movement) {
+        this.baseMovement = movement;
+        this.movement = baseMovement;
+    } // end constructor
+
+    public int getMovement() { return movement; }
 } // end class Stats

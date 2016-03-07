@@ -17,10 +17,10 @@ public class Navigation {
     };
 
     public static boolean checkMove(Location location, Map map){
-        if(location.getY() < 0 || location.getY() > 20) {
+        if(location.getY() < 0 || location.getY() >= map.getHeight()) {
             return false;
         }
-        if(location.getX() < 0 || location.getX() > 10) {
+        if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         }
         if(map.getTile(location.getX(), location.getY()) instanceof Mountain) {

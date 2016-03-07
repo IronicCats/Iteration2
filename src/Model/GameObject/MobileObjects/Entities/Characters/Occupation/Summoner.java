@@ -25,5 +25,6 @@ public class Summoner extends Occupation {
         else {
             //do nothing
         }
+        alert();
     }
 }

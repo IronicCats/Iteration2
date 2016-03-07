@@ -1,4 +1,4 @@
-package Model.Map.AreaEffect;
+package Model.GameObject.AreaEffect;
 
 /**
  * Created by mazumderm on 3/1/2016.

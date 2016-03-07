@@ -10,14 +10,31 @@ import Model.Location;
 // class for projectiles
 public class Projectile extends MobileObject {
 
-    private Effect effect;
+    private Effect [] effects;
+    int range;
 
-    public Projectile(Location location) {
+    //constructor
+    public Projectile(Location location, Effect [] effects, int range) {
         super(location);
+        this.effects = effects;
+        this.range = range;
     }
 
-    public Effect getEffect() {
-        return effect;
+    //accessor methods
+    public Effect [] getEffect() {
+        return this.effects;
+    }
+
+    public void setEffects(Effect [] e){
+        this.effects = e;
+    }
+
+    public int getRange(){
+        return this.range;
+    }
+
+    public void setRange(int r){
+        this.range = r;
     }
 
     @Override
