@@ -65,7 +65,7 @@ public class AreaEffectFactory {
             case SKULLANDCROSSBONES:
             case REDCROSS:
             default:
-                return new DecalView(decal, Assets.POTION);
+                return new DecalView(decal, Assets.HEALTH_POTION);
         }
     } // end makeAsset
 }

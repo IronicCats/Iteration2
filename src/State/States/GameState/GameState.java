@@ -5,12 +5,16 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Stats.CharacterStats;
 import State.StatesEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
@@ -18,6 +22,7 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
@@ -41,6 +46,10 @@ public class GameState extends State {
     private Map map;
     private Camera camera;
     private MapView mapView;
+    SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
+
+
+
 
     private Player player;
     private MobileObjectView playerView;
@@ -56,9 +65,14 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(1,1));
-        mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.FIRE)));
         player = new Player();
+        Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
+        map.placeItem(item);
+        mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
+        mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
+        //creating a new player
+        player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
     }
@@ -68,10 +82,13 @@ public class GameState extends State {
     }
 
     public void movePlayer(int degrees) {
-
         if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()){ // returns if new location is walkable
             player.move(degrees);
+            player.getLocation().setDir(degrees);
         }
+        sl.setGameMap(map);                     //TODO remove these lines
+        sl.setPlayer(player);
+        sl.save();
     }
 
     public void moveObject(int degrees, MobileObject mobileObject){
