@@ -75,7 +75,6 @@ public class Location {
             default:
                 break;
         }
-        location.setDir(degrees);
         return newLocation;
     }
 
