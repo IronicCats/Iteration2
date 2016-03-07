@@ -1,6 +1,7 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
+import Model.GameObject.Decal.Decal;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
@@ -15,6 +16,7 @@ import Utilities.MapUtilities.MakeMap;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
+import View.Views.DecalView;
 import View.Views.EntityView;
 import View.Views.ItemView;
 import View.Views.MapView;
@@ -30,6 +32,7 @@ public class GameState extends State {
 
     private HashMap<Item, ItemView> mapItems;
     private HashMap<Entity, EntityView> entities;
+    private HashMap<Decal, DecalView> decals;
     private Map map;
     private Camera camera;
     private MapView mapView;

@@ -7,6 +7,7 @@ import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
 import Utilities.Settings;
+import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ public class TileView implements Observer, Renderable {
     private Tile tile;
     private BufferedImage sprite;
     Location location;
-    private Decal decal;
+    private DecalView decalView;
 
     public TileView(Tile tile, BufferedImage sprite) {
         this.tile = tile;
@@ -30,15 +31,19 @@ public class TileView implements Observer, Renderable {
         if(tile.getHasAreaEffect()){
             if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DAMAGE))
             {
-                decal = new Decal(location, DecalEnum.FIRE);
+                decalView = new DecalView(new Decal(location, DecalEnum.FIRE), Assets.POTION);
             }
             else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.HEAL))
             {
-                decal = new Decal(location, DecalEnum.REDCROSS);
+                decalView = new DecalView(new Decal(location, DecalEnum.REDCROSS), Assets.POTION);
             }
             else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DEATH))
             {
-                decal = new Decal(location, DecalEnum.SKULLANDCROSSBONES);
+                decalView = new DecalView(new Decal(location, DecalEnum.SKULLANDCROSSBONES),Assets.POTION );
+            }
+            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.LEVELUP))
+            {
+                decalView = new DecalView(new Decal(location, DecalEnum.GOLDSTAR),Assets.POTION );
             }
         }
     }
@@ -63,7 +68,7 @@ public class TileView implements Observer, Renderable {
     public void render(Graphics g, int xOffset, int yOffset) {
         g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         if(tile.getHasAreaEffect()){
-
+            decalView.render(g, xOffset, yOffset);
         }
     }
 

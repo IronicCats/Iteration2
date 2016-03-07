@@ -1,9 +1,13 @@
 package Utilities;
 
 
+import Model.GameObject.Decal.Decal;
+import Model.GameObject.Decal.DecalEnum;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import View.ViewUtilities.Graphics.Assets;
+import View.Views.DecalView;
 
 /**
  * Created by mazumderm on 3/6/2016.
@@ -50,5 +54,18 @@ public class AreaEffectFactory {
             default:
                 return null;
         }
-    }
+    }// end
+
+    public static DecalView makeAsset(DecalEnum decalEnum, Decal decal) {
+        switch(decalEnum) {
+            /**
+            case DAMAGE:
+            case HEALTH:
+            case DEATH:
+            case LEVELUP:
+             **/
+            default:
+                return new DecalView(decal, Assets.POTION);
+        }
+    } // end makeAsset
 }

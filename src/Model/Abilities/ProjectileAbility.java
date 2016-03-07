@@ -2,6 +2,7 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Projectile;
+import Model.Map.Tile;
 
 /**
  * Created by mazumderm on 3/6/2016.
@@ -33,5 +34,9 @@ public class ProjectileAbility extends Abilities {
 
     public void setProjectile(Projectile p){
         this.projectile = p;
+    }
+
+    public void execute(Tile t){
+
     }
 }
