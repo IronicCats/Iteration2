@@ -12,6 +12,7 @@ import java.awt.*;
 public abstract class State implements Tickable, Renderable {
     public static Canvas canvas;
     public static State currentState = null;
+
     public static State previousState = null;
     private static State[] states = new State[(int) StatesEnum.ExitState.ordinal()];
     private Controller controller;
@@ -42,5 +43,4 @@ public abstract class State implements Tickable, Renderable {
     public void deactivateListener() {
         canvas.removeKeyListener(controller);
     }
-
 }

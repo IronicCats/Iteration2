@@ -50,6 +50,12 @@ public class GameState extends State {
         player = new Player();
         playerView = new EntityView(player, Assets.PLAYER);
 
+        InventoryState inventoryState = new InventoryState();//adding the inv state
+        State.addState(StatesEnum.InventoryState, inventoryState);
+
+        EquipmentState equipementState = new EquipmentState();//adding the equipment state
+        State.addState(StatesEnum.EquipmentState, equipementState);
+
     }
 
     public void switchState() {
