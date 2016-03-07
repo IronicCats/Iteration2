@@ -52,13 +52,13 @@ public class Assets {
         // End of Tiles
 
         //Items
-        SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/HealthPotion.png"));
+        SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HealthPotion.png"));
         HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
 
-        SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/ManaPotion.png"));
+        SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
         MANA_POTION = potionManaSheet.crop(0,0,32,32);
 
-        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/res/Items/ClosedChest.png"));
+        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
         CLOSED_TREASURE_CHEST = chestSheet.crop(0,0,32,28);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
