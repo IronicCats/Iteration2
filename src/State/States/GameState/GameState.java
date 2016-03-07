@@ -1,11 +1,15 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Stats.CharacterStats;
 import State.StatesEnum;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -47,7 +51,8 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
-        player = new Player();
+        //creating a new player
+        player = new Player(new Location(35, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
     }

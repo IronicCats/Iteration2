@@ -61,7 +61,19 @@ public class TileView implements Observer, Renderable {
     }
 
     public void render(Graphics g, int xOffset, int yOffset) {
+
         g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        /*
+        if(tile is unseen && out of sight) {
+            draw black hex;
+        }else if( out of sight ) {
+            draw transparent black over tile
+        }else {
+           drawTile;
+        }
+
+
+         */
         if(tile.getHasAreaEffect()){
 
         }
