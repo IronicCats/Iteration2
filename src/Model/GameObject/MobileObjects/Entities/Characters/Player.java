@@ -1,5 +1,9 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Effects.EquipmentModification;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
@@ -40,4 +44,19 @@ public class Player extends Character implements Observer{
     public void remove() {
 
     } // end remove
+
+    public void equip(Weapon weapon) {
+        inventory.equip(weapon);
+        stats.applyEquipmentModification(weapon.getEquipmentModification());
+    } // end equip
+
+    public void equip(Armor armor) {
+        inventory.equip(armor);
+        stats.applyEquipmentModification(armor.getEquipmentModification());
+    } // end equip
+
+    public void unequip(EquipmentSlotEnum slot) {
+        inventory.unequip(slot);
+        stats.removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+    } // end unequip
 } // end class Player

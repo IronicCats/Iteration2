@@ -39,6 +39,7 @@ public class Weapon extends Takable {
     }
 
     public EquipmentTypeEnum getType() { return type; }
+    public EquipmentModification getEquipmentModification() { return (EquipmentModification) effect; }
 
     @Override
     public void addObserver(Observer o) {

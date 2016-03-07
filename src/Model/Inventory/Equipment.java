@@ -1,10 +1,12 @@
 package Model.Inventory;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 /**
@@ -173,4 +175,31 @@ public class Equipment {
         // should never be reached
         return null;
     } // end unequip
+
+    public Takable getSlot(EquipmentSlotEnum slot) {
+        switch(slot) {
+            case MAINHAND:
+                return mainhand;
+            case OFFHAND:
+                return offhand;
+            case HEAD:
+                return head;
+            case CHEST:
+                return chest;
+            case LEGS:
+                return legs;
+            case GLOVES:
+                return gloves;
+            case BOOTS:
+                return boots;
+            case SHIELD:
+                return shield;
+            case ACCESSORY1:
+                return accessory1;
+            case ACCESSORY2:
+                return accessory1;
+            default:
+                return null;
+        }
+    } // end getSlot
 } // end class Equipment
