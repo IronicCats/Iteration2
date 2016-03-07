@@ -9,9 +9,9 @@ import Model.Stats.CharacterStats;
 /**
  * Created by broskj on 3/6/16.
  */
-public class Character extends Entity {
-    private Inventory inventory;
-    private CharacterStats stats;
+public abstract class Character extends Entity {
+    protected Inventory inventory;
+    protected CharacterStats stats;
 
     public Character() {
         super();

@@ -8,13 +8,11 @@ import Model.Location;
 
 /**
  * Created by Wimberley on 3/3/16.
+ *
+ * This class is the parent class for NPC and player. It holds all common
+ *  attributes for the aforementioned enitites.
+ *  It also inherits location from MobileObject
  */
-
-/*
-This class is the parent class for NPC and player. It holds all common
-attributes for the aforementioned enitites.
-It also inherits location from MobileObject
-*/
 
 public abstract class Entity extends MobileObject {
 
