@@ -1,10 +1,12 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Stats.PlayerStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
-import Model.Location;
+
+import java.util.ArrayList;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -25,20 +27,9 @@ public class Player extends Entity{
         super(location, stats, occupation);
     }
 
+    // takes in the degrees associated with key press and updates player location
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
-        if (degrees == 45) {
-            location.setDir(1);
-        } else if (degrees == 90) {
-            location.setDir(0);
-        } else if (degrees == 135) {
-            location.setDir(5);
-        } else if (degrees == 225) {
-            location.setDir(4);
-        } else if (degrees == 270) {
-            location.setDir(3);
-        } else if (degrees == 315) {
-            location.setDir(2);
-        }
+        alert();
     }
 }

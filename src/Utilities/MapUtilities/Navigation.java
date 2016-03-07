@@ -13,21 +13,22 @@ import Model.Map.Tiles.*;
  */
 public class Navigation {
 
-    private Map map;
-
-    public Navigation(Map map){
-        this.map = map;
+    public Navigation(){
     };
 
-    public boolean checkMove(Location location){
-        if(location.getY() <= 0 && location.getY() >= 20)
+    public static boolean checkMove(Location location, Map map){
+        if(location.getY() < 0 || location.getY() >= map.getHeight()) {
             return false;
-        if(location.getX() <= 0 && location.getX() >= 10)
+        }
+        if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
-        if(map.getTile(location.getX(), location.getY()) instanceof Mountain)
+        }
+        if(map.getTile(location.getX(), location.getY()) instanceof Mountain) {
             return false;
-        if(map.getTile(location.getX(), location.getY()) instanceof Water)
+        }
+        if(map.getTile(location.getX(), location.getY()) instanceof Water) {
             return false;
+        }
         return true;
     }
 }
