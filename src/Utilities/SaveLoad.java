@@ -163,6 +163,23 @@ public class SaveLoad {
 
         //AreaEffect
         //if(t.)
+        //Decal
+
+        //item
+        if(t.hasItems()){
+            Element item = doc.createElement("item"); // creates an element and tags it as a document
+            //will probably have to go through each item on a tile since we can have multiple
+
+            Attr itemID = doc.createAttribute("id");
+            //gets the id of an item.
+            for(int i = 0; i < t.getItems().size(); i++){//note make sure this is correct for size
+                itemID.setValue(Integer.toString(t.getItems().get(i).getId()));
+                item.setAttributeNode(itemID);      //sets the attribute node to the item id
+                tile.appendChild(item);             //appends node to element
+            }
+            //note, I am pretty sure having it in the loop is right
+
+        }
 
         return tile; //returns the element
     }
