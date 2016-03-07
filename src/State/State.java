@@ -40,7 +40,6 @@ public abstract class State implements Tickable, Renderable {
         canvas.addKeyListener(controller);
     }
     public void deactivateListener() {
-        System.out.println(canvas.getKeyListeners());
         canvas.removeKeyListener(controller);
     }
 
