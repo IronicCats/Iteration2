@@ -1,5 +1,6 @@
 package View.Views;
 
+import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Utilities.Settings;
@@ -32,12 +33,13 @@ public class MapView implements Observer, Renderable {
 
     }
 
-    public void render(Graphics g, int xOffset, int yOffset) {
+    public void render(Graphics g, int xOffset, int yOffset, Location playerLocation) {
         for(int y = 0; y <  map.getHeight(); ++y){
             for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
                 tileViews[x][y].render(g,
                         ((Utilities.calculateHexXLocation(x, y)) - xOffset),
-                        (Utilities.calculateHexYLocation(x, y) - yOffset)
+                        (Utilities.calculateHexYLocation(x, y) - yOffset),
+                        playerLocation
                 );
                 g.setColor(Color.WHITE);
                 int textW = Utilities.getFontWidth(g, new Font("Arial", Font.PLAIN, 12), "0,0");
