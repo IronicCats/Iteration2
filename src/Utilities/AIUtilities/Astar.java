@@ -29,7 +29,7 @@ public class Astar {
             Tile neighbors[] = neighbors(current,map);
             for(int i = 0; i < 6; i++){
                 Tile next = neighbors[i];
-                if(next != null && parent[next.getLocation().getX()][next.getLocation().getY()] != null){
+                if(next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null){
                     Queue.add(next);
                     parent[next.getLocation().getX()][next.getLocation().getY()] = current;
                 }
