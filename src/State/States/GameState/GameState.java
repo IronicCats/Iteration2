@@ -78,6 +78,12 @@ public class GameState extends State {
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
         map.placeAreaEffect(a);
 
+        InventoryState inventoryState = new InventoryState();//adding the inv state
+        State.addState(StatesEnum.InventoryState, inventoryState);
+
+        EquipmentState equipementState = new EquipmentState();//adding the equipment state
+        State.addState(StatesEnum.EquipmentState, equipementState);
+
     }
 
     public void switchState() {
