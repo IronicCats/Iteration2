@@ -45,9 +45,9 @@ public class Assets {
     public static void init() {
         //Tiles
         //Fog Tiles
-        SpriteSheet FogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
+        SpriteSheet FogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/fullfog.png"));
         FOGTILE = FogTileSheet.crop(0,0,32,28);
-        SpriteSheet HalfFogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
+        SpriteSheet HalfFogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/halffog.png"));
         HALFFOGTILE = HalfFogTileSheet.crop(0,0,32,28);
 
         //Basic TIles
