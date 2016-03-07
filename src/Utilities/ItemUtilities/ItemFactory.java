@@ -1,4 +1,4 @@
-package Utilities;
+package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
@@ -16,6 +16,7 @@ import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
+import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
