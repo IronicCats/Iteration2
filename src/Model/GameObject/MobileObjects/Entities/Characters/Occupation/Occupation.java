@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.Stats.PlayerStats;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.Stats.CharacterStats;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
 
@@ -18,7 +19,7 @@ public abstract class Occupation implements Subject, Observer {
     private String name;
     private String description;
     private StatStructure initialStats;
-    private PlayerStats playerStats;
+    private CharacterStats playerStats;
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
@@ -31,7 +32,7 @@ public abstract class Occupation implements Subject, Observer {
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH,StatsEnum.AGILITY,
                 StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
         initialStats = new StatStructure(stats, val);
-        playerStats = new PlayerStats(initialStats);
+        playerStats = new CharacterStats(initialStats);
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
 
