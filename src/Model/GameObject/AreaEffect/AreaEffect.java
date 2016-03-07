@@ -1,12 +1,15 @@
-package Model.Map.AreaEffect;
+package Model.GameObject.AreaEffect;
 
+import Model.GameObject.GameObject;
 import Model.Location;
 import Model.Effects.*;
-import Model.GameObject.Decal.*;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
+
 /**
  * Created by mazumderm on 3/1/2016.
  */
-public class AreaEffect {
+public class AreaEffect extends GameObject {
 
     String name;
     String description;
@@ -14,41 +17,36 @@ public class AreaEffect {
     //animation?
     Location location;
     AreaEffectEnum areaEffect;
-    Decal decal;
 
     //constructor
-    public AreaEffect(String name, String description, AreaEffectEnum areaEffect)
+    public AreaEffect(String name, String description, AreaEffectEnum areaEffect, Location location)
     {
+        super(location);
         this.name = name;
         this.description = description;
         this.areaEffect = areaEffect;
 
-
         //modifications will be made based on changes to effects, stats, and rendering
-        /**
+
          if(areaEffect == AreaEffectEnum.DAMAGE)// if its damaging area effect
          {
          StatStructure modification = new StatStructure(StatsEnum.LIFE, -5);
-         effect = new Effect(modification,0, this.description);
-         decal = new Decal(Assets.damage, this.location, DecalEnum.SKULLANDCROSSBONES);
+         effect = new Effect(modification);
          }
          else if(areaEffect == AreaEffectEnum.HEAL)// if its healing area effect
          {
          StatStructure modification = new StatStructure(StatsEnum.LIFE, 5);
-         effect = new Effect(modification,0, this.description);
-         decal = new Decal(Assets.redCross, this.location, DecalEnum.REDCROSS);
+         effect = new Effect(modification);
          }
          else if(areaEffect == AreaEffectEnum.DEATH)// if its a death effect
          {
          StatStructure modification = new StatStructure(StatsEnum.LIVES_LEFT, -1);
-         effect = new Effect(modification,0, this.description);
-         decal = new Decal(Assets.skullAndBones, this.location, DecalEnum.SKULLANDCROSSBONES);
+         effect = new Effect(modification);
          }
          else if(areaEffect == AreaEffectEnum.LEVELUP)// if its healing area effect
          {
          StatStructure modification = new StatStructure(StatsEnum.LEVEL, 1);
-         effect = new Effect(modification,0, this.description);
-         decal = new Decal(Assets.goldStar, this.location, DecalEnum.GOLDSTAR);
+         effect = new Effect(modification);
          }
          else if(areaEffect == AreaEffectEnum.TELEPORT)
          {
@@ -58,7 +56,7 @@ public class AreaEffect {
          {
          //code depends on changes made to Stats and Effect
          }
-         */
+
     }
 
     //accesor methods
@@ -72,5 +70,4 @@ public class AreaEffect {
 
     public Effect getEffect() {return effect;}
 
-    public Decal getDecal() {return decal;}
 }
