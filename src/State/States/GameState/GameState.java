@@ -57,7 +57,7 @@ public class GameState extends State {
     }
 
     public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map)){ // returns if new location is walkable
+        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map) & player.canMove()){ // returns if new location is walkable
             player.move(degrees);
         }
     }

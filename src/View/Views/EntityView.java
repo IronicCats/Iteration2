@@ -1,6 +1,7 @@
 package View.Views;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Utilities.*;
 import View.ViewUtilities.Renderable;
@@ -23,19 +24,24 @@ public class EntityView implements Renderable, Observer {
     private int width;
     private int height;
 
-    private int oldX, oldY, goalX, goalY;
+
+    private ViewLocation viewLocation;
+    private float goalX, goalY;
 
     public EntityView(Entity entity, ArrayList<BufferedImage> sprites) {
         entity.addObserver(this);
-        oldX = oldY = goalY = goalX = 0;
+        goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
+        goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
         this.entity = entity;
         this.sprites = sprites;
         this.location = entity.getLocation();
+        this.viewLocation = entity.getViewLocation();
         this.movement = entity.getMovement();
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
         this.active = 0;
+        this.movement = 10;
     }
 
     public void pause() {
@@ -54,13 +60,34 @@ public class EntityView implements Renderable, Observer {
     }
 
     public void tween() {
+        if(goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
+            entity.setCanMove(true);
+            return;
+        }
+        entity.setCanMove(false);
+        if(goalX != viewLocation.getX()) {
+            if(goalX > viewLocation.getX()){
+                viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
+            }
+            if(goalX < viewLocation.getX()){
+                viewLocation.setX(Math.max(viewLocation.getX() - movement, goalX));
+            }
+        }
+        if(goalY != viewLocation.getY()) {
+            if(goalY > viewLocation.getY()){
+                viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
+            }
+            if(goalY < viewLocation.getY()){
+                viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
+            }
+        }
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         tween();
         g.drawImage(sprites.get(active),
-                goalX - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
-                goalY - cameraYOffset - (Settings.TILEHEIGHT / (2*2)),
+                (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
+                (int)viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2*2)),
                 Settings.PLAYERWIDTH,
                 Settings.PLAYERHEIGHT,
                 null
@@ -69,14 +96,8 @@ public class EntityView implements Renderable, Observer {
 
     @Override
     public void update() {
-        if (oldX == goalX) {
-            oldX = Utilities.calculateTileCenterXLocation(location);
-            oldY = Utilities.calculateTileCenterYLocation(location);
-
-        }
-        location = entity.getLocation();
-        goalX = Utilities.calculateTileCenterXLocation(location);
-        goalY = Utilities.calculateTileCenterYLocation(location);
+            goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
+            goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
     }
 
     @Override
