@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Utilities.Subject;
 import Utilities.Observer;
@@ -27,6 +28,15 @@ public class Map implements Subject {
     public Tile getTile(int x , int y) {
 
         return tiles[x][y];
+    }
+
+    // notifies tile that Mobile object is on it
+    public void registerObject(MobileObject object){
+        tiles[object.getLocation().getX()][object.getLocation().getY()].setObject(object);
+    }
+
+    public void deRegister(Location location){
+        tiles[location.getX()][location.getY()].leaveTile();
     }
 
     public void placeItem(Item item) {
