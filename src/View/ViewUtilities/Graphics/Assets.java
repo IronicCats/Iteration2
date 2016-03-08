@@ -42,6 +42,7 @@ public class Assets {
     public static BufferedImage STAR;
     public static BufferedImage LEFT;
     public static BufferedImage RIGHT;
+    public static BufferedImage BACK;
 
     public static void init() {
         //Tiles
@@ -125,6 +126,7 @@ public class Assets {
         //menu
         LEFT = new ImageLoader().loadImage("/left.png");
         RIGHT = new ImageLoader().loadImage("/right.png");
+        BACK = new ImageLoader().loadImage("/BACK.jpg");
 
     }
 }
