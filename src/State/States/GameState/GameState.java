@@ -113,10 +113,6 @@ public class GameState extends State {
         }
     }
 
-    @Override
-    public void tick() {
-        enemy.tick();
-    }
 
     public void render(Graphics g) {
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
@@ -130,6 +126,12 @@ public class GameState extends State {
         camera.centerOnPlayer(player);
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+    }
+
+
+    @Override
+    public void tick() {
+        enemy.tick();
     }
 
     @Override

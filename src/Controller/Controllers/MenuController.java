@@ -33,6 +33,7 @@ public class MenuController extends Controller {
         }
         if(e.getKeyCode() == 10) {
             if (currentState == 1){
+                System.out.println("Switching to gameState");
                 state.switchState(StatesEnum.GameState);
             }
             else if(currentState==2)System.out.println("this is the load state");

@@ -27,10 +27,12 @@ public class MenuState extends State {
         public void moveDown(){
                 menuView.next();
         }
-        public void tick(){
-                System.out.println("MenuState tick");
-        }
 
+        @Override
+        public void tick(){
+                return;
+        }
+        @Override
         public void render(Graphics g) {
                 menuView.render(g);
         }
