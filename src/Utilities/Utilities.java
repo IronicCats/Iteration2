@@ -69,14 +69,19 @@ public class Utilities {
     }
 
     public static boolean outOfSite(Location playerLocation, Location tileLocation) {
-        int sight = 3;
-        //System.out.println(playerLocation.getX() + "  " + tileLocation.getX());
-        if(playerLocation.getX() + sight > tileLocation.getX() || playerLocation.getX() - sight < tileLocation.getX() ){
+        int sight = 2;
+        if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
             return true;
         }
-        if(playerLocation.getY() + sight > tileLocation.getY() || playerLocation.getY() - sight < tileLocation.getY() ){
+        if(Math.abs(tileLocation.getY() - playerLocation.getY()) > sight ){
             return true;
         }
+        if(Math.abs(tileLocation.getY() - playerLocation.getY()) >= sight && playerLocation.getX() % 2 == 0 && playerLocation.getX() != tileLocation.getX() && !((playerLocation.getY() - tileLocation.getY()) >= sight)) {
+                return true;
+        }
+        /*if(){
+            return true;
+        }*/
         return false;
     }
 
