@@ -5,22 +5,17 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
-import Model.GameObject.MobileObjects.Entities.AI.AIcontroller;
-import Model.GameObject.MobileObjects.Entities.AI.NPCcontroller;
+import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import State.StatesEnum;
-import Utilities.AIUtilities.Astar;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -37,7 +32,6 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -81,7 +75,8 @@ public class GameState extends State {
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
-        enemy = new NPC(new Location(0,0),new CharacterStats(),new Smasher(), new Inventory(),new NPCcontroller(map));
+        enemy = new NPC(new Location(0,0,0), new CharacterStats(),new Smasher(), new Inventory(),new NPCController(map));
+        System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
 
@@ -126,9 +121,9 @@ public class GameState extends State {
             map.registerObject(object); // registers mobile object with tile
         }
     }
-
+    @Override
     public void tick() {
-        System.out.println("Ticking GameState");
+        System.out.println("GameState Tick");
         enemy.tick();
     }
 
