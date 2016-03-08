@@ -111,6 +111,10 @@ public class Location {
                 '}';
     }
 
+    public String simpleToString() {
+        return "(" + x + "," + y + ")";
+    } // end simpleToString
+
     public void setDir(int dir) {
         this.dir = dir;
     }
