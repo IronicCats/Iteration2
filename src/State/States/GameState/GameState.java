@@ -123,7 +123,6 @@ public class GameState extends State {
     }
     @Override
     public void tick() {
-        System.out.println("GameState Tick");
         enemy.tick();
     }
 

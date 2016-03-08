@@ -26,8 +26,6 @@ import java.util.ArrayList;
         public void setAI(MobileObject AI) {this.AI = AI;}
         @Override
         public void tick() {
-            System.out.println(destination);
-            System.out.println(AI.getLocation());
             if (AI.canMove() && !AI.getLocation().equals(destination)) {
                 AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
                 AI.alert();
