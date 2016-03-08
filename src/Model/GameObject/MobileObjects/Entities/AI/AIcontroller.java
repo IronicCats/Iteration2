@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
     public abstract class AIcontroller implements Tickable {
 
-       /* private Astar astar;
+        private Astar astar;
 
         public AIcontroller(Astar astar){
             this.astar = astar;
@@ -29,5 +29,5 @@ import java.util.ArrayList;
         public void tick() {
 
         }
-        */
+
 }
