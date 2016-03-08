@@ -29,8 +29,10 @@ import java.util.ArrayList;
             if (AI.canMove() && !AI.getLocation().equals(destination)) {
                 Location path = Astar.Findpath(map, AI.getLocation(), destination).get(0);
                 if(Navigation.checkMove(path, map, AI)) {
+                    map.deRegister(AI.getLocation());
                     AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
                     AI.alert();
+                    map.registerObject(AI);
                     System.out.println("Moving");
                 }
             }

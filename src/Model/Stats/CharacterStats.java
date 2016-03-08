@@ -423,7 +423,7 @@ public class CharacterStats extends Stats implements Subject {
             equippedArmor += e.getArmorRating();
             System.out.println("Armor modification applied: " + e.getArmorRating());
         }
-        applyEffect(new Effect(e.getStats(), e.getType(), 0));
+        applyEffect(new Effect(e.getModification(), e.getType(), 0));
 
         update();
     } // end applyEquipmentModification
@@ -438,7 +438,7 @@ public class CharacterStats extends Stats implements Subject {
             equippedArmor -= e.getArmorRating();
             System.out.println("Armor modification removed: " + e.getArmorRating());
         }
-        removeEffect(new Effect(e.getStats(), e.getType(), 0));
+        removeEffect(new Effect(e.getModification(), e.getType(), 0));
 
         update();
     } // end removeEquipmentModification

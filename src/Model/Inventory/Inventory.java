@@ -1,6 +1,7 @@
 package Model.Inventory;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
@@ -59,6 +60,10 @@ public class Inventory implements Subject{
         alert();
         return item;
     } // end remove
+
+    public Takable getSlot(EquipmentSlotEnum slot) {
+        return equipment.getSlot(slot);
+    } // end getSlot
 
     @Override
     public void addObserver(Observer o) {

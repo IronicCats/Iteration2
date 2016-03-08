@@ -3,7 +3,6 @@ package Utilities.MapUtilities;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
 import Model.Location;
-import Model.Map.Tiles.*;
 
 /**
  * Created by Wimberley on 3/6/16.

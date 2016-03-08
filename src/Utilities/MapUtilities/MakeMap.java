@@ -46,6 +46,7 @@ public class MakeMap {
             System.out.println("Failed");
 
         }
+
         //Reads in map from map.txt
         String[] tokens = builder.toString().split("\\s+");
         Settings.MAPWIDTH= width = Utilities.parseInt(tokens[0]);

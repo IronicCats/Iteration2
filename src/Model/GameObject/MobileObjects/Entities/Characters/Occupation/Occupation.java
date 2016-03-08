@@ -51,6 +51,8 @@ public abstract class Occupation implements Subject, Observer {
         return initialStats;
     }
 
+    public CharacterStats getStats() { return playerStats; }
+
     public Map<SkillsEnum, Integer> getBasicSkills(){
         return basicSkills;
     }

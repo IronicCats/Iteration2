@@ -38,6 +38,7 @@ public class Armor extends Takable {
         effect.getModification().modifyStat(StatsEnum.ARMOR_RATING, defense);
     }
     public EquipmentTypeEnum getType() { return type; }
+    public EquipmentModification getEquipmentModification() { return (EquipmentModification) effect; }
 
     @Override
     public void addObserver(Observer o) {
