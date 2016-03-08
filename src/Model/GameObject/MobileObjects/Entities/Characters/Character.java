@@ -11,16 +11,14 @@ import Model.Stats.CharacterStats;
  */
 public abstract class Character extends Entity {
     protected Inventory inventory;
-    protected CharacterStats stats;
 
     public Character() {
         super();
-        this.stats = new CharacterStats();
         this.inventory = new Inventory();
     } // end default constructor
 
-    public Character(Location location, CharacterStats stats, Occupation occupation, Inventory inventory) {
-        super(location, stats, occupation);
+    public Character(Location location, Occupation occupation, Inventory inventory) {
+        super(location, occupation.getStats(), occupation);
         this.inventory = inventory;
     } // end constructor
 } // end class Character

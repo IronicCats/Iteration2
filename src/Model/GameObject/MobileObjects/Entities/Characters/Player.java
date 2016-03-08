@@ -1,5 +1,9 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Effects.EquipmentModification;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
@@ -20,8 +24,8 @@ public class Player extends Character implements Observer{
         super();
     } // end default constructor
 
-    public Player(Location location, CharacterStats stats, Occupation occupation, Inventory inventory){
-        super(location, stats, occupation, inventory);
+    public Player(Location location, Occupation occupation, Inventory inventory){
+        super(location, occupation, inventory);
         inventory.addObserver(this);
     } // end constructor
 
@@ -34,11 +38,26 @@ public class Player extends Character implements Observer{
 
     @Override
     public void update() {
-        stats.update();
+        ((CharacterStats)stats).update();
     } // end update
 
     @Override
     public void remove() {
 
     } // end remove
+
+    public void equip(Weapon weapon) {
+        inventory.equip(weapon);
+        ((CharacterStats)stats).applyEquipmentModification(weapon.getEquipmentModification());
+    } // end equip
+
+    public void equip(Armor armor) {
+        inventory.equip(armor);
+        ((CharacterStats)stats).applyEquipmentModification(armor.getEquipmentModification());
+    } // end equip
+
+    public void unequip(EquipmentSlotEnum slot) {
+        inventory.unequip(slot);
+        ((CharacterStats)stats).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+    } // end unequip
 } // end class Player

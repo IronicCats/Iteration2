@@ -6,9 +6,9 @@ import Utilities.AIUtilities.Astar;
 /**
  * Created by Aidan on 3/6/2016.
  */
-public class PetController extends AIcontroller {
+public class NPCController extends AIcontroller {
 
-    public PetController(Map map) {
+    public NPCController(Map map) {
         super(map);
     }
 

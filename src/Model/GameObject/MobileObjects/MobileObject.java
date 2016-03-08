@@ -18,7 +18,7 @@ public abstract class MobileObject extends GameObject{
     private float speed;
     private boolean canMove;
     private ViewLocation viewLocation;
-    // private Nav navigation
+    private Location destination;
 
     public MobileObject() {
         super();
@@ -33,7 +33,9 @@ public abstract class MobileObject extends GameObject{
     }
 
     public void move(int degrees){
-
+        location = Location.newLocation(degrees, location);
+        location.setDir(degrees);
+        alert();
     }
 
 
@@ -64,4 +66,5 @@ public abstract class MobileObject extends GameObject{
     public void toggleCanMove() {
         this.canMove = !this.canMove;
     }
+
 }
