@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
             this.map = map;
         }
 
-        private MobileObject AI;
+        private NPC AI;
         private Location destination = new Location(2,5,0);
 
         @Override
