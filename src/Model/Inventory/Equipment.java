@@ -1,10 +1,12 @@
 package Model.Inventory;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 /**
@@ -56,17 +58,17 @@ public class Equipment {
     public void equip(Weapon weapon) {
         switch (weapon.getType()) {
             case ONE_HANDED:
-                if(!mainhand.equals(null) && !offhand.equals(null)) { unequip(EquipmentSlotEnum.OFFHAND); }
-                if(mainhand.equals(null)) {
+                if(mainhand != null && offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
+                if(mainhand == null) {
                     mainhand = weapon;
-                } else if(offhand.equals(null)) {
+                } else if(offhand == null) {
                     offhand = weapon;
                 }
                 break;
             case TWO_HANDED:
-                if(!mainhand.equals(null)) { unequip(EquipmentSlotEnum.MAINHAND); }
-                if(!offhand.equals(null)) { unequip(EquipmentSlotEnum.OFFHAND); }
-                if(!shield.equals(null)) { unequip(EquipmentSlotEnum.SHIELD); }
+                if(mainhand != null) { unequip(EquipmentSlotEnum.MAINHAND); }
+                if(offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
+                if(shield != null) { unequip(EquipmentSlotEnum.SHIELD); }
                 mainhand = weapon;
                 break;
             default:
@@ -78,39 +80,39 @@ public class Equipment {
     public void equip(Armor armor) {
         switch (armor.getType()) {
             case HEAD:
-                if(!head.equals(null)) { unequip(EquipmentSlotEnum.HEAD); }
+                if(head != null) { unequip(EquipmentSlotEnum.HEAD); }
                 head = armor;
                 break;
             case CHEST:
-                if(!chest.equals(null)) { unequip(EquipmentSlotEnum.CHEST); }
+                if(chest != null) { unequip(EquipmentSlotEnum.CHEST); }
                 chest = armor;
                 break;
             case LEGS:
-                if(!legs.equals(null)) { unequip(EquipmentSlotEnum.LEGS); }
+                if(legs != null) { unequip(EquipmentSlotEnum.LEGS); }
                 legs = armor;
                 break;
             case GLOVES:
-                if(!gloves.equals(null)) { unequip(EquipmentSlotEnum.GLOVES); }
+                if(gloves != null) { unequip(EquipmentSlotEnum.GLOVES); }
                 gloves = armor;
                 break;
             case BOOTS:
-                if(!boots.equals(null)) { unequip(EquipmentSlotEnum.BOOTS); }
+                if(boots != null) { unequip(EquipmentSlotEnum.BOOTS); }
                 boots = armor;
                 break;
             case SHIELD:
                 /*
                 shield occupies offhand slot, so unequip 2h or offhand weapon
                  */
-                if(!shield.equals(null)) { unequip(EquipmentSlotEnum.SHIELD); }
+                if(shield != null) { unequip(EquipmentSlotEnum.SHIELD); }
                 if(mainhand.getType().equals(EquipmentTypeEnum.TWO_HANDED)) { unequip(EquipmentSlotEnum.MAINHAND); }
-                if(!offhand.equals(null)) { unequip(EquipmentSlotEnum.OFFHAND); }
+                if(offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
                 shield = armor;
                 break;
             case ACCESSORY:
-                if(!accessory1.equals(null) && !accessory2.equals(null)) { unequip(EquipmentSlotEnum.ACCESSORY2); }
-                if(accessory1.equals(null)) {
+                if(accessory1 != null && accessory2 != null) { unequip(EquipmentSlotEnum.ACCESSORY2); }
+                if(accessory1 == null) {
                     accessory1 = armor;
-                } else if(accessory2.equals(null)) {
+                } else if(accessory2 == null) {
                     accessory2 = armor;
                 }
                 break;
@@ -173,4 +175,31 @@ public class Equipment {
         // should never be reached
         return null;
     } // end unequip
+
+    public Takable getSlot(EquipmentSlotEnum slot) {
+        switch(slot) {
+            case MAINHAND:
+                return mainhand;
+            case OFFHAND:
+                return offhand;
+            case HEAD:
+                return head;
+            case CHEST:
+                return chest;
+            case LEGS:
+                return legs;
+            case GLOVES:
+                return gloves;
+            case BOOTS:
+                return boots;
+            case SHIELD:
+                return shield;
+            case ACCESSORY1:
+                return accessory1;
+            case ACCESSORY2:
+                return accessory1;
+            default:
+                return null;
+        }
+    } // end getSlot
 } // end class Equipment
