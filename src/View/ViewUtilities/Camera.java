@@ -44,7 +44,7 @@ public class Camera implements Observer {
         gameWidth = Settings.GAMEWIDTH;
         gameHeight = Settings.GAMEHEIGHT;
         xOffset = (int)player.getViewLocation().getX() - gameWidth/2 + Settings.PLAYERWIDTH/2;
-        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERWIDTH/2;
+        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERHEIGHT/2;
         keepCameraOnMap();
     }
 

@@ -3,6 +3,7 @@ package View.Views;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Tile;
 import Utilities.Observer;
@@ -22,6 +23,7 @@ public class TileView implements Observer, Renderable {
     private Tile tile;
     private BufferedImage sprite;
     Location location;
+    private ViewLocation viewLocation;
     private DecalView decalView;
 
     public TileView(Tile tile, BufferedImage sprite) {
@@ -29,6 +31,7 @@ public class TileView implements Observer, Renderable {
         tile.addObserver(this);
         this.sprite = sprite;
         this.location = tile.getLocation();
+        this.viewLocation = new ViewLocation(location.getX(), location.getY());
         if(tile.getHasAreaEffect()){
             if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DAMAGE))
             {
@@ -70,7 +73,12 @@ public class TileView implements Observer, Renderable {
 
         g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
 
-        if(Utilities.outOfSite(playerLocation, this.location)) {//tile.visited
+        /*if(Utilities.outOfSite(playerLocation, this.location)) {//tile.visited
+            //System.out.print("Here");
+            g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        }*/
+
+        if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, playerLocation.getX(), this.location.getX())) {//tile.visited
             //System.out.print("Here");
             g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }

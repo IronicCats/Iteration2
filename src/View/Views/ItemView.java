@@ -49,6 +49,7 @@ public class ItemView implements Observer, Renderable {
         g.drawImage(sprite, location.getX(), location.getY(), 50, 50, null);
     }
 
+
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,

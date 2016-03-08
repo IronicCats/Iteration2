@@ -1,5 +1,6 @@
 package Utilities;
 
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 
 import java.awt.*;
@@ -68,13 +69,28 @@ public class Utilities {
         return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2) + Settings.TILEHEIGHT/2;
     }
 
+    public static double calculateSight(int sight, int playX, int tileX){
+        int pixelX = (sight/2) * (Settings.TILEWIDTH / 2);
+        return (((sight * Settings.TILEWIDTH) - (playX == tileX ? 0:Settings.TILEWIDTH / 4) - pixelX) + Settings.TILEHEIGHT/2);
+    }
+
     public static boolean outOfSite(Location playerLocation, Location tileLocation) {
-        int sight = 3;
-        //System.out.println(playerLocation.getX() + "  " + tileLocation.getX());
-        if(playerLocation.getX() + sight > tileLocation.getX() || playerLocation.getX() - sight < tileLocation.getX() ){
+        int sight = 1;
+        if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
             return true;
         }
-        if(playerLocation.getY() + sight > tileLocation.getY() || playerLocation.getY() - sight < tileLocation.getY() ){
+        if(Math.abs(tileLocation.getY() - playerLocation.getY()) > sight ){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean outOfSite(ViewLocation playerLocation, ViewLocation tileLocation, int playX, int tileX) {
+        double sight = calculateSight(Settings.SIGHT, playX, tileX);
+        if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
+            return true;
+        }
+        if(Math.abs(tileLocation.getY() - playerLocation.getY()) > sight){
             return true;
         }
         return false;
