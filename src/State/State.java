@@ -17,8 +17,6 @@ public abstract class State implements Tickable, Renderable {
     private static State[] states = new State[(int) StatesEnum.ExitState.ordinal()];
     private Controller controller;
 
-    public abstract void tick();
-    public abstract void render(Graphics g);
 
     public abstract void switchState(StatesEnum state);
 
