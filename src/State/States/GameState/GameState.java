@@ -91,10 +91,10 @@ public class GameState extends State {
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
         map.placeAreaEffect(a);
 
-        InventoryState inventoryState = new InventoryState();//adding the inv state
+        InventoryState inventoryState = new InventoryState(this);//adding the inv state
         State.addState(StatesEnum.InventoryState, inventoryState);
 
-        EquipmentState equipementState = new EquipmentState();//adding the equipment state
+        EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
         State.addState(StatesEnum.EquipmentState, equipementState);
 
        //This is code to check Astar
@@ -148,6 +148,9 @@ public class GameState extends State {
 
     @Override
     public void switchState(StatesEnum state) {
-
+        if(getState() != getLiveState(state)) {
+            System.out.println(state);
+            setState(state);
+        }
     }
 }
