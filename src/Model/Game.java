@@ -31,11 +31,13 @@ public class Game implements Runnable {
 
             if( delta >= 1 ) {
                 //DO STUFF
-                //System.out.println(State.\getCurrentState());
-                if(State.getCurrentState() != null ) {
-                    State.getCurrentState().tick();
+                try {
+                    if (State.getCurrentState() != null) {
+                        State.getCurrentState().tick();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
-
                 //
                 ticks++;
                 delta--;
@@ -45,6 +47,7 @@ public class Game implements Runnable {
                 ticks = 0;
                 timer = 0;
             }
+
         }
 
         stop();
