@@ -76,7 +76,7 @@ public class GameState extends State {
         player = new Player();
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        enemy = new NPC(new Location(15,15,0), new Smasher(), new Inventory(),new NPCController(map));
+        enemy = new NPC(new Location(5,5,0), new Smasher(), new Inventory(),new NPCController(map));
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
