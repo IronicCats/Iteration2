@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
         private Astar astar;
         private MobileObject AI;
+        private Location Destination = new Location(2,5,0);
 
         public AIcontroller(Astar astar){
             this.astar = astar;
@@ -23,13 +24,8 @@ import java.util.ArrayList;
 
         @Override
         public void tick() {
-            //Ai will have a tile that it is currently on and a destination
-            //This is used until you can access tile from location without having to go thgrough map first
-            if(!AI.getLocation().equals(AI.getDestination())) {
-                ArrayList<Location> path = astar.Findpath(AI.getLocation(), AI.getDestination());
-                for (int i = 0; i < path.size(); i++) {
-                    AI.move(path.get(i).getDir());
-                }
+            if (AI.canMove() && !AI.getLocation().equals(Destination)) {
+                AI.move(astar.Findpath(AI.getLocation(), Destination).get(0).getDir());
             }
         }
 

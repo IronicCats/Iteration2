@@ -5,6 +5,7 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -55,6 +56,8 @@ public class GameState extends State {
 
 
     private Player player;
+    private NPC enemy;
+
     private MobileObjectView playerView;
 
     public GameState() {
@@ -68,12 +71,14 @@ public class GameState extends State {
 
         Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         player = new Player();
+
         Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
         map.placeItem(item);
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
+        enemy = new NPC(new Location(5,5),new CharacterStats(),new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
         
         //area effect
@@ -88,13 +93,13 @@ public class GameState extends State {
         State.addState(StatesEnum.EquipmentState, equipementState);
 
        //This is code to check Astar
-        Astar astar = new Astar(map);
+        /*Astar astar = new Astar(map);
         ArrayList<Location> path = astar.Findpath(new Location(0,0),new Location(5,5));
         for(int i = 0; i < path.size(); i++){
             System.out.println("xLoc " + path.get(i).getX());
             System.out.println("yLoc " + path.get(i).getY());
             System.out.println("dir " + path.get(i).getDir());
-        }
+        }*/
     }
 
     public void switchState() {

@@ -68,7 +68,4 @@ public abstract class MobileObject extends GameObject{
         this.canMove = !this.canMove;
     }
 
-    public Location getDestination() {
-        return destination;
-    }
 }
