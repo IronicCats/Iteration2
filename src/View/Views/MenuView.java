@@ -5,8 +5,10 @@ import Utilities.Observer;
 import Utilities.Settings;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
+import View.ViewUtilities.Graphics.Assets;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Joshua Kegley on 3/1/2016.
@@ -29,6 +31,8 @@ public class MenuView implements Renderable {
         //g.drawImage(Assets.background, 0, 0, 800, 600, null);
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(0, 0, width, height);
+        g.drawImage(Assets.LEFT,0,height*1/5,width*7/24,height*4/5,null);
+        g.drawImage(Assets.RIGHT,width*17/24,height*1/5,width*7/24,height*4/5,null);
         for(int i = 0; i < menuItems.length; ++i) {
             g.setFont(new Font("Arial", Font.PLAIN, 54));
             FontMetrics fm = g.getFontMetrics();

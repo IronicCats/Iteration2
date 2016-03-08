@@ -40,7 +40,8 @@ public class Assets {
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
     public static BufferedImage STAR;
-
+    public static BufferedImage LEFT;
+    public static BufferedImage RIGHT;
 
     public static void init() {
         //Tiles
@@ -120,5 +121,10 @@ public class Assets {
 
         SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
         STAR = starSheet.crop(0,0,32,32);
+
+        //menu
+        LEFT = new ImageLoader().loadImage("/left.png");
+        RIGHT = new ImageLoader().loadImage("/right.png");
+
     }
 }
