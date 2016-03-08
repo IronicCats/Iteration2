@@ -19,81 +19,82 @@ public class Astar {
         this.map = map;
     }
 
-    public ArrayList<Tile> Findpath(Tile start, Tile end) {
+    public ArrayList<Location> Findpath(Location start, Location end) {
 
 
-        Queue<Tile> Queue = new LinkedList<Tile>();
+        Queue<Location> Queue = new LinkedList<>();
         Tile parent[][] = new Tile[Settings.TILEWIDTH][Settings.TILEHEIGHT];
 
         Queue.add(start);
-        parent[start.getLocation().getX()][start.getLocation().getY()] = null;
+        parent[start.getX()][start.getY()] = null;
 
         while (!Queue.isEmpty()) {
-            Tile current = Queue.remove();
-            if(current.IsWalkable) {
-                Tile neighbors[] = neighbors(current, map);
+            Location current = Queue.remove();
+            Tile currentTile = map.getTile(current.getX(),current.getY());
+            if(currentTile.IsWalkable) {
+                Tile neighbors[] = neighbors(currentTile, map);
                 for (int i = 0; i < 6; i++) {
                     Tile next = neighbors[i];
                     if (next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null) {
-                        Queue.add(next);
-                        parent[next.getLocation().getX()][next.getLocation().getY()] = current;
+                        Queue.add(next.getLocation());
+                        parent[next.getLocation().getX()][next.getLocation().getY()] = currentTile;
                     }
                 }
             }
         }
 
-        ArrayList<Tile> path = new ArrayList<Tile>();
+        ArrayList<Location> path = new ArrayList<Location>();
 
-        Tile current = end;
-        path.add(current);
-        while(current != start){
+        Tile current = map.getTile(end.getX(),end.getY());
+        path.add(current.getLocation());
+        while(current != map.getTile(start.getX(),start.getY())){
             current = parent[current.getLocation().getX()][current.getLocation().getY()];
-            path.add(current);
+            path.add(current.getLocation());
         }
         Collections.reverse(path);
         for(int i = 0; i < path.size() - 1; i++){
-            int  startx = path.get(i).getLocation().getX();
-            int  starty = path.get(i).getLocation().getY();
-            int  endx = path.get(i + 1).getLocation().getX();
-            int  endy = path.get(i + 1).getLocation().getY();
+            int  startx = path.get(i).getX();
+            int  starty = path.get(i).getY();
+            int  endx = path.get(i + 1).getX();
+            int  endy = path.get(i + 1).getY();
             if(startx % 2 == 0){
                 if(endx - startx == 1 && endy - starty == -1){
-                    path.get(i).getLocation().setDir(45);
+                    path.get(i).setDir(45);
                 }
                 else if(endx - startx == 0 && endy - starty == -1){
-                    path.get(i).getLocation().setDir(90);
+                    path.get(i).setDir(90);
                 }
                 else if(endx - startx == -1 && endy - starty == -1){
-                    path.get(i).getLocation().setDir(135);
+                    path.get(i).setDir(135);
                 }
                 else if(endx - startx == -1 && endy - starty == 0){
-                    path.get(i).getLocation().setDir(225);
+                    path.get(i).setDir(225);
                 }
                 else if(endx - startx == 0 && endy - starty == 1){
-                    path.get(i).getLocation().setDir(270);
+                    path.get(i).setDir(270);
                 }
                 else if(endx - startx == 1 && endy - starty == 0){
-                    path.get(i).getLocation().setDir(315);
+                    path.get(i).setDir(315);
                 }
             }
             else{
                 if(endx - startx == 1 && endy - starty == 0){
-                    path.get(i).getLocation().setDir(45);
+                    path.get(i).setDir(45);
                 }
                 else if(endx - startx == 0 && endy - starty == -1){
-                    path.get(i).getLocation().setDir(90);
+                    path.get(i).setDir(90);
                 }
                 else if(endx - startx == -1 && endy - starty == 0){
-                    path.get(i).getLocation().setDir(135);
+                    path.get(i).setDir(135);
                 }
                 else if(endx - startx == -1 && endy - starty == 1){
-                    path.get(i).getLocation().setDir(225);
+                    path.get(i).setDir(225);
                 }
                 else if(endx - startx == 0 && endy - starty == 1){
-                    path.get(i).getLocation().setDir(270);
+                    path.get(i).setDir(270);
                 }
                 else if(endx - startx == 1 && endy - starty == 1){
-                    path.get(i).getLocation().setDir(315);
+                    path.get(i).setDir(315);
                 }
             }
         }

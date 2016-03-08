@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
         private Astar astar;
         private MobileObject AI;
-        //Need way to do this without importing map
-        private Map map;
 
         public AIcontroller(Astar astar){
             this.astar = astar;
@@ -27,14 +25,10 @@ import java.util.ArrayList;
         public void tick() {
             //Ai will have a tile that it is currently on and a destination
             //This is used until you can access tile from location without having to go thgrough map first
-            Location Destination = AI.getDestination();
-            Tile DestinationTile = map.getTile(Destination.getX(),Destination.getY());
-            Location CurrentPosition = AI.getLocation();
-            Tile CurrentTile = map.getTile(CurrentPosition.getX(),CurrentPosition.getY());
-            if(!CurrentPosition.equals(Destination)) {
-                ArrayList<Tile> path = astar.Findpath(CurrentTile, DestinationTile);
+            if(!AI.getLocation().equals(AI.getDestination())) {
+                ArrayList<Location> path = astar.Findpath(AI.getLocation(), AI.getDestination());
                 for (int i = 0; i < path.size(); i++) {
-                    AI.move(path.get(i).getLocation().getDir());
+                    AI.move(path.get(i).getDir());
                 }
             }
         }
