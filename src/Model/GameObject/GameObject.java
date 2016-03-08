@@ -23,6 +23,7 @@ public abstract class GameObject implements Subject {
     public Location getLocation() {
         return location;
     }
+
     public void setLocation(Location l) {
         location = l;
     }

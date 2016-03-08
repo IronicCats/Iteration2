@@ -81,7 +81,7 @@ public class GameState extends State {
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
-        enemy = new NPC(new Location(0,0),new CharacterStats(),new Smasher(), new Inventory(),new NPCcontroller(map));
+        enemy = new NPC(new Location(3,0),new CharacterStats(),new Smasher(), new Inventory(),new NPCcontroller(map));
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
 

@@ -19,7 +19,6 @@ public abstract class MobileObject extends GameObject{
     private boolean canMove;
     private ViewLocation viewLocation;
     // private Nav navigation
-    private Location destination;
 
     public MobileObject() {
         super();

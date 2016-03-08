@@ -25,7 +25,8 @@ import java.util.ArrayList;
 
         @Override
         public void tick() {
-            System.out.println(destination + " " + AI.getLocation());
+            System.out.println(destination);
+            System.out.println(AI.getLocation());
             if (AI.canMove() && !AI.getLocation().equals(destination)) {
                 AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
                 AI.alert();
