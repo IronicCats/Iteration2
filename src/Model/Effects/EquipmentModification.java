@@ -15,8 +15,6 @@ import Model.Stats.StatsEnum;
  * By design, no piece of equipment should have a duration other than 0.
  */
 public class EquipmentModification extends Effect {
-    private StatStructure stats;
-    private ModificationEnum type;
     private boolean weapon, armor;
 
     public EquipmentModification() {
@@ -27,10 +25,10 @@ public class EquipmentModification extends Effect {
         super(stats, ModificationEnum.REAL, 0);
         weapon = false;
         armor = false;
-        if(this.stats.getKeySet().contains(StatsEnum.OFFENSIVE_RATING)) {
+        if(stats.getKeySet().contains(StatsEnum.OFFENSIVE_RATING)) {
             weapon = true;
         }
-        if(this.stats.getKeySet().contains(StatsEnum.ARMOR_RATING)) {
+        if(stats.getKeySet().contains(StatsEnum.ARMOR_RATING)) {
             armor = true;
         }
     } // end constructor
@@ -39,18 +37,16 @@ public class EquipmentModification extends Effect {
         super(stats, m, 0);
         weapon = false;
         armor = false;
-        if(this.stats.getKeySet().contains(StatsEnum.OFFENSIVE_RATING)) {
+        if(stats.getKeySet().contains(StatsEnum.OFFENSIVE_RATING)) {
             weapon = true;
         }
-        if(this.stats.getKeySet().contains(StatsEnum.ARMOR_RATING)) {
+        if(stats.getKeySet().contains(StatsEnum.ARMOR_RATING)) {
             armor = true;
         }
     } // end constructor
 
-    public StatStructure getStats() { return stats; }
-    public ModificationEnum getType() { return type; }
-    public int getWeaponRating() { return stats.getStat(StatsEnum.OFFENSIVE_RATING); }
-    public int getArmorRating() { return stats.getStat(StatsEnum.ARMOR_RATING); }
+    public int getWeaponRating() { return getModification().getStat(StatsEnum.OFFENSIVE_RATING); }
+    public int getArmorRating() { return getModification().getStat(StatsEnum.ARMOR_RATING); }
     public boolean hasWeaponValue() { return weapon; }
     public boolean hasArmorValue() { return armor; }
 } // end class
