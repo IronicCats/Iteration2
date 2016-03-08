@@ -94,6 +94,10 @@ public class Location {
         this.y = y;
     }
 
+    public boolean equals(Location o) {
+        return o.getX() == x && o.getY() == y;
+    }
+
     public int getDir() {
         return dir;
     }
