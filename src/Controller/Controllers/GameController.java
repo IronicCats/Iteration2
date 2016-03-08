@@ -20,7 +20,7 @@ public class GameController extends Controller {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!canGetInput()) { return; }
-        System.out.println("Game: " + e.getKeyCode());
+        //System.out.println("Game: " + e.getKeyCode());
         if(e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
             ((GameState) state).movePlayer(90);
         } else if(e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 33) {

@@ -1,6 +1,7 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
@@ -73,8 +74,9 @@ public class GameState extends State {
 
         //creating a new player
         player = new Player();
-        player = new Player(new Location(0, 2), new CharacterStats(), new Smasher(), new Inventory());
-        enemy = new NPC(new Location(15,15,0), new CharacterStats(),new Smasher(), new Inventory(),new NPCController(map));
+        player = new Player(new Location(0, 2), new Smasher(), new Inventory());
+        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        enemy = new NPC(new Location(15,15,0), new Smasher(), new Inventory(),new NPCController(map));
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);

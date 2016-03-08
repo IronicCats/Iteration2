@@ -13,8 +13,8 @@ import Model.Tickable;
 
 public class NPC extends Character implements Tickable {
     NPCController controller;
-    public NPC(Location location, CharacterStats stats, Occupation occupation, Inventory inventory, NPCController controller) {
-        super(location, stats, occupation, inventory);
+    public NPC(Location location, Occupation occupation, Inventory inventory, NPCController controller) {
+        super(location, occupation, inventory);
         controller.setAI(this);
         this.controller = controller;
     }
