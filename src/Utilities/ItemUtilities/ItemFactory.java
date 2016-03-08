@@ -20,6 +20,9 @@ import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by broskj on 3/5/16.
  *
@@ -27,6 +30,23 @@ import View.Views.ItemView;
  * Each item ID corresponds to its index in the items enumeration.
  */
 public class ItemFactory {
+
+    public static HashMap<Item, ItemView> initMainMap(){
+
+        HashMap<Item, ItemView> initItems = new HashMap<>();
+
+        // health potion
+        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
+        initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
+
+        // closed treasure chest
+        Item treasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
+        initItems.put(treasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, treasureChest));
+
+        return initItems;
+    }
+
+
     public static Item makeItem(ItemsEnum itemsEnum, Location location) {
         int id = itemsEnum.ordinal();
         switch(itemsEnum) {
