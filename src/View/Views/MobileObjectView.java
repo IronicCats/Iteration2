@@ -1,6 +1,7 @@
 package View.Views;
 
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Utilities.*;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class MobileObjectView implements Renderable, Observer {
 
-    private Entity entity;
+    private MobileObject entity;
     private ArrayList<BufferedImage> sprites;
     private Location location;
 
