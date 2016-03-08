@@ -74,8 +74,8 @@ public class GameState extends State {
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
-        player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
-        enemy = new NPC(new Location(0,0,0), new CharacterStats(),new Smasher(), new Inventory(),new NPCController(map));
+        player = new Player(new Location(0, 2), new CharacterStats(), new Smasher(), new Inventory());
+        enemy = new NPC(new Location(15,15,0), new CharacterStats(),new Smasher(), new Inventory(),new NPCController(map));
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);

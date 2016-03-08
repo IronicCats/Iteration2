@@ -6,6 +6,7 @@ import Model.Map.Map;
 import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.Astar;
+import Utilities.MapUtilities.Navigation;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
     public abstract class AIcontroller implements Tickable {
 
         Map map;
-
         public AIcontroller(Map map){
             this.map = map;
         }
@@ -26,9 +26,12 @@ import java.util.ArrayList;
         @Override
         public void tick() {
             if (AI.canMove() && !AI.getLocation().equals(destination)) {
-                AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
-                AI.alert();
-                System.out.println("Moving");
+                Location path = Astar.Findpath(map, AI.getLocation(), destination).get(0);
+                if(Navigation.checkMove(path, map, AI)) {
+                    AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
+                    AI.alert();
+                    System.out.println("Moving");
+                }
             }
         }
 
