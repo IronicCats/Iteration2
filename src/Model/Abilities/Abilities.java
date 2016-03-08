@@ -9,7 +9,7 @@ import Model.Stats.StatStructure;
 /**
  * Created by mazumderm on 3/5/2016.
  */
-public class Abilities {
+public abstract class Abilities {
     Effect[] effects;
     Requirement requirement;
     StatStructure cost;
@@ -36,7 +36,5 @@ public class Abilities {
     }
 
     //operations
-    public void execute(Tile t){
-
-    }
+    public abstract void execute(Tile t);
 }

@@ -10,6 +10,9 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
+
+    public static BufferedImage FOGTILE;
+    public static BufferedImage HALFFOGTILE;
     public static BufferedImage GRASSHEXTILE;
     public static BufferedImage WATERHEXTILE;
     public static BufferedImage MOUNTAINHEXTILE;
@@ -28,14 +31,26 @@ public class Assets {
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
     public static BufferedImage CHESTPLATE;
+    public static BufferedImage PANTS;
     public static BufferedImage PLATELEGS;
     public static BufferedImage GAUNTLETS;
     public static BufferedImage BOOTS;
     public static BufferedImage SHIELD;
 
+    public static BufferedImage SKULL;
+    public static BufferedImage REDCROSS;
+    public static BufferedImage STAR;
+
 
     public static void init() {
         //Tiles
+        //Fog Tiles
+        SpriteSheet FogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/fullfog.png"));
+        FOGTILE = FogTileSheet.crop(0,0,32,28);
+        SpriteSheet HalfFogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/halffog.png"));
+        HALFFOGTILE = HalfFogTileSheet.crop(0,0,32,28);
+
+        //Basic TIles
         SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
         GRASSHEXTILE = HexTileGrassSheet.crop(0,0,32,28);
 
@@ -47,10 +62,13 @@ public class Assets {
         // End of Tiles
 
         //Items
-        SpriteSheet potionSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PotionSprite.png"));
-        HEALTH_POTION = potionSheet.crop(0,0,32,32);
+        SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HealthPotion.png"));
+        HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
 
-        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Closed_Chest.png"));
+        SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
+        MANA_POTION = potionManaSheet.crop(0,0,32,32);
+
+        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
         CLOSED_TREASURE_CHEST = chestSheet.crop(0,0,32,28);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
@@ -65,6 +83,21 @@ public class Assets {
         SpriteSheet helmetSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Helmet.png"));
         HELMET = helmetSheet.crop(0,0,32,32);
 
+        SpriteSheet chestPlateSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ChestPlate.png"));
+        CHESTPLATE = chestPlateSheet.crop(0,0,32,32);
+
+        SpriteSheet pantsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Pants.png"));
+        PANTS = pantsSheet.crop(0,0,32,32);
+
+        SpriteSheet bootsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Boots.png"));
+        BOOTS = bootsSheet.crop(0,0,32,32);
+
+        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gauntlets.png"));
+        GAUNTLETS = gauntletsSheet.crop(0,0,32,32);
+
+        SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
+        SHIELD = shieldSheet.crop(0,0,32,32);
+
         //End of Tiles
 
         //Entities
@@ -77,5 +110,15 @@ public class Assets {
         PLAYER.add(player2.crop(0, 0, 32, 32));
         PLAYER.add(player3.crop(0, 0, 32, 32));
         PLAYER.add(player4.crop(0, 0, 32, 32));
+
+        //Decals
+        SpriteSheet skullSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Skull.png"));
+        SKULL = skullSheet.crop(0,0,32,32);
+
+        SpriteSheet redCrossSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/RedCross.png"));
+        REDCROSS = redCrossSheet.crop(0,0,32,32);
+
+        SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
+        STAR = starSheet.crop(0,0,32,32);
     }
 }

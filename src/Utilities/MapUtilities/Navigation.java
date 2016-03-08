@@ -3,7 +3,6 @@ package Utilities.MapUtilities;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
 import Model.Location;
-import Model.Map.Tiles.*;
 
 /**
  * Created by Wimberley on 3/6/16.
@@ -24,10 +23,7 @@ public class Navigation {
         else if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         }
-        else if(map.getTile(location.getX(), location.getY()) instanceof Mountain) {
-            return false;
-        }
-        else if(map.getTile(location.getX(), location.getY()) instanceof Water) {
+        else if(!map.getTile(location.getX(), location.getY()).IsWalkable) {
             return false;
         }
         else {

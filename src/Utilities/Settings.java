@@ -7,13 +7,15 @@ public class Settings {
     public static int GAMEWIDTH = 800;
     public static int GAMEHEIGHT = 600;
     //TODO: WTF? NO?
-    public static int MAPWIDTH = 10;
-    public static int MAPHEIGHT = 10;
+    public static int MAPWIDTH;
+    public static int MAPHEIGHT;
     //MAP WIDTH AND HEIGHT CAN CHANGE, SHOULD BE STATIC
     public static int TILEWIDTH = 64*2;
     public static int TILEHEIGHT = 56*2;
     public static int PLAYERWIDTH = TILEWIDTH/2;
     public static int PLAYERHEIGHT = TILEHEIGHT/2;
+
+    public static int SIGHT = 2;
 
     public static int UP_RIGHT = 105;
     public static int UP = 104;

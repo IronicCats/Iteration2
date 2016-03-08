@@ -1,5 +1,6 @@
 package Utilities;
 
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 
 import java.awt.*;
@@ -66,6 +67,22 @@ public class Utilities {
     }
     public static int calculateTileCenterYLocation(int x, int y) {
         return y * Settings.TILEHEIGHT + (x % 2 == 0 ? 0:Settings.TILEHEIGHT / 2) + Settings.TILEHEIGHT/2;
+    }
+
+    public static double calculateSight(int sight, float playX, float tileX){
+        int pixelX = (sight/2) * (Settings.TILEWIDTH / 2);
+        return (((sight * Settings.TILEWIDTH) - (playX == tileX ? 0:Settings.TILEWIDTH / 4) - pixelX) + Settings.TILEHEIGHT/2);
+    }
+
+    public static boolean outOfSite(ViewLocation playerLocation, ViewLocation tileLocation) {
+        double sight = calculateSight(Settings.SIGHT, tileLocation.getX(), playerLocation.getX());
+        if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
+            return true;
+        }
+        if(Math.abs(tileLocation.getY() - playerLocation.getY()) > sight){
+            return true;
+        }
+        return false;
     }
 
 }

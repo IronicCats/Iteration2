@@ -32,7 +32,6 @@ public class Camera implements Observer {
         if (xOffset < 0) {
             xOffset = 0;
         } else if (xOffset >  ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250){
-            System.out.println("MAX WIDTH");
             xOffset = ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250;
         }
         if (yOffset < 0) {
@@ -48,7 +47,7 @@ public class Camera implements Observer {
         gameWidth = Settings.GAMEWIDTH;
         gameHeight = Settings.GAMEHEIGHT;
         xOffset = (int)player.getViewLocation().getX() - gameWidth/2 + Settings.PLAYERWIDTH/2;
-        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERWIDTH/2;
+        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERHEIGHT/2;
         keepCameraOnMap();
     }
 
