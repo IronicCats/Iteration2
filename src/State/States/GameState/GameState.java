@@ -87,6 +87,15 @@ public class GameState extends State {
         EquipmentState equipementState = new EquipmentState();//adding the equipment state
         State.addState(StatesEnum.EquipmentState, equipementState);
 
+       /* This is code to check Astar
+        Astar astar = new Astar(map);
+        ArrayList<Tile> path = new ArrayList<Tile>();
+        path = astar.Findpath(map.getTile(0,0),map.getTile(5,5));
+        for(int i = 0; i < path.size(); i++){
+            System.out.println("xLoc " + path.get(i).getLocation().getX());
+            System.out.println("yLoc " + path.get(i).getLocation().getY());
+            System.out.println("dir " + path.get(i).getLocation().getDir());
+        }*/
     }
 
     public void switchState() {

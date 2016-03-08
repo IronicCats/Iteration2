@@ -51,6 +51,52 @@ public class Astar {
             path.add(current);
         }
         Collections.reverse(path);
+        for(int i = 0; i < path.size() - 1; i++){
+            int  startx = path.get(i).getLocation().getX();
+            int  starty = path.get(i).getLocation().getY();
+            int  endx = path.get(i + 1).getLocation().getX();
+            int  endy = path.get(i + 1).getLocation().getY();
+            if(startx % 2 == 0){
+                if(endx - startx == 1 && endy - starty == -1){
+                    path.get(i).getLocation().setDir(45);
+                }
+                else if(endx - startx == 0 && endy - starty == -1){
+                    path.get(i).getLocation().setDir(90);
+                }
+                else if(endx - startx == -1 && endy - starty == -1){
+                    path.get(i).getLocation().setDir(135);
+                }
+                else if(endx - startx == -1 && endy - starty == 0){
+                    path.get(i).getLocation().setDir(225);
+                }
+                else if(endx - startx == 0 && endy - starty == 1){
+                    path.get(i).getLocation().setDir(270);
+                }
+                else if(endx - startx == 1 && endy - starty == 0){
+                    path.get(i).getLocation().setDir(315);
+                }
+            }
+            else{
+                if(endx - startx == 1 && endy - starty == 0){
+                    path.get(i).getLocation().setDir(45);
+                }
+                else if(endx - startx == 0 && endy - starty == -1){
+                    path.get(i).getLocation().setDir(90);
+                }
+                else if(endx - startx == -1 && endy - starty == 0){
+                    path.get(i).getLocation().setDir(135);
+                }
+                else if(endx - startx == -1 && endy - starty == 1){
+                    path.get(i).getLocation().setDir(225);
+                }
+                else if(endx - startx == 0 && endy - starty == 1){
+                    path.get(i).getLocation().setDir(270);
+                }
+                else if(endx - startx == 1 && endy - starty == 1){
+                    path.get(i).getLocation().setDir(315);
+                }
+            }
+        }
         return path;
     }
 

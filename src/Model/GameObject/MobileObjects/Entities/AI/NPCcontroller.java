@@ -5,4 +5,8 @@ package Model.GameObject.MobileObjects.Entities.AI;
  */
 public class NPCcontroller extends AIcontroller {
 
+    @Override
+    public void tick() {
+
+    }
 }
