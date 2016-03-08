@@ -21,7 +21,7 @@ import java.util.ArrayList;
             this.map = map;
         }
 
-        private NPC AI;
+        private MobileObject AI;
         private Location destination = new Location(2,5,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
         @Override
