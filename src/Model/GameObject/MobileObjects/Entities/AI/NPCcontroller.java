@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.Map.Map;
 import Utilities.AIUtilities.Astar;
 
 /**
@@ -7,12 +8,8 @@ import Utilities.AIUtilities.Astar;
  */
 public class NPCcontroller extends AIcontroller {
 
-    public NPCcontroller(Astar astar) {
-        super(astar);
+    public NPCcontroller(Map map) {
+        super(map);
     }
 
-    @Override
-    public void tick() {
-
-    }
 }

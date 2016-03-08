@@ -5,6 +5,8 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
+import Model.GameObject.MobileObjects.Entities.AI.AIcontroller;
+import Model.GameObject.MobileObjects.Entities.AI.NPCcontroller;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
@@ -59,6 +61,7 @@ public class GameState extends State {
     private NPC enemy;
 
     private MobileObjectView playerView;
+    private MobileObjectView enemyView;
 
     public GameState() {
         setController(new GameController(this));
@@ -78,8 +81,10 @@ public class GameState extends State {
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
-        enemy = new NPC(new Location(5,5),new CharacterStats(),new Smasher(), new Inventory());
+        enemy = new NPC(new Location(0,0),new CharacterStats(),new Smasher(), new Inventory(),new NPCcontroller(map));
         playerView = new MobileObjectView(player, Assets.PLAYER);
+        enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+
         
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
@@ -123,7 +128,8 @@ public class GameState extends State {
     }
 
     public void tick() {
-
+        System.out.println("Ticking GameState");
+        enemy.tick();
     }
 
     public void render(Graphics g) {
@@ -137,6 +143,7 @@ public class GameState extends State {
         }
         camera.centerOnPlayer(player);
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
+        enemyView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
     @Override

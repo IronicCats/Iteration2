@@ -13,13 +13,7 @@ import java.util.*;
 
 public class Astar {
 
-    Map map;
-
-    public Astar(Map map){
-        this.map = map;
-    }
-
-    public ArrayList<Location> Findpath(Location start, Location end) {
+    public static ArrayList<Location> Findpath(Map map, Location start, Location end) {
 
 
         Queue<Location> Queue = new LinkedList<>();
@@ -101,7 +95,7 @@ public class Astar {
         return path;
     }
 
-    public Tile[] neighbors(Tile start, Map map) {
+    public static Tile[] neighbors(Tile start, Map map) {
         int x = start.getLocation().getX();
         int y = start.getLocation().getY();
         Tile neighbors[] = new Tile[6];

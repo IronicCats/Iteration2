@@ -14,18 +14,22 @@ import java.util.ArrayList;
  */
     public abstract class AIcontroller implements Tickable {
 
-        private Astar astar;
-        private MobileObject AI;
-        private Location Destination = new Location(2,5,0);
+        Map map;
 
-        public AIcontroller(Astar astar){
-            this.astar = astar;
+        public AIcontroller(Map map){
+            this.map = map;
         }
+
+        private MobileObject AI;
+        private Location destination = new Location(2,5,0);
 
         @Override
         public void tick() {
-            if (AI.canMove() && !AI.getLocation().equals(Destination)) {
-                AI.move(astar.Findpath(AI.getLocation(), Destination).get(0).getDir());
+            System.out.println(destination + " " + AI.getLocation());
+            if (AI.canMove() && !AI.getLocation().equals(destination)) {
+                AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
+                AI.alert();
+                System.out.println("Moving");
             }
         }
 
