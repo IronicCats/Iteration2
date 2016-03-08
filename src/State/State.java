@@ -12,14 +12,15 @@ import java.awt.*;
 public abstract class State implements Tickable, Renderable {
     public static Canvas canvas;
     public static State currentState = null;
-
     public static State previousState = null;
     private static State[] states = new State[(int) StatesEnum.ExitState.ordinal()];
+
     private Controller controller;
 
 
-    public abstract void switchState(StatesEnum state);
-
+    public void switchState(StatesEnum state) {
+        currentState = states[state.ordinal()];
+    }
     public static void addState( StatesEnum s, State state ) { states[s.ordinal()] = state; }
     public static void setState( StatesEnum s ) {
         if(currentState != null) {
@@ -30,7 +31,7 @@ public abstract class State implements Tickable, Renderable {
     }
     public static State getState() { return currentState; }
     public State getLiveState(StatesEnum state) { return states[state.ordinal()];}
-    public State getPreviousState(){ return previousState; }
+
 
     public Controller getController() { return controller; }
     public void setController( Controller controller ) { this.controller = controller; }

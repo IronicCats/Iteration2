@@ -31,7 +31,10 @@ public class Game implements Runnable {
 
             if( delta >= 1 ) {
                 //DO STUFF
-               State.currentState.tick();
+                //System.out.println(State.getState());
+                if(State.getState() != null ) {
+                    State.getState().tick();
+                }
 
                 //
                 ticks++;
