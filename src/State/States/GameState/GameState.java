@@ -14,8 +14,10 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import State.StatesEnum;
+import Utilities.AIUtilities.Astar;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -32,6 +34,7 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -72,7 +75,7 @@ public class GameState extends State {
         //creating a new player
         player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
-
+        
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
