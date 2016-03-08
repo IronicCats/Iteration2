@@ -24,8 +24,8 @@ public class Player extends Character implements Observer{
         super();
     } // end default constructor
 
-    public Player(Location location, CharacterStats stats, Occupation occupation, Inventory inventory){
-        super(location, stats, occupation, inventory);
+    public Player(Location location, Occupation occupation, Inventory inventory){
+        super(location, occupation, inventory);
         inventory.addObserver(this);
     } // end constructor
 
@@ -38,7 +38,7 @@ public class Player extends Character implements Observer{
 
     @Override
     public void update() {
-        stats.update();
+        ((CharacterStats)stats).update();
     } // end update
 
     @Override
@@ -48,16 +48,16 @@ public class Player extends Character implements Observer{
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
-        stats.applyEquipmentModification(weapon.getEquipmentModification());
+        ((CharacterStats)stats).applyEquipmentModification(weapon.getEquipmentModification());
     } // end equip
 
     public void equip(Armor armor) {
         inventory.equip(armor);
-        stats.applyEquipmentModification(armor.getEquipmentModification());
+        ((CharacterStats)stats).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
-        stats.removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+        ((CharacterStats)stats).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 } // end class Player

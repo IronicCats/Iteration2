@@ -10,8 +10,8 @@ import Model.Stats.CharacterStats;
  */
 
 public class NPC extends Character {
-    public NPC(Location location, CharacterStats stats, Occupation occupation, Inventory inventory) {
-        super(location, stats, occupation, inventory);
+    public NPC(Location location, Occupation occupation, Inventory inventory) {
+        super(location, occupation, inventory);
     }
     // inventory = NPCinventory
 }
