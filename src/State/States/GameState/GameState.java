@@ -32,6 +32,7 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -66,14 +67,12 @@ public class GameState extends State {
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
         mapView = MakeMap.makeMapView(map);
 
-        Item item = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
-        player = new Player();
+        // initializing items
+        mapItems = ItemFactory.initMainMap();
+        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
-        Item chest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
-        map.placeItem(item);
-        mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
-        mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
+        player = new Player();
         player = new Player(new Location(0, 2), new CharacterStats(), new Smasher(), new Inventory());
         enemy = new NPC(new Location(15,15,0), new CharacterStats(),new Smasher(), new Inventory(),new NPCController(map));
         System.out.println(enemy);
@@ -114,13 +113,6 @@ public class GameState extends State {
         }
     }
 
-    public void moveObject(int degrees, MobileObject object){
-        if(Navigation.checkMove(Location.newLocation(degrees, object.getLocation()), map, object) & object.canMove()){ // returns if new location is walkable
-            map.deRegister(player.getLocation()); // removes mobile object from tile
-            object.move(degrees);
-            map.registerObject(object); // registers mobile object with tile
-        }
-    }
     @Override
     public void tick() {
         enemy.tick();
