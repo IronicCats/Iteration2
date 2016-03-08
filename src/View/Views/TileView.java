@@ -73,11 +73,11 @@ public class TileView implements Observer, Renderable {
         if(Utilities.outOfSite(playerLocation, this.location)) {//tile.visited
             //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }
-        /**
-        if(tile.getHasAreaEffect()){
+
+        if(true){
             decalView.render(g, xOffset, yOffset);
         }
-         **/
+
     }
 
 }
