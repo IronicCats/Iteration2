@@ -46,7 +46,8 @@ public abstract class Tile implements Subject {
     public void setAreaEffectTile(AreaEffect a){
         this.areaEffectEnum = a.getAreaEffect();
         this.a = a;
-        hasAreaEffect = true;
+        this.hasAreaEffect = true;
+       // System.out.println(hasAreaEffect);
     }
 
     public AreaEffectEnum getAreaEffectEnum(){
@@ -88,7 +89,9 @@ public abstract class Tile implements Subject {
         return location;
     }
 
-    public boolean getHasAreaEffect(){return this.hasAreaEffect;}
+    public boolean getHasAreaEffect(){
+        return this.hasAreaEffect;
+    }
 
 
     @Override

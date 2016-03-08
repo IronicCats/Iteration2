@@ -74,7 +74,6 @@ public class TileView implements Observer, Renderable {
             //System.out.print("Here");
             //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }
-
         /**
         if(tile.getHasAreaEffect()){
             decalView.render(g, xOffset, yOffset);
