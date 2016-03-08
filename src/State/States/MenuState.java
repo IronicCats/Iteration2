@@ -20,7 +20,6 @@ public class MenuState extends State {
 
         public void switchState(StatesEnum state) {
                 if(getState() != getLiveState(state)) {
-                        System.out.println(state);
                         setState(state);
                 }
 
@@ -33,7 +32,6 @@ public class MenuState extends State {
                 menuView.next();
         }
         public void tick(){
-                System.out.println("MenuState Tick");
         }
 
         public void render(Graphics g) {

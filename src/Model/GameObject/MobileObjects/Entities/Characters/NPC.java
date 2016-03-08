@@ -21,8 +21,10 @@ public class NPC extends Character implements Tickable {
 
     @Override
     public void tick() {
-        System.out.println("in NPC");
-        controller.tick();
+        if (controller != null){
+            controller.tick();
+        }
+
     }
 
     // inventory = NPCinventory
