@@ -1,6 +1,8 @@
 package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.Decal.Decal;
+import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
@@ -14,6 +16,8 @@ import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
 import State.States.GameState.GameState;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.ItemUtilities.ItemsEnum;
 import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
@@ -93,10 +97,51 @@ public class SaveLoad {
                 for(int j = 0; j < tileNodes.getLength(); j++){
                     Element tileElement = (Element) tileNodes.item(j);
 
-                    AreaEffect areaEffect = null;
+
 
                     Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
+                    String terrainType = terrainElement.getAttribute("terrainType");
+                    //how are we telling something that it's a grass/water/mountain?
 
+
+                    AreaEffect areaEffect = null;       //blank areaEffect to fill in
+                    NodeList areaEffectNodes = tileElement.getElementsByTagName("areaEffect");
+                    if(areaEffectNodes.getLength() > 0){
+                        Element areaEffectElement = (Element) areaEffectNodes.item(0);
+                        String areaEffectEnum = areaEffectElement.getAttribute("enum");
+
+                        switch(areaEffectEnum){
+                            //a case for each enum
+                        }
+
+                    }
+                    Decal decal = null;
+                    //decal stuff but I don't even have that saving yet
+
+                    Item[] itemArray = null;
+                    NodeList itemNodes = tileElement.getElementsByTagName("item");
+                    if(itemNodes.getLength() > 0){
+                        //this is very iffy at the moment
+                        for(int k = 0; k < itemNodes.getLength();k++)
+                        {
+                            Element itemElement = (Element) itemNodes.item(k);
+                            String itemID = itemElement.getAttribute("id");
+                            int id = Integer.parseInt(itemID);
+                            //id = itemsEnum.
+                            //ItemsEnum.AGILITY_POTION.ordinal
+
+                            Location l = new Location(0,0,270);
+                            l.setX(i);
+                            l.setY(j);
+
+                            //I'm probably going to need some huge if statement or something. Idk
+                            itemArray[k]  = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION,l);
+                           // itemArray[k] = ItemFactory.makeItem(itemID)
+                            //remember to ask Kyle to create something in itemFactory
+                            //that will create by itemID.
+
+                        }
+                    }
                     
                 }
             }
@@ -245,9 +290,9 @@ public class SaveLoad {
         //Decal
 
         //item
-        System.out.println("Right before it should see item.");
+
         if(t.hasItems()){
-            System.out.println("It should see the item");
+
             Element item = doc.createElement("item"); // creates an element and tags it as a document
             //will probably have to go through each item on a tile since we can have multiple
 
