@@ -1,6 +1,5 @@
 package State.States.GameState;
 
-import Controller.Controllers.EquipmentController;
 import Controller.Controllers.InventoryController;
 import State.State;
 import State.StatesEnum;
@@ -30,7 +29,7 @@ public class InventoryState extends State{
 
     @Override
     public void switchState(StatesEnum state) {
-        if(getState() != getLiveState(state)) {
+        if(getCurrentState() != getStoredState(state)) {
             System.out.println(state);
             setState(state);
         }
