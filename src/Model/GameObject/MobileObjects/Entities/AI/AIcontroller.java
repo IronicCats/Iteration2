@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
         private NPC AI;
         private Location destination = new Location(2,5,0);
-
+        public void setAI(MobileObject AI) {this.AI = AI;}
         @Override
         public void tick() {
             System.out.println(destination);
