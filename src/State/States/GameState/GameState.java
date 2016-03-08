@@ -1,6 +1,7 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -60,9 +61,9 @@ public class GameState extends State {
         mapItems.put(item, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, item));
         mapItems.put(chest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, chest));
         //creating a new player
-        player = new Player(new Location(2, 2), new CharacterStats(), new Smasher(), new Inventory());
+        player = new Player(new Location(2, 2), new Smasher(), new Inventory());
         playerView = new MobileObjectView(player, Assets.PLAYER);
-
+        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
     }
 
     public void switchState() {
