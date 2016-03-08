@@ -26,8 +26,8 @@ public class Camera implements Observer {
     }
     //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraOnMap() {
-        System.out.println(xOffset);
-        System.out.println(((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250);
+        //System.out.println(xOffset);
+        //System.out.println(((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250);
 
         if (xOffset < 0) {
             xOffset = 0;
