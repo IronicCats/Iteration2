@@ -12,17 +12,20 @@ public class Pack {
     private Item[] items;
     private int count;
     private final int cap = 16;
+    private int money;
 
     public Pack() {
         items = new Item[cap];
         for(int i = 0; i < cap; i++) { items[i] = null; }
         count = 0;
+        money = 0;
     } // end default constructor
 
-    public Pack(Item[] items) {
+    public Pack(Item[] items, int money) {
         items = new Item[cap];
         count = items.length;
         this.items = items;
+        this.money = money;
     } // end constructor
 
     public boolean full() {
@@ -81,4 +84,8 @@ public class Pack {
         }
         return tempItems;
     } // end dump
+
+    public int getMoney() { return money; }
+    public void setMoney(int money) { this.money = money; }
+    public void modifyMoney(int money) { this.money += money; }
 } // end class Pack
