@@ -30,10 +30,10 @@ public class Settings {
 
     public static int SPACE = 0x20;
     public static int D = 0x44;
-    public static int E = 0x45;
+    public static int E = 69;
     public static int I = 0x49;
     public static int M = 0x4D;
-    public static int Q = 0x51;
+    public static int Q = 81;
 
     public static String TITLE = "Ironic Cats";
 }

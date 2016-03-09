@@ -52,6 +52,18 @@ public class Player extends Character implements Observer{
 
     } // end remove
 
+    public ArrayList<Item> takeItems(ArrayList<Item> items) {
+        System.out.println(items);
+        System.out.println(items.get(0).getClass());
+        for(Item i: items) {
+            if(i instanceof Takable) {
+                pickup(i);
+                items.remove(i);
+            }
+        }
+        return items;
+    }
+
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
         ((CharacterStats)getStats()).applyEquipmentModification(weapon.getEquipmentModification());
@@ -67,12 +79,13 @@ public class Player extends Character implements Observer{
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
+    /*
     public void interact(Item item) {
         if(item instanceof Takable) {
             pickup(item);
         }
     } // end interact
-
+    */
     public void examinePack() {
         inventory.examine();
         emptyPack();
@@ -81,6 +94,7 @@ public class Player extends Character implements Observer{
     public void emptyPack() {
         inventory.emptyPack();
     } // end emptyPack
+
 
     public void pickup(Item item) {
         inventory.place(item);

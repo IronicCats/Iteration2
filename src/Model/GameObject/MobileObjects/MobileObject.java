@@ -85,6 +85,10 @@ public abstract class MobileObject extends GameObject{
         return tile;
     }
 
+    public void interactWithTile() {
+        tile.interact();
+    }
+
 
 
 }
