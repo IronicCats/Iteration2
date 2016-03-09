@@ -270,7 +270,7 @@ public class CharacterStats extends Stats implements Subject {
         }
 
         for(StatsEnum s : e.getModification().getKeySet()) {
-            System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
+            //System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
             switch (s){
                 // primary stats
                 case LIVES_LEFT:
@@ -330,7 +330,7 @@ public class CharacterStats extends Stats implements Subject {
 
     public void removeEffect(Effect e) {
         for(StatsEnum s : e.getModification().getKeySet()) {
-            System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
+            //System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
             switch (s){
                 // primary stats
                 case LIVES_LEFT:

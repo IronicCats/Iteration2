@@ -354,6 +354,8 @@ public class ItemFactory {
 
     public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
         switch(itemsEnum) {
+            case BAGOFITEMS:
+                return new ItemView(item, Assets.BAGOFITEMS);
             case HEALTH_POTION:
                 return new ItemView(item, Assets.HEALTH_POTION);
             case MANA_POTION:

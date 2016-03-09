@@ -1,0 +1,46 @@
+# Iteration 2 Goals
+### Skills
+### level-up - skill point assignment
+        need to create variables (specific to each Occupation?)
+### entities
+##### NPCs
+        NPCs can move, have some AI
+        need to classify friendly vs enemy
+##### mounts/vehicles
+        can modify player movement on mount/dismount
+        need to render new images
+##### pets
+        need to configure AI, allow for following Player
+        configure scavenging, getting into trouble, ...
+### avatar - NPC interaction
+        tile stuff
+##### combat
+        need to have Tile interaction between two Entities to send Effects
+##### dialog
+        need to create dialog, UI
+##### buy/sell items
+        create money
+        add value to items
+##### use of item/skill on NPC
+        similar Tile interaction as combat
+### multiple spell, weapon, item, etc. types
+        currently have weapon types in game, should be class-specific
+        need to create spells
+### hextile maps
+        DONE
+### fog of war
+        DONE
+### scrollable viewport
+        DONE
+### traps and teleport area effects
+        area-effects in place
+            create subclass for
+### distance and influence radius
+        maaaaaaaaaaaath (similar concept as FoW?)
+### configurable UI
+        Settings file in place, need to configure values
+
+Shopkeeping:
+    ShopView, ShopState
+    Entities need money
+        money can be found on the ground, dropped by enemies

@@ -1,6 +1,7 @@
 package Model.GameObject;
 
 import Model.Location;
+import Model.Tickable;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Joshua Kegley on 3/1/2016.
  */
-public abstract class GameObject implements Subject {
+public abstract class GameObject implements Subject, Tickable {
     private ArrayList<Observer> observers;
     protected Location location;
     public GameObject() {
@@ -54,5 +55,10 @@ public abstract class GameObject implements Subject {
         for(Observer o: observers){
             o.update();
         }
+    }
+
+    @Override
+    public void tick() {
+        
     }
 }

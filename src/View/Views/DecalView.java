@@ -1,6 +1,6 @@
 package View.Views;
 
-import Model.GameObject.Decal.Decal;
+import Model.GameObject.AreaEffect.AreaEffect;
 import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -14,16 +14,16 @@ import java.awt.image.BufferedImage;
  * Created by mazumderm on 3/5/2016.
  */
 public class DecalView implements Observer, Renderable {
-    private Decal decal;
+    private AreaEffect areaEffect;
     private BufferedImage sprite;
     private Location location;
 
 
-    public DecalView(Decal decal, BufferedImage sprite) {
-        this.decal = decal;
+    public DecalView(AreaEffect areaEffect, BufferedImage sprite) {
+        this.areaEffect = areaEffect;
         this.sprite = sprite;
-        this.location = decal.getLocation();
-        decal.addObserver(this);
+        this.location = areaEffect.getLocation();
+        areaEffect.addObserver(this);
     }
 
     public BufferedImage getSprite() {
@@ -32,7 +32,7 @@ public class DecalView implements Observer, Renderable {
 
     @Override
     public void update() {
-        location = decal.getLocation();
+        location = areaEffect.getLocation();
     }
 
     @Override
@@ -50,10 +50,10 @@ public class DecalView implements Observer, Renderable {
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,
-                Utilities.calculateHexXLocation(location) - cameraXOffset + (Settings.TILEWIDTH/2 - (Settings.TILEWIDTH / (2*4))),
-                Utilities.calculateHexYLocation(location) - cameraYOffset + (Settings.TILEHEIGHT/2 -(Settings.TILEHEIGHT / (2*4))),
-                Settings.TILEWIDTH / 4,
-                Settings.TILEHEIGHT / 4,
+                cameraXOffset + (Settings.TILEWIDTH/ 2 - Settings.DEFAULTITEMWIDTH /2),
+                cameraYOffset + (Settings.TILEHEIGHT/ 2 - Settings.DEFAULTITEMHEIGHT/2),
+                Settings.DEFAULTITEMWIDTH,
+                Settings.DEFAULTITEMHEIGHT,
                 null
         );
     }

@@ -12,18 +12,29 @@ public class Pack {
     private Item[] items;
     private int count;
     private final int cap = 16;
+    private int money;
 
     public Pack() {
         items = new Item[cap];
         for(int i = 0; i < cap; i++) { items[i] = null; }
         count = 0;
+        money = 0;
     } // end default constructor
 
-    public Pack(Item[] items) {
+    public Pack(Item[] items, int money) {
         items = new Item[cap];
         count = items.length;
         this.items = items;
+        this.money = money;
     } // end constructor
+
+    public boolean full() {
+        return count == cap;
+    } // end full
+
+    public boolean empty() {
+        return count == 0;
+    } // end empty
 
     public void place(Item item) {
         /*
@@ -59,16 +70,22 @@ public class Pack {
             }
         }
     } // end examine
-
     public int getSizeLeft() {
         return cap - count;
     }
 
-    public void empty() {
-        for(int i = 0; i < cap; i++) {
+    public ArrayList<Item> dump() {
+        ArrayList<Item> tempItems = new ArrayList<>();
+        for(int i = 0; i < items.length; ++i){
             if(items[i] != null) {
-                remove(i);
+                tempItems.add(items[i]);
+                items[i] = null;
             }
         }
-    } // end emptyPack
+        return tempItems;
+    } // end dump
+
+    public int getMoney() { return money; }
+    public void setMoney(int money) { this.money = money; }
+    public void modifyMoney(int money) { this.money += money; }
 } // end class Pack
