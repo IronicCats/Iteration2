@@ -1,6 +1,9 @@
 package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.Decal.Decal;
+import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
@@ -14,6 +17,11 @@ import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
 import State.States.GameState.GameState;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.ItemUtilities.ItemsEnum;
+import View.ViewUtilities.Graphics.Assets;
+import View.Views.MapView;
+import View.Views.TileView;
 import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
@@ -22,6 +30,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
@@ -35,6 +44,7 @@ public class SaveLoad {
     private static Entity player;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
     private static GameState game;
+    private static MapView gamemapView;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
@@ -46,11 +56,18 @@ public class SaveLoad {
         return gameMap;
     }
 
+    public static MapView getGamemapView(){
+        return gamemapView;
+    }
+
     public static void setGameMap(Map map){// sets the current map
         gameMap = map;
     }
     public static void setPlayer(Entity a){//sets the current player
         player = a;
+    }
+    public static void setGamemapView(MapView m){
+        gamemapView = m;
     }
 
     public static SaveLoad getInstance() {//returns the instance of SaveLoad
@@ -60,15 +77,16 @@ public class SaveLoad {
     public static void load(String fileName){
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
-        String filePath = "src/res/saveFiles/" + fileName;
+        String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap,filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
+        System.out.println("Everything has been loaded!");
     }
 
     public static void loadMap(Map inputMap,String fileName)
     {
 
-        String filepath = "src/res/saveFiles/" + fileName;
+        String filepath = fileName;
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -82,7 +100,9 @@ public class SaveLoad {
             int mapHeight = Integer.parseInt(map.getAttribute("height"));
 
             //if there is problem it may be here
-            Tile[][] tiles = new Tile[mapHeight][mapWidth]; //this might not be good in our implementation
+            Tile[][] tiles = new Tile[mapWidth][mapHeight]; //this might not be good in our implementation
+            TileView[][] tv = new TileView[mapWidth][mapHeight];
+            //was mapHeight/mapWitdth
 
             NodeList rows = doc.getElementsByTagName("row");
 
@@ -93,25 +113,263 @@ public class SaveLoad {
                 for(int j = 0; j < tileNodes.getLength(); j++){
                     Element tileElement = (Element) tileNodes.item(j);
 
-                    AreaEffect areaEffect = null;
+
 
                     Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
+                    String terrainType = terrainElement.getAttribute("terrainType");
+                    //how are we telling something that it's a grass/water/mountain?
 
-                    
+
+                    AreaEffect areaEffect = null;       //blank areaEffect to fill in
+                    NodeList areaEffectNodes = tileElement.getElementsByTagName("areaEffect");
+                    if(areaEffectNodes.getLength() > 0){
+                        Element areaEffectElement = (Element) areaEffectNodes.item(0);
+                        String areaEffectEnum = areaEffectElement.getAttribute("enum");
+
+                        switch(areaEffectEnum){
+                            //a case for each enum
+                        }
+
+                    }
+                    Decal decal = null;
+                    //decal stuff but I don't even have that saving yet
+
+                    Item[] itemArray = new Item[10];//check this
+                    NodeList itemNodes = tileElement.getElementsByTagName("item");
+                    if(itemNodes.getLength() > 0){
+                        //this is very iffy at the moment
+                        for(int k = 0; k < itemNodes.getLength();k++)
+                        {
+                            Element itemElement = (Element) itemNodes.item(k);
+                            String itemID = itemElement.getAttribute("id");
+                            int id = Integer.parseInt(itemID);
+                            //id = itemsEnum.
+                            //ItemsEnum.AGILITY_POTION.ordinal
+
+                            Location l = new Location(0,0,270);
+                            l.setX(i);
+                            l.setY(j);
+
+                            //I'm probably going to need some huge if statement or something. Idk
+
+                            switch(id){
+                                case 0:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION,l);
+                                    break;
+                                case 1:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MANA_POTION,l);
+                                    break;
+                                case 2:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION,l);
+                                    break;
+                                case 3:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION,l);
+                                    break;
+                                case 4:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION,l);
+                                    break;
+                                case 5:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION,l);
+                                    break;
+                                case 6:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION,l);
+                                    break;
+                                case 7:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION,l);
+                                    break;
+                                case 8:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STICK_SWORD,l);
+                                    break;
+                                case 9:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD,l);
+                                    break;
+                                case 10:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER,l);
+                                    break;
+                                case 11:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE,l);
+                                    break;
+                                case 12:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE,l);
+                                    break;
+                                case 13:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL,l);
+                                    break;
+                                case 14:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND,l);
+                                    break;
+                                case 15:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF,l);
+                                    break;
+                                case 16:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HAIRBALL,l);
+                                    break;
+                                case 17:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.LASER_POINTER,l);
+                                    break;
+                                case 18:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG,l);
+                                    break;
+                                case 19:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CHEST_KEY,l);
+                                    break;
+                                case 20:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.OPEN_TREASURE_CHEST,l);
+                                    break;
+                                case 21:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST,l);
+                                    break;
+                                case 22:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.DOOR_KEY,l);
+                                    break;
+                                case 23:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.OPEN_DOOR,l);
+                                    break;
+                                case 24:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CLOSED_DOOR,l);
+                                    break;
+                                case 25:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HELMET,l);
+                                    break;
+                                case 26:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CHESTPLATE,l);
+                                    break;
+                                case 27:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PLATELEGS,l);
+                                    break;
+                                case 28:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.GAUNTLETS,l);
+                                    break;
+                                case 29:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.BOOTS,l);
+                                    break;
+                                case 30:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SHIELD,l);
+                                    break;
+                                case 31:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MILDLY_COOL_RING,l);
+                                    break;
+                                case 32:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.DOPE_RING,l);
+                                    break;
+                                case 33:
+                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PANTS,l);
+                                    break;
+
+
+                            }
+
+
+                        }
+
+                    }
+                    Location lg = new Location(i,j);
+                    System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
+                    if(terrainType.equalsIgnoreCase("grass")) {
+                        System.out.println("I get the grass.");
+                        tiles[i][j] = new Grass(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE );
+
+                    }
+                    else if(terrainType.equalsIgnoreCase("water")) {
+                        System.out.println("I get the water.");
+                        tiles[i][j] = new Water(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE );
+
+                    }
+                    else if(terrainType.equalsIgnoreCase("mountain")) {
+                        tiles[i][j] = new Mountain(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE );
+                    }
+                    //System.out.println(tiles[i][j].toString());
+
                 }
             }
+            Location spawn = new Location(0,0);
+            spawn.setX(Integer.parseInt(map.getAttribute("spawnX")));
+            spawn.setY(Integer.parseInt(map.getAttribute("spawnY")));
 
+
+
+            Map recreateMap = new Map(tiles,mapWidth,mapHeight,spawn);
+            //SaveLoad.setGameMap(recreateMap);
+            gameMap = recreateMap;
+            MapView mv = new MapView(recreateMap,tv);
+            System.out.println("LOL");
+
+            System.out.println(gameMap.getTile(0, 1));
+            System.out.println(gameMap.getTile(1,0));
+            gamemapView = mv;
+            mv.update();
+            //inputMap = recreateMap;
 
 
            // Map recreateMap = new Map();
         }catch(Exception e){
             e.printStackTrace();
+            System.out.println("Map problems");
         }
     }
 
     public static void loadPlayer(String fileName)
     {
+        // Get the xml filepath string ensuring file separators are specific to the use's OS.
+        String file = fileName;
+        Entity avatar = player;
+        //Map m = IOMediator.getInstance().map;
+        try {
+            // Create a document from the xml file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(new File(file));
+            doc.getDocumentElement().normalize();
 
+            NodeList entities = doc.getElementsByTagName("entities"); //might have to be player
+            //Checks the type of the avatar and sets information
+            //System.out.println("length =" + entities.getLength()); TODO erase
+            for (int i = 0; i < entities.getLength(); i++) {
+                Element entity = (Element) entities.item(i); // this is a player
+                NodeList p = doc.getElementsByTagName("player");
+                Element pl = (Element)p.item(0);
+               // if (entity.getAttribute("player").equals("player")) {
+                    int x = Integer.parseInt(pl.getAttribute("locX"));
+                    int y = Integer.parseInt(pl.getAttribute("locY"));
+                    int d = Integer.parseInt(pl.getAttribute("direction"));
+                    String occupation = pl.getAttribute("occupation");
+                    //System.out.println("Occupation:" + occupation);
+
+                    //System.out.println("x=" + x + " y=" + y + " direction=" + d);
+                    Location l = new Location(x,y,d);
+                    //Location l = new Location(x,y);
+                    //avatar.setLocation(l);
+                    System.out.println(player.toString());
+
+                    player.setLocation(l);
+                    //Player p = new Player(l,)
+
+
+
+                    /*if (occupation.equals(Entity.Occupation.SMASHER.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SMASHER);
+                    } else if (occupation.equals(Entity.Occupation.SUMMONER.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SUMMONER);
+                    } else if (occupation.equals(Entity.Occupation.SNEAK.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SNEAK);
+                    }*/
+
+                   /* loadStats(avatar.getStats(), entity); //Separate function to handle loading stats
+                    loadInventory(avatar.getInventory(), entity);
+                    loadEquipped(avatar.getEquippedItems(), entity);
+                    //Adds avatar to the map
+                    m.insertEntityAtLocation(x, y, avatar);*/
+                //}
+            }
+
+            //System.out.println("Finish loading avatar: " + avatar.getLocation()[0] + "," + avatar.getLocation()[1] + "," + avatar.getOrientation());
+        } catch (Exception e) {
+            System.out.println("Problem parsing avatar");
+            e.printStackTrace();
+        }
     }
 
 
@@ -245,9 +503,9 @@ public class SaveLoad {
         //Decal
 
         //item
-        System.out.println("Right before it should see item.");
+
         if(t.hasItems()){
-            System.out.println("It should see the item");
+
             Element item = doc.createElement("item"); // creates an element and tags it as a document
             //will probably have to go through each item on a tile since we can have multiple
 

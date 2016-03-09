@@ -7,14 +7,20 @@ import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Stats.PetStats;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -52,28 +58,32 @@ public class GameState extends State {
 
     private Player player;
     private NPC enemy;
+    private Pet pet;
 
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
+    private MobileObjectView petView;
 
     public GameState() {
         //need to change this
         cameraMoving = false;
+        map = MakeMap.makeMap();
+        mapView = MakeMap.makeMapView(map);
 
 
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
         decals = new HashMap<>();
-        map = MakeMap.makeMap();
+
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
-        mapView = MakeMap.makeMapView(map);
 
 
         //creating a new player
         player = new Player();
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        playerView = new MobileObjectView(player, Assets.PLAYER);
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
@@ -82,10 +92,13 @@ public class GameState extends State {
 
 
 
-        enemy = new NPC(new Location(2, 2, 0), new Smasher(), new Inventory(),new NPCController(map));
 
-        playerView = new MobileObjectView(player, Assets.PLAYER);
+        enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
+       // pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
+
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+        //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
+
 
         
         //area effect
@@ -93,11 +106,8 @@ public class GameState extends State {
         decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
         map.placeAreaEffect(a);
 
-        InventoryState inventoryState = new InventoryState(this);//adding the inv state
-        INVENTORYSTATE = inventoryState;
 
-        EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
-        EQUIPMENTSTATE = equipementState;
+
 
         map.setMapItems(mapItems);
     }
@@ -114,6 +124,9 @@ public class GameState extends State {
         else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
         }
+
+
+
     }
 
     public void SetCameramoving(boolean movement){
@@ -123,9 +136,10 @@ public class GameState extends State {
         }
     }
 
+
     @Override
     public void tick() {
-        //enemy.tick();
+        enemy.tick();
     }
 
     public void render(Graphics g) {
@@ -142,7 +156,20 @@ public class GameState extends State {
         }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
+
+    public void playerInteract() {
+        if(map.getTile(player.getX(), player.getY()).hasItems()){
+            Item itemOnTile = map.getTile(player.getX(), player.getY()).getItems().get(0);
+            player.interact(itemOnTile);
+        }
+    } // end playerInteract
+
+    public void playerExamineInventory() {
+        player.examinePack();
+    } // end playerExamineInventory
+
 
     @Override
     public void switchState(State state) {

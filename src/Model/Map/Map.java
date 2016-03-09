@@ -12,14 +12,13 @@ import View.Views.ItemView;
 import View.Views.MobileObjectView;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
  * Created by Aidan on 3/1/2016.
  */
 public class Map implements Subject {
-
-    public static Map map;
 
     private Tile tiles[][];
     private int width;
@@ -36,7 +35,6 @@ public class Map implements Subject {
         this.width = width;
         this.height = height;
         this.spawn = spawn;
-        map = this;
     }
 
     public Tile getTile(int x , int y) {
@@ -55,8 +53,8 @@ public class Map implements Subject {
     }
 
     // notifies tile that Mobile object is on it
-    public void register(MobileObject object){
-        tiles[object.getLocation().getX()][object.getLocation().getY()].register(object);
+    public Tile register(MobileObject object){
+        return tiles[object.getX()][object.getY()].register(object);
     }
 
     public void deRegister(Location location){
@@ -142,4 +140,13 @@ public class Map implements Subject {
         this.mapItems = mapItems;
     }
 
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                ", width=" + width +
+                ", height=" + height +
+                ", spawn=" + spawn +
+                '}';
+    }
 }

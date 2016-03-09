@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
@@ -66,6 +67,10 @@ public abstract class Tile implements Subject {
     public Tile register(MobileObject object) {
         this.object = object;
         hasObject = true;
+        System.out.println(object + " Has registered");
+        if(object instanceof Player) {
+            visited = true;
+        }
         return this;
     }
 
@@ -77,7 +82,8 @@ public abstract class Tile implements Subject {
 
 
     public boolean isWalkable() {
-        return isWalkable && !hasObject();
+        // add && !hasObject()
+        return isWalkable;
     }
 
 

@@ -36,4 +36,7 @@ import Utilities.MapUtilities.Navigation;
             }
         }
 
-}
+    public void setDestination(Location location) {
+        this.destination = location;
+    } // end setDestination
+} // end class AIcontroller

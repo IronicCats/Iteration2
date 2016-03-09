@@ -2,8 +2,12 @@ package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
 import Model.Location;
+
 import Model.Map.Map;
 import Model.Map.Tile;
+
+import Model.Stats.Stats;
+import State.States.GameState.GameState;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -20,22 +24,28 @@ public abstract class MobileObject extends GameObject{
     protected Map map;
 
     private float speed;
-    private boolean canMove;
-    private ViewLocation viewLocation;
     private Tile tile;
     // private Nav navigation
+    private Stats stats;
+    private boolean canMove;
+    private ViewLocation viewLocation;
 
     public MobileObject() {
         super();
         canMove = true;
-        speed = 0;
+        stats = new Stats();
         viewLocation = new ViewLocation(location.getX(), location.getY());
-        map = Map.map;
+        map = GameState.map;
+        tile = map.register(this);
+
     }
-    public MobileObject(Location location) {
+    public MobileObject(Location location, Stats stats) {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
+        this.stats = stats;
+        map = GameState.map;
+        tile = map.getTile(location);
     }
 
     public void move(int degrees){
@@ -46,13 +56,11 @@ public abstract class MobileObject extends GameObject{
     }
 
 
-    public float getSpeed() {
-        return speed;
+    public Stats getStats() {
+        return stats;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
+    public int getMovement() { return stats.getMovement(); }
 
     public ViewLocation getViewLocation() {
         return viewLocation;
@@ -75,14 +83,8 @@ public abstract class MobileObject extends GameObject{
     }
 
     public Tile registerTile(Location location) {
-        Tile oldTile = tile;
-        if(oldTile == null) {
-            System.out.println(this.location);
-            tile = map.getTile(this.location);
-        }
-        tile = Map.map.getTile(location);
-        oldTile.deregister();
-        tile.register(this);
+        tile.deregister();
+        tile = map.register(this);
         return tile;
     }
 
