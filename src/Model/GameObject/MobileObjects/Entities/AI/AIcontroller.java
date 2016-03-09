@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;

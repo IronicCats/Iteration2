@@ -3,7 +3,6 @@ package State.States;
 
 import State.State;
 import State.States.GameState.GameState;
-import State.StatesEnum;
 
 import java.awt.*;
 
@@ -13,15 +12,17 @@ import java.awt.*;
 public class InitialState extends State {
 
     public void init(Canvas canvas) {
+        INITIALSTATE = this;
         State.canvas = canvas;
+        currentState = this;
         //Create the MainMenu
         MenuState menu = new MenuState();
-        State.addState(StatesEnum.MenuState, menu);
+        MENUSTATE = menu;
         //Create the Game
         GameState gameState = new GameState();
-        State.addState(StatesEnum.GameState, gameState);
+        GAMESTATE = gameState;
 
-        State.setState(StatesEnum.MenuState);
+        //switchState(MENUSTATE);
 
     }
 
@@ -35,7 +36,7 @@ public class InitialState extends State {
     }
 
     @Override
-    public void switchState(StatesEnum s) {
-
+    public void switchState(State state) {
+        setState(state);
     }
 }

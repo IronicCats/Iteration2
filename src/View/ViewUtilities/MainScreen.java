@@ -1,8 +1,7 @@
 package View.ViewUtilities;
 
+
 import Utilities.Settings;
-import View.View;
-import sun.util.locale.provider.JRELocaleConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +37,7 @@ public class MainScreen extends JFrame {
         getContentPane().add(canvas, BorderLayout.CENTER);
         pack();
 
+
         this.getRootPane().addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 // This is only called when the user releases the mouse button.
@@ -46,10 +46,12 @@ public class MainScreen extends JFrame {
                 Settings.GAMEWIDTH = windowWidth = getWidth();
 
                 canvas.setPreferredSize(new Dimension(windowWidth, windowHeight));
+                canvas.setFocusable(true);
                 repaint();
 
             }
         });
+
     }
 
     public Canvas getCanvas() {

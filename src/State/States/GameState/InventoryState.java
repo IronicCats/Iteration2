@@ -2,7 +2,6 @@ package State.States.GameState;
 
 import Controller.Controllers.InventoryController;
 import State.State;
-import State.StatesEnum;
 
 import java.awt.*;
 
@@ -28,10 +27,8 @@ public class InventoryState extends State{
     }
 
     @Override
-    public void switchState(StatesEnum state) {
-        if(getCurrentState() != getStoredState(state)) {
-            System.out.println(state);
-            setState(state);
-        }
+    public void switchState(State state) {
+
+        setState(state);
     }
 }
