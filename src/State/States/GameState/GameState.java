@@ -42,7 +42,7 @@ public class GameState extends State {
     private HashMap<Item, ItemView> mapItems;
     private HashMap<AreaEffect, DecalView> decals;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
-    private Map map;
+    public static Map map;
     private Camera camera;
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
@@ -69,16 +69,21 @@ public class GameState extends State {
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
         mapView = MakeMap.makeMapView(map);
 
-        // initializing items
-        mapItems = ItemFactory.initMainMap();
-        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         //creating a new player
         player = new Player();
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        enemy = new NPC(new Location(5,5,0), new Smasher(), new Inventory(),new NPCController(map));
-        System.out.println(enemy);
+
+        // initializing items
+        mapItems = ItemFactory.initMainMap();
+        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+
+
+
+
+        enemy = new NPC(new Location(2, 2, 0), new Smasher(), new Inventory(),new NPCController(map));
+
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
 
@@ -94,7 +99,7 @@ public class GameState extends State {
         EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
         EQUIPMENTSTATE = equipementState;
 
-
+        map.setMapItems(mapItems);
     }
 
     public void switchState() {
@@ -107,9 +112,7 @@ public class GameState extends State {
             camera.move(degrees);
         }
         else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
-            map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
-            map.registerObject(player); // registers player with tile
         }
     }
 
@@ -122,7 +125,7 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        enemy.tick();
+        //enemy.tick();
     }
 
     public void render(Graphics g) {

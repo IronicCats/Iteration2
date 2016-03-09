@@ -2,6 +2,8 @@ package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
 import Model.Location;
+import Model.Map.Map;
+import Model.Map.Tile;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -15,10 +17,12 @@ Also inherits location from GameObject
 */
 public abstract class MobileObject extends GameObject{
 
+    protected Map map;
+
     private float speed;
     private boolean canMove;
     private ViewLocation viewLocation;
-
+    private Tile tile;
     // private Nav navigation
 
     public MobileObject() {
@@ -26,6 +30,7 @@ public abstract class MobileObject extends GameObject{
         canMove = true;
         speed = 0;
         viewLocation = new ViewLocation(location.getX(), location.getY());
+        map = Map.map;
     }
     public MobileObject(Location location) {
         super(location);
@@ -36,6 +41,7 @@ public abstract class MobileObject extends GameObject{
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
         location.setDir(degrees);
+        registerTile(location);
         alert();
     }
 
@@ -67,5 +73,19 @@ public abstract class MobileObject extends GameObject{
     public void toggleCanMove() {
         this.canMove = !this.canMove;
     }
+
+    public Tile registerTile(Location location) {
+        Tile oldTile = tile;
+        if(oldTile == null) {
+            System.out.println(this.location);
+            tile = map.getTile(this.location);
+        }
+        tile = Map.map.getTile(location);
+        oldTile.deregister();
+        tile.register(this);
+        return tile;
+    }
+
+
 
 }
