@@ -113,6 +113,9 @@ public class GameState extends State {
             player.move(degrees);
             map.registerObject(player); // registers player with tile
         }
+
+
+
     }
 
     @Override

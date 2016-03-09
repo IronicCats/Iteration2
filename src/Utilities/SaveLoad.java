@@ -3,6 +3,7 @@ package Utilities;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
@@ -18,6 +19,9 @@ import Model.Map.Tiles.Water;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
+import View.ViewUtilities.Graphics.Assets;
+import View.Views.MapView;
+import View.Views.TileView;
 import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
 import javax.xml.transform.OutputKeys;
@@ -26,6 +30,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
@@ -39,6 +44,7 @@ public class SaveLoad {
     private static Entity player;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
     private static GameState game;
+    private static MapView gamemapView;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
@@ -50,11 +56,18 @@ public class SaveLoad {
         return gameMap;
     }
 
+    public static MapView getGamemapView(){
+        return gamemapView;
+    }
+
     public static void setGameMap(Map map){// sets the current map
         gameMap = map;
     }
     public static void setPlayer(Entity a){//sets the current player
         player = a;
+    }
+    public static void setGamemapView(MapView m){
+        gamemapView = m;
     }
 
     public static SaveLoad getInstance() {//returns the instance of SaveLoad
@@ -64,15 +77,16 @@ public class SaveLoad {
     public static void load(String fileName){
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
-        String filePath = "src/res/saveFiles/" + fileName;
+        String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap,filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
+        System.out.println("Everything has been loaded!");
     }
 
     public static void loadMap(Map inputMap,String fileName)
     {
 
-        String filepath = "src/res/saveFiles/" + fileName;
+        String filepath = fileName;
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -86,7 +100,9 @@ public class SaveLoad {
             int mapHeight = Integer.parseInt(map.getAttribute("height"));
 
             //if there is problem it may be here
-            Tile[][] tiles = new Tile[mapHeight][mapWidth]; //this might not be good in our implementation
+            Tile[][] tiles = new Tile[mapWidth][mapHeight]; //this might not be good in our implementation
+            TileView[][] tv = new TileView[mapWidth][mapHeight];
+            //was mapHeight/mapWitdth
 
             NodeList rows = doc.getElementsByTagName("row");
 
@@ -118,7 +134,7 @@ public class SaveLoad {
                     Decal decal = null;
                     //decal stuff but I don't even have that saving yet
 
-                    Item[] itemArray = null;
+                    Item[] itemArray = new Item[10];//check this
                     NodeList itemNodes = tileElement.getElementsByTagName("item");
                     if(itemNodes.getLength() > 0){
                         //this is very iffy at the moment
@@ -244,14 +260,29 @@ public class SaveLoad {
                             }
 
 
-                           //tiles[i][j] = ;
-
-
-
-
                         }
+
                     }
-                    
+                    Location lg = new Location(i,j);
+                    System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
+                    if(terrainType.equalsIgnoreCase("grass")) {
+                        System.out.println("I get the grass.");
+                        tiles[i][j] = new Grass(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE );
+
+                    }
+                    else if(terrainType.equalsIgnoreCase("water")) {
+                        System.out.println("I get the water.");
+                        tiles[i][j] = new Water(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE );
+
+                    }
+                    else if(terrainType.equalsIgnoreCase("mountain")) {
+                        tiles[i][j] = new Mountain(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE );
+                    }
+                    //System.out.println(tiles[i][j].toString());
+
                 }
             }
             Location spawn = new Location(0,0);
@@ -261,16 +292,84 @@ public class SaveLoad {
 
 
             Map recreateMap = new Map(tiles,mapWidth,mapHeight,spawn);
-            SaveLoad.setGameMap(recreateMap);
+            //SaveLoad.setGameMap(recreateMap);
+            gameMap = recreateMap;
+            MapView mv = new MapView(recreateMap,tv);
+            System.out.println("LOL");
+
+            System.out.println(gameMap.getTile(0, 1));
+            System.out.println(gameMap.getTile(1,0));
+            gamemapView = mv;
+            mv.update();
+            //inputMap = recreateMap;
+
+
            // Map recreateMap = new Map();
         }catch(Exception e){
             e.printStackTrace();
+            System.out.println("Map problems");
         }
     }
 
     public static void loadPlayer(String fileName)
     {
+        // Get the xml filepath string ensuring file separators are specific to the use's OS.
+        String file = fileName;
+        Entity avatar = player;
+        //Map m = IOMediator.getInstance().map;
+        try {
+            // Create a document from the xml file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(new File(file));
+            doc.getDocumentElement().normalize();
 
+            NodeList entities = doc.getElementsByTagName("entities"); //might have to be player
+            //Checks the type of the avatar and sets information
+            //System.out.println("length =" + entities.getLength()); TODO erase
+            for (int i = 0; i < entities.getLength(); i++) {
+                Element entity = (Element) entities.item(i); // this is a player
+                NodeList p = doc.getElementsByTagName("player");
+                Element pl = (Element)p.item(0);
+               // if (entity.getAttribute("player").equals("player")) {
+                    int x = Integer.parseInt(pl.getAttribute("locX"));
+                    int y = Integer.parseInt(pl.getAttribute("locY"));
+                    int d = Integer.parseInt(pl.getAttribute("direction"));
+                    String occupation = pl.getAttribute("occupation");
+                    //System.out.println("Occupation:" + occupation);
+
+                    //System.out.println("x=" + x + " y=" + y + " direction=" + d);
+                    Location l = new Location(x,y,d);
+                    //Location l = new Location(x,y);
+                    //avatar.setLocation(l);
+                    System.out.println(player.toString());
+
+                    player.setLocation(l);
+                    //Player p = new Player(l,)
+
+
+
+                    /*if (occupation.equals(Entity.Occupation.SMASHER.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SMASHER);
+                    } else if (occupation.equals(Entity.Occupation.SUMMONER.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SUMMONER);
+                    } else if (occupation.equals(Entity.Occupation.SNEAK.getType())) {
+                        avatar.setOccupation(Entity.Occupation.SNEAK);
+                    }*/
+
+                   /* loadStats(avatar.getStats(), entity); //Separate function to handle loading stats
+                    loadInventory(avatar.getInventory(), entity);
+                    loadEquipped(avatar.getEquippedItems(), entity);
+                    //Adds avatar to the map
+                    m.insertEntityAtLocation(x, y, avatar);*/
+                //}
+            }
+
+            //System.out.println("Finish loading avatar: " + avatar.getLocation()[0] + "," + avatar.getLocation()[1] + "," + avatar.getOrientation());
+        } catch (Exception e) {
+            System.out.println("Problem parsing avatar");
+            e.printStackTrace();
+        }
     }
 
 
