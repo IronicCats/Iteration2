@@ -19,12 +19,14 @@ import java.util.Random;
 public class Pet extends MobileObject implements Tickable{
     PetController controller;
     PetStats stats;
+    Location base;
     Pack pack;
     Random random;
     boolean owned;
 
     public Pet(PetController controller) {
-        super(new Location(0, 0));
+        super(new Location(0, 0), new PetStats());
+        base = new Location(0, 0);
         this.controller = controller;
         stats = new PetStats();
         pack = new Pack();
@@ -35,7 +37,8 @@ public class Pet extends MobileObject implements Tickable{
     } // end default constructor
 
     public Pet(PetController controller, Location location, PetStats stats, Pack pack, boolean owned) {
-        super(location);
+        super(location, stats);
+        base = location;
         this.controller = controller;
         this.stats = stats;
         this.pack = pack;
@@ -58,8 +61,9 @@ public class Pet extends MobileObject implements Tickable{
 
     public Location computeRandomLocation() {
         System.out.println("computeRandomLocation called");
-        int x = random.nextInt(5);
-        int y = random.nextInt(5);
+        int temp = random.nextInt(2) - 1; // random number between -1 and 1
+        int x = random.nextInt(base.getX() + temp * stats.getMovement());
+        int y = random.nextInt(base.getY() + temp * stats.getMovement());
 
         return new Location(x, y);
     } // end computeRandomLocation

@@ -29,7 +29,7 @@ public class MobileObjectView implements Renderable, Observer {
     private ViewLocation viewLocation;
     private float goalX, goalY;
 
-    public MobileObjectView(Entity entity, ArrayList<BufferedImage> sprites) {
+    public MobileObjectView(MobileObject entity, ArrayList<BufferedImage> sprites) {
         entity.addObserver(this);
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
