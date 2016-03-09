@@ -148,6 +148,17 @@ public class GameState extends State {
         petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
+    public void playerInteract() {
+        if(map.getTile(player.getX(), player.getY()).hasItems()){
+            Item itemOnTile = map.getTile(player.getX(), player.getY()).getItems().get(0);
+            player.interact(itemOnTile);
+        }
+    } // end playerInteract
+
+    public void playerExamineInventory() {
+        player.examinePack();
+    } // end playerExamineInventory
+
     @Override
     public void tick() {
         enemy.tick();
