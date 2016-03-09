@@ -69,7 +69,7 @@ public class AreaEffectFactory {
             case HEAL:
                 return new DecalView(areaEffect, Assets.REDCROSS);
             default:
-                return new DecalView(areaEffect, Assets.HEALTH_POTION);
+                return null;
         }
     } // end makeAsset
 }
