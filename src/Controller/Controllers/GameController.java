@@ -1,7 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import State.StatesEnum;
+import State.State;
 import Utilities.Settings;
 import State.States.GameState.GameState;
 
@@ -35,7 +35,7 @@ public class GameController extends Controller {
             ((GameState) state).movePlayer(45);
         }
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);
-        if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(StatesEnum.InventoryState);
-        if(e.getKeyCode() == KeyEvent.VK_E)state.switchState(StatesEnum.EquipmentState);
+        if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(State.INVENTORYSTATE);
+        if(e.getKeyCode() == KeyEvent.VK_E)state.switchState(State.EQUIPMENTSTATE);
     }
 }
