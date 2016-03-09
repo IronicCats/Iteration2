@@ -73,7 +73,8 @@ public class Player extends Character implements Observer{
 
     public void mount(Vehicle vehicle){
         ((CharacterStats)getStats()).setMovement(vehicle.getMovement());
-    }
+        // change sprite
+    } // end mount
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
@@ -94,7 +95,8 @@ public class Player extends Character implements Observer{
 
     public void unmount(){
         ((CharacterStats)getStats()).resetMovement();
-    }
+        // change sprite
+    } // end unmount
 
     public void examinePack() {
         inventory.examine();
