@@ -15,7 +15,6 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Stats.CharacterStats;
 import State.StatesEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
@@ -33,7 +32,6 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -158,9 +156,7 @@ public class GameState extends State {
 
     @Override
     public void switchState(StatesEnum state) {
-        if(getState() != getLiveState(state)) {
-            System.out.println(state);
-            setState(state);
-        }
+        System.out.println(state);
+        setState(state);
     }
 }

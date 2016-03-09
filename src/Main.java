@@ -15,8 +15,9 @@ public class Main {
         InitialState is = new InitialState();
         is.init(view.getCanvas());
         Game gameThread = new Game();
-        view.start();
         gameThread.start();
+        view.start();
+
 
     }
 }
