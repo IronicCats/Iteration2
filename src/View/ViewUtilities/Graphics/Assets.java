@@ -20,9 +20,10 @@ public class Assets {
 
     public static ArrayList<BufferedImage> PLAYER;
 
-
+    public static BufferedImage BAGOFITEMS;
     public static BufferedImage HEALTH_POTION;
     public static BufferedImage CLOSED_TREASURE_CHEST;
+    public static BufferedImage OPEN_TREASURE_CHEST;
     public static BufferedImage MANA_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
@@ -36,6 +37,8 @@ public class Assets {
     public static BufferedImage GAUNTLETS;
     public static BufferedImage BOOTS;
     public static BufferedImage SHIELD;
+    public static BufferedImage CHEST_KEY;
+    public static BufferedImage HOUSE;
 
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
@@ -64,14 +67,20 @@ public class Assets {
         // End of Tiles
 
         //Items
+        SpriteSheet BAGOFITEMSSPRITESHEET = new SpriteSheet(new ImageLoader().loadImage("/Items/ItemBag.png"));
+        BAGOFITEMS = BAGOFITEMSSPRITESHEET.crop(0,0,32,32);
+
         SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HealthPotion.png"));
         HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
 
         SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
         MANA_POTION = potionManaSheet.crop(0,0,32,32);
 
-        SpriteSheet chestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
-        CLOSED_TREASURE_CHEST = chestSheet.crop(0,0,32,28);
+        SpriteSheet closedChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
+        CLOSED_TREASURE_CHEST = closedChestSheet.crop(0,0,32,28);
+
+        SpriteSheet openChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenChest.png"));
+        OPEN_TREASURE_CHEST = openChestSheet.crop(0,0,32,28);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
         STICK_SWORD = stickSwordSheet.crop(0,0,32,32);
@@ -99,6 +108,12 @@ public class Assets {
 
         SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
         SHIELD = shieldSheet.crop(0,0,32,32);
+
+        SpriteSheet keySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Key.png"));
+        CHEST_KEY = keySheet.crop(0,0,32,32);
+
+        SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
+        HOUSE = houseSheet.crop(0,0,32,32);
 
         //End of Tiles
 

@@ -7,6 +7,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 import Utilities.Subject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -31,17 +32,28 @@ public class Inventory implements Subject{
         observers = new ArrayList<>();
     } // end constructor
 
+    public boolean packFull() {
+        return pack.full();
+    } // end packFull
+
+    public boolean packEmpty() {
+        return pack.empty();
+    } // end packEmpty
+
     public void equip(Weapon weapon) {
+        System.out.println("Equipping " + weapon.getName());
         equipment.equip(weapon);
         alert();
     } // end equip
 
     public void equip(Armor armor) {
+        System.out.println("Equipping " + armor.getName());
         equipment.equip(armor);
         alert();
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        System.out.println("Unequipping item in " + slot + " slot.");
         pack.place(equipment.unequip(slot));
         alert();
     } // end unequip
@@ -52,6 +64,7 @@ public class Inventory implements Subject{
 
     public void place(Item item) {
         pack.place(item);
+        System.out.println(item.getName() + " added to inventory");
         alert();
     } // end place
 
@@ -61,9 +74,21 @@ public class Inventory implements Subject{
         return item;
     } // end remove
 
+    public void examine() {
+        pack.examine();
+    } // end examine
+
+    public ArrayList<Item> emptyPack() {
+        return pack.dump();
+    } // end emptyPack
+
     public Takable getSlot(EquipmentSlotEnum slot) {
         return equipment.getSlot(slot);
     } // end getSlot
+
+    public int getPackSpaceLeft() {
+        return pack.getSizeLeft();
+    }
 
     @Override
     public void addObserver(Observer o) {

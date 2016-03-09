@@ -50,7 +50,7 @@ public class View implements Runnable {
         g = bs.getDrawGraphics();
 
         g.clearRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
-        g.setColor(Color.BLACK);
+        g.setColor(new Color(52, 73, 94));
         g.fillRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
         if(State.getCurrentState() != null ) {
             State.getCurrentState().render(g);

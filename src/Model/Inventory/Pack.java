@@ -11,27 +11,36 @@ import java.util.ArrayList;
 public class Pack {
     private Item[] items;
     private int count;
-    private final int cap;
+    private final int cap = 16;
 
     public Pack() {
-        items = new Item[]{};
+        items = new Item[cap];
+        for(int i = 0; i < cap; i++) { items[i] = null; }
         count = 0;
-        cap = 16;
     } // end default constructor
 
     public Pack(Item[] items) {
-        this.items = items;
+        items = new Item[cap];
         count = items.length;
-        cap = 16;
+        this.items = items;
     } // end constructor
+
+    public boolean full() {
+        return count == cap;
+    } // end full
+
+    public boolean empty() {
+        return count == 0;
+    } // end empty
 
     public void place(Item item) {
         /*
         place an item at the first open position in the items array
          */
         for(int i = 0; i < cap; i++) {
-            if(items[i].equals(null)) {
+            if(items[i] == null) {
                 items[i] = item;
+                count++;
                 return;
             }
         }
@@ -40,10 +49,36 @@ public class Pack {
     public Item remove(int index) {
         Item anItem = items[index];
         items[index] = null;
+        count--;
         return anItem;
     } // end remove
 
     public Item get(int index) {
         return items[index];
     } // end get
+
+    public void examine() {
+        if(count == 0) {
+            System.out.println("Pack empty.");
+        }
+        for(int i = 0; i < cap; i++) {
+            if(items[i] != null) {
+                System.out.println(i + ": " + items[i].getName());
+            }
+        }
+    } // end examine
+    public int getSizeLeft() {
+        return cap - count;
+    }
+
+    public ArrayList<Item> dump() {
+        ArrayList<Item> tempItems = new ArrayList<>();
+        for(int i = 0; i < items.length; ++i){
+            if(items[i] != null) {
+                tempItems.add(items[i]);
+                items[i] = null;
+            }
+        }
+        return tempItems;
+    } // end dump
 } // end class Pack

@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
+import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Quest;
@@ -40,8 +41,48 @@ public class ItemFactory {
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
 
         // closed treasure chest
-        Item treasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 5));
-        initItems.put(treasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, treasureChest));
+        Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
+        initItems.put(closedTreasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, closedTreasureChest));
+
+        // laser pointer
+        Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(3, 4));
+        initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
+
+        // stick sword
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(2, 2));
+        initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
+
+        // helmet
+        Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
+        initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
+
+        // chest armor
+        Item chestPlate = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, new Location(5, 5));
+        initItems.put(chestPlate, ItemFactory.makeAsset(ItemsEnum.CHESTPLATE, chestPlate));
+
+        // pants
+        Item pants = ItemFactory.makeItem(ItemsEnum.PANTS, new Location(6, 5));
+        initItems.put(pants, ItemFactory.makeAsset(ItemsEnum.PANTS, pants));
+
+        // guantlets
+        Item gauntlets = ItemFactory.makeItem(ItemsEnum.GAUNTLETS, new Location(7, 5));
+        initItems.put(gauntlets, ItemFactory.makeAsset(ItemsEnum.GAUNTLETS, gauntlets));
+
+        // boots
+        Item boots = ItemFactory.makeItem(ItemsEnum.BOOTS, new Location(8, 5));
+        initItems.put(boots, ItemFactory.makeAsset(ItemsEnum.BOOTS, boots));
+
+        // shield
+        Item shield = ItemFactory.makeItem(ItemsEnum.SHIELD, new Location(9, 5));
+        initItems.put(shield, ItemFactory.makeAsset(ItemsEnum.SHIELD, shield));
+
+        // shield
+        Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(5, 3));
+        initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
+
+        // house
+        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
+        initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         return initItems;
     }
@@ -301,6 +342,12 @@ public class ItemFactory {
                                 new StatsEnum[] {StatsEnum.STRENGTH, StatsEnum.AGILITY, StatsEnum.INTELLECT,
                                         StatsEnum.HARDINESS},
                                 new int[] {4, 4, 4, 4})));
+            case HOUSE:
+                return new Obstacle(id,
+                            "House",
+                            "Old farmer Joe's house",
+                            null,
+                            location);
             default:
                 return null;
         }
@@ -308,6 +355,8 @@ public class ItemFactory {
 
     public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
         switch(itemsEnum) {
+            case BAGOFITEMS:
+                return new ItemView(item, Assets.BAGOFITEMS);
             case HEALTH_POTION:
                 return new ItemView(item, Assets.HEALTH_POTION);
             case MANA_POTION:
@@ -329,21 +378,32 @@ public class ItemFactory {
             case CATNIP_STAFF:
             case HAIRBALL:
             case LASER_POINTER:
+                return new ItemView(item, Assets.LASER_POINTER);
             case FISH_BOOMERANG:
             case CHEST_KEY:
+                return new ItemView(item, Assets.CHEST_KEY);
             case OPEN_TREASURE_CHEST:
+                return new ItemView(item,Assets.OPEN_TREASURE_CHEST);
             case CLOSED_TREASURE_CHEST:
                 return new ItemView(item, Assets.CLOSED_TREASURE_CHEST);
             case DOOR_KEY:
             case OPEN_DOOR:
             case CLOSED_DOOR:
             case HELMET:
+                return new ItemView(item, Assets.HELMET);
             case CHESTPLATE:
+                return new ItemView(item, Assets.CHESTPLATE);
             case PANTS:
+                return new ItemView(item, Assets.PANTS);
             case PLATELEGS:
             case GAUNTLETS:
+                return new ItemView(item, Assets.GAUNTLETS);
             case BOOTS:
+                return new ItemView(item, Assets.BOOTS);
             case SHIELD:
+                return new ItemView(item, Assets.SHIELD);
+            case HOUSE:
+                return new ItemView(item, Assets.HOUSE);
             default:
                 return null;
         }
