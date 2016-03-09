@@ -51,6 +51,7 @@ public class GameState extends State {
     private Player player;
     private NPC enemy;
 
+
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
 
@@ -81,9 +82,7 @@ public class GameState extends State {
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
 
-        //area effect
-        AreaEffect a = new AreaEffect("LEVELUP", "Gains you a level", AreaEffectEnum.LEVELUP, new Location(5,5));
-        map.placeAreaEffect(a);
+
 
         InventoryState inventoryState = new InventoryState(this);//adding the inv state
         INVENTORYSTATE = inventoryState;
@@ -133,6 +132,7 @@ public class GameState extends State {
         if(!cameraMoving) {
             camera.centerOnPlayer(player);
         }
+
 
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());

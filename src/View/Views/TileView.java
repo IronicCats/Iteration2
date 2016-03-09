@@ -30,6 +30,15 @@ public class TileView implements Observer, Renderable {
         this.sprite = sprite;
         this.location = tile.getLocation();
         this.viewLocation = new ViewLocation(location.getX(), location.getY());
+
+    }
+
+    public BufferedImage getSprite(){ return sprite; }
+
+    @Override
+    public void update() {
+        //initialize decalView
+        // Type of DecalView changes with what type of areaEffect is on a tile
         if(tile.getHasAreaEffect()){
             if(tile.getAreaEffectEnum() == AreaEffectEnum.LEVELUP){
                 decalView = new DecalView(tile.getAreaEffect(), Assets.STAR);
@@ -42,13 +51,6 @@ public class TileView implements Observer, Renderable {
             }
         }
 
-    }
-
-    public BufferedImage getSprite(){ return sprite; }
-
-    @Override
-    public void update() {
-        System.out.println("Updating");
     }
 
     @Override
@@ -70,10 +72,17 @@ public class TileView implements Observer, Renderable {
             g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }*/
 
-        System.out.println(decalView);
-        if(tile.getHasAreaEffect() && decalView != null){
-            decalView.render(g, xOffset, yOffset);
-        }
+        /**
+            System.out.println(decalView);
+            System.out.println("AE:" + tile.getAreaEffect());
+            System.out.println(tile.getHasAreaEffect());
+         **/
+        //render the decal onto the tile if the tile has an area effect
+        //check that decalView is initialized
+            if(tile.getHasAreaEffect() && decalView != null){
+                decalView.render(g, xOffset, yOffset);
+            }
+
 
 
     }

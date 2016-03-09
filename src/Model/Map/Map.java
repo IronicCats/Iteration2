@@ -52,12 +52,7 @@ public class Map implements Subject {
     }
 
     public void placeAreaEffect(AreaEffect a) {
-        System.out.println(a);
         try {
-            System.out.println(a.getX() + " " + a.getY());
-            System.out.println(tiles[a.getX()][a.getY()]);
-
-
             tiles[a.getX()][a.getY()].setAreaEffect(a);
         }catch (Exception e) {
             System.out.println(e);

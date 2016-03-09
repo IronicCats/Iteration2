@@ -101,9 +101,7 @@ public class MakeMap {
         }
     }
 
-    public static void populateAreaEffects(AreaEffect [] areaEffects, Map map){
-        for(AreaEffect a:areaEffects){
-            map.placeAreaEffect(a);
-        }
+    public static void populateAreaEffects(AreaEffect areaEffects, Map map){
+            map.placeAreaEffect(areaEffects);
     }
 }

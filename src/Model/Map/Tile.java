@@ -25,6 +25,7 @@ public abstract class Tile implements Subject {
     private MobileObject object;
     private boolean hasAreaEffect;
     private boolean visited;
+    private AreaEffectEnum ar;
 
     public Tile(Location location, boolean IsWalkable){
         items = new ArrayList<>();
@@ -32,16 +33,19 @@ public abstract class Tile implements Subject {
         this.location = location;
         this.IsWalkable = IsWalkable;
         visited = false;
-        areaEffect = null;
         observers = new ArrayList<>();
+        hasAreaEffect = false;
     }
 
     public void addItem(Item item) {
         items.add(item);
     }
 
+    //set the tiles area effect
     public void setAreaEffect(AreaEffect a){
         this.areaEffect = a;
+        this.ar = a.getAreaEffect();
+        hasAreaEffect = true;
         alert();
     }
 
@@ -50,7 +54,7 @@ public abstract class Tile implements Subject {
     }
 
     public AreaEffectEnum getAreaEffectEnum(){
-        return this.areaEffect.getAreaEffect();
+        return this.ar;
     }
 
     public MobileObject getObject() {
@@ -84,15 +88,9 @@ public abstract class Tile implements Subject {
         return location;
     }
 
+    //access if the current tile has an area effect or not
     public boolean getHasAreaEffect(){
-        if(areaEffect != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return hasAreaEffect;
     }
 
 
