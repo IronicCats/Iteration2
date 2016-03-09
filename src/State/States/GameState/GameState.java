@@ -28,6 +28,8 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.MobileObjectUtilities.NPCFactory;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
@@ -96,13 +98,11 @@ public class GameState extends State {
 
 
 
+        enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
+        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(4, 5, 0), map);
 
-        enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
-        enemy1 = new NPC(new Location(4,5,0), new Smasher(), new Inventory(),new NPCController(map));
-        //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
-
-        enemyView = new MobileObjectView(enemy, Assets.PLAYER);
-        enemyView1 = new MobileObjectView(enemy1, Assets.PLAYER);
+        enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
+        enemyView1 = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1);
 
         //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
 
