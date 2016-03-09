@@ -1,9 +1,8 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import State.States.GameState.EquipmentState;
+import State.State;
 import State.States.GameState.InventoryState;
-import State.StatesEnum;
 
 import java.awt.event.KeyEvent;
 
@@ -21,7 +20,7 @@ public class InventoryController extends Controller {
             return;
         }
         if(e.getKeyCode() == KeyEvent.VK_I){
-            state.switchState(StatesEnum.GameState);
+            state.switchState(State.GAMESTATE);
             System.out.println("ayylmao");
         }
     }

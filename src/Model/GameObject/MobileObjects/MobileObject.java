@@ -19,7 +19,6 @@ public abstract class MobileObject extends GameObject{
     private Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
-    //private Location destination;
 
     public MobileObject() {
         super();

@@ -21,7 +21,6 @@ import Model.GameObject.Item.Item;
 import Model.Stats.PetStats;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
-import State.StatesEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -38,8 +37,6 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -56,7 +53,7 @@ public class GameState extends State {
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
-
+    private boolean cameraMoving;
 
 
     private Player player;
@@ -68,6 +65,10 @@ public class GameState extends State {
     private MobileObjectView petView;
 
     public GameState() {
+        //need to change this
+        cameraMoving = false;
+
+
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -99,33 +100,36 @@ public class GameState extends State {
         map.placeAreaEffect(a);
 
         InventoryState inventoryState = new InventoryState(this);//adding the inv state
-        State.addState(StatesEnum.InventoryState, inventoryState);
+        INVENTORYSTATE = inventoryState;
 
         EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
-        State.addState(StatesEnum.EquipmentState, equipementState);
+        EQUIPMENTSTATE = equipementState;
 
-       //This is code to check Astar
-        /*Astar astar = new Astar(map);
-        ArrayList<Location> path = astar.Findpath(new Location(0,0),new Location(5,5));
-        for(int i = 0; i < path.size(); i++){
-            System.out.println("xLoc " + path.get(i).getX());
-            System.out.println("yLoc " + path.get(i).getY());
-            System.out.println("dir " + path.get(i).getDir());
-        }*/
+
     }
 
     public void switchState() {
 
     }
 
-    public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+    public void move(int degrees) {
+        if(cameraMoving){
+            System.out.println("camera moving");
+            camera.move(degrees);
+        }
+        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
             map.registerObject(player); // registers player with tile
         }
     }
 
+    public void SetCameramoving(boolean movement){
+        cameraMoving = movement;
+        if(!cameraMoving){
+            camera.centerOnPlayer(player);
+        }
+    }
 
     public void render(Graphics g) {
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
@@ -136,12 +140,13 @@ public class GameState extends State {
         for (DecalView decalView : decals.values()) {
             decalView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        camera.centerOnPlayer(player);
+        if(!cameraMoving) {
+            camera.centerOnPlayer(player);
+        }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
         petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
-
 
     @Override
     public void tick() {
@@ -150,8 +155,7 @@ public class GameState extends State {
     }
 
     @Override
-    public void switchState(StatesEnum state) {
-        System.out.println(state);
+    public void switchState(State state) {
         setState(state);
     }
 }

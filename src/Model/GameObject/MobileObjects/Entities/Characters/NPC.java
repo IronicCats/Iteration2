@@ -16,10 +16,12 @@ import java.util.Random;
 public class NPC extends Character implements Tickable {
     NPCController controller;
     Random random;
+    Location base;
     public NPC(Location location, Occupation occupation, Inventory inventory, NPCController controller) {
         super(location, occupation, inventory);
         controller.setAI(this);
         this.controller = controller;
+        base = location;
         random = new Random(System.currentTimeMillis());
     }
 
@@ -35,11 +37,8 @@ public class NPC extends Character implements Tickable {
     } // end tick
 
     public Location computeRandomLocation() {
-        System.out.println("computeRandomLocation called");
-        int x = random.nextInt(5);
-        int y = random.nextInt(5);
-
-        return new Location(x, y);
+        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * 2/*stats.getMovement()*/,
+                base.getY() + (int)Math.pow(-1, random.nextInt(2)) * 2)/*stats.getMovement()*/;
     } // end computeRandomLocation
 
     // inventory = NPCinventory

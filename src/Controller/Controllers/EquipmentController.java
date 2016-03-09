@@ -2,9 +2,7 @@ package Controller.Controllers;
 
 import Controller.Controller;
 import State.States.GameState.EquipmentState;
-import State.States.GameState.GameState;
-import State.StatesEnum;
-
+import State.State;
 import java.awt.event.KeyEvent;
 
 /**
@@ -21,7 +19,7 @@ public class EquipmentController extends Controller {
             return;
         }
         if(e.getKeyCode() == KeyEvent.VK_E){
-            state.switchState(StatesEnum.GameState);
+            state.switchState(State.GAMESTATE);
             System.out.println("ayylmao");
         }
     }

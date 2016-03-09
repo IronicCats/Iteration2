@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
@@ -33,7 +34,7 @@ public abstract class AIcontroller implements Tickable {
                 AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
                 AI.alert();
                 map.registerObject(AI);
-                System.out.println("Moving to " + destination.simpleToString());
+                //System.out.println("Moving to " + destination.simpleToString());
             }
         }
     }
