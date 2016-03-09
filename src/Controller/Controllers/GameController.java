@@ -70,6 +70,8 @@ public class GameController extends Controller {
                 ((GameState) state).executePlayerCommand(PlayerCommandsEnum.interact);
             } else if (e.getKeyCode() == Settings.D) {          /* execute inventory dump (temporary?) */
                 ((GameState) state).executePlayerCommand(PlayerCommandsEnum.drop);
+            } else if(e.getKeyCode() == Settings.F){
+                Settings.FOG = !Settings.FOG;
             }
 
         //these are already listed above

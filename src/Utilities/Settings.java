@@ -40,6 +40,8 @@ public class Settings {
     public static int I = 0x49;
     public static int M = 0x4D;
     public static int Q = 81;
+    public static int F = 70;
+    public static boolean FOG = false;
 
     public static String TITLE = "Ironic Cats";
 }
