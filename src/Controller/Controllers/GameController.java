@@ -72,9 +72,6 @@ public class GameController extends Controller {
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);
         if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(State.INVENTORYSTATE);
         if(e.getKeyCode() == KeyEvent.VK_E)state.switchState(State.EQUIPMENTSTATE);
-        if(e.getKeyCode() == KeyEvent.VK_H){
-            HotKeys.adjustKey(e.getKeyCode());
-        }
-
+        if(e.getKeyCode() == KeyEvent.VK_P)state.switchState(State.PAUSESTATE);
     }
 }
