@@ -25,7 +25,7 @@ public class Astar {
         while (!Queue.isEmpty()) {
             Location current = Queue.remove();
             Tile currentTile = map.getTile(current.getX(),current.getY());
-            if(currentTile.IsWalkable) {
+            if(currentTile.isWalkable()) {
                 Tile neighbors[] = neighbors(currentTile, map);
                 for (int i = 0; i < 6; i++) {
                     Tile next = neighbors[i];

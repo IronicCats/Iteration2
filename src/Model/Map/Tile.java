@@ -1,8 +1,8 @@
 package Model.Map;
 
+
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
@@ -20,16 +20,19 @@ public abstract class Tile implements Subject {
     private Location location;
     protected ArrayList<Observer> observers;
     public boolean IsWalkable;
+    protected Observer observer;
+    private boolean isWalkable;
     private ArrayList<Item> items;
     private AreaEffect areaEffect;
     private MobileObject object;
+    private boolean hasObject;
     private boolean hasAreaEffect;
     private boolean visited;
     private AreaEffectEnum ar;
 
-    public Tile(Location location, boolean IsWalkable){
+    public Tile(Location location, boolean isWalkable){
         items = new ArrayList<>();
-        object = null;
+        hasObject = false;
         this.location = location;
         this.IsWalkable = IsWalkable;
         visited = false;
@@ -61,23 +64,35 @@ public abstract class Tile implements Subject {
         return object;
     }
 
-    public void setObject(MobileObject object){
-        this.object = object;
-        if(object instanceof Player){
-            visited = true;
-        }
+    public boolean hasObject() {
+        return hasObject;
     }
 
-    public void leaveTile(){
-        this.object = null;
+    public Tile register(MobileObject object) {
+        this.object = object;
+        hasObject = true;
+        System.out.println(object + " Has registered");
+        if(object instanceof Player) {
+            visited = true;
+        }
+        return this;
     }
+
+    public void deregister() {
+        object = null;
+        hasObject = false;
+    }
+
+
+
+    public boolean isWalkable() {
+        // add && !hasObject()
+        return isWalkable;
+    }
+
 
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    public boolean hasObject() {
-        return object != null;
     }
 
     public boolean hasItems() {

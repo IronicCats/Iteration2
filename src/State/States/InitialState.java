@@ -2,7 +2,9 @@ package State.States;
 
 
 import State.State;
+import State.States.GameState.EquipmentState;
 import State.States.GameState.GameState;
+import State.States.GameState.InventoryState;
 
 import java.awt.*;
 
@@ -22,6 +24,11 @@ public class InitialState extends State {
         GameState gameState = new GameState();
         GAMESTATE = gameState;
 
+
+        InventoryState inventoryState = new InventoryState(gameState);//adding the inv state
+        INVENTORYSTATE = inventoryState;
+        EquipmentState equipementState = new EquipmentState(gameState);//adding the equipment state
+        EQUIPMENTSTATE = equipementState;
         //switchState(MENUSTATE);
 
     }

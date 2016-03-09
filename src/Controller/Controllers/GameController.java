@@ -27,7 +27,7 @@ public class GameController extends Controller {
         if(e.getKeyCode() == Settings.ENTER){
             if(!cameraMoves) {
                 cameraMoves = true;
-                waitingTime = 45; 
+                waitingTime = 45;
                 ((GameState) state).SetCameramoving(cameraMoves);
             }
             else{
