@@ -49,10 +49,13 @@ public abstract class MobileObject extends GameObject{
     }
 
     public void move(int degrees){
-        location = Location.newLocation(degrees, location);
-        location.setDir(degrees);
-        registerTile(location);
-        alert();
+        if(canMove) {
+            canMove = false;
+            location = Location.newLocation(degrees, location);
+            location.setDir(degrees);
+            registerTile(location);
+            alert();
+        }
     }
 
 

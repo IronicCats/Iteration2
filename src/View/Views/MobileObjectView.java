@@ -83,6 +83,7 @@ public class MobileObjectView implements Renderable, Observer {
             return;
         }
         entity.setCanMove(false);
+
         if(goalX != viewLocation.getX()) {
             if(goalX > viewLocation.getX()){
                 viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
