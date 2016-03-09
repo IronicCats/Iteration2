@@ -2,6 +2,7 @@ package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
 import Model.Location;
+import Model.Stats.Stats;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -15,21 +16,21 @@ Also inherits location from GameObject
 */
 public abstract class MobileObject extends GameObject{
 
-    private float speed;
+    private Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
-    private Location destination;
 
     public MobileObject() {
         super();
         canMove = true;
-        speed = 0;
+        stats = new Stats();
         viewLocation = new ViewLocation(location.getX(), location.getY());
     }
-    public MobileObject(Location location) {
+    public MobileObject(Location location, Stats stats) {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
+        this.stats = stats;
     }
 
     public void move(int degrees){
@@ -39,13 +40,11 @@ public abstract class MobileObject extends GameObject{
     }
 
 
-    public float getSpeed() {
-        return speed;
+    public Stats getStats() {
+        return stats;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
+    public int getMovement() { return stats.getMovement(); }
 
     public ViewLocation getViewLocation() {
         return viewLocation;

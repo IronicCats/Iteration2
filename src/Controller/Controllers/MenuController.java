@@ -1,9 +1,8 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import State.State;
 import State.States.MenuState;
-import State.StatesEnum;
-import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
 
@@ -33,7 +32,8 @@ public class MenuController extends Controller {
         }
         if(e.getKeyCode() == 10) {
             if (currentState == 1){
-                state.switchState(StatesEnum.GameState);
+                System.out.println("Switching to gameState");
+                state.switchState(State.GAMESTATE);
             }
             else if(currentState==2)System.out.println("this is the load state");
             else if(currentState==3)System.exit(0);

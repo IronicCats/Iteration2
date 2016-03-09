@@ -1,6 +1,6 @@
 package View.Views;
 
-import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Utilities.*;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class MobileObjectView implements Renderable, Observer {
 
-    private Entity entity;
+    private MobileObject entity;
     private ArrayList<BufferedImage> sprites;
     private Location location;
 
@@ -28,7 +28,25 @@ public class MobileObjectView implements Renderable, Observer {
     private ViewLocation viewLocation;
     private float goalX, goalY;
 
-    public MobileObjectView(Entity entity, ArrayList<BufferedImage> sprites) {
+    public MobileObjectView(MobileObject entity, BufferedImage sprite) {
+        ArrayList<BufferedImage> temp = new ArrayList<>();
+        temp.add(sprite);
+        entity.addObserver(this);
+        goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
+        goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
+        this.entity = entity;
+        this.sprites = temp;
+        this.location = entity.getLocation();
+        this.viewLocation = entity.getViewLocation();
+        this.movement = entity.getMovement();
+        this.width = sprites.get(0).getWidth();
+        this.height = sprites.get(0).getHeight();
+        System.out.println(sprites.size());
+        this.active = 0;
+        this.movement = 10;
+    } // end constructor
+
+    public MobileObjectView(MobileObject entity, ArrayList<BufferedImage> sprites) {
         entity.addObserver(this);
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());

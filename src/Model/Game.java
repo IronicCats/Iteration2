@@ -9,11 +9,12 @@ public class Game implements Runnable {
 
     //Used for Game Loop
 
-    private boolean running = false;
+    public boolean running = false;
     private Thread thread;
 
 
     public void run() {
+        System.out.println("I'm Starting");
 
         int fps = 60;
         double timePerTick = 1000000000 / fps;
@@ -22,8 +23,8 @@ public class Game implements Runnable {
         long lastTime = System.nanoTime();
         long timer = 0;
         int ticks = 0;
-
         while (running) {
+
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
@@ -31,8 +32,17 @@ public class Game implements Runnable {
 
             if( delta >= 1 ) {
                 //DO STUFF
-               State.currentState.tick();
+                try {
+                    if(State.getCurrentState() == State.INITIALSTATE) {
+                        State.setState(State.MENUSTATE);
+                    }
+                    if (State.getCurrentState() != null) {
+                        State.getCurrentState().tick();
 
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 //
                 ticks++;
                 delta--;
@@ -42,16 +52,20 @@ public class Game implements Runnable {
                 ticks = 0;
                 timer = 0;
             }
-        }
 
+        }
+        System.out.println("I'm stopping");
         stop();
     }
 
 
     public synchronized void start() {
         if (running) {
+            System.out.println("Already running");
+
             return;
         }
+        System.out.println("Thread Started");
         running = true;
         thread = new Thread(this);
         thread.start();
@@ -59,6 +73,7 @@ public class Game implements Runnable {
 
 
     public synchronized void stop() {
+        System.out.println("in stop method");
         if( !running ) {
             return;
         }

@@ -7,16 +7,20 @@ import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Stats.CharacterStats;
-import State.StatesEnum;
+import Model.Stats.PetStats;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -33,7 +37,6 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -50,16 +53,22 @@ public class GameState extends State {
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
-
+    private boolean cameraMoving;
 
 
     private Player player;
     private NPC enemy;
+    private Pet pet;
 
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
+    private MobileObjectView petView;
 
     public GameState() {
+        //need to change this
+        cameraMoving = false;
+
+
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -76,10 +85,13 @@ public class GameState extends State {
         player = new Player();
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        enemy = new NPC(new Location(15,15,0), new Smasher(), new Inventory(),new NPCController(map));
+        enemy = new NPC(new Location(5,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+        petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
+
 
         
         //area effect
@@ -88,27 +100,24 @@ public class GameState extends State {
         map.placeAreaEffect(a);
 
         InventoryState inventoryState = new InventoryState(this);//adding the inv state
-        State.addState(StatesEnum.InventoryState, inventoryState);
+        INVENTORYSTATE = inventoryState;
 
         EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
-        State.addState(StatesEnum.EquipmentState, equipementState);
+        EQUIPMENTSTATE = equipementState;
 
-       //This is code to check Astar
-        /*Astar astar = new Astar(map);
-        ArrayList<Location> path = astar.Findpath(new Location(0,0),new Location(5,5));
-        for(int i = 0; i < path.size(); i++){
-            System.out.println("xLoc " + path.get(i).getX());
-            System.out.println("yLoc " + path.get(i).getY());
-            System.out.println("dir " + path.get(i).getDir());
-        }*/
+
     }
 
     public void switchState() {
 
     }
 
-    public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+    public void move(int degrees) {
+        if(cameraMoving){
+            System.out.println("camera moving");
+            camera.move(degrees);
+        }
+        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
             map.registerObject(player); // registers player with tile
@@ -118,9 +127,11 @@ public class GameState extends State {
 
     }
 
-    @Override
-    public void tick() {
-        enemy.tick();
+    public void SetCameramoving(boolean movement){
+        cameraMoving = movement;
+        if(!cameraMoving){
+            camera.centerOnPlayer(player);
+        }
     }
 
     public void render(Graphics g) {
@@ -132,16 +143,22 @@ public class GameState extends State {
         for (DecalView decalView : decals.values()) {
             decalView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        camera.centerOnPlayer(player);
+        if(!cameraMoving) {
+            camera.centerOnPlayer(player);
+        }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
     @Override
-    public void switchState(StatesEnum state) {
-        if(getState() != getLiveState(state)) {
-            System.out.println(state);
-            setState(state);
-        }
+    public void tick() {
+        enemy.tick();
+        pet.tick();
+    }
+
+    @Override
+    public void switchState(State state) {
+        setState(state);
     }
 }

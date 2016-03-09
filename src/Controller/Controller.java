@@ -14,6 +14,7 @@ import java.util.TimerTask;
 public abstract class Controller implements KeyListener {
     public State state;
     protected long lastPressProcessed = 0;
+    public int waitingTime = 500;
 
 
     public Controller(State state) {
@@ -41,7 +42,7 @@ public abstract class Controller implements KeyListener {
     }
 
     public boolean canGetInput() {
-        if(System.currentTimeMillis() - lastPressProcessed > 500) {
+        if(System.currentTimeMillis() - lastPressProcessed > waitingTime) {
             lastPressProcessed = System.currentTimeMillis();
             return true;
         }

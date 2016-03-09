@@ -2,6 +2,10 @@ package State;
 
 import Controller.*;
 import Model.*;
+import Model.Inventory.Inventory;
+import State.States.GameState.*;
+import State.States.InitialState;
+import State.States.MenuState;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
@@ -9,36 +13,53 @@ import java.awt.*;
 /**
  * Created by Joshua Kegley on 2/24/2016.
  */
-public abstract class State implements Tickable, Renderable {
+public class State implements Tickable, Renderable {
+
+    public static GameState GAMESTATE;
+    public static MenuState MENUSTATE;
+    public static InventoryState INVENTORYSTATE;
+    public static InitialState INITIALSTATE;
+
+    public static LoadState LOADSTATE;
+    public static SaveState SAVESTATE;
+    public static EquipmentState EQUIPMENTSTATE;
+
     public static Canvas canvas;
     public static State currentState = null;
 
-    public static State previousState = null;
-    private static State[] states = new State[(int) StatesEnum.ExitState.ordinal()];
     private Controller controller;
 
 
-    public abstract void switchState(StatesEnum state);
+    public void switchState(State state) {}
 
-    public static void addState( StatesEnum s, State state ) { states[s.ordinal()] = state; }
-    public static void setState( StatesEnum s ) {
+    public static void setState( State state ) {
+
         if(currentState != null) {
             currentState.deactivateListener();
         }
-        currentState = states[s.ordinal()];
+        currentState = state;
         currentState.activateListener();
     }
-    public static State getState() { return currentState; }
-    public State getLiveState(StatesEnum state) { return states[state.ordinal()];}
-    public State getPreviousState(){ return previousState; }
+    public static State getCurrentState() { return currentState; }
 
     public Controller getController() { return controller; }
     public void setController( Controller controller ) { this.controller = controller; }
+
 
     public void activateListener() {
         canvas.addKeyListener(controller);
     }
     public void deactivateListener() {
         canvas.removeKeyListener(controller);
+    }
+
+    @Override
+    public void tick() {
+        System.out.println("At basic tick");
+    }
+
+    @Override
+    public void render(Graphics g) {
+
     }
 }
