@@ -25,6 +25,14 @@ public class Pack {
         this.items = items;
     } // end constructor
 
+    public boolean full() {
+        return count == cap;
+    } // end full
+
+    public boolean empty() {
+        return count == 0;
+    } // end empty
+
     public void place(Item item) {
         /*
         place an item at the first open position in the items array
@@ -60,7 +68,7 @@ public class Pack {
         }
     } // end examine
 
-    public void empty() {
+    public void dump() {
         for(int i = 0; i < cap; i++) {
             if(items[i] != null) {
                 remove(i);

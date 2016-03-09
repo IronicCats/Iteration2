@@ -4,6 +4,7 @@ import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Equippable;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.Inventory.EquipmentSlotEnum;
@@ -67,27 +68,28 @@ public class Player extends Character implements Observer{
     } // end unequip
 
     public void interact(Item item) {
-        if (item instanceof Takable) {
-            pickup(item);
-        } else if (item instanceof Weapon) {
+        if (item instanceof Weapon) {
             System.out.println("weapon");
             equip((Weapon)item);
         } else if (item instanceof Armor) {
             System.out.println("armor");
             equip((Armor)item);
+        } else if (item instanceof Takable) {
+            pickup(item);
         }
     } // end interact
 
     public void examinePack() {
         inventory.examine();
-        emptyPack();
+        //emptyPack();
     } // end emptyPack
 
     public void emptyPack() {
-        inventory.emptyPack();
+        inventory.dump();
     } // end emptyPack
 
     public void pickup(Item item) {
-        inventory.place(item);
+        if(!inventory.packFull())
+            inventory.place(item);
     } // end pickup
 } // end class Player
