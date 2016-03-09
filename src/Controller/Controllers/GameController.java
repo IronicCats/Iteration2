@@ -16,7 +16,7 @@ public class GameController extends Controller {
     public GameController(GameState state) {
         super(state);
     }
-    private boolean CameraMoves;
+    private boolean cameraMoves;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -25,46 +25,28 @@ public class GameController extends Controller {
 
         //If camera movement is true then move camera instead of player
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            System.out.println("Enter key pressed");
-            if(!CameraMoves) {
-                CameraMoves = true;
-                ((GameState) state).saveCameraOffsets();
+            if(!cameraMoves) {
+                cameraMoves = true;
+                ((GameState) state).SetCameramoving(cameraMoves);
             }
             else{
-                CameraMoves = false;
-                ((GameState) state).BackToOriginalOffset();
+                cameraMoves = false;
+                ((GameState) state).SetCameramoving(cameraMoves);
             }
         }
 
-        if(!CameraMoves) {
             if (e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
-                ((GameState) state).movePlayer(90);
+                ((GameState) state).move(90);
             } else if (e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 33) {
-                ((GameState) state).movePlayer(135);
+                ((GameState) state).move(135);
             } else if (e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == 37) {
-                ((GameState) state).movePlayer(225);
+                ((GameState) state).move(225);
             } else if (e.getKeyCode() == Settings.DOWN || e.getKeyCode() == 40) {
-                ((GameState) state).movePlayer(270);
+                ((GameState) state).move(270);
             } else if (e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == 39) {
-                ((GameState) state).movePlayer(315);
+                ((GameState) state).move(315);
             } else if (e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
-                ((GameState) state).movePlayer(45);
-            }
-        }
-        else {
-                if (e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
-                    ((GameState) state).moveCamera(90);
-                } else if (e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 33) {
-                    ((GameState) state).moveCamera(135);
-                } else if (e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == 37) {
-                    ((GameState) state).moveCamera(225);
-                } else if (e.getKeyCode() == Settings.DOWN || e.getKeyCode() == 40) {
-                    ((GameState) state).moveCamera(270);
-                } else if (e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == 39) {
-                    ((GameState) state).moveCamera(315);
-                } else if (e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
-                    ((GameState) state).moveCamera(45);
-                }
+                ((GameState) state).move(45);
             }
 
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);

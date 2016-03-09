@@ -109,28 +109,23 @@ public class GameState extends State {
 
     }
 
-    public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+    public void move(int degrees) {
+        if(cameraMoving){
+            System.out.println("camera moving");
+            camera.move(degrees);
+        }
+        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
             map.registerObject(player); // registers player with tile
         }
     }
 
-    public void moveCamera(int degrees){
-        camera.move(degrees);
-    }
-
-    public void saveCameraOffsets(){
-        cameraMoving = true;
-        camera.setOriginalXOffset(camera.getxOffset());
-        camera.setGetOriginalYOffset(camera.getyOffset());
-    }
-
-    public void BackToOriginalOffset(){
-        cameraMoving = false;
-        camera.setxOffset(camera.getOriginalXOffset());
-        camera.setyOffset(camera.getGetOriginalYOffset());
+    public void SetCameramoving(boolean movement){
+        cameraMoving = movement;
+        if(!cameraMoving){
+            camera.centerOnPlayer(player);
+        }
     }
 
     @Override

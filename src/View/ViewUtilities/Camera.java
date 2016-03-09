@@ -15,7 +15,6 @@ public class Camera implements Observer {
     private int gameWidth, gameHeight;
     private int xOffset, yOffset;
     private Map map;
-    private int originalXOffset, getOriginalYOffset;
                                      // The Camera will also need a Player object.
 
     public Camera(int gameWidth, int gameHeight, Map map) {
@@ -54,31 +53,22 @@ public class Camera implements Observer {
 
     public void move(int degrees){
         switch(degrees){
-            case 45:
-                xOffset += Settings.TILEWIDTH/4;
-                yOffset -= Settings.TILEHEIGHT/2;
-                break;
             case 90:
-                yOffset -= Settings.TILEHEIGHT;
-                break;
-            case 135:
-                xOffset -= Settings.TILEWIDTH/4;
-                yOffset -= Settings.TILEHEIGHT/2;
+                yOffset -= 30;
                 break;
             case 225:
-                xOffset -= Settings.TILEWIDTH/4;
-                yOffset += Settings.TILEHEIGHT/2;
+                xOffset -= 30;
                 break;
             case 270:
-                yOffset += Settings.TILEHEIGHT;
+                yOffset += 30;
                 break;
             case 315:
-                xOffset += Settings.TILEWIDTH/4;
-                yOffset += Settings.TILEHEIGHT/2;
+                xOffset += 30;
                 break;
             default:
                 break;
         }
+        keepCameraOnMap();
     }
 
     //Every time you change the offset of x or y keepcameronMap makes sure you didnt cross the boundary
@@ -98,22 +88,6 @@ public class Camera implements Observer {
     public void setyOffset(int yOffset) {
         this.yOffset = yOffset;
         keepCameraOnMap();
-    }
-
-    public int getOriginalXOffset() {
-        return originalXOffset;
-    }
-
-    public void setOriginalXOffset(int originalXOffset) {
-        this.originalXOffset = originalXOffset;
-    }
-
-    public int getGetOriginalYOffset() {
-        return getOriginalYOffset;
-    }
-
-    public void setGetOriginalYOffset(int getOriginalYOffset) {
-        this.getOriginalYOffset = getOriginalYOffset;
     }
 
     @Override
