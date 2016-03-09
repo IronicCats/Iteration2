@@ -38,6 +38,8 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -87,7 +89,7 @@ public class GameState extends State {
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
-        petView = new MobileObjectView(pet, Assets.PLAYER);
+        petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
 
 
         

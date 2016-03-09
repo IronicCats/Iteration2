@@ -60,12 +60,8 @@ public class Pet extends MobileObject implements Tickable{
     } // end tick
 
     public Location computeRandomLocation() {
-        System.out.println("computeRandomLocation called");
-        int temp = random.nextInt(2) - 1; // random number between -1 and 1
-        int x = random.nextInt(base.getX() + temp * stats.getMovement());
-        int y = random.nextInt(base.getY() + temp * stats.getMovement());
-
-        return new Location(x, y);
+        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * 2/*stats.getMovement()*/,
+                base.getY() + (int)Math.pow(-1, random.nextInt(2)) * 2)/*stats.getMovement()*/;
     } // end computeRandomLocation
 
     public PetStats getStats() { return stats; }
