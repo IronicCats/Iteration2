@@ -173,12 +173,16 @@ public class GameState extends State {
                 player.emptyPack();
                 break;
             case attack:
+                System.out.println("Attack!");
                 break;
             case ability1:
+                System.out.println("Ability 1");
                 break;
             case ability2:
+                System.out.println("Ability 2");
                 break;
             case ability3:
+                System.out.println("Ability 3");
                 break;
         }
     }

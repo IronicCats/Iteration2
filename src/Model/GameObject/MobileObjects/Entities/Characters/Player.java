@@ -4,6 +4,7 @@ import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Equippable;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Pet;
@@ -72,27 +73,46 @@ public class Player extends Character implements Observer{
 
     public void mount(Vehicle vehicle){
         ((CharacterStats)getStats()).setMovement(vehicle.getMovement());
-    }
+        // change sprite
+    } // end mount
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
+    public void interact(Item item) {
+        if (item instanceof Weapon) {
+            System.out.println("weapon");
+            equip((Weapon)item);
+        } else if (item instanceof Armor) {
+            System.out.println("armor");
+            equip((Armor)item);
+        } else if (item instanceof Takable) {
+            pickup(item);
+        }
+    } // end interact
 
     public void unmount(){
         ((CharacterStats)getStats()).resetMovement();
-    }
+        // change sprite
+    } // end unmount
 
-  
     public void examinePack() {
         inventory.examine();
-        emptyPack();
+        //emptyPack();
     } // end emptyPack
 
+    public void emptyPack() {
+        inventory.emptyPack();
+    } // end emptyPack
+
+    public void pickup(Item item) {
+        if(!inventory.packFull())
+            inventory.place(item);
+    } // end pickup
 
     public void tick() {
         ((CharacterStats)getStats()).tick();
     }
-
 } // end class Player
