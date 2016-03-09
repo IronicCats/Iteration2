@@ -27,7 +27,8 @@ public class MenuView implements Renderable {
 
     @Override
     public void render(Graphics g) {
-
+        width= Settings.GAMEWIDTH;
+        height= Settings.GAMEHEIGHT;
         //g.drawImage(Assets.background, 0, 0, 800, 600, null);
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(0, 0, width, height);
