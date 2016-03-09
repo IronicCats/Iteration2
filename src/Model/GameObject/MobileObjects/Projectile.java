@@ -2,6 +2,7 @@ package Model.GameObject.MobileObjects;
 
 import Model.Effects.Effect;
 import Model.Location;
+import Model.Stats.Stats;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -14,8 +15,8 @@ public class Projectile extends MobileObject {
     int range;
 
     //constructor
-    public Projectile(Location location, Effect effects, int range) {
-        super(location);
+    public Projectile(Location location, Stats stats, Effect effects, int range) {
+        super(location, stats);
         this.effects = effects;
         this.range = range;
     }

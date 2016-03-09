@@ -5,14 +5,20 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Stats.PetStats;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -50,10 +56,12 @@ public class GameState extends State {
 
     private Player player;
     private NPC enemy;
+    private Pet pet;
 
 
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
+    private MobileObjectView petView;
 
     public GameState() {
         //need to change this
@@ -78,9 +86,12 @@ public class GameState extends State {
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         enemy = new NPC(new Location(5,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+        petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
+
 
 
 
@@ -107,6 +118,9 @@ public class GameState extends State {
             player.move(degrees);
             map.registerObject(player); // registers player with tile
         }
+
+
+
     }
 
     public void SetCameramoving(boolean movement){
@@ -114,11 +128,6 @@ public class GameState extends State {
         if(!cameraMoving){
             camera.centerOnPlayer(player);
         }
-    }
-
-    @Override
-    public void tick() {
-        enemy.tick();
     }
 
     public void render(Graphics g) {
@@ -136,6 +145,24 @@ public class GameState extends State {
 
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        petView.render(g, camera.getxOffset(), camera.getyOffset());
+    }
+
+    public void playerInteract() {
+        if(map.getTile(player.getX(), player.getY()).hasItems()){
+            Item itemOnTile = map.getTile(player.getX(), player.getY()).getItems().get(0);
+            player.interact(itemOnTile);
+        }
+    } // end playerInteract
+
+    public void playerExamineInventory() {
+        player.examinePack();
+    } // end playerExamineInventory
+
+    @Override
+    public void tick() {
+        enemy.tick();
+        pet.tick();
     }
 
     @Override

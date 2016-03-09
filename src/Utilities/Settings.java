@@ -24,5 +24,16 @@ public class Settings {
     public static int DOWN = 98;
     public static int DOWN_RIGHT = 99;
 
+    public static int TAB = 0x09;
+    public static int ENTER = 0x0D;
+    public static int ESC = 0x1B;
+
+    public static int SPACE = 0x20;
+    public static int D = 0x44;
+    public static int E = 0x45;
+    public static int I = 0x49;
+    public static int M = 0x4D;
+    public static int Q = 0x51;
+
     public static String TITLE = "Ironic Cats";
 }
