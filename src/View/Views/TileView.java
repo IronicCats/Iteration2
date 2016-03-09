@@ -57,18 +57,19 @@ public class TileView implements Observer, Renderable {
         if (tile.hasItems()) {
             Item item;
             if(tile.amountOfItems() > 1) {
-                item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
+                itemView = ItemFactory.makeAsset(ItemsEnum.BAGOFITEMS,tile.getItems().get(0));
                 for(Item i: tile.getItems()){
                     if(i instanceof Obstacle){//IF THE ITEM IS AN OBSTACLE, DRAW THAT ONLY
                         item = i;
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
                     }
                 }
-                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
             }else{
                 item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
+                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
+
 
             }
-            itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
 
         }else {
             itemView = null;
