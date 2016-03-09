@@ -38,7 +38,7 @@ public class Player extends Character implements Observer{
 
     @Override
     public void update() {
-        ((CharacterStats)stats).update();
+        ((CharacterStats)getStats()).update();
     } // end update
 
     @Override
@@ -48,16 +48,16 @@ public class Player extends Character implements Observer{
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
-        ((CharacterStats)stats).applyEquipmentModification(weapon.getEquipmentModification());
+        ((CharacterStats)getStats()).applyEquipmentModification(weapon.getEquipmentModification());
     } // end equip
 
     public void equip(Armor armor) {
         inventory.equip(armor);
-        ((CharacterStats)stats).applyEquipmentModification(armor.getEquipmentModification());
+        ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
-        ((CharacterStats)stats).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+        ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 } // end class Player
