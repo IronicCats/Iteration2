@@ -25,6 +25,14 @@ public class Pack {
         this.items = items;
     } // end constructor
 
+    public boolean full() {
+        return count == cap;
+    } // end full
+
+    public boolean empty() {
+        return count == 0;
+    } // end empty
+
     public void place(Item item) {
         /*
         place an item at the first open position in the items array
@@ -59,16 +67,19 @@ public class Pack {
             }
         }
     } // end examine
-
     public int getSizeLeft() {
-        return cap - items.length;
+        return cap - count;
     }
 
-    public void empty() {
-        for(int i = 0; i < cap; i++) {
+    public ArrayList<Item> dump() {
+        ArrayList<Item> tempItems = new ArrayList<>();
+        for(int i = 0; i < items.length; ++i){
             if(items[i] != null) {
-                remove(i);
+                tempItems.add(items[i]);
+                items[i] = null;
             }
         }
-    } // end emptyPack
+        System.out.println(tempItems);
+        return tempItems;
+    } // end dump
 } // end class Pack

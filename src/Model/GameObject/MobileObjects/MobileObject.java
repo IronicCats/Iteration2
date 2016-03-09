@@ -45,14 +45,17 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
         this.stats = stats;
         map = GameState.map;
-        tile = map.getTile(location);
+        tile = map.register(this);
     }
 
     public void move(int degrees){
-        location = Location.newLocation(degrees, location);
-        location.setDir(degrees);
-        registerTile(location);
-        alert();
+        if(canMove) {
+            canMove = false;
+            location = Location.newLocation(degrees, location);
+            location.setDir(degrees);
+            registerTile(location);
+            alert();
+        }
     }
 
 
@@ -89,6 +92,9 @@ public abstract class MobileObject extends GameObject{
         tile.interact();
     }
 
+    public Tile getTile(){
+        return tile;
+    }
 
 
 }

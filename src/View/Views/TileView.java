@@ -1,9 +1,15 @@
 package View.Views;
 
+import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Tile;
+import Utilities.AreaEffectUtilities.AreaEffectFactory;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Settings;
 import Utilities.Utilities;
@@ -23,9 +29,11 @@ public class TileView implements Observer, Renderable {
     Location location;
     private ViewLocation viewLocation;
     private DecalView decalView;
+    private ItemView itemView;
 
     public TileView(Tile tile, BufferedImage sprite) {
         this.tile = tile;
+        this.itemView = null;
         tile.addObserver(this);
         this.sprite = sprite;
         this.location = tile.getLocation();
@@ -37,20 +45,37 @@ public class TileView implements Observer, Renderable {
 
     @Override
     public void update() {
-        //initialize decalView
-        // Type of DecalView changes with what type of areaEffect is on a tile
-        if(tile.getHasAreaEffect()){
-            if(tile.getAreaEffectEnum() == AreaEffectEnum.LEVELUP){
-                decalView = new DecalView(tile.getAreaEffect(), Assets.STAR);
+        if (tile.hasItems()) {
+            Item item;
+            System.out.println("Creating Item View");
+            if(tile.amountOfItems() > 1) {
+                item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
+                for(Item i: tile.getItems()){
+                    if(i instanceof Obstacle){//IF THE ITEM IS AN OBSTACLE, DRAW THAT ONLY
+                        item = i;
+                    }
+                }
+                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
+            }else{
+                item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
+
             }
-            else if(tile.getAreaEffectEnum() == AreaEffectEnum.DEATH){
-                decalView = new DecalView(tile.getAreaEffect(), Assets.SKULL);
-            }
-            else if(tile.getAreaEffectEnum() == AreaEffectEnum.DEATH){
-                decalView = new DecalView(tile.getAreaEffect(), Assets.SKULL);
-            }
+            itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
+
+        }else {
+            itemView = null;
         }
 
+        /**
+        if(tile.getHasAreaEffect()){
+            decalView = AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR));
+        }
+         **/
+
+        //initialize decalView
+        if(tile.getHasAreaEffect()){
+           decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
+        }
     }
 
     @Override
@@ -65,26 +90,40 @@ public class TileView implements Observer, Renderable {
 
     public void render(Graphics g, int xOffset, int yOffset, Location playerLocation) {
 
-        g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
 
-        if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
-            //System.out.print("Here");
-            //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        if(decalView != null){
+            decalView.render(g, xOffset, yOffset);
+        }
+        if(itemView != null) {
+            itemView.render(g, xOffset, yOffset);
+            //itemView.render(g);
         }
 
-        /**
-            System.out.println(decalView);
-            System.out.println("AE:" + tile.getAreaEffect());
-            System.out.println(tile.getHasAreaEffect());
-         **/
-        //render the decal onto the tile if the tile has an area effect
-        //check that decalView is initialized
-            if(tile.getHasAreaEffect() && decalView != null){
+/*
+        if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
+            if (tile.isVisited()) {
+                g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+                if(itemView != null) {
+                    itemView.render(g, xOffset, yOffset);
+                    //itemView.render(g);
+                }
+                g.drawImage(Assets.HALFFOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+
+            } else {
+                g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+
+            }
+        }else {
+            g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+            if(decalView != null){
                 decalView.render(g, xOffset, yOffset);
             }
-
-
-
+            if(itemView != null) {
+                itemView.render(g, xOffset, yOffset);
+                //itemView.render(g);
+            }
+        }
+    */
     }
-
 }

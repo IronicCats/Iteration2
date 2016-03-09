@@ -15,30 +15,21 @@ import Model.Stats.StatsEnum;
 /* This item adds defense rating to the player. The value of the defense rating added is held within the statStruc
    in the effect attribute.
  */
-public class Armor extends Takable {
-    private EquipmentTypeEnum type;
-
+public class Armor extends Equippable {
     public Armor() {
         super();
-        this.type = null;
     } // end default constructor
 
     public Armor(int id, String name, String description, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
-        super(id, name, description, location, requirements, e);
-        this.type = type;
+        super(id, name, description, location, requirements, type, e);
     } // end constructor
 
-    // returns value in effect's statStruc associated with defensive rating
     public int getDefense(){
         return effect.getModification().getStat(StatsEnum.ARMOR_RATING);
     }
-
-    // used if armor is worn out to adjust defensive rating
     public void setDefense(int defense) {
         effect.getModification().modifyStat(StatsEnum.ARMOR_RATING, defense);
     }
-    public EquipmentTypeEnum getType() { return type; }
-    public EquipmentModification getEquipmentModification() { return (EquipmentModification) effect; }
 
     @Override
     public void addObserver(Observer o) {

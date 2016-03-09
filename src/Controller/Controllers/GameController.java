@@ -1,6 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import Model.Abilities.PlayerCommandsEnum;
 import State.State;
 import Utilities.Settings;
 import State.States.GameState.GameState;
@@ -28,12 +29,12 @@ public class GameController extends Controller {
             if(!cameraMoves) {
                 cameraMoves = true;
                 waitingTime = 45;
-                ((GameState) state).SetCameramoving(cameraMoves);
+                ((GameState) state).setCameraMoving(cameraMoves);
             }
             else{
                 cameraMoves = false;
                 waitingTime = 500;
-                ((GameState) state).SetCameramoving(cameraMoves);
+                ((GameState) state).setCameraMoving(cameraMoves);
             }
         }
 
@@ -49,26 +50,32 @@ public class GameController extends Controller {
                 ((GameState) state).move(315);
             } else if (e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
                 ((GameState) state).move(45);
-            } else if (e.getKeyCode() == Settings.ESC) {
-                // open menu
-                System.out.println("escape pressed");
-            } else if (e.getKeyCode() == Settings.SPACE) {
-                // execute attack?
+            } else if (e.getKeyCode() == Settings.ESC) {        /* open pause menu */
+                state.switchState(State.PAUSESTATE);
+            } else if (e.getKeyCode() == Settings.SPACE) {      /* execute attack? */
                 System.out.println("space pressed");
-            } else if (e.getKeyCode() == Settings.E) {
+            } else if (e.getKeyCode() == Settings.E) {          /* open equipment state */
                 state.switchState(State.EQUIPMENTSTATE);
-            } else if (e.getKeyCode() == Settings.I) {
+            } else if (e.getKeyCode() == Settings.ONE) {        /* execute ability1 */
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability1);
+            } else if (e.getKeyCode() == Settings.TWO) {        /* execute ability2 */
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability2);
+            } else if (e.getKeyCode() == Settings.THREE) {      /* execute ability3 */
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability3);
+            } else if (e.getKeyCode() == Settings.I) {          /* open inventory state */
                 state.switchState(State.INVENTORYSTATE);
-            } else if (e.getKeyCode() == Settings.M) {
-                // open map
+            } else if (e.getKeyCode() == Settings.M) {          /* open map state */
                 System.out.println("m pressed");
-            } else if (e.getKeyCode() == Settings.Q) {
-                ((GameState) state).playerInteract();
-            } else if (e.getKeyCode() == Settings.D) {
-                ((GameState) state).playerExamineInventory();
+            } else if (e.getKeyCode() == Settings.Q) {          /* execute interaction */
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.interact);
+            } else if (e.getKeyCode() == Settings.D) {          /* execute inventory dump (temporary?) */
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.drop);
             }
 
+        //these are already listed above
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);
-
+        //if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(State.INVENTORYSTATE);
+        //if(e.getKeyCode() == KeyEvent.VK_E)state.switchState(State.EQUIPMENTSTATE);
+        //if(e.getKeyCode() == KeyEvent.VK_P)state.switchState(State.PAUSESTATE);
     }
 }
