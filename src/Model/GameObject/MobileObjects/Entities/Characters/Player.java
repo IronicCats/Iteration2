@@ -14,6 +14,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Utilities.Observer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -55,12 +56,15 @@ public class Player extends Character implements Observer{
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         System.out.println(items);
         System.out.println(items.get(0).getClass());
-        for(Item i: items) {
-            if(i instanceof Takable) {
+        for (Iterator<Item> it = items.iterator(); it.hasNext(); ) {
+            Item i = it.next();
+            if(i instanceof Takable && inventory.getPackSpaceLeft() > 0) {
+                System.out.println(i);
                 pickup(i);
                 items.remove(i);
             }
         }
+
         return items;
     }
 

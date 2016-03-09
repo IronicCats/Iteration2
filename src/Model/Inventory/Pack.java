@@ -61,7 +61,7 @@ public class Pack {
     } // end examine
 
     public int getSizeLeft() {
-        return cap - items.length;
+        return cap - count;
     }
 
     public void empty() {
