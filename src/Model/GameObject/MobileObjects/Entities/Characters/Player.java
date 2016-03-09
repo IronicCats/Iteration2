@@ -1,14 +1,19 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
 import Model.Effects.EquipmentModification;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Usable;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Utilities.Observer;
+
+import java.util.ArrayList;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -60,4 +65,23 @@ public class Player extends Character implements Observer{
         inventory.unequip(slot);
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
+
+    public void interact(Item item) {
+        if(item instanceof Takable) {
+            pickup(item);
+        }
+    } // end interact
+
+    public void examinePack() {
+        inventory.examine();
+        emptyPack();
+    } // end emptyPack
+
+    public void emptyPack() {
+        inventory.emptyPack();
+    } // end emptyPack
+
+    public void pickup(Item item) {
+        inventory.place(item);
+    } // end pickup
 } // end class Player
