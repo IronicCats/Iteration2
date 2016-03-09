@@ -46,7 +46,7 @@ import java.util.HashMap;
 public class GameState extends State {
 
     private HashMap<Item, ItemView> mapItems;
-    private HashMap<AreaEffect, DecalView> areaEffects;
+    private HashMap<AreaEffect, DecalView> decals;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
     public static Map map;
     private Camera camera;
@@ -71,13 +71,15 @@ public class GameState extends State {
         //need to change this
         cameraMoving = false;
         mapItems = new HashMap<>();
+        decals = new HashMap<>();
+        mobileObjects = new HashMap<>();
+
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
+
         setController(new GameController(this));
-        mapItems = new HashMap<>();
-        mobileObjects = new HashMap<>();
-        areaEffects = new HashMap<>();
-        map = MakeMap.makeMap();
+
+
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
 
 
@@ -113,8 +115,8 @@ public class GameState extends State {
 
         
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(2,2));
-        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(6,4));
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
+        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6,4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
 
