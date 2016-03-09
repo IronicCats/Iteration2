@@ -29,6 +29,11 @@ public abstract class Character extends Entity {
         this.inventory = inventory;
     } // end constructor
 
+    public Character(Location location, CharacterStats stats, Occupation occupation, Inventory inventory) {
+         super(location, stats, occupation);
+        this.inventory = inventory;
+    } // end constructor
+
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         //System.out.println("Here");
         ArrayList<Item> tempItems = new ArrayList<>(items);
