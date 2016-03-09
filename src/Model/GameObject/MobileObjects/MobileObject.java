@@ -84,6 +84,9 @@ public abstract class MobileObject extends GameObject{
 
     public Tile registerTile(Location location) {
         tile.deregister();
+        while(map.getTile(location).hasObject()) {
+            //Waiting to register with the next tile;
+        }
         tile = map.register(this);
         return tile;
     }

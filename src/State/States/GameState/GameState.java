@@ -73,14 +73,16 @@ public class GameState extends State {
     public GameState() {
         //need to change this
         cameraMoving = false;
+        mapItems = new HashMap<>();
+        decals = new HashMap<>();
+        mobileObjects = new HashMap<>();
+
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
 
 
         setController(new GameController(this));
-        mapItems = new HashMap<>();
-        mobileObjects = new HashMap<>();
-        decals = new HashMap<>();
+
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
 
@@ -91,23 +93,24 @@ public class GameState extends State {
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
-        // initializing items
-        mapItems = ItemFactory.initMainMap();
-        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
-
-
-
-
         enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
         enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(4, 5, 0), map);
+        //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
 
         enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
         enemyView1 = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1);
 
         //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
 
+        mobileObjects.put(player, playerView);
+        mobileObjects.put(enemy, enemyView);
+        mobileObjects.put(enemy1, enemyView1);
+        // initializing items
+        mapItems = ItemFactory.initMainMap();
+        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
-        
+
+
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
         AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
@@ -143,6 +146,12 @@ public class GameState extends State {
         }
     }
 
+    public MobileObjectView getMobileObjectView(MobileObject o){
+            return mobileObjects.get(o);
+    }
+    public Camera getCamera() {
+        return camera;
+    }
 
     @Override
     public void tick() {
@@ -152,15 +161,15 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-        //keyset for keys, values for values
         if(!cameraMoving) {
             camera.centerOnPlayer(player);
         }
-        enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
+        mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
+        //keyset for keys, values for values
+        //enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
 
-        playerView.render(g, camera.getxOffset(), camera.getyOffset());
-        enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        //playerView.render(g, camera.getxOffset(), camera.getyOffset());
+        //enemyView.render(g, camera.getxOffset(), camera.getyOffset());
 
         DisplayMessage.render(g);
         //petView.render(g, camera.getxOffset(), camera.getyOffset());
