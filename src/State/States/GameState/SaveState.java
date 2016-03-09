@@ -1,7 +1,6 @@
 package State.States.GameState;
 
 import State.State;
-import State.StatesEnum;
 
 import java.awt.*;
 
@@ -26,7 +25,7 @@ public class SaveState extends State {
     }
 
     @Override
-    public void switchState(StatesEnum state) {
-
+    public void switchState(State state) {
+        setState(state);
     }
 }

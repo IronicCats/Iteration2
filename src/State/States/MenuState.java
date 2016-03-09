@@ -2,7 +2,6 @@ package State.States;
 
 import Controller.Controllers.MenuController;
 import State.State;
-import State.StatesEnum;
 import View.Views.MenuView;
 
 import java.awt.*;
@@ -18,7 +17,7 @@ public class MenuState extends State {
                 setController(new MenuController(this));
         }
 
-        public void switchState(StatesEnum state) {
+        public void switchState(State state) {
                 setState(state);
         }
         public void moveUp(){

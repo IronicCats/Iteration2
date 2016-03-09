@@ -13,7 +13,6 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import State.StatesEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -87,19 +86,12 @@ public class GameState extends State {
         map.placeAreaEffect(a);
 
         InventoryState inventoryState = new InventoryState(this);//adding the inv state
-        State.addState(StatesEnum.InventoryState, inventoryState);
+        INVENTORYSTATE = inventoryState;
 
         EquipmentState equipementState = new EquipmentState(this);//adding the equipment state
-        State.addState(StatesEnum.EquipmentState, equipementState);
+        EQUIPMENTSTATE = equipementState;
 
-       //This is code to check Astar
-        /*Astar astar = new Astar(map);
-        ArrayList<Location> path = astar.Findpath(new Location(0,0),new Location(5,5));
-        for(int i = 0; i < path.size(); i++){
-            System.out.println("xLoc " + path.get(i).getX());
-            System.out.println("yLoc " + path.get(i).getY());
-            System.out.println("dir " + path.get(i).getDir());
-        }*/
+
     }
 
     public void switchState() {
@@ -147,8 +139,7 @@ public class GameState extends State {
     }
 
     @Override
-    public void switchState(StatesEnum state) {
-        System.out.println(state);
+    public void switchState(State state) {
         setState(state);
     }
 }
