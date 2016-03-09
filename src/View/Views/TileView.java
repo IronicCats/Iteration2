@@ -2,8 +2,6 @@ package View.Views;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -75,8 +73,15 @@ public class TileView implements Observer, Renderable {
             itemView = null;
         }
 
+        /**
         if(tile.getHasAreaEffect()){
             decalView = AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR));
+        }
+         **/
+
+        //initialize decalView
+        if(tile.getHasAreaEffect()){
+           decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
         }
         /*
         if(tile.hasObject()){
@@ -125,6 +130,8 @@ public class TileView implements Observer, Renderable {
             mobileObjectView.render(g, State.GAMESTATE.getCamera().getxOffset(), State.GAMESTATE.getCamera().getyOffset());
         }
     }
+
+
 
 
     public void renderFog(Graphics g, int xOffset, int yOffset, Location playerLocation) {

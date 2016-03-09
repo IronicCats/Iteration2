@@ -2,7 +2,10 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Projectile;
+import Model.Location;
 import Model.Map.Tile;
+import Model.Requirement;
+import Model.Stats.StatStructure;
 
 /**
  * Created by mazumderm on 3/6/2016.
@@ -12,8 +15,8 @@ public class ProjectileAbility extends Abilities {
     Projectile projectile;
 
 
-    public ProjectileAbility(int range, Projectile projectile, Effect[] e){
-        super(e);
+    public ProjectileAbility(int range, Projectile projectile, Requirement requirements, Effect cost){
+        super(projectile.getEffect(), requirements, cost);
         this.range = range;
         this.projectile = projectile;
 
@@ -36,7 +39,8 @@ public class ProjectileAbility extends Abilities {
         this.projectile = p;
     }
 
-    public void execute(Tile t){
+    public void execute(Location location){
+
 
     }
 }

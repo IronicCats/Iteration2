@@ -5,8 +5,6 @@ import Model.Abilities.PlayerCommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
@@ -65,6 +63,7 @@ public class GameState extends State {
     private NPC enemy1;
     private Pet pet;
 
+
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
     private MobileObjectView enemyView1;
@@ -80,11 +79,11 @@ public class GameState extends State {
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
 
-
         setController(new GameController(this));
 
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
+
 
 
         //creating a new player
@@ -110,13 +109,11 @@ public class GameState extends State {
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
 
-
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
-        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
+        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6,4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
-
 
 
         map.setMapItems(mapItems);
