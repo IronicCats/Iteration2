@@ -7,6 +7,8 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,6 +37,7 @@ public abstract class Character extends Entity {
             Item i = it.next();
             if(i instanceof Takable) {//if its takable
                 if(pickup(i)) {//and i was able to pick it up
+                    DisplayMessage.addMessage(new GameMessage("You picked up: " + i.getName(), 3));
                     items.remove(i); //remove it from the items
                 }
             }
@@ -51,6 +54,7 @@ public abstract class Character extends Entity {
         return false;
     } // end pickup
     public void emptyPack() {
+        DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
         getTile().addItems(inventory.emptyPack());
     } // end emptyPack
 
