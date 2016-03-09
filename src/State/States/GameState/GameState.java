@@ -31,6 +31,7 @@ import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
+import View.Views.MessageBox.DisplayMessage;
 import View.Views.MobileObjectView;
 import View.Views.ItemView;
 import View.Views.MapView;
@@ -163,6 +164,7 @@ public class GameState extends State {
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
 
+        DisplayMessage.render(g);
         //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 

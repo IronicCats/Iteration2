@@ -79,7 +79,6 @@ public class Pack {
                 items[i] = null;
             }
         }
-        System.out.println(tempItems);
         return tempItems;
     } // end dump
 } // end class Pack
