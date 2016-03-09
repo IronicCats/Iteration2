@@ -102,7 +102,7 @@ public class Player extends Character implements Observer{
             pickup(item);
         }
     } // end interact
-  
+
     public void examinePack() {
         inventory.examine();
         emptyPack();
