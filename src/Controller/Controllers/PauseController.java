@@ -15,13 +15,14 @@ public class PauseController extends Controller{
         super(state);
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
         if (!canGetInput()) {
             return;
         }
         if (e.getKeyCode() == KeyEvent.VK_P) {
             state.switchState(State.GAMESTATE);
-            System.out.println("Game is Paused");
+            System.out.println("Game was Paused");
         }
 
     }

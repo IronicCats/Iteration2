@@ -346,7 +346,6 @@ public class ItemFactory {
                 return new Obstacle(id,
                             "House",
                             "Old farmer Joe's house",
-                            null,
                             location);
             default:
                 return null;

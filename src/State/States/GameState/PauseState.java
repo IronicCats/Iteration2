@@ -1,6 +1,5 @@
 package State.States.GameState;
 
-import Controller.Controllers.InventoryController;
 import Controller.Controllers.PauseController;
 import State.State;
 
@@ -16,10 +15,6 @@ public class PauseState extends State{
     public PauseState(GameState GS){
         setController(new PauseController(this));
         game=GS;
-    }
-
-    public void switchState() {
-
     }
 
     public void tick() {
