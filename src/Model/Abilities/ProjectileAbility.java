@@ -15,7 +15,7 @@ public class ProjectileAbility extends Abilities {
     Projectile projectile;
 
 
-    public ProjectileAbility(int range, Projectile projectile, Requirement requirements, StatStructure cost){
+    public ProjectileAbility(int range, Projectile projectile, Requirement requirements, Effect cost){
         super(projectile.getEffect(), requirements, cost);
         this.range = range;
         this.projectile = projectile;

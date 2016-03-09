@@ -15,7 +15,7 @@ public class AOEAbility extends Abilities{
     int degreeMovement;
     int range;
 
-    public AOEAbility(int degreeMovement, int range, Effect [] effects, Requirement requirements, StatStructure cost){
+    public AOEAbility(int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost){
         super(effects, requirements, cost);
         this.degreeMovement = degreeMovement;
         this.range = range;

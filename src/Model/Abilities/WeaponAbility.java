@@ -14,7 +14,7 @@ public class WeaponAbility extends Abilities {
     Weapon weapon;
     //constructor
 
-    public WeaponAbility(Effect[] e, Weapon w, Requirement requirements, StatStructure cost){
+    public WeaponAbility(Effect e, Weapon w, Requirement requirements, Effect cost){
         super(e, requirements, cost);
         this.weapon = w;
     }

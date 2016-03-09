@@ -1,7 +1,5 @@
 package Model.Map;
 
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
@@ -20,13 +18,11 @@ import java.util.ArrayList;
 public abstract class Tile implements Subject {
 
     private Location location;
-    protected Observer observer;
+    protected ArrayList<Observer> observers;
     public boolean IsWalkable;
     private ArrayList<Item> items;
-    private AreaEffect a;
-    private AreaEffectEnum areaEffectEnum;
+    private AreaEffect areaEffect;
     private MobileObject object;
-    private Decal decal;
     private boolean hasAreaEffect;
     private boolean visited;
 
@@ -35,8 +31,9 @@ public abstract class Tile implements Subject {
         object = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
-        hasAreaEffect = false;
+        this.hasAreaEffect = false;
         visited = false;
+        observers = new ArrayList<>();
     }
 
     public void addItem(Item item) {
@@ -44,18 +41,18 @@ public abstract class Tile implements Subject {
     }
 
     public void setAreaEffectTile(AreaEffect a){
-        this.areaEffectEnum = a.getAreaEffect();
-        this.a = a;
+        this.areaEffect = a;
         this.hasAreaEffect = true;
-       // System.out.println(hasAreaEffect);
+        System.out.println(hasAreaEffect + "MM");
+        alert();
+    }
+
+    public AreaEffect getAreaEffect(){
+        return this.areaEffect;
     }
 
     public AreaEffectEnum getAreaEffectEnum(){
-        return this.areaEffectEnum;
-    }
-
-    public Decal getDecal(){
-        return this.decal;
+        return this.areaEffect.getAreaEffect();
     }
 
     public MobileObject getObject() {
@@ -90,13 +87,14 @@ public abstract class Tile implements Subject {
     }
 
     public boolean getHasAreaEffect(){
+        System.out.println("MM" + this.hasAreaEffect);
         return this.hasAreaEffect;
     }
 
 
     @Override
     public void addObserver(Observer o) {
-
+        observers.add(o);
     }
 
     @Override
@@ -106,7 +104,9 @@ public abstract class Tile implements Subject {
 
     @Override
     public void alert() {
-
+        for(Observer o: observers) {
+            o.update();
+        }
     }
 
 }

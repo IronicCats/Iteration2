@@ -1,6 +1,6 @@
 package View.Views;
 
-import Model.GameObject.Decal.Decal;
+import Model.GameObject.AreaEffect.AreaEffect;
 import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -14,16 +14,16 @@ import java.awt.image.BufferedImage;
  * Created by mazumderm on 3/5/2016.
  */
 public class DecalView implements Observer, Renderable {
-    private Decal decal;
+    private AreaEffect areaEffect;
     private BufferedImage sprite;
     private Location location;
 
 
-    public DecalView(Decal decal, BufferedImage sprite) {
-        this.decal = decal;
+    public DecalView(AreaEffect areaEffect, BufferedImage sprite) {
+        this.areaEffect = areaEffect;
         this.sprite = sprite;
-        this.location = decal.getLocation();
-        decal.addObserver(this);
+        this.location = areaEffect.getLocation();
+        areaEffect.addObserver(this);
     }
 
     public BufferedImage getSprite() {
@@ -32,7 +32,7 @@ public class DecalView implements Observer, Renderable {
 
     @Override
     public void update() {
-        location = decal.getLocation();
+        location = areaEffect.getLocation();
     }
 
     @Override

@@ -4,8 +4,6 @@ import Controller.Controllers.GameController;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
@@ -43,7 +41,7 @@ import java.util.HashMap;
 public class GameState extends State {
 
     private HashMap<Item, ItemView> mapItems;
-    private HashMap<AreaEffect, DecalView> decals;
+    private HashMap<AreaEffect, DecalView> areaEffects;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
     private Map map;
     private Camera camera;
@@ -63,7 +61,7 @@ public class GameState extends State {
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
-        decals = new HashMap<>();
+        areaEffects = new HashMap<>();
         map = MakeMap.makeMap();
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
         mapView = MakeMap.makeMapView(map);
@@ -71,6 +69,7 @@ public class GameState extends State {
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+
 
         //creating a new player
         player = new Player();
@@ -81,10 +80,8 @@ public class GameState extends State {
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
 
-        
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
-        decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
+        AreaEffect a = new AreaEffect("LEVELUP", "Gains you a level", AreaEffectEnum.LEVELUP, new Location(5,5));
         map.placeAreaEffect(a);
 
         InventoryState inventoryState = new InventoryState(this);//adding the inv state
@@ -126,9 +123,7 @@ public class GameState extends State {
         for (ItemView itemView : mapItems.values()) {
             itemView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        for (DecalView decalView : decals.values()) {
-            decalView.render(g, camera.getxOffset(), camera.getyOffset());
-        }
+
         camera.centerOnPlayer(player);
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());

@@ -1,8 +1,6 @@
 package View.Views;
 
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Tile;
@@ -33,30 +31,16 @@ public class TileView implements Observer, Renderable {
         this.location = tile.getLocation();
         this.viewLocation = new ViewLocation(location.getX(), location.getY());
         if(tile.getHasAreaEffect()){
-            if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DAMAGE))
-            {
-                decalView = new DecalView(new Decal(location, DecalEnum.FIRE), Assets.HEALTH_POTION);
-            }
-            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.HEAL))
-            {
-                decalView = new DecalView(new Decal(location, DecalEnum.REDCROSS), Assets.HEALTH_POTION);
-            }
-            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.DEATH))
-            {
-                decalView = new DecalView(new Decal(location, DecalEnum.SKULLANDCROSSBONES),Assets.HEALTH_POTION );
-            }
-            else if(tile.getAreaEffectEnum().equals(AreaEffectEnum.LEVELUP))
-            {
-                decalView = new DecalView(new Decal(location, DecalEnum.GOLDSTAR),Assets.HEALTH_POTION );
-            }
+            decalView = new DecalView(tile.getAreaEffect(), Assets.STAR);
         }
+
     }
 
     public BufferedImage getSprite(){ return sprite; }
 
     @Override
     public void update() {
-
+        System.out.println("Updating");
     }
 
     @Override
@@ -78,9 +62,13 @@ public class TileView implements Observer, Renderable {
             g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }*/
 
-        if(true){
+
+        if(tile.getHasAreaEffect() && decalView != null){
             decalView.render(g, xOffset, yOffset);
         }
+
+
+
 
     }
 

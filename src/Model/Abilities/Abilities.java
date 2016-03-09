@@ -11,11 +11,11 @@ import Model.Stats.StatStructure;
  * Created by mazumderm on 3/5/2016.
  */
 public abstract class Abilities {
-    Effect[] effects;
+    Effect effects;
     Requirement requirement;
-    StatStructure cost;
+    Effect cost;
     //constructor
-    public Abilities(Effect[] effects, Requirement requirement, StatStructure cost) {
+    public Abilities(Effect effects, Requirement requirement, Effect cost) {
 
         this.effects = effects;
         this.requirement = requirement;
@@ -23,11 +23,11 @@ public abstract class Abilities {
     }
 
     //accessor
-    public Effect [] getEffects(){
+    public Effect getEffects(){
         return this.effects;
     }
 
-    public void setEffects(Effect [] effects){
+    public void setEffects(Effect effects){
         this.effects = effects;
     }
 
@@ -39,11 +39,11 @@ public abstract class Abilities {
         this.requirement = r;
     }
 
-    public StatStructure getCost(){
+    public Effect getCost(){
         return this.cost;
     }
 
-    public void setCost(){
+    public void setCost(Effect cost){
         this.cost = cost;
     }
 

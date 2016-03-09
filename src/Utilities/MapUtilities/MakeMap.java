@@ -1,7 +1,6 @@
 package Utilities.MapUtilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
-import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
 import Model.Location;
 import Model.Map.Map;

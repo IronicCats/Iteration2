@@ -1,8 +1,6 @@
 package Utilities.AreaEffectUtilities;
 
 
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
@@ -10,11 +8,14 @@ import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
 import Utilities.Utilities;
 
+import java.util.HashMap;
+
 
 /**
  * Created by mazumderm on 3/6/2016.
  */
 public class AreaEffectFactory {
+
     public static AreaEffect makeAreaEffect(AreaEffectEnum a, Location location){
         switch(a){
             case DAMAGE:
@@ -58,17 +59,17 @@ public class AreaEffectFactory {
         }
     }// end
 
-    public static DecalView makeAsset(Decal decal) {
-        switch(decal.getType()) {
-            case FIRE:
-            case GOLDSTAR:
-                return new DecalView(decal, Assets.STAR);
-            case SKULLANDCROSSBONES:
-                return new DecalView(decal, Assets.SKULL);
-            case REDCROSS:
-                return new DecalView(decal, Assets.REDCROSS);
+    public static DecalView makeAsset(AreaEffectEnum areaEffectEnum, AreaEffect areaEffect) {
+        switch(areaEffectEnum) {
+            case DAMAGE:
+            case LEVELUP:
+                return new DecalView(areaEffect, Assets.STAR);
+            case DEATH:
+                return new DecalView(areaEffect, Assets.SKULL);
+            case HEAL:
+                return new DecalView(areaEffect, Assets.REDCROSS);
             default:
-                return new DecalView(decal, Assets.HEALTH_POTION);
+                return new DecalView(areaEffect, Assets.HEALTH_POTION);
         }
     } // end makeAsset
 }
