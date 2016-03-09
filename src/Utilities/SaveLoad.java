@@ -298,10 +298,7 @@ public class SaveLoad {
             //SaveLoad.setGameMap(recreateMap);
             gameMap = recreateMap;
             MapView mv = new MapView(recreateMap,tv);
-            System.out.println("LOL");
 
-            System.out.println(gameMap.getTile(0, 1));
-            System.out.println(gameMap.getTile(1,0));
             gamemapView = mv;
             mv.update();
             //inputMap = recreateMap;
@@ -350,7 +347,8 @@ public class SaveLoad {
                     player.setLocation(l);
                     //Player p = new Player(l,)
 
-
+                    //Player peer = new Player()
+                            //Assign occupation when creating new player, don't update jesus fucking christ what is wrong with me.
 
                     /*if (occupation.equals(Entity.Occupation.SMASHER.getType())) {
                         avatar.setOccupation(Entity.Occupation.SMASHER);
@@ -536,7 +534,7 @@ public class SaveLoad {
         baseMana.setValue(Integer.toString(stat.getBaseMana()));
         derive.setAttributeNode(baseMana);
 
-        
+
         return derive;
     }
 
