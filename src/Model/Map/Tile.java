@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 /**
  * Created by Aidan on 3/1/2016.
+ *
+ * TODO:
+ *  interact() needs to have different implementations based on instanceof
+ *      alternately, renace player.takeItems(...) to reflect different interactions
  */
 public abstract class Tile implements Subject {
 
