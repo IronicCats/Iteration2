@@ -7,6 +7,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 import Utilities.Subject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -77,13 +78,17 @@ public class Inventory implements Subject{
         pack.examine();
     } // end examine
 
-    public void dump() {
-        pack.empty();
+    public ArrayList<Item> emptyPack() {
+        return pack.dump();
     } // end emptyPack
 
     public Takable getSlot(EquipmentSlotEnum slot) {
         return equipment.getSlot(slot);
     } // end getSlot
+
+    public int getPackSpaceLeft() {
+        return pack.getSizeLeft();
+    }
 
     @Override
     public void addObserver(Observer o) {

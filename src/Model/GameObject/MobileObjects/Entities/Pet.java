@@ -1,5 +1,7 @@
 package Model.GameObject.MobileObjects.Entities;
 
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.Inventory.Pack;
 import Model.Stats.PetStats;
@@ -7,6 +9,8 @@ import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Tickable;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -51,10 +55,6 @@ public class Pet extends MobileObject implements Tickable{
     @Override
     public void tick() {
         if(controller != null) {
-            int temp = random.nextInt(450);
-            if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
-                controller.setDestination(computeRandomLocation());
-            }
             controller.tick();
         }
     } // end tick
@@ -67,4 +67,21 @@ public class Pet extends MobileObject implements Tickable{
     public PetStats getStats() { return stats; }
     public Pack getPack() { return pack; }
     public boolean getOwned() { return owned; }
+
+    public ArrayList<Item> takeItems(ArrayList<Item> items) {
+        ArrayList<Item> tempItems = new ArrayList<>(items);
+        Iterator<Item> it = tempItems.iterator();
+        while(it.hasNext()){
+            Item i = it.next();
+            if(i instanceof Takable && pack.getSizeLeft() > 0) {
+                pickup(i);
+                items.remove(i);
+            }
+        }
+        return items;
+    }
+
+    public void pickup(Item item) {
+        pack.place(item);
+    } // end pickup
 } // end

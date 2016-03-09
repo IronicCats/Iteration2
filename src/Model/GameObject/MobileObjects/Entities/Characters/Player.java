@@ -7,6 +7,8 @@ import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Equippable;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Model.GameObject.MobileObjects.Entities.Pet;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
@@ -15,6 +17,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Utilities.Observer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -25,6 +28,9 @@ This is the player class. This class contains everything the player controlled
 character will need.
  */
 public class Player extends Character implements Observer{
+
+    Pet pet;
+    Vehicle vehicle;
 
     public Player() {
         super();
@@ -39,6 +45,7 @@ public class Player extends Character implements Observer{
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
         location.setDir(degrees);
+        registerTile(location);
         alert();
     } // end move
 
@@ -52,6 +59,8 @@ public class Player extends Character implements Observer{
 
     } // end remove
 
+
+
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
         ((CharacterStats)getStats()).applyEquipmentModification(weapon.getEquipmentModification());
@@ -61,6 +70,10 @@ public class Player extends Character implements Observer{
         inventory.equip(armor);
         ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
+
+    public void mount(Vehicle vehicle){
+        ((CharacterStats)getStats()).setMovement(vehicle.getMovement());
+    }
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
@@ -79,17 +92,25 @@ public class Player extends Character implements Observer{
         }
     } // end interact
 
+    public void unmount(){
+        ((CharacterStats)getStats()).resetMovement();
+    }
+
     public void examinePack() {
         inventory.examine();
         //emptyPack();
     } // end emptyPack
 
     public void emptyPack() {
-        inventory.dump();
+        inventory.emptyPack();
     } // end emptyPack
 
     public void pickup(Item item) {
         if(!inventory.packFull())
             inventory.place(item);
     } // end pickup
+
+    public void tick() {
+        ((CharacterStats)getStats()).tick();
+    }
 } // end class Player

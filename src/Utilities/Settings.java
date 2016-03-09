@@ -14,6 +14,9 @@ public class Settings {
     public static int TILEHEIGHT = 56*2;
     public static int PLAYERWIDTH = TILEWIDTH/2;
     public static int PLAYERHEIGHT = TILEHEIGHT/2;
+    public static int DEFAULTITEMHEIGHT = TILEHEIGHT/4;
+    public static int DEFAULTITEMWIDTH = TILEWIDTH/4;
+
 
     public static int SIGHT = 2;
 
@@ -30,10 +33,10 @@ public class Settings {
 
     public static int SPACE = 0x20;
     public static int D = 0x44;
-    public static int E = 0x45;
+    public static int E = 69;
     public static int I = 0x49;
     public static int M = 0x4D;
-    public static int Q = 0x51;
+    public static int Q = 81;
 
     public static String TITLE = "Ironic Cats";
 }

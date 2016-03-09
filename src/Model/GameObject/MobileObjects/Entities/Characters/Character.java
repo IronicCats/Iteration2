@@ -1,10 +1,15 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by broskj on 3/6/16.
@@ -21,4 +26,28 @@ public abstract class Character extends Entity {
         super(location, occupation.getStats(), occupation);
         this.inventory = inventory;
     } // end constructor
+
+    public ArrayList<Item> takeItems(ArrayList<Item> items) {
+        System.out.println("Here");
+        ArrayList<Item> tempItems = new ArrayList<>(items);
+        System.out.println(items.size());
+        Iterator<Item> it = tempItems.iterator();
+        while(it.hasNext()){
+            Item i = it.next();
+            if(i instanceof Takable && inventory.getPackSpaceLeft() > 0) {
+                pickup(i);
+                items.remove(i);
+            }
+        }
+        System.out.println(items.size());
+        return items;
+    }
+
+    public void pickup(Item item) {
+        inventory.place(item);
+    } // end pickup
+    public void emptyPack() {
+        getTile().addItems(inventory.emptyPack());
+    } // end emptyPack
+
 } // end class Character

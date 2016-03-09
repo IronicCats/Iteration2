@@ -39,4 +39,5 @@ public abstract class Entity extends MobileObject {
     public Occupation getOccupation() {
         return occupation;
     }
+
 }

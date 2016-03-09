@@ -67,12 +67,19 @@ public class Pack {
             }
         }
     } // end examine
+    public int getSizeLeft() {
+        return cap - count;
+    }
 
-    public void dump() {
-        for(int i = 0; i < cap; i++) {
+    public ArrayList<Item> dump() {
+        ArrayList<Item> tempItems = new ArrayList<>();
+        for(int i = 0; i < items.length; ++i){
             if(items[i] != null) {
-                remove(i);
+                tempItems.add(items[i]);
+                items[i] = null;
             }
         }
-    } // end emptyPack
+        System.out.println(tempItems);
+        return tempItems;
+    } // end dump
 } // end class Pack

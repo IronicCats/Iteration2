@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
+import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Quest;
@@ -48,7 +49,7 @@ public class ItemFactory {
         initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(3, 5));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(2, 2));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // helmet
@@ -78,6 +79,10 @@ public class ItemFactory {
         // shield
         Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(5, 3));
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
+
+        // house
+        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
+        initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         return initItems;
     }
@@ -337,6 +342,12 @@ public class ItemFactory {
                                 new StatsEnum[] {StatsEnum.STRENGTH, StatsEnum.AGILITY, StatsEnum.INTELLECT,
                                         StatsEnum.HARDINESS},
                                 new int[] {4, 4, 4, 4})));
+            case HOUSE:
+                return new Obstacle(id,
+                            "House",
+                            "Old farmer Joe's house",
+                            null,
+                            location);
             default:
                 return null;
         }
@@ -389,6 +400,8 @@ public class ItemFactory {
                 return new ItemView(item, Assets.BOOTS);
             case SHIELD:
                 return new ItemView(item, Assets.SHIELD);
+            case HOUSE:
+                return new ItemView(item, Assets.HOUSE);
             default:
                 return null;
         }

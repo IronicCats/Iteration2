@@ -23,7 +23,7 @@ public class Navigation {
         else if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         }
-        else if(!map.getTile(location.getX(), location.getY()).IsWalkable) {
+        else if(!map.getTile(location.getX(), location.getY()).isWalkable()) {
             return false;
         }
         else {

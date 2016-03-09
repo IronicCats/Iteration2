@@ -64,4 +64,12 @@ public abstract class Item extends GameObject implements Subject {
             observers.get(i).update();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import Model.Abilities.PlayerCommandsEnum;
 import State.State;
 import Utilities.Settings;
 import State.States.GameState.GameState;
@@ -27,13 +28,13 @@ public class GameController extends Controller {
         if(e.getKeyCode() == Settings.ENTER){
             if(!cameraMoves) {
                 cameraMoves = true;
-                waitingTime = 45; 
-                ((GameState) state).SetCameramoving(cameraMoves);
+                waitingTime = 45;
+                ((GameState) state).setCameraMoving(cameraMoves);
             }
             else{
                 cameraMoves = false;
                 waitingTime = 500;
-                ((GameState) state).SetCameramoving(cameraMoves);
+                ((GameState) state).setCameraMoving(cameraMoves);
             }
         }
 
@@ -63,12 +64,15 @@ public class GameController extends Controller {
                 // open map
                 System.out.println("m pressed");
             } else if (e.getKeyCode() == Settings.Q) {
-                ((GameState) state).playerInteract();
+                //Interact with facing tile
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.interact);
             } else if (e.getKeyCode() == Settings.D) {
-                ((GameState) state).playerExamineInventory();
-            }
+                //Drop Inventory
+                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.drop);            }
 
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);
-
+        if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(State.INVENTORYSTATE);
+        if(e.getKeyCode() == KeyEvent.VK_E)state.switchState(State.EQUIPMENTSTATE);
+        if(e.getKeyCode() == KeyEvent.VK_P)state.switchState(State.PAUSESTATE);
     }
 }

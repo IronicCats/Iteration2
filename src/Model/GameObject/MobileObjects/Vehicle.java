@@ -18,6 +18,8 @@ public class Vehicle extends MobileObject {
     }
 
 
+
+
     @Override
     public void move(int degrees) {
         // some code
