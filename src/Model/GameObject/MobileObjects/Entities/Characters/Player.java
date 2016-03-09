@@ -6,6 +6,8 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Model.GameObject.MobileObjects.Entities.Pet;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
@@ -25,6 +27,9 @@ This is the player class. This class contains everything the player controlled
 character will need.
  */
 public class Player extends Character implements Observer{
+
+    Pet pet;
+    Vehicle vehicle;
 
     public Player() {
         super();
@@ -78,18 +83,26 @@ public class Player extends Character implements Observer{
         ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
+    public void mount(Vehicle vehicle){
+        ((CharacterStats)getStats()).setMovement(vehicle.getMovement());
+    }
+
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
-    /*
+
+    public void unmount(){
+        ((CharacterStats)getStats()).resetMovement();
+    }
+
     public void interact(Item item) {
         if(item instanceof Takable) {
             pickup(item);
         }
     } // end interact
-    */
+  
     public void examinePack() {
         inventory.examine();
         emptyPack();

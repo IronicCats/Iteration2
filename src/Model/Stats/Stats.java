@@ -18,4 +18,8 @@ public class Stats {
     } // end constructor
 
     public int getMovement() { return movement; }
+
+    public void setMovement(int movement) { this.movement = movement;}
+
+    public void resetMovement(){ this.movement = baseMovement;}
 } // end class Stats
