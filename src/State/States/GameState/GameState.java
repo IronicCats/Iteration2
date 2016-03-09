@@ -7,14 +7,20 @@ import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
+import Model.Stats.PetStats;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -52,9 +58,11 @@ public class GameState extends State {
 
     private Player player;
     private NPC enemy;
+    private Pet pet;
 
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
+    private MobileObjectView petView;
 
     public GameState() {
         //need to change this
@@ -78,9 +86,12 @@ public class GameState extends State {
         player = new Player(new Location(0, 2), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         enemy = new NPC(new Location(5,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
         System.out.println(enemy);
         playerView = new MobileObjectView(player, Assets.PLAYER);
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+        petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
+
 
         
         //area effect
@@ -120,11 +131,6 @@ public class GameState extends State {
         }
     }
 
-    @Override
-    public void tick() {
-        enemy.tick();
-    }
-
     public void render(Graphics g) {
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         //keyset for keys, values for values
@@ -139,6 +145,13 @@ public class GameState extends State {
         }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        petView.render(g, camera.getxOffset(), camera.getyOffset());
+    }
+
+    @Override
+    public void tick() {
+        enemy.tick();
+        pet.tick();
     }
 
     @Override
