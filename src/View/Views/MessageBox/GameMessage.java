@@ -9,8 +9,10 @@ import java.awt.*;
  */
 public class GameMessage {
     String message;
-    public GameMessage(String message) {
+    int seconds;
+    public GameMessage(String message, int seconds) {
         this.message = message;
+        this.seconds = seconds;
 
     }
 

@@ -7,6 +7,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 import Utilities.Subject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -31,17 +32,28 @@ public class Inventory implements Subject{
         observers = new ArrayList<>();
     } // end constructor
 
+    public boolean packFull() {
+        return pack.full();
+    } // end packFull
+
+    public boolean packEmpty() {
+        return pack.empty();
+    } // end packEmpty
+
     public void equip(Weapon weapon) {
+        System.out.println("Equipping " + weapon.getName());
         equipment.equip(weapon);
         alert();
     } // end equip
 
     public void equip(Armor armor) {
+        System.out.println("Equipping " + armor.getName());
         equipment.equip(armor);
         alert();
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        System.out.println("Unequipping item in " + slot + " slot.");
         pack.place(equipment.unequip(slot));
         alert();
     } // end unequip
@@ -66,8 +78,8 @@ public class Inventory implements Subject{
         pack.examine();
     } // end examine
 
-    public void emptyPack() {
-        pack.empty();
+    public ArrayList<Item> emptyPack() {
+        return pack.dump();
     } // end emptyPack
 
     public Takable getSlot(EquipmentSlotEnum slot) {
