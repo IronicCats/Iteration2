@@ -95,12 +95,14 @@ public abstract class Tile implements Subject {
         if(object instanceof Player) {
             visited = true;
         }
+        alert();
         return this;
     }
 
     public void deregister() {
         object = null;
         hasObject = false;
+        alert();
     }
 
 

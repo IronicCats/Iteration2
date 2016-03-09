@@ -70,10 +70,9 @@ public class GameState extends State {
     public GameState() {
         //need to change this
         cameraMoving = false;
+        mapItems = new HashMap<>();
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
-
-
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -89,14 +88,6 @@ public class GameState extends State {
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
-        // initializing items
-        mapItems = ItemFactory.initMainMap();
-        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
-
-
-
-
-
         enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
         enemy1 = new NPC(new Location(4,5,0), new Smasher(), new Inventory(),new NPCController(map));
         //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
@@ -105,6 +96,20 @@ public class GameState extends State {
         enemyView1 = new MobileObjectView(enemy1, Assets.PLAYER);
 
         //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
+
+        mobileObjects.put(player, playerView);
+        mobileObjects.put(enemy, enemyView);
+        mobileObjects.put(enemy1, enemyView1);
+        // initializing items
+        mapItems = ItemFactory.initMainMap();
+        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+
+
+
+
+
+
+
 
         
         //area effect
@@ -141,6 +146,12 @@ public class GameState extends State {
         }
     }
 
+    public MobileObjectView getMobileObjectView(MobileObject o){
+            return mobileObjects.get(o);
+    }
+    public Camera getCamera() {
+        return camera;
+    }
 
     @Override
     public void tick() {
@@ -150,19 +161,15 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-        //keyset for keys, values for values
-        for (ItemView itemView : mapItems.values()) {
-            itemView.render(g, camera.getxOffset(), camera.getyOffset());
-        }
-
         if(!cameraMoving) {
             camera.centerOnPlayer(player);
         }
-        enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
+        mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
+        //keyset for keys, values for values
+        //enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
 
-        playerView.render(g, camera.getxOffset(), camera.getyOffset());
-        enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+        //playerView.render(g, camera.getxOffset(), camera.getyOffset());
+        //enemyView.render(g, camera.getxOffset(), camera.getyOffset());
 
         DisplayMessage.render(g);
         //petView.render(g, camera.getxOffset(), camera.getyOffset());
