@@ -17,13 +17,15 @@ public class Navigation {
     };
 
     public static boolean checkMove(Location location, Map map, MobileObject type){
+        System.out.println("Testing Move: " + location);
+        System.out.println(map.getTile(location).isWalkable());
         if(location.getY() < 0 || location.getY() >= map.getHeight()) {
             return false;
         }
         else if(location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         }
-        else if(!map.getTile(location.getX(), location.getY()).IsWalkable) {
+        else if(!map.getTile(location.getX(), location.getY()).isWalkable()) {
             return false;
         }
         else {

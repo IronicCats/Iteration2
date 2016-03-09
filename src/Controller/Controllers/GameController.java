@@ -25,10 +25,10 @@ public class GameController extends Controller {
         //System.out.println("Game: " + e.getKeyCode());
 
         //If camera movement is true then move camera instead of player
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+        if(e.getKeyCode() == Settings.ENTER){
             if(!cameraMoves) {
                 cameraMoves = true;
-                waitingTime = 45; 
+                waitingTime = 45;
                 ((GameState) state).SetCameramoving(cameraMoves);
             }
             else{
@@ -50,6 +50,23 @@ public class GameController extends Controller {
                 ((GameState) state).move(315);
             } else if (e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
                 ((GameState) state).move(45);
+            } else if (e.getKeyCode() == Settings.ESC) {
+                // open menu
+                System.out.println("escape pressed");
+            } else if (e.getKeyCode() == Settings.SPACE) {
+                // execute attack?
+                System.out.println("space pressed");
+            } else if (e.getKeyCode() == Settings.E) {
+                state.switchState(State.EQUIPMENTSTATE);
+            } else if (e.getKeyCode() == Settings.I) {
+                state.switchState(State.INVENTORYSTATE);
+            } else if (e.getKeyCode() == Settings.M) {
+                // open map
+                System.out.println("m pressed");
+            } else if (e.getKeyCode() == Settings.Q) {
+                ((GameState) state).playerInteract();
+            } else if (e.getKeyCode() == Settings.D) {
+                ((GameState) state).playerExamineInventory();
             }
 
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);

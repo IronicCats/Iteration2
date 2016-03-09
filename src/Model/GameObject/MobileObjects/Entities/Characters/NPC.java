@@ -28,18 +28,9 @@ public class NPC extends Character implements Tickable {
     @Override
     public void tick() {
         if(controller != null) {
-            int temp = random.nextInt(600);
-            if(temp == 1) { // arbitrary number
-                controller.setDestination(computeRandomLocation());
-            }
             controller.tick();
         }
     } // end tick
-
-    public Location computeRandomLocation() {
-        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * 2/*stats.getMovement()*/,
-                base.getY() + (int)Math.pow(-1, random.nextInt(2)) * 2)/*stats.getMovement()*/;
-    } // end computeRandomLocation
 
     // inventory = NPCinventory
 }
