@@ -92,7 +92,6 @@ public abstract class Tile implements Subject {
     public Tile register(MobileObject object) {
         this.object = object;
         hasObject = true;
-        System.out.println(object + " Has registered" + " Has items: " + hasItems());
         if(object instanceof Player) {
             visited = true;
         }

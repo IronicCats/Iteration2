@@ -103,14 +103,6 @@ public class Player extends Character implements Observer{
         //emptyPack();
     } // end emptyPack
 
-    public void emptyPack() {
-        inventory.emptyPack();
-    } // end emptyPack
-
-    public void pickup(Item item) {
-        if(!inventory.packFull())
-            inventory.place(item);
-    } // end pickup
 
     public void tick() {
         ((CharacterStats)getStats()).tick();
