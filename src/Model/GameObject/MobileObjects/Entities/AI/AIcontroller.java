@@ -27,10 +27,8 @@ import Utilities.MapUtilities.Navigation;
 
                 Location path = Astar.Findpath(map, AI.getLocation(), destination).get(0);
                 if(Navigation.checkMove(path, map, AI)) {
-                    map.deRegister(AI.getLocation());
                     AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
                     AI.alert();
-                    map.register(AI);
                     System.out.println("Moving");
                 }
             }

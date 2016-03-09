@@ -51,10 +51,6 @@ public class Pet extends MobileObject implements Tickable{
     @Override
     public void tick() {
         if(controller != null) {
-            int temp = random.nextInt(450);
-            if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
-                controller.setDestination(computeRandomLocation());
-            }
             controller.tick();
         }
     } // end tick

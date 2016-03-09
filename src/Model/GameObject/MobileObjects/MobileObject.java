@@ -78,9 +78,6 @@ public abstract class MobileObject extends GameObject{
         this.canMove = canMove;
     }
 
-    public void toggleCanMove() {
-        this.canMove = !this.canMove;
-    }
 
     public Tile registerTile(Location location) {
         tile.deregister();
