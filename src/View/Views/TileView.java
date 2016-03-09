@@ -75,7 +75,7 @@ public class TileView implements Observer, Renderable {
 
         if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
             //System.out.print("Here");
-            g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+            //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }
 
         /**
