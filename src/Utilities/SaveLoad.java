@@ -16,6 +16,9 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
+import Model.Stats.DerivedStats;
+import Model.Stats.PrimaryStats;
+import Model.Stats.Stats;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -432,7 +435,109 @@ public class SaveLoad {
         occupation.setValue(e.getOccupation().getName());   //sets the occupation attribute to player occupation
         type.setAttributeNode(occupation);          //element sets attribute Node to element
 
+        Element stat = doc.createElement("Stats");
+        //need to get Primary then secondary
         return type;                //returns it so it can be used in XML
+    }
+
+    private static Node getPrimaryStats(Document doc, PrimaryStats stat){
+
+
+        Element primary = doc.createElement("primary");
+
+        Attr livesLeft = doc.createAttribute("livesLeft");
+        livesLeft.setValue(Integer.toString(stat.getLivesLeft()));
+        primary.setAttributeNode(livesLeft);
+
+        Attr strength = doc.createAttribute("strength");
+        strength.setValue(Integer.toString(stat.getStrength()));
+        primary.setAttributeNode(strength);
+
+        Attr agility = doc.createAttribute("agility");
+        agility.setValue(Integer.toString(stat.getAgility()));
+        primary.setAttributeNode(agility);
+
+        Attr intellect = doc.createAttribute("intellect");
+        intellect.setValue(Integer.toString(stat.getIntellect()));
+        primary.setAttributeNode(intellect);
+
+        Attr hardiness = doc.createAttribute("hardiness");
+        hardiness.setValue(Integer.toString(stat.getHardiness()));
+        primary.setAttributeNode(hardiness);
+
+        Attr experience = doc.createAttribute("experience");
+        experience.setValue(Integer.toString(stat.getExperience()));
+        primary.setAttributeNode(experience);
+
+        Attr movement = doc.createAttribute("movement");
+        movement.setValue(Integer.toString(stat.getMovement()));
+        primary.setAttributeNode(movement);
+
+        Attr baseStr = doc.createAttribute("baseStr");
+        baseStr.setValue(Integer.toString(stat.getBaseStr()));
+        primary.setAttributeNode(baseStr);
+
+        Attr baseAgi = doc.createAttribute("baseAgi");
+        baseAgi.setValue(Integer.toString(stat.getBaseAgi()));
+        primary.setAttributeNode(baseAgi);
+
+        Attr baseIntel = doc.createAttribute("baseIntel");
+        baseIntel.setValue(Integer.toString(stat.getBaseIntel()));
+        primary.setAttributeNode(baseIntel);
+
+        Attr baseHard = doc.createAttribute("baseHard");
+        baseHard.setValue(Integer.toString(stat.getBaseHard()));
+        primary.setAttributeNode(baseHard);
+
+        Attr baseMovement = doc.createAttribute("baseMovement");
+        baseMovement.setValue(Integer.toString(stat.getBaseMovement()));
+        primary.setAttributeNode(baseMovement);
+
+        Attr xpThresh = doc.createAttribute("xpThresh");
+        xpThresh.setValue(Integer.toString(stat.getXpThreshhold()));
+        primary.setAttributeNode(xpThresh);
+
+
+        return primary;
+    }
+
+    private static Node getDerived(Document doc, DerivedStats stat){
+        Element derive = doc.createElement("derived");
+
+        Attr level = doc.createAttribute("level");
+        level.setValue(Integer.toString(stat.getLevel()));
+        derive.setAttributeNode(level);
+
+        Attr life = doc.createAttribute("life");
+        life.setValue(Integer.toString(stat.getLife()));
+        derive.setAttributeNode(life);
+
+        Attr mana = doc.createAttribute("mana");
+        mana.setValue(Integer.toString(stat.getMana()));
+        derive.setAttributeNode(mana);
+
+        Attr offensiveRating = doc.createAttribute("offense");
+        offensiveRating.setValue(Integer.toString(stat.getOffensiveRating()));
+        derive.setAttributeNode(offensiveRating);
+
+        Attr defesniveRating = doc.createAttribute("defense");
+        defesniveRating.setValue(Integer.toString(stat.getDefensiveRating()));
+        derive.setAttributeNode(defesniveRating);
+
+        Attr armorRating = doc.createAttribute("armorRating");
+        armorRating.setValue(Integer.toString(stat.getArmorRating()));
+        derive.setAttributeNode(armorRating);
+
+        Attr baseLife = doc.createAttribute("baseLife");
+        baseLife.setValue(Integer.toString(stat.getBaseLife()));
+        derive.setAttributeNode(baseLife);
+
+        Attr baseMana = doc.createAttribute("baseMana");
+        baseMana.setValue(Integer.toString(stat.getBaseMana()));
+        derive.setAttributeNode(baseMana);
+
+        
+        return derive;
     }
 
     private static Node getMap(Document doc, Map m){
