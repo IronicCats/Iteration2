@@ -27,10 +27,12 @@ public class GameController extends Controller {
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             if(!cameraMoves) {
                 cameraMoves = true;
+                waitingTime = 45;
                 ((GameState) state).SetCameramoving(cameraMoves);
             }
             else{
                 cameraMoves = false;
+                waitingTime = 500;
                 ((GameState) state).SetCameramoving(cameraMoves);
             }
         }
