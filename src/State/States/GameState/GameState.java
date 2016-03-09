@@ -160,10 +160,7 @@ public class GameState extends State {
     }
 
     public void playerInteract() {
-        if(map.getTile(player.getX(), player.getY()).hasItems()){
-            Item itemOnTile = map.getTile(player.getX(), player.getY()).getItems().get(0);
-            player.interact(itemOnTile);
-        }
+            player.interactWithTile();
     } // end playerInteract
 
     public void playerExamineInventory() {

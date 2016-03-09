@@ -49,7 +49,7 @@ public class ItemFactory {
         initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(3, 5));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(2, 2));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // helmet

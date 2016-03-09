@@ -74,6 +74,10 @@ public class Inventory implements Subject{
         return equipment.getSlot(slot);
     } // end getSlot
 
+    public int getPackSpaceLeft() {
+        return pack.getSizeLeft();
+    }
+
     @Override
     public void addObserver(Observer o) {
         observers.add(o);
