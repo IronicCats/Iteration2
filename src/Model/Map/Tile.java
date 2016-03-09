@@ -44,6 +44,7 @@ public abstract class Tile implements Subject {
     public void interact() {
         if (hasItems() && object instanceof Player) {
             items = ((Player) object).takeItems(items);
+            System.out.print(items);
             alert();
         }
     }
@@ -52,6 +53,14 @@ public abstract class Tile implements Subject {
         items.add(item);
         alert();
     }
+
+    public void addItems(ArrayList<Item> items) {
+        for (Item i: items) {
+            this.items.add(i);
+        }
+        alert();
+    }
+
 
     public void setAreaEffectTile(AreaEffect a){
         this.areaEffectEnum = a.getAreaEffect();

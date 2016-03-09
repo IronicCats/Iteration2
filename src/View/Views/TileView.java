@@ -49,6 +49,7 @@ public class TileView implements Observer, Renderable {
     public void update() {
         if (tile.hasItems()) {
             Item item;
+            System.out.println("Creating Item View");
             if(tile.amountOfItems() > 1) {
                 item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
                 for(Item i: tile.getItems()){
@@ -63,6 +64,8 @@ public class TileView implements Observer, Renderable {
             }
             itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
 
+        }else {
+            itemView = null;
         }
 
         if(tile.getHasAreaEffect()){
@@ -92,9 +95,9 @@ public class TileView implements Observer, Renderable {
             //itemView.render(g);
         }
 
-
+/*
         if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
-            /*
+
             if (tile.isVisited()) {
                 g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
                 if(itemView != null) {
@@ -104,9 +107,9 @@ public class TileView implements Observer, Renderable {
                 g.drawImage(Assets.HALFFOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
 
             } else {
-                //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+                g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
 
-            }*/
+            }
         }else {
             g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
             if(decalView != null){
@@ -117,6 +120,6 @@ public class TileView implements Observer, Renderable {
                 //itemView.render(g);
             }
         }
+    */
     }
-
 }

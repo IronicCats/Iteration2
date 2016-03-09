@@ -64,11 +64,15 @@ public class Pack {
         return cap - count;
     }
 
-    public void empty() {
-        for(int i = 0; i < cap; i++) {
+    public ArrayList<Item> empty() {
+        ArrayList<Item> tempItems = new ArrayList<>();
+        for(int i = 0; i < items.length; ++i){
             if(items[i] != null) {
-                remove(i);
+                tempItems.add(items[i]);
+                items[i] = null;
             }
         }
+        System.out.println(tempItems);
+        return tempItems;
     } // end emptyPack
 } // end class Pack

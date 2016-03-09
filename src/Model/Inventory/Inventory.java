@@ -7,6 +7,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Utilities.Observer;
 import Utilities.Subject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -66,8 +67,8 @@ public class Inventory implements Subject{
         pack.examine();
     } // end examine
 
-    public void emptyPack() {
-        pack.empty();
+    public ArrayList<Item> emptyPack() {
+        return pack.empty();
     } // end emptyPack
 
     public Takable getSlot(EquipmentSlotEnum slot) {

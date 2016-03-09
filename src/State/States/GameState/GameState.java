@@ -1,6 +1,7 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
+import Model.Abilities.PlayerCommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
@@ -108,9 +109,7 @@ public class GameState extends State {
         
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
-        //decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
         AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
-
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
 
@@ -136,7 +135,7 @@ public class GameState extends State {
 
     }
 
-    public void SetCameramoving(boolean movement){
+    public void setCameraMoving(boolean movement){
         cameraMoving = movement;
         if(!cameraMoving){
             camera.centerOnPlayer(player);
@@ -146,6 +145,7 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        player.tick();
         enemy.tick();
         enemy1.tick();
     }
@@ -164,9 +164,25 @@ public class GameState extends State {
         //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
-    public void playerInteract() {
-            player.interactWithTile();
-    } // end playerInteract
+    public void executePlayerCommand(PlayerCommandsEnum pce){
+        switch(pce){
+            case interact:
+                player.interactWithTile();
+                break;
+            case drop:
+                player.emptyPack();
+                break;
+            case attack:
+                break;
+            case ability1:
+                break;
+            case ability2:
+                break;
+            case ability3:
+                break;
+        }
+    }
+
 
     public void playerExamineInventory() {
         player.examinePack();

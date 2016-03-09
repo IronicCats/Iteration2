@@ -84,21 +84,15 @@ public class Player extends Character implements Observer{
         ((CharacterStats)getStats()).resetMovement();
     }
 
-    public void interact(Item item) {
-        if(item instanceof Takable) {
-            pickup(item);
-        }
-    } // end interact
   
     public void examinePack() {
         inventory.examine();
         emptyPack();
     } // end emptyPack
 
-    public void emptyPack() {
-        inventory.emptyPack();
-    } // end emptyPack
 
-
+    public void tick() {
+        ((CharacterStats)getStats()).tick();
+    }
 
 } // end class Player

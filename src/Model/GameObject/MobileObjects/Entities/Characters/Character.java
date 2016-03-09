@@ -28,7 +28,9 @@ public abstract class Character extends Entity {
     } // end constructor
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
+        System.out.println("Here");
         ArrayList<Item> tempItems = new ArrayList<>(items);
+        System.out.println(items.size());
         Iterator<Item> it = tempItems.iterator();
         while(it.hasNext()){
             Item i = it.next();
@@ -37,10 +39,15 @@ public abstract class Character extends Entity {
                 items.remove(i);
             }
         }
+        System.out.println(items.size());
         return items;
     }
 
     public void pickup(Item item) {
         inventory.place(item);
     } // end pickup
+    public void emptyPack() {
+        getTile().addItems(inventory.emptyPack());
+    } // end emptyPack
+
 } // end class Character
