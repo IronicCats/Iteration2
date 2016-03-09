@@ -30,21 +30,25 @@ public abstract class Character extends Entity {
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         //System.out.println("Here");
         ArrayList<Item> tempItems = new ArrayList<>(items);
-        System.out.println(items.size());
         Iterator<Item> it = tempItems.iterator();
         while(it.hasNext()){
             Item i = it.next();
-            if(i instanceof Takable && inventory.getPackSpaceLeft() > 0) {
-                pickup(i);
-                items.remove(i);
+            if(i instanceof Takable) {//if its takable
+                if(pickup(i)) {//and i was able to pick it up
+                    items.remove(i); //remove it from the items
+                }
             }
         }
-        System.out.println(items.size());
         return items;
     }
 
-    public void pickup(Item item) {
-        inventory.place(item);
+    public boolean pickup(Item item) {
+
+        if(inventory.getPackSpaceLeft() > 0){
+            inventory.place(item);
+            return true;
+        }
+        return false;
     } // end pickup
     public void emptyPack() {
         getTile().addItems(inventory.emptyPack());
