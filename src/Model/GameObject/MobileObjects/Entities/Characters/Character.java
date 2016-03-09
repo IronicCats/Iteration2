@@ -28,7 +28,7 @@ public abstract class Character extends Entity {
     } // end constructor
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
-        System.out.println("Here");
+        //System.out.println("Here");
         ArrayList<Item> tempItems = new ArrayList<>(items);
         System.out.println(items.size());
         Iterator<Item> it = tempItems.iterator();
