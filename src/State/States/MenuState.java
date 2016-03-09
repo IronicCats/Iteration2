@@ -19,11 +19,7 @@ public class MenuState extends State {
         }
 
         public void switchState(StatesEnum state) {
-                if(getState() != getLiveState(state)) {
-                        setState(state);
-                }
-
-
+                setState(state);
         }
         public void moveUp(){
                 menuView.previous();
@@ -31,9 +27,12 @@ public class MenuState extends State {
         public void moveDown(){
                 menuView.next();
         }
-        public void tick(){
-        }
 
+        @Override
+        public void tick(){
+                return;
+        }
+        @Override
         public void render(Graphics g) {
                 menuView.render(g);
         }

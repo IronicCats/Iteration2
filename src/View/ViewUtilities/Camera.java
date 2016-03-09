@@ -51,6 +51,26 @@ public class Camera implements Observer {
         keepCameraOnMap();
     }
 
+    public void move(int degrees){
+        switch(degrees){
+            case 90:
+                yOffset -= 30;
+                break;
+            case 225:
+                xOffset -= 30;
+                break;
+            case 270:
+                yOffset += 30;
+                break;
+            case 315:
+                xOffset += 30;
+                break;
+            default:
+                break;
+        }
+        keepCameraOnMap();
+    }
+
     //Every time you change the offset of x or y keepcameronMap makes sure you didnt cross the boundary
     public int getxOffset() {
         return xOffset;

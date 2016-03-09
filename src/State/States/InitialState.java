@@ -27,7 +27,6 @@ public class InitialState extends State {
 
     @Override
     public void tick() {
-
     }
 
     @Override

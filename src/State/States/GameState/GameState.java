@@ -13,7 +13,6 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Stats.CharacterStats;
 import State.StatesEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
@@ -31,7 +30,6 @@ import View.Views.ItemView;
 import View.Views.MapView;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -48,7 +46,7 @@ public class GameState extends State {
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
-
+    private boolean cameraMoving;
 
 
     private Player player;
@@ -58,6 +56,10 @@ public class GameState extends State {
     private MobileObjectView enemyView;
 
     public GameState() {
+        //need to change this
+        cameraMoving = false;
+
+
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -104,11 +106,22 @@ public class GameState extends State {
 
     }
 
-    public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+    public void move(int degrees) {
+        if(cameraMoving){
+            System.out.println("camera moving");
+            camera.move(degrees);
+        }
+        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
             map.registerObject(player); // registers player with tile
+        }
+    }
+
+    public void SetCameramoving(boolean movement){
+        cameraMoving = movement;
+        if(!cameraMoving){
+            camera.centerOnPlayer(player);
         }
     }
 
@@ -125,15 +138,17 @@ public class GameState extends State {
         }
 
         camera.centerOnPlayer(player);
+        if(!cameraMoving) {
+            camera.centerOnPlayer(player);
+        }
+
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
     @Override
     public void switchState(StatesEnum state) {
-        if(getState() != getLiveState(state)) {
-            System.out.println(state);
-            setState(state);
-        }
+        System.out.println(state);
+        setState(state);
     }
 }
