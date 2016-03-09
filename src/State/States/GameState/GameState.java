@@ -50,7 +50,7 @@ public class GameState extends State {
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
-
+    private boolean cameraMoving;
 
 
     private Player player;
@@ -60,6 +60,10 @@ public class GameState extends State {
     private MobileObjectView enemyView;
 
     public GameState() {
+        //need to change this
+        cameraMoving = false;
+
+
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -115,6 +119,22 @@ public class GameState extends State {
         }
     }
 
+    public void moveCamera(int degrees){
+        camera.move(degrees);
+    }
+
+    public void saveCameraOffsets(){
+        cameraMoving = true;
+        camera.setOriginalXOffset(camera.getxOffset());
+        camera.setGetOriginalYOffset(camera.getyOffset());
+    }
+
+    public void BackToOriginalOffset(){
+        cameraMoving = false;
+        camera.setxOffset(camera.getOriginalXOffset());
+        camera.setyOffset(camera.getGetOriginalYOffset());
+    }
+
     @Override
     public void tick() {
         enemy.tick();
@@ -129,7 +149,9 @@ public class GameState extends State {
         for (DecalView decalView : decals.values()) {
             decalView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        camera.centerOnPlayer(player);
+        if(!cameraMoving) {
+            camera.centerOnPlayer(player);
+        }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
     }
