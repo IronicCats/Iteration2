@@ -103,9 +103,11 @@ public class GameState extends State {
         
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
-        decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
-        map.placeAreaEffect(a);
+        //decals.put(a, AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR)));
+        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
 
+        map.placeAreaEffect(a);
+        map.placeAreaEffect(b);
 
 
 
@@ -145,12 +147,6 @@ public class GameState extends State {
     public void render(Graphics g) {
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         //keyset for keys, values for values
-        for (ItemView itemView : mapItems.values()) {
-            itemView.render(g, camera.getxOffset(), camera.getyOffset());
-        }
-        for (DecalView decalView : decals.values()) {
-            decalView.render(g, camera.getxOffset(), camera.getyOffset());
-        }
         if(!cameraMoving) {
             camera.centerOnPlayer(player);
         }

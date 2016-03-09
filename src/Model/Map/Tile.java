@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public abstract class Tile implements Subject {
 
     private Location location;
-    protected Observer observer;
+    protected ArrayList<Observer> observers;
     private boolean isWalkable;
     private ArrayList<Item> items;
     private AreaEffect a;
@@ -37,23 +37,27 @@ public abstract class Tile implements Subject {
         this.isWalkable = isWalkable;
         hasAreaEffect = false;
         visited = false;
+        observers = new ArrayList<>();
     }
 
 
     public void interact() {
         if (hasItems() && object instanceof Player) {
             items = ((Player) object).takeItems(items);
+            alert();
         }
     }
 
     public void addItem(Item item) {
         items.add(item);
+        alert();
     }
 
     public void setAreaEffectTile(AreaEffect a){
         this.areaEffectEnum = a.getAreaEffect();
         this.a = a;
         hasAreaEffect = true;
+        alert();
     }
 
     public AreaEffectEnum getAreaEffectEnum(){
@@ -114,20 +118,29 @@ public abstract class Tile implements Subject {
 
     public boolean getHasAreaEffect(){return this.hasAreaEffect;}
 
+    public int amountOfItems() {
+        return items.size();
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
 
     @Override
     public void addObserver(Observer o) {
-
+        observers.add(o);
     }
 
     @Override
     public void removeObserver(Observer o) {
-
+        observers.remove(o);
     }
 
     @Override
     public void alert() {
-
+        for(Observer o: observers) {
+            o.update();
+        }
     }
 
 }

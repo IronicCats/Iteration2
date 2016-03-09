@@ -14,6 +14,9 @@ public class Settings {
     public static int TILEHEIGHT = 56*2;
     public static int PLAYERWIDTH = TILEWIDTH/2;
     public static int PLAYERHEIGHT = TILEHEIGHT/2;
+    public static int DEFAULTITEMHEIGHT = TILEHEIGHT/4;
+    public static int DEFAULTITEMWIDTH = TILEWIDTH/4;
+
 
     public static int SIGHT = 2;
 

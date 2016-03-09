@@ -53,20 +53,7 @@ public class Player extends Character implements Observer{
 
     } // end remove
 
-    public ArrayList<Item> takeItems(ArrayList<Item> items) {
-        System.out.println(items);
-        System.out.println(items.get(0).getClass());
-        for (Iterator<Item> it = items.iterator(); it.hasNext(); ) {
-            Item i = it.next();
-            if(i instanceof Takable && inventory.getPackSpaceLeft() > 0) {
-                System.out.println(i);
-                pickup(i);
-                items.remove(i);
-            }
-        }
 
-        return items;
-    }
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
@@ -100,7 +87,5 @@ public class Player extends Character implements Observer{
     } // end emptyPack
 
 
-    public void pickup(Item item) {
-        inventory.place(item);
-    } // end pickup
+
 } // end class Player
