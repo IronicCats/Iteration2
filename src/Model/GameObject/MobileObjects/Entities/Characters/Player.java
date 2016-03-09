@@ -67,8 +67,14 @@ public class Player extends Character implements Observer{
     } // end unequip
 
     public void interact(Item item) {
-        if(item instanceof Takable) {
+        if (item instanceof Takable) {
             pickup(item);
+        } else if (item instanceof Weapon) {
+            System.out.println("weapon");
+            equip((Weapon)item);
+        } else if (item instanceof Armor) {
+            System.out.println("armor");
+            equip((Armor)item);
         }
     } // end interact
 
