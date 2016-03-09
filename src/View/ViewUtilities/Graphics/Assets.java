@@ -38,6 +38,7 @@ public class Assets {
     public static BufferedImage BOOTS;
     public static BufferedImage SHIELD;
     public static BufferedImage CHEST_KEY;
+    public static BufferedImage HOUSE;
 
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
@@ -107,6 +108,9 @@ public class Assets {
 
         SpriteSheet keySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Key.png"));
         CHEST_KEY = keySheet.crop(0,0,32,32);
+
+        SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
+        HOUSE = houseSheet.crop(0,0,32,32);
 
         //End of Tiles
 
