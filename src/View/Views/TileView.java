@@ -83,9 +83,18 @@ public class TileView implements Observer, Renderable {
     public void render(Graphics g, int xOffset, int yOffset, Location playerLocation) {
 
 
+        g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
+        if(decalView != null){
+            decalView.render(g, xOffset, yOffset);
+        }
+        if(itemView != null) {
+            itemView.render(g, xOffset, yOffset);
+            //itemView.render(g);
+        }
+
 
         if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
-            //System.out.print("Here");
+            /*
             if (tile.isVisited()) {
                 g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
                 if(itemView != null) {
@@ -97,7 +106,7 @@ public class TileView implements Observer, Renderable {
             } else {
                 //g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
 
-            }
+            }*/
         }else {
             g.drawImage(sprite, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
             if(decalView != null){

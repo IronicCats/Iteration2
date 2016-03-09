@@ -100,7 +100,7 @@ public abstract class Tile implements Subject {
             }
         }
         // add && !hasObject()
-        return isWalkable;
+        return isWalkable && !hasObject;
     }
 
 

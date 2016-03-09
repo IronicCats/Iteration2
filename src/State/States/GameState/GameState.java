@@ -58,10 +58,12 @@ public class GameState extends State {
 
     private Player player;
     private NPC enemy;
+    private NPC enemy1;
     private Pet pet;
 
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
+    private MobileObjectView enemyView1;
     private MobileObjectView petView;
 
     public GameState() {
@@ -81,7 +83,7 @@ public class GameState extends State {
 
         //creating a new player
         player = new Player();
-        player = new Player(new Location(0, 2), new Smasher(), new Inventory());
+        player = new Player(new Location(0, 1), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
@@ -94,9 +96,12 @@ public class GameState extends State {
 
 
         enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
-       // pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
+        enemy1 = new NPC(new Location(4,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
 
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
+        enemyView1 = new MobileObjectView(enemy1, Assets.PLAYER);
+
         //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
 
 
@@ -142,6 +147,7 @@ public class GameState extends State {
     @Override
     public void tick() {
         enemy.tick();
+        enemy1.tick();
     }
 
     public void render(Graphics g) {
@@ -150,8 +156,11 @@ public class GameState extends State {
         if(!cameraMoving) {
             camera.centerOnPlayer(player);
         }
+        enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
+
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
+
         //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
