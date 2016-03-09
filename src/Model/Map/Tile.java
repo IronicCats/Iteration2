@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
@@ -38,6 +39,13 @@ public abstract class Tile implements Subject {
         visited = false;
     }
 
+
+    public void interact() {
+        if (hasItems() && object instanceof Player) {
+            items = ((Player) object).takeItems(items);
+        }
+    }
+
     public void addItem(Item item) {
         items.add(item);
     }
@@ -67,7 +75,7 @@ public abstract class Tile implements Subject {
     public Tile register(MobileObject object) {
         this.object = object;
         hasObject = true;
-        System.out.println(object + " Has registered");
+        System.out.println(object + " Has registered" + " Has items: " + hasItems());
         if(object instanceof Player) {
             visited = true;
         }
@@ -82,6 +90,11 @@ public abstract class Tile implements Subject {
 
 
     public boolean isWalkable() {
+        for(Item i: items){
+            if(i instanceof Obstacle){
+                return false;
+            }
+        }
         // add && !hasObject()
         return isWalkable;
     }

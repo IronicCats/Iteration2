@@ -60,6 +60,10 @@ public class Pack {
         }
     } // end examine
 
+    public int getSizeLeft() {
+        return cap - items.length;
+    }
+
     public void empty() {
         for(int i = 0; i < cap; i++) {
             if(items[i] != null) {
