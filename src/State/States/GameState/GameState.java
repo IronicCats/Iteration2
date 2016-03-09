@@ -47,7 +47,7 @@ public class GameState extends State {
     private MapView mapView;
     SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
-
+    private boolean cameraMoving;
 
 
     private Player player;
@@ -57,6 +57,10 @@ public class GameState extends State {
     private MobileObjectView enemyView;
 
     public GameState() {
+        //need to change this
+        cameraMoving = false;
+
+
         setController(new GameController(this));
         mapItems = new HashMap<>();
         mobileObjects = new HashMap<>();
@@ -97,14 +101,29 @@ public class GameState extends State {
 
     }
 
-    public void movePlayer(int degrees) {
-        if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+    public void move(int degrees) {
+        if(cameraMoving){
+            System.out.println("camera moving");
+            camera.move(degrees);
+        }
+        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             map.deRegister(player.getLocation()); // removes player from tile
             player.move(degrees);
             map.registerObject(player); // registers player with tile
         }
     }
 
+    public void SetCameramoving(boolean movement){
+        cameraMoving = movement;
+        if(!cameraMoving){
+            camera.centerOnPlayer(player);
+        }
+    }
+
+    @Override
+    public void tick() {
+        enemy.tick();
+    }
 
     public void render(Graphics g) {
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
@@ -115,15 +134,11 @@ public class GameState extends State {
         for (DecalView decalView : decals.values()) {
             decalView.render(g, camera.getxOffset(), camera.getyOffset());
         }
-        camera.centerOnPlayer(player);
+        if(!cameraMoving) {
+            camera.centerOnPlayer(player);
+        }
         playerView.render(g, camera.getxOffset(), camera.getyOffset());
         enemyView.render(g, camera.getxOffset(), camera.getyOffset());
-    }
-
-
-    @Override
-    public void tick() {
-        enemy.tick();
     }
 
     @Override
