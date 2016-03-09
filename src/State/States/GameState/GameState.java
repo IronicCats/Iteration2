@@ -81,7 +81,7 @@ public class GameState extends State {
 
         //creating a new player
         player = new Player();
-        player = new Player(new Location(0, 2), new Smasher(), new Inventory());
+        player = new Player(new Location(0, 1), new Smasher(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         playerView = new MobileObjectView(player, Assets.PLAYER);
 

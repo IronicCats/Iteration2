@@ -18,16 +18,17 @@ import Utilities.MapUtilities.Navigation;
         }
 
         private MobileObject AI;
-        private Location destination = new Location(2,3,0);
+        private Location destination = new Location(0,2,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
         @Override
         public void tick() {
 
             if (AI.canMove() && !AI.getLocation().equals(destination)) {
 
-                Location path = Astar.Findpath(map, AI.getLocation(), destination).get(0);
-                if(Navigation.checkMove(path, map, AI)) {
-                    AI.move(Astar.Findpath(map, AI.getLocation(), destination).get(0).getDir());
+                Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0);
+                Location end  = Astar.Findpath(map, AI.getLocation(), destination).get(1);
+                if(Navigation.checkMove(end, map, AI)) {
+                    AI.move(start.getDir());
                     AI.alert();
                     System.out.println("Moving");
                 }

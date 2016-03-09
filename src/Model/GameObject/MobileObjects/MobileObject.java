@@ -45,7 +45,7 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
         this.stats = stats;
         map = GameState.map;
-        tile = map.getTile(location);
+        tile = map.register(this);
     }
 
     public void move(int degrees){
