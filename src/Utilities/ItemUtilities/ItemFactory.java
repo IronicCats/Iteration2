@@ -76,7 +76,7 @@ public class ItemFactory {
         Item shield = ItemFactory.makeItem(ItemsEnum.SHIELD, new Location(9, 5));
         initItems.put(shield, ItemFactory.makeAsset(ItemsEnum.SHIELD, shield));
 
-        // shield
+        // key
         Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(5, 3));
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
 

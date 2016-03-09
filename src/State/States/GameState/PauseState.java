@@ -2,6 +2,7 @@ package State.States.GameState;
 
 import Controller.Controllers.PauseController;
 import State.State;
+import View.Views.PauseView;
 
 import java.awt.*;
 
@@ -10,9 +11,11 @@ import java.awt.*;
  */
 public class PauseState extends State{
 
-    GameState game;
+    private PauseView pauseView;
+    private GameState game;
 
     public PauseState(GameState GS){
+        pauseView = new PauseView();
         setController(new PauseController(this));
         game=GS;
     }
@@ -20,8 +23,15 @@ public class PauseState extends State{
     public void tick() {
     }
 
+    public void moveUp(){
+        pauseView.previous();
+    }
+    public void moveDown(){
+        pauseView.next();
+    }
+
     public void render(Graphics g) {
-        game.render(g);
+        pauseView.render(g);
     }
 
     @Override

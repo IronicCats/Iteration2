@@ -3,6 +3,7 @@ package Controller.Controllers;
 import State.State;
 import State.States.GameState.PauseState;
 import Controller.Controller;
+import State.States.MenuState;
 
 import java.awt.event.KeyEvent;
 
@@ -11,8 +12,11 @@ import java.awt.event.KeyEvent;
  */
 public class PauseController extends Controller{
 
+    private int currentState;
+
     public PauseController(PauseState state) {
         super(state);
+        currentState = 1;
     }
 
     @Override
@@ -23,6 +27,25 @@ public class PauseController extends Controller{
         if (e.getKeyCode() == KeyEvent.VK_P) {
             state.switchState(State.GAMESTATE);
             System.out.println("Game was Paused");
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
+            currentState--;
+            ((MenuState)state).moveUp();
+            //System.out.println("state = " + currentState);
+        }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<3){
+            currentState++;
+            ((MenuState)state).moveDown();
+            //System.out.println("state =" + currentState);
+        }
+        if(e.getKeyCode() == 10) {
+            if (currentState == 1){
+                System.out.println("Switching to gameState");
+                state.switchState(State.GAMESTATE);
+            }
+            else if(currentState==2)System.out.println("this is the load state");
+            else if(currentState==3)System.exit(0);
         }
 
     }
