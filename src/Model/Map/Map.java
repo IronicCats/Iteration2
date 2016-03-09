@@ -58,12 +58,10 @@ public class Map implements Subject {
             System.out.println(tiles[a.getX()][a.getY()]);
 
 
-            tiles[a.getX()][a.getY()].setAreaEffectTile(a);
+            tiles[a.getX()][a.getY()].setAreaEffect(a);
         }catch (Exception e) {
-            e.printStackTrace();
             System.out.println(e);
             System.out.println("Error while adding AreaEffect to Map");
-            System.out.close();
         }
     }
 

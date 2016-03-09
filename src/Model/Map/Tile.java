@@ -31,8 +31,8 @@ public abstract class Tile implements Subject {
         object = null;
         this.location = location;
         this.IsWalkable = IsWalkable;
-        this.hasAreaEffect = false;
         visited = false;
+        areaEffect = null;
         observers = new ArrayList<>();
     }
 
@@ -40,10 +40,8 @@ public abstract class Tile implements Subject {
         items.add(item);
     }
 
-    public void setAreaEffectTile(AreaEffect a){
+    public void setAreaEffect(AreaEffect a){
         this.areaEffect = a;
-        this.hasAreaEffect = true;
-        System.out.println(hasAreaEffect + "MM");
         alert();
     }
 
@@ -87,8 +85,14 @@ public abstract class Tile implements Subject {
     }
 
     public boolean getHasAreaEffect(){
-        System.out.println("MM" + this.hasAreaEffect);
-        return this.hasAreaEffect;
+        if(areaEffect != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

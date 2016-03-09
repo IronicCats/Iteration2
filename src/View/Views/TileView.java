@@ -31,7 +31,15 @@ public class TileView implements Observer, Renderable {
         this.location = tile.getLocation();
         this.viewLocation = new ViewLocation(location.getX(), location.getY());
         if(tile.getHasAreaEffect()){
-            decalView = new DecalView(tile.getAreaEffect(), Assets.STAR);
+            if(tile.getAreaEffectEnum() == AreaEffectEnum.LEVELUP){
+                decalView = new DecalView(tile.getAreaEffect(), Assets.STAR);
+            }
+            else if(tile.getAreaEffectEnum() == AreaEffectEnum.DEATH){
+                decalView = new DecalView(tile.getAreaEffect(), Assets.SKULL);
+            }
+            else if(tile.getAreaEffectEnum() == AreaEffectEnum.DEATH){
+                decalView = new DecalView(tile.getAreaEffect(), Assets.SKULL);
+            }
         }
 
     }
@@ -62,12 +70,10 @@ public class TileView implements Observer, Renderable {
             g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
         }*/
 
-
+        System.out.println(decalView);
         if(tile.getHasAreaEffect() && decalView != null){
             decalView.render(g, xOffset, yOffset);
         }
-
-
 
 
     }
