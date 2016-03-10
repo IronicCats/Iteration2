@@ -1,25 +1,19 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
-import Model.Abilities.PlayerCommandsEnum;
+import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
-import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
-import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Stats.PetStats;
-import Model.Stats.StatStructure;
-import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -57,17 +51,7 @@ public class GameState extends State {
 
     private boolean cameraMoving;
 
-
     private Player player;
-    private NPC enemy;
-    private NPC enemy1;
-    private Pet pet;
-
-
-    private MobileObjectView playerView;
-    private MobileObjectView enemyView;
-    private MobileObjectView enemyView1;
-    private MobileObjectView petView;
 
     public GameState() {
         //need to change this
@@ -83,16 +67,18 @@ public class GameState extends State {
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
 
+        //creating a new player
+        player =  NPCFactory.Player();
+        NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = NPCFactory.Init();
-
-        //creating a new player
-        player =  NPCFactory.Player();
-        playerView = new MobileObjectView(player, Assets.PLAYER.get(0));
+        mobileObjects = NPCFactory.Init(map);
+        mobileObjects.put(player, NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+        map.setMobileObjects(mobileObjects);
 
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
@@ -145,37 +131,12 @@ public class GameState extends State {
             camera.centerOnPlayer(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-        //keyset for keys, values for values
-        //enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
-
-        //playerView.render(g, camera.getxOffset(), camera.getyOffset());
-        //enemyView.render(g, camera.getxOffset(), camera.getyOffset());
-
+        
         DisplayMessage.render(g);
-        //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
-    public void executePlayerCommand(PlayerCommandsEnum pce){
-        switch(pce){
-            case interact:
-                player.interactWithTile();
-                break;
-            case drop:
-                player.emptyPack();
-                break;
-            case attack:
-                System.out.println("Attack!");
-                break;
-            case ability1:
-                System.out.println("Ability 1");
-                break;
-            case ability2:
-                System.out.println("Ability 2");
-                break;
-            case ability3:
-                System.out.println("Ability 3");
-                break;
-        }
+    public void executePlayerCommand(CommandsEnum pce){
+        player.excute(pce);
     }
 
 

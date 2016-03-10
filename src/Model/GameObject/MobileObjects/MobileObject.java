@@ -5,6 +5,7 @@ import Model.Location;
 
 import Model.Map.Map;
 import Model.Map.Tile;
+import Controller.Controller;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
@@ -26,7 +27,7 @@ public abstract class MobileObject extends GameObject{
     private float speed;
     private Tile tile;
     // private Nav navigation
-    private Stats stats;
+    protected Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
 
@@ -37,7 +38,6 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-
     }
     public MobileObject(Location location, Stats stats) {
         super(location);
@@ -92,7 +92,7 @@ public abstract class MobileObject extends GameObject{
     }
 
     public void interactWithTile() {
-        tile.interact();
+        tile.interact(this.location);
     }
 
     public Tile getTile(){

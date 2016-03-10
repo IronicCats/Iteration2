@@ -20,7 +20,7 @@ public class MobileObjectView implements Renderable, Observer {
     private Location location;
 
     private int movement;
-    private int active = 0;
+    private int active;
     private int width;
     private int height;
 
@@ -42,7 +42,7 @@ public class MobileObjectView implements Renderable, Observer {
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
-        this.active = 0;
+        this.active = 3;
         this.movement = 10;
     } // end constructor
 
@@ -58,7 +58,7 @@ public class MobileObjectView implements Renderable, Observer {
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
-        this.active = 0;
+        this.active = 3;
         this.movement = 10;
     }
 
@@ -115,6 +115,7 @@ public class MobileObjectView implements Renderable, Observer {
 
     @Override
     public void update() {
+            setDirection(entity.getDir());
             goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
             goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
     }
@@ -122,6 +123,27 @@ public class MobileObjectView implements Renderable, Observer {
     @Override
     public void remove() {
 
+    }
+
+    public void setDirection(int degrees){
+        if(degrees == Settings.NORTH){
+            this.active = 0;
+        }
+        else if(degrees == Settings.NE){
+            this.active = 1;
+        }
+        else if(degrees == Settings.SE){
+            this.active = 2;
+        }
+        else if(degrees == Settings.SOUTH){
+            this.active = 3;
+        }
+        else if(degrees == Settings.SW){
+            this.active = 4;
+        }
+        else if(degrees == Settings.NW){
+            this.active = 5;
+        }
     }
 }
 

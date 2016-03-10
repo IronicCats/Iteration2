@@ -7,8 +7,8 @@ import Model.Map.Map;
  */
 public class PetController extends AIcontroller {
 
-    public PetController() {
-        super();
+    public PetController(Map map) {
+        super(map);
     }
 
 }

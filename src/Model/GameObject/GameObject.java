@@ -38,6 +38,7 @@ public abstract class GameObject implements Subject, Tickable {
     public int getY() {
         return location.getY();
     }
+    public int getDir() {return location.getDir(); }
 
     public String toString() {
         return "GameObject with Location: " + location.toString();

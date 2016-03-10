@@ -34,13 +34,11 @@ public class Location {
                 else{
                     newLocation.setY(location.getY());
                 }
-                newLocation.setDir(degrees);
                 newLocation.setX(location.getX() + 1);
                 break;
             case 90:
                 newLocation.setY(location.getY() - 1);
                 newLocation.setX(location.getX());
-                newLocation.setDir(degrees);
                 break;
             case 135:
                 if (location.getX() % 2 == 0) {
@@ -50,7 +48,6 @@ public class Location {
                     newLocation.setY(location.getY());
                 }
                 newLocation.setX(location.getX() - 1);
-                newLocation.setDir(degrees);
                 break;
             case 225:
                 if (location.getX() % 2 != 0) {
@@ -60,12 +57,10 @@ public class Location {
                     newLocation.setY(location.getY());
                 }
                 newLocation.setX(location.getX() - 1);
-                newLocation.setDir(degrees);
                 break;
             case 270:
                 newLocation.setY(location.getY() + 1);
                 newLocation.setX(location.getX());
-                newLocation.setDir(degrees);
                 break;
             case 315:
                 if (location.getX() % 2 != 0) {
@@ -75,11 +70,12 @@ public class Location {
                     newLocation.setY(location.getY());
                 }
                 newLocation.setX(location.getX() + 1);
-                newLocation.setDir(degrees);
                 break;
             default:
                 break;
         }
+        newLocation.setDir(degrees);
+        //System.out.println(newLocation.getDir());
         return newLocation;
     }
 

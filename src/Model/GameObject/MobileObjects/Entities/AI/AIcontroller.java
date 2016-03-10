@@ -3,9 +3,17 @@ package Model.GameObject.MobileObjects.Entities.AI;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
+import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.Astar;
+import Utilities.AIUtilities.FindTilesinRange;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MapUtilities.Neighbors;
+import Utilities.Settings;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by Aidan on 3/6/2016.
@@ -15,8 +23,8 @@ import Utilities.MapUtilities.Navigation;
         Map map;
         MobileObject mobileObject;
 
-        public AIcontroller(){
-
+        public AIcontroller(Map map){
+            this.map = map;
         }
 
         private MobileObject AI;
@@ -28,14 +36,16 @@ import Utilities.MapUtilities.Navigation;
     @Override
     public void tick() {
         if(mobileObject != null) {
-            follow(mobileObject);
+            //follow(mobileObject);
+            goToObjInSight(mobileObject,3);
         }
         else{
             //moveTo(destination);
         }
+
     }
 
-    /*public void moveTo(Location destination){
+    public void moveTo(Location destination){
         if (AI.canMove() && !AI.getLocation().equals(destination)) {
             Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0); //Tile currently on
             Location end  = Astar.Findpath(map, AI.getLocation(), destination).get(1);  //Tile that AI wants to go to
@@ -45,7 +55,7 @@ import Utilities.MapUtilities.Navigation;
                     System.out.println("Moving");
             }
         }
-    }*/
+    }
 
     public void setMap(Map map) {
         this.map = map;
@@ -53,6 +63,19 @@ import Utilities.MapUtilities.Navigation;
 
     public void follow(MobileObject mobileObject){
         //moveTo(mobileObject.getLocation());
+    }
+
+    public void goToObjInSight(MobileObject mobileObject, int sight) {
+
+        ArrayList<Tile> range = FindTilesinRange.find(AI,map,sight);
+
+        for(Tile tile : range){
+            if(tile.getObject() == mobileObject){
+                follow(mobileObject);
+                break;
+            }
+        }
+
     }
 
     public void setDestination(Location location) {
