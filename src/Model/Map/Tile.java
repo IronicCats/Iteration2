@@ -4,6 +4,7 @@ package Model.Map;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -54,7 +55,9 @@ public abstract class Tile implements Subject {
         look at this beautiful anticohesion!  I'll fix it later
          */
         Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        if(tempTile.hasObject() && tempTile.getObject() instanceof NPC) {      /* check for Shopkeeper at that tile */
+        MobileObject tempObject = tempTile.getObject();
+        if(tempObject instanceof FriendlyNPC) {      /* check for Shopkeeper at that tile */
+
             TradeState tradeState = new TradeState(State.GAMESTATE, ((Player) object).getPack(), ((NPC) tempTile.getObject()).getPack());
             State.setState(tradeState);
         }

@@ -21,4 +21,8 @@ public class FriendlyNPC extends NPC {
     public String getRandomDialog() {
         return dialog.get((int)(Math.random() * dialog.size()));
     } // end getRandomDialog
+
+    public void interact() {
+
+    } // end interact
 } // end class FriendlyNPC

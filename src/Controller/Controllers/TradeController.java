@@ -26,9 +26,9 @@ public class TradeController extends Controller {
             System.out.println("TradeController -> UP");
         } else if(e.getKeyCode() == Settings.DOWN) {        /* move cursor down */
             System.out.println("TradeController -> DOWN");
-        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {   /* move cursor down */
+        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {   /* move cursor left */
             System.out.println("TradeController -> LEFT");
-        } else if(e.getKeyCode() == Settings.DOWN_RIGHT) {  /* move cursor down */
+        } else if(e.getKeyCode() == Settings.DOWN_RIGHT) {  /* move cursor right */
             System.out.println("TradeController -> RIGHT");
         } else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
             System.out.println("TradeController -> ENTER");
