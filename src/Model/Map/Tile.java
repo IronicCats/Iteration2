@@ -4,11 +4,14 @@ package Model.Map;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import State.State;
+import State.States.GameState.TradeState;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -19,7 +22,7 @@ import java.util.ArrayList;
  *
  * TODO:
  *  interact() needs to have different implementations based on instanceof
- *      alternately, renace player.takeItems(...) to reflect different interactions
+ *      alternately, replace player.takeItems(...) to reflect different interactions
  */
 public abstract class Tile implements Subject {
 
@@ -47,6 +50,14 @@ public abstract class Tile implements Subject {
 
 
     public void interact(Location playersLocation) {
+        /*
+        look at this beautiful anticohesion!  I'll fix it later
+         */
+        Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
+        if(tempTile.hasObject() && tempTile.getObject() instanceof NPC) {      /* check for Shopkeeper at that tile */
+            TradeState tradeState = new TradeState(State.GAMESTATE, ((Player) object).getPack(), ((NPC) tempTile.getObject()).getPack());
+            State.setState(tradeState);
+        }
         if (hasItems()) {
             items = ((Player) object).takeItems(items);
             System.out.print(items);
