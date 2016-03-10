@@ -139,9 +139,9 @@ public class Assets {
         STAR = starSheet.crop(0,0,32,32);
 
         //menu
-        LEFT = new ImageLoader().loadImage("/left.png");
-        RIGHT = new ImageLoader().loadImage("/right.png");
-        BACK = new ImageLoader().loadImage("/BACK.jpg");
+        LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");
+        RIGHT = new ImageLoader().loadImage("/Pics/RIGHT1.png");
+        BACK = new ImageLoader().loadImage("/Pics/blue.jpg");
 
     }
 }
