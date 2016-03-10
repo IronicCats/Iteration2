@@ -31,6 +31,12 @@ public class InitialState extends State {
 
         PauseState pauseState = new PauseState(gameState); // adding pause state
         PAUSESTATE = pauseState;
+        SettingState settingState = new SettingState(gameState);
+        SETTINGSTATE = settingState;
+        SaveState saveState = new SaveState(gameState);
+        SAVESTATE = saveState;
+        LoadState loadState = new LoadState(gameState);
+        LOADSTATE = loadState;
 
     }
 

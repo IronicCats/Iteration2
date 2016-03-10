@@ -32,13 +32,41 @@ public class PauseController extends Controller{
 
         if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
             currentState--;
-            ((MenuState)state).moveUp();
+            ((PauseState)state).moveUp();
             //System.out.println("state = " + currentState);
         }
-        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<3){
+        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<5){
             currentState++;
-            ((MenuState)state).moveDown();
+            ((PauseState)state).moveDown();
             //System.out.println("state =" + currentState);
         }
+        if(e.getKeyCode() == 10) {
+            switch(currentState){
+                case 1:
+                    System.out.println("Switching to gameState");
+                    state.switchState(State.GAMESTATE);
+                    break;
+                case 2:
+                    System.out.println("Switching to saveState");
+                    state.switchState(State.SAVESTATE);
+                    break;
+                case 3:
+                    System.out.println("Switching to loadState");
+                    state.switchState(State.LOADSTATE);
+                    break;
+                case 4:
+                    System.out.println("Switching to settingState");
+                    state.switchState(State.SETTINGSTATE);
+                    break;
+                case 5:
+                    System.out.println("leaving");
+                    System.exit(0);
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
+
 }

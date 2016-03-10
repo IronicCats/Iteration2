@@ -26,7 +26,7 @@ public class PauseView implements Renderable {
         width= Settings.GAMEWIDTH;
         height= Settings.GAMEHEIGHT;
         g.setColor(new Color(12, 12, 12, 130));
-        //g.fillRect(0, 0, width, height);
+        g.fillRect(width/2-200, height/2-250, 400, 500);
         //g.drawImage(Assets.BACK,width/2,height/2,width,height,null);
         //g.drawImage(Assets.LEFT,0,height*1/5,width*7/24,height*4/5,null);
         //g.drawImage(Assets.RIGHT,width*17/24,height*1/5,width*7/24,height*4/5,null);
@@ -35,27 +35,27 @@ public class PauseView implements Renderable {
             FontMetrics fm = g.getFontMetrics();
             int totalWidth = (fm.stringWidth(pauseMenuItems[i]));
             int x = (width - totalWidth) / 2;
-            int y = 50 + (height / 2) - 100 + 120 * i;
+            int y =  (height / 2) - 100 + 75 * i;
 
             if(i == currentItem){
                 g.setColor(new Color(149, 165, 166, 175));
                 g.fillRect(x, y - fm.getHeight() + (fm.getHeight() / 4), totalWidth, fm.getHeight() );
-                g.setColor(new Color(243, 156, 18));
+                g.setColor(new Color(228, 241, 254));
 
             }else {
                 g.setColor(new Color(149, 165, 166, 175));
                 g.fillRect(x, y - fm.getHeight() + (fm.getHeight() / 4), totalWidth, fm.getHeight() );
-                g.setColor(new Color(231, 76, 60));
+                g.setColor(new Color(25, 181, 254));
             }
 
             g.drawString(pauseMenuItems[i], x, y);
 
         }
 
-        g.setFont(new Font("Papyrus", Font.PLAIN, 100));
+        g.setFont(new Font("HelveticaNeueLT Pro 55 Roman", Font.PLAIN, 50));
         g.setColor(new Color(255,255,255));
         FontMetrics fm = g.getFontMetrics();
-        g.drawString("Ironic Cats",width / 2 - fm.stringWidth("Ironic Cats")/2, 25 + fm.getHeight()/2 );
+        g.drawString("Menu",width / 2 - fm.stringWidth("Menu")/2, height/2-200+fm.getHeight()/2 );
     }
 
     public void next() {

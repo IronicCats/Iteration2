@@ -41,7 +41,6 @@ public class MainScreen extends JFrame {
         this.getRootPane().addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 // This is only called when the user releases the mouse button.
-                System.out.println("componentResized");
                 Settings.GAMEHEIGHT = windowHeight = getHeight();
                 Settings.GAMEWIDTH = windowWidth = getWidth();
 

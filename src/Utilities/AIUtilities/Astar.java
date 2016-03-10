@@ -2,6 +2,7 @@ package Utilities.AIUtilities;
 
 import Model.Location;
 import Model.Map.Tile;
+import Utilities.MapUtilities.Neighbors;
 import Utilities.Settings;
 import Model.Map.Map;
 
@@ -19,6 +20,7 @@ public class Astar {
         You need a queue for the breadth first search algorithm. It searches every tile that
         is walkable while also adding its parent and storing it in an array.
         */
+
         Queue<Location> Queue = new LinkedList<>();  //The quee which stores the tiles
         Tile parent[][] = new Tile[Settings.TILEWIDTH][Settings.TILEHEIGHT]; //This stores the parents
 
@@ -29,12 +31,11 @@ public class Astar {
             Location current = Queue.remove();
             Tile currentTile = map.getTile(current.getX(),current.getY());
             if(currentTile.isWalkable() || start.equals(current)) {
-                Tile neighbors[] = neighbors(currentTile, map);   //This uses the neighbor method which calculates all the
-                for (int i = 0; i < 6; i++) {                     //surrounding tiles of a particular tile.
-                    Tile next = neighbors[i];
-                    if (next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null && !next.getLocation().equals(start)) { //This if statement makes sure that the tile isnt null it is not already a parent and it's not the starting tile
-                        Queue.add(next.getLocation());
-                        parent[next.getLocation().getX()][next.getLocation().getY()] = currentTile;
+                Tile neighbors[] = Neighbors.neighbors(currentTile, map);   //This uses the neighbor method which calculates all the
+                for (Tile tile:neighbors) {                     //surrounding tiles of a particular tile.
+                    if (tile != null && parent[tile.getLocation().getX()][tile.getLocation().getY()] == null && !tile.getLocation().equals(start)) { //This if statement makes sure that the tile isnt null it is not already a parent and it's not the starting tile
+                        Queue.add(tile.getLocation());
+                        parent[tile.getLocation().getX()][tile.getLocation().getY()] = currentTile;
                     }
                 }
             }
@@ -103,26 +104,4 @@ public class Astar {
         return path;
     }
 
-    public static Tile[] neighbors(Tile start, Map map) {
-        int x = start.getLocation().getX();
-        int y = start.getLocation().getY();
-        Tile neighbors[] = new Tile[6];
-        if (x % 2 == 0) {
-            neighbors[0] = map.getTile(x,y - 1);
-            neighbors[1] = map.getTile(x + 1,y - 1);
-            neighbors[2] = map.getTile(x + 1,y);
-            neighbors[3] = map.getTile(x,y + 1);
-            neighbors[4] = map.getTile(x - 1,y);
-            neighbors[5] = map.getTile(x - 1,y - 1);
-        }
-        else{
-            neighbors[0] = map.getTile(x,y - 1);
-            neighbors[1] = map.getTile(x + 1,y);
-            neighbors[2] = map.getTile(x + 1,y + 1);
-            neighbors[3] = map.getTile(x ,y + 1);
-            neighbors[4] = map.getTile(x - 1,y + 1);
-            neighbors[5] = map.getTile(x - 1,y);
-        }
-        return neighbors;
-    }
 }

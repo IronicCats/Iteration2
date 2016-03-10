@@ -23,6 +23,7 @@ public class State implements Tickable, Renderable {
 
     public static LoadState LOADSTATE;
     public static SaveState SAVESTATE;
+    public static SettingState SETTINGSTATE;
     public static EquipmentState EQUIPMENTSTATE;
     public static PauseState PAUSESTATE;
 
