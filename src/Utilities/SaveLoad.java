@@ -1,7 +1,6 @@
 package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
-import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
@@ -142,7 +141,6 @@ public class SaveLoad {
                         }
 
                     }
-                    Decal decal = null;
                     //decal stuff but I don't even have that saving yet
 
                     Item[] itemArray = new Item[10];//check this

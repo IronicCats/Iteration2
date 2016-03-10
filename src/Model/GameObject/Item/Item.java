@@ -3,6 +3,7 @@ package Model.GameObject.Item;
 import Model.GameObject.GameObject;
 import Model.Location;
 import Model.Requirement;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 import View.Views.ItemView;
@@ -21,12 +22,14 @@ public abstract class Item extends GameObject implements Subject {
     private String name;
     private String description;
     private ArrayList<Observer> observers;
+    private ItemsEnum type;
 
     public Item() {
         super();
         id = 0;
         name = "";
         description = "";
+        type = ItemsEnum.values()[id];
     } // end default constructor
 
     public Item(int id, String name, String description, Location location) {
@@ -35,6 +38,7 @@ public abstract class Item extends GameObject implements Subject {
         this.id = id;
         this.name = name;
         this.description = description;
+        type = ItemsEnum.values()[id];
     } // end constructor
 
     public int getId() {
@@ -46,7 +50,7 @@ public abstract class Item extends GameObject implements Subject {
     public String getDescription() {
         return description;
     }
-
+    public ItemsEnum getItemType() { return type; }
 
     @Override
     public void addObserver(Observer o) {
