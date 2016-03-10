@@ -83,6 +83,7 @@ public class TileView implements Observer, Renderable {
         if(tile.getHasAreaEffect()){
            decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
         }
+
         if(tile.hasObject()){
             if(State.getCurrentState() == State.GAMESTATE) {
                 mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
@@ -129,9 +130,6 @@ public class TileView implements Observer, Renderable {
             mobileObjectView.render(g, State.GAMESTATE.getCamera().getxOffset(), State.GAMESTATE.getCamera().getyOffset());
         }
     }
-
-
-
 
     public void renderFog(Graphics g, int xOffset, int yOffset, Location playerLocation) {
         if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation)) {//tile.visited
