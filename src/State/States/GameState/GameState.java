@@ -87,7 +87,7 @@ public class GameState extends State {
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
         enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
-        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(10, 10, 0), map);
+        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(7, 7, 0), map);
 
         //enemy.getController().setMobileObject(player);
         enemy.getController().setBaseLoc(new Location(0,0));

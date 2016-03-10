@@ -65,13 +65,13 @@ import java.util.Random;
         moveTo(mobileObject.getLocation());
     }
 
-    public void goToObjInSight(MobileObject mobileObject, int sight) {
+    public void goToObjInSight(MobileObject target, int sight) {
 
-        ArrayList<Tile> range = FindTilesinRange.find(AI, map, sight);
+        ArrayList<Tile> range = FindTilesinRange.find(AI.getLocation(), map, sight); //give AI location not AI
 
         for (Tile tile : range) {
-            if (tile.getObject() == mobileObject) {
-                follow(mobileObject);
+            if (tile.getObject() == target) {
+                follow(target);
                 break;
             }
         }
