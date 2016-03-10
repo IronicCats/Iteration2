@@ -15,6 +15,7 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 
+import javax.swing.text.html.HTMLDocument;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,6 +46,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by Andy on 3/5/2016.
@@ -427,11 +429,16 @@ public class SaveLoad {
 
     }
 
-    private static Node getEntity(Document doc, Entity e){
-        Element entity = doc.createElement("entities"); // gets entity with createElement
-
+    private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO){
+        Element mobileObjects = doc.createElement("entities"); // gets entity with createElement
+        Attr test = doc.createAttribute("test");
+        Iterator it = mO.entrySet().iterator();
+        while(it.hasNext()){
+           // Map.Entry<MobileObject,MobileObjectView> pair
+        }
+        //test.
         //entity.appendChild(getPlayerInfo(doc,e));//need to make Entity info
-        return entity;
+        return mobileObjects;
     }
 
     private static Node getPlayerInfo(Document doc, Player e){
@@ -577,6 +584,8 @@ public class SaveLoad {
 
         return inventory;
     }
+
+
 
     private static Node getEquippedItems(Document doc, Equipment equipped){
         Element equip = doc.createElement("equipped");
