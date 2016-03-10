@@ -32,9 +32,9 @@ public class MobileObjectView implements Renderable, Observer {
         ArrayList<BufferedImage> temp = new ArrayList<>();
         temp.add(sprite);
         entity.addObserver(this);
+        this.entity = entity;
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
-        this.entity = entity;
         this.sprites = temp;
         this.location = entity.getLocation();
         this.viewLocation = entity.getViewLocation();

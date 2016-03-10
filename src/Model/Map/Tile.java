@@ -90,13 +90,13 @@ public abstract class Tile implements Subject {
     }
 
     public Tile register(MobileObject object) {
-        this.object = object;
-        hasObject = true;
-        if(object instanceof Player) {
-            visited = true;
-        }
-        alert();
-        return this;
+            this.object = object;
+            hasObject = true;
+            if (object instanceof Player) {
+                visited = true;
+            }
+            alert();
+            return this;
     }
 
     public void deregister() {

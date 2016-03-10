@@ -83,7 +83,6 @@ public class TileView implements Observer, Renderable {
         if(tile.getHasAreaEffect()){
            decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
         }
-        /*
         if(tile.hasObject()){
             if(State.getCurrentState() == State.GAMESTATE) {
                 mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
@@ -91,7 +90,7 @@ public class TileView implements Observer, Renderable {
         }else {
             mobileObjectView = null;
         }
-        */
+
     }
 
     @Override
