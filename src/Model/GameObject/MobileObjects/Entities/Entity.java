@@ -16,27 +16,28 @@ import Model.Location;
 
 public abstract class Entity extends MobileObject {
 
-    protected Stats stats;
+    //protected Stats stats;
     protected Occupation occupation;
 
     public Entity() {
         super();
-        stats = new Stats();
+        //stats = new Stats();
         occupation = new Smasher();
     }
 
     public Entity(Location location, Stats stats, Occupation occupation){
-        super(location);
-        this.stats = stats;
+        super(location, stats);
+        //this.stats = stats;
         this.occupation = occupation;
     }
-
+/*
     public Stats getStats() {
         return stats;
     }
     public int getMovement() { return stats.getMovement(); }
-
+*/
     public Occupation getOccupation() {
         return occupation;
     }
+
 }

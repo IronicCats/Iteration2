@@ -52,6 +52,7 @@ public class Inventory implements Subject{
 
     public void place(Item item) {
         pack.place(item);
+        System.out.println(item.getName() + " added to inventory");
         alert();
     } // end place
 
@@ -61,9 +62,21 @@ public class Inventory implements Subject{
         return item;
     } // end remove
 
+    public void examine() {
+        pack.examine();
+    } // end examine
+
+    public void emptyPack() {
+        pack.empty();
+    } // end emptyPack
+
     public Takable getSlot(EquipmentSlotEnum slot) {
         return equipment.getSlot(slot);
     } // end getSlot
+
+    public int getPackSpaceLeft() {
+        return pack.getSizeLeft();
+    }
 
     @Override
     public void addObserver(Observer o) {

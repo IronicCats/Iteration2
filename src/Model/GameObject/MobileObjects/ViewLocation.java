@@ -29,4 +29,13 @@ public class ViewLocation {
     public void setY(float y) {
         this.y = y;
     }
+
+
+    @Override
+    public String toString() {
+        return "ViewLocation{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
