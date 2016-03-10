@@ -2,10 +2,7 @@ package State.States;
 
 
 import State.State;
-import State.States.GameState.EquipmentState;
-import State.States.GameState.GameState;
-import State.States.GameState.InventoryState;
-import State.States.GameState.PauseState;
+import State.States.GameState.*;
 
 import java.awt.*;
 
@@ -34,6 +31,12 @@ public class InitialState extends State {
 
         PauseState pauseState = new PauseState(gameState); // adding pause state
         PAUSESTATE = pauseState;
+        SettingState settingState = new SettingState(gameState);
+        SETTINGSTATE = settingState;
+        SaveState saveState = new SaveState(gameState);
+        SAVESTATE = saveState;
+        LoadState loadState = new LoadState(gameState);
+        LOADSTATE = loadState;
 
     }
 

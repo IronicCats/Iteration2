@@ -35,7 +35,7 @@ public class PauseView implements Renderable {
             FontMetrics fm = g.getFontMetrics();
             int totalWidth = (fm.stringWidth(pauseMenuItems[i]));
             int x = (width - totalWidth) / 2;
-            int y = 50 + (height / 2) - 100 + 120 * i;
+            int y =  (height / 2) - 100 + 75 * i;
 
             if(i == currentItem){
                 g.setColor(new Color(149, 165, 166, 175));

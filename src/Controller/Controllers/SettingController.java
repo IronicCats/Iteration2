@@ -6,10 +6,10 @@ import State.State;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Dartyx on 3/7/2016.
+ * Created by Dartyx on 3/9/2016.
  */
-public class SaveController extends Controller {
-    public SaveController(State state) {
+public class SettingController extends Controller {
+    public SettingController(State state) {
         super(state);
     } // end constructor
 
