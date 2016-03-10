@@ -2,10 +2,7 @@ package State.States;
 
 
 import State.State;
-import State.States.GameState.EquipmentState;
-import State.States.GameState.GameState;
-import State.States.GameState.InventoryState;
-import State.States.GameState.PauseState;
+import State.States.GameState.*;
 
 import java.awt.*;
 
