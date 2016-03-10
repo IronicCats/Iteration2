@@ -3,6 +3,7 @@ package Model.Map;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
@@ -45,13 +46,26 @@ public abstract class Tile implements Subject {
     }
 
 
-    public void interact() {
-        if (hasItems() && object instanceof Player) {
+    public void interact(Location playersLocation) {
+        if (hasItems()) {
             items = ((Player) object).takeItems(items);
             System.out.print(items);
             alert();
         }
     }
+
+    public void recieveAttack(Character character) {
+        Location location = Location.newLocation(character.getDir(), this.location);
+        Map.map.carryAttack(character, location);
+
+    }
+    public void deliverAttack(Character character) {
+        Location location = Location.newLocation(character.getDir(), this.location);
+        if(hasObject()) {
+            ((Character)object).recieveAttack(character);
+        }
+    }
+
 
     public void addItem(Item item) {
         items.add(item);
@@ -64,6 +78,7 @@ public abstract class Tile implements Subject {
         }
         alert();
     }
+
 
 
     public void setAreaEffectTile(AreaEffect a){

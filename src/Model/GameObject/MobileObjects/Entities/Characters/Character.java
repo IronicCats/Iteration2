@@ -1,10 +1,18 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Abilities.CommandsEnum;
 import Model.Effects.Effect;
+import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
+import Model.GameObject.Item.Items.OneShot;
 import Model.GameObject.Item.Items.Takable;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.Vehicle;
+import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
@@ -51,6 +59,56 @@ public abstract class Character extends Entity {
         return items;
     }
 
+    public void interact(Item item) {
+        if (item instanceof Interactable) {
+            //HUH?
+        }else if (item instanceof OneShot) {
+            System.out.println("OneShot item");
+            getStats().applyEffect(((OneShot) item).getEffect());
+
+        }
+    } // end interact
+
+
+
+    public void equip(Weapon weapon) {
+        inventory.equip(weapon);
+        ((CharacterStats)getStats()).applyEquipmentModification(weapon.getEquipmentModification());
+    } // end equip
+
+    public void equip(Armor armor) {
+        inventory.equip(armor);
+        ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
+    } // end equip
+
+    public void mount(Vehicle vehicle){
+        //getStats().setMovement(vehicle.getMovement());
+        // change sprite
+    } // end mount
+
+    public void unequip(EquipmentSlotEnum slot) {
+        inventory.unequip(slot);
+        ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+    } // end unequip
+
+    public void unmount(){
+        //getStats().resetMovement();
+        // change sprite
+    } // end unmount
+
+
+    public void attack() {
+        getTile().recieveAttack(this);
+    }
+
+    public void recieveAttack(Character attacker) {
+        System.out.print(this.getClass() + " is being attack by " + attacker.getClass());
+    }
+
+    public void useAbility(CommandsEnum e) {
+        //tile.useAbility(this, getAbility(e))
+    }
+
     public boolean pickup(Item item) {
 
         if(inventory.getPackSpaceLeft() > 0){
@@ -72,4 +130,25 @@ public abstract class Character extends Entity {
         return !((CharacterStats) getStats()).isDead();
     } // end checkForDeath
 
+    public void excute(CommandsEnum e) {
+        switch(e){
+            case pickup:
+                interactWithTile();
+            case drop:
+                emptyPack();
+                break;
+            case attack:
+                attack();
+            case ability1:
+            case ability2:
+            case ability3:
+                useAbility(e);
+                break;
+        }
+
+    }
+
+    public CharacterStats getStats() {
+        return (CharacterStats)stats;
+    }
 } // end class Character

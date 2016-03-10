@@ -1,25 +1,19 @@
 package State.States.GameState;
 
 import Controller.Controllers.GameController;
-import Model.Abilities.PlayerCommandsEnum;
+import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
-import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
-import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
-import Model.Stats.PetStats;
-import Model.Stats.StatStructure;
-import Model.Stats.StatsEnum;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -165,27 +159,8 @@ public class GameState extends State {
         DisplayMessage.render(g);
     }
 
-    public void executePlayerCommand(PlayerCommandsEnum pce){
-        switch(pce){
-            case interact:
-                player.interactWithTile();
-                break;
-            case drop:
-                player.emptyPack();
-                break;
-            case attack:
-                System.out.println("Attack!");
-                break;
-            case ability1:
-                System.out.println("Ability 1");
-                break;
-            case ability2:
-                System.out.println("Ability 2");
-                break;
-            case ability3:
-                System.out.println("Ability 3");
-                break;
-        }
+    public void executePlayerCommand(CommandsEnum pce){
+        player.excute(pce);
     }
 
 
