@@ -110,4 +110,6 @@ public class Inventory implements Subject{
             o.update();
         }
     } // end alert
+
+    public Pack getPack() { return pack; }
 } // end class Inventory
