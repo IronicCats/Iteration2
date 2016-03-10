@@ -7,6 +7,7 @@ import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.Astar;
 import Utilities.AIUtilities.FindTilesinRange;
+import Utilities.AIUtilities.RandomLocation;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MapUtilities.Neighbors;
 import Utilities.Settings;
@@ -14,6 +15,8 @@ import Utilities.Settings;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
+
 
 /**
  * Created by Aidan on 3/6/2016.
@@ -22,6 +25,8 @@ import java.util.Queue;
 
         Map map;
         MobileObject mobileObject;
+        Random random = new Random(System.currentTimeMillis());
+        Location baseLoc;
 
         public AIcontroller(Map map){
             this.map = map;
@@ -31,16 +36,15 @@ import java.util.Queue;
         private Location destination = new Location(0,2,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
 
-
-
     @Override
     public void tick() {
         if(mobileObject != null) {
             //follow(mobileObject);
-            goToObjInSight(mobileObject,3);
+            goToObjInSight(mobileObject,2);
         }
         else{
-            moveTo(destination);
+            randomlyMoveinRange();
+            //moveTo(destination);
         }
 
     }
@@ -63,15 +67,24 @@ import java.util.Queue;
 
     public void goToObjInSight(MobileObject mobileObject, int sight) {
 
-        ArrayList<Tile> range = FindTilesinRange.find(AI,map,sight);
+        ArrayList<Tile> range = FindTilesinRange.find(AI, map, sight);
 
-        for(Tile tile : range){
-            if(tile.getObject() == mobileObject){
+        for (Tile tile : range) {
+            if (tile.getObject() == mobileObject) {
                 follow(mobileObject);
                 break;
             }
         }
+    }
 
+    public void  randomlyMoveinRange(){
+        int temp = random.nextInt(30);
+        if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
+            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc);
+            if(map.getTile(randomLoc.getX(),randomLoc.getY()) != null) {
+                moveTo(randomLoc);
+            }
+        }
     }
 
     public void setDestination(Location location) {
@@ -80,4 +93,11 @@ import java.util.Queue;
 
     public void setMobileObject(MobileObject mobileObject) { this.mobileObject = mobileObject; }
 
+    public Location getBaseLoc() {
+        return baseLoc;
+    }
+
+    public void setBaseLoc(Location baseLoc) {
+        this.baseLoc = baseLoc;
+    }
 } // end class AIcontroller

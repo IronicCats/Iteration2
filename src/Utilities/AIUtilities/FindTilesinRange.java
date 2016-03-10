@@ -37,10 +37,10 @@ public class FindTilesinRange {
         for (int i = 0; i < Settings.MAPWIDTH; i++) {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
                 if(BFS[i][j] != null) {
-                    if (Math.abs(AI.getLocation().getX() - map.getTile(i,j).getLocation().getX()) < sight) {
+                    if (Math.abs(AI.getLocation().getX() - BFS[i][j].getLocation().getX()) < sight) {
                         range.add(BFS[i][j]);
                     }
-                    if (Math.abs(AI.getLocation().getY() - map.getTile(i,j).getLocation().getY()) < sight) {
+                    if (Math.abs(AI.getLocation().getY() - BFS[i][j].getLocation().getY()) < sight) {
                         range.add(BFS[i][j]);
                     }
                 }
