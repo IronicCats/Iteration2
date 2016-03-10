@@ -44,7 +44,6 @@ public class Player extends Character implements Observer{
     // takes in the degrees associated with key press and updates player location
     public void move(int degrees){
         location = Location.newLocation(degrees, location);
-        location.setDir(degrees);
         registerTile(location);
         alert();
     } // end move
