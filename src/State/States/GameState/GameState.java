@@ -81,35 +81,18 @@ public class GameState extends State {
 
         setController(new GameController(this));
 
-
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
-
-
-
-        //creating a new player
-        player = new Player();
-        player = new Player(new Location(0, 1), new Smasher(), new Inventory());
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        playerView = new MobileObjectView(player, Assets.PLAYER);
-
-        enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
-        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(4, 5, 0), map);
-        enemy1.getController().setMobileObject(player);
-
-        //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
-
-        enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
-        enemyView1 = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1);
-
-        //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
-
-        mobileObjects.put(player, playerView);
-        mobileObjects.put(enemy, enemyView);
-        mobileObjects.put(enemy1, enemyView1);
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+
+        // initializing NPC's
+        mobileObjects = NPCFactory.Init();
+
+        //creating a new player
+        player =  NPCFactory.Player();
+        playerView = new MobileObjectView(player, Assets.PLAYER.get(0));
 
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
@@ -152,8 +135,9 @@ public class GameState extends State {
     @Override
     public void tick() {
         player.tick();
-        enemy.tick();
-        enemy1.tick();
+        for (MobileObject key : mobileObjects.keySet()) {
+            key.tick();
+        }
     }
 
     public void render(Graphics g) {
