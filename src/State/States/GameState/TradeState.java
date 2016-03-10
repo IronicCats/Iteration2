@@ -31,11 +31,11 @@ public class TradeState extends State {
 
         for(Item item : playerPack.getItems()) {
             if (item != null) {
-                playerItems.put(item, ItemFactory.makeAsset(item.getType(), item));
+                playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
             }
         }for(Item item : shopPack.getItems()) {
             if (item != null) {
-                playerItems.put(item, ItemFactory.makeAsset(item.getType(), item));
+                playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
             }
         }
     } // end constructor
