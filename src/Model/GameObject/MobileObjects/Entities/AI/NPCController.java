@@ -10,3 +10,4 @@ public class NPCController extends AIcontroller {
         super(map);
     }
 }
+

@@ -5,8 +5,6 @@ import Model.Abilities.PlayerCommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.Decal.Decal;
-import Model.GameObject.Decal.DecalEnum;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
@@ -28,6 +26,8 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.MobileObjectUtilities.NPCFactory;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
@@ -63,6 +63,7 @@ public class GameState extends State {
     private NPC enemy1;
     private Pet pet;
 
+
     private MobileObjectView playerView;
     private MobileObjectView enemyView;
     private MobileObjectView enemyView1;
@@ -78,11 +79,11 @@ public class GameState extends State {
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
 
-
         setController(new GameController(this));
 
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
+
 
 
         //creating a new player
@@ -91,13 +92,14 @@ public class GameState extends State {
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         playerView = new MobileObjectView(player, Assets.PLAYER);
 
-        enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
-        enemy1 = new NPC(new Location(4,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
+        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(4, 5, 0), map);
         enemy1.getController().setMobileObject(player);
+
         //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
 
-        enemyView = new MobileObjectView(enemy, Assets.PLAYER);
-        enemyView1 = new MobileObjectView(enemy1, Assets.PLAYER);
+        enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
+        enemyView1 = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1);
 
         //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
 
@@ -109,11 +111,10 @@ public class GameState extends State {
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
-        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
+        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6,4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
-
 
 
         map.setMapItems(mapItems);
