@@ -32,23 +32,39 @@ public class PauseController extends Controller{
 
         if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
             currentState--;
-            ((MenuState)state).moveUp();
+            ((PauseState)state).moveUp();
             //System.out.println("state = " + currentState);
         }
-        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<3){
+        if(e.getKeyCode() == KeyEvent.VK_DOWN&& currentState<5){
             currentState++;
-            ((MenuState)state).moveDown();
+            ((PauseState)state).moveDown();
             //System.out.println("state =" + currentState);
         }
         if(e.getKeyCode() == 10) {
-            if (currentState == 1){
-                System.out.println("Switching to gameState");
-                state.switchState(State.GAMESTATE);
+            switch(currentState){
+                case 1:
+                    System.out.println("Switching to gameState");
+                    state.switchState(State.GAMESTATE);
+                    break;
+                case 2:
+                    System.out.println("Switching to saveState");
+                    break;
+                case 3:
+                    System.out.println("Switching to loadState");
+                    break;
+                case 4:
+                    System.out.println("Switching to settingState");
+                    state.switchState(State.SETTINGSTATE);
+                    break;
+                case 5:
+                    System.out.println("leaving");
+                    System.exit(0);
+                    break;
+                default:
+                    break;
             }
-            else if(currentState==2)System.out.println("this is the save state");
-            else if(currentState==3)System.out.println("this is the load state");
-            else if(currentState==4)System.out.println("this is the load state");
-            else if(currentState==5)System.exit(0);
+
         }
     }
+
 }
