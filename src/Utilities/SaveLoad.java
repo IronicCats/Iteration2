@@ -8,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Equipment;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
@@ -31,6 +32,7 @@ import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.MapView;
+import View.Views.MobileObjectView;
 import View.Views.TileView;
 import org.w3c.dom.*;
 import org.xml.sax.SAXParseException;
@@ -42,6 +44,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by Andy on 3/5/2016.
@@ -55,6 +58,7 @@ public class SaveLoad {
     private static Map gameMap;     //list of all maps may be needed
     private static GameState game;
     private static MapView gamemapView;
+    private static HashMap<MobileObject, MobileObjectView> mobileObjects;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
@@ -69,6 +73,7 @@ public class SaveLoad {
     public static MapView getGamemapView(){
         return gamemapView;
     }
+    
 
     public static void setGameMap(Map map){// sets the current map
         gameMap = map;
@@ -78,6 +83,9 @@ public class SaveLoad {
     }
     public static void setGamemapView(MapView m){
         gamemapView = m;
+    }
+    public static void setMobileObjects(HashMap<MobileObject,MobileObjectView> mobileObjectMap){
+        mobileObjects = mobileObjectMap;
     }
 
     public static SaveLoad getInstance() {//returns the instance of SaveLoad
