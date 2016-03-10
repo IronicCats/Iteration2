@@ -44,3 +44,5 @@ Shopkeeping:
     ShopView, ShopState
     Entities need money
         money can be found on the ground, dropped by enemies
+    Shopkeeper as subclass of FriendlyNPC
+        leave dialog, move references to pack and whatnot
