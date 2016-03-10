@@ -93,6 +93,7 @@ public class GameState extends State {
 
         enemy = new NPC(new Location(0,0,0), new Smasher(), new Inventory(),new NPCController(map));
         enemy1 = new NPC(new Location(4,5,0), new Smasher(), new Inventory(),new NPCController(map));
+        enemy1.getController().setMobileObject(player);
         //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
 
         enemyView = new MobileObjectView(enemy, Assets.PLAYER);
@@ -107,15 +108,6 @@ public class GameState extends State {
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
-
-
-
-
-
-
-
-
-        
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(1,1));
         AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(6,4));
