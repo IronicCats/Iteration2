@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * Contains a pack and worn equipment.
  */
 public class Inventory implements Subject{
+
     private Pack pack;
     private Equipment equipment;
     private ArrayList<Observer> observers;

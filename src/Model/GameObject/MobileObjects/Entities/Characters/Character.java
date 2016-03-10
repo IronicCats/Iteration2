@@ -135,6 +135,7 @@ public abstract class Character extends Entity {
         switch(e){
             case interact:
                 interactWithTile();
+                break;
             case drop:
                 emptyPack();
                 break;

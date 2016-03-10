@@ -62,8 +62,8 @@ public abstract class Tile implements Subject {
             State.setState(tradeState);
         }
         if (hasItems()) {
-            items = ((Player) object).takeItems(items);
-            System.out.print(items);
+            items = ((Character) object).takeItems(items);
+            System.out.print("Telling player to take items");
             alert();
         }
     }
