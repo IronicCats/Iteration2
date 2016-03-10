@@ -57,13 +57,16 @@ public abstract class MobileObject extends GameObject{
             alert();
         }
     }
-
+    public Map getMap(){
+        return this.map;
+    }
 
     public Stats getStats() {
         return stats;
     }
 
-    public int getMovement() { return stats.getMovement(); }
+    public int getMovement() {
+        return stats.getMovement(); }
 
     public ViewLocation getViewLocation() {
         return viewLocation;

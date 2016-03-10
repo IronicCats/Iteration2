@@ -15,6 +15,7 @@ import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
+import Model.Map.Map;
 import Model.Stats.CharacterStats;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
@@ -154,4 +155,5 @@ public abstract class Character extends Entity {
     public Inventory getInventory(){
         return inventory;
     }
+
 } // end class Character

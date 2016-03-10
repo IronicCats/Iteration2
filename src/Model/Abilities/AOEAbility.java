@@ -1,10 +1,14 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Model.Map.Map;
 import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
+import Utilities.MapUtilities.Neighbors;
 
 import java.util.ArrayList;
 
@@ -13,12 +17,10 @@ import java.util.ArrayList;
  */
 public class AOEAbility extends Abilities{
     int degreeMovement;
-    int range;
 
     public AOEAbility(int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost){
         super(effects, requirements, cost);
         this.degreeMovement = degreeMovement;
-        this.range = range;
     }
 
     public int getDegreeMovement(){
@@ -29,23 +31,15 @@ public class AOEAbility extends Abilities{
         this.degreeMovement = degreeMovement;
     }
 
-    public int getRange(){
-        return this.range;
-    }
-
-    public void setRange(int range){
-        this.range = range;
-    }
-
-    public void execute(Location location){
-        ArrayList<Location> affectedAreas;
+    public void execute(MobileObject targeter, Location targeterLocation){
+        /**
+        Tile [] affectedTiles;
+        Map map = targeter.getMap();
         if(degreeMovement == 60){
-            switch(location.getDir()){
+            switch(targeterLocation.getDir()){
                 case 45:
-
                     break;
                 case 90:
-
                     break;
                 case 135:
 
@@ -64,7 +58,16 @@ public class AOEAbility extends Abilities{
             }
         }
         else if(degreeMovement == 360){
-
+            affectedTiles = Neighbors.neighbors(targeter.getTile(),map);
+            for(int i = 0; i < affectedTiles.length; ++i){// for all tiles in affected range
+                Tile t = affectedTiles[i];
+                MobileObject m = t.getObject();   // get object from each tile
+                ((Character)(targeter)).applyEffect(getEffects()); // apply ability affect
+                }
+            }
         }
+         **/
     }
+
+
 }
