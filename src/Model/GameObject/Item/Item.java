@@ -50,7 +50,7 @@ public abstract class Item extends GameObject implements Subject {
     public String getDescription() {
         return description;
     }
-    public ItemsEnum getType() { return type; }
+    public ItemsEnum getItemType() { return type; }
 
     @Override
     public void addObserver(Observer o) {
