@@ -1,7 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import Model.Abilities.PlayerCommandsEnum;
+import Model.Abilities.CommandsEnum;
 import State.State;
 import Utilities.Settings;
 import State.States.GameState.GameState;
@@ -22,7 +22,7 @@ public class GameController extends Controller {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!canGetInput()) { return; }
-        //System.out.println("Game: " + e.getKeyCode());
+        System.out.println("Game: " + e.getKeyCode());
 
         //If camera movement is true then move camera instead of player
         if(e.getKeyCode() == Settings.ENTER){
@@ -56,20 +56,22 @@ public class GameController extends Controller {
                 System.out.println("space pressed");
             } else if (e.getKeyCode() == Settings.E) {          /* open equipment state */
                 state.switchState(State.EQUIPMENTSTATE);
+            } else if (e.getKeyCode() == Settings.ATTACK) {
+                ((GameState) state).executePlayerCommand(CommandsEnum.attack);
             } else if (e.getKeyCode() == Settings.ONE) {        /* execute ability1 */
-                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability1);
+                ((GameState) state).executePlayerCommand(CommandsEnum.ability1);
             } else if (e.getKeyCode() == Settings.TWO) {        /* execute ability2 */
-                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability2);
+                ((GameState) state).executePlayerCommand(CommandsEnum.ability2);
             } else if (e.getKeyCode() == Settings.THREE) {      /* execute ability3 */
-                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.ability3);
+                ((GameState) state).executePlayerCommand(CommandsEnum.ability3);
             } else if (e.getKeyCode() == Settings.I) {          /* open inventory state */
                 state.switchState(State.INVENTORYSTATE);
             } else if (e.getKeyCode() == Settings.M) {          /* open map state */
                 System.out.println("m pressed");
             } else if (e.getKeyCode() == Settings.Q) {          /* execute interaction */
-                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.interact);
+                ((GameState) state).executePlayerCommand(CommandsEnum.interact);
             } else if (e.getKeyCode() == Settings.D) {          /* execute inventory dump (temporary?) */
-                ((GameState) state).executePlayerCommand(PlayerCommandsEnum.drop);
+                ((GameState) state).executePlayerCommand(CommandsEnum.drop);
             } else if(e.getKeyCode() == Settings.F){
                 Settings.FOG = !Settings.FOG;
             }

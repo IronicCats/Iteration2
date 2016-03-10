@@ -26,7 +26,7 @@ public abstract class MobileObject extends GameObject{
     private float speed;
     private Tile tile;
     // private Nav navigation
-    private Stats stats;
+    protected Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
 
@@ -95,7 +95,7 @@ public abstract class MobileObject extends GameObject{
     }
 
     public void interactWithTile() {
-        tile.interact();
+        tile.interact(this.location);
     }
 
     public Tile getTile(){
