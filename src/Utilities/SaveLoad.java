@@ -2,13 +2,17 @@ package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Equipment;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
@@ -417,7 +421,7 @@ public class SaveLoad {
             //The Element interface represents an element in an XML document
             Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
-
+            rootElement.appendChild(getMobileObjects(doc,mobileObjects));
             rootElement.appendChild(getPlayerInfo(doc,(Player)player));                 //adds the next root element which is entities
             rootElement.appendChild(getMap(doc,gameMap));
 
@@ -430,15 +434,62 @@ public class SaveLoad {
     }
 
     private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO){
-        Element mobileObjects = doc.createElement("entities"); // gets entity with createElement
+        Element mobileObjects = doc.createElement("mobileObjects"); // gets entity with createElement
         Attr test = doc.createAttribute("test");
         Iterator it = mO.entrySet().iterator();
         while(it.hasNext()){
-           // Map.Entry<MobileObject,MobileObjectView> pair
+            java.util.Map.Entry pair = (java.util.Map.Entry)it.next();
+            System.out.println(pair.getKey()+ "=" + pair.getValue());
+            if(pair.getKey() instanceof Player){
+                getPlayerInfo(doc,(Player)pair.getKey());
+            }
+            else if(pair.getKey() instanceof Pet){
+                getPetInfo(doc,(Pet)pair.getKey());
+            }
+            else if(pair.getKey() instanceof Vehicle){
+                //getVehicleInfo
+            }
+            else if(pair.getKey() instanceof FriendlyNPC){
+                //getFriendlyNPCInfo
+            }
+            else if(pair.getKey() instanceof HostileNPC){
+                //getHostileNPCInfo
+            }
+            //it.remove(); ??? Says it avoids CurrentModificationException
         }
         //test.
         //entity.appendChild(getPlayerInfo(doc,e));//need to make Entity info
         return mobileObjects;
+    }
+    private static Node getPetInfo(Document doc, Pet p){
+        Element type = doc.createElement("pet");
+
+        Attr x = doc.createAttribute("locX");
+        x.setValue(Integer.toString(p.getLocation().getX()));
+        type.setAttributeNode(x);
+
+        Attr y = doc.createAttribute("locY"); //creates an attribute for Y location
+        y.setValue(Integer.toString(p.getLocation().getY())); //sets the y attribute to player y
+        type.setAttributeNode(y);
+
+        Attr direction = doc.createAttribute("direction"); //creates an attribute for direction
+        direction.setValue(Integer.toString(p.getLocation().getDir()));//sets the direction attribute to player direction
+        type.setAttributeNode(direction); //element sets attribute Node to direction
+
+        Attr owned = doc.createAttribute("owned");
+        direction.setValue(Boolean.toString(p.getOwned()));
+        type.setAttributeNode(owned);
+
+        //probably need to get "base"
+        return type;
+    }
+
+    private static Node getVehicleInfo(Document doc, Vehicle v){
+        Element type = doc.createElement("vehicle");
+
+        //may need to wait for it to be implemented so I know what I'm saving
+
+        return type;
     }
 
     private static Node getPlayerInfo(Document doc, Player e){
