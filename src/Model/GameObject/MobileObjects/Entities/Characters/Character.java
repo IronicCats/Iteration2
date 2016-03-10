@@ -132,7 +132,7 @@ public abstract class Character extends Entity {
 
     public void excute(CommandsEnum e) {
         switch(e){
-            case pickup:
+            case interact:
                 interactWithTile();
             case drop:
                 emptyPack();
