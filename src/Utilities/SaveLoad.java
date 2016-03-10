@@ -410,7 +410,7 @@ public class SaveLoad {
             Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
 
-            rootElement.appendChild(getEntity(doc,player));                 //adds the next root element which is entities
+            rootElement.appendChild(getPlayerInfo(doc,(Player)player));                 //adds the next root element which is entities
             rootElement.appendChild(getMap(doc,gameMap));
 
             toXML(doc,filePath);                                            //turns the document into an XML
@@ -424,11 +424,11 @@ public class SaveLoad {
     private static Node getEntity(Document doc, Entity e){
         Element entity = doc.createElement("entities"); // gets entity with createElement
 
-        entity.appendChild(getEntityInfo(doc,e));//need to make Entity info
+        //entity.appendChild(getPlayerInfo(doc,e));//need to make Entity info
         return entity;
     }
 
-    private static Node getEntityInfo(Document doc, Entity e){
+    private static Node getPlayerInfo(Document doc, Player e){
         Element type = doc.createElement("player"); //creates a new element in document, labels it player
 
        // Attr etype = doc.createAttribute("type");
@@ -452,7 +452,8 @@ public class SaveLoad {
 
         //Element stat = doc.createElement("Stats");
         type.appendChild(getCharacterStats(doc,(CharacterStats)e.getStats()));
-        //type.appendChild(getInventory(doc,))
+        //type.appendChild(getInventory(doc,));
+        
         //need to get Primary then secondary
         return type;                //returns it so it can be used in XML
     }
