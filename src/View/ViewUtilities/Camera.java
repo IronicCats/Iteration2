@@ -26,8 +26,6 @@ public class Camera implements Observer {
     }
     //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraOnMap() {
-        //System.out.println(xOffset);
-        //System.out.println(((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250);
 
         if (xOffset < 0) {
             xOffset = 0;
@@ -52,6 +50,7 @@ public class Camera implements Observer {
     }
 
     public void move(int degrees){
+        //The move method in camera words very similarly to the players movement
         switch(degrees){
             case 90:
                 yOffset -= 30;
