@@ -14,7 +14,8 @@ import Utilities.Observer;
  * Created by Aidan on 3/2/2016.
  */
 
-public class MapView implements Observer, Renderable {
+public class
+MapView implements Observer, Renderable {
 
     private Map map;
     private TileView tileViews[][];
