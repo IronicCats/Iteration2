@@ -3,8 +3,15 @@ package Utilities;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Decal.Decal;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.Inventory.Equipment;
+import Model.Inventory.EquipmentSlotEnum;
+import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 
@@ -16,6 +23,7 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
+import Model.Stats.CharacterStats;
 import Model.Stats.DerivedStats;
 import Model.Stats.PrimaryStats;
 import Model.Stats.Stats;
@@ -335,7 +343,7 @@ public class SaveLoad {
                     int x = Integer.parseInt(pl.getAttribute("locX"));
                     int y = Integer.parseInt(pl.getAttribute("locY"));
                     int d = Integer.parseInt(pl.getAttribute("direction"));
-                    String occupation = pl.getAttribute("occupation");
+                    String occupationString = pl.getAttribute("occupation");
                     //System.out.println("Occupation:" + occupation);
 
                     //System.out.println("x=" + x + " y=" + y + " direction=" + d);
@@ -344,19 +352,28 @@ public class SaveLoad {
                     //avatar.setLocation(l);
                     System.out.println(player.toString());
 
-                    player.setLocation(l);
+                    //player.setLocation(l);
                     //Player p = new Player(l,)
 
                     //Player peer = new Player()
                             //Assign occupation when creating new player, don't update jesus fucking christ what is wrong with me.
+                Occupation occupation = null;
+                switch(occupationString) {
+                    case "Smasher":
+                        occupation = new Smasher();
+                        break;
+                    case "Summoner":
+                        occupation = new Summoner();
+                        break;
+                    case "Sneak":
+                        occupation = new Sneak();
+                        break;
+                    }
 
-                    /*if (occupation.equals(Entity.Occupation.SMASHER.getType())) {
-                        avatar.setOccupation(Entity.Occupation.SMASHER);
-                    } else if (occupation.equals(Entity.Occupation.SUMMONER.getType())) {
-                        avatar.setOccupation(Entity.Occupation.SUMMONER);
-                    } else if (occupation.equals(Entity.Occupation.SNEAK.getType())) {
-                        avatar.setOccupation(Entity.Occupation.SNEAK);
-                    }*/
+                //load inventory
+                Player peer = new Player();
+                //^ this will be location,occupation,inventory,stats
+
 
                    /* loadStats(avatar.getStats(), entity); //Separate function to handle loading stats
                     loadInventory(avatar.getInventory(), entity);
@@ -433,12 +450,14 @@ public class SaveLoad {
         occupation.setValue(e.getOccupation().getName());   //sets the occupation attribute to player occupation
         type.setAttributeNode(occupation);          //element sets attribute Node to element
 
-        Element stat = doc.createElement("Stats");
+        //Element stat = doc.createElement("Stats");
+        type.appendChild(getCharacterStats(doc,(CharacterStats)e.getStats()));
+        //type.appendChild(getInventory(doc,))
         //need to get Primary then secondary
         return type;                //returns it so it can be used in XML
     }
 
-    private static Node getPrimaryStats(Document doc, PrimaryStats stat){
+    private static Node getCharacterStats(Document doc, CharacterStats stat){
 
 
         Element primary = doc.createElement("primary");
@@ -495,47 +514,122 @@ public class SaveLoad {
         xpThresh.setValue(Integer.toString(stat.getXpThreshhold()));
         primary.setAttributeNode(xpThresh);
 
+        Attr level = doc.createAttribute("level");
+        level.setValue(Integer.toString(stat.getLevel()));
+        primary.setAttributeNode(level);
+
+        Attr life = doc.createAttribute("life");
+        life.setValue(Integer.toString(stat.getLife()));
+        primary.setAttributeNode(life);
+
+        Attr mana = doc.createAttribute("mana");
+        mana.setValue(Integer.toString(stat.getMana()));
+        primary.setAttributeNode(mana);
+
+        Attr offensiveRating = doc.createAttribute("offense");
+        offensiveRating.setValue(Integer.toString(stat.getOffensiveRating()));
+        primary.setAttributeNode(offensiveRating);
+
+        Attr defesniveRating = doc.createAttribute("defense");
+        defesniveRating.setValue(Integer.toString(stat.getDefensiveRating()));
+        primary.setAttributeNode(defesniveRating);
+
+        Attr armorRating = doc.createAttribute("armorRating");
+        armorRating.setValue(Integer.toString(stat.getArmorRating()));
+        primary.setAttributeNode(armorRating);
+
+        Attr baseLife = doc.createAttribute("baseLife");
+        baseLife.setValue(Integer.toString(stat.getBaseLife()));
+        primary.setAttributeNode(baseLife);
+
+        Attr baseMana = doc.createAttribute("baseMana");
+        baseMana.setValue(Integer.toString(stat.getBaseMana()));
+        primary.setAttributeNode(baseMana);
 
         return primary;
     }
 
-    private static Node getDerived(Document doc, DerivedStats stat){
-        Element derive = doc.createElement("derived");
-
-        Attr level = doc.createAttribute("level");
-        level.setValue(Integer.toString(stat.getLevel()));
-        derive.setAttributeNode(level);
-
-        Attr life = doc.createAttribute("life");
-        life.setValue(Integer.toString(stat.getLife()));
-        derive.setAttributeNode(life);
-
-        Attr mana = doc.createAttribute("mana");
-        mana.setValue(Integer.toString(stat.getMana()));
-        derive.setAttributeNode(mana);
-
-        Attr offensiveRating = doc.createAttribute("offense");
-        offensiveRating.setValue(Integer.toString(stat.getOffensiveRating()));
-        derive.setAttributeNode(offensiveRating);
-
-        Attr defesniveRating = doc.createAttribute("defense");
-        defesniveRating.setValue(Integer.toString(stat.getDefensiveRating()));
-        derive.setAttributeNode(defesniveRating);
-
-        Attr armorRating = doc.createAttribute("armorRating");
-        armorRating.setValue(Integer.toString(stat.getArmorRating()));
-        derive.setAttributeNode(armorRating);
-
-        Attr baseLife = doc.createAttribute("baseLife");
-        baseLife.setValue(Integer.toString(stat.getBaseLife()));
-        derive.setAttributeNode(baseLife);
-
-        Attr baseMana = doc.createAttribute("baseMana");
-        baseMana.setValue(Integer.toString(stat.getBaseMana()));
-        derive.setAttributeNode(baseMana);
 
 
-        return derive;
+    private static Node getInventory(Document doc, Inventory inv){
+        Element inventory = doc.createElement("inventory");
+
+
+        for(int i = 0; i< 16-inv.getPackSpaceLeft(); i++)
+        {
+            Element iItem = doc.createElement("item");
+
+            Attr id = doc.createAttribute("id");
+            id.setValue(Integer.toString(inv.get(i).getId()));
+            iItem.setAttributeNode(id);
+
+            inventory.appendChild(iItem);
+        }
+
+
+        return inventory;
+    }
+
+    private static Node getEquippedItems(Document doc, Equipment equipped){
+        Element equip = doc.createElement("equipped");
+        equip.appendChild(getEquip(doc,equipped,"head"));
+        equip.appendChild(getEquip(doc, equipped, "chest"));
+        equip.appendChild(getEquip(doc, equipped, "gloves"));
+        equip.appendChild(getEquip(doc, equipped, "boots"));
+        equip.appendChild(getEquip(doc, equipped, "legs"));
+        equip.appendChild(getEquip(doc, equipped, "shield"));
+        equip.appendChild(getEquip(doc, equipped, "mainHand"));
+        equip.appendChild(getEquip(doc, equipped, "offHand"));
+        equip.appendChild(getEquip(doc, equipped, "accessory1"));
+        equip.appendChild(getEquip(doc, equipped, "accessory2"));
+
+        return equip;
+    }
+
+    private static Node getEquip(Document doc, Equipment equipped,String typeOfItem){
+        Element type = doc.createElement(typeOfItem);
+        Item item = null;
+        switch(typeOfItem){
+            case "head":
+                item = equipped.getSlot(EquipmentSlotEnum.HEAD);
+                break;
+            case "chest":
+                item = equipped.getSlot(EquipmentSlotEnum.CHEST);
+                break;
+            case "gloves":
+                item = equipped.getSlot(EquipmentSlotEnum.GLOVES);
+                break;
+            case "legs":
+                item = equipped.getSlot(EquipmentSlotEnum.LEGS);
+                break;
+            case "boots":
+                item = equipped.getSlot(EquipmentSlotEnum.BOOTS);
+                break;
+            case "shield":
+                item = equipped.getSlot(EquipmentSlotEnum.SHIELD);
+                break;
+            case "mainHand":
+                item = equipped.getSlot(EquipmentSlotEnum.MAINHAND);
+                break;
+            case "offHand":
+                item = equipped.getSlot(EquipmentSlotEnum.OFFHAND);
+                break;
+            case "accessory1":
+                item = equipped.getSlot(EquipmentSlotEnum.ACCESSORY1);
+                break;
+            case "accessory2":
+                item = equipped.getSlot(EquipmentSlotEnum.ACCESSORY2);
+        }
+        Attr id = doc.createAttribute("id");
+        if(item != null){
+            id.setValue(Integer.toString(item.getId()));
+        }
+        else{
+            id.setValue("-1");
+        }
+        type.setAttributeNode(id);
+
+        return type;
     }
 
     private static Node getMap(Document doc, Map m){
