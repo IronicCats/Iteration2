@@ -3,9 +3,17 @@ package Model.GameObject.MobileObjects.Entities.AI;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
+import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.Astar;
+import Utilities.AIUtilities.FindTilesinRange;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MapUtilities.Neighbors;
+import Utilities.Settings;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by Aidan on 3/6/2016.
@@ -28,11 +36,13 @@ import Utilities.MapUtilities.Navigation;
     @Override
     public void tick() {
         if(mobileObject != null) {
-            follow(mobileObject);
+            //follow(mobileObject);
+            goToObjInSight(mobileObject,3);
         }
         else{
             moveTo(destination);
         }
+
     }
 
     public void moveTo(Location destination){
@@ -49,6 +59,19 @@ import Utilities.MapUtilities.Navigation;
 
     public void follow(MobileObject mobileObject){
         moveTo(mobileObject.getLocation());
+    }
+
+    public void goToObjInSight(MobileObject mobileObject, int sight) {
+
+        ArrayList<Tile> range = FindTilesinRange.find(AI,map,sight);
+
+        for(Tile tile : range){
+            if(tile.getObject() == mobileObject){
+                follow(mobileObject);
+                break;
+            }
+        }
+
     }
 
     public void setDestination(Location location) {
