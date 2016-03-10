@@ -4,6 +4,7 @@ import State.State;
 import State.States.GameState.PauseState;
 import Controller.Controller;
 import State.States.MenuState;
+import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
 
@@ -24,7 +25,7 @@ public class PauseController extends Controller{
         if (!canGetInput()) {
             return;
         }
-        if (e.getKeyCode() == KeyEvent.VK_P) {
+        if (e.getKeyCode() == Settings.ESC) {
             state.switchState(State.GAMESTATE);
             System.out.println("Game was Paused");
         }
@@ -39,14 +40,5 @@ public class PauseController extends Controller{
             ((MenuState)state).moveDown();
             //System.out.println("state =" + currentState);
         }
-        if(e.getKeyCode() == 10) {
-            if (currentState == 1){
-                System.out.println("Switching to gameState");
-                state.switchState(State.GAMESTATE);
-            }
-            else if(currentState==2)System.out.println("this is the load state");
-            else if(currentState==3)System.exit(0);
-        }
-
     }
 }

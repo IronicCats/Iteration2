@@ -12,27 +12,24 @@ import java.awt.*;
 public class PauseView implements Renderable {
 
     private int width,height;
-    private String[] pauseMenuItems = {"Resume Game", "Save Game", "Load Game", "Exit Game"};
+    private String[] pauseMenuItems = {"Resume Game", "Save Game", "Load Game", "Settings", "Exit Game"};
     private int currentItem;
 
 
     public PauseView(){
-        width= Settings.GAMEWIDTH - 200;
-        height= Settings.GAMEHEIGHT - 200;
         currentItem=0;
     }
-
-
-
 
     @Override
     public void render(Graphics g) {
 
+        width= Settings.GAMEWIDTH;
+        height= Settings.GAMEHEIGHT;
         g.setColor(new Color(12, 12, 12, 130));
-        g.fillRect(0, 0, width, height);
-        g.drawImage(Assets.BACK,0,0,width,height,null);
-        g.drawImage(Assets.LEFT,0,height*1/5,width*7/24,height*4/5,null);
-        g.drawImage(Assets.RIGHT,width*17/24,height*1/5,width*7/24,height*4/5,null);
+        //g.fillRect(0, 0, width, height);
+        //g.drawImage(Assets.BACK,width/2,height/2,width,height,null);
+        //g.drawImage(Assets.LEFT,0,height*1/5,width*7/24,height*4/5,null);
+        //g.drawImage(Assets.RIGHT,width*17/24,height*1/5,width*7/24,height*4/5,null);
         for(int i = 0; i < pauseMenuItems.length; ++i) {
             g.setFont(new Font("Arial", Font.PLAIN, 40));
             FontMetrics fm = g.getFontMetrics();

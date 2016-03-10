@@ -30,7 +30,9 @@ public class PauseState extends State{
         pauseView.next();
     }
 
+    // passes in pause view and map view
     public void render(Graphics g) {
+        game.render(g);
         pauseView.render(g);
     }
 
