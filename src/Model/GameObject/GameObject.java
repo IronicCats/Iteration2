@@ -11,11 +11,14 @@ import java.util.ArrayList;
  * Created by Joshua Kegley on 3/1/2016.
  */
 public abstract class GameObject implements Subject, Tickable {
+    
     private ArrayList<Observer> observers;
     protected Location location;
+
     public GameObject() {
         observers = new ArrayList<>();
         location = new Location(0,0);}
+
     public GameObject(Location location) {
         observers = new ArrayList<>();
         this.location = location;

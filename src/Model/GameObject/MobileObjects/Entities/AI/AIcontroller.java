@@ -15,8 +15,8 @@ import Utilities.MapUtilities.Navigation;
         Map map;
         MobileObject mobileObject;
 
-        public AIcontroller(Map map){
-            this.map = map;
+        public AIcontroller(){
+
         }
 
         private MobileObject AI;
@@ -31,24 +31,28 @@ import Utilities.MapUtilities.Navigation;
             follow(mobileObject);
         }
         else{
-            moveTo(destination);
+            //moveTo(destination);
         }
     }
 
-    public void moveTo(Location destination){
+    /*public void moveTo(Location destination){
         if (AI.canMove() && !AI.getLocation().equals(destination)) {
             Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0); //Tile currently on
             Location end  = Astar.Findpath(map, AI.getLocation(), destination).get(1);  //Tile that AI wants to go to
             if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
                     AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving ");
+                    System.out.println("Moving");
             }
         }
+    }*/
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public void follow(MobileObject mobileObject){
-        moveTo(mobileObject.getLocation());
+        //moveTo(mobileObject.getLocation());
     }
 
     public void setDestination(Location location) {
