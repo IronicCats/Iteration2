@@ -170,14 +170,8 @@ public class GameState extends State {
             camera.centerOnPlayer(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-        //keyset for keys, values for values
-        //enemyView1.render(g, camera.getxOffset(), camera.getyOffset());
-
-        //playerView.render(g, camera.getxOffset(), camera.getyOffset());
-        //enemyView.render(g, camera.getxOffset(), camera.getyOffset());
-
+        
         DisplayMessage.render(g);
-        //petView.render(g, camera.getxOffset(), camera.getyOffset());
     }
 
     public void executePlayerCommand(PlayerCommandsEnum pce){
