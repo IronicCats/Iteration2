@@ -46,6 +46,12 @@ public class Player extends Character implements Observer{
         location = Location.newLocation(degrees, location);
         location.setDir(degrees);
         registerTile(location);
+        if(getTile().getHasAreaEffect()){
+            System.out.println(this.getStats().getLevel());
+            this.applyEffect(this.getTile().getAreaEffect().getEffect());
+            System.out.println(this.getStats().getLevel());
+            alert();
+        }
         alert();
     } // end move
 
