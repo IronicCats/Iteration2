@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
@@ -62,5 +63,13 @@ public abstract class Character extends Entity {
         DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
         getTile().addItems(inventory.emptyPack());
     } // end emptyPack
+
+    public void applyEffect(Effect... e) {
+        ((CharacterStats)getStats()).applyEffect(e);
+    } // end applyEffect
+
+    public boolean checkForDeath() {
+        return !((CharacterStats) getStats()).isDead();
+    } // end checkForDeath
 
 } // end class Character
