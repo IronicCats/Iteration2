@@ -13,13 +13,10 @@ import java.util.ArrayList;
  */
 public class AOEAbility extends Abilities{
     int degreeMovement;
-    int range;
-    boolean helpfulToSelf;
 
     public AOEAbility(int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost){
         super(effects, requirements, cost);
         this.degreeMovement = degreeMovement;
-        this.range = range;
     }
 
     public int getDegreeMovement(){
@@ -28,14 +25,6 @@ public class AOEAbility extends Abilities{
 
     public void setDegreeMovement(int degreeMovement){
         this.degreeMovement = degreeMovement;
-    }
-
-    public int getRange(){
-        return this.range;
-    }
-
-    public void setRange(int range){
-        this.range = range;
     }
 
     public void execute(Location targeterLocation){
@@ -64,7 +53,11 @@ public class AOEAbility extends Abilities{
             }
         }
         else if(degreeMovement == 360){
+            for(int i = targeterLocation.getX() - 1; i < targeterLocation.getX() + 1; ++i){
+                for(int j = targeterLocation.getY() - 1; j < targeterLocation.getY() + 1; ++j){
 
+                }
+            }
         }
     }
 }
