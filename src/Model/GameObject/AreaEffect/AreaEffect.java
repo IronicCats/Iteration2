@@ -14,14 +14,12 @@ public class AreaEffect extends GameObject {
     String name;
     String description;
     Effect effect;
-    //animation?
-    Location location;
     AreaEffectEnum areaEffect;
 
     //constructor
-    public AreaEffect(String name, String description, AreaEffectEnum areaEffect, Location location)
-    {
+    public AreaEffect(String name, String description, AreaEffectEnum areaEffect, Location location) {
         super(location);
+        System.out.println(location);
         this.name = name;
         this.description = description;
         this.areaEffect = areaEffect;
@@ -66,8 +64,6 @@ public class AreaEffect extends GameObject {
     public String getName() {return name;}
 
     public AreaEffectEnum getAreaEffect() {return areaEffect;}
-
-    public Location getLocation() {return location;}
 
     public Effect getEffect() {return effect;}
 

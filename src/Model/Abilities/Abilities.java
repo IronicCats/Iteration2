@@ -2,6 +2,7 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
@@ -10,20 +11,23 @@ import Model.Stats.StatStructure;
  * Created by mazumderm on 3/5/2016.
  */
 public abstract class Abilities {
-    Effect[] effects;
+    Effect effects;
     Requirement requirement;
-    StatStructure cost;
+    Effect cost;
     //constructor
-    public Abilities(Effect[] effects) {
+    public Abilities(Effect effects, Requirement requirement, Effect cost) {
+
         this.effects = effects;
+        this.requirement = requirement;
+        this.cost = cost;
     }
 
     //accessor
-    public Effect [] getEffects(){
+    public Effect getEffects(){
         return this.effects;
     }
 
-    public void setEffects(Effect [] effects){
+    public void setEffects(Effect effects){
         this.effects = effects;
     }
 
@@ -35,6 +39,14 @@ public abstract class Abilities {
         this.requirement = r;
     }
 
+    public Effect getCost(){
+        return this.cost;
+    }
+
+    public void setCost(Effect cost){
+        this.cost = cost;
+    }
+
     //operations
-    public abstract void execute(Tile t);
+    public abstract void execute(Location location);
 }

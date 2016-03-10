@@ -11,22 +11,22 @@ import Model.Stats.Stats;
 // class for projectiles
 public class Projectile extends MobileObject {
 
-    private Effect [] effects;
+    private Effect effects;
     int range;
 
     //constructor
-    public Projectile(Location location, Stats stats, Effect [] effects, int range) {
+    public Projectile(Location location, Stats stats, Effect effects, int range) {
         super(location, stats);
         this.effects = effects;
         this.range = range;
     }
 
     //accessor methods
-    public Effect [] getEffect() {
+    public Effect getEffect() {
         return this.effects;
     }
 
-    public void setEffects(Effect [] e){
+    public void setEffects(Effect e){
         this.effects = e;
     }
 
