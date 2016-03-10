@@ -72,4 +72,8 @@ public abstract class Character extends Entity {
         return !((CharacterStats) getStats()).isDead();
     } // end checkForDeath
 
+    public Inventory getInventory(){
+        return inventory;
+    }
+
 } // end class Character

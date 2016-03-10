@@ -450,7 +450,8 @@ public class SaveLoad {
 
         //Element stat = doc.createElement("Stats");
         type.appendChild(getCharacterStats(doc,(CharacterStats)e.getStats()));
-        //type.appendChild(getInventory(doc,));
+        type.appendChild(getInventory(doc,e.getInventory()));
+        type.appendChild(getEquippedItems(doc,e.getInventory().getEquipment()));
         
         //need to get Primary then secondary
         return type;                //returns it so it can be used in XML
