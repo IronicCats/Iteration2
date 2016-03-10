@@ -51,17 +51,7 @@ public class GameState extends State {
 
     private boolean cameraMoving;
 
-
     private Player player;
-    private NPC enemy;
-    private NPC enemy1;
-    private Pet pet;
-
-
-    private MobileObjectView playerView;
-    private MobileObjectView enemyView;
-    private MobileObjectView enemyView1;
-    private MobileObjectView petView;
 
     public GameState() {
         //need to change this
@@ -75,34 +65,20 @@ public class GameState extends State {
 
         setController(new GameController(this));
 
-
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
 
-
-
         //creating a new player
-        player = new Player();
-        player = new Player(new Location(0, 1), new Smasher(), new Inventory());
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        playerView = new MobileObjectView(player, Assets.PLAYER);
-
-        enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
-        enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(10, 10, 0), map);
-        enemy1.getController().setMobileObject(player);
-        //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
-
-        enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
-        enemyView1 = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1);
-
-        //petView = new MobileObjectView(pet, Assets.HEALTH_POTION);
-
-        mobileObjects.put(player, playerView);
-        mobileObjects.put(enemy, enemyView);
-        mobileObjects.put(enemy1, enemyView1);
+        player =  NPCFactory.Player();
+        NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player);
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+
+        // initializing NPC's
+        mobileObjects = NPCFactory.Init(map);
+        mobileObjects.put(player, NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+        map.setMobileObjects(mobileObjects);
 
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
@@ -145,8 +121,9 @@ public class GameState extends State {
     @Override
     public void tick() {
         player.tick();
-        enemy.tick();
-        enemy1.tick();
+        for (MobileObject key : mobileObjects.keySet()) {
+            key.tick();
+        }
     }
 
     public void render(Graphics g) {

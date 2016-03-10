@@ -70,11 +70,12 @@ public class Location {
                     newLocation.setY(location.getY());
                 }
                 newLocation.setX(location.getX() + 1);
-
                 break;
             default:
                 break;
         }
+        newLocation.setDir(degrees);
+        //System.out.println(newLocation.getDir());
         return newLocation;
     }
 

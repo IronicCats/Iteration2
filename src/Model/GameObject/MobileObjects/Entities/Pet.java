@@ -3,6 +3,7 @@ package Model.GameObject.MobileObjects.Entities;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Pack;
 import Model.Stats.PetStats;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -21,20 +22,20 @@ import java.util.Random;
 
  */
 public class Pet extends MobileObject implements Tickable{
+
     PetController controller;
     PetStats stats;
     Location base;
     Pack pack;
-    Random random;
     boolean owned;
+    private Player player;
 
     public Pet(PetController controller) {
-        super(new Location(0, 0), new PetStats());
+
         base = new Location(0, 0);
         this.controller = controller;
         stats = new PetStats();
         pack = new Pack();
-        random = new Random(System.currentTimeMillis());
         owned = false;
 
         controller.setAI(this);
@@ -46,7 +47,6 @@ public class Pet extends MobileObject implements Tickable{
         this.controller = controller;
         this.stats = stats;
         this.pack = pack;
-        random = new Random(System.currentTimeMillis());
         this.owned = owned;
 
         controller.setAI(this);
@@ -58,11 +58,6 @@ public class Pet extends MobileObject implements Tickable{
             controller.tick();
         }
     } // end tick
-
-    public Location computeRandomLocation() {
-        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * 2/*stats.getMovement()*/,
-                base.getY() + (int)Math.pow(-1, random.nextInt(2)) * 2)/*stats.getMovement()*/;
-    } // end computeRandomLocation
 
     public PetStats getStats() { return stats; }
     public Pack getPack() { return pack; }
@@ -79,6 +74,11 @@ public class Pet extends MobileObject implements Tickable{
             }
         }
         return items;
+    }
+
+    public void setOwnership(Player player){
+        this.owned = true;
+        this.player = player;
     }
 
     public void pickup(Item item) {

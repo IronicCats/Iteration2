@@ -17,8 +17,13 @@ public class Settings {
     public static int DEFAULTITEMHEIGHT = TILEHEIGHT/4;
     public static int DEFAULTITEMWIDTH = TILEWIDTH/4;
 
+    public static int NORTH = 90;
+    public static int NE = 45;
+    public static int SE = 315;
+    public static int SOUTH = 270;
+    public static int SW = 225;
+    public static int NW = 135;
 
-    public static int SIGHT = 2;
 
     public static int UP_RIGHT = 105;
     public static int UP = 104;
