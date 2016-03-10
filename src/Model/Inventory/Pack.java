@@ -60,6 +60,8 @@ public class Pack {
         return items[index];
     } // end get
 
+    public Item[] getItems() { return items; }
+
     public void examine() {
         if(count == 0) {
             System.out.println("Pack empty.");
@@ -85,6 +87,7 @@ public class Pack {
         return tempItems;
     } // end dump
 
+    public int getCount() { return count; }
     public int getMoney() { return money; }
     public void setMoney(int money) { this.money = money; }
     public void modifyMoney(int money) { this.money += money; }

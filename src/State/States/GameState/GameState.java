@@ -94,6 +94,8 @@ public class GameState extends State {
 
         enemy = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(0, 0, 0), map);
         enemy1 = (NPC)NPCFactory.makeNPC(MobileObjectEnum.KITTEN, new Location(4, 5, 0), map);
+        enemy1.getController().setMobileObject(player);
+
         //pet = new Pet(new PetController(map), new Location(3, 3), new PetStats(new StatStructure(StatsEnum.MOVEMENT, 3)), new Pack(), false);
 
         enemyView = NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy);
@@ -108,7 +110,6 @@ public class GameState extends State {
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
-
 
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
@@ -125,8 +126,8 @@ public class GameState extends State {
     }
 
     public void move(int degrees) {
+        //If camera is moving then movement will be applied to camera, otherwise apply it to the player
         if(cameraMoving){
-            System.out.println("camera moving");
             camera.move(degrees);
         }
         else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
@@ -140,7 +141,7 @@ public class GameState extends State {
     public void setCameraMoving(boolean movement){
         cameraMoving = movement;
         if(!cameraMoving){
-            camera.centerOnPlayer(player);
+            camera.centerOnPlayer(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
         }
     }
 
