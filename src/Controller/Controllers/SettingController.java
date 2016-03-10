@@ -7,10 +7,10 @@ import Utilities.Settings;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Dartyx on 3/7/2016.
+ * Created by Dartyx on 3/9/2016.
  */
-public class LoadController extends Controller{
-    public LoadController(State state) {
+public class SettingController extends Controller {
+    public SettingController(State state) {
         super(state);
     } // end constructor
 
@@ -21,7 +21,7 @@ public class LoadController extends Controller{
         }
         if (e.getKeyCode() == Settings.ESC) {
             state.switchState(State.GAMESTATE);
-            System.out.println("Game was Paused");
+            System.out.println("Game was in settings and is now resumed");
         }
 
     }

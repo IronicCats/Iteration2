@@ -133,9 +133,6 @@ public class GameState extends State {
         else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
         }
-
-
-
     }
 
     public void setCameraMoving(boolean movement){
