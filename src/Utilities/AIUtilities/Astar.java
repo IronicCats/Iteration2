@@ -13,13 +13,14 @@ import java.util.*;
  */
 
 public class Astar {
-    
+
     public static ArrayList<Location> Findpath(Map map, Location start, Location end) {
 
         /*
         You need a queue for the breadth first search algorithm. It searches every tile that
         is walkable while also adding its parent and storing it in an array.
         */
+
         Queue<Location> Queue = new LinkedList<>();  //The quee which stores the tiles
         Tile parent[][] = new Tile[Settings.TILEWIDTH][Settings.TILEHEIGHT]; //This stores the parents
 
@@ -31,11 +32,10 @@ public class Astar {
             Tile currentTile = map.getTile(current.getX(),current.getY());
             if(currentTile.isWalkable() || start.equals(current)) {
                 Tile neighbors[] = Neighbors.neighbors(currentTile, map);   //This uses the neighbor method which calculates all the
-                for (int i = 0; i < 6; i++) {                     //surrounding tiles of a particular tile.
-                    Tile next = neighbors[i];
-                    if (next != null && parent[next.getLocation().getX()][next.getLocation().getY()] == null && !next.getLocation().equals(start)) { //This if statement makes sure that the tile isnt null it is not already a parent and it's not the starting tile
-                        Queue.add(next.getLocation());
-                        parent[next.getLocation().getX()][next.getLocation().getY()] = currentTile;
+                for (Tile tile:neighbors) {                     //surrounding tiles of a particular tile.
+                    if (tile != null && parent[tile.getLocation().getX()][tile.getLocation().getY()] == null && !tile.getLocation().equals(start)) { //This if statement makes sure that the tile isnt null it is not already a parent and it's not the starting tile
+                        Queue.add(tile.getLocation());
+                        parent[tile.getLocation().getX()][tile.getLocation().getY()] = currentTile;
                     }
                 }
             }

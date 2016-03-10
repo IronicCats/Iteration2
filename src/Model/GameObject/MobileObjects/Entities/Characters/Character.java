@@ -151,4 +151,7 @@ public abstract class Character extends Entity {
     public CharacterStats getStats() {
         return (CharacterStats)stats;
     }
+    public Inventory getInventory(){
+        return inventory;
+    }
 } // end class Character

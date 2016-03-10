@@ -132,7 +132,6 @@ public abstract class Tile implements Subject {
         return isWalkable && !hasObject;
     }
 
-
     public ArrayList<Item> getItems() {
         return items;
     }

@@ -90,6 +90,10 @@ public class Inventory implements Subject{
         return pack.getSizeLeft();
     }
 
+    public Equipment getEquipment(){
+        return equipment;
+    }
+
     @Override
     public void addObserver(Observer o) {
         observers.add(o);

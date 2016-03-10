@@ -35,7 +35,10 @@ public class MenuController extends Controller {
                 System.out.println("Switching to gameState");
                 state.switchState(State.GAMESTATE);
             }
-            else if(currentState==2)System.out.println("this is the load state");
+            else if(currentState==2){
+                System.out.println("this is the load state");
+                state.switchState(State.LOADSTATE);
+            }
             else if(currentState==3)System.exit(0);
         }
     }
