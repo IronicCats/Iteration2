@@ -2,6 +2,7 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
@@ -48,5 +49,5 @@ public abstract class Abilities {
     }
 
     //operations
-    public abstract void execute(Location targeterLocation);
+    public abstract void execute(MobileObject m, Location targeterLocation);
 }

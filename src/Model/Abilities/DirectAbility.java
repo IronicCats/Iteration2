@@ -1,6 +1,7 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
@@ -11,7 +12,7 @@ import Model.Stats.StatStructure;
  */
 
 /**
- * The purpose of thic class is to provide the skeleton for basic direct abilities. 
+ * The purpose of thic class is to provide the skeleton for basic direct abilities.
  */
 public class DirectAbility extends Abilities {
 
@@ -20,9 +21,8 @@ public class DirectAbility extends Abilities {
         super(effects, requirement, cost);
     }
 
-    public void execute(Location targeterLocation){
+    public void execute(MobileObject m, Location targeterLocation){
         //get the tile that the targeter can target
-
         //for all entities on the tile apply the effect
     }
 }

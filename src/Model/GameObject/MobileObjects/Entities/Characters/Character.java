@@ -7,6 +7,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.Inventory;
 import Model.Location;
+import Model.Map.Map;
 import Model.Stats.CharacterStats;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
@@ -71,5 +72,6 @@ public abstract class Character extends Entity {
     public boolean checkForDeath() {
         return !((CharacterStats) getStats()).isDead();
     } // end checkForDeath
+
 
 } // end class Character

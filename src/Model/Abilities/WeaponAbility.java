@@ -2,6 +2,7 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
@@ -27,7 +28,7 @@ public class WeaponAbility extends Abilities {
         this.weapon = w;
     }
 
-    public void execute(Location targeterLocation){
+    public void execute(MobileObject m, Location targeterLocation){
 
     }
 }

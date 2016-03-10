@@ -1,10 +1,14 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Model.Map.Map;
 import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
+import Utilities.MapUtilities.Neighbors;
 
 import java.util.ArrayList;
 
@@ -27,14 +31,15 @@ public class AOEAbility extends Abilities{
         this.degreeMovement = degreeMovement;
     }
 
-    public void execute(Location targeterLocation){
-        ArrayList<Tile> affectedTiles;
+    public void execute(MobileObject targeter, Location targeterLocation){
+        /**
+        Tile [] affectedTiles;
+        Map map = targeter.getMap();
         if(degreeMovement == 60){
             switch(targeterLocation.getDir()){
                 case 45:
                     break;
                 case 90:
-
                     break;
                 case 135:
 
@@ -53,11 +58,16 @@ public class AOEAbility extends Abilities{
             }
         }
         else if(degreeMovement == 360){
-            for(int i = targeterLocation.getX() - 1; i < targeterLocation.getX() + 1; ++i){
-                for(int j = targeterLocation.getY() - 1; j < targeterLocation.getY() + 1; ++j){
-
+            affectedTiles = Neighbors.neighbors(targeter.getTile(),map);
+            for(int i = 0; i < affectedTiles.length; ++i){// for all tiles in affected range
+                Tile t = affectedTiles[i];
+                MobileObject m = t.getObject();   // get object from each tile
+                ((Character)(targeter)).applyEffect(getEffects()); // apply ability affect
                 }
             }
         }
+         **/
     }
+
+
 }
