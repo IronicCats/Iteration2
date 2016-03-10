@@ -106,6 +106,7 @@ public class GameState extends State {
         mobileObjects.put(player, playerView);
         mobileObjects.put(enemy, enemyView);
         mobileObjects.put(enemy1, enemyView1);
+
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
