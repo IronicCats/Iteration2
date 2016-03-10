@@ -106,6 +106,7 @@ public class GameState extends State {
         mobileObjects.put(player, playerView);
         mobileObjects.put(enemy, enemyView);
         mobileObjects.put(enemy1, enemyView1);
+
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
@@ -132,9 +133,6 @@ public class GameState extends State {
         else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
         }
-
-
-
     }
 
     public void setCameraMoving(boolean movement){
