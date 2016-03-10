@@ -11,4 +11,8 @@ public class PetController extends AIcontroller {
         super(map);
     }
 
+    public void follow(){
+        moveTo(mobileObject.getLocation());
+    }
+
 }
