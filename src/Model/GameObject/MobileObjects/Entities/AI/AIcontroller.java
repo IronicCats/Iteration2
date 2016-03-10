@@ -40,7 +40,7 @@ import java.util.Queue;
             goToObjInSight(mobileObject,3);
         }
         else{
-            moveTo(destination);
+            //moveTo(destination);
         }
 
     }
@@ -52,13 +52,17 @@ import java.util.Queue;
             if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
                     AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving ");
+                    System.out.println("Moving");
             }
         }
     }
 
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
     public void follow(MobileObject mobileObject){
-        moveTo(mobileObject.getLocation());
+        //moveTo(mobileObject.getLocation());
     }
 
     public void goToObjInSight(MobileObject mobileObject, int sight) {
