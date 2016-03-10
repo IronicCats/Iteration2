@@ -20,7 +20,7 @@ public class Assets {
 
     public static ArrayList<BufferedImage> PLAYER;
 
-
+    public static BufferedImage BAGOFITEMS;
     public static BufferedImage HEALTH_POTION;
     public static BufferedImage CLOSED_TREASURE_CHEST;
     public static BufferedImage OPEN_TREASURE_CHEST;
@@ -67,6 +67,9 @@ public class Assets {
         // End of Tiles
 
         //Items
+        SpriteSheet BAGOFITEMSSPRITESHEET = new SpriteSheet(new ImageLoader().loadImage("/Items/ItemBag.png"));
+        BAGOFITEMS = BAGOFITEMSSPRITESHEET.crop(0,0,32,32);
+
         SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HealthPotion.png"));
         HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
 

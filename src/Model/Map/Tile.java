@@ -1,6 +1,6 @@
 package Model.Map;
 
-import Model.GameObject.Decal.Decal;
+
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -15,35 +15,40 @@ import java.util.ArrayList;
 
 /**
  * Created by Aidan on 3/1/2016.
+ *
+ * TODO:
+ *  interact() needs to have different implementations based on instanceof
+ *      alternately, renace player.takeItems(...) to reflect different interactions
  */
 public abstract class Tile implements Subject {
 
     private Location location;
     protected ArrayList<Observer> observers;
-    private boolean isWalkable;
+    public boolean isWalkable;
+    protected Observer observer;
     private ArrayList<Item> items;
-    private AreaEffect a;
-    private AreaEffectEnum areaEffectEnum;
+    private AreaEffect areaEffect;
     private MobileObject object;
     private boolean hasObject;
-    private Decal decal;
     private boolean hasAreaEffect;
     private boolean visited;
+    private AreaEffectEnum ar;
 
     public Tile(Location location, boolean isWalkable){
         items = new ArrayList<>();
         hasObject = false;
         this.location = location;
         this.isWalkable = isWalkable;
-        hasAreaEffect = false;
         visited = false;
         observers = new ArrayList<>();
+        hasAreaEffect = false;
     }
 
 
     public void interact() {
         if (hasItems() && object instanceof Player) {
             items = ((Player) object).takeItems(items);
+            System.out.print(items);
             alert();
         }
     }
@@ -53,19 +58,27 @@ public abstract class Tile implements Subject {
         alert();
     }
 
+    public void addItems(ArrayList<Item> items) {
+        for (Item i: items) {
+            this.items.add(i);
+        }
+        alert();
+    }
+
+
     public void setAreaEffectTile(AreaEffect a){
-        this.areaEffectEnum = a.getAreaEffect();
-        this.a = a;
+        this.areaEffect = a;
+        this.ar = a.getAreaEffect();
         hasAreaEffect = true;
         alert();
     }
 
-    public AreaEffectEnum getAreaEffectEnum(){
-        return this.areaEffectEnum;
+    public AreaEffect getAreaEffect(){
+        return this.areaEffect;
     }
 
-    public Decal getDecal(){
-        return this.decal;
+    public AreaEffectEnum getAreaEffectEnum(){
+        return this.ar;
     }
 
     public MobileObject getObject() {
@@ -77,18 +90,19 @@ public abstract class Tile implements Subject {
     }
 
     public Tile register(MobileObject object) {
-        this.object = object;
-        hasObject = true;
-        System.out.println(object + " Has registered" + " Has items: " + hasItems());
-        if(object instanceof Player) {
-            visited = true;
-        }
-        return this;
+            this.object = object;
+            hasObject = true;
+            if (object instanceof Player) {
+                visited = true;
+            }
+            alert();
+            return this;
     }
 
     public void deregister() {
         object = null;
         hasObject = false;
+        alert();
     }
 
 
@@ -116,7 +130,10 @@ public abstract class Tile implements Subject {
         return location;
     }
 
-    public boolean getHasAreaEffect(){return this.hasAreaEffect;}
+    //access if the current tile has an area effect or not
+    public boolean getHasAreaEffect(){
+        return hasAreaEffect;
+    }
 
     public int amountOfItems() {
         return items.size();

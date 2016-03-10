@@ -32,5 +32,13 @@ public class NPC extends Character implements Tickable {
         }
     } // end tick
 
+    public NPCController getController() {
+        return controller;
+    }
+
+    public void setController(NPCController controller) {
+        this.controller = controller;
+    }
+
     // inventory = NPCinventory
 }

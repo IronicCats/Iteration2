@@ -13,6 +13,8 @@ import Utilities.MapUtilities.Navigation;
     public abstract class AIcontroller implements Tickable {
 
         Map map;
+        MobileObject mobileObject;
+
         public AIcontroller(Map map){
             this.map = map;
         }
@@ -20,22 +22,39 @@ import Utilities.MapUtilities.Navigation;
         private MobileObject AI;
         private Location destination = new Location(0,2,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
-        @Override
-        public void tick() {
 
-            if (AI.canMove() && !AI.getLocation().equals(destination)) {
 
-                Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0);
-                Location end  = Astar.Findpath(map, AI.getLocation(), destination).get(1);
-                if(Navigation.checkMove(end, map, AI)) {
-                    AI.move(start.getDir());
+
+    @Override
+    public void tick() {
+        if(mobileObject != null) {
+            follow(mobileObject);
+        }
+        else{
+            moveTo(destination);
+        }
+    }
+
+    public void moveTo(Location destination){
+        if (AI.canMove() && !AI.getLocation().equals(destination)) {
+            Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0); //Tile currently on
+            Location end  = Astar.Findpath(map, AI.getLocation(), destination).get(1);  //Tile that AI wants to go to
+            if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
+                    AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving");
-                }
+                    System.out.println("Moving ");
             }
         }
+    }
+
+    public void follow(MobileObject mobileObject){
+        moveTo(mobileObject.getLocation());
+    }
 
     public void setDestination(Location location) {
         this.destination = location;
     } // end setDestination
+
+    public void setMobileObject(MobileObject mobileObject) { this.mobileObject = mobileObject; }
+
 } // end class AIcontroller

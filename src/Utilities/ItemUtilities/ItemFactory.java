@@ -76,7 +76,7 @@ public class ItemFactory {
         Item shield = ItemFactory.makeItem(ItemsEnum.SHIELD, new Location(9, 5));
         initItems.put(shield, ItemFactory.makeAsset(ItemsEnum.SHIELD, shield));
 
-        // shield
+        // key
         Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(5, 3));
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
 
@@ -346,7 +346,6 @@ public class ItemFactory {
                 return new Obstacle(id,
                             "House",
                             "Old farmer Joe's house",
-                            null,
                             location);
             default:
                 return null;
@@ -355,6 +354,8 @@ public class ItemFactory {
 
     public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
         switch(itemsEnum) {
+            case BAGOFITEMS:
+                return new ItemView(item, Assets.BAGOFITEMS);
             case HEALTH_POTION:
                 return new ItemView(item, Assets.HEALTH_POTION);
             case MANA_POTION:

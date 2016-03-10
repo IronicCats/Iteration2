@@ -2,14 +2,11 @@ package View.Views;
 
 import Model.Location;
 import Model.Map.Map;
-import Model.Map.Tile;
 import Utilities.Settings;
 import Utilities.Utilities;
-import View.ViewUtilities.Camera;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
-import java.util.Set;
 
 import Utilities.Observer;
 
@@ -36,7 +33,12 @@ public class MapView implements Observer, Renderable {
     public void render(Graphics g, int xOffset, int yOffset, Location playerLocation) {
         for(int y = 0; y <  map.getHeight(); ++y){
             for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
-                tileViews[x][y].render(g,
+                tileViews[x][y].renderTile(g,
+                        ((Utilities.calculateHexXLocation(x, y)) - xOffset),
+                        (Utilities.calculateHexYLocation(x, y) - yOffset),
+                        playerLocation
+                );
+                tileViews[x][y].renderNonMobile(g,
                         ((Utilities.calculateHexXLocation(x, y)) - xOffset),
                         (Utilities.calculateHexYLocation(x, y) - yOffset),
                         playerLocation
@@ -48,6 +50,22 @@ public class MapView implements Observer, Renderable {
                         ((Utilities.calculateHexXLocation(x, y)) - xOffset) + Settings.TILEWIDTH/2 - textW/2,
                         ((Utilities.calculateHexYLocation(x, y) - yOffset)) + 10
                 );
+            }
+        }
+        for(int y = 0; y <  map.getHeight(); ++y){
+            for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
+                tileViews[x][y].mobileObjects(g,
+                        ((Utilities.calculateHexXLocation(x, y)) - xOffset),
+                        (Utilities.calculateHexYLocation(x, y) - yOffset),
+                        playerLocation
+                );
+                if(Settings.FOG) {
+                    tileViews[x][y].renderFog(g,
+                            ((Utilities.calculateHexXLocation(x, y)) - xOffset),
+                            (Utilities.calculateHexYLocation(x, y) - yOffset),
+                            playerLocation
+                    );
+                }
             }
         }
     }

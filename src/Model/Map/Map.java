@@ -4,6 +4,8 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.MapUtilities.MakeMap;
 import Utilities.Settings;
 import Utilities.Subject;
 import Utilities.Observer;
@@ -35,6 +37,8 @@ public class Map implements Subject {
         this.width = width;
         this.height = height;
         this.spawn = spawn;
+
+
     }
 
     public Tile getTile(int x , int y) {
@@ -64,6 +68,7 @@ public class Map implements Subject {
     public void placeItem(Item item) {
         try {
             tiles[item.getX()][item.getY()].addItem(item);
+            tiles[item.getX()][item.getY()].alert();
 
         }catch (Exception e) {
             System.out.println(e);
@@ -74,6 +79,7 @@ public class Map implements Subject {
     public void placeAreaEffect(AreaEffect a) {
         try {
             tiles[a.getX()][a.getY()].setAreaEffectTile(a);
+            tiles[a.getX()][a.getY()].alert();
         }catch (Exception e) {
             System.out.println(e);
             System.out.println("Error while adding AreaEffect to Map");

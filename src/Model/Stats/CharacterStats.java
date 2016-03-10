@@ -42,6 +42,7 @@ public class CharacterStats extends Stats implements Subject {
     private int xpThreshold;
     private double xpMultiplier,
             statMultiplier;
+    private boolean alive;
     private ArrayList<Effect> effects;
     private ArrayList<Long> finishTimes;
     private ArrayList<EquipmentModification> equipmentModifications;
@@ -70,6 +71,8 @@ public class CharacterStats extends Stats implements Subject {
         offensiveRating = equippedWeapon + strength + level;
         defensiveRating = agility + level;
         armorRating = equippedArmor + hardiness;
+
+        alive = true;
 
         equipmentModifications = new ArrayList<>();
         observers = new ArrayList<>();
@@ -115,6 +118,8 @@ public class CharacterStats extends Stats implements Subject {
         offensiveRating = equippedWeapon + strength + level;
         defensiveRating = agility + level;
         armorRating = equippedArmor + hardiness;
+
+        alive = true;
 
         equipmentModifications = new ArrayList<>();
         observers = new ArrayList<>();
@@ -219,7 +224,10 @@ public class CharacterStats extends Stats implements Subject {
         effects.clear();
         finishTimes.clear();
 
-        livesLeft--;
+        if(livesLeft > 1) {
+            livesLeft--;
+            alive = true;
+        }
 
         strength = baseStr;
         agility = baseAgi;
@@ -270,13 +278,13 @@ public class CharacterStats extends Stats implements Subject {
         }
 
         for(StatsEnum s : e.getModification().getKeySet()) {
-            System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
+            //System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
             switch (s){
                 // primary stats
                 case LIVES_LEFT:
                     if(e.getModification().getStat(s) < 0) {
                         for (int i = 0; i < Math.abs(e.getModification().getStat(s)); i++) {
-                            kill();
+                            //kill();
                         }
                     } else {
                         modifyStat(s, e.getType(), e.getModification().getStat(s));
@@ -330,7 +338,7 @@ public class CharacterStats extends Stats implements Subject {
 
     public void removeEffect(Effect e) {
         for(StatsEnum s : e.getModification().getKeySet()) {
-            System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
+            //System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
             switch (s){
                 // primary stats
                 case LIVES_LEFT:
@@ -459,6 +467,8 @@ public class CharacterStats extends Stats implements Subject {
             o.update();
         }
     } // end alert
+
+    public boolean isDead() { return !alive; }
 
     public int getLivesLeft() { return livesLeft; }
     public int getBaseLives() { return baseLives; }
