@@ -2,19 +2,15 @@ package Model.Map;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
-import Utilities.ItemUtilities.ItemFactory;
-import Utilities.MapUtilities.MakeMap;
 import Utilities.Settings;
 import Utilities.Subject;
 import Utilities.Observer;
-import View.ViewUtilities.Renderable;
 import View.Views.ItemView;
 import View.Views.MobileObjectView;
 
-import java.awt.*;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -22,6 +18,7 @@ import java.util.HashMap;
  */
 public class Map implements Subject {
 
+    public static Map map;
     private Tile tiles[][];
     private int width;
     private int height;
@@ -37,7 +34,7 @@ public class Map implements Subject {
         this.width = width;
         this.height = height;
         this.spawn = spawn;
-
+        map = this;
 
     }
 
@@ -86,6 +83,9 @@ public class Map implements Subject {
         }
     }
 
+    public void carryAttack(Character c, Location l) {
+        getTile(l).deliverAttack(c);
+    }
 
     public Location getSpawn(){
         return spawn;

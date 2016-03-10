@@ -9,5 +9,8 @@ public class NPCController extends AIcontroller {
     public NPCController(Map map) {
         super(map);
     }
+
+
+
 }
 

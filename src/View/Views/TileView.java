@@ -73,11 +73,6 @@ public class TileView implements Observer, Renderable {
             itemView = null;
         }
 
-        /**
-        if(tile.getHasAreaEffect()){
-            decalView = AreaEffectFactory.makeAsset(new Decal(new Location(1,1),DecalEnum.GOLDSTAR));
-        }
-         **/
 
         //initialize decalView
         if(tile.getHasAreaEffect()){
