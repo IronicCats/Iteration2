@@ -48,5 +48,5 @@ public abstract class Abilities {
     }
 
     //operations
-    public abstract void execute(Location location);
+    public abstract void execute(Location targeterLocation);
 }

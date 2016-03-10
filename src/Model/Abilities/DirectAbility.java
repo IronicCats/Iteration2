@@ -16,7 +16,7 @@ public class DirectAbility extends Abilities {
         super(effects, requirement, cost);
     }
 
-    public void execute(Location l){
+    public void execute(Location targeterLocation){
 
     }
 }

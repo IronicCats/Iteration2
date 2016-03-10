@@ -27,7 +27,7 @@ public class WeaponAbility extends Abilities {
         this.weapon = w;
     }
 
-    public void execute(Location location){
+    public void execute(Location targeterLocation){
 
     }
 }

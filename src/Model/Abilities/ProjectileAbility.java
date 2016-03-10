@@ -39,7 +39,7 @@ public class ProjectileAbility extends Abilities {
         this.projectile = p;
     }
 
-    public void execute(Location location){
+    public void execute(Location targeterLocation){
 
 
     }

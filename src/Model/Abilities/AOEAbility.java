@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class AOEAbility extends Abilities{
     int degreeMovement;
     int range;
+    boolean helpfulToSelf;
 
     public AOEAbility(int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost){
         super(effects, requirements, cost);
@@ -37,12 +38,11 @@ public class AOEAbility extends Abilities{
         this.range = range;
     }
 
-    public void execute(Location location){
-        ArrayList<Location> affectedAreas;
+    public void execute(Location targeterLocation){
+        ArrayList<Tile> affectedTiles;
         if(degreeMovement == 60){
-            switch(location.getDir()){
+            switch(targeterLocation.getDir()){
                 case 45:
-
                     break;
                 case 90:
 
