@@ -15,7 +15,7 @@ public class Obstacle extends Item {
         super();
     } // end constructor
 
-    public Obstacle(int id, String name, String description, Location location){
-        super(id, name, description, location);
+    public Obstacle(int id, String name, String description, int value, Location location){
+        super(id, name, description, value, location);
     } // end constructor
 }
