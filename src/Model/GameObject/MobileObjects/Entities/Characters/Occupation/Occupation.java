@@ -32,22 +32,26 @@ public abstract class Occupation implements Subject, Observer {
     private Abilities[] occupationalAbilities;
     private Abilities[] basicSkillAbilities;
     private Abilities basicAttack;
+    private int pastLevel;
 
     //constructor
     public Occupation(String name, String description, int[] val)
     {
+       observers = new ArrayList<>();
         this.name = name;
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH,StatsEnum.AGILITY,
                 StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
         initialStats = new StatStructure(stats, val);
         playerStats = new CharacterStats(initialStats);
+        playerStats.addObserver(this);
+        pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
         basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
         basicSkills.put(SkillsEnum.BARGAIN, 0);
         basicSkills.put(SkillsEnum.OBSERVATION, 0);
-        playerStats.addObserver(this);
+
     }
 
     //accessor methods
@@ -126,13 +130,9 @@ public abstract class Occupation implements Subject, Observer {
 
     @Override
     public void alert() {
-        if(observers.size() != 0)
-        {
             for (Observer observer : observers) {
-                observer.update();
+                 observer.update();
             }
-        }
-
     } // end alert
 
     /*
@@ -140,7 +140,14 @@ public abstract class Occupation implements Subject, Observer {
      */
     @Override
     public void update() {
-
+        if(pastLevel != playerStats.getLevel()){
+            pastLevel = playerStats.getLevel();
+            /**
+            //change the skills
+            SkillsEnum s;
+            modifyOccupationalSkills(s, getOccupationalSkillsValue(s) + 1);
+             **/
+        }
     } // end update
 
     @Override
