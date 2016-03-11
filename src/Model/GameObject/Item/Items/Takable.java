@@ -21,8 +21,8 @@ public abstract class Takable extends Item{
         this.requirement = new Requirement();
     } // end default constructor
 
-    public Takable(int id, String name, String description, Location location, Requirement requirement, Effect effect){
-        super(id, name, description, location);
+    public Takable(int id, String name, String description, int value, Location location, Requirement requirement, Effect effect){
+        super(id, name, description, value, location);
         this.requirement = requirement;
         this.effect = effect;
     } // end default constructor

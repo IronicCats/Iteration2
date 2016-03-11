@@ -14,9 +14,11 @@ import java.util.Random;
  */
 
 public class NPC extends Character implements Tickable {
+
     NPCController controller;
     Random random;
     Location base;
+
     public NPC(Location location, Occupation occupation, Inventory inventory, NPCController controller) {
         super(location, occupation, inventory);
         controller.setAI(this);

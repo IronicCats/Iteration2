@@ -2,9 +2,9 @@ package Utilities;
 
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
+import View.ViewUtilities.ViewSettings;
 
 import java.awt.*;
-import java.util.Set;
 
 /**
  * Created by Aidan on 3/1/2016.
@@ -75,7 +75,7 @@ public class Utilities {
     }
 
     public static boolean outOfSite(ViewLocation playerLocation, ViewLocation tileLocation) {
-        double sight = calculateSight(Settings.SIGHT, tileLocation.getX(), playerLocation.getX());
+        double sight = calculateSight(ViewSettings.SIGHT, tileLocation.getX(), playerLocation.getX());
         if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
             return true;
         }

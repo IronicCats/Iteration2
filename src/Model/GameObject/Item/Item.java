@@ -21,6 +21,7 @@ public abstract class Item extends GameObject implements Subject {
     private int id; // used to determine type of item
     private String name;
     private String description;
+    private int value;
     private ArrayList<Observer> observers;
     private ItemsEnum type;
 
@@ -29,15 +30,17 @@ public abstract class Item extends GameObject implements Subject {
         id = 0;
         name = "";
         description = "";
+        value = 0;
         type = ItemsEnum.values()[id];
     } // end default constructor
 
-    public Item(int id, String name, String description, Location location) {
+    public Item(int id, String name, String description, int value, Location location) {
         super(location);
         observers = new ArrayList<>();
         this.id = id;
         this.name = name;
         this.description = description;
+        this.value = value;
         type = ItemsEnum.values()[id];
     } // end constructor
 
@@ -51,6 +54,7 @@ public abstract class Item extends GameObject implements Subject {
         return description;
     }
     public ItemsEnum getItemType() { return type; }
+    public int getValue() { return value; }
 
     @Override
     public void addObserver(Observer o) {
