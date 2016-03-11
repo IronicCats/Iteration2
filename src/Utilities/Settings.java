@@ -36,8 +36,8 @@ public class Settings {
     public static int ENTER = 0x0D;
     public static int ESC = 0x1B;
 
-    public static int SPACE = 0x20;
-    public static int ATTACK = 16;
+    public static int SPACE = 0;
+    public static int ATTACK = 0x20;
     public static int ONE = 0x31;
     public static int TWO = 0x32;
     public static int THREE = 0x33;
