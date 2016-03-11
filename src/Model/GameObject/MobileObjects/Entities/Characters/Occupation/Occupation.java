@@ -44,6 +44,9 @@ public abstract class Occupation implements Subject, Observer {
         playerStats = new CharacterStats(initialStats);
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
+        basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
+        basicSkills.put(SkillsEnum.BARGAIN, 0);
+        basicSkills.put(SkillsEnum.OBSERVATION, 0);
         playerStats.addObserver(this);
     }
 
@@ -68,7 +71,6 @@ public abstract class Occupation implements Subject, Observer {
 
     public void setOccupationalSkills(Map<SkillsEnum, Integer> m){
         this.occupationalSkills = m;
-        alert();
     }
 
     public void setBasicSkills(Map<SkillsEnum, Integer> m){
@@ -124,9 +126,13 @@ public abstract class Occupation implements Subject, Observer {
 
     @Override
     public void alert() {
-        for (Observer observer : observers) {
-            observer.update();
+        if(observers.size() != 0)
+        {
+            for (Observer observer : observers) {
+                observer.update();
+            }
         }
+
     } // end alert
 
     /*

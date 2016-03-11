@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * Contains a pack and worn equipment.
  */
 public class Inventory implements Subject{
+
     private Pack pack;
     private Equipment equipment;
     private ArrayList<Observer> observers;
@@ -110,4 +111,6 @@ public class Inventory implements Subject{
             o.update();
         }
     } // end alert
+
+    public Pack getPack() { return pack; }
 } // end class Inventory

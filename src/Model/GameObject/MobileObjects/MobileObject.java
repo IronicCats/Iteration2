@@ -5,6 +5,7 @@ import Model.Location;
 
 import Model.Map.Map;
 import Model.Map.Tile;
+import Controller.Controller;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
@@ -37,7 +38,6 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-
     }
     public MobileObject(Location location, Stats stats) {
         super(location);

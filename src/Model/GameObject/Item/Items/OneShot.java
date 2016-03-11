@@ -18,8 +18,8 @@ public class OneShot extends Item {
         this.effect = new Effect();
     } // end default constructor
 
-    public OneShot(int id, String name, String description, Location location, Effect effect){
-        super(id, name, description, location);
+    public OneShot(int id, String name, String description, int value, Location location, Effect effect){
+        super(id, name, description, value, location);
         this.effect = effect;
     } // end constructor
 

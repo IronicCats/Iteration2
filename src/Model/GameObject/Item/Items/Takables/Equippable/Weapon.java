@@ -20,8 +20,8 @@ public class Weapon extends Equippable {
         super();
     } // end default constructor
 
-    public Weapon(int id, String name, String description, Location location, Requirement requirement, EquipmentTypeEnum type, EquipmentModification e) {
-        super(id, name, description, location, requirement, type, e);
+    public Weapon(int id, String name, String description, int value, Location location, Requirement requirement, EquipmentTypeEnum type, EquipmentModification e) {
+        super(id, name, description, value, location, requirement, type, e);
     } // end constructor
 
     public int getDamage(){

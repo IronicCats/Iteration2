@@ -21,6 +21,13 @@ public class Summoner extends Occupation {
     {
 
         super("Summoner", "Specializes in spell casting", new int [] {5,5,5,7,5,0,5});
+
+        //set occupational skills
+        modifyOccupationalSkills(SkillsEnum.ENCHANT, 0);
+        modifyOccupationalSkills(SkillsEnum.BANE, 0);
+        modifyOccupationalSkills(SkillsEnum.CREEP, 0);
+        modifyOccupationalSkills(SkillsEnum.STAFF, 0);
+
         //basic attack of just hitting another entity
         /**
          // basic attack for Summoner is a weapon ability involving the whacking of an enemy with a staff

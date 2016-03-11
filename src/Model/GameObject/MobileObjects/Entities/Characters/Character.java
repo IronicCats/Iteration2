@@ -14,6 +14,7 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.Stats.CharacterStats;
@@ -131,10 +132,11 @@ public abstract class Character extends Entity {
         return !((CharacterStats) getStats()).isDead();
     } // end checkForDeath
 
-    public void excute(CommandsEnum e) {
+    public void execute(CommandsEnum e) {
         switch(e){
             case interact:
                 interactWithTile();
+                break;
             case drop:
                 emptyPack();
                 break;
@@ -155,5 +157,7 @@ public abstract class Character extends Entity {
     public Inventory getInventory(){
         return inventory;
     }
+
+    public Pack getPack() { return inventory.getPack(); }
 
 } // end class Character

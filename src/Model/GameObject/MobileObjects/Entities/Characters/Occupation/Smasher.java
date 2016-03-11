@@ -19,6 +19,11 @@ public class Smasher extends Occupation {
 
         super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 5});
 
+        //set occupational skills
+        modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);
+        modifyOccupationalSkills(SkillsEnum.TWOHANDWEAP, 0);
+        modifyOccupationalSkills(SkillsEnum.BRAWL, 0);
+
         //basic attack for smasher is a direct ability that involves hitting another entity
         //basic attack is calculated based on strength and brawl skill level
         // distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill

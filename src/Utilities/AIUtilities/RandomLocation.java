@@ -8,11 +8,12 @@ import java.util.Random;
  */
 public class RandomLocation {
 
-    private static Random random;
+    private static Random random = new Random(System.currentTimeMillis());;
 
     public static Location computeRandomLocation(Location base) {
-        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * 2/*stats.getMovement()*/,
-                base.getY() + (int)Math.pow(-1, random.nextInt(2)) * 2)/*stats.getMovement()*/;
+        System.out.println("xLoc: " + base.getX() + " " + "yLoc: " + base.getY());
+        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(3)/*stats.getMovement()*/,
+                            base.getY() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(3))/*stats.getMovement()*/;
     }
 
 }

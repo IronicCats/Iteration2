@@ -1,7 +1,9 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import Model.Abilities.CommandsEnum;
 import State.State;
+import State.States.GameState.TradeState;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
@@ -19,19 +21,20 @@ public class TradeController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == Settings.ESC) {                /* exit trade */
+        if(e.getKeyCode() == Settings.ESC) {                    /* exit trade */
             state.switchState(State.GAMESTATE);
             System.out.println("exiting TradeState");
-        } else if(e.getKeyCode() == Settings.UP) {          /* move cursor up */
+        } else if(e.getKeyCode() == Settings.UP) {              /* move cursor up */
             System.out.println("TradeController -> UP");
-        } else if(e.getKeyCode() == Settings.DOWN) {        /* move cursor down */
+        } else if(e.getKeyCode() == Settings.DOWN) {            /* move cursor down */
             System.out.println("TradeController -> DOWN");
-        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {   /* move cursor down */
+        } else if(e.getKeyCode() == Settings.DOWN_LEFT) {       /* move cursor left */
             System.out.println("TradeController -> LEFT");
-        } else if(e.getKeyCode() == Settings.DOWN_RIGHT) {  /* move cursor down */
+        } else if(e.getKeyCode() == Settings.DOWN_RIGHT) {      /* move cursor right */
             System.out.println("TradeController -> RIGHT");
-        } else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
+        } else if(e.getKeyCode() == Settings.ENTER) {           /* sell item/confirm/... */
             System.out.println("TradeController -> ENTER");
+            ((TradeState) state).executeCommand(CommandsEnum.make_transaction);
         }
     } // end keyPressed
 

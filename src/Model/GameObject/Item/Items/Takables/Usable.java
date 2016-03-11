@@ -13,8 +13,8 @@ import Model.Effects.Effect;
 // this item inherits all attributes and methods from Takable and Item
 public class Usable extends Takable {
 
-    public Usable(int id, String name, String description, Location location, Requirement requirement, Effect effect){
-        super(id, name, description, location, requirement, effect);
+    public Usable(int id, String name, String description, int value, Location location, Requirement requirement, Effect effect){
+        super(id, name, description, value, location, requirement, effect);
     }
 
 
