@@ -402,8 +402,19 @@ public class SaveLoad {
         }
     }
 
+    private static void loadStats(String filename){
 
+    }
+    private static void loadVehicles(String filename){
 
+    }
+
+    private static void loadPets(String filename){
+        
+    }
+    //---------------------------------------------------------------------//
+    //                                                                     //
+    //                                                                     //
     //---------------------------------SAVE--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void save(){//function that will be called when you want to save
         if(currFileName == null)
@@ -447,7 +458,7 @@ public class SaveLoad {
                 getPetInfo(doc,(Pet)pair.getKey());
             }
             else if(pair.getKey() instanceof Vehicle){
-                //getVehicleInfo
+                getVehicleInfo(doc,(Vehicle)pair.getKey());
             }
             else if(pair.getKey() instanceof FriendlyNPC){
                 //getFriendlyNPCInfo
@@ -477,7 +488,7 @@ public class SaveLoad {
         type.setAttributeNode(direction); //element sets attribute Node to direction
 
         Attr owned = doc.createAttribute("owned");
-        direction.setValue(Boolean.toString(p.getOwned()));
+        owned.setValue(Boolean.toString(p.getOwned()));
         type.setAttributeNode(owned);
 
         //probably need to get "base"
@@ -486,6 +497,19 @@ public class SaveLoad {
 
     private static Node getVehicleInfo(Document doc, Vehicle v){
         Element type = doc.createElement("vehicle");
+
+        Attr x = doc.createAttribute("locX");
+        x.setValue(Integer.toString(v.getLocation().getX()));
+        type.setAttributeNode(x);
+
+        Attr y = doc.createAttribute("locY");
+        y.setValue(Integer.toString(v.getLocation().getX()));
+        type.setAttributeNode(y);
+
+        Attr direction = doc.createAttribute("direction"); //creates an attribute for direction
+        direction.setValue(Integer.toString(v.getLocation().getDir()));//sets the direction attribute to player direction
+        type.setAttributeNode(direction);
+
 
         //may need to wait for it to be implemented so I know what I'm saving
 
