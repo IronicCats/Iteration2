@@ -64,6 +64,7 @@ public class NPCFactory {
         switch (npcEnum) {
             case KITTEN:
                 return new NPC(location,
+                        MobileObjectEnum.DAVE_PET.ordinal(),
                         new Smasher(),
                         new Inventory(
                                 new Pack(
@@ -76,7 +77,7 @@ public class NPCFactory {
             case CORGI_SHOPKEEPER:
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
-               return new Pet(new PetController(map), location, new PetStats(), pack, false);
+               return new Pet(new PetController(map), location,  MobileObjectEnum.DAVE_PET.ordinal(), new PetStats(), pack, false);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -90,7 +91,10 @@ public class NPCFactory {
 
     public static Player Player(){
         // player
-        Player player = new Player(new Location(0,1), new Smasher(), new Inventory());;
+        Player player = new Player(new Location(0,1),
+                MobileObjectEnum.PLAYER.ordinal(),
+                new Smasher(),
+                new Inventory());;
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }

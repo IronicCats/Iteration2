@@ -9,6 +9,7 @@ import Controller.Controller;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -30,6 +31,8 @@ public abstract class MobileObject extends GameObject{
     protected Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
+    private int sight, range;
+    private int id;
 
     public MobileObject() {
         super();
@@ -38,14 +41,22 @@ public abstract class MobileObject extends GameObject{
         viewLocation = new ViewLocation(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
+        sight = 2;
+        range = 2;
+        id = 0;
+
     }
-    public MobileObject(Location location, Stats stats) {
+    public MobileObject(Location location, int id,  Stats stats) {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
+        sight = 2;
+        range = 2;
+        this.id = id;
+
     }
 
     public void move(int degrees){
@@ -97,6 +108,22 @@ public abstract class MobileObject extends GameObject{
 
     public Tile getTile(){
         return tile;
+    }
+
+    public int getSight() {
+        return sight;
+    }
+
+    public void setSight(int sight) {
+        this.sight = sight;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 
 
