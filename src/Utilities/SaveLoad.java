@@ -403,10 +403,36 @@ public class SaveLoad {
         NodeList temp = player.getElementsByTagName("primary");
         Element prime = (Element)temp.item(0);
 
-        StatStructure statStructure = new StatStructure();
-        statStructure.modifyStat(StatsEnum.AGILITY,10); //FIXME
-        statStructure.modifyStat(StatsEnum.STRENGTH,10);
-        cStats.set
+        cStats.setStrength(Integer.parseInt(player.getAttribute("strength")));
+        cStats.setBaseLife(Integer.parseInt(player.getAttribute("baseLife")));
+        cStats.setAgility(Integer.parseInt(player.getAttribute("agility")));
+        cStats.setBaseAgi(Integer.parseInt(player.getAttribute("baseAgi")));
+        cStats.setBaseStr(Integer.parseInt(player.getAttribute("baseStr")));
+        cStats.setIntellect(Integer.parseInt(player.getAttribute("intellect")));
+        cStats.setBaseIntel(Integer.parseInt(player.getAttribute("baseIntel")));
+        cStats.setBaseMana(Integer.parseInt(player.getAttribute("baseMana")));
+        cStats.setExperience(Integer.parseInt(player.getAttribute("experience")));
+        cStats.setBaseLives(Integer.parseInt(player.getAttribute("baseLives")));
+        cStats.setHardiness(Integer.parseInt(player.getAttribute("hardiness")));
+        cStats.setBaseHard(Integer.parseInt(player.getAttribute("baseHard")));
+        cStats.setDefensiveRating(Integer.parseInt(player.getAttribute("defense")));
+        cStats.setOffensiveRating(Integer.parseInt(player.getAttribute("offense")));
+        cStats.setLife(Integer.parseInt(player.getAttribute("life")));
+        cStats.setMana(Integer.parseInt(player.getAttribute("mana")));
+        cStats.setMovement(Integer.parseInt(player.getAttribute("movement")));
+        //xp threshhold?
+
+
+
+
+
+
+
+
+
+
+
+        //cStats.set
         //StatStructure statStructure = new StatStructure()
 
         //CharacterStats c = new CharacterStats()
@@ -642,6 +668,10 @@ public class SaveLoad {
         Attr baseMana = doc.createAttribute("baseMana");
         baseMana.setValue(Integer.toString(stat.getBaseMana()));
         primary.setAttributeNode(baseMana);
+
+        Attr baseLives = doc.createAttribute("baseLives");
+        baseLives.setValue(Integer.toString(stat.getBaseLives()));
+        primary.setAttributeNode(baseLives);
 
         return primary;
     }
