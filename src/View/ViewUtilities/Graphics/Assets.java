@@ -20,7 +20,8 @@ public class Assets {
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
     public static ArrayList<BufferedImage> PET;
-    public static ArrayList<BufferedImage> NPC;
+    public static ArrayList<BufferedImage> BLUE_NPC;
+    public static ArrayList<BufferedImage> CAT_NPC;
 
     // end NPC's
 
@@ -145,26 +146,28 @@ public class Assets {
         SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
         SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
         SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
+        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
+        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
         PET.add(pet1.crop(0,0,32,32));
         PET.add(pet2.crop(0,0,32,32));
         PET.add(pet3.crop(0,0,32,32));
         PET.add(pet4.crop(0,0,32,32));
-        //TODO: Mike, fix this bullshit
-        PET.add(pet3.crop(0,0,32,32));
-        PET.add(pet4.crop(0,0,32,32));
+        PET.add(pet5.crop(0,0,32,32));
+        PET.add(pet6.crop(0,0,32,32));
 
-        NPC = new ArrayList<>();
-        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
+        BLUE_NPC = new ArrayList<>();
+        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNorth.png"));
+        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNE.png"));
+        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSE.png"));
         SpriteSheet npc4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        NPC.add(npc1.crop(0,0,32,32));
-        NPC.add(npc2.crop(0,0,32,32));
-        NPC.add(npc3.crop(0,0,32,32));
-        NPC.add(npc4.crop(0,0,32,32));
-        //TODO: Mike, fix this bullshit
-        NPC.add(npc3.crop(0,0,32,32));
-        NPC.add(npc4.crop(0,0,32,32));
+        SpriteSheet npc5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSW.png"));
+        SpriteSheet npc6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNW.png"));
+        BLUE_NPC.add(npc1.crop(0,0,32,32));
+        BLUE_NPC.add(npc2.crop(0,0,32,32));
+        BLUE_NPC.add(npc3.crop(0,0,32,32));
+        BLUE_NPC.add(npc4.crop(0,0,32,32));
+        BLUE_NPC.add(npc5.crop(0,0,32,32));
+        BLUE_NPC.add(npc6.crop(0,0,32,32));
         // End entities
 
         //Decals

@@ -98,7 +98,7 @@ public class NPCFactory {
     public static MobileObjectView makeAsset(MobileObjectEnum npcEnum, MobileObject mobileObject) {
         switch (npcEnum) {
             case KITTEN:
-               return new MobileObjectView(mobileObject, Assets.NPC);
+               return new MobileObjectView(mobileObject, Assets.BLUE_NPC);
             case SMALL_CAT:
             case FAT_CAT:
             case PLAYER:
