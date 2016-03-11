@@ -152,7 +152,7 @@ public class GameState extends State {
     }
 
     public void executePlayerCommand(CommandsEnum pce){
-        player.excute(pce);
+        player.execute(pce);
     }
 
 

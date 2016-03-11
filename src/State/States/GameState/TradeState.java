@@ -1,6 +1,7 @@
 package State.States.GameState;
 
 import Controller.Controllers.TradeController;
+import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Item;
 import Model.Inventory.Pack;
 import State.State;
@@ -39,6 +40,16 @@ public class TradeState extends State {
             }
         }
     } // end constructor
+
+    public void executeCommand(CommandsEnum command) {
+        switch(command) {
+            case make_transaction:
+                System.out.println("making transaction...");
+                break;
+            default:
+                System.out.println("Don't send that command to the TradeState");
+        }
+    } // end executeCommand
 
     public void tick() {
     }

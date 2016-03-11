@@ -16,7 +16,7 @@ public class Quest extends Takable {
     // Note: effect in this case can be used to add experience to player when quest item is successfully used to
     // complete a quest.
 
-    public Quest(int id, String name, String description, Location location, Requirement requirement, Effect effect){
-        super(id, name, description, location, requirement, effect);
+    public Quest(int id, String name, String description, int value, Location location, Requirement requirement, Effect effect){
+        super(id, name, description, value, location, requirement, effect);
     }
 }
