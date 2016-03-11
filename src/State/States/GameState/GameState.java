@@ -80,7 +80,7 @@ public class GameState extends State {
         enemy.getController().setBaseLoc(new Location(6,4));
         mobileObjects.put(enemy, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy));
 
-        NPC enemy1 = new NPC(new Location(3, 2), new Smasher(), new Inventory(), new NPCController(map));
+        NPC enemy1 = new NPC(new Location(7, 7), new Smasher(), new Inventory(), new NPCController(map));
         enemy1.getController().setBaseLoc(new Location(0,0));
         enemy1.getController().setMobileObject(player);
 

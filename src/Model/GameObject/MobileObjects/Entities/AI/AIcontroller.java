@@ -39,8 +39,8 @@ import java.util.Random;
     @Override
     public void tick() {
         if(mobileObject != null) {
-            follow(mobileObject);
-            //goToObjInSight(mobileObject,2);
+            //follow(mobileObject);
+            goToObjInSight(mobileObject,2);
         }
         else{
             randomlyMoveinRange();
