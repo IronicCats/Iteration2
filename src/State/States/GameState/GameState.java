@@ -76,13 +76,22 @@ public class GameState extends State {
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
 
         //
-        NPC enemy = new NPC(new Location(6, 4), new Smasher(), new Inventory(), new NPCController(map));
+        NPC enemy = new NPC(new Location(6, 4),
+                MobileObjectEnum.KITTEN.ordinal(),
+                new Smasher(),
+                new Inventory(),
+                new NPCController(map));
         enemy.getController().setBaseLoc(new Location(6,4));
         mobileObjects.put(enemy, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy));
 
-        NPC enemy1 = new NPC(new Location(3, 2), new Smasher(), new Inventory(), new NPCController(map));
+        NPC enemy1 = new NPC(new Location(7, 7),
+                MobileObjectEnum.CORGI_SHOPKEEPER.ordinal(),
+                new Smasher(),
+                new Inventory(),
+                new NPCController(map));
+
         enemy1.getController().setBaseLoc(new Location(0,0));
-        enemy1.getController().setMobileObject(player);
+        enemy1.getController().setTarget(player);
 
         mobileObjects.put(enemy1, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1));
 

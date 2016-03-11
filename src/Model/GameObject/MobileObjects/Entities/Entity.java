@@ -25,8 +25,8 @@ public abstract class Entity extends MobileObject {
         occupation = new Smasher();
     }
 
-    public Entity(Location location, Stats stats, Occupation occupation){
-        super(location, stats);
+    public Entity(Location location, int id, Stats stats, Occupation occupation){
+        super(location, id, stats);
         //this.stats = stats;
         this.occupation = occupation;
     }

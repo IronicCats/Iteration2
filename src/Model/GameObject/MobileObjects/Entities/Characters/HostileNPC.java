@@ -9,7 +9,7 @@ import Model.Location;
  * Created by broskj on 3/9/16.
  */
 public class HostileNPC extends NPC {
-    public HostileNPC(Location location, Occupation occupation, Inventory inventory, NPCController controller) {
-        super(location, occupation, inventory, controller);
+    public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller) {
+        super(location, id, occupation, inventory, controller);
     } // end constructor
 } // end class HostileNPC

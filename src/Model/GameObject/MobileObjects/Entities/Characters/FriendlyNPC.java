@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class FriendlyNPC extends NPC {
     private ArrayList<String> dialog;
 
-    public FriendlyNPC(Location location, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
-        super(location, occupation, inventory, controller);
+    public FriendlyNPC(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
+        super(location, id, occupation, inventory, controller);
         this.dialog = dialog;
     } // end constructor
 
