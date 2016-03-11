@@ -39,8 +39,8 @@ import java.util.Random;
     @Override
     public void tick() {
         if(mobileObject != null) {
-            //follow(mobileObject);
-            goToObjInSight(mobileObject,2);
+            follow(mobileObject);
+            //goToObjInSight(mobileObject,2);
         }
         else{
             randomlyMoveinRange();
@@ -56,9 +56,13 @@ import java.util.Random;
             if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
                     AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving ");
+                    System.out.println("Moving");
             }
         }
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public void follow(MobileObject mobileObject){

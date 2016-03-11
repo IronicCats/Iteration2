@@ -7,6 +7,7 @@ import Utilities.Settings;
 import State.States.GameState.GameState;
 
 import java.awt.event.KeyEvent;
+import java.util.Set;
 
 
 /**
@@ -39,17 +40,17 @@ public class GameController extends Controller {
         }
 
             if (e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
-                ((GameState) state).move(90);
+                ((GameState) state).move(Settings.NORTH);
             } else if (e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == 33) {
-                ((GameState) state).move(135);
+                ((GameState) state).move(Settings.NW);
             } else if (e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == 37) {
-                ((GameState) state).move(225);
+                ((GameState) state).move(Settings.SW);
             } else if (e.getKeyCode() == Settings.DOWN || e.getKeyCode() == 40) {
-                ((GameState) state).move(270);
+                ((GameState) state).move(Settings.SOUTH);
             } else if (e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == 39) {
-                ((GameState) state).move(315);
+                ((GameState) state).move(Settings.SE);
             } else if (e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == 34) {
-                ((GameState) state).move(45);
+                ((GameState) state).move(Settings.NE);
             } else if (e.getKeyCode() == Settings.ESC) {        /* open pause menu */
                 state.switchState(State.PAUSESTATE);
             } else if (e.getKeyCode() == Settings.SPACE) {      /* execute attack? */

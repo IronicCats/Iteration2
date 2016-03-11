@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Created by broskj on 3/5/16.
  */
 public class PetStats extends Stats implements Subject {
+
     private ArrayList<Effect> effects;
     private ArrayList<Long> finishTimes;
     private ArrayList<Observer> observers;
