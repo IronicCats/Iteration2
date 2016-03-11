@@ -147,6 +147,11 @@ public abstract class Occupation implements Subject, Observer {
             SkillsEnum s;
             modifyOccupationalSkills(s, getOccupationalSkillsValue(s) + 1);
              **/
+
+            /**
+             * recompute all abilites
+             * differs with each occupation
+             */
         }
     } // end update
 
