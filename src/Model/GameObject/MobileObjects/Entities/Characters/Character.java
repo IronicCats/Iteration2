@@ -105,6 +105,7 @@ public abstract class Character extends Entity {
 
     public void recieveAttack(Character attacker) {
         System.out.print(this.getClass() + " is being attack by " + attacker.getClass());
+        //this.applyEffect(attacker);
     }
 
     public void useAbility(CommandsEnum e) {

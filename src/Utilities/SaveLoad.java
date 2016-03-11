@@ -2,19 +2,24 @@ package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Equipment;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
 
+import javax.swing.text.html.HTMLDocument;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,10 +28,7 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
-import Model.Stats.CharacterStats;
-import Model.Stats.DerivedStats;
-import Model.Stats.PrimaryStats;
-import Model.Stats.Stats;
+import Model.Stats.*;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -45,6 +47,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by Andy on 3/5/2016.
@@ -396,8 +399,55 @@ public class SaveLoad {
         }
     }
 
+    private static void loadStats(CharacterStats cStats, Element player){
+        NodeList temp = player.getElementsByTagName("primary");
+        Element prime = (Element)temp.item(0);
+
+        cStats.setStrength(Integer.parseInt(player.getAttribute("strength")));
+        cStats.setBaseLife(Integer.parseInt(player.getAttribute("baseLife")));
+        cStats.setAgility(Integer.parseInt(player.getAttribute("agility")));
+        cStats.setBaseAgi(Integer.parseInt(player.getAttribute("baseAgi")));
+        cStats.setBaseStr(Integer.parseInt(player.getAttribute("baseStr")));
+        cStats.setIntellect(Integer.parseInt(player.getAttribute("intellect")));
+        cStats.setBaseIntel(Integer.parseInt(player.getAttribute("baseIntel")));
+        cStats.setBaseMana(Integer.parseInt(player.getAttribute("baseMana")));
+        cStats.setExperience(Integer.parseInt(player.getAttribute("experience")));
+        cStats.setBaseLives(Integer.parseInt(player.getAttribute("baseLives")));
+        cStats.setHardiness(Integer.parseInt(player.getAttribute("hardiness")));
+        cStats.setBaseHard(Integer.parseInt(player.getAttribute("baseHard")));
+        cStats.setDefensiveRating(Integer.parseInt(player.getAttribute("defense")));
+        cStats.setOffensiveRating(Integer.parseInt(player.getAttribute("offense")));
+        cStats.setLife(Integer.parseInt(player.getAttribute("life")));
+        cStats.setMana(Integer.parseInt(player.getAttribute("mana")));
+        cStats.setMovement(Integer.parseInt(player.getAttribute("movement")));
+        //xp threshhold?
 
 
+
+
+
+
+
+
+
+
+
+        //cStats.set
+        //StatStructure statStructure = new StatStructure()
+
+        //CharacterStats c = new CharacterStats()
+
+    }
+    private static void loadVehicles(String filename){
+
+    }
+
+    private static void loadPets(String filename){
+        
+    }
+    //---------------------------------------------------------------------//
+    //                                                                     //
+    //                                                                     //
     //---------------------------------SAVE--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void save(){//function that will be called when you want to save
         if(currFileName == null)
@@ -415,7 +465,7 @@ public class SaveLoad {
             //The Element interface represents an element in an XML document
             Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
-
+            rootElement.appendChild(getMobileObjects(doc,mobileObjects));
             rootElement.appendChild(getPlayerInfo(doc,(Player)player));                 //adds the next root element which is entities
             rootElement.appendChild(getMap(doc,gameMap));
 
@@ -427,11 +477,76 @@ public class SaveLoad {
 
     }
 
-    private static Node getEntity(Document doc, Entity e){
-        Element entity = doc.createElement("entities"); // gets entity with createElement
-
+    private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO){
+        Element mobileObjects = doc.createElement("mobileObjects"); // gets entity with createElement
+        Attr test = doc.createAttribute("test");
+        Iterator it = mO.entrySet().iterator();
+        while(it.hasNext()){
+            java.util.Map.Entry pair = (java.util.Map.Entry)it.next();
+            System.out.println(pair.getKey()+ "=" + pair.getValue());
+            if(pair.getKey() instanceof Player){
+                getPlayerInfo(doc,(Player)pair.getKey());
+            }
+            else if(pair.getKey() instanceof Pet){
+                getPetInfo(doc,(Pet)pair.getKey());
+            }
+            else if(pair.getKey() instanceof Vehicle){
+                getVehicleInfo(doc,(Vehicle)pair.getKey());
+            }
+            else if(pair.getKey() instanceof FriendlyNPC){
+                //getFriendlyNPCInfo
+            }
+            else if(pair.getKey() instanceof HostileNPC){
+                //getHostileNPCInfo
+            }
+            //it.remove(); ??? Says it avoids CurrentModificationException
+        }
+        //test.
         //entity.appendChild(getPlayerInfo(doc,e));//need to make Entity info
-        return entity;
+        return mobileObjects;
+    }
+    private static Node getPetInfo(Document doc, Pet p){
+        Element type = doc.createElement("pet");
+
+        Attr x = doc.createAttribute("locX");
+        x.setValue(Integer.toString(p.getLocation().getX()));
+        type.setAttributeNode(x);
+
+        Attr y = doc.createAttribute("locY"); //creates an attribute for Y location
+        y.setValue(Integer.toString(p.getLocation().getY())); //sets the y attribute to player y
+        type.setAttributeNode(y);
+
+        Attr direction = doc.createAttribute("direction"); //creates an attribute for direction
+        direction.setValue(Integer.toString(p.getLocation().getDir()));//sets the direction attribute to player direction
+        type.setAttributeNode(direction); //element sets attribute Node to direction
+
+        Attr owned = doc.createAttribute("owned");
+        owned.setValue(Boolean.toString(p.getOwned()));
+        type.setAttributeNode(owned);
+
+        //probably need to get "base"
+        return type;
+    }
+
+    private static Node getVehicleInfo(Document doc, Vehicle v){
+        Element type = doc.createElement("vehicle");
+
+        Attr x = doc.createAttribute("locX");
+        x.setValue(Integer.toString(v.getLocation().getX()));
+        type.setAttributeNode(x);
+
+        Attr y = doc.createAttribute("locY");
+        y.setValue(Integer.toString(v.getLocation().getX()));
+        type.setAttributeNode(y);
+
+        Attr direction = doc.createAttribute("direction"); //creates an attribute for direction
+        direction.setValue(Integer.toString(v.getLocation().getDir()));//sets the direction attribute to player direction
+        type.setAttributeNode(direction);
+
+
+        //may need to wait for it to be implemented so I know what I'm saving
+
+        return type;
     }
 
     private static Node getPlayerInfo(Document doc, Player e){
@@ -554,6 +669,10 @@ public class SaveLoad {
         baseMana.setValue(Integer.toString(stat.getBaseMana()));
         primary.setAttributeNode(baseMana);
 
+        Attr baseLives = doc.createAttribute("baseLives");
+        baseLives.setValue(Integer.toString(stat.getBaseLives()));
+        primary.setAttributeNode(baseLives);
+
         return primary;
     }
 
@@ -577,6 +696,8 @@ public class SaveLoad {
 
         return inventory;
     }
+
+
 
     private static Node getEquippedItems(Document doc, Equipment equipped){
         Element equip = doc.createElement("equipped");
