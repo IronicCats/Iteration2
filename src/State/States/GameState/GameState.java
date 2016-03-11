@@ -5,12 +5,14 @@ import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
@@ -51,7 +53,8 @@ public class GameState extends State {
 
     private boolean cameraMoving;
 
-    private Player player;
+    private static Player player;
+
 
     public GameState() {
         //need to change this
@@ -70,13 +73,25 @@ public class GameState extends State {
         //creating a new player
         player =  NPCFactory.Player();
         NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+
+        //
+        NPC enemy = new NPC(new Location(6, 4), new Smasher(), new Inventory(), new NPCController(map));
+        enemy.getController().setBaseLoc(new Location(6,4));
+        mobileObjects.put(enemy, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy));
+
+        NPC enemy1 = new NPC(new Location(3, 2), new Smasher(), new Inventory(), new NPCController(map));
+        enemy1.getController().setBaseLoc(new Location(0,0));
+        enemy1.getController().setMobileObject(player);
+
+        mobileObjects.put(enemy1, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1));
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = NPCFactory.Init(map);
+        //mobileObjects = NPCFactory.Init(map);
         mobileObjects.put(player, NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
 
@@ -85,7 +100,6 @@ public class GameState extends State {
         AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6,4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
-
 
         map.setMapItems(mapItems);
     }
@@ -122,7 +136,9 @@ public class GameState extends State {
     public void tick() {
         player.tick();
         for (MobileObject key : mobileObjects.keySet()) {
-            key.tick();
+            if(!(key instanceof Player)) {
+                key.tick();
+            }
         }
     }
 
@@ -136,7 +152,7 @@ public class GameState extends State {
     }
 
     public void executePlayerCommand(CommandsEnum pce){
-        player.excute(pce);
+        player.execute(pce);
     }
 
 
@@ -144,6 +160,9 @@ public class GameState extends State {
         player.examinePack();
     } // end playerExamineInventory
 
+    public static Player getPlayer() {
+        return player;
+    }
 
     @Override
     public void switchState(State state) {
