@@ -1,10 +1,16 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
+import Model.Abilities.Abilities;
+import Model.Abilities.DirectAbility;
+import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.Requirement;
 import Model.Stats.CharacterStats;
 import Model.Stats.StatStructure;
+import Model.Stats.Stats;
 import Model.Stats.StatsEnum;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -23,6 +29,9 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
+    private Abilities[] occupationalAbilities;
+    private Abilities[] basicSkillAbilities;
+    private Abilities basicAttack;
 
     //constructor
     public Occupation(String name, String description, int[] val)
@@ -35,7 +44,7 @@ public abstract class Occupation implements Subject, Observer {
         playerStats = new CharacterStats(initialStats);
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
-
+        playerStats.addObserver(this);
     }
 
     //accessor methods
@@ -45,10 +54,6 @@ public abstract class Occupation implements Subject, Observer {
 
     public String getDescription() {
         return description;
-    }
-
-    public StatStructure getInitialStats() {
-        return initialStats;
     }
 
     public CharacterStats getStats() { return playerStats; }
@@ -83,8 +88,30 @@ public abstract class Occupation implements Subject, Observer {
         alert();
     }
 
+    public int getBasicSkillValue(SkillsEnum s){
+        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+            return basicSkills.get(s);
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public void setBasicAttack(Abilities basicAttack){
+        this.basicAttack = basicAttack;
+        alert();
+    }
+
+    public Abilities getBasicAttack(){
+        return basicAttack;
+    }
+
+
     //different occupational skills for each occupation
     public abstract void modifyOccupationalSkills(SkillsEnum s, int value);
+
+    public abstract int getOccupationalSkillsValue(SkillsEnum s);
+
 
     /*
    implement subject methods

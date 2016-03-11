@@ -84,6 +84,7 @@ public class ItemFactory {
         Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
+
         return initItems;
     }
 
