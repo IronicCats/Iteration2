@@ -149,6 +149,9 @@ public class Assets {
         PET.add(pet2.crop(0,0,32,32));
         PET.add(pet3.crop(0,0,32,32));
         PET.add(pet4.crop(0,0,32,32));
+        //TODO: Mike, fix this bullshit
+        PET.add(pet3.crop(0,0,32,32));
+        PET.add(pet4.crop(0,0,32,32));
 
         NPC = new ArrayList<>();
         SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
@@ -159,7 +162,9 @@ public class Assets {
         NPC.add(npc2.crop(0,0,32,32));
         NPC.add(npc3.crop(0,0,32,32));
         NPC.add(npc4.crop(0,0,32,32));
-
+        //TODO: Mike, fix this bullshit
+        NPC.add(npc3.crop(0,0,32,32));
+        NPC.add(npc4.crop(0,0,32,32));
         // End entities
 
         //Decals

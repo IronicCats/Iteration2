@@ -16,6 +16,8 @@ import Model.Inventory.Pack;
 import Model.Location;
 import Model.Stats.PetStats;
 
+import State.State;
+import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import View.ViewUtilities.Graphics.Assets;
@@ -32,15 +34,28 @@ public class NPCFactory {
     public static HashMap<MobileObject, MobileObjectView> c Init(Map map){
 
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
-
+        //TODO: MIKE WHAT THE FUCK! xD
         // pet
-        MobileObject pet = makeNPC(MobileObjectEnum.DAVE_PET, new Location(3, 3), new Pack(), map);
-        objects.put(pet, makeAsset(MobileObjectEnum.DAVE_PET, pet));
+        //MobileObject pet = makeNPC(MobileObjectEnum.DAVE_PET, new Location(3, 3), new Pack(), map);
+        //objects.put(pet, makeAsset(MobileObjectEnum.DAVE_PET, pet));
+
+        // Enemy zero
+        //NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), new Pack(), map);
+        //enemy.getController().setBaseLoc(new Location(0,0));
+        //objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
 
         // Enemy one
-        MobileObject enemy1 = makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), new Pack(), map);
-        objects.put(enemy1, makeAsset(MobileObjectEnum.KITTEN, enemy1));
+        //NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), new Pack(), map);
+        //objects.put(enemy1, makeAsset(MobileObjectEnum.KITTEN, enemy1));
 
+        //enemy.getController().setMobileObject(player);
+        //TODO: Aidan, don't set the player as a target manually!!!
+        //enemy.getController().setBaseLoc(new Location(0,0));
+        //enemy1.getController().setBaseLoc(new Location(0,0));
+
+        if(GameState.getPlayer() != null) {
+            //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
+        }
 
         return objects;
     }
