@@ -37,12 +37,12 @@ public class Pet extends MobileObject implements Tickable{
         stats = new PetStats();
         pack = new Pack();
         owned = false;
-
+        stats.setMovement(6);
         controller.setAI(this);
     } // end default constructor
 
-    public Pet(PetController controller, Location location, PetStats stats, Pack pack, boolean owned) {
-        super(location, stats);
+    public Pet(PetController controller, Location location, int id, PetStats stats, Pack pack, boolean owned) {
+        super(location, id, stats);
         base = location;
         this.controller = controller;
         this.stats = stats;
