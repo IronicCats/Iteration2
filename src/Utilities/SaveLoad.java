@@ -28,10 +28,7 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
-import Model.Stats.CharacterStats;
-import Model.Stats.DerivedStats;
-import Model.Stats.PrimaryStats;
-import Model.Stats.Stats;
+import Model.Stats.*;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -402,7 +399,17 @@ public class SaveLoad {
         }
     }
 
-    private static void loadStats(String filename){
+    private static void loadStats(CharacterStats cStats, Element player){
+        NodeList temp = player.getElementsByTagName("primary");
+        Element prime = (Element)temp.item(0);
+
+        StatStructure statStructure = new StatStructure();
+        statStructure.modifyStat(StatsEnum.AGILITY,10); //FIXME
+        statStructure.modifyStat(StatsEnum.STRENGTH,10);
+        cStats.set
+        //StatStructure statStructure = new StatStructure()
+
+        //CharacterStats c = new CharacterStats()
 
     }
     private static void loadVehicles(String filename){
