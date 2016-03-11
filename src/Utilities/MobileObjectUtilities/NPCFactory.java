@@ -31,7 +31,7 @@ import java.util.HashMap;
 
 public class NPCFactory {
 
-    public static HashMap<MobileObject, MobileObjectView> c Init(Map map){
+    public static HashMap<MobileObject, MobileObjectView> Init(Map map){
 
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
         //TODO: MIKE WHAT THE FUCK! xD
