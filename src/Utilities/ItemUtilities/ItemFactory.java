@@ -95,54 +95,63 @@ public class ItemFactory {
                 return new Usable(id,
                         "Health potion",
                         "A potion that restores health",
+                        5,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.LIFE, 10)));
             case MANA_POTION:
                 return new Usable(id,
                         "Mana potion",
                         "A potion that restores mana",
+                        5,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.MANA, 10)));
             case STRENGTH_POTION:
                 return new Usable(id,
                         "Strength potion",
                         "A potion that boosts strength",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.STRENGTH, 10)));
             case AGILITY_POTION:
                 return new Usable(id,
                         "Agility potion",
                         "A potion that boosts agility",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.AGILITY, 10)));
             case INTELLECT_POTION:
                 return new Usable(id,
                         "Intellect potion",
                         "A potion that boosts intellect",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.INTELLECT, 10)));
             case HARDINESS_POTION:
                 return new Usable(id,
                         "Hardiness potion",
                         "A potion that boosts hardiness",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.HARDINESS, 10)));
             case EXPERIENCE_POTION:
                 return new Usable(id,
                         "Experience potion",
                         "A potion that raises experience",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.EXPERIENCE, 10)));
             case MOVEMENT_POTION:
                 return new Usable(id,
                         "Movement potion",
                         "A potion that raises movement",
+                        8,
                         location, new Requirement(),
                         new Effect(new StatStructure(StatsEnum.MOVEMENT, 10)));
             case STICK_SWORD:
                 return new Weapon(id,
                         "Stick Sword",
                         "A sword made from a stick",
+                        10,
                         location,
                         new Requirement(new Smasher()),
                         EquipmentTypeEnum.ONE_HANDED,
@@ -151,6 +160,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Stick Greatsword",
                         "A sword made from a big stick",
+                        15,
                         location,
                         new Requirement(new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -159,6 +169,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Swordfish dagger",
                         "A dagger made from a swordfish bill",
+                        65,
                         location,
                         new Requirement(5, new Smasher()),
                         EquipmentTypeEnum.ONE_HANDED,
@@ -167,6 +178,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Swordfish lance",
                         "A large lance made from a swordfish bill",
+                        100,
                         location,
                         new Requirement(5, new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -175,6 +187,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A mace made from a deadly puffer fish",
+                        225,
                         location,
                         new Requirement(15, new Smasher()),
                         EquipmentTypeEnum.ONE_HANDED,
@@ -183,6 +196,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A heavy mace made from a deadly puffer fish",
+                        350,
                         location,
                         new Requirement(15, new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -191,6 +205,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Mouse on a string wand",
                         "A magical stick with a mouse attached",
+                        30,
                         location,
                         new Requirement(new Summoner()),
                         EquipmentTypeEnum.ONE_HANDED,
@@ -199,6 +214,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Catnip staff",
                         "A staff imbued with the magic of catnip",
+                        45,
                         location,
                         new Requirement(new Summoner()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -207,6 +223,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Hairball",
                         "A hairball projectile",
+                        12,
                         location,
                         new Requirement(new Sneak()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -215,6 +232,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Laser pointer",
                         "A powerful laser pointer",
+                        80,
                         location,
                         new Requirement(5, new Sneak()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -223,6 +241,7 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Fish boomerang",
                         "A sharp fish carcass boomerang",
+                        300,
                         location,
                         new Requirement(15, new Sneak()),
                         EquipmentTypeEnum.TWO_HANDED,
@@ -231,6 +250,7 @@ public class ItemFactory {
                 return new Quest(id,
                         "Chest key",
                         "A key to a chest",
+                        25,
                         location,
                         new Requirement(),
                         new Effect());
@@ -238,18 +258,21 @@ public class ItemFactory {
                 return new Interactable(id,
                         "Unlocked chest",
                         "An unlocked chest",
+                        -1,
                         location,
                         new Requirement());
             case CLOSED_TREASURE_CHEST:
                 return new Interactable(id,
                         "Closed chest",
                         "A locked chest",
+                        -1,
                         location,
                         new Requirement(makeItem(ItemsEnum.CHEST_KEY, null)));
             case DOOR_KEY:
                 return new Quest(id,
                         "Door key",
                         "A key to a door",
+                        25,
                         location,
                         new Requirement(),
                         new Effect());
@@ -257,18 +280,21 @@ public class ItemFactory {
                 return new Interactable(id,
                         "Open door",
                         "An open door",
+                        -1,
                         location,
                         new Requirement());
             case CLOSED_DOOR:
                 return new Interactable(id,
                         "Closed door",
                         "A locked door",
+                        -1,
                         location,
                         new Requirement(makeItem(ItemsEnum.DOOR_KEY, null)));
             case HELMET:
                 return new Armor(id,
                         "Helmet",
                         "To protect your head",
+                        30,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.HEAD,
@@ -277,6 +303,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Chestplate",
                         "A sturdy piece of chest armor",
+                        50,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.CHEST,
@@ -285,6 +312,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Pants",
                         "A set of leather leggings",
+                        10,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.LEGS,
@@ -293,6 +321,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Platelegs",
                         "A set of armored leggings",
+                        40,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.LEGS,
@@ -301,6 +330,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Gauntlets",
                         "Made to protect your hands",
+                        20,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.GLOVES,
@@ -309,6 +339,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Boots",
                         "Foot protection",
+                        20,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.BOOTS,
@@ -317,6 +348,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Shield",
                         "A thick shield",
+                        40,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.SHIELD,
@@ -325,6 +357,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Mildly cool ring",
                         "A mildly cool imbued ring",
+                        125,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.ACCESSORY,
@@ -335,6 +368,7 @@ public class ItemFactory {
                 return new Armor(id,
                         "Dope ring",
                         "A dope imbued ring",
+                        250,
                         location,
                         new Requirement(),
                         EquipmentTypeEnum.ACCESSORY,
@@ -344,9 +378,10 @@ public class ItemFactory {
                                 new int[] {4, 4, 4, 4})));
             case HOUSE:
                 return new Obstacle(id,
-                            "House",
-                            "Old farmer Joe's house",
-                            location);
+                        "House",
+                        "Old farmer Joe's house",
+                        -1,
+                        location);
             default:
                 return null;
         }

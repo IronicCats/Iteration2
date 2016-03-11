@@ -22,8 +22,8 @@ public class Interactable extends Item {
         this.requirement = new Requirement();
         state = false;
     }
-    public Interactable(int id, String name, String description, Location location, Requirement requirement){
-        super(id, name, description, location);
+    public Interactable(int id, String name, String description, int value, Location location, Requirement requirement){
+        super(id, name, description, value, location);
         this.requirement = requirement;
         state = false;
     }

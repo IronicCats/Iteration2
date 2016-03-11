@@ -17,8 +17,8 @@ public abstract class Equippable extends Takable{
         this.type = null;
     } // end default constructor
 
-    public Equippable(int id, String name, String description, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
-        super(id, name, description, location, requirements, e);
+    public Equippable(int id, String name, String description, int value, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
+        super(id, name, description, value, location, requirements, e);
         this.type = type;
     } // end constructor
 

@@ -20,8 +20,8 @@ public class Armor extends Equippable {
         super();
     } // end default constructor
 
-    public Armor(int id, String name, String description, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
-        super(id, name, description, location, requirements, type, e);
+    public Armor(int id, String name, String description, int value, Location location, Requirement requirements, EquipmentTypeEnum type, EquipmentModification e) {
+        super(id, name, description, value, location, requirements, type, e);
     } // end constructor
 
     public int getDefense(){
