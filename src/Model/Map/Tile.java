@@ -3,10 +3,8 @@ package Model.Map;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.MobileObjects.Entities.Characters.*;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
-import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
-import Model.GameObject.MobileObjects.Entities.Characters.NPC;
-import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
@@ -56,10 +54,8 @@ public abstract class Tile implements Subject {
          */
         Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
         MobileObject tempObject = tempTile.getObject();
-        if(tempObject instanceof FriendlyNPC) {      /* check for Shopkeeper at that tile */
-
-            TradeState tradeState = new TradeState(State.GAMESTATE, ((Player) object).getPack(), ((NPC) tempTile.getObject()).getPack());
-            State.setState(tradeState);
+        if(tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
+            ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
         }
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
