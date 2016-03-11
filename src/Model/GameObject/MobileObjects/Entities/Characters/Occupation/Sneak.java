@@ -23,7 +23,7 @@ public class Sneak extends Occupation{
                //distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
                 "Attack",
                 "Basic attack of sneak",
-                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength())),
+                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));

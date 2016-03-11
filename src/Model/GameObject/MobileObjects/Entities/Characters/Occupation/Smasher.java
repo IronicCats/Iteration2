@@ -30,7 +30,7 @@ public class Smasher extends Occupation {
         setBasicAttack(new DirectAbility(
                             "Attack",
                             "Basic attack of smasher",
-                            new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + this.getOccupationalSkillsValue(SkillsEnum.BRAWL))),
+                            new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())),
                             new Requirement(0),
                             new Effect(new StatStructure(StatsEnum.MANA, 0))
                         ));
