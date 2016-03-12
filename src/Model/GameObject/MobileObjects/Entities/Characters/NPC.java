@@ -19,10 +19,8 @@ public class NPC extends Character implements Tickable {
     Random random;
     Location base;
 
-    public NPC(Location location, int id, Occupation occupation, Inventory inventory, AIController controller) {
+    public NPC(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation, inventory);
-        controller.setAI(this);
-        this.controller = controller;
         base = location;
         random = new Random(System.currentTimeMillis());
         stats.setMovement(7);
@@ -31,6 +29,8 @@ public class NPC extends Character implements Tickable {
     @Override
     public void tick() {
         if (controller != null) {
+
+            getStats().tick();
             controller.tick();
         }
     } // end tick

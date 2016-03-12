@@ -48,8 +48,6 @@ Shopkeeping:
         leave dialog, move references to pack and whatnot
 
 Change text on bottom left to not stay open for as long
-Change static settings integer names
-Drop coins on death (in addition to inventory/equipment)
 Remove NPC fully from map on death
     Currently you cannot walk on a tile where an NPC has died
 Check equippable requirement on interact with equipment (InventoryState)
@@ -63,7 +61,7 @@ AI
     HostileAI
         Wander around base randomly
         If character in sight
-            Follow, attack until out of range or target is dead
+            Follow, attack until out of range
     PetAI
         Wander around base randomly
         If given required item (sushi)

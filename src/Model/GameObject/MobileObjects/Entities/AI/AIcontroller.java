@@ -47,7 +47,8 @@ import java.util.Random;
         if (target != null) {
             //follow(mobileObject);
             goToObjInView();
-        } else {
+        }
+        else {
             randomlyMoveinRange();
             //moveTo(destination);
         }

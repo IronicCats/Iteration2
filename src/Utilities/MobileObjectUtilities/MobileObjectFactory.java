@@ -40,7 +40,7 @@ public class MobileObjectFactory {
         // Enemy zero
         HostileNPC enemy = (HostileNPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
         enemy.getController().setBaseLoc(new Location(0,0));
-
+        enemy.getController().setEnemy(enemy);
         enemy.getController().setTarget(player);
         enemy.getStats().setLife(2);
         objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
@@ -48,6 +48,7 @@ public class MobileObjectFactory {
         // Enemy one
         HostileNPC enemy1 = (HostileNPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
         enemy1.getController().setTarget(player);
+        enemy1.getController().setEnemy(enemy1);
         enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
@@ -95,7 +96,7 @@ public class MobileObjectFactory {
                                 new Equipment()),
                         new EnemyController(map));
             case FAT_CAT:
-                return new NPC(location,
+                return new HostileNPC(location,
                         id,
                         new Smasher(),
                         new Inventory(

@@ -3,6 +3,8 @@ package Model;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Pack;
 import Utilities.ItemUtilities.ItemsEnum;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -64,33 +66,37 @@ public class Requirement {
         this.requiredOccupation = requiredOccupation;
     } // end constructor
 
-    public boolean meetsLevel(int level){
-        if(level == requiredLevel){
+    public int getRequiredLevel() { return requiredLevel; }
+    public ItemsEnum getRequiredItemEnum() { return requiredItemEnum; }
+    public Occupation getRequiredOccupation() { return requiredOccupation; }
+
+    public boolean meetsLevel(int level) {
+        if(requiredLevel <= 0 || level >= requiredLevel)
             return true;
-        }
-        else{
-            return false;
-        }
+        DisplayMessage.addMessage(new GameMessage("Need level " + requiredLevel, 3));
+        return false;
     }
 
     /* takes in players inventory and iterates through pack to determine if player
        has required item*/
    public boolean hasRequiredItem(Pack pack){
-        if(requiredItemEnum != null){
-            for(int i = 0; i < pack.getCount(); i++) {
-                if (pack.getItems()[i].getItemType() == requiredItemEnum) {
-                    return true;
-                }
-            }
-        }
+       if(requiredItemEnum == null || pack.contains(requiredItemEnum))
+           return true;
+       DisplayMessage.addMessage(new GameMessage("Need " + requiredItemEnum, 3));
        return false;
+    } // end hasRequiredItem
+
+    public boolean isRequiredOccupation(Occupation occupation) {
+        if(requiredOccupation == null || requiredOccupation.getClass() == occupation.getClass())
+            return true;
+        DisplayMessage.addMessage(new GameMessage("Need to be a " + requiredOccupation.getName(), 3));
+        return false;
     }
 
-    public boolean meetsRequirements(int playerLevel, Pack pack) {
-        if (hasRequiredItem(pack) && meetsLevel(playerLevel)) {
+    public boolean meetsRequirements(int playerLevel, Pack pack, Occupation occupation) {
+        if (hasRequiredItem(pack) && meetsLevel(playerLevel) && isRequiredOccupation(occupation)) {
             return true;
-        } else {
-            return false;
         }
-    }
+        return false;
+    } // end meetsRequirements
 }

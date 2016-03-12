@@ -10,8 +10,12 @@ import Model.Location;
  */
 public class HostileNPC extends NPC {
 
-    public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, EnemyController controller) {
-        super(location, id, occupation, inventory, controller);
+    EnemyController enemyController;
+
+    public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, EnemyController enemyController) {
+        super(location, id, occupation, inventory);
+        this.enemyController = enemyController;
+        enemyController.setAI(this);
     } // end constructor
 
     @Override
@@ -20,4 +24,8 @@ public class HostileNPC extends NPC {
             controller.tick();
         }
     } // end tick
+
+    public EnemyController getController(){
+        return enemyController;
+    }
 } // end class HostileNPC

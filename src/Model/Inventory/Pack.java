@@ -63,12 +63,12 @@ public class Pack {
         return anItem;
     } // end remove
 
-    public Item remove(ItemsEnum enums) {
+    /*public Item remove(ItemsEnum enums) {
         Item anItem = items[index];
         items[index] = null;
         count--;
         return anItem;
-    } // end remove
+    } // end remove*/
 
     public Item get(int index) {
         return items[index];
@@ -112,6 +112,20 @@ public class Pack {
         tempItems.add(new Money(money));
         return tempItems;
     } // end dump
+
+    public boolean contains(ItemsEnum itemsEnum) {
+        if(itemsEnum == null) {
+            return true;
+        }
+        for(int i = 0; i < cap; i++) {
+            if(items[i] != null) {
+            }
+            if(items[i].getItemType() == itemsEnum) {
+                return true;
+            }
+        }
+        return false;
+    } // end contains
 
     public int getCount() { return count; }
     public int getMoney() { return money; }
