@@ -3,6 +3,7 @@ package Utilities.MobileObjectUtilities;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
+import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
@@ -69,7 +70,6 @@ public class MobileObjectFactory {
     public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map) {
         int id = npcEnum.ordinal();
         switch (npcEnum) {
-            case BLUE:
             case KITTEN:
                 return new NPC(location,
                         id,
@@ -81,10 +81,7 @@ public class MobileObjectFactory {
                                 new Equipment()),
                         new Enemycontroller(map));
             case SMALL_CAT:
-<<<<<<< HEAD
             case BLUE:
-                return new NPC(location, id, new Smasher(), new Inventory(), new Enemycontroller(map));
-=======
                 return new NPC(location,
                         id,
                         new Smasher(),
@@ -93,8 +90,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 25) + 1),
                                 new Equipment()),
-                        new NPCController(map));
->>>>>>> 59d120b1b91d01708c6b95d85fc92ed1a190e1d8
+                        new Enemycontroller(map));
             case FAT_CAT:
                 return new NPC(location,
                         id,
@@ -104,7 +100,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 50) + 1),
                                 new Equipment()),
-                        new NPCController(map));
+                        new Enemycontroller(map));
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
