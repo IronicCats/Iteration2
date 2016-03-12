@@ -21,7 +21,7 @@ public class PetStats extends Stats implements Subject {
         effects = new ArrayList<>();
         finishTimes = new ArrayList<>();
         observers = new ArrayList<>();
-        movement = 0;
+        movement = 3;
     } // end default constructor
 
     public PetStats(StatStructure ss) {
@@ -41,7 +41,7 @@ public class PetStats extends Stats implements Subject {
         Each tick, check for expired Effects and check if player's XP is greater than the threshhold to level up
          */
         if (!effects.isEmpty()) {
-            for (int i = effects.size()-1; i >= 0; --i) {
+            for (int i = effects.size() - 1; i >= 0; --i) {
                 if (System.currentTimeMillis() >= finishTimes.get(i)) {
                     removeEffect(effects.get(i));
                     effects.remove(i);
@@ -58,7 +58,7 @@ public class PetStats extends Stats implements Subject {
     } // end applyEffect
 
     public void applyEffect(Effect e) {
-        if(e.getDuration() > 0) {
+        if (e.getDuration() > 0) {
             effects.add(e);
             finishTimes.add(System.currentTimeMillis() + e.getDuration());
         }
@@ -88,10 +88,10 @@ public class PetStats extends Stats implements Subject {
     } // end removeEffect
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
-        switch(s) {
+        switch (s) {
             case MOVEMENT:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.movement += this.movement * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.movement += this.movement * amount / 100;
                 else
                     this.movement += amount;
                 break;
@@ -105,10 +105,14 @@ public class PetStats extends Stats implements Subject {
     implement subject methods
      */
     @Override
-    public void addObserver(Utilities.Observer o) { observers.add(o); }
+    public void addObserver(Utilities.Observer o) {
+        observers.add(o);
+    }
 
     @Override
-    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
+    public void removeObserver(Utilities.Observer o) {
+        observers.remove(o);
+    }
 
     @Override
     public void alert() {

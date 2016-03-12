@@ -42,4 +42,13 @@ public class Effect {
     }
     public long getDuration() { return duration; }
     public ModificationEnum getType() { return type; }
+
+    @Override
+    public String toString() {
+        return "Effect{" +
+                "modification=" + modification +
+                ", type=" + type +
+                ", duration=" + duration +
+                '}';
+    }
 }

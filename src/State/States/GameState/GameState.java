@@ -2,30 +2,30 @@ package State.States.GameState;
 
 import Controller.Controllers.GameController;
 import Model.Abilities.CommandsEnum;
-import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
-import Model.GameObject.Item.Item;
+import State.State;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
-import Utilities.MapUtilities.*;
-import State.State;
 import Utilities.MapUtilities.MakeMap;
+import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
 import View.Views.DecalView;
-import View.Views.MessageBox.DisplayMessage;
-import View.Views.MobileObjectView;
 import View.Views.ItemView;
 import View.Views.MapView;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MobileObjectView;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -61,29 +61,30 @@ public class GameState extends State {
 
         setController(new GameController(this));
 
-        camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
+        camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT, map);
 
         //creating a new player
-        player =  MobileObjectFactory.Player();
+        player = MobileObjectFactory.Player();
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
-        MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
+        MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = MobileObjectFactory.Init(map);
+        mobileObjects = MobileObjectFactory.Init(map, player);
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
 
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3,2));
-        AreaEffect  b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6,4));
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
+        AreaEffect b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6, 4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
 
         map.setMapItems(mapItems);
+
     }
 
     public void switchState() {
@@ -92,53 +93,55 @@ public class GameState extends State {
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
-        if(cameraMoving){
+        if (cameraMoving) {
             camera.move(degrees);
-        }else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+        } else if (Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
-        }else {
+        } else {
             player.face(degrees);
         }
     }
 
-    public void setCameraMoving(boolean movement){
+    public void setCameraMoving(boolean movement) {
         cameraMoving = movement;
-        if(!cameraMoving){
+        if (!cameraMoving) {
             camera.centerOnPlayer(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
         }
     }
 
-    public MobileObjectView getMobileObjectView(MobileObject o){
-            return mobileObjects.get(o);
+    public MobileObjectView getMobileObjectView(MobileObject o) {
+        return mobileObjects.get(o);
     }
+
     public Camera getCamera() {
         return camera;
     }
 
-    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {return mobileObjects;}
+    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {
+        return mobileObjects;
+    }
 
-    public static Map getMap() {return map;}
+    public static Map getMap() {
+        return map;
+    }
 
     @Override
     public void tick() {
-        player.tick();
         for (MobileObject key : mobileObjects.keySet()) {
-            if(!(key instanceof Player)) {
-                key.tick();
-            }
+            key.tick();
         }
     }
 
     public void render(Graphics g) {
-        if(!cameraMoving) {
+        if (!cameraMoving) {
             camera.centerOnPlayer(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-        
+
         DisplayMessage.render(g);
     }
 
-    public void executePlayerCommand(CommandsEnum pce){
+    public void executePlayerCommand(CommandsEnum pce) {
         player.execute(pce);
     }
 

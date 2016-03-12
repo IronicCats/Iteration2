@@ -9,6 +9,7 @@ import java.awt.*;
  * Created by Dartyx on 3/7/2016.
  */
 public class LoadView implements Renderable {
+
     private int width,height;
     private int currentItem;
     private String[] loadViewItems = {"SaveFile1","SaveFile2","SaveFile3","Back"};
@@ -20,6 +21,7 @@ public class LoadView implements Renderable {
         height= Settings.GAMEHEIGHT;
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(width/2-200, height/2-250, 400, 500);
+
 
         for(int i = 0; i < loadViewItems.length; ++i) {
             g.setFont(new Font("Arial", Font.PLAIN, 40));

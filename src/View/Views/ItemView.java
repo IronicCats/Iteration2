@@ -52,12 +52,17 @@ public class ItemView implements Observer, Renderable {
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,
-                cameraXOffset + (Settings.TILEWIDTH/ 2 - Settings.DEFAULTITEMWIDTH /2),
-                cameraYOffset + (Settings.TILEHEIGHT/ 2 - Settings.DEFAULTITEMHEIGHT/2),
+                cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH / 2),
+                cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT / 2),
                 Settings.DEFAULTITEMWIDTH,
                 Settings.DEFAULTITEMHEIGHT,
                 null
         );
+    }
+
+    public void render(Graphics g, int placeX, int placeY, int sizeX, int sizeY) {
+        //draw it
+        g.drawImage(sprite, placeX, placeY, sizeX, sizeY, null);
     }
 
 }

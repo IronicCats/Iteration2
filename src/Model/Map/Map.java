@@ -1,15 +1,15 @@
 package Model.Map;
 
+import Model.Abilities.Abilities;
+import Model.Abilities.DirectAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
-import Model.GameObject.MobileObjects.Entities.Characters.NPC;
-import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Utilities.Observer;
 import Utilities.Settings;
 import Utilities.Subject;
-import Utilities.Observer;
 import View.Views.ItemView;
 import View.Views.MobileObjectView;
 
@@ -31,7 +31,7 @@ public class Map implements Subject {
     private HashMap<Item, ItemView> mapItems;
 
 
-    public Map(Tile tiles[][], int width, int height, Location spawn){
+    public Map(Tile tiles[][], int width, int height, Location spawn) {
         this.tiles = tiles;
         this.width = width;
         this.height = height;
@@ -40,27 +40,28 @@ public class Map implements Subject {
 
     }
 
-    public Tile getTile(int x , int y) {
-        if(x < 0 || y < 0 || x > Settings.MAPWIDTH-1 || y > Settings.MAPHEIGHT-1 ){
+    public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x > Settings.MAPWIDTH - 1 || y > Settings.MAPHEIGHT - 1) {
             return null;
         }
         return tiles[x][y];
     }
+
     public Tile getTile(Location location) {
         int x = location.getX();
         int y = location.getY();
-        if(x < 0 || y < 0 || x > Settings.MAPWIDTH-1 || y > Settings.MAPHEIGHT-1 ){
+        if (x < 0 || y < 0 || x > Settings.MAPWIDTH - 1 || y > Settings.MAPHEIGHT - 1) {
             return null;
         }
         return tiles[x][y];
     }
 
     // notifies tile that Mobile object is on it
-    public Tile register(MobileObject object){
+    public Tile register(MobileObject object) {
         return tiles[object.getX()][object.getY()].register(object);
     }
 
-    public void deRegister(Location location){
+    public void deRegister(Location location) {
         tiles[location.getX()][location.getY()].deregister();
     }
 
@@ -69,7 +70,7 @@ public class Map implements Subject {
             tiles[item.getX()][item.getY()].addItem(item);
             tiles[item.getX()][item.getY()].alert();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -78,16 +79,28 @@ public class Map implements Subject {
         try {
             tiles[a.getX()][a.getY()].setAreaEffectTile(a);
             tiles[a.getX()][a.getY()].alert();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void carryAttack(Character c, Location l) {
-        getTile(l).deliverAttack(c);
+    public void carryAttack(Character c, Abilities a) {
+        if (a instanceof DirectAbility) {
+            getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
+        } else {
+            System.out.println("Not a Direct Ability");
+        }
     }
 
-    public Location getSpawn(){
+    public void carryInteraction(MobileObject mo) {
+        Location destination = Location.newLocation(mo.getDir(), mo.getLocation());
+        if (isInMap(destination)) {
+            System.out.println("Tile within map");
+            getTile(destination).receiveInteraction(mo);
+        }
+    }
+
+    public Location getSpawn() {
         return spawn;
     }
 
@@ -119,8 +132,8 @@ public class Map implements Subject {
 
     @Override
     public void alert() {
-        for(Tile t[]: tiles){
-            for(Tile tile: t){
+        for (Tile t[] : tiles) {
+            for (Tile tile : t) {
                 tile.alert();
             }
         }
@@ -146,6 +159,13 @@ public class Map implements Subject {
         this.mapItems = mapItems;
     }
 
+    public boolean isInMap(Location l) {
+        if (l.getX() < 0 || l.getX() > map.getWidth() || l.getY() < 0 || l.getY() > map.getHeight()) {
+            System.out.println("Trying to interact outside map");
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

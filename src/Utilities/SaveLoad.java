@@ -19,12 +19,6 @@ import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Map.Map;
-
-import javax.swing.text.html.HTMLDocument;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
@@ -41,14 +35,15 @@ import View.Views.MapView;
 import View.Views.MobileObjectView;
 import View.Views.TileView;
 import org.w3c.dom.*;
-import org.xml.sax.SAXParseException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -71,6 +66,7 @@ public class SaveLoad {
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
 
+
     public static GameState getGameState() {
         return gs;
     }
@@ -79,40 +75,46 @@ public class SaveLoad {
         return player;
 
     }
-    public static Map getGameMap(){// to save the map
+
+    public static Map getGameMap() {// to save the map
         return gameMap;
     }
 
-    public static MapView getGamemapView(){
+    public static MapView getGamemapView() {
         return gamemapView;
     }
-    
 
-    public static void setGameMap(Map map){// sets the current map
+
+    public static void setGameMap(Map map) {// sets the current map
         gameMap = map;
     }
-    public static void setPlayer(Entity a){//sets the current player
+
+    public static void setPlayer(Entity a) {//sets the current player
         player = a;
     }
-    public static void setGamemapView(MapView m){
+
+    public static void setGamemapView(MapView m) {
         gamemapView = m;
     }
-    public static void setMobileObjects(HashMap<MobileObject,MobileObjectView> mobileObjectMap){
+
+    public static void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjectMap) {
         mobileObjects = mobileObjectMap;
     }
-    public static void setCurrFileName(String fileName){
+
+    public static void setCurrFileName(String fileName) {
         currFileName = fileName;
     }
 
     public static SaveLoad getInstance() {//returns the instance of SaveLoad
         return instance;
     }
+
     //---------------------------------LOAD--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
-    public static void load(String fileName){
+    public static void load(String fileName) {
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
-        loadMap(gameMap,filePath);  //gameMap may be wrong, need to check this
+        loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
         loadMobileObjects(filePath);
         gs.setPlayer((Player)player);
@@ -127,8 +129,7 @@ public class SaveLoad {
         System.out.println("Everything has been loaded!");
     }
 
-    public static void loadMap(Map inputMap,String fileName)
-    {
+    public static void loadMap(Map inputMap, String fileName) {
 
         String filepath = fileName;
         try {
@@ -139,7 +140,7 @@ public class SaveLoad {
             doc.getDocumentElement().normalize(); //this normalizes it, idk what that means though lol
 
             NodeList mapList = doc.getElementsByTagName("map");
-            Element map = (Element)mapList.item(0); //need to change this for working with multiple maps
+            Element map = (Element) mapList.item(0); //need to change this for working with multiple maps
             int mapWidth = Integer.parseInt(map.getAttribute("width"));
             int mapHeight = Integer.parseInt(map.getAttribute("height"));
 
@@ -150,13 +151,12 @@ public class SaveLoad {
 
             NodeList rows = doc.getElementsByTagName("row");
 
-            for(int i = 0; i <rows.getLength(); i++){
+            for (int i = 0; i < rows.getLength(); i++) {
                 Element row = (Element) rows.item(i); //for each row in i
                 NodeList tileNodes = row.getElementsByTagName("tile");
 
-                for(int j = 0; j < tileNodes.getLength(); j++){
+                for (int j = 0; j < tileNodes.getLength(); j++) {
                     Element tileElement = (Element) tileNodes.item(j);
-
 
 
                     Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
@@ -166,11 +166,11 @@ public class SaveLoad {
 
                     AreaEffect areaEffect = null;       //blank areaEffect to fill in
                     NodeList areaEffectNodes = tileElement.getElementsByTagName("areaEffect");
-                    if(areaEffectNodes.getLength() > 0){
+                    if (areaEffectNodes.getLength() > 0) {
                         Element areaEffectElement = (Element) areaEffectNodes.item(0);
                         String areaEffectEnum = areaEffectElement.getAttribute("enum");
 
-                        switch(areaEffectEnum){
+                        switch (areaEffectEnum) {
                             //a case for each enum
                         }
 
@@ -179,124 +179,123 @@ public class SaveLoad {
 
                     Item[] itemArray = new Item[10];//check this
                     NodeList itemNodes = tileElement.getElementsByTagName("item");
-                    if(itemNodes.getLength() > 0){
+                    if (itemNodes.getLength() > 0) {
                         //this is very iffy at the moment
-                        for(int k = 0; k < itemNodes.getLength();k++)
-                        {
+                        for (int k = 0; k < itemNodes.getLength(); k++) {
                             Element itemElement = (Element) itemNodes.item(k);
                             String itemID = itemElement.getAttribute("id");
                             int id = Integer.parseInt(itemID);
                             //id = itemsEnum.
                             //ItemsEnum.AGILITY_POTION.ordinal
 
-                            Location l = new Location(0,0,270);
+                            Location l = new Location(0, 0, 270);
                             l.setX(i);
                             l.setY(j);
 
                             //I'm probably going to need some huge if statement or something. Idk
 
-                            switch(id){
+                            switch (id) {
                                 case 0:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, l);
                                     break;
                                 case 1:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MANA_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MANA_POTION, l);
                                     break;
                                 case 2:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, l);
                                     break;
                                 case 3:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, l);
                                     break;
                                 case 4:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, l);
                                     break;
                                 case 5:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, l);
                                     break;
                                 case 6:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, l);
                                     break;
                                 case 7:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, l);
                                     break;
                                 case 8:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STICK_SWORD,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, l);
                                     break;
                                 case 9:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, l);
                                     break;
                                 case 10:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, l);
                                     break;
                                 case 11:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, l);
                                     break;
                                 case 12:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, l);
                                     break;
                                 case 13:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, l);
                                     break;
                                 case 14:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, l);
                                     break;
                                 case 15:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, l);
                                     break;
                                 case 16:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HAIRBALL,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HAIRBALL, l);
                                     break;
                                 case 17:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.LASER_POINTER,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, l);
                                     break;
                                 case 18:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG, l);
                                     break;
                                 case 19:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CHEST_KEY,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, l);
                                     break;
                                 case 20:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.OPEN_TREASURE_CHEST,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_TREASURE_CHEST, l);
                                     break;
                                 case 21:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, l);
                                     break;
                                 case 22:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.DOOR_KEY,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOOR_KEY, l);
                                     break;
                                 case 23:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.OPEN_DOOR,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_DOOR, l);
                                     break;
                                 case 24:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CLOSED_DOOR,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_DOOR, l);
                                     break;
                                 case 25:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.HELMET,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HELMET, l);
                                     break;
                                 case 26:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.CHESTPLATE,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, l);
                                     break;
                                 case 27:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PLATELEGS,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PLATELEGS, l);
                                     break;
                                 case 28:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.GAUNTLETS,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.GAUNTLETS, l);
                                     break;
                                 case 29:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.BOOTS,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.BOOTS, l);
                                     break;
                                 case 30:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.SHIELD,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SHIELD, l);
                                     break;
                                 case 31:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.MILDLY_COOL_RING,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MILDLY_COOL_RING, l);
                                     break;
                                 case 32:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.DOPE_RING,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOPE_RING, l);
                                     break;
                                 case 33:
-                                    itemArray[k]  = ItemFactory.makeItem(ItemsEnum.PANTS,l);
+                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PANTS, l);
                                     break;
 
 
@@ -310,49 +309,48 @@ public class SaveLoad {
                     //System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
                     if(terrainType.equalsIgnoreCase("grass")) {
                         //System.out.println("I get the grass.");
+
                         tiles[i][j] = new Grass(lg);
-                        tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE );
+                        tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
 
                     }
                     else if(terrainType.equalsIgnoreCase("water")) {
                         //System.out.println("I get the water.");
-                        tiles[i][j] = new Water(lg);
-                        tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE );
 
-                    }
-                    else if(terrainType.equalsIgnoreCase("mountain")) {
+                        tiles[i][j] = new Water(lg);
+                        tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE);
+
+                    } else if (terrainType.equalsIgnoreCase("mountain")) {
                         tiles[i][j] = new Mountain(lg);
-                        tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE );
+                        tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE);
                     }
                     //System.out.println(tiles[i][j].toString());
 
                 }
             }
-            Location spawn = new Location(0,0);
+            Location spawn = new Location(0, 0);
             spawn.setX(Integer.parseInt(map.getAttribute("spawnX")));
             spawn.setY(Integer.parseInt(map.getAttribute("spawnY")));
 
 
-
-            Map recreateMap = new Map(tiles,mapWidth,mapHeight,spawn);
+            Map recreateMap = new Map(tiles, mapWidth, mapHeight, spawn);
             //SaveLoad.setGameMap(recreateMap);
             gameMap = recreateMap;
-            MapView mv = new MapView(recreateMap,tv);
+            MapView mv = new MapView(recreateMap, tv);
 
             gamemapView = mv;
             mv.update();
             //inputMap = recreateMap;
 
 
-           // Map recreateMap = new Map();
-        }catch(Exception e){
+            // Map recreateMap = new Map();
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Map problems");
         }
     }
 
-    public static void loadPlayer(String fileName)
-    {
+    public static void loadPlayer(String fileName) {
         // Get the xml filepath string ensuring file separators are specific to the use's OS.
         String file = fileName;
         Entity avatar = player;
@@ -370,6 +368,7 @@ public class SaveLoad {
             for (int i = 0; i < mobileObjects.getLength(); i++) {
                 Element entity = (Element) mobileObjects.item(i); // this is a player
                 NodeList p = doc.getElementsByTagName("player");
+
                 Element pl = (Element)p.item(0);
                // if (entity.getAttribute("player").equals("player")) {
                     int x = Integer.parseInt(pl.getAttribute("locX"));
@@ -389,8 +388,9 @@ public class SaveLoad {
 
                     //Player peer = new Player()
                             //Assign occupation when creating new player, don't update jesus fucking christ what is wrong with me.
+
                 Occupation occupation = null;
-                switch(occupationString) {
+                switch (occupationString) {
                     case "Smasher":
                         occupation = new Smasher();
                         break;
@@ -400,7 +400,7 @@ public class SaveLoad {
                     case "Sneak":
                         occupation = new Sneak();
                         break;
-                    }
+                }
 
                 //load inventory FIXME
                 Inventory inv = new Inventory();
@@ -424,9 +424,9 @@ public class SaveLoad {
         }
     }
 
-    private static void loadStats(CharacterStats cStats, Element player){
+    private static void loadStats(CharacterStats cStats, Element player) {
         NodeList temp = player.getElementsByTagName("primary");
-        Element prime = (Element)temp.item(0);
+        Element prime = (Element) temp.item(0);
 
         cStats.setStrength(Integer.parseInt(player.getAttribute("strength")));
         cStats.setBaseLife(Integer.parseInt(player.getAttribute("baseLife")));
@@ -448,19 +448,19 @@ public class SaveLoad {
         //xp threshhold?
 
 
-
         //cStats.set
         //StatStructure statStructure = new StatStructure()
 
         //CharacterStats c = new CharacterStats()
 
     }
-    private static void loadVehicles(String filename){
+
+    private static void loadVehicles(String filename) {
 
     }
 
-    private static void loadPets(String filename){
-        
+    private static void loadPets(String filename) {
+
     }
 
     private static void loadMobileObjects(String filename){
@@ -470,15 +470,16 @@ public class SaveLoad {
         //Pet a = new FriendlyNPC()
         mobileObjects.put(null,null);
     }
+
     //---------------------------------------------------------------------//
     //                                                                     //
     //                                                                     //
     //---------------------------------SAVE--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
-    public static void save(){//function that will be called when you want to save
-        if(currFileName == null)
+    public static void save() {//function that will be called when you want to save
+        if (currFileName == null)
             currFileName = "saveFile1";
 
-            try{
+        try {
             //Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance(); //create an instance of a documentBuilderFactory
             //Defines the API to obtain DOM Document instances from an XML document. Using this class, an application programmer can obtain a Document from XML.
@@ -488,40 +489,36 @@ public class SaveLoad {
             //String filePath = "/res/saveFiles/" + currFileName;              //the filePath is in resource folders plus passed in filename
             String filePath = getSaveFilePath(currFileName);                    //should work for saveFilePath
             //The Element interface represents an element in an XML document
-            Element rootElement = doc.createElementNS(filePath,"SaveFile"); //starts the root Element of XML from filePath
+            Element rootElement = doc.createElementNS(filePath, "SaveFile"); //starts the root Element of XML from filePath
             doc.appendChild(rootElement);                                   //adds the child to the doc
-            rootElement.appendChild(getMobileObjects(doc,mobileObjects));
-            rootElement.appendChild(getPlayerInfo(doc,(Player)player));                 //adds the next root element which is entities
-            rootElement.appendChild(getMap(doc,gameMap));
+            rootElement.appendChild(getMobileObjects(doc, mobileObjects));
+            rootElement.appendChild(getPlayerInfo(doc, (Player) player));                 //adds the next root element which is entities
+            rootElement.appendChild(getMap(doc, gameMap));
 
-            toXML(doc,filePath);                                            //turns the document into an XML
-        }catch(Exception e){
+            toXML(doc, filePath);                                            //turns the document into an XML
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
 
-    private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO){
+    private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO) {
         Element mobileObjects = doc.createElement("mobileObjects"); // gets entity with createElement
         Attr test = doc.createAttribute("test");
         Iterator it = mO.entrySet().iterator();
-        while(it.hasNext()){
-            java.util.Map.Entry pair = (java.util.Map.Entry)it.next();
-            System.out.println(pair.getKey()+ "=" + pair.getValue());
-            if(pair.getKey() instanceof Player){
-                getPlayerInfo(doc,(Player)pair.getKey());
-            }
-            else if(pair.getKey() instanceof Pet){
-                getPetInfo(doc,(Pet)pair.getKey());
-            }
-            else if(pair.getKey() instanceof Vehicle){
-                getVehicleInfo(doc,(Vehicle)pair.getKey());
-            }
-            else if(pair.getKey() instanceof FriendlyNPC){
+        while (it.hasNext()) {
+            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
+            System.out.println(pair.getKey() + "=" + pair.getValue());
+            if (pair.getKey() instanceof Player) {
+                getPlayerInfo(doc, (Player) pair.getKey());
+            } else if (pair.getKey() instanceof Pet) {
+                getPetInfo(doc, (Pet) pair.getKey());
+            } else if (pair.getKey() instanceof Vehicle) {
+                getVehicleInfo(doc, (Vehicle) pair.getKey());
+            } else if (pair.getKey() instanceof FriendlyNPC) {
                 //getFriendlyNPCInfo
-            }
-            else if(pair.getKey() instanceof HostileNPC){
+            } else if (pair.getKey() instanceof HostileNPC) {
                 //getHostileNPCInfo
             }
             //it.remove(); ??? Says it avoids CurrentModificationException
@@ -530,7 +527,8 @@ public class SaveLoad {
         //entity.appendChild(getPlayerInfo(doc,e));//need to make Entity info
         return mobileObjects;
     }
-    private static Node getPetInfo(Document doc, Pet p){
+
+    private static Node getPetInfo(Document doc, Pet p) {
         Element type = doc.createElement("pet");
 
         Attr x = doc.createAttribute("locX");
@@ -553,7 +551,7 @@ public class SaveLoad {
         return type;
     }
 
-    private static Node getVehicleInfo(Document doc, Vehicle v){
+    private static Node getVehicleInfo(Document doc, Vehicle v) {
         Element type = doc.createElement("vehicle");
 
         Attr x = doc.createAttribute("locX");
@@ -574,11 +572,11 @@ public class SaveLoad {
         return type;
     }
 
-    private static Node getPlayerInfo(Document doc, Player e){
+    private static Node getPlayerInfo(Document doc, Player e) {
         Element type = doc.createElement("player"); //creates a new element in document, labels it player
 
-       // Attr etype = doc.createAttribute("type");
-       // etype.setValue(e.getType());
+        // Attr etype = doc.createAttribute("type");
+        // etype.setValue(e.getType());
 
         Attr x = doc.createAttribute("locX"); //creates an attribute for X location
         x.setValue(Integer.toString(e.getLocation().getX())); //sets the x attriubte to player x
@@ -597,15 +595,15 @@ public class SaveLoad {
         type.setAttributeNode(occupation);          //element sets attribute Node to element
 
         //Element stat = doc.createElement("Stats");
-        type.appendChild(getCharacterStats(doc,(CharacterStats)e.getStats()));
-        type.appendChild(getInventory(doc,e.getInventory()));
-        type.appendChild(getEquippedItems(doc,e.getInventory().getEquipment()));
-        
+        type.appendChild(getCharacterStats(doc, (CharacterStats) e.getStats()));
+        type.appendChild(getInventory(doc, e.getInventory()));
+        type.appendChild(getEquippedItems(doc, e.getInventory().getEquipment()));
+
         //need to get Primary then secondary
         return type;                //returns it so it can be used in XML
     }
 
-    private static Node getCharacterStats(Document doc, CharacterStats stat){
+    private static Node getCharacterStats(Document doc, CharacterStats stat) {
 
 
         Element primary = doc.createElement("primary");
@@ -702,13 +700,11 @@ public class SaveLoad {
     }
 
 
-
-    private static Node getInventory(Document doc, Inventory inv){
+    private static Node getInventory(Document doc, Inventory inv) {
         Element inventory = doc.createElement("inventory");
 
 
-        for(int i = 0; i< 16-inv.getPackSpaceLeft(); i++)
-        {
+        for (int i = 0; i < 16 - inv.getPackSpaceLeft(); i++) {
             Element iItem = doc.createElement("item");
 
             Attr id = doc.createAttribute("id");
@@ -723,10 +719,9 @@ public class SaveLoad {
     }
 
 
-
-    private static Node getEquippedItems(Document doc, Equipment equipped){
+    private static Node getEquippedItems(Document doc, Equipment equipped) {
         Element equip = doc.createElement("equipped");
-        equip.appendChild(getEquip(doc,equipped,"head"));
+        equip.appendChild(getEquip(doc, equipped, "head"));
         equip.appendChild(getEquip(doc, equipped, "chest"));
         equip.appendChild(getEquip(doc, equipped, "gloves"));
         equip.appendChild(getEquip(doc, equipped, "boots"));
@@ -740,10 +735,10 @@ public class SaveLoad {
         return equip;
     }
 
-    private static Node getEquip(Document doc, Equipment equipped,String typeOfItem){
+    private static Node getEquip(Document doc, Equipment equipped, String typeOfItem) {
         Element type = doc.createElement(typeOfItem);
         Item item = null;
-        switch(typeOfItem){
+        switch (typeOfItem) {
             case "head":
                 item = equipped.getSlot(EquipmentSlotEnum.HEAD);
                 break;
@@ -775,10 +770,9 @@ public class SaveLoad {
                 item = equipped.getSlot(EquipmentSlotEnum.ACCESSORY2);
         }
         Attr id = doc.createAttribute("id");
-        if(item != null){
+        if (item != null) {
             id.setValue(Integer.toString(item.getId()));
-        }
-        else{
+        } else {
             id.setValue("-1");
         }
         type.setAttributeNode(id);
@@ -786,7 +780,7 @@ public class SaveLoad {
         return type;
     }
 
-    private static Node getMap(Document doc, Map m){
+    private static Node getMap(Document doc, Map m) {
         Element map = doc.createElement("map"); //creates a map element for the doc
         int getWidth = m.getWidth();               //gets width
         int getHeight = m.getHeight();             //gets height
@@ -803,10 +797,10 @@ public class SaveLoad {
         map.setAttributeNode(height);               //setsAttributeNode on element
 
         //note I did something different than original cause it made mroe sense
-        for(int i = 0; i < getWidth; i++){  //for each in map width
+        for (int i = 0; i < getWidth; i++) {  //for each in map width
             Element row = doc.createElement("row");//create element row
-            for(int j = 0; j < getHeight; j++){ //for each in height
-                row.appendChild(getTile(doc,m.getTile(i,j)));          //append each tile into row
+            for (int j = 0; j < getHeight; j++) { //for each in height
+                row.appendChild(getTile(doc, m.getTile(i, j)));          //append each tile into row
             }
             map.appendChild(row);           //adds the node row to element map
         }
@@ -823,16 +817,16 @@ public class SaveLoad {
 
     }
 
-    private static Node getTile(Document doc, Tile t){
+    private static Node getTile(Document doc, Tile t) {
         Element tile = doc.createElement("tile"); //Creates an element with tag tile
         Element terrain = doc.createElement("terrain"); //creates and element for terrain
 
         Attr type = doc.createAttribute("terrainType");//creates an attribute for terrain
-        if(t instanceof Grass)          //checks if it is an instance of grass
+        if (t instanceof Grass)          //checks if it is an instance of grass
             type.setValue("grass");     //if so setValue to grass
-        else if(t instanceof Water)     //checks to see if it is an instance of water
+        else if (t instanceof Water)     //checks to see if it is an instance of water
             type.setValue("water");     //if os setValue to water
-        else if(t instanceof Mountain)  //checks to see if it is an instance of mountain
+        else if (t instanceof Mountain)  //checks to see if it is an instance of mountain
             type.setValue("mountain");  //if so setValue to mountain
         terrain.setAttributeNode(type); //sets the attribute node to whatever type it ended up
         tile.appendChild(terrain);      //appends the child to the element
@@ -840,7 +834,7 @@ public class SaveLoad {
         //May have to get Entity? Not 100% sure if that is necessary
 
         //AreaEffect
-        if(t.getHasAreaEffect())// if it has an area effect
+        if (t.getHasAreaEffect())// if it has an area effect
         {
             Element areaEffect = doc.createElement("areaEffect");   //creates an element and tags it as areaEffect
 
@@ -855,14 +849,14 @@ public class SaveLoad {
 
         //item
 
-        if(t.hasItems()){
+        if (t.hasItems()) {
 
             Element item = doc.createElement("item"); // creates an element and tags it as a document
             //will probably have to go through each item on a tile since we can have multiple
 
             Attr itemID = doc.createAttribute("id");
             //gets the id of an item.
-            for(int i = 0; i < t.getItems().size(); i++){//note make sure this is correct for size
+            for (int i = 0; i < t.getItems().size(); i++) {//note make sure this is correct for size
                 itemID.setValue(Integer.toString(t.getItems().get(i).getId()));
                 item.setAttributeNode(itemID);      //sets the attribute node to the item id
                 tile.appendChild(item);             //appends node to element
@@ -874,9 +868,9 @@ public class SaveLoad {
         return tile; //returns the element
     }
 
-    public static void toXML(Document doc, String fileName){
+    public static void toXML(Document doc, String fileName) {
         TransformerFactory tf = TransformerFactory.newInstance(); //creates an instance of a Transformer factory for xml shenanigans
-        try{
+        try {
             //An instance of this abstract class can transform a source tree into a result tree
             Transformer transformer = tf.newTransformer();      //creates a new tranformer from the factory
 
@@ -888,12 +882,12 @@ public class SaveLoad {
 
             //Set an output property that will be in effect for the transformation
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            tf.setAttribute("indent-number",5);
+            tf.setAttribute("indent-number", 5);
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
                     "5");//figure out why the fuck you need that
-            transformer.transform(dSource,sResult);
+            transformer.transform(dSource, sResult);
 
-        }catch(TransformerException e){
+        } catch (TransformerException e) {
             e.printStackTrace();
         }
     }

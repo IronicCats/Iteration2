@@ -8,15 +8,14 @@ import Model.GameObject.Item.Items.Takables.Money;
 import Utilities.Observer;
 import Utilities.Subject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/6/16.
- *
+ * <p>
  * Contains a pack and worn equipment.
  */
-public class Inventory implements Subject{
+public class Inventory implements Subject {
 
     private Pack pack;
     private Equipment equipment;
@@ -65,14 +64,13 @@ public class Inventory implements Subject{
     } // end get
 
     public void place(Item item) {
-        if(item instanceof Money) {                         /* item type is money, add quantity to money var */
+        if (item instanceof Money) {                         /* item type is money, add quantity to money var */
             modifyMoney(((Money) item).getQuantity());
 
             return;
         }
         pack.place(item);
         System.out.println(item.getName() + " added to inventory");
-        alert();
     } // end place
 
     public void modifyMoney(int amount) {
@@ -82,7 +80,6 @@ public class Inventory implements Subject{
 
     public Item remove(int index) {
         Item item = pack.remove(index);
-        alert();
         return item;
     } // end remove
 
@@ -102,7 +99,7 @@ public class Inventory implements Subject{
         return pack.getSizeLeft();
     }
 
-    public Equipment getEquipment(){
+    public Equipment getEquipment() {
         return equipment;
     }
 
@@ -123,5 +120,7 @@ public class Inventory implements Subject{
         }
     } // end alert
 
-    public Pack getPack() { return pack; }
+    public Pack getPack() {
+        return pack;
+    }
 } // end class Inventory

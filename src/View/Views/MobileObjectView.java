@@ -1,10 +1,16 @@
 package View.Views;
 
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
-import Utilities.*;
+import Utilities.Observer;
+import Utilities.Settings;
+import Utilities.Utilities;
 import View.ViewUtilities.Renderable;
+import View.ViewUtilities.ViewModules.ViewModule;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -78,46 +84,58 @@ public class MobileObjectView implements Renderable, Observer {
     }
 
     public void tween() {
-        if(goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
+        if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
             return;
         }
         entity.setCanMove(false);
 
-        if(goalX != viewLocation.getX()) {
-            if(goalX > viewLocation.getX()){
+        if (goalX != viewLocation.getX()) {
+            if (goalX > viewLocation.getX()) {
                 viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
             }
-            if(goalX < viewLocation.getX()){
+            if (goalX < viewLocation.getX()) {
                 viewLocation.setX(Math.max(viewLocation.getX() - movement, goalX));
             }
         }
-        if(goalY != viewLocation.getY()) {
-            if(goalY > viewLocation.getY()){
+        if (goalY != viewLocation.getY()) {
+            if (goalY > viewLocation.getY()) {
                 viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
             }
-            if(goalY < viewLocation.getY()){
+            if (goalY < viewLocation.getY()) {
                 viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
             }
         }
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
+        if (entity instanceof Character && ((Character) entity).isDead()) {
+            return;
+        }
         tween();
         g.drawImage(sprites.get(active),
-                (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
-                (int)viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2*2)),
+                (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
+                (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
                 Settings.PLAYERWIDTH,
                 Settings.PLAYERHEIGHT,
                 null
         );
+        if (!(entity instanceof Player) && !(entity instanceof Pet)) {
+
+            ViewModule.renderHealthBox(g,
+                    ((Character) entity).getStats().getLife(),
+                    ((Character) entity).getStats().getBaseLife(),
+                    (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
+                    (int) viewLocation.getY() - cameraYOffset - (Settings.TILEWIDTH / (2 * 2))
+            );
+        }
     }
 
     @Override
     public void update() {
-            setDirection(entity.getDir());
-            goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
-            goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
+        setDirection(entity.getDir());
+        goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
+        goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
     }
 
     @Override
@@ -125,23 +143,18 @@ public class MobileObjectView implements Renderable, Observer {
 
     }
 
-    public void setDirection(int degrees){
-        if(degrees == Settings.NORTH){
+    public void setDirection(int degrees) {
+        if (degrees == Settings.NORTH) {
             this.active = 0;
-        }
-        else if(degrees == Settings.NE){
+        } else if (degrees == Settings.NE) {
             this.active = 1;
-        }
-        else if(degrees == Settings.SE){
+        } else if (degrees == Settings.SE) {
             this.active = 2;
-        }
-        else if(degrees == Settings.SOUTH){
+        } else if (degrees == Settings.SOUTH) {
             this.active = 3;
-        }
-        else if(degrees == Settings.SW){
+        } else if (degrees == Settings.SW) {
             this.active = 4;
-        }
-        else if(degrees == Settings.NW){
+        } else if (degrees == Settings.NW) {
             this.active = 5;
         }
     }

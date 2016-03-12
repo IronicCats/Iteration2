@@ -3,11 +3,10 @@ package Controller.Controllers;
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
 import State.State;
-import Utilities.Settings;
 import State.States.GameState.GameState;
+import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
-import java.util.Set;
 
 
 /**
@@ -54,12 +53,8 @@ public class GameController extends Controller {
                 ((GameState) state).move(Settings.NE);
             } else if (e.getKeyCode() == Settings.ESC) {        /* open pause menu */
                 state.switchState(State.PAUSESTATE);
-            } else if (e.getKeyCode() == Settings.SPACE) {      /* execute attack? */
-                System.out.println("space pressed");
-            } else if (e.getKeyCode() == Settings.E) {          /* open equipment state */
+            } else if (e.getKeyCode() == Settings.EQUIP) {          /* open equipment state */
                 state.switchState(State.EQUIPMENTSTATE);
-            } else if (e.getKeyCode() == KeyEvent.VK_V) {
-                state.switchState(State.TRADESTATE);
             } else if (e.getKeyCode() == Settings.ATTACK) {
                 ((GameState) state).executePlayerCommand(CommandsEnum.attack);
             } else if (e.getKeyCode() == Settings.ONE) {        /* execute ability1 */
@@ -68,12 +63,12 @@ public class GameController extends Controller {
                 ((GameState) state).executePlayerCommand(CommandsEnum.ability2);
             } else if (e.getKeyCode() == Settings.THREE) {      /* execute ability3 */
                 ((GameState) state).executePlayerCommand(CommandsEnum.ability3);
-            } else if (e.getKeyCode() == Settings.I) {          /* open inventory state */
+            } else if (e.getKeyCode() == Settings.INVENTORY) {          /* open inventory state */
                 state.switchState(State.INVENTORYSTATE);
-            } else if (e.getKeyCode() == Settings.M) {          /* open map state */
-            } else if (e.getKeyCode() == Settings.Q) {          /* execute interaction */
+            } else if (e.getKeyCode() == Settings.MAP) {          /* open map state */
+            } else if (e.getKeyCode() == Settings.INTERACT) {          /* execute interaction */
                 ((GameState) state).executePlayerCommand(CommandsEnum.interact);
-            } else if (e.getKeyCode() == Settings.D) {          /* execute inventory dump (temporary?) */
+            } else if (e.getKeyCode() == Settings.DROP) {          /* execute inventory dump (temporary?) */
                 ((GameState) state).executePlayerCommand(CommandsEnum.drop);
             } else if(e.getKeyCode() == Settings.F){
                 Settings.FOG = !Settings.FOG;

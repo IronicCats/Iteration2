@@ -9,24 +9,25 @@ import java.awt.*;
 /**
  * Created by Dartyx on 3/7/2016.
  */
-public class PauseState extends State{
+public class PauseState extends State {
 
     private PauseView pauseView;
     private GameState game;
 
-    public PauseState(GameState GS){
+    public PauseState(GameState GS) {
         pauseView = new PauseView();
         setController(new PauseController(this));
-        game=GS;
+        game = GS;
     }
 
     public void tick() {
     }
 
-    public void moveUp(){
+    public void moveUp() {
         pauseView.previous();
     }
-    public void moveDown(){
+
+    public void moveDown() {
         pauseView.next();
     }
 

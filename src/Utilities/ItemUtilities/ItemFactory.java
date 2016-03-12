@@ -18,22 +18,20 @@ import Model.Location;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
-import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by broskj on 3/5/16.
- *
+ * <p>
  * A factory class to generate items and their assets.
  * Each item ID corresponds to its index in the items enumeration.
  */
 public class ItemFactory {
 
-    public static HashMap<Item, ItemView> initMainMap(){
+    public static HashMap<Item, ItemView> initMainMap() {
 
         HashMap<Item, ItemView> initItems = new HashMap<>();
 
@@ -86,9 +84,9 @@ public class ItemFactory {
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         //coin stacks
-        Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1,2));
-        Item money2 = ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, new Location(2,4));
-        Item money3 = ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, new Location(3,5));
+        Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1, 2));
+        Item money2 = ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, new Location(2, 4));
+        Item money3 = ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, new Location(3, 5));
         initItems.put(money1, ItemFactory.makeAsset(ItemsEnum.SMALL_COIN_STACK, money1));
         initItems.put(money2, ItemFactory.makeAsset(ItemsEnum.MEDIUM_COIN_STACK, money2));
         initItems.put(money3, ItemFactory.makeAsset(ItemsEnum.LARGE_COIN_STACK, money3));
@@ -96,10 +94,19 @@ public class ItemFactory {
         return initItems;
     }
 
+    public static Item[] makeRandomItems(Location location) {
+        int amount = (int) (Math.random() * 5) + 1;          /* drop between 1 and 5 items */
+        Item[] items = new Item[amount];
+        for (int i = 0; i < amount; i++) {
+            items[i] = ItemFactory.makeItem(ItemsEnum.values()[(int) (Math.random() * ItemsEnum.values().length)], location);
+        }
+        return items;
+    } // end makeRandomItems
+
 
     public static Item makeItem(ItemsEnum itemsEnum, Location location) {
         int id = itemsEnum.ordinal();
-        switch(itemsEnum) {
+        switch (itemsEnum) {
             case HEALTH_POTION:
                 return new Usable(id,
                         "Health potion",
@@ -371,8 +378,8 @@ public class ItemFactory {
                         new Requirement(),
                         EquipmentTypeEnum.ACCESSORY,
                         new EquipmentModification(new StatStructure(
-                                new StatsEnum[] {StatsEnum.AGILITY, StatsEnum.INTELLECT},
-                                new int[] {2, 2})));
+                                new StatsEnum[]{StatsEnum.AGILITY, StatsEnum.INTELLECT},
+                                new int[]{2, 2})));
             case DOPE_RING:
                 return new Armor(id,
                         "Dope ring",
@@ -382,9 +389,9 @@ public class ItemFactory {
                         new Requirement(),
                         EquipmentTypeEnum.ACCESSORY,
                         new EquipmentModification(new StatStructure(
-                                new StatsEnum[] {StatsEnum.STRENGTH, StatsEnum.AGILITY, StatsEnum.INTELLECT,
+                                new StatsEnum[]{StatsEnum.STRENGTH, StatsEnum.AGILITY, StatsEnum.INTELLECT,
                                         StatsEnum.HARDINESS},
-                                new int[] {4, 4, 4, 4})));
+                                new int[]{4, 4, 4, 4})));
             case HOUSE:
                 return new Obstacle(id,
                         "House",
@@ -399,7 +406,7 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         new Effect(),
-                        (int)(Math.random() * 10) + 1);         /* random amount between 1 and 10 */
+                        (int) (Math.random() * 10) + 1);         /* random amount between 1 and 10 */
             case MEDIUM_COIN_STACK:
                 return new Money(id,
                         "Medium coin stack",
@@ -408,7 +415,7 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         new Effect(),
-                        (int)(Math.random() * 25) + 1);         /* random amount between 1 and 25 */
+                        (int) (Math.random() * 25) + 1);         /* random amount between 1 and 25 */
             case LARGE_COIN_STACK:
                 return new Money(id,
                         "Large coin stack",
@@ -417,14 +424,14 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         new Effect(),
-                        (int)(Math.random() * 50) + 1);         /* random amount between 1 and 50 */
+                        (int) (Math.random() * 50) + 1);         /* random amount between 1 and 50 */
             default:
                 return null;
         }
     } // end makeItem
 
     public static ItemView makeAsset(ItemsEnum itemsEnum, Item item) {
-        switch(itemsEnum) {
+        switch (itemsEnum) {
             case BAGOFITEMS:
                 return new ItemView(item, Assets.BAGOFITEMS);
             case HEALTH_POTION:
@@ -453,7 +460,7 @@ public class ItemFactory {
             case CHEST_KEY:
                 return new ItemView(item, Assets.CHEST_KEY);
             case OPEN_TREASURE_CHEST:
-                return new ItemView(item,Assets.OPEN_TREASURE_CHEST);
+                return new ItemView(item, Assets.OPEN_TREASURE_CHEST);
             case CLOSED_TREASURE_CHEST:
                 return new ItemView(item, Assets.CLOSED_TREASURE_CHEST);
             case DOOR_KEY:
