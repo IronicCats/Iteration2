@@ -165,8 +165,8 @@ public class GameState extends State {
         mapView = mv;
     }
 
-    public void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjects) {
-        this.mobileObjects = mobileObjects;
+    public void setMobileObjects(HashMap<MobileObject, MobileObjectView> mo) {
+        mobileObjects = mo;
     }
 
     @Override

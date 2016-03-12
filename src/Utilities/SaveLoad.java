@@ -111,6 +111,7 @@ public class SaveLoad {
 
     //---------------------------------LOAD--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void load(String fileName) {
+        gs = new GameState();
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
@@ -119,7 +120,17 @@ public class SaveLoad {
         loadMobileObjects(filePath);
         gs.setPlayer((Player)player);
         gs.setMap(gameMap);
+        ((Player) player).update();
+        if(mobileObjects.isEmpty()){
+            System.out.println("This is empty");
+        }
+        else
+            System.out.println("This isn't empty");
+        if (gs == null){
+            System.out.println("This is null");
+        }
         gs.setMobileObjects(mobileObjects);
+
         ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
 
         player.setViewLocation(vl);
@@ -465,10 +476,13 @@ public class SaveLoad {
 
     private static void loadMobileObjects(String filename){
         Location l = new Location(2,2,0);
-        Stats stats = new Stats();
-        //MobileObject a = MobileObjectEnum.LASER;
+        //Stats stats = new Stats();
+        //Pet a = MobileObjectFactory.makeNPC();
         //Pet a = new FriendlyNPC()
-        mobileObjects.put(null,null);
+        System.out.println("It should be here.");
+        //gameMap.setMobileObjects(mobileObjects);
+        mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+        gameMap.setMobileObjects(mobileObjects);
     }
 
     //---------------------------------------------------------------------//

@@ -1,6 +1,7 @@
 package Controller.Controllers;
 
 import Controller.Controller;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import State.State;
 import State.States.GameState.LoadState;
 import Utilities.SaveLoad;
@@ -47,9 +48,13 @@ public class LoadController extends Controller{
                     SaveLoad.load("SaveFile1.sav");
                     System.out.println("SaveFile1 should be loading.");
                     State.GAMESTATE = SaveLoad.getGameState();//need to set it properly
+                    State.GAMESTATE.setPlayer((Player)SaveLoad.getPlayer());
+                    ((Player) SaveLoad.getPlayer()).update();
+                    //SaveLoad.getGameMap().
                     if(State.LOADSTATE.getLastState() == 0){
                         state.switchState(State.GAMESTATE);
                     }
+
                     break;
                 case 2:
                     //saveFile2
