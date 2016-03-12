@@ -48,7 +48,7 @@ public class ItemFactory {
         initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(2, 2));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 2));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // helmet
@@ -80,8 +80,16 @@ public class ItemFactory {
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
 
         // house
-        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
+        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(7, 2));
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
+
+        // tuna
+        /*Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
+        initItems.put(tuna, ItemFactory.makeAsset(ItemsEnum.TUNA, tuna));*/
+
+        // tuna
+        Item sushi = ItemFactory.makeItem(ItemsEnum.SUSHI, new Location(8, 8));
+        initItems.put(sushi, ItemFactory.makeAsset(ItemsEnum.SUSHI, sushi));
 
         //coin stacks
         Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1, 2));
@@ -424,7 +432,23 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         new Effect(),
-                        (int) (Math.random() * 50) + 1);         /* random amount between 1 and 50 */
+                        (int)(Math.random() * 50) + 1);         /* random amount between 1 and 50 */
+            case TUNA:
+                return new Quest(id,
+                        "Can of Tuna",
+                        "???",
+                        5,
+                        location,
+                        new Requirement(),
+                        null);
+            case SUSHI:
+                return new Quest(id,
+                        "Yummy Sushi",
+                        "Could be used to attract a Dave",
+                        5,
+                        location,
+                        new Requirement(),
+                        null);
             default:
                 return null;
         }
@@ -445,7 +469,7 @@ public class ItemFactory {
             case EXPERIENCE_POTION:
             case MOVEMENT_POTION:
             case STICK_SWORD:
-                return new ItemView(item, Assets.MANA_POTION);
+                return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
             case SWORDFISH_DAGGER:
             case SWORDFISH_LANCE:
@@ -481,6 +505,10 @@ public class ItemFactory {
                 return new ItemView(item, Assets.SHIELD);
             case HOUSE:
                 return new ItemView(item, Assets.HOUSE);
+            case TUNA:
+                return new ItemView(item, Assets.TUNA);
+            case SUSHI:
+                return new ItemView(item, Assets.SUSHI);
             case SMALL_COIN_STACK:
             case MEDIUM_COIN_STACK:
             case LARGE_COIN_STACK:

@@ -5,6 +5,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -72,6 +73,13 @@ public class Inventory implements Subject {
         pack.place(item);
         System.out.println(item.getName() + " added to inventory");
     } // end place
+
+    public boolean contains(ItemsEnum itemsEnum) {
+        if(pack.contains(itemsEnum)) {
+            return true;
+        }
+        return false;
+    } // end contains
 
     public void modifyMoney(int amount) {
         pack.modifyMoney(amount);

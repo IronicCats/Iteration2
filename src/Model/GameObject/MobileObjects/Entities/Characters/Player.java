@@ -16,7 +16,8 @@ import Utilities.Observer;
 This is the player class. This class contains everything the player controlled
 character will need.
  */
-public class Player extends Character implements Observer {
+
+public class Player extends Character{
 
     Pet pet;
     Vehicle vehicle;
@@ -35,22 +36,12 @@ public class Player extends Character implements Observer {
 
     // takes in the degrees associated with key press and updates player location
 
-    /*    public void move(int degrees){
-            location = Location.newLocation(degrees, location);
-            registerTile(location);
-            alert();
-        } // end move
-    */
-    @Override
-    public void update() {
-        ((CharacterStats) getStats()).update();
-    } // end update
-
-    @Override
-    public void remove() {
-
-    } // end remove
-
+/*    public void move(int degrees){
+        location = Location.newLocation(degrees, location);
+        registerTile(location);
+        alert();
+    } // end move
+*/
 
     public void examinePack() {
         inventory.examine();

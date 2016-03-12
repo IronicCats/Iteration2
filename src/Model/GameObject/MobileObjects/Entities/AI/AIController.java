@@ -18,23 +18,24 @@ import java.util.Random;
 /**
  * Created by Aidan on 3/6/2016.
  */
-public abstract class AIcontroller implements Tickable, Observer {
 
-    Map map;
-    MobileObject target;
-    Location oldTargetLocation;
-    //TODO: Take in an array of possible targets. When looking at tiles in sight
-    //check to see if one of the nearby mobile objects is one of my possible targets
-    //then set target
-    MobileObjectEnum[] possibleTargets;
-    Random random = new Random(System.currentTimeMillis());
-    Location baseLoc;
+    public abstract class AIController implements Tickable, Observer {
 
-    public AIcontroller(Map map) {
-        this.map = map;
-    }
+        Map map;
+        MobileObject target;
+        Location oldTargetLocation;
+        //TODO: Take in an array of possible targets. When looking at tiles in sight
+        //check to see if one of the nearby mobile objects is one of my possible targets
+        //then set target
+        Random random = new Random(System.currentTimeMillis());
+        Location baseLoc;
+
+        public AIController(Map map){
+            this.map = map;
+        }
 
     protected MobileObject AI;
+
     private Location destination = new Location(0, 2, 0);
 
     public void setAI(MobileObject AI) {
@@ -46,7 +47,8 @@ public abstract class AIcontroller implements Tickable, Observer {
         if (target != null) {
             //follow(mobileObject);
             goToObjInView();
-        } else {
+        }
+        else {
             randomlyMoveinRange();
             //moveTo(destination);
         }
@@ -130,16 +132,6 @@ public abstract class AIcontroller implements Tickable, Observer {
 
     }
 
-    //This method should be somewhere else TODO: put this somewhere else
-    public void followThenAttackinRange(int attackRange) {
-        //TODO: take out attack range parameter and search through list of possible attacks instead. Also implment AI.attack
-        if (targetinSight() && RangeofTilesinSight.find(AI.getLocation(), target.getLocation()) >= attackRange) {
-            //   AI.attack();
-        }
-        follow();
-
-    }
-
     public void followReturnToBaseWhenOutofRange() {
         if (targetinView()) {
             follow();
@@ -162,13 +154,16 @@ public abstract class AIcontroller implements Tickable, Observer {
         }
     }
 
+    public boolean canFace(){
+        return CanFace.find(AI,target,map);
+    }
+
     public void setDestination(Location location) {
         this.destination = location;
     } // end setDestination
 
     public void setTarget(MobileObject mobileObject) {
-        this.target = mobileObject;
-    }
+        this.target = mobileObject; }
 
     public Location getBaseLoc() {
         return baseLoc;
@@ -180,11 +175,11 @@ public abstract class AIcontroller implements Tickable, Observer {
 
     @Override
     public void update() {
-
+        AI.getStats();
+        //if health of AI is below certain level then runawaynearDeath
     }
 
     @Override
     public void remove() {
-
     }
-} // end class AIcontroller
+} // end class AIController

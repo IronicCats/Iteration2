@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,13 @@ public class Pack {
         return anItem;
     } // end remove
 
+    /*public Item remove(ItemsEnum enums) {
+        Item anItem = items[index];
+        items[index] = null;
+        count--;
+        return anItem;
+    } // end remove*/
+
     public Item get(int index) {
         return items[index];
     } // end get
@@ -105,19 +113,22 @@ public class Pack {
         return tempItems;
     } // end dump
 
-    public int getCount() {
-        return count;
-    }
+    public boolean contains(ItemsEnum itemsEnum) {
+        if(itemsEnum == null) {
+            return true;
+        }
+        for(int i = 0; i < cap; i++) {
+            if(items[i] != null) {
+            }
+            if(items[i].getItemType() == itemsEnum) {
+                return true;
+            }
+        }
+        return false;
+    } // end contains
 
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    public void modifyMoney(int money) {
-        this.money += money;
-    }
+    public int getCount() { return count; }
+    public int getMoney() { return money; }
+    public void setMoney(int money) { this.money = money; }
+    public void modifyMoney(int money) { this.money += money; }
 } // end class Pack

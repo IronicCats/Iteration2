@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.AIController;
+import Model.GameObject.MobileObjects.Entities.AI.EnemyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;
 import Model.Location;
@@ -14,14 +15,12 @@ import java.util.Random;
 
 public class NPC extends Character implements Tickable {
 
-    NPCController controller;
+    AIController controller;
     Random random;
     Location base;
 
-    public NPC(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller) {
+    public NPC(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation, inventory);
-        controller.setAI(this);
-        this.controller = controller;
         base = location;
         random = new Random(System.currentTimeMillis());
         stats.setMovement(7);
@@ -30,15 +29,17 @@ public class NPC extends Character implements Tickable {
     @Override
     public void tick() {
         if (controller != null) {
+
+            getStats().tick();
             controller.tick();
         }
     } // end tick
 
-    public NPCController getController() {
+    public AIController getController() {
         return controller;
     }
 
-    public void setController(NPCController controller) {
+    public void setController(EnemyController controller) {
         this.controller = controller;
     }
 

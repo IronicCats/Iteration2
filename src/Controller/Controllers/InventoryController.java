@@ -3,6 +3,7 @@ package Controller.Controllers;
 import Controller.Controller;
 import State.State;
 import State.States.GameState.InventoryState;
+import State.States.MenuState;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
@@ -21,7 +22,10 @@ public class InventoryController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == KeyEvent.VK_I){
+        if(e.getKeyCode() == Settings.ESC || e.getKeyCode() == Settings.INVENTORY) {
+            ((InventoryState)state).switchState(State.GAMESTATE);
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_I){
             state.switchState(State.GAMESTATE);
         }
         else if(e.getKeyCode() == Settings.EQUIP) {
@@ -44,6 +48,9 @@ public class InventoryController extends Controller {
         }
         else if(e.getKeyCode() == Settings.INTERACT) {       /* interact */
             ((InventoryState)state).interact();
+        }
+        else if(e.getKeyCode() == Settings.DROP) {
+            ((InventoryState)state).drop();
         }
     }
 }

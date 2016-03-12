@@ -82,16 +82,19 @@ public class InventoryState extends State {
 
     //interaction
     public void interact() {
-        if (pack.get(selector) instanceof Weapon) {
-            inventory.equip((Weapon) pack.get(selector));
-        } else if (pack.get(selector) instanceof Armor) {
-            inventory.equip((Armor) pack.get(selector));
+        if (pack.get(selector) instanceof Weapon || pack.get(selector) instanceof Armor) {
+            equip();
         } else if (pack.get(selector) instanceof Usable) {
             player.applyEffect(pack.use(selector));
             inventory.remove(selector);
         }
     } // end interact
 
+    public void equip() {
+        player.equip(selector);
+    } // end equip
+
     public void drop() {
-    }
+        player.drop(selector);
+    } // end drop
 }

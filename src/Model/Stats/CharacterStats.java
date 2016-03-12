@@ -225,12 +225,8 @@ public class CharacterStats extends Stats implements Subject {
         effects.clear();
         finishTimes.clear();
 
-        if (livesLeft > 1) {
-            livesLeft--;
-            alive = true;
-        } else {
-            alive = false;
-        }
+        alive = false;
+        livesLeft--;
 
         strength = baseStr;
         agility = baseAgi;
@@ -243,6 +239,13 @@ public class CharacterStats extends Stats implements Subject {
 
         update();
     } // end kill
+
+    public void revive() {
+        if(livesLeft > 1) {
+            alive = true;
+            update();
+        }
+    } // end revive
 
     public void applyEffect(Effect[] e) {
         for (Effect effect : e) {
@@ -334,7 +337,6 @@ public class CharacterStats extends Stats implements Subject {
                     break;
             }
         }
-        update();
     } // end applyEffect
 
     public void removeEffect(Effect e) {
@@ -414,6 +416,12 @@ public class CharacterStats extends Stats implements Subject {
                 this.livesLeft += livesLeft;
                 if (livesLeft > baseLives)
                     livesLeft = baseLives;
+                break;
+            case LIFE:
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.life += this.life * amount / 100;
+                else
+                    this.life += amount;
                 break;
             default:
                 break;
