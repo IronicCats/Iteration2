@@ -1,7 +1,5 @@
 package View.ViewUtilities;
 
-import View.View;
-
 import java.awt.*;
 
 /**

@@ -1,14 +1,12 @@
 package State.States.GameState;
 
 import Controller.Controllers.InventoryController;
-
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
-
 import State.State;
 import View.Views.InventoryView;
 
@@ -17,7 +15,7 @@ import java.awt.*;
 /**
  * Created by Dartyx on 3/6/2016.
  */
-public class InventoryState extends State{
+public class InventoryState extends State {
     GameState game;
 
     Inventory inventory;
@@ -26,15 +24,17 @@ public class InventoryState extends State{
     InventoryView invView;
     int selector;
 
-    public InventoryState(GameState GS){
+    public InventoryState(GameState GS) {
         setController(new InventoryController(this));
-        game=GS;
-        selector=0;
+        game = GS;
+        selector = 0;
+
 
         player=game.getPlayer();
         inventory=player.getInventory();
         pack=player.getPack();
         invView=new InventoryView(pack,player);
+
     }
 
 
@@ -47,7 +47,7 @@ public class InventoryState extends State{
 
     public void render(Graphics g) {
         game.render(g);
-        invView.render(g,selector);
+        invView.render(g, selector);
 
     }
 
@@ -56,44 +56,50 @@ public class InventoryState extends State{
 
         setState(state);
     }
+
     //movement functions
-    public void up(){
-        if(selector-4<0)selector+=12;
-        else selector-=4;
+    public void up() {
+        if (selector - 4 < 0) selector += 12;
+        else selector -= 4;
         System.out.println(selector);
     }
-    public void down(){
-        if(selector+4>15)selector-=12;
-        else selector+=4;
+
+    public void down() {
+        if (selector + 4 > 15) selector -= 12;
+        else selector += 4;
         System.out.println(selector);
     }
-    public void right(){
-        if(selector%4==3)selector-=3;
+
+    public void right() {
+        if (selector % 4 == 3) selector -= 3;
         else selector++;
         System.out.println(selector);
     }
-    public void left(){
-        if(selector%4==0)selector+=3;
+
+    public void left() {
+        if (selector % 4 == 0) selector += 3;
         else selector--;
         System.out.println(selector);
     }
+
     //interaction
-    public void interact(){
-        if(pack.get(selector) instanceof Weapon){
-            inventory.equip((Weapon)pack.get(selector));
-            pack.setNull(selector);
-        }
-        else if(pack.get(selector) instanceof Armor){
-            inventory.equip((Armor)pack.get(selector));
-            pack.setNull(selector);
-        }
-        else if(pack.get(selector) instanceof Usable){
+
+    public void interact() {
+        if (pack.get(selector) instanceof Weapon || pack.get(selector) instanceof Armor) {
+            equip();
+        } else if (pack.get(selector) instanceof Usable) {
             player.applyEffect(pack.use(selector));
+            inventory.remove(selector);
         }
+    } // end interact
 
-    };
+    public void equip() {
+        player.equip(selector);
+    } // end equip
 
-    public void drop(){
-        inventory.drop(selector);
-    }
+
+    public void drop() {
+        player.drop(selector);
+    } // end drop
+
 }

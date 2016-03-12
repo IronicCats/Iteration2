@@ -1,8 +1,8 @@
 package Model.GameObject.Item.Items;
 
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.Location;
-import Model.Effects.Effect;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -18,7 +18,7 @@ public class OneShot extends Item {
         this.effect = new Effect();
     } // end default constructor
 
-    public OneShot(int id, String name, String description, int value, Location location, Effect effect){
+    public OneShot(int id, String name, String description, int value, Location location, Effect effect) {
         super(id, name, description, value, location);
         this.effect = effect;
     } // end constructor
@@ -26,7 +26,6 @@ public class OneShot extends Item {
     public Effect getEffect() {
         return effect;
     }
-
 
 
 }

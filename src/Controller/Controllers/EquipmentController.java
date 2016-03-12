@@ -1,8 +1,10 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import State.States.GameState.EquipmentState;
 import State.State;
+import State.States.GameState.EquipmentState;
+import Utilities.Settings;
+
 import java.awt.event.KeyEvent;
 
 /**
@@ -18,7 +20,7 @@ public class EquipmentController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == KeyEvent.VK_E){
+        if(e.getKeyCode() == Settings.ESC || e.getKeyCode() == Settings.EQUIP){
             state.switchState(State.GAMESTATE);
         }
     }

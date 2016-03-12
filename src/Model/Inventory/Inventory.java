@@ -5,18 +5,18 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/6/16.
- *
+ * <p>
  * Contains a pack and worn equipment.
  */
-public class Inventory implements Subject{
+public class Inventory implements Subject {
 
     private Pack pack;
     private Equipment equipment;
@@ -65,7 +65,7 @@ public class Inventory implements Subject{
     } // end get
 
     public void place(Item item) {
-        if(item instanceof Money) {                         /* item type is money, add quantity to money var */
+        if (item instanceof Money) {                         /* item type is money, add quantity to money var */
             modifyMoney(((Money) item).getQuantity());
 
             return;
@@ -73,6 +73,13 @@ public class Inventory implements Subject{
         pack.place(item);
         System.out.println(item.getName() + " added to inventory");
     } // end place
+
+    public boolean contains(ItemsEnum itemsEnum) {
+        if(pack.contains(itemsEnum)) {
+            return true;
+        }
+        return false;
+    } // end contains
 
     public void modifyMoney(int amount) {
         pack.modifyMoney(amount);
@@ -105,7 +112,7 @@ public class Inventory implements Subject{
         return pack.getSizeLeft();
     }
 
-    public Equipment getEquipment(){
+    public Equipment getEquipment() {
         return equipment;
     }
 
@@ -126,5 +133,7 @@ public class Inventory implements Subject{
         }
     } // end alert
 
-    public Pack getPack() { return pack; }
+    public Pack getPack() {
+        return pack;
+    }
 } // end class Inventory

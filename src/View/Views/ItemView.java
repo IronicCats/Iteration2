@@ -1,6 +1,9 @@
 package View.Views;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
+import Model.GameObject.Item.Items.Obstacle;
+import Model.Inventory.Pack;
 import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -51,17 +54,29 @@ public class ItemView implements Observer, Renderable {
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
+        if(item instanceof Obstacle || item instanceof Interactable) {
+            g.drawImage(sprite,
+                    cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH),
+                    cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT),
+                    Settings.DEFAULTITEMWIDTH * 2,
+                    Settings.DEFAULTITEMHEIGHT * 2,
+                    null
+            );
+            return;
+        }
+
         g.drawImage(sprite,
-                cameraXOffset + (Settings.TILEWIDTH/ 2 - Settings.DEFAULTITEMWIDTH /2),
-                cameraYOffset + (Settings.TILEHEIGHT/ 2 - Settings.DEFAULTITEMHEIGHT/2),
+                cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH / 2),
+                cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT / 2),
                 Settings.DEFAULTITEMWIDTH,
                 Settings.DEFAULTITEMHEIGHT,
                 null
         );
     }
+
     public void render(Graphics g, int placeX, int placeY, int sizeX, int sizeY) {
         //draw it
-        g.drawImage(sprite,placeX,placeY,sizeX,sizeY,null);
+        g.drawImage(sprite, placeX, placeY, sizeX, sizeY, null);
     }
 
 }

@@ -1,8 +1,6 @@
 package Utilities.AIUtilities;
 
-import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
-import Model.Map.Map;
 import Model.Map.Tile;
 
 import java.util.ArrayList;

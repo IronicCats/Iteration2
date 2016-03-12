@@ -5,15 +5,15 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Pack;
+import Model.Requirement;
 import Model.Stats.PetStats;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Tickable;
-import Utilities.Settings;
+import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -22,7 +22,7 @@ import java.util.Random;
 /* Setting up packages
 
  */
-public class Pet extends MobileObject implements Tickable{
+public class Pet extends MobileObject implements Tickable {
 
     PetController controller;
     PetStats stats;
@@ -30,6 +30,7 @@ public class Pet extends MobileObject implements Tickable{
     Pack pack;
     boolean owned;
     private Player player;
+    private Requirement requirement;
 
     public Pet(PetController controller) {
 
@@ -42,34 +43,47 @@ public class Pet extends MobileObject implements Tickable{
         controller.setAI(this);
     } // end default constructor
 
-    public Pet(PetController controller, Location location, int id, PetStats stats, Pack pack) {
+    public Pet(PetController controller, Location location, int id, PetStats stats, Pack pack, Player player, ItemsEnum reqItem) {
         super(location, id, stats);
         base = location;
         this.controller = controller;
         this.stats = stats;
         this.pack = pack;
         stats.setMovement(6);
-        //this.setSight(Settings.MAPHEIGHT);
+        this.requirement = new Requirement(reqItem);
+        this.player = player;
+        this.controller.setBaseLoc(new Location(10,10));
         controller.setAI(this);
     } // end constructor
 
     @Override
     public void tick() {
+        if(this.getController().targetinView() && this.requirement.hasRequiredItem(player.getPack())){
+            setOwnership();
+        }
         if(controller != null) {
             controller.tick();
         }
     } // end tick
 
-    public PetStats getStats() { return stats; }
-    public Pack getPack() { return pack; }
-    public boolean getOwned() { return owned; }
+    public PetStats getStats() {
+        return stats;
+    }
+
+    public Pack getPack() {
+        return pack;
+    }
+
+    public boolean getOwned() {
+        return owned;
+    }
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         ArrayList<Item> tempItems = new ArrayList<>(items);
         Iterator<Item> it = tempItems.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Item i = it.next();
-            if(i instanceof Takable && pack.getSizeLeft() > 0) {
+            if (i instanceof Takable && pack.getSizeLeft() > 0) {
                 pickup(i);
                 items.remove(i);
             }
@@ -81,10 +95,13 @@ public class Pet extends MobileObject implements Tickable{
         return controller;
     }
 
-    public void setOwnership(Player player){
+    public void setOwnership() {
         this.owned = true;
-        this.player = player;
-        this.controller.setTarget(player);
+        this.getController().setPlayer(this.player);
+        this.getController().setBaseLoc(this.player.getLocation());
+        for(int i = 0; i < player.getPack().getCount(); i++){
+
+        }
     }
 
     public void pickup(Item item) {

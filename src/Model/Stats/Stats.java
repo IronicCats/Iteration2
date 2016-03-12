@@ -1,14 +1,13 @@
 package Model.Stats;
 
 import Utilities.Observer;
-import Utilities.Subject;
 
 import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/6/16.
  */
-public class Stats  {
+public class Stats {
     private int movement,
             baseMovement;
 
@@ -24,11 +23,17 @@ public class Stats  {
         this.movement = baseMovement;
     } // end constructor
 
-    public int getMovement() { return movement; }
+    public int getMovement() {
+        return movement;
+    }
 
-    public void setMovement(int movement) { this.movement = movement;}
+    public void setMovement(int movement) {
+        this.movement = movement;
+    }
 
-    public void resetMovement(){ this.movement = baseMovement;}
+    public void resetMovement() {
+        this.movement = baseMovement;
+    }
 
 
 } // end class Stats

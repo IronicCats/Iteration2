@@ -1,11 +1,10 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
+import Model.Effects.EquipmentModification;
 import Model.Inventory.EquipmentTypeEnum;
-import Model.Stats.StatsEnum;
-import Model.GameObject.Item.Items.Takable;
 import Model.Location;
 import Model.Requirement;
-import Model.Effects.EquipmentModification;
+import Model.Stats.StatsEnum;
 import Utilities.Observer;
 
 /**
@@ -24,9 +23,10 @@ public class Weapon extends Equippable {
         super(id, name, description, value, location, requirement, type, e);
     } // end constructor
 
-    public int getDamage(){
+    public int getDamage() {
         return effect.getModification().getStat(StatsEnum.OFFENSIVE_RATING);
     }
+
     public void setDamage(int damage) {
         effect.getModification().modifyStat(StatsEnum.OFFENSIVE_RATING, damage);
     }

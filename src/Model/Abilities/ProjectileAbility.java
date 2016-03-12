@@ -12,25 +12,16 @@ import Model.Stats.StatStructure;
  * Created by mazumderm on 3/6/2016.
  */
 public class ProjectileAbility extends Abilities {
-    int range;
     Projectile projectile;
 
 
     public ProjectileAbility(String name, String description, int range, Projectile projectile, Requirement requirements, Effect cost){
-        super(name, description, projectile.getEffect(), requirements, cost);
-        this.range = range;
+        super(name, description, projectile.getEffect(), requirements, cost, projectile.getRange());
         this.projectile = projectile;
 
     }
 
     //accessor methods
-    public int getRange(){
-        return this.range;
-    }
-
-    public void setRange(int range){
-        this.range = range;
-    }
 
     public Projectile getProjectile(){
         return this.projectile;
@@ -40,8 +31,4 @@ public class ProjectileAbility extends Abilities {
         this.projectile = p;
     }
 
-    public void execute(MobileObject m, Location targeterLocation){
-
-
-    }
 }
