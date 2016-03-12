@@ -22,6 +22,7 @@ public class Assets {
     public static ArrayList<BufferedImage> PET;
     public static ArrayList<BufferedImage> BLUE_NPC;
     public static ArrayList<BufferedImage> CAT_NPC;
+    public static ArrayList<BufferedImage> DAVE_PET;
 
     // end NPC's
 
@@ -171,6 +172,21 @@ public class Assets {
         BLUE_NPC.add(npc4.crop(0,0,32,32));
         BLUE_NPC.add(npc5.crop(0,0,32,32));
         BLUE_NPC.add(npc6.crop(0,0,32,32));
+
+        DAVE_PET = new ArrayList<>();
+        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
+        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
+        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
+        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
+        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
+        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
+        DAVE_PET.add(pet1.crop(0,0,32,32));
+        DAVE_PET.add(pet2.crop(0,0,32,32));
+        DAVE_PET.add(pet3.crop(0,0,32,32));
+        DAVE_PET.add(pet4.crop(0,0,32,32));
+        DAVE_PET.add(pet5.crop(0,0,32,32));
+        DAVE_PET.add(pet6.crop(0,0,32,32));
+
         // End entities
 
         //Decals
