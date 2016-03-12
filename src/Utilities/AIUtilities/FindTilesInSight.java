@@ -17,88 +17,97 @@ public class FindTilesInSight {
         ArrayList<Tile> tilesinSight = new ArrayList<Tile>();
 
         for (Tile tile : tilesinView) {
-            if(location.getX() % 2 == 0 ){
-                switch(location.getDir()) {
-                        case 45:
-                            if (tile.getLocation().getX() - location.getX() > 0 && tile.getLocation().getX() - location.getX() <= view && location.getY() - tile.getLocation().getY() == 1) {
-                                tilesinSight.add(tile);
-                            }
-                            break;
-                        case 90:
-                            if (location.getY() - tile.getLocation().getY() <= view && tile.getLocation().getX() == location.getX()) {
-                                tilesinSight.add(tile);
-                            }
-                            break;
-                        case 135:
-                            if(location.getX() - tile.getLocation().getX() > 0 && location.getX() - tile.getLocation().getX() <= view && location.getY() - tile.getLocation().getY() == 1){
-                                tilesinSight.add(tile);
-                            }
-                            break;
-                        case 225:
-                            if(location.getX() - tile.getLocation().getX() > 0 && location.getX() - tile.getLocation().getX() <= view && tile.getLocation().getY() - location.getY() <= view + 1){
-                                if(!(location.getX() - tile.getLocation().getX()  == 1 && tile.getLocation().getY() - location.getY() == 1) ) {
-                                    tilesinSight.add(tile);
-                                }
-                            }
-                            break;
-                        case 270:
-                            if(tile.getLocation().getY() - location.getY() <= view && tile.getLocation().getX() == location.getX()){
-                                tilesinSight.add(tile);
-                        }
-                            break;
-                        case 315:
-                            if(tile.getLocation().getX() - location.getX() > 0 &&tile.getLocation().getX() - location.getX() <= view && tile.getLocation().getY() - location.getY() <= view + 1){
-                                if(!(tile.getLocation().getX() - location.getX()  == 1 && tile.getLocation().getY() - location.getY() == 1) ) {
-                                    tilesinSight.add(tile);
-                                }
-                            }
-                            break;
-                }
+            int posXdis = tile.getLocation().getX() - location.getX();
+            int negXdis = location.getX() - tile.getLocation().getX();
+            int posYdis = tile.getLocation().getY() - location.getY();
+            int negYdis = location.getY() - tile.getLocation().getY();
 
-            }
-            else{
-                switch(location.getDir()) {
+            if (location.getX() % 2 == 0) {
+                switch (location.getDir()) {
                     case 45:
-                        if (tile.getLocation().getX() - location.getX() > 0 &&tile.getLocation().getX() - location.getX() <= view && location.getY() - tile.getLocation().getY() == 1) {
-                            if(!(tile.getLocation().getX() - location.getX() == 1 && location.getY() - tile.getLocation().getY() == 1))
+                        if (view >= 1 && posXdis == 1 && negYdis == 1) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && posXdis == 2 && negYdis == 1) {
                             tilesinSight.add(tile);
                         }
                         break;
                     case 90:
-                        if (location.getY() - tile.getLocation().getY() <= view && tile.getLocation().getX() == location.getX()) {
+                        if (negYdis > 0 && negYdis <= view && tile.getLocation().getX() == location.getX()) {
                             tilesinSight.add(tile);
                         }
                         break;
                     case 135:
-                        if(location.getX() - tile.getLocation().getX() > 0 && location.getX() - tile.getLocation().getX() <= view && location.getY() - tile.getLocation().getY() == 1){
-                            if(!(location.getX() - tile.getLocation().getX() == 1 && location.getY() - tile.getLocation().getY() == 1)) {
-                                tilesinSight.add(tile);
-                            }
+                        if (view >= 1 && negXdis == 1 && negYdis == 1) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && negXdis == 2 && negYdis == 1) {
+                            tilesinSight.add(tile);
                         }
                         break;
                     case 225:
-                        if(location.getX() - tile.getLocation().getX() > 0 && location.getX() - tile.getLocation().getX() <= view && tile.getLocation().getY() - location.getY() <= view + 1){
+                        if (view >= 1 && negXdis == 1 && posYdis == 0) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && negXdis == 2 && posYdis == 1) {
                             tilesinSight.add(tile);
                         }
                         break;
                     case 270:
-                        if(tile.getLocation().getY() - location.getY() <= view && tile.getLocation().getX() == location.getX()){
+                        if (posYdis > 0 && negYdis <= view && tile.getLocation().getX() == location.getX()) {
                             tilesinSight.add(tile);
                         }
                         break;
                     case 315:
-                        if(tile.getLocation().getX() - location.getX() > 0 && tile.getLocation().getX() - location.getX() <= view && tile.getLocation().getY() - location.getY() <= view + 1){
+                        if (view >= 1 && posXdis == 1 && posYdis == 0) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && posXdis == 2 && posYdis == 1) {
                             tilesinSight.add(tile);
                         }
                         break;
                 }
 
+            } else {
+                switch (location.getDir()) {
+                    case 45:
+                        if (view >= 1 && posXdis == 1 && negYdis == 0) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && posXdis == 2 && negYdis == 1) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+                    case 90:
+                        if (negYdis > 0 && negYdis <= view && tile.getLocation().getX() == location.getX()) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+                    case 135:
+                        if (view >= 1 && negXdis == 1 && negYdis == 0) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && negXdis == 2 && negYdis == 1) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+                    case 225:
+                        if (view >= 1 && negXdis == 1 && posYdis == 1) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && negXdis == 2 && posYdis == 1) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+                    case 270:
+                        if (posYdis > 0 && posYdis <= view && tile.getLocation().getX() == location.getX()) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+                    case 315:
+                        if (view >= 1 && posXdis == 1 && posYdis == 1) {
+                            tilesinSight.add(tile);
+                        } else if (view == 2 && posXdis == 2 && posYdis == 1) {
+                            tilesinSight.add(tile);
+                        }
+                        break;
+
+                }
             }
         }
-
         return tilesinSight;
-
     }
-
-
 }

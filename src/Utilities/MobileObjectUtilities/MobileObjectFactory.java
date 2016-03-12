@@ -56,7 +56,7 @@ public class MobileObjectFactory {
         //enemy1.getController().setBaseLoc(new Location(0,0));
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(5,5), map);
         davePet.setOwnership(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
