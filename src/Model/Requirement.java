@@ -82,11 +82,8 @@ public class Requirement {
                     return true;
                 }
             }
-            return false;
         }
-        else{
-            return true;
-        }
+       return false;
     }
 
     public boolean meetsRequirements(int playerLevel, Pack pack) {

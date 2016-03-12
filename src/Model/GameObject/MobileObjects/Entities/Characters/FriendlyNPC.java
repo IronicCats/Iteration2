@@ -1,6 +1,5 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
-import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
 import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;

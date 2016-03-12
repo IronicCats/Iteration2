@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,13 @@ public class Pack {
     } // end place
 
     public Item remove(int index) {
+        Item anItem = items[index];
+        items[index] = null;
+        count--;
+        return anItem;
+    } // end remove
+
+    public Item remove(ItemsEnum enums) {
         Item anItem = items[index];
         items[index] = null;
         count--;
