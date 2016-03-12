@@ -49,5 +49,8 @@ public class InventoryController extends Controller {
         else if(e.getKeyCode() == Settings.INTERACT) {       /* interact */
             ((InventoryState)state).interact();
         }
+        else if(e.getKeyCode() == Settings.DROP) {
+            ((InventoryState)state).drop();
+        }
     }
 }
