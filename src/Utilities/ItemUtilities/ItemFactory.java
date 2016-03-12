@@ -7,6 +7,7 @@ import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
@@ -84,6 +85,13 @@ public class ItemFactory {
         Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
+        //coin stacks
+        Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1,2));
+        Item money2 = ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, new Location(2,4));
+        Item money3 = ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, new Location(3,5));
+        initItems.put(money1, ItemFactory.makeAsset(ItemsEnum.SMALL_COIN_STACK, money1));
+        initItems.put(money2, ItemFactory.makeAsset(ItemsEnum.MEDIUM_COIN_STACK, money2));
+        initItems.put(money3, ItemFactory.makeAsset(ItemsEnum.LARGE_COIN_STACK, money3));
 
         return initItems;
     }
@@ -383,6 +391,33 @@ public class ItemFactory {
                         "Old farmer Joe's house",
                         -1,
                         location);
+            case SMALL_COIN_STACK:
+                return new Money(id,
+                        "Small coin stack",
+                        "A small amount of money",
+                        1,
+                        location,
+                        new Requirement(),
+                        new Effect(),
+                        (int)(Math.random() * 10) + 1);         /* random amount between 1 and 10 */
+            case MEDIUM_COIN_STACK:
+                return new Money(id,
+                        "Medium coin stack",
+                        "A medium amount of money",
+                        1,
+                        location,
+                        new Requirement(),
+                        new Effect(),
+                        (int)(Math.random() * 25) + 1);         /* random amount between 1 and 25 */
+            case LARGE_COIN_STACK:
+                return new Money(id,
+                        "Large coin stack",
+                        "A Large amount of money",
+                        1,
+                        location,
+                        new Requirement(),
+                        new Effect(),
+                        (int)(Math.random() * 50) + 1);         /* random amount between 1 and 50 */
             default:
                 return null;
         }
@@ -439,6 +474,10 @@ public class ItemFactory {
                 return new ItemView(item, Assets.SHIELD);
             case HOUSE:
                 return new ItemView(item, Assets.HOUSE);
+            case SMALL_COIN_STACK:
+            case MEDIUM_COIN_STACK:
+            case LARGE_COIN_STACK:
+                return new ItemView(item, Assets.CATNIP);
             default:
                 return null;
         }
