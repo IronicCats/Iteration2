@@ -31,7 +31,7 @@ public class Sneak extends Occupation{
                //distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
                 "Attack",
                 "Basic attack of sneak",
-                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getOffensiveRating())),
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
@@ -42,7 +42,7 @@ public class Sneak extends Occupation{
     //operations
     public void modifyOccupationalSkills(SkillsEnum s, int value){
         //checking for sneak related skill change
-        if(s.equals(SkillsEnum.PICKPOCK) || s.equals(SkillsEnum.DRTRAP) || s.equals(SkillsEnum.CREEP) || s.equals(SkillsEnum.RANGEWEAP) ){
+        if(s == SkillsEnum.PICKPOCK || s == SkillsEnum.DRTRAP || s == SkillsEnum.CREEP || s == SkillsEnum.RANGEWEAP ){
             Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
             m.put(s, value); //changing the occupational skills
             this.setOccupationalSkills(m); //setting the occupational skills
@@ -54,7 +54,7 @@ public class Sneak extends Occupation{
     }
 
     public int getOccupationalSkillsValue(SkillsEnum s){
-        if(s.equals(SkillsEnum.PICKPOCK) || s.equals(SkillsEnum.DRTRAP) || s.equals(SkillsEnum.CREEP) || s.equals(SkillsEnum.RANGEWEAP)){
+        if(s == SkillsEnum.PICKPOCK || s == SkillsEnum.DRTRAP || s == SkillsEnum.CREEP || s == SkillsEnum.RANGEWEAP){
             return getOccupationalSkills().get(s);
         }
         else {
