@@ -40,16 +40,16 @@ public class Settings {
     public static int ESC = 0x1B;
 
 
-    public static int SPACE = 0x20;
+    public static int SPACE = 32;
     public static int ATTACK = 0x20;
     public static int ONE = 0x31;
     public static int TWO = 0x32;
     public static int THREE = 0x33;
-    public static int D = 0x44;
-    public static int E = 69;
-    public static int I = 0x49;
-    public static int M = 0x4D;
-    public static int Q = 81;
+    public static int DROP = 0x44;
+    public static int EQUIP = 69;
+    public static int INVENTORY = 0x49;
+    public static int MAP = 0x4D;
+    public static int INTERACT = 81;
     public static int F = 70;
     public static boolean FOG = false;
 

@@ -1,9 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
-import Model.Requirement;
 
 /**
  * Created by Aidan on 3/6/2016.
@@ -14,8 +12,6 @@ public class PetController extends AIcontroller {
         super(map);
     }
 
-    //new Requirement requirement = new Requirement();
-
     private Player player;
 
     public void setPlayer(Player player) {
@@ -24,13 +20,14 @@ public class PetController extends AIcontroller {
 
     @Override
     public void tick() {
-        if(targetinSight() && this.player != null) {
+        if(targetinView() && this.player != null) {
             randomlyMoveinRange();
         }
         else if(player == null){
             randomlyMoveinRange();
         }
         else{
+            System.out.println("here");
             follow();
         }
     }

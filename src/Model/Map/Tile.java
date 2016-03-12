@@ -1,6 +1,7 @@
 package Model.Map;
 
 
+import Model.Abilities.Abilities;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.*;
@@ -49,33 +50,28 @@ public abstract class Tile implements Subject {
     }
 
 
-    public void interact(Location playersLocation) {
-        /*
-        look at this beautiful anticohesion!  I'll fix it later
-         */
-        Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        if(tempTile != null) {
-            MobileObject tempObject = tempTile.getObject();
-            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
-                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
-            }
-        }
+    public void interact() {
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
-            System.out.print("Telling player to take items");
             alert();
+        }
+        System.out.println("Interacting with tile");
+        Map.map.carryInteraction(object);
+
+    }
+
+    public void receiveInteraction(MobileObject interacter) {
+        if(hasObject()) {
+            object.interact(interacter);
         }
     }
 
-    public void recieveAttack(Character character) {
-        Location location = Location.newLocation(character.getDir(), this.location);
-        Map.map.carryAttack(character, location);
-
+    public void sendAttack(Character character, Abilities ability) {
+        Map.map.carryAttack(character, ability);
     }
-    public void deliverAttack(Character character) {
-        Location location = Location.newLocation(character.getDir(), this.location);
+    public void receiveAttack(Character c, Abilities a) {
         if(hasObject()) {
-            ((Character)object).recieveAttack(character);
+            ((Character)object).receiveAttack(c, a);
         }
     }
 
@@ -172,6 +168,8 @@ public abstract class Tile implements Subject {
     public boolean isVisited() {
         return visited;
     }
+
+    public void setIsVisited() { visited = true; }
 
     @Override
     public void addObserver(Observer o) {

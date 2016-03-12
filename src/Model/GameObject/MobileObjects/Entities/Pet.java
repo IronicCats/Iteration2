@@ -60,7 +60,7 @@ public class Pet extends MobileObject implements Tickable{
 
     @Override
     public void tick() {
-        if(this.getController().targetinSight()){
+        if(this.getController().targetinSight() && this.requirement.hasRequiredItem(player.getPack())){
             setOwnership();
         }
         if(controller != null) {

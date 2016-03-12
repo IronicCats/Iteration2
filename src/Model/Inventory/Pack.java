@@ -1,6 +1,9 @@
 package Model.Inventory;
 
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Money;
+import Model.GameObject.Item.Items.Takables.Usable;
 import Utilities.Observer;
 
 import java.util.ArrayList;
@@ -22,9 +25,11 @@ public class Pack {
     } // end default constructor
 
     public Pack(Item[] items, int money) {
-        items = new Item[cap];
+        this.items = new Item[cap];
         count = items.length;
-        this.items = items;
+        for(int i = 0; i < count; i++) {
+            this.items[i] = items[i];
+        }
         this.money = money;
     } // end constructor
 
@@ -62,15 +67,23 @@ public class Pack {
 
     public Item[] getItems() { return items; }
 
+    public Effect use(int i){
+        Effect temp = ((Usable)items[i]).getEffect();
+        items[i]=null;
+        return temp;
+    }
+
     public void examine() {
         if(count == 0) {
             System.out.println("Pack empty.");
-        }
-        for(int i = 0; i < cap; i++) {
-            if(items[i] != null) {
-                System.out.println(i + ": " + items[i].getName());
+        } else {
+            for (int i = 0; i < cap; i++) {
+                if (items[i] != null) {
+                    System.out.println(i + ": " + items[i].getName());
+                }
             }
         }
+        System.out.println(getMoney());
     } // end examine
     public int getSizeLeft() {
         return cap - count;
@@ -84,6 +97,7 @@ public class Pack {
                 items[i] = null;
             }
         }
+        tempItems.add(new Money(money));
         return tempItems;
     } // end dump
 
@@ -91,4 +105,5 @@ public class Pack {
     public int getMoney() { return money; }
     public void setMoney(int money) { this.money = money; }
     public void modifyMoney(int money) { this.money += money; }
+
 } // end class Pack

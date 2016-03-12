@@ -1,15 +1,16 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Model.Tickable;
-import Utilities.AIUtilities.Astar;
-import Utilities.AIUtilities.FindTilesinRange;
-import Utilities.AIUtilities.RandomLocation;
+import Utilities.AIUtilities.*;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MapUtilities.RangeofTilesinSight;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.Observer;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +19,7 @@ import java.util.Random;
 /**
  * Created by Aidan on 3/6/2016.
  */
-    public abstract class AIcontroller implements Tickable {
+    public abstract class AIcontroller implements Tickable, Observer {
 
         Map map;
         MobileObject target;
@@ -34,7 +35,7 @@ import java.util.Random;
             this.map = map;
         }
 
-        private MobileObject AI;
+        protected MobileObject AI;
         private Location destination = new Location(0,2,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
 
@@ -42,7 +43,7 @@ import java.util.Random;
     public void tick() {
         if(target != null) {
             //follow(mobileObject);
-            goToObjInSight();
+            goToObjInView();
         }
         else{
             randomlyMoveinRange();
@@ -75,14 +76,18 @@ import java.util.Random;
     }
 
     //Waits for a particular mobileobject to be in sight and when in sight, follows that mobileobject
-    public void goToObjInSight() {
-        if(targetinSight()){
+    public void goToObjInView() {
+        if(targetinView()){
             follow();
         }
     }
 
+    public ArrayList<Tile> getTilesinView(){
+        return FindTilesAround.find(AI.getLocation(), map, AI.getView(), AI.getViewLocation());
+    }
+
     public ArrayList<Tile> getTilesinSight(){
-        return FindTilesinRange.find(AI.getLocation(), map, AI.getSight(), AI.getViewLocation());
+        return FindTilesInSight.find(getTilesinView(),AI.getLocation(),AI.getView());
     }
 
     public void  randomlyMoveinRange(){
@@ -95,6 +100,15 @@ import java.util.Random;
         }
     }
 
+    public void tryToPickUpRandomly(int percentPickup){
+        int temp = random.nextInt(30);
+        if(temp == 1){
+            if(map.getTile(AI.getLocation().getX(),AI.getLocation().getY()).hasItems()){
+                //AI.pickupItem
+            }
+        }
+    }
+
     public boolean targetinFront() {
         Location targetTile = Location.newLocation(AI.getLocation().getDir(),AI.getLocation());
         if(map.getTile(targetTile).getObject() == target){
@@ -103,15 +117,48 @@ import java.util.Random;
         return false;
     }
 
-    public boolean targetinSight(){
-        ArrayList<Tile> range = getTilesinSight();
+    public boolean targetinView(){
 
-        for (Tile tile : range) {
-            if (tile.getObject() == target) {
-                return true;
+        return FindTargetinTiles.find(getTilesinView(),target);
+
+    }
+
+    public boolean targetinSight(){
+
+        return FindTargetinTiles.find(getTilesinSight(),target);
+
+    }
+
+    //This method should be somewhere else TODO: put this somewhere else
+    public void followThenAttackinRange(int attackRange){
+        //TODO: take out attack range parameter and search through list of possible attacks instead. Also implment AI.attack
+        if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
+         //   AI.attack();
+        }
+        follow();
+
+    }
+
+    public void followReturnToBaseWhenOutofRange(){
+        if(targetinView()){
+            follow();
+        }
+        returntoBase();
+    }
+
+    public void returntoBase(){
+        moveTo(baseLoc);
+    }
+
+    public void runawayWheNearDeath(int runawayRange){
+        //if(nearDeath)
+        int temp = random.nextInt(30);
+        if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
+            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc,runawayRange);
+            if(map.getTile(randomLoc.getX(),randomLoc.getY()) != null) {
+                moveTo(randomLoc);
             }
         }
-        return false;
     }
 
     public void setDestination(Location location) {
@@ -129,5 +176,12 @@ import java.util.Random;
         this.baseLoc = baseLoc;
     }
 
+    @Override
+    public void update() {
 
+    }
+
+    @Override
+    public void remove() {
+    }
 } // end class AIcontroller

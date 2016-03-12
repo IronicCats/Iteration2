@@ -104,6 +104,15 @@ public class ItemFactory {
         return initItems;
     }
 
+    public static Item[] makeRandomItems(Location location) {
+        int amount = (int)(Math.random() * 5) + 1;          /* drop between 1 and 5 items */
+        Item[] items = new Item[amount];
+        for(int i = 0; i < amount; i++) {
+            items[i] = ItemFactory.makeItem(ItemsEnum.values()[(int)(Math.random() * ItemsEnum.values().length)], location);
+        }
+        return items;
+    } // end makeRandomItems
+
 
     public static Item makeItem(ItemsEnum itemsEnum, Location location) {
         int id = itemsEnum.ordinal();

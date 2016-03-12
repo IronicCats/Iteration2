@@ -5,11 +5,12 @@ import Model.Location;
 
 import Model.Map.Map;
 import Model.Map.Tile;
-import Controller.Controller;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -31,7 +32,7 @@ public abstract class MobileObject extends GameObject {
     protected Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
-    private int sight, range;
+    private int view, range;
     private int id;
 
     public MobileObject() {
@@ -41,7 +42,7 @@ public abstract class MobileObject extends GameObject {
         viewLocation = new ViewLocation(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-        sight = 2;
+        view = 2;
         range = 2;
         id = 0;
     }
@@ -53,7 +54,7 @@ public abstract class MobileObject extends GameObject {
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
-        sight = 2;
+        view = 2;
         range = 2;
         this.id = id;
     }
@@ -114,19 +115,19 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interactWithTile() {
-        tile.interact(this.location);
+        tile.interact();
     }
 
     public Tile getTile(){
         return tile;
     }
 
-    public int getSight() {
-        return sight;
+    public int getView() {
+        return view;
     }
 
-    public void setSight(int sight) {
-        this.sight = sight;
+    public void setView(int view) {
+        this.view = view;
     }
 
     public int getRange() {
@@ -139,5 +140,11 @@ public abstract class MobileObject extends GameObject {
         this.range = range;
     }
 
+    public MobileObjectEnum getID() {
+        return MobileObjectEnum.values()[id];
+    }
 
+    public void interact(MobileObject mo) {
+        DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
+    }
 }

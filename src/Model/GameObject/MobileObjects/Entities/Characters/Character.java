@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Abilities.Abilities;
 import Model.Abilities.CommandsEnum;
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
@@ -16,11 +17,11 @@ import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
 import Model.Location;
-import Model.Map.Map;
 import Model.Stats.CharacterStats;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 
+import javax.xml.stream.events.Characters;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,6 +30,11 @@ import java.util.Iterator;
  */
 public abstract class Character extends Entity {
     protected Inventory inventory;
+    protected Abilities attack;
+    protected Abilities ability1;
+    protected Abilities ability2;
+    protected Abilities ability3;
+
 
     public Character() {
         super();
@@ -38,11 +44,9 @@ public abstract class Character extends Entity {
     public Character(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation.getStats(), occupation);
         this.inventory = inventory;
-    } // end constructor
+        attack = occupation.getBasicAttack();
+        System.out.println(attack);
 
-    public Character(Location location, int id, CharacterStats stats, Occupation occupation, Inventory inventory) {
-         super(location, id, stats, occupation);
-        this.inventory = inventory;
     } // end constructor
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
@@ -82,11 +86,6 @@ public abstract class Character extends Entity {
         ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
-    public void mount(Vehicle vehicle){
-        //getStats().setMovement(vehicle.getMovement());
-        // change sprite
-    } // end mount
-
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
@@ -98,18 +97,20 @@ public abstract class Character extends Entity {
     } // end unmount
 
 
-    public void attack() {
-
-        getTile().recieveAttack(this);
+    public void attack(Abilities a) {
+        System.out.println("Executing ability: " + a);
+        if (a == null) {
+            System.out.println("Ability not set");
+            return;
+        }
+        getTile().sendAttack(this, a);
     }
 
-    public void recieveAttack(Character attacker) {
-        System.out.print(this.getClass() + " is being attack by " + attacker.getClass());
-        //this.applyEffect(attacker);
-    }
-
-    public void useAbility(CommandsEnum e) {
-        //tile.useAbility(this, getAbility(e))
+    public void receiveAttack(Character attacker, Abilities ability) {
+        //Calculate Damage done based on Offensive Rating and Defensive Rating
+        //But for now, just apply effect
+        System.out.println(ability.getEffects().toString());
+        this.applyEffect(ability.getEffects());
     }
 
     public boolean pickup(Item item) {
@@ -127,11 +128,16 @@ public abstract class Character extends Entity {
 
     public void applyEffect(Effect... e) {
         ((CharacterStats)getStats()).applyEffect(e);
+        if(!getStats().isAlive()) {
+            emptyPack();
+        }
     } // end applyEffect
 
-    public boolean checkForDeath() {
-        return !((CharacterStats) getStats()).isDead();
-    } // end checkForDeath
+    public void setInitialLevel(int level) {
+        for(int i = 0; i < level; i++) {
+            getStats().levelUp();
+        }
+    } // end setInitialLevel
 
     public void execute(CommandsEnum e) {
         switch(e){
@@ -142,12 +148,17 @@ public abstract class Character extends Entity {
                 emptyPack();
                 break;
             case attack:
-                attack();
+                System.out.println("Attacking with: " + attack);
+                attack(this.attack);
+                break;
             case ability1:
-
+                attack(ability1);
+                break;
             case ability2:
+                attack(ability2);
+                break;
             case ability3:
-                useAbility(e);
+                attack(ability3);
                 break;
         }
 
@@ -161,5 +172,17 @@ public abstract class Character extends Entity {
     }
 
     public Pack getPack() { return inventory.getPack(); }
+
+    public boolean isDead() {
+        return !getStats().isAlive();
+    }
+
+    @Override
+    public void tick() {
+        if (!isDead()) {
+            getStats().tick();
+            //respawn eventually
+        }
+    }
 
 } // end class Character

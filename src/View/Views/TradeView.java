@@ -1,6 +1,8 @@
 package View.Views;
 
+import Model.Inventory.Pack;
 import Model.Map.Map;
+import Utilities.ItemUtilities.ItemFactory;
 import Utilities.Observer;
 import Utilities.Settings;
 import View.ViewUtilities.Graphics.Assets;
@@ -14,8 +16,14 @@ import java.awt.*;
 public class TradeView implements Renderable, Observer{
     private Map map;
     int width,height;
+    Pack playerPack;
+    Pack shopPack;
     double mX,mY;
-    public TradeView() {
+    ItemView itemView[] = new ItemView[32];
+    public TradeView(Pack playerPack, Pack shopPack) {
+        for(int i=0;i<32;++i)itemView[i]=null;
+        this.playerPack=playerPack;
+        this.shopPack=shopPack;
         //this.map = map;
         //map.addObserver(this);
     } // end constructor
@@ -35,6 +43,18 @@ public class TradeView implements Renderable, Observer{
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(width/10, height/10, width*4/5, height*4/5);
         //making the title
+
+        //making the views
+        for(int i=0;i<32;++i){
+            if(i<16){
+                if(playerPack.get(i)==null)itemView[i]=null;
+                else itemView[i]= ItemFactory.makeAsset(playerPack.get(i).getItemType(), playerPack.get(i));
+            }
+            else {
+                if(shopPack.get(i-16)==null)itemView[i]=null;
+                else itemView[i]= ItemFactory.makeAsset(shopPack.get(i-16).getItemType(), shopPack.get(i-16));
+            }
+        }
 
         //render the pack
         renderPackOne(g,s);
@@ -70,9 +90,9 @@ public class TradeView implements Renderable, Observer{
             } else {
                 g.drawImage(Assets.BOX, tempX, tempY, size, size, null);
                 g.setColor(new Color(200, 200, 200, 200));
-                g.drawString("User:"+(i-16),tempX,tempY);
+                g.drawString("Shop:"+(i-16),tempX,tempY);
             }
-
+            if(itemView[i]!=null)itemView[i].render(g,tempX,tempY,size,size);
             tempX += size + intX;
             if (i % 4 == 3) {
                 tempY += size + intY;
@@ -105,9 +125,9 @@ public class TradeView implements Renderable, Observer{
             } else {
                 g.drawImage(Assets.BOX, tempX, tempY, size, size, null);
                 g.setColor(new Color(200, 200, 200, 200));
-                g.drawString("Shop:"+i,tempX,tempY);
+                g.drawString("User:"+i,tempX,tempY);
             }
-
+            if(itemView[i]!=null)itemView[i].render(g,tempX,tempY,size,size);
             tempX += size + intX;
             if (i % 4 == 3) {
                 tempY += size + intY;
@@ -119,7 +139,8 @@ public class TradeView implements Renderable, Observer{
 
     }
     public void renderDescriptions(Graphics g,int s){
-
+        g.setColor(new Color(12, 12, 12, 250));
+        g.fillRect(width*3/20, height*31/40, width*6/20, height*1/10);
     }
 
 

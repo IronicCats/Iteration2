@@ -32,43 +32,4 @@ public class AOEAbility extends Abilities{
         this.degreeMovement = degreeMovement;
     }
 
-    public void execute(MobileObject targeter, Location targeterLocation){
-        /**
-        Tile [] affectedTiles;
-        Map map = targeter.getMap();
-        if(degreeMovement == 60){
-            switch(targeterLocation.getDir()){
-                case 45:
-                    break;
-                case 90:
-                    break;
-                case 135:
-
-                    break;
-                case 225:
-
-                    break;
-                case 270:
-
-                    break;
-                case 315:
-
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if(degreeMovement == 360){
-            affectedTiles = Neighbors.neighbors(targeter.getTile(),map);
-            for(int i = 0; i < affectedTiles.length; ++i){// for all tiles in affected range
-                Tile t = affectedTiles[i];
-                MobileObject m = t.getObject();   // get object from each tile
-                ((Character)(targeter)).applyEffect(getEffects()); // apply ability affect
-                }
-            }
-        }
-         **/
-    }
-
-
 }

@@ -86,4 +86,11 @@ public class StatStructure {
     public Set<StatsEnum> getKeySet() { return map.keySet(); } // end getKeyset
 
     public int getSize() { return map.size(); }
+
+    @Override
+    public String toString() {
+        return "StatStructure{" +
+                "map=" + map +
+                '}';
+    }
 } // end class StatStructure

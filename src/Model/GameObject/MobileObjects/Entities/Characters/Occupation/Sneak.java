@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.DirectAbility;
+import Model.Abilities.PickPocket;
 import Model.Effects.Effect;
 import Model.Requirement;
 import Model.Stats.StatStructure;
@@ -64,6 +65,7 @@ public class Sneak extends Occupation{
     }
 
     public void recomputeOccupationalAbilities(){
+        //basic attack
         setBasicAttack(new DirectAbility(
                 "Attack",
                 "Basic attack of sneak",
@@ -71,6 +73,8 @@ public class Sneak extends Occupation{
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
+        //compute occupational abilities
+        getOccupationalAbilities().clear();
     }
 }
 
