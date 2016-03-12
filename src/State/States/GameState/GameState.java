@@ -151,6 +151,17 @@ public class GameState extends State {
         return player;
     }
 
+    public static void setPlayer(Player player) {
+        GameState.player = player;
+    }
+
+    public static void setMap(Map map) {
+        GameState.map = map;
+    }
+    public  void setMapView(MapView mv){
+        mapView = mv;
+    }
+
     @Override
     public void switchState(State state) {
         setState(state);

@@ -29,6 +29,7 @@ import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
 import Model.Stats.*;
+import State.State;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -110,6 +111,10 @@ public class SaveLoad {
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap,filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
+        gs.setPlayer((Player)player);
+        gs.setMap(gameMap);
+        //gs.setMapView(gamemapView);
+
         System.out.println("Everything has been loaded!");
     }
 
