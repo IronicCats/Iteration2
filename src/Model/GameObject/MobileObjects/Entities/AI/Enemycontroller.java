@@ -11,11 +11,16 @@ import Utilities.MapUtilities.RangeofTilesinSight;
  * Created by Aidan on 3/7/2016.
  */
 public class Enemycontroller extends AIcontroller {
+
     public Enemycontroller(Map map) {
         super(map);
     }
 
     HostileNPC enemy;
+
+    public void setEnemy(HostileNPC enemy) {
+        this.enemy = enemy;
+    }
 
     @Override
     public void tick() {

@@ -47,6 +47,8 @@ public class Assets {
     public static BufferedImage CHEST_KEY;
     public static BufferedImage HOUSE;
     public static BufferedImage CATNIP;
+    public static BufferedImage TUNA;
+    public static BufferedImage SUSHI;
     // end of items
 
     public static BufferedImage SKULL;
@@ -131,6 +133,12 @@ public class Assets {
 
         SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
         CATNIP = moneySheet.crop(0, 0, 32, 32);
+
+        SpriteSheet tunaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Tuna.png"));
+        TUNA = tunaSheet.crop(0,0,32,32);
+
+        SpriteSheet sushiSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Sushi.png"));
+        SUSHI = sushiSheet.crop(0,0,32,32);
 
         // End of tiles
 
