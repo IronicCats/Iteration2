@@ -70,7 +70,7 @@ public class TradeView implements Renderable, Observer{
             } else {
                 g.drawImage(Assets.BOX, tempX, tempY, size, size, null);
                 g.setColor(new Color(200, 200, 200, 200));
-                g.drawString("User:"+(i-16),tempX,tempY);
+                g.drawString("Shop:"+(i-16),tempX,tempY);
             }
 
             tempX += size + intX;
@@ -105,7 +105,7 @@ public class TradeView implements Renderable, Observer{
             } else {
                 g.drawImage(Assets.BOX, tempX, tempY, size, size, null);
                 g.setColor(new Color(200, 200, 200, 200));
-                g.drawString("Shop:"+i,tempX,tempY);
+                g.drawString("User:"+i,tempX,tempY);
             }
 
             tempX += size + intX;
