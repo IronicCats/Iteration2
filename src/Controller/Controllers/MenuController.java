@@ -35,6 +35,7 @@ public class MenuController extends Controller {
                 state.switchState(State.GAMESTATE);
             }
             else if(currentState==2){
+                State.LOADSTATE.setLastState(0);
                 state.switchState(State.LOADSTATE);
             }
             else if(currentState==3)System.exit(0);

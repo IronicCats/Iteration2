@@ -48,6 +48,7 @@ public class PauseController extends Controller{
                     state.switchState(State.SAVESTATE);
                     break;
                 case 3:
+                    State.LOADSTATE.setLastState(1);
                     state.switchState(State.LOADSTATE);
                     break;
                 case 4:

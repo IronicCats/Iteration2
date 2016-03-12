@@ -2,16 +2,21 @@ package Controller.Controllers;
 
 import Controller.Controller;
 import State.State;
+import State.States.GameState.LoadState;
+import Utilities.SaveLoad;
 import Utilities.Settings;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
  * Created by Dartyx on 3/7/2016.
  */
 public class LoadController extends Controller{
+    private int currentState;
     public LoadController(State state) {
         super(state);
+        currentState = 1;
     } // end constructor
 
     @Override
@@ -23,5 +28,47 @@ public class LoadController extends Controller{
             state.switchState(State.GAMESTATE);
         }
 
+        if (e.getKeyCode() == KeyEvent.VK_UP && currentState > 1) {
+            currentState--;
+            ((LoadState) state).moveUp();
+            //System.out.println("state = " + currentState);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN && currentState < 4) {
+            currentState++;
+            ((LoadState) state).moveDown();
+            //System.out.println("state =" + currentState);
+        }
+
+        if (e.getKeyCode() == 10) {
+            switch (currentState) {
+                case 1:
+                    //saveFile1
+                    SaveLoad.getInstance();
+                    System.out.println("SaveFile1 should be loading.");
+                    break;
+                case 2:
+                    //saveFile2
+                    SaveLoad.getInstance();
+                    System.out.println("SaveFile2 should be loading");
+                    break;
+                case 3:
+                    //saveFile3
+                    System.out.println("SaveFile3 should be loading.");
+                    break;
+                case 4:
+                    if(State.LOADSTATE.getLastState() == 0){
+                        state.switchState(State.MENUSTATE);
+                        System.out.println("Switching to loadState");
+                    }
+                    if(State.LOADSTATE.getLastState() == 1){
+                        System.out.println("Switching to pauseState");
+                        state.switchState(State.PAUSESTATE);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
