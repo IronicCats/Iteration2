@@ -3,6 +3,7 @@ package Controller.Controllers;
 import Controller.Controller;
 import State.State;
 import State.States.GameState.SaveState;
+import Utilities.SaveLoad;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
@@ -42,15 +43,36 @@ public class SaveController extends Controller {
             switch (currentState) {
                 case 1:
                     //saveFile1
+                    SaveLoad.getInstance();
+                    SaveLoad.setCurrFileName("SaveFile1");
+                    SaveLoad.setMobileObjects(State.GAMESTATE.getMobileObjects());
+                    SaveLoad.setGameMap(State.GAMESTATE.getMap());
+                    SaveLoad.setPlayer(State.GAMESTATE.getPlayer());
+                    SaveLoad.save();
+                    System.out.println("SaveFile1 should be saving.");
                     break;
                 case 2:
                     //saveFile2
+                    SaveLoad.getInstance();
+                    SaveLoad.setCurrFileName("SaveFile2");
+                    SaveLoad.setMobileObjects(State.GAMESTATE.getMobileObjects());
+                    SaveLoad.setGameMap(State.GAMESTATE.getMap());
+                    SaveLoad.setPlayer(State.GAMESTATE.getPlayer());
+                    SaveLoad.save();
+                    System.out.println("SaveFile2 should be saving");
                     break;
                 case 3:
                     //saveFile3
+                    SaveLoad.getInstance();
+                    SaveLoad.setCurrFileName("SaveFile3");
+                    SaveLoad.setMobileObjects(State.GAMESTATE.getMobileObjects());
+                    SaveLoad.setGameMap(State.GAMESTATE.getMap());
+                    SaveLoad.setPlayer(State.GAMESTATE.getPlayer());
+                    SaveLoad.save();
+                    System.out.println("SaveFile3 should be saving.");
                     break;
                 case 4:
-                    System.out.println("Switching to settingState");
+                    System.out.println("Switching to pauseState");
                     state.switchState(State.PAUSESTATE);
                     break;
                 default:
