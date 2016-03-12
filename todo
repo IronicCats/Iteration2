@@ -53,4 +53,19 @@ Drop coins on death (in addition to inventory/equipment)
 Remove NPC fully from map on death
     Currently you cannot walk on a tile where an NPC has died
 Check equippable requirement on interact with equipment (InventoryState)
-Exit to GameState from any state by using equip
+
+
+AI
+    FriendlyAI
+        Wander around base randomly
+        If attacked
+            increase range and poll for new locations faster
+    HostileAI
+        Wander around base randomly
+        If character in sight
+            Follow, attack until out of range or target is dead
+    PetAI
+        Wander around base randomly
+        If given required item (sushi)
+            register and follow Player
+            then pick up items randomly

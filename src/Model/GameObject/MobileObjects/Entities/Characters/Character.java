@@ -131,6 +131,21 @@ public abstract class Character extends Entity implements Observer{
         getTile().addItems(inventory.emptyPack());
     } // end emptyPack
 
+    public void drop(int index) {
+        DisplayMessage.addMessage(new GameMessage("You dropped your " + inventory.get(index), 3));
+        getTile().addItem(inventory.remove(index));
+    } // end drop
+
+    public void equip(int index) {
+        DisplayMessage.addMessage(new GameMessage("You equipped  " + inventory.get(index), 3));
+        if(inventory.get(index) instanceof Weapon) {
+            equip((Weapon) inventory.remove(index));
+        }
+        else if(inventory.get(index) instanceof Armor) {
+            equip((Armor) inventory.remove(index));
+        }
+    } // end equip
+
     public void applyEffect(Effect... e) {
         ((CharacterStats)getStats()).applyEffect(e);
     } // end applyEffect
