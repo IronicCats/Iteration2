@@ -36,9 +36,10 @@ public class Player extends Character implements Observer{
         super();
     } // end default constructor
 
-    public Player(Location location, Occupation occupation, Inventory inventory){
-        super(location, occupation, inventory);
+    public Player(Location location, int id, Occupation occupation, Inventory inventory){
+        super(location, id, occupation, inventory);
         inventory.addObserver(this);
+        stats.setMovement(10);
     } // end constructor
 
     // takes in the degrees associated with key press and updates player location

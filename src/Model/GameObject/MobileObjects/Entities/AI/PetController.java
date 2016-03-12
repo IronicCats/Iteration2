@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
 
 /**
@@ -7,12 +8,16 @@ import Model.Map.Map;
  */
 public class PetController extends AIcontroller {
 
+    private MobileObject owner;
+
     public PetController(Map map) {
         super(map);
     }
 
     public void follow(){
-        moveTo(mobileObject.getLocation());
+        moveTo(target.getLocation());
     }
+
+
 
 }

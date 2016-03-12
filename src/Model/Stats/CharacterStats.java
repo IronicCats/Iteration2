@@ -494,4 +494,26 @@ public class CharacterStats extends Stats implements Subject {
     public void resetLife() { this.life = this.baseLife; }
     public void resetMana() { this.mana = this.baseMana; }
     public void emptyMana() { this.mana = 0; }
+
+    public void setLevel(int level) {this.level = level;}
+    public void setLivesLeft(int livesLeft) {this.livesLeft = livesLeft;}
+    public void setStrength(int strength) {this.strength = strength;}
+    public void setAgility(int agility) {this.agility = agility;}
+    public void setIntellect(int intellect) {this.intellect = intellect;}
+    public void setHardiness(int hardiness) {this.hardiness = hardiness;}
+    public void setExperience(int experience) {this.experience = experience;}
+    public void setLife(int life) {this.life = life;}
+    public void setMana(int mana) {this.mana = mana;}
+    public void setOffensiveRating(int offensiveRating) {this.offensiveRating = offensiveRating;}
+    public void setDefensiveRating(int defensiveRating) {this.defensiveRating = defensiveRating;}
+    public void setArmorRating(int armorRating) {this.armorRating = armorRating;}
+    public void setBaseLives(int baseLives) {this.baseLives = baseLives;}
+    public void setBaseStr(int baseStr) {this.baseStr = baseStr;}
+    public void setBaseAgi(int baseAgi) {this.baseAgi = baseAgi;}
+    public void setBaseIntel(int baseIntel) {this.baseIntel = baseIntel;}
+    public void setBaseHard(int baseHard) {this.baseHard = baseHard;}
+    public void setBaseMovement(int baseMovement) {this.baseMovement = baseMovement;}
+    public void setBaseMana(int baseMana) {this.baseMana = baseMana;}
+    public void setBaseLife(int baseLife) {this.baseLife = baseLife;}
+
 } // end class CharacterStats

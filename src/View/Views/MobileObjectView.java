@@ -43,7 +43,7 @@ public class MobileObjectView implements Renderable, Observer {
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
         this.active = 3;
-        this.movement = 10;
+        this.movement = entity.getMovement();
     } // end constructor
 
     public MobileObjectView(MobileObject entity, ArrayList<BufferedImage> sprites) {
@@ -59,7 +59,7 @@ public class MobileObjectView implements Renderable, Observer {
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
         this.active = 3;
-        this.movement = 10;
+        this.movement = entity.getMovement();
     }
 
     public void pause() {

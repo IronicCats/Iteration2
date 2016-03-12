@@ -36,10 +36,11 @@ public class Settings {
     public static int DOWN_RIGHT = 99;
 
     public static int TAB = 0x09;
-    public static int ENTER = 0x0D;
+    public static int ENTER = 10;
     public static int ESC = 0x1B;
 
-    public static int SPACE = 0;
+
+    public static int SPACE = 0x20;
     public static int ATTACK = 0x20;
     public static int ONE = 0x31;
     public static int TWO = 0x32;

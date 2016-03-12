@@ -37,6 +37,7 @@ public class GameController extends Controller {
                 waitingTime = 500;
                 ((GameState) state).setCameraMoving(cameraMoves);
             }
+            System.out.println("camera moving");
         }
 
             if (e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {

@@ -34,13 +34,13 @@ public abstract class Character extends Entity {
         this.inventory = new Inventory();
     } // end default constructor
 
-    public Character(Location location, Occupation occupation, Inventory inventory) {
-        super(location, occupation.getStats(), occupation);
+    public Character(Location location, int id, Occupation occupation, Inventory inventory) {
+        super(location, id, occupation.getStats(), occupation);
         this.inventory = inventory;
     } // end constructor
 
-    public Character(Location location, CharacterStats stats, Occupation occupation, Inventory inventory) {
-         super(location, stats, occupation);
+    public Character(Location location, int id, CharacterStats stats, Occupation occupation, Inventory inventory) {
+         super(location, id, stats, occupation);
         this.inventory = inventory;
     } // end constructor
 
@@ -104,6 +104,7 @@ public abstract class Character extends Entity {
 
     public void recieveAttack(Character attacker) {
         System.out.print(this.getClass() + " is being attack by " + attacker.getClass());
+        //this.applyEffect(attacker);
     }
 
     public void useAbility(CommandsEnum e) {

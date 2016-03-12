@@ -37,10 +37,7 @@ public class FindTilesinRange {
         for (int i = 0; i < Settings.MAPWIDTH; i++) {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
                 if(BFS[i][j] != null) {
-                    if (Math.abs(Loc.getX() - BFS[i][j].getLocation().getX()) < sight) {
-                        range.add(BFS[i][j]);
-                    }
-                    if (Math.abs(Loc.getY() - BFS[i][j].getLocation().getY()) < sight) {
+                    if (Math.abs(Loc.getX() - BFS[i][j].getLocation().getX()) <= sight && Math.abs(Loc.getY() - BFS[i][j].getLocation().getY()) <= sight) {
                         range.add(BFS[i][j]);
                     }
                 }

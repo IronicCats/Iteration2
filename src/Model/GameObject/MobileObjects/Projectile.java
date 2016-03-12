@@ -15,8 +15,8 @@ public class Projectile extends MobileObject {
     int range;
 
     //constructor
-    public Projectile(Location location, Stats stats, Effect effects, int range) {
-        super(location, stats);
+    public Projectile(Location location, int id, Stats stats, Effect effects, int range) {
+        super(location, id, stats);
         this.effects = effects;
         this.range = range;
     }

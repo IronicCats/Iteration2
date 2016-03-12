@@ -9,12 +9,9 @@ import Utilities.AIUtilities.Astar;
 import Utilities.AIUtilities.FindTilesinRange;
 import Utilities.AIUtilities.RandomLocation;
 import Utilities.MapUtilities.Navigation;
-import Utilities.MapUtilities.Neighbors;
-import Utilities.Settings;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
 
 
@@ -24,7 +21,12 @@ import java.util.Random;
     public abstract class AIcontroller implements Tickable {
 
         Map map;
-        MobileObject mobileObject;
+        MobileObject target;
+        Location oldTargetLocation;
+        //TODO: Take in an array of possible targets. When looking at tiles in sight
+        //check to see if one of the nearby mobile objects is one of my possible targets
+        //then set target
+        MobileObjectEnum[] possibleTargets;
         Random random = new Random(System.currentTimeMillis());
         Location baseLoc;
 
@@ -38,9 +40,9 @@ import java.util.Random;
 
     @Override
     public void tick() {
-        if(mobileObject != null) {
-            follow(mobileObject);
-            //goToObjInSight(mobileObject,2);
+        if(target != null) {
+            //follow(mobileObject);
+            goToObjInSight();
         }
         else{
             randomlyMoveinRange();
@@ -49,6 +51,7 @@ import java.util.Random;
 
     }
 
+    //Moves to destination
     public void moveTo(Location destination){
         if (AI.canMove() && !AI.getLocation().equals(destination)) {
             Location start = Astar.Findpath(map, AI.getLocation(), destination).get(0); //Tile currently on
@@ -65,37 +68,59 @@ import java.util.Random;
         this.map = map;
     }
 
-    public void follow(MobileObject mobileObject){
-        moveTo(mobileObject.getLocation());
+    //Moves to location of a mobileobject
+    public void follow(){
+        if(oldTargetLocation == null || AI.getLocation().equals(oldTargetLocation)){
+            oldTargetLocation = target.getLocation();
+        }
+        moveTo(oldTargetLocation);
     }
 
-    public void goToObjInSight(MobileObject target, int sight) {
-
-        ArrayList<Tile> range = FindTilesinRange.find(AI.getLocation(), map, sight); //give AI location not AI
-
-        for (Tile tile : range) {
-            if (tile.getObject() == target) {
-                follow(target);
-                break;
-            }
+    //Waits for a particular mobileobject to be in sight and when in sight, follows that mobileobject
+    public void goToObjInSight() {
+        if(targetinSight()){
+            follow();
         }
+    }
+
+    public ArrayList<Tile> getTilesinSight(){
+        return FindTilesinRange.find(AI.getLocation(), map, AI.getSight());
     }
 
     public void  randomlyMoveinRange(){
         int temp = random.nextInt(30);
         if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
-            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc);
+            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc,AI.getRange());
             if(map.getTile(randomLoc.getX(),randomLoc.getY()) != null) {
                 moveTo(randomLoc);
             }
         }
     }
 
+    public boolean targetinFront() {
+        Location targetTile = Location.newLocation(AI.getLocation().getDir(),AI.getLocation());
+        if(map.getTile(targetTile).getObject() == target){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean targetinSight(){
+        ArrayList<Tile> range = getTilesinSight();
+
+        for (Tile tile : range) {
+            if (tile.getObject() == target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setDestination(Location location) {
         this.destination = location;
     } // end setDestination
 
-    public void setMobileObject(MobileObject mobileObject) { this.mobileObject = mobileObject; }
+    public void setTarget(MobileObject mobileObject) { this.target = mobileObject; }
 
     public Location getBaseLoc() {
         return baseLoc;
@@ -104,4 +129,6 @@ import java.util.Random;
     public void setBaseLoc(Location baseLoc) {
         this.baseLoc = baseLoc;
     }
+
+
 } // end class AIcontroller
