@@ -228,6 +228,8 @@ public class CharacterStats extends Stats implements Subject {
         if(livesLeft > 1) {
             livesLeft--;
             alive = true;
+        }else {
+            alive = false;
         }
 
         strength = baseStr;
@@ -470,8 +472,6 @@ public class CharacterStats extends Stats implements Subject {
         }
     } // end alert
 
-    public boolean isDead() { return !alive; }
-
     public int getLivesLeft() { return livesLeft; }
     public int getBaseLives() { return baseLives; }
     public int getStrength() { return strength; }
@@ -518,4 +518,7 @@ public class CharacterStats extends Stats implements Subject {
     public void setBaseMana(int baseMana) {this.baseMana = baseMana;}
     public void setBaseLife(int baseLife) {this.baseLife = baseLife;}
 
+    public boolean isAlive() {
+        return alive;
+    }
 } // end class CharacterStats

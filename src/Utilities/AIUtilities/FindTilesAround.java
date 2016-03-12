@@ -15,13 +15,13 @@ import java.util.Queue;
 /**
  * Created by Aidan on 3/9/2016.
  */
-public class FindTilesinRange {
+public class FindTilesAround {
 
     public static ArrayList<Tile> find(Location Loc, Map map, int sight, ViewLocation viewLoc) {
 
         Tile BFS[][] = new Tile[Settings.TILEWIDTH][Settings.TILEHEIGHT];   //this is going to be an array handling all tiles found in BFS
         Queue<Tile> Queue = new LinkedList<>();
-        Queue.add(map.getTile(Loc.getX(),Loc.getY()));  //a Queue for adding tiles that are encountered
+        Queue.add(map.getTile(Loc.getX(), Loc.getY()));  //a Queue for adding tiles that are encountered
         while (!Queue.isEmpty()) {
             Tile current = Queue.remove();
             Tile neighbors[] = Neighbors.neighbors(current, map);
@@ -37,12 +37,13 @@ public class FindTilesinRange {
 
         for (int i = 0; i < Settings.MAPWIDTH; i++) {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
-                if(!Utilities.outOfSite(viewLoc, new ViewLocation(BFS[i][j].getLocation().getX(),BFS[i][j].getLocation().getY()))) {
+
+                if (!Utilities.outOfSite(viewLoc, new ViewLocation(BFS[i][j].getLocation().getX(), BFS[i][j].getLocation().getY()), sight)) {
                     range.add(BFS[i][j]);
                 }
+
             }
         }
         return range;
     }
 }
-

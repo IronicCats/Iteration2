@@ -12,12 +12,30 @@ import java.awt.geom.Rectangle2D;
  */
 public class ViewModule {
 
-    public static void renderHealthBox(Graphics g, int direction, int health, int maxHealth, int x, int y) {
+    public static void renderName(Graphics g, String name, int x, int y) {
+        g.setColor(Color.WHITE);
+        g.drawString(name, x, y-4);
+    }
 
+    public static void renderHealthBox(Graphics g, int health, int maxHealth, int x, int y) {
         g.setColor(Color.WHITE);
         g.drawRect(x, y-5, 60, 8);
-        g.setColor(Color.GREEN);
+        g.setColor(calculateHealthColor(((double)health/maxHealth)));
         g.fillRect(x+1, y-4, (int)(((double)health/(double)maxHealth)*60), 7);
     }
 
+    public static Color calculateHealthColor(double ratio) {
+        int gr = (int)(255 * ratio*100) / 100;
+        int red = (int)(255 * (100 - ratio*100)) / 100;
+        int blu = 0;
+        if(gr > 255 || red > 255) {
+            return new Color(255, 255, 255);
+        }else if(gr < 0 || red < 0) {
+            return new Color(0, 0, 0);
+        }
+
+        return new Color(red, gr, blu);
+    }
+
 }
+

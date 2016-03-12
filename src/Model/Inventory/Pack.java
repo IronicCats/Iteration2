@@ -22,9 +22,11 @@ public class Pack {
     } // end default constructor
 
     public Pack(Item[] items, int money) {
-        items = new Item[cap];
+        this.items = new Item[cap];
         count = items.length;
-        this.items = items;
+        for(int i = 0; i < count; i++) {
+            this.items[i] = items[i];
+        }
         this.money = money;
     } // end constructor
 
@@ -65,12 +67,14 @@ public class Pack {
     public void examine() {
         if(count == 0) {
             System.out.println("Pack empty.");
-        }
-        for(int i = 0; i < cap; i++) {
-            if(items[i] != null) {
-                System.out.println(i + ": " + items[i].getName());
+        } else {
+            for (int i = 0; i < cap; i++) {
+                if (items[i] != null) {
+                    System.out.println(i + ": " + items[i].getName());
+                }
             }
         }
+        System.out.println(getMoney());
     } // end examine
     public int getSizeLeft() {
         return cap - count;

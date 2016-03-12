@@ -5,7 +5,6 @@ import Model.Location;
 
 import Model.Map.Map;
 import Model.Map.Tile;
-import Controller.Controller;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
@@ -31,7 +30,7 @@ public abstract class MobileObject extends GameObject {
     protected Stats stats;
     private boolean canMove;
     private ViewLocation viewLocation;
-    private int sight, range;
+    private int view, range;
     private int id;
 
     public MobileObject() {
@@ -41,7 +40,7 @@ public abstract class MobileObject extends GameObject {
         viewLocation = new ViewLocation(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-        sight = 2;
+        view = 2;
         range = 2;
         id = 0;
     }
@@ -53,7 +52,7 @@ public abstract class MobileObject extends GameObject {
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
-        sight = 2;
+        view = 2;
         range = 2;
         this.id = id;
     }
@@ -121,12 +120,12 @@ public abstract class MobileObject extends GameObject {
         return tile;
     }
 
-    public int getSight() {
-        return sight;
+    public int getView() {
+        return view;
     }
 
-    public void setSight(int sight) {
-        this.sight = sight;
+    public void setView(int view) {
+        this.view = view;
     }
 
     public int getRange() {

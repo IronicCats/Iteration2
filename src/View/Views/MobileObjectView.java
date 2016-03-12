@@ -108,6 +108,9 @@ public class MobileObjectView implements Renderable, Observer {
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
+       if(entity instanceof Character && ((Character)entity).isDead()) {
+           return;
+       }
         tween();
         g.drawImage(sprites.get(active),
                 (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
@@ -117,11 +120,13 @@ public class MobileObjectView implements Renderable, Observer {
                 null
         );
         if(!(entity instanceof Player) && !(entity instanceof Pet)){
-            ViewModule.renderHealthBox(g, entity.getDir(),
+
+            ViewModule.renderHealthBox(g,
                     ((Character)entity).getStats().getLife(),
                     ((Character)entity).getStats().getBaseLife(),
                     (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
-                    (int)viewLocation.getY() - cameraYOffset - (Settings.TILEWIDTH / (2*2)));
+                    (int)viewLocation.getY() - cameraYOffset - (Settings.TILEWIDTH / (2*2))
+            );
         }
     }
 
