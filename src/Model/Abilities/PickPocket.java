@@ -22,14 +22,19 @@ public class PickPocket extends ExecutableAbility {
             //can't take any object
         }
         else if(getSkillLevel() == 1){
-            int moneyTaken = (int)(.25 * ((Character)targeted).getPack().getMoney());
+            int moneyTaken = (int)(.25 * ((Character)targeted).getMoney());
+            ((Character)targeted).modifyMoney(moneyTaken * -1);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
         else if(getSkillLevel() == 2){
-            int moneyTaken = (int)(.5 * ((Character)targeted).getPack().getMoney());
+            int moneyTaken = (int)(.5 * ((Character)targeted).getMoney());
+            ((Character)targeted).modifyMoney(moneyTaken * -1);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
         else {
-            int moneyTaken = ((Character)targeted).getPack().getMoney();
-            ((Character)targeted).getPack().setMoney(0);
+            int moneyTaken = ((Character)targeted).getMoney();
+            ((Character)targeted).setMoney(0);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
     }
 }

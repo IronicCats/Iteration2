@@ -15,10 +15,9 @@ public class RemoveTrap extends ExecutableAbility{
     }
 
     //operations
-    public int getSkillLevel(){
-        return this.getSkillLevel();
-    }
-    public void execute(MobileObject targeted){
+
+
+    public void execute(MobileObject targeter, MobileObject targeted){
 
     }
 }

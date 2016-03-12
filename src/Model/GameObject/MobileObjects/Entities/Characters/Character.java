@@ -187,6 +187,18 @@ public abstract class Character extends Entity implements Observer{
         return !getStats().isAlive();
     }
 
+    public int getMoney(){
+        return getPack().getMoney();
+    }
+
+    public void setMoney(int money){
+        getPack().setMoney(money);
+    }
+
+    public void modifyMoney(int money){
+        getPack().modifyMoney(money);
+    }
+
     @Override
     public void update() {
         if(!getStats().isAlive()) {
