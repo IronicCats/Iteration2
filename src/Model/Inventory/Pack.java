@@ -54,7 +54,6 @@ public class Pack {
     public Item remove(int index) {
         Item anItem = items[index];
         items[index] = null;
-        System.out.println(anItem.getName());
         count--;
         return anItem;
     } // end remove

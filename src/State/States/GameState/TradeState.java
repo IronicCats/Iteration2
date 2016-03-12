@@ -47,7 +47,6 @@ public class TradeState extends State {
         }for(Item item : shopPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
-                System.out.println("Shopkeeper has item " + item.getName());
             }
         }
     } // end constructor
@@ -79,25 +78,21 @@ public class TradeState extends State {
         if(selector-4<0&&selector<16)selector+=12;
         else if(selector-4<16&&selector>15)selector+=12;
         else selector-=4;
-        //System.out.println(selector);
     }
     public void down(){
         if(selector+4>15&&selector<16)selector-=12;
         else if(selector+4>31&&selector>15)selector-=12;
         else selector+=4;
-        System.out.println(selector);
     }
     public void right(){
         if(selector%4==3&&selector<16)selector+=13;
         else if(selector%4==3&&selector>15)selector-=19;
         else selector++;
-        System.out.println(selector);
     }
     public void left(){
         if(selector%4==0&&selector<16)selector+=19;
         else if(selector%4==0&&selector>15)selector-=13;
         else selector--;
-        System.out.println(selector);
     }
 
     public void transaction() {
@@ -108,7 +103,6 @@ public class TradeState extends State {
             good = playerPack.get(selector);                /* selling item */
             if(good == null)
                 return;
-            System.out.println(good.getName() + " at position " + selector);
             newValue = (int)(good.getValue() * 0.9);
 
             if(shopPack.getMoney() >= newValue) {
@@ -124,7 +118,6 @@ public class TradeState extends State {
             good = shopPack.get(selector-16);               /* buying item */
             if(good == null)
                 return;
-            System.out.println(good.getName() + " at position " + (selector-16));
             newValue = (int)(good.getValue() * 1.1);
 
             if(playerPack.getMoney() >= newValue) {
