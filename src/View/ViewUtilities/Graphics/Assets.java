@@ -1,6 +1,7 @@
 package View.ViewUtilities.Graphics;
 
 import java.awt.image.BufferedImage;
+import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 
 /**
@@ -44,6 +45,7 @@ public class Assets {
     public static BufferedImage SHIELD;
     public static BufferedImage CHEST_KEY;
     public static BufferedImage HOUSE;
+    public static BufferedImage CATNIP;
     // end of items
 
     public static BufferedImage SKULL;
@@ -121,6 +123,9 @@ public class Assets {
 
         SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
         HOUSE = houseSheet.crop(0,0,32,32);
+
+        SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
+        CATNIP = moneySheet.crop(0,0,32,32);
 
         // End of tiles
 
