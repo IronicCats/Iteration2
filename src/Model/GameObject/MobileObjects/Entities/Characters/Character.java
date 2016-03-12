@@ -21,6 +21,7 @@ import Model.Stats.CharacterStats;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 
+import javax.xml.stream.events.Characters;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -127,8 +128,16 @@ public abstract class Character extends Entity {
 
     public void applyEffect(Effect... e) {
         ((CharacterStats)getStats()).applyEffect(e);
+        if(!getStats().isAlive()) {
+            emptyPack();
+        }
     } // end applyEffect
 
+    public void setInitialLevel(int level) {
+        for(int i = 0; i < level; i++) {
+            getStats().levelUp();
+        }
+    } // end setInitialLevel
 
     public void execute(CommandsEnum e) {
         switch(e){
