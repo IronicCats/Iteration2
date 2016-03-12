@@ -136,6 +136,7 @@ public class CharacterStats extends Stats implements Subject {
 
         this.effects = new ArrayList<>();
         this.finishTimes = new ArrayList<>();
+
     } // end constructor
 
     public void tick() {

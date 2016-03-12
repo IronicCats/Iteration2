@@ -1,6 +1,7 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
 import Model.Map.Tile;
@@ -15,8 +16,8 @@ public class ProjectileAbility extends Abilities {
     Projectile projectile;
 
 
-    public ProjectileAbility(int range, Projectile projectile, Requirement requirements, Effect cost){
-        super(projectile.getEffect(), requirements, cost);
+    public ProjectileAbility(String name, String description, int range, Projectile projectile, Requirement requirements, Effect cost){
+        super(name, description, projectile.getEffect(), requirements, cost);
         this.range = range;
         this.projectile = projectile;
 
@@ -39,7 +40,7 @@ public class ProjectileAbility extends Abilities {
         this.projectile = p;
     }
 
-    public void execute(Location location){
+    public void execute(MobileObject m, Location targeterLocation){
 
 
     }

@@ -1,10 +1,16 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
+import Model.Abilities.Abilities;
+import Model.Abilities.DirectAbility;
+import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.Requirement;
 import Model.Stats.CharacterStats;
 import Model.Stats.StatStructure;
+import Model.Stats.Stats;
 import Model.Stats.StatsEnum;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -23,18 +29,28 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
+    private Abilities[] occupationalAbilities;
+    private Abilities[] basicSkillAbilities;
+    private Abilities basicAttack;
+    private int pastLevel;
 
     //constructor
     public Occupation(String name, String description, int[] val)
     {
+       observers = new ArrayList<>();
         this.name = name;
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH,StatsEnum.AGILITY,
                 StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
         initialStats = new StatStructure(stats, val);
         playerStats = new CharacterStats(initialStats);
+        playerStats.addObserver(this);
+        pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
+        basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
+        basicSkills.put(SkillsEnum.BARGAIN, 0);
+        basicSkills.put(SkillsEnum.OBSERVATION, 0);
 
     }
 
@@ -45,10 +61,6 @@ public abstract class Occupation implements Subject, Observer {
 
     public String getDescription() {
         return description;
-    }
-
-    public StatStructure getInitialStats() {
-        return initialStats;
     }
 
     public CharacterStats getStats() { return playerStats; }
@@ -63,7 +75,6 @@ public abstract class Occupation implements Subject, Observer {
 
     public void setOccupationalSkills(Map<SkillsEnum, Integer> m){
         this.occupationalSkills = m;
-        alert();
     }
 
     public void setBasicSkills(Map<SkillsEnum, Integer> m){
@@ -83,8 +94,30 @@ public abstract class Occupation implements Subject, Observer {
         alert();
     }
 
+    public int getBasicSkillValue(SkillsEnum s){
+        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+            return basicSkills.get(s);
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public void setBasicAttack(Abilities basicAttack){
+        this.basicAttack = basicAttack;
+        alert();
+    }
+
+    public Abilities getBasicAttack(){
+        return basicAttack;
+    }
+
+
     //different occupational skills for each occupation
     public abstract void modifyOccupationalSkills(SkillsEnum s, int value);
+
+    public abstract int getOccupationalSkillsValue(SkillsEnum s);
+
 
     /*
    implement subject methods
@@ -97,9 +130,9 @@ public abstract class Occupation implements Subject, Observer {
 
     @Override
     public void alert() {
-        for (Observer observer : observers) {
-            observer.update();
-        }
+            for (Observer observer : observers) {
+                 observer.update();
+            }
     } // end alert
 
     /*
@@ -107,7 +140,19 @@ public abstract class Occupation implements Subject, Observer {
      */
     @Override
     public void update() {
+        if(pastLevel != playerStats.getLevel()){
+            pastLevel = playerStats.getLevel();
+            /**
+            //change the skills
+            SkillsEnum s;
+            modifyOccupationalSkills(s, getOccupationalSkillsValue(s) + 1);
+             **/
 
+            /**
+             * recompute all abilites
+             * differs with each occupation
+             */
+        }
     } // end update
 
     @Override

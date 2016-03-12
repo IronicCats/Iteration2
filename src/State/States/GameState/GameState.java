@@ -121,9 +121,10 @@ public class GameState extends State {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
         if(cameraMoving){
             camera.move(degrees);
-        }
-        else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
+        }else if(Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
             player.move(degrees);
+        }else {
+            player.face(degrees);
         }
     }
 

@@ -35,6 +35,7 @@ public abstract class Tile implements Subject {
     private boolean hasObject;
     private boolean hasAreaEffect;
     private boolean visited;
+
     private AreaEffectEnum ar;
 
     public Tile(Location location, boolean isWalkable){
@@ -121,6 +122,9 @@ public abstract class Tile implements Subject {
             hasObject = true;
             if (object instanceof Player) {
                 visited = true;
+                if(this.getHasAreaEffect()){
+                    ((Player)object).applyEffect(areaEffect.getEffect());
+                }
             }
             alert();
             return this;

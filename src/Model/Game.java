@@ -14,7 +14,6 @@ public class Game implements Runnable {
 
 
     public void run() {
-        System.out.println("I'm Starting");
 
         int fps = 60;
         double timePerTick = 1000000000 / fps;
@@ -54,18 +53,15 @@ public class Game implements Runnable {
             }
 
         }
-        System.out.println("I'm stopping");
         stop();
     }
 
 
     public synchronized void start() {
         if (running) {
-            System.out.println("Already running");
 
             return;
         }
-        System.out.println("Thread Started");
         running = true;
         thread = new Thread(this);
         thread.start();
@@ -73,7 +69,6 @@ public class Game implements Runnable {
 
 
     public synchronized void stop() {
-        System.out.println("in stop method");
         if( !running ) {
             return;
         }
