@@ -80,7 +80,7 @@ public class ItemFactory {
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
 
         // house
-        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(2, 2));
+        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(7, 2));
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         // tuna
