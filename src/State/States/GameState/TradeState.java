@@ -24,12 +24,12 @@ public class TradeState extends State {
     private TradeView tradeView;
     private int selector;
 
-    public TradeState(GameState game){
+    /*public TradeState(GameState game){
         this.game=game;
         setController(new TradeController(this));
         selector=0;
         tradeView=new TradeView();
-    }
+    }*/
 
     public TradeState(GameState game, Pack playerPack, Pack shopPack) {
         setController(new TradeController(this));
@@ -40,7 +40,7 @@ public class TradeState extends State {
         shopItems = new HashMap<>();
         setController(new TradeController(this));
         selector=0;
-        tradeView=new TradeView();
+        tradeView=new TradeView(playerPack,shopPack);
         for(Item item : playerPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
