@@ -1,7 +1,9 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.DirectAbility;
+import Model.Abilities.ProjectileAbility;
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
