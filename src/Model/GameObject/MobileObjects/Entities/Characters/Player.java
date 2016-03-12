@@ -29,7 +29,7 @@ import java.util.Iterator;
 This is the player class. This class contains everything the player controlled
 character will need.
  */
-public class Player extends Character implements Observer{
+public class Player extends Character{
 
     Pet pet;
     Vehicle vehicle;
@@ -54,16 +54,6 @@ public class Player extends Character implements Observer{
         alert();
     } // end move
 */
-    @Override
-    public void update() {
-        ((CharacterStats)getStats()).update();
-    } // end update
-
-    @Override
-    public void remove() {
-
-    } // end remove
-
 
     public void examinePack() {
         inventory.examine();
