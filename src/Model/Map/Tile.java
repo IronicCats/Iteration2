@@ -51,20 +51,24 @@ public abstract class Tile implements Subject {
 
 
     public void interact(Location playersLocation) {
-        /*
-        look at this beautiful anticohesion!  I'll fix it later
-         */
-        Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        if(tempTile != null) {
-            MobileObject tempObject = tempTile.getObject();
-            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
-                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
-            }
-        }
+        //If Im standing on any items, pick them up
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
             alert();
         }
+        /*
+        look at this beautiful anticohesion!  I'll fix it later
+         TODO: Fix This?!
+         */
+        Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
+        if(tempTile != null) {
+            MobileObject tempObject = tempTile.getObject();
+            //Why is this not just tempObject.interact()?
+            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
+                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
+            }
+        }
+        //
     }
 
     public void sendAttack(Character character, Abilities ability) {
