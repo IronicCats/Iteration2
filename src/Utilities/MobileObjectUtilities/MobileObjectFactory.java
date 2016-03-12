@@ -2,6 +2,7 @@ package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
@@ -69,7 +70,6 @@ public class MobileObjectFactory {
     public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map) {
         int id = npcEnum.ordinal();
         switch (npcEnum) {
-            case BLUE:
             case KITTEN:
                 return new NPC(location,
                         id,
@@ -79,8 +79,9 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 10) + 1),
                                 new Equipment()),
-                        new NPCController(map));
+                        new Enemycontroller(map));
             case SMALL_CAT:
+            case BLUE:
                 return new NPC(location,
                         id,
                         new Smasher(),
@@ -89,7 +90,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 25) + 1),
                                 new Equipment()),
-                        new NPCController(map));
+                        new Enemycontroller(map));
             case FAT_CAT:
                 return new NPC(location,
                         id,
@@ -99,7 +100,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 50) + 1),
                                 new Equipment()),
-                        new NPCController(map));
+                        new Enemycontroller(map));
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
@@ -115,7 +116,7 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new NPCController(map),
+                        new Enemycontroller(map),
                         new ArrayList<>());
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
@@ -130,7 +131,7 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new NPCController(map),
+                        new Enemycontroller(map),
                         new ArrayList<>());
             case DAVE_PET:
                 return new Pet(new PetController(map), location, 0, new PetStats(), new Pack());
