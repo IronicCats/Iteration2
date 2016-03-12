@@ -4,6 +4,8 @@ import Model.Abilities.Abilities;
 import Model.Abilities.CommandsEnum;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.Map.Map;
+import Utilities.AIUtilities.DirectionofTarget;
+import Utilities.AIUtilities.DistanceFromFaceableTarget;
 import Utilities.AbilitiesUtilities.checkAbilityRange;
 import Utilities.MapUtilities.RangeofTilesinSight;
 
@@ -16,7 +18,7 @@ public class Enemycontroller extends AIcontroller {
         super(map);
     }
 
-    HostileNPC enemy;
+    HostileNPC enemy =  (HostileNPC)AI;
 
     public void setEnemy(HostileNPC enemy) {
         this.enemy = enemy;
@@ -25,7 +27,7 @@ public class Enemycontroller extends AIcontroller {
     @Override
     public void tick() {
         if(targetinView()) {
-            //followThenAttackinRange();
+            followThenAttackinRange();
         }
         else{
            randomlyMoveinRange();
@@ -34,12 +36,10 @@ public class Enemycontroller extends AIcontroller {
 
     public void followThenAttackinRange(){
         if(canFace()) {
-            
-            //if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
-            //enemy.execute(CommandsEnum.ability1);
-            //}
-            //follow();
-        }
+            enemy.face(DirectionofTarget.getDir(enemy.getLocation(),target.getLocation()));
+            enemy.attack(checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities(),DistanceFromFaceableTarget.calculate(enemy,target)).get(0));
+            }
+        follow();
     }
 
     @Override
