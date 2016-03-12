@@ -65,7 +65,6 @@ public abstract class Character extends Entity {
         if (item instanceof Interactable) {
             //HUH?
         }else if (item instanceof OneShot) {
-            System.out.println("OneShot item");
             getStats().applyEffect(((OneShot) item).getEffect());
 
         }
