@@ -10,6 +10,7 @@ import Model.GameObject.Item.Items.OneShot;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.EquipmentSlotEnum;
@@ -55,7 +56,11 @@ public abstract class Character extends Entity {
             Item i = it.next();
             if (i instanceof Takable) {//if its takable
                 if (pickup(i)) {//and i was able to pick it up
-                    DisplayMessage.addMessage(new GameMessage("You picked up: " + i.getName(), 3));
+                    if(i instanceof Money){
+                        DisplayMessage.addMessage(new GameMessage("You picked up: " + ((Money)i).getQuantity() + " CatNips", 3));
+                    }else {
+                        DisplayMessage.addMessage(new GameMessage("You picked up: " + i.getName(), 3));
+                    }
                     items.remove(i); //remove it from the items
                 }
             }
