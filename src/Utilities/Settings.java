@@ -40,7 +40,7 @@ public class Settings {
     public static int ESC = 0x1B;
 
 
-    public static int SPACE = 0x20;
+    public static int SPACE = 32;
     public static int ATTACK = 0x20;
     public static int ONE = 0x31;
     public static int TWO = 0x32;

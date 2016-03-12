@@ -8,6 +8,7 @@ import Model.Map.Tile;
 
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -137,5 +138,7 @@ public abstract class MobileObject extends GameObject {
         this.range = range;
     }
 
-
+    public MobileObjectEnum getID() {
+        return MobileObjectEnum.values()[id];
+    }
 }
