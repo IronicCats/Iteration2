@@ -42,28 +42,20 @@ public class TradeController extends Controller {
                 state.switchState(State.GAMESTATE);
                 System.out.println("exiting TradeState");
         }
-        if(e.getKeyCode() == KeyEvent.VK_V){
-            state.switchState(State.GAMESTATE);
-            System.out.println("Going back to the future");
-        }
         else if(e.getKeyCode() == Settings.UP || e.getKeyCode() == KeyEvent.VK_UP) {          /* move cursor up */
-            ((TradeState)state).up();
-            System.out.println("YOLO -> UP");
+            ((TradeState)state).executeCommand(CommandsEnum.up);
         }
         else if(e.getKeyCode() == Settings.DOWN || e.getKeyCode() == KeyEvent.VK_DOWN) {        /* move cursor down */
-            ((TradeState)state).down();
-            System.out.println("YOLO -> DOWN");
+            ((TradeState)state).executeCommand(CommandsEnum.down);
         }
         else if(e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == KeyEvent.VK_LEFT) {   /* move cursor down */
-            ((TradeState)state).left();
-            System.out.println("YOLO -> LEFT");
+            ((TradeState)state).executeCommand(CommandsEnum.left);
         }
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
-            ((TradeState)state).right();
-            System.out.println("YOLO -> RIGHT");
+            ((TradeState)state).executeCommand(CommandsEnum.right);
         }
         else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
-            System.out.println("YOLO -> ENTER");
+            ((TradeState)state).executeCommand(CommandsEnum.make_transaction);
         }
 
 
