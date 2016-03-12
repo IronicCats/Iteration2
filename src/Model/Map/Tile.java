@@ -62,7 +62,6 @@ public abstract class Tile implements Subject {
         }
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
-            System.out.print("Telling player to take items");
             alert();
         }
     }
