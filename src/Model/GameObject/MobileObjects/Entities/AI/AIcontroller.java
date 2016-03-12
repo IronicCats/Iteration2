@@ -100,6 +100,15 @@ import java.util.Random;
         }
     }
 
+    public void tryToPickUpRandomly(int percentPickup){
+        int temp = random.nextInt(30);
+        if(temp == 1){
+            if(map.getTile(AI.getLocation().getX(),AI.getLocation().getY()).hasItems()){
+                //AI.pickupItem
+            }
+        }
+    }
+
     public boolean targetinFront() {
         Location targetTile = Location.newLocation(AI.getLocation().getDir(),AI.getLocation());
         if(map.getTile(targetTile).getObject() == target){
@@ -139,6 +148,17 @@ import java.util.Random;
 
     public void returntoBase(){
         moveTo(baseLoc);
+    }
+
+    public void runawayWheNearDeath(int runawayRange){
+        //if(nearDeath)
+        int temp = random.nextInt(30);
+        if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
+            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc,runawayRange);
+            if(map.getTile(randomLoc.getX(),randomLoc.getY()) != null) {
+                moveTo(randomLoc);
+            }
+        }
     }
 
     public void setDestination(Location location) {
