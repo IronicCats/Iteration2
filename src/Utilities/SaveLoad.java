@@ -62,8 +62,14 @@ public class SaveLoad {
     private static GameState game;
     private static MapView gamemapView;
     private static HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private static GameState gs;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
+
+
+    public static GameState getGameState() {
+        return gs;
+    }
 
     public static Entity getPlayer(){// this will be changed later
         return player;
