@@ -158,7 +158,7 @@ public class Map implements Subject {
     }
 
     public boolean isInMap(Location l) {
-        if(l.getX() < map.getWidth() || l.getX() > map.getWidth() || l.getY() < map.getHeight() || l.getY() > map.getHeight()) {
+        if(l.getX() < 0 || l.getX() > map.getWidth() || l.getY() < 0 || l.getY() > map.getHeight()) {
             System.out.println("Trying to interact outside map");
             return false;
         }

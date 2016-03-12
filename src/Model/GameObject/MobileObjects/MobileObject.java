@@ -9,6 +9,8 @@ import Model.Map.Tile;
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -143,6 +145,6 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interact(MobileObject mo) {
-        System.out.println("No Interaction defined");
-    };
+        DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
+    }
 }
