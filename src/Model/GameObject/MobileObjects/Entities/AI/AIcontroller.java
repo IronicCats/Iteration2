@@ -8,6 +8,7 @@ import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.*;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MapUtilities.RangeofTilesinSight;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.Observer;
 
@@ -121,12 +122,23 @@ import java.util.Random;
 
     //This method should be somewhere else TODO: put this somewhere else
     public void followThenAttackinRange(int attackRange){
-
-        if(FindTargetinTiles.find(FindTilesAround.find(AI.getLocation(), map, attackRange, AI.getViewLocation()),target)){
+        //TODO: take out attack range parameter and search through list of possible attacks instead. Also implment AI.attack
+        if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
          //   AI.attack();
         }
         follow();
 
+    }
+
+    public void followReturnToBaseWhenOutofRange(){
+        if(targetinView()){
+            follow();
+        }
+        returntoBase();
+    }
+
+    public void returntoBase(){
+        moveTo(baseLoc);
     }
 
     public void setDestination(Location location) {
