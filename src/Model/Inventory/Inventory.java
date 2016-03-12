@@ -81,9 +81,14 @@ public class Inventory implements Subject{
 
     public Item remove(int index) {
         Item item = pack.remove(index);
+        alert();
         return item;
     } // end remove
-
+    public void drop(int index){
+        Item item = pack.remove(index);
+        alert();
+        //somehow put it on map
+    }
     public void examine() {
         pack.examine();
     } // end examine

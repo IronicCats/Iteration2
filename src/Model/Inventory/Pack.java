@@ -98,7 +98,9 @@ public class Pack {
         }
         return tempItems;
     } // end dump
-
+    public void setNull(int i){
+        items[i]=null;
+    }
     public int getCount() { return count; }
     public int getMoney() { return money; }
     public void setMoney(int money) { this.money = money; }

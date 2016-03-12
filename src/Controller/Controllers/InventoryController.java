@@ -46,5 +46,11 @@ public class InventoryController extends Controller {
         else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
             System.out.println("YOLO -> ENTER");
         }
+        else if(e.getKeyCode() == KeyEvent.VK_Q){
+            ((InventoryState)state).interact();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_D){
+            ((InventoryState)state).drop();
+        }
     }
 }
