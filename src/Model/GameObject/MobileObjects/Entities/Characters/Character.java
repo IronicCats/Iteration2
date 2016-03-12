@@ -142,6 +142,11 @@ public abstract class Character extends Entity {
         }
     } // end applyEffect
 
+    public void setInitialLevel(int level) {
+        for(int i = 0; i < level; i++) {
+            getStats().levelUp();
+        }
+    } // end setInitialLevel
 
     public void execute(CommandsEnum e) {
         switch(e){
