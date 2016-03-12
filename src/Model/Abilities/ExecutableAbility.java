@@ -1,6 +1,7 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Requirement;
 
 /**
@@ -8,11 +9,14 @@ import Model.Requirement;
  */
 public abstract class ExecutableAbility extends Abilities {
 
+    private int skillLevel;
+
     //constructor
-    public ExecutableAbility(String name, String description, Effect effects, Requirement requirement, Effect cost) {
+    public ExecutableAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int skilLevel) {
         super(name, description, effects, requirement, cost);
+        this.skillLevel = skilLevel;
     }
 
     //operations
-    public abstract void execute();
+    public abstract void execute(MobileObject targeted);
 }

@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.DirectAbility;
+import Model.Abilities.PickPocket;
 import Model.Effects.Effect;
 import Model.Requirement;
 import Model.Stats.StatStructure;
@@ -37,7 +38,13 @@ public class Sneak extends Occupation{
         ));
 
         //computes occupational abilities
-
+        getOccupationalAbilities().add(new PickPocket(
+                                             "Pickpocket",
+                                             "Try and snatch something from someone",
+                                             new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
+                                             new Requirement(0),
+                                             new Effect(new StatStructure(StatsEnum.MANA, 0))),
+                                             getOccupationalSkillsValue(SkillsEnum.PICKPOCK)  );
     }
 
     //operations
