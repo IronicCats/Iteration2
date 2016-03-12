@@ -53,7 +53,8 @@ public class DirectionofTarget {
                 return 315;
             }
 
-        } else {
+        }
+        else {
 
             if (posXdis == 1 && negYdis == 0) {
                 return 45;
@@ -92,7 +93,8 @@ public class DirectionofTarget {
             }
 
         }
-    return 0;
+
+        return 0;
 
     }
 

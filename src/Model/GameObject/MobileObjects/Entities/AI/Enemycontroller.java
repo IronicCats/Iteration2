@@ -34,16 +34,20 @@ public class Enemycontroller extends AIcontroller {
         }
     }
 
-    public void followThenAttackinRange(){
-        if(canFace()) {
-            enemy.face(DirectionofTarget.getDir(enemy.getLocation(),target.getLocation()));
-            enemy.attack(checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities(),DistanceFromFaceableTarget.calculate(enemy,target)).get(0));
+
+    public void followThenAttackinRange() {
+        if (canFace()) {
+            System.out.println(DirectionofTarget.getDir(AI.getLocation(), target.getLocation()));
+            if (DirectionofTarget.getDir(AI.getLocation(), target.getLocation()) != 0) {
+                AI.face(DirectionofTarget.getDir(AI.getLocation(), target.getLocation()));
+                //enemy.attack(checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities(),DistanceFromFaceableTarget.calculate(enemy,target)).get(0));
             }
-        follow();
+            //follow();
+        }
     }
 
     @Override
-    public void update() {
+    public void update(){
 
     }
 
