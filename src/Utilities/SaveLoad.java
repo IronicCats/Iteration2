@@ -416,6 +416,7 @@ public class SaveLoad {
                 //load inventory FIXME
                 Inventory inv = new Inventory();
                 Player peer = new Player(l,2,occupation,inv);
+
                 player = peer;
                 //^ this will be location,occupation,inventory,stats
 
