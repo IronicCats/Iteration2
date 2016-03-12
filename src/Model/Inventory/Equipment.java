@@ -4,19 +4,15 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
-import Utilities.Observer;
-
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/6/16.
- *
+ * <p>
  * Handles equipped armor and weapons.
- *
+ * <p>
  * A character can wield one 2-handed weapon, two 1-handed weapons, or one 1-handed weapons and one shield.
  * A character can only wear one of each armor type.
- *
+ * <p>
  * Any attempt to equip an item in a slot where an item already exists will unequip the existing item first.
  */
 public class Equipment {
@@ -58,17 +54,25 @@ public class Equipment {
     public void equip(Weapon weapon) {
         switch (weapon.getType()) {
             case ONE_HANDED:
-                if(mainhand != null && offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
-                if(mainhand == null) {
+                if (mainhand != null && offhand != null) {
+                    unequip(EquipmentSlotEnum.OFFHAND);
+                }
+                if (mainhand == null) {
                     mainhand = weapon;
-                } else if(offhand == null) {
+                } else if (offhand == null) {
                     offhand = weapon;
                 }
                 break;
             case TWO_HANDED:
-                if(mainhand != null) { unequip(EquipmentSlotEnum.MAINHAND); }
-                if(offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
-                if(shield != null) { unequip(EquipmentSlotEnum.SHIELD); }
+                if (mainhand != null) {
+                    unequip(EquipmentSlotEnum.MAINHAND);
+                }
+                if (offhand != null) {
+                    unequip(EquipmentSlotEnum.OFFHAND);
+                }
+                if (shield != null) {
+                    unequip(EquipmentSlotEnum.SHIELD);
+                }
                 mainhand = weapon;
                 break;
             default:
@@ -80,39 +84,57 @@ public class Equipment {
     public void equip(Armor armor) {
         switch (armor.getType()) {
             case HEAD:
-                if(head != null) { unequip(EquipmentSlotEnum.HEAD); }
+                if (head != null) {
+                    unequip(EquipmentSlotEnum.HEAD);
+                }
                 head = armor;
                 break;
             case CHEST:
-                if(chest != null) { unequip(EquipmentSlotEnum.CHEST); }
+                if (chest != null) {
+                    unequip(EquipmentSlotEnum.CHEST);
+                }
                 chest = armor;
                 break;
             case LEGS:
-                if(legs != null) { unequip(EquipmentSlotEnum.LEGS); }
+                if (legs != null) {
+                    unequip(EquipmentSlotEnum.LEGS);
+                }
                 legs = armor;
                 break;
             case GLOVES:
-                if(gloves != null) { unequip(EquipmentSlotEnum.GLOVES); }
+                if (gloves != null) {
+                    unequip(EquipmentSlotEnum.GLOVES);
+                }
                 gloves = armor;
                 break;
             case BOOTS:
-                if(boots != null) { unequip(EquipmentSlotEnum.BOOTS); }
+                if (boots != null) {
+                    unequip(EquipmentSlotEnum.BOOTS);
+                }
                 boots = armor;
                 break;
             case SHIELD:
                 /*
                 shield occupies offhand slot, so unequip 2h or offhand weapon
                  */
-                if(shield != null) { unequip(EquipmentSlotEnum.SHIELD); }
-                if(mainhand.getType().equals(EquipmentTypeEnum.TWO_HANDED)) { unequip(EquipmentSlotEnum.MAINHAND); }
-                if(offhand != null) { unequip(EquipmentSlotEnum.OFFHAND); }
+                if (shield != null) {
+                    unequip(EquipmentSlotEnum.SHIELD);
+                }
+                if (mainhand.getType().equals(EquipmentTypeEnum.TWO_HANDED)) {
+                    unequip(EquipmentSlotEnum.MAINHAND);
+                }
+                if (offhand != null) {
+                    unequip(EquipmentSlotEnum.OFFHAND);
+                }
                 shield = armor;
                 break;
             case ACCESSORY:
-                if(accessory1 != null && accessory2 != null) { unequip(EquipmentSlotEnum.ACCESSORY2); }
-                if(accessory1 == null) {
+                if (accessory1 != null && accessory2 != null) {
+                    unequip(EquipmentSlotEnum.ACCESSORY2);
+                }
+                if (accessory1 == null) {
                     accessory1 = armor;
-                } else if(accessory2 == null) {
+                } else if (accessory2 == null) {
                     accessory2 = armor;
                 }
                 break;
@@ -177,7 +199,7 @@ public class Equipment {
     } // end unequip
 
     public Takable getSlot(EquipmentSlotEnum slot) {
-        switch(slot) {
+        switch (slot) {
             case MAINHAND:
                 return mainhand;
             case OFFHAND:

@@ -27,8 +27,17 @@ public class PetController extends AIcontroller {
             randomlyMoveinRange();
         }
         else{
-            System.out.println("here");
             follow();
         }
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void remove() {
+
     }
 }

@@ -13,12 +13,12 @@ public class Settings {
     public static int MAPWIDTH;
     public static int MAPHEIGHT;
     //MAP WIDTH AND HEIGHT CAN CHANGE, SHOULD BE STATIC
-    public static int TILEWIDTH = 64*2;
-    public static int TILEHEIGHT = 56*2;
-    public static int PLAYERWIDTH = TILEWIDTH/2;
-    public static int PLAYERHEIGHT = TILEHEIGHT/2;
-    public static int DEFAULTITEMHEIGHT = TILEHEIGHT/4;
-    public static int DEFAULTITEMWIDTH = TILEWIDTH/4;
+    public static int TILEWIDTH = 64 * 2;
+    public static int TILEHEIGHT = 56 * 2;
+    public static int PLAYERWIDTH = TILEWIDTH / 2;
+    public static int PLAYERHEIGHT = TILEHEIGHT / 2;
+    public static int DEFAULTITEMHEIGHT = TILEHEIGHT / 4;
+    public static int DEFAULTITEMWIDTH = TILEWIDTH / 4;
 
     public static int NORTH = 90;
     public static int NE = 45;

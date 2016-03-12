@@ -39,13 +39,14 @@ public class TradeState extends State {
         playerItems = new HashMap<>();
         shopItems = new HashMap<>();
         setController(new TradeController(this));
-        selector=0;
-        tradeView=new TradeView(playerPack,shopPack);
-        for(Item item : playerPack.getItems()) {
+        selector = 0;
+        tradeView = new TradeView(playerPack, shopPack);
+        for (Item item : playerPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
             }
-        }for(Item item : shopPack.getItems()) {
+        }
+        for (Item item : shopPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
             }
@@ -53,7 +54,7 @@ public class TradeState extends State {
     } // end constructor
 
     public void executeCommand(CommandsEnum command) {
-        switch(command) {
+        switch (command) {
             case make_transaction:
                 System.out.println("making transaction...");
                 transaction();
@@ -80,32 +81,36 @@ public class TradeState extends State {
 
     public void render(Graphics g) {
         game.render(g);
-        tradeView.render(g,selector);
+        tradeView.render(g, selector);
     }
+
     @Override
 
     public void switchState(State state) {
         setState(state);
     }
 
-    public void up(){
-        if(selector-4<0&&selector<16)selector+=12;
-        else if(selector-4<16&&selector>15)selector+=12;
-        else selector-=4;
+    public void up() {
+        if (selector - 4 < 0 && selector < 16) selector += 12;
+        else if (selector - 4 < 16 && selector > 15) selector += 12;
+        else selector -= 4;
     }
-    public void down(){
-        if(selector+4>15&&selector<16)selector-=12;
-        else if(selector+4>31&&selector>15)selector-=12;
-        else selector+=4;
+
+    public void down() {
+        if (selector + 4 > 15 && selector < 16) selector -= 12;
+        else if (selector + 4 > 31 && selector > 15) selector -= 12;
+        else selector += 4;
     }
-    public void right(){
-        if(selector%4==3&&selector<16)selector+=13;
-        else if(selector%4==3&&selector>15)selector-=19;
+
+    public void right() {
+        if (selector % 4 == 3 && selector < 16) selector += 13;
+        else if (selector % 4 == 3 && selector > 15) selector -= 19;
         else selector++;
     }
-    public void left(){
-        if(selector%4==0&&selector<16)selector+=19;
-        else if(selector%4==0&&selector>15)selector-=13;
+
+    public void left() {
+        if (selector % 4 == 0 && selector < 16) selector += 19;
+        else if (selector % 4 == 0 && selector > 15) selector -= 13;
         else selector--;
     }
 
@@ -113,13 +118,13 @@ public class TradeState extends State {
         Item good;
         int newValue;
 
-        if(selector <= 15) {                                /* player's pack */
+        if (selector <= 15) {                                /* player's pack */
             good = playerPack.get(selector);                    /* selling item */
-            if(good == null || good instanceof Quest)    /* can't trade quest items */
+            if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;
-            newValue = (int)(good.getValue() * 0.9);
+            newValue = (int) (good.getValue() * 0.9);
 
-            if(shopPack.getMoney() >= newValue) {
+            if (shopPack.getMoney() >= newValue) {
                 /*
                 execute sale
                  */
@@ -128,20 +133,20 @@ public class TradeState extends State {
                 shopPack.modifyMoney(-newValue);
                 shopPack.place(playerPack.remove(selector));
             } // end if
-        } else  {                                           /* shopkeeper's pack */
-            good = shopPack.get(selector-16);                   /* buying item */
-            if(good == null || good instanceof Quest)    /* can't trade quest items */
+        } else {                                           /* shopkeeper's pack */
+            good = shopPack.get(selector - 16);                   /* buying item */
+            if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;
-            newValue = (int)(good.getValue() * 1.1);
+            newValue = (int) (good.getValue() * 1.1);
 
-            if(playerPack.getMoney() >= newValue) {
+            if (playerPack.getMoney() >= newValue) {
                 /*
                 execute purchase
                  */
                 System.out.println("Buying " + good.getName() + " for " + newValue);
                 playerPack.modifyMoney(-newValue);
                 shopPack.modifyMoney(newValue);
-                playerPack.place(shopPack.remove(selector-16));
+                playerPack.place(shopPack.remove(selector - 16));
             } // end if
         }
     } // end transaction

@@ -1,12 +1,9 @@
 package View.ViewUtilities;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.ViewLocation;
-import Model.Location;
 import Model.Map.Map;
 import Utilities.Observer;
 import Utilities.Settings;
-import Utilities.Utilities;
 
 /**
  * Created by Aidan on 3/2/2016.
@@ -15,7 +12,7 @@ public class Camera implements Observer {
     private int gameWidth, gameHeight;
     private int xOffset, yOffset;
     private Map map;
-                                     // The Camera will also need a Player object.
+    // The Camera will also need a Player object.
 
     public Camera(int gameWidth, int gameHeight, Map map) {
         this.gameHeight = gameHeight;
@@ -24,19 +21,19 @@ public class Camera implements Observer {
         yOffset = 0;
         xOffset = 0;
     }
+
     //This makes sure that the map doesn't go off the screen and start showing blankspace
     public void keepCameraOnMap() {
 
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset >  ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250){
-            xOffset = ((map.getWidth() - (gameWidth/Settings.TILEWIDTH)) * Settings.TILEWIDTH )-1250;
+        } else if (xOffset > ((map.getWidth() - (gameWidth / Settings.TILEWIDTH)) * Settings.TILEWIDTH) - 1250) {
+            xOffset = ((map.getWidth() - (gameWidth / Settings.TILEWIDTH)) * Settings.TILEWIDTH) - 1250;
         }
         if (yOffset < 0) {
             yOffset = 0;
-        }
-        else if (yOffset > (((map.getHeight() + 1) * Settings.TILEHEIGHT) - gameHeight)) {
-            yOffset = ((map.getHeight()+1) * Settings.TILEHEIGHT) - gameHeight;
+        } else if (yOffset > (((map.getHeight() + 1) * Settings.TILEHEIGHT) - gameHeight)) {
+            yOffset = ((map.getHeight() + 1) * Settings.TILEHEIGHT) - gameHeight;
 
         }
     }
@@ -44,14 +41,14 @@ public class Camera implements Observer {
     public void centerOnPlayer(Player player) {
         gameWidth = Settings.GAMEWIDTH;
         gameHeight = Settings.GAMEHEIGHT;
-        xOffset = (int)player.getViewLocation().getX() - gameWidth/2 + Settings.PLAYERWIDTH/2;
-        yOffset = (int)player.getViewLocation().getY() - gameHeight/2 + Settings.PLAYERHEIGHT/2;
+        xOffset = (int) player.getViewLocation().getX() - gameWidth / 2 + Settings.PLAYERWIDTH / 2;
+        yOffset = (int) player.getViewLocation().getY() - gameHeight / 2 + Settings.PLAYERHEIGHT / 2;
         keepCameraOnMap();
     }
 
-    public void move(int degrees){
+    public void move(int degrees) {
         //The move method in camera words very similarly to the players movement
-        switch(degrees){
+        switch (degrees) {
             case 90:
                 yOffset -= 30;
                 break;

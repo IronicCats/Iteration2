@@ -1,9 +1,8 @@
 package Controller.Controllers;
 
+import Controller.Controller;
 import State.State;
 import State.States.GameState.PauseState;
-import Controller.Controller;
-import State.States.MenuState;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;

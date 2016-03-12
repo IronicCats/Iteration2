@@ -11,11 +11,9 @@ import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Tickable;
 import Utilities.ItemUtilities.ItemsEnum;
-import Utilities.Settings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -24,7 +22,7 @@ import java.util.Random;
 /* Setting up packages
 
  */
-public class Pet extends MobileObject implements Tickable{
+public class Pet extends MobileObject implements Tickable {
 
     PetController controller;
     PetStats stats;
@@ -68,16 +66,24 @@ public class Pet extends MobileObject implements Tickable{
         }
     } // end tick
 
-    public PetStats getStats() { return stats; }
-    public Pack getPack() { return pack; }
-    public boolean getOwned() { return owned; }
+    public PetStats getStats() {
+        return stats;
+    }
+
+    public Pack getPack() {
+        return pack;
+    }
+
+    public boolean getOwned() {
+        return owned;
+    }
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         ArrayList<Item> tempItems = new ArrayList<>(items);
         Iterator<Item> it = tempItems.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Item i = it.next();
-            if(i instanceof Takable && pack.getSizeLeft() > 0) {
+            if (i instanceof Takable && pack.getSizeLeft() > 0) {
                 pickup(i);
                 items.remove(i);
             }
@@ -89,7 +95,7 @@ public class Pet extends MobileObject implements Tickable{
         return controller;
     }
 
-    public void setOwnership(){
+    public void setOwnership() {
         this.owned = true;
         this.getController().setPlayer(this.player);
         this.getController().setBaseLoc(this.player.getLocation());

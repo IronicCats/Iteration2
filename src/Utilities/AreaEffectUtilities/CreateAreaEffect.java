@@ -1,16 +1,15 @@
 package Utilities.AreaEffectUtilities;
 
-import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Utilities.Utilities;
+import Model.Location;
 
 /**
  * Created by mazumderm on 3/3/2016.
  */
 public class CreateAreaEffect {
 
-    public static AreaEffect addDamage(String name, String description, Location location){
+    public static AreaEffect addDamage(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,
@@ -37,7 +36,7 @@ public class CreateAreaEffect {
         );
     }
 
-    public static AreaEffect addLevelUp(String name, String description, Location location){
+    public static AreaEffect addLevelUp(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,
@@ -46,7 +45,7 @@ public class CreateAreaEffect {
         );
     }
 
-    public static AreaEffect addTeleport(String name, String description, Location location){
+    public static AreaEffect addTeleport(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,
@@ -55,7 +54,7 @@ public class CreateAreaEffect {
         );
     }
 
-    public static AreaEffect addTrap(String name, String description, Location location){
+    public static AreaEffect addTrap(String name, String description, Location location) {
         return new AreaEffect(
                 name,
                 description,

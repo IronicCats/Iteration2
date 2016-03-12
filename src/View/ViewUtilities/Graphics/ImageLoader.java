@@ -8,11 +8,11 @@ import java.io.IOException;
  * Created by Aidan on 3/1/2016.
  */
 public class ImageLoader {
-    public BufferedImage loadImage(String path){
+    public BufferedImage loadImage(String path) {
         System.out.println(path);
         try {
             return ImageIO.read(getClass().getResourceAsStream(path));
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }

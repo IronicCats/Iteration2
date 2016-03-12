@@ -1,8 +1,7 @@
 package State;
 
-import Controller.*;
-import Model.*;
-import Model.Inventory.Inventory;
+import Controller.Controller;
+import Model.Tickable;
 import State.States.GameState.*;
 import State.States.InitialState;
 import State.States.MenuState;
@@ -33,25 +32,35 @@ public class State implements Tickable, Renderable {
     private Controller controller;
 
 
-    public void switchState(State state) {}
+    public void switchState(State state) {
+    }
 
-    public static void setState( State state ) {
+    public static void setState(State state) {
 
-        if(currentState != null) {
+        if (currentState != null) {
             currentState.deactivateListener();
         }
         currentState = state;
         currentState.activateListener();
     }
-    public static State getCurrentState() { return currentState; }
 
-    public Controller getController() { return controller; }
-    public void setController( Controller controller ) { this.controller = controller; }
+    public static State getCurrentState() {
+        return currentState;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 
 
     public void activateListener() {
         canvas.addKeyListener(controller);
     }
+
     public void deactivateListener() {
         canvas.removeKeyListener(controller);
     }

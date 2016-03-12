@@ -2,11 +2,9 @@ package Model.GameObject.Item;
 
 import Model.GameObject.GameObject;
 import Model.Location;
-import Model.Requirement;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
-import View.Views.ItemView;
 
 import java.util.ArrayList;
 
@@ -47,14 +45,22 @@ public abstract class Item extends GameObject implements Subject {
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDescription() {
         return description;
     }
-    public ItemsEnum getItemType() { return type; }
-    public int getValue() { return value; }
+
+    public ItemsEnum getItemType() {
+        return type;
+    }
+
+    public int getValue() {
+        return value;
+    }
 
     @Override
     public void addObserver(Observer o) {
@@ -68,7 +74,7 @@ public abstract class Item extends GameObject implements Subject {
 
     @Override
     public void alert() {
-        for(int i = 0; i < observers.size(); ++i) {
+        for (int i = 0; i < observers.size(); ++i) {
             observers.get(i).update();
         }
     }

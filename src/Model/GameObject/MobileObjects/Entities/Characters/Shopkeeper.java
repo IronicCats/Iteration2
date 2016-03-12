@@ -1,6 +1,8 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.AIcontroller;
+import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
+import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
  * Created by broskj on 3/10/16.
  */
 public class Shopkeeper extends FriendlyNPC {
-    public Shopkeeper(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
+    public Shopkeeper(Location location, int id, Occupation occupation, Inventory inventory, FriendlyController controller, ArrayList<String> dialog) {
         super(location, id, occupation, inventory, controller, dialog);
     } // end constructor
 
@@ -25,8 +27,8 @@ public class Shopkeeper extends FriendlyNPC {
     } // end initiateTrade
 
     public void interact(MobileObject mo) {
-        if(mo instanceof Player){
-            initiateTrade(((Player)mo).getPack());
+        if (mo instanceof Player) {
+            initiateTrade(((Player) mo).getPack());
         }
     }
 } // end class Shopkeeper

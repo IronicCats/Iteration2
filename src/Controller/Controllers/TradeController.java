@@ -3,7 +3,6 @@ package Controller.Controllers;
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
 import State.State;
-import State.States.GameState.InventoryState;
 import State.States.GameState.TradeState;
 import Utilities.Settings;
 

@@ -9,7 +9,7 @@ import Model.Requirement;
 /**
  * Created by broskj on 3/8/16.
  */
-public abstract class Equippable extends Takable{
+public abstract class Equippable extends Takable {
     private EquipmentTypeEnum type;
 
     public Equippable() {
@@ -22,6 +22,11 @@ public abstract class Equippable extends Takable{
         this.type = type;
     } // end constructor
 
-    public EquipmentTypeEnum getType() { return type; }
-    public EquipmentModification getEquipmentModification() { return (EquipmentModification) effect; }
+    public EquipmentTypeEnum getType() {
+        return type;
+    }
+
+    public EquipmentModification getEquipmentModification() {
+        return (EquipmentModification) effect;
+    }
 } // end class Equippable

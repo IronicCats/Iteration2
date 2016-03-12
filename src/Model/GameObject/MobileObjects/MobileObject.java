@@ -2,10 +2,8 @@ package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
 import Model.Location;
-
 import Model.Map.Map;
 import Model.Map.Tile;
-
 import Model.Stats.Stats;
 import State.States.GameState.GameState;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
@@ -47,7 +45,7 @@ public abstract class MobileObject extends GameObject {
         id = 0;
     }
 
-    public MobileObject(Location location, int id,  Stats stats) {
+    public MobileObject(Location location, int id, Stats stats) {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
@@ -59,8 +57,8 @@ public abstract class MobileObject extends GameObject {
         this.id = id;
     }
 
-    public void move(int degrees){
-        if(location.getDir() == degrees) {
+    public void move(int degrees) {
+        if (location.getDir() == degrees) {
             if (canMove) {
                 canMove = false;
                 location = Location.newLocation(degrees, location);
@@ -68,7 +66,7 @@ public abstract class MobileObject extends GameObject {
                 registerTile(location);
                 alert();
             }
-        }else {
+        } else {
             face(degrees);
         }
     }
@@ -78,15 +76,17 @@ public abstract class MobileObject extends GameObject {
         alert();
     }
 
-    public Map getMap(){
+    public Map getMap() {
         return this.map;
     }
+
     public Stats getStats() {
         return stats;
     }
 
     public int getMovement() {
-        return stats.getMovement(); }
+        return stats.getMovement();
+    }
 
     public ViewLocation getViewLocation() {
         return viewLocation;
@@ -107,7 +107,7 @@ public abstract class MobileObject extends GameObject {
 
     public Tile registerTile(Location location) {
         tile.deregister();
-        while(map.getTile(location).hasObject()) {
+        while (map.getTile(location).hasObject()) {
             //Waiting to register with the next tile;
         }
         tile = map.register(this);
@@ -118,7 +118,7 @@ public abstract class MobileObject extends GameObject {
         tile.interact();
     }
 
-    public Tile getTile(){
+    public Tile getTile() {
         return tile;
     }
 
@@ -133,7 +133,6 @@ public abstract class MobileObject extends GameObject {
     public int getRange() {
         return range;
     }
-
 
 
     public void setRange(int range) {
