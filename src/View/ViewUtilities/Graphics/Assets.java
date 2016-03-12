@@ -52,6 +52,7 @@ public class Assets {
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
     public static BufferedImage STAR;
+    public static BufferedImage FIRE;
     public static BufferedImage LEFT;
     public static BufferedImage RIGHT;
     public static BufferedImage BACK;
@@ -202,6 +203,9 @@ public class Assets {
 
         SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
         STAR = starSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet fireSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Fire.png"));
+        FIRE = fireSheet.crop(0, 0, 32, 32);
 
         //menu
         LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");

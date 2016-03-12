@@ -80,8 +80,10 @@ public class GameState extends State {
         //area effect
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         AreaEffect b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6, 4));
+        AreaEffect c = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(4, 4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
+        map.placeAreaEffect(c);
 
         map.setMapItems(mapItems);
 

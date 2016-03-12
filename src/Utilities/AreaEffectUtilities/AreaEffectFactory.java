@@ -59,12 +59,17 @@ public class AreaEffectFactory {
     public static DecalView makeAsset(AreaEffectEnum areaEffectEnum, AreaEffect areaEffect) {
         switch (areaEffectEnum) {
             case DAMAGE:
+                return new DecalView(areaEffect, Assets.FIRE);
             case LEVELUP:
                 return new DecalView(areaEffect, Assets.STAR);
             case DEATH:
                 return new DecalView(areaEffect, Assets.SKULL);
             case HEAL:
                 return new DecalView(areaEffect, Assets.REDCROSS);
+            case TELEPORT:
+                return null;
+            case TRAP:
+                return null;
             default:
                 return null;
         }
