@@ -7,11 +7,11 @@ import Utilities.Utilities;
  */
 public class ViewLocation {
 
-    private float x,y;
+    private float x, y;
 
-    public ViewLocation(int x, int y){
-        this.x = Utilities.calculateTileCenterXLocation(x,y);
-        this.y = Utilities.calculateTileCenterYLocation(x,y);
+    public ViewLocation(int x, int y) {
+        this.x = Utilities.calculateTileCenterXLocation(x, y);
+        this.y = Utilities.calculateTileCenterYLocation(x, y);
     }
 
     public float getX() {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class FindTargetinTiles {
 
-    public static boolean find(ArrayList<Tile> range, MobileObject target){
+    public static boolean find(ArrayList<Tile> range, MobileObject target) {
 
         for (Tile tile : range) {
             if (tile.getObject() == target) {

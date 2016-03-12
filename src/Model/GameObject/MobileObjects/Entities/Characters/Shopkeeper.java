@@ -25,8 +25,8 @@ public class Shopkeeper extends FriendlyNPC {
     } // end initiateTrade
 
     public void interact(MobileObject mo) {
-        if(mo instanceof Player){
-            initiateTrade(((Player)mo).getPack());
+        if (mo instanceof Player) {
+            initiateTrade(((Player) mo).getPack());
         }
     }
 } // end class Shopkeeper

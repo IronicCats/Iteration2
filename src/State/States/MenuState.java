@@ -13,26 +13,29 @@ public class MenuState extends State {
     private MenuView menuView;
 
     public MenuState() {
-        menuView=new MenuView();
+        menuView = new MenuView();
         setController(new MenuController(this));
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         return;
     }
+
     public void switchState(State state) {
-            setState(state);
+        setState(state);
     }
-    public void moveUp(){
-            menuView.previous();
+
+    public void moveUp() {
+        menuView.previous();
     }
-    public void moveDown(){
-                menuView.next();
-        }
+
+    public void moveDown() {
+        menuView.next();
+    }
 
     public void render(Graphics g) {
-                menuView.render(g);
-        }
+        menuView.render(g);
+    }
 
 }

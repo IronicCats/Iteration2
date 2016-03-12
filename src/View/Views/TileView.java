@@ -1,15 +1,11 @@
 package View.Views;
 
-import Model.GameObject.AreaEffect.AreaEffect;
-import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
-import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Tile;
 import State.State;
-import State.States.GameState.GameState;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -49,42 +45,44 @@ public class TileView implements Observer, Renderable {
 
     }
 
-    public BufferedImage getSprite(){ return sprite; }
+    public BufferedImage getSprite() {
+        return sprite;
+    }
 
     @Override
     public void update() {
         if (tile.hasItems()) {
             Item item;
-            if(tile.amountOfItems() > 1) {
-                itemView = ItemFactory.makeAsset(ItemsEnum.BAGOFITEMS,tile.getItems().get(0));
-                for(Item i: tile.getItems()){
-                    if(i instanceof Obstacle){//IF THE ITEM IS AN OBSTACLE, DRAW THAT ONLY
+            if (tile.amountOfItems() > 1) {
+                itemView = ItemFactory.makeAsset(ItemsEnum.BAGOFITEMS, tile.getItems().get(0));
+                for (Item i : tile.getItems()) {
+                    if (i instanceof Obstacle) {//IF THE ITEM IS AN OBSTACLE, DRAW THAT ONLY
                         item = i;
-                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
                     }
                 }
-            }else{
+            } else {
                 item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
-                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()],tile.getItems().get(0));
+                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
 
 
             }
 
-        }else {
+        } else {
             itemView = null;
         }
 
 
         //initialize decalView
-        if(tile.getHasAreaEffect()){
-           decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
+        if (tile.getHasAreaEffect()) {
+            decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
         }
 
-        if(tile.hasObject()){
-            if(State.getCurrentState() == State.GAMESTATE) {
+        if (tile.hasObject()) {
+            if (State.getCurrentState() == State.GAMESTATE) {
                 mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
             }
-        }else {
+        } else {
             mobileObjectView = null;
         }
 
@@ -106,29 +104,29 @@ public class TileView implements Observer, Renderable {
     }
 
     public void renderNonMobile(Graphics g, int xOffset, int yOffset, Location playerLocation) {
-        if(decalView != null){
+        if (decalView != null) {
             decalView.render(g, xOffset, yOffset);
         }
-        if(itemView != null) {
+        if (itemView != null) {
             itemView.render(g, xOffset, yOffset);
             //itemView.render(g);
         }
     }
 
     public void mobileObjects(Graphics g, int xOffset, int yOffset, Location playerLocation) {
-        if(tile.hasObject() && mobileObjectView == null && !Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)){
+        if (tile.hasObject() && mobileObjectView == null && !Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)) {
 
             mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
-        }else if(!tile.hasObject()){
+        } else if (!tile.hasObject()) {
             mobileObjectView = null;
         }
-        if(mobileObjectView != null) {
+        if (mobileObjectView != null) {
             mobileObjectView.render(g, State.GAMESTATE.getCamera().getxOffset(), State.GAMESTATE.getCamera().getyOffset());
         }
     }
 
     public void renderFog(Graphics g, int xOffset, int yOffset, Location playerLocation) {
-        if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)) {//tile.visited
+        if (Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)) {//tile.visited
             if (tile.isVisited()) {
                 g.drawImage(Assets.HALFFOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
                 return;

@@ -15,15 +15,14 @@ public class PetController extends AIcontroller {
         super(map);
     }
 
-   @Override
+    @Override
     public void tick() {
-        if(targetinView()) {
+        if (targetinView()) {
             //follow();
             //goToObjInView();
-            System.out.println(CanFace.find(AI,target,map));
+            System.out.println(CanFace.find(AI, target, map));
             //System.out.println(targetinSight());
-        }
-        else{
+        } else {
             //randomlyMoveinRange();
             //moveTo(destination);
         }
