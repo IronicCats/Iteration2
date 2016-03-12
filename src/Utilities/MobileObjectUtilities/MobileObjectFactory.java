@@ -2,11 +2,10 @@ package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
-import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
+import Model.GameObject.MobileObjects.Entities.AI.EnemyController;
 import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
-import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
@@ -38,15 +37,17 @@ public class MobileObjectFactory {
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
 
         // Enemy zero
-        NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
+        HostileNPC enemy = (HostileNPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
         enemy.getController().setBaseLoc(new Location(0,0));
+        enemy.getController().setEnemy(enemy);
         enemy.getController().setTarget(player);
         enemy.getStats().setLife(2);
         objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
 
         // Enemy one
-        NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
+        HostileNPC enemy1 = (HostileNPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
         enemy1.getController().setTarget(player);
+        enemy1.getController().setEnemy(enemy1);
         enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
@@ -73,7 +74,7 @@ public class MobileObjectFactory {
         int id = npcEnum.ordinal();
         switch (npcEnum) {
             case KITTEN:
-                return new NPC(location,
+                return new HostileNPC(location,
                         id,
                         new Smasher(),
                         new Inventory(
@@ -81,10 +82,10 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 10) + 1),
                                 new Equipment()),
-                        new Enemycontroller(map));
+                        new EnemyController(map));
             case SMALL_CAT:
             case BLUE:
-                return new NPC(location,
+                return new HostileNPC(location,
                         id,
                         new Smasher(),
                         new Inventory(
@@ -92,9 +93,9 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 25) + 1),
                                 new Equipment()),
-                        new Enemycontroller(map));
+                        new EnemyController(map));
             case FAT_CAT:
-                return new NPC(location,
+                return new HostileNPC(location,
                         id,
                         new Smasher(),
                         new Inventory(
@@ -102,7 +103,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 50) + 1),
                                 new Equipment()),
-                        new Enemycontroller(map));
+                        new EnemyController(map));
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,

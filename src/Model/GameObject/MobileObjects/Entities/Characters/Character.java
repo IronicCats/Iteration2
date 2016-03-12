@@ -15,6 +15,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Inventory.*;
 import Model.Location;
+import Model.Requirement;
 import Model.Stats.CharacterStats;
 import Utilities.Observer;
 import View.Views.MessageBox.DisplayMessage;
@@ -136,12 +137,17 @@ public abstract class Character extends Entity implements Observer{
     } // end drop
 
     public void equip(int index) {
-        DisplayMessage.addMessage(new GameMessage("You equipped  " + inventory.get(index), 3));
-        if(inventory.get(index) instanceof Weapon) {
-            equip((Weapon) inventory.remove(index));
-        }
-        else if(inventory.get(index) instanceof Armor) {
-            equip((Armor) inventory.remove(index));
+        Item item = inventory.get(index);
+        if(meetsRequirement(((Takable)item).getRequirements())) {
+            DisplayMessage.addMessage(new GameMessage("You equipped  " + inventory.get(index), 3));
+            if(inventory.get(index) instanceof Weapon) {
+                equip((Weapon) inventory.remove(index));
+            }
+            else if(inventory.get(index) instanceof Armor) {
+                equip((Armor) inventory.remove(index));
+            }
+        } else {
+            System.out.println("don't meet requirements");
         }
     } // end equip
 
@@ -154,6 +160,10 @@ public abstract class Character extends Entity implements Observer{
             getStats().levelUp();
         }
     } // end setInitialLevel
+
+    public boolean meetsRequirement(Requirement requirement) {
+        return requirement.meetsRequirements(getStats().getLevel(), getPack(), getOccupation());
+    } // end meetsRequirement
 
     public void execute(CommandsEnum e) {
         switch (e) {
