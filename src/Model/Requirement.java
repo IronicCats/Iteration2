@@ -3,6 +3,7 @@ package Model;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Utilities.ItemUtilities.ItemsEnum;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -16,51 +17,51 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 public class Requirement {
 
     private int requiredLevel; // used to tell if player is high enough level. Intialized to 0
-    private Item requiredItem; // used to tell if player has required item
+    private ItemsEnum requiredItemEnum; // used to tell if player has required item
     private Occupation requiredOccupation;
 
     public Requirement() {
         this.requiredLevel = 0;
-        this.requiredItem = null;
+        this.requiredItemEnum = null;
         this.requiredOccupation = null;
     } // end default constructor
 
     public Requirement(int requiredLevel, Occupation requiredOccupation) {
         this.requiredLevel = requiredLevel;
-        this.requiredItem = null;
+        this.requiredItemEnum = null;
         this.requiredOccupation = requiredOccupation;
     } // end constructor
 
-    public Requirement(Item requiredItem, Occupation requiredOccupation) {
+    public Requirement(ItemsEnum requiredItem, Occupation requiredOccupation) {
         this.requiredLevel = 0;
-        this.requiredItem = requiredItem;
+        this.requiredItemEnum = requiredItem;
         this.requiredOccupation = requiredOccupation;
     } // end constructor
 
     // constructor for requirement needing both item level and specific item
-    public Requirement(int requiredLevel, Item requiredItem){
+    public Requirement(int requiredLevel, ItemsEnum requiredItem){
         this.requiredLevel = requiredLevel;
-        this.requiredItem = requiredItem;
+        this.requiredItemEnum = requiredItem;
         this.requiredOccupation = null;
     } // end constructor
 
     // constructor for requirement needing only player level
     public Requirement(int requiredLevel){
         this.requiredLevel = requiredLevel;
-        this.requiredItem = null;
+        this.requiredItemEnum = null;
         this.requiredOccupation = null;
     } // end constructor
 
     // constructor for requirement needing only specific item
-    public Requirement(Item requiredItem){
+    public Requirement(ItemsEnum requiredItem){
         this.requiredLevel = 0;
-        this.requiredItem = requiredItem;
+        this.requiredItemEnum = requiredItem;
         this.requiredOccupation = null;
     } // end constructor
 
     public Requirement(Occupation requiredOccupation) {
         this.requiredLevel = 0;
-        this.requiredItem = null;
+        this.requiredItemEnum = null;
         this.requiredOccupation = requiredOccupation;
     } // end constructor
 

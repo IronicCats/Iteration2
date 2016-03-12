@@ -1,11 +1,12 @@
 package Utilities.AIUtilities;
 
-import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Utilities.MapUtilities.Neighbors;
 import Utilities.Settings;
+import Model.GameObject.MobileObjects.ViewLocation;
+import Utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,11 +17,11 @@ import java.util.Queue;
  */
 public class FindTilesAround {
 
-    public static ArrayList<Tile> find(Location Loc, Map map, int sight) {
+    public static ArrayList<Tile> find(Location Loc, Map map, int sight, ViewLocation viewLoc) {
 
         Tile BFS[][] = new Tile[Settings.TILEWIDTH][Settings.TILEHEIGHT];   //this is going to be an array handling all tiles found in BFS
         Queue<Tile> Queue = new LinkedList<>();
-        Queue.add(map.getTile(Loc.getX(),Loc.getY()));  //a Queue for adding tiles that are encountered
+        Queue.add(map.getTile(Loc.getX(), Loc.getY()));  //a Queue for adding tiles that are encountered
         while (!Queue.isEmpty()) {
             Tile current = Queue.remove();
             Tile neighbors[] = Neighbors.neighbors(current, map);
@@ -36,14 +37,13 @@ public class FindTilesAround {
 
         for (int i = 0; i < Settings.MAPWIDTH; i++) {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
-                if(BFS[i][j] != null) {
-                    if (Math.abs(Loc.getX() - BFS[i][j].getLocation().getX()) <= sight && Math.abs(Loc.getY() - BFS[i][j].getLocation().getY()) <= sight) {
-                                range.add(BFS[i][j]);
-                            }
-                        }
-                    }
+
+                if (!Utilities.outOfSite(viewLoc, new ViewLocation(BFS[i][j].getLocation().getX(), BFS[i][j].getLocation().getY()))) {
+                    range.add(BFS[i][j]);
                 }
+
+            }
+        }
         return range;
     }
 }
-

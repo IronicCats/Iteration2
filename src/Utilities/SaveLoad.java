@@ -90,6 +90,9 @@ public class SaveLoad {
     public static void setMobileObjects(HashMap<MobileObject,MobileObjectView> mobileObjectMap){
         mobileObjects = mobileObjectMap;
     }
+    public static void setCurrFileName(String fileName){
+        currFileName = fileName;
+    }
 
     public static SaveLoad getInstance() {//returns the instance of SaveLoad
         return instance;
@@ -424,14 +427,6 @@ public class SaveLoad {
 
 
 
-
-
-
-
-
-
-
-
         //cStats.set
         //StatStructure statStructure = new StatStructure()
 
@@ -451,7 +446,7 @@ public class SaveLoad {
     //---------------------------------SAVE--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void save(){//function that will be called when you want to save
         if(currFileName == null)
-            currFileName = "test";
+            currFileName = "saveFile1";
 
             try{
             //Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.

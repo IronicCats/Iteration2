@@ -21,7 +21,6 @@ public class LoadController extends Controller{
         }
         if (e.getKeyCode() == Settings.ESC) {
             state.switchState(State.GAMESTATE);
-            System.out.println("Game was Paused");
         }
 
     }

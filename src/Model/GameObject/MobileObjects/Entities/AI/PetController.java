@@ -14,10 +14,16 @@ public class PetController extends AIcontroller {
         super(map);
     }
 
-    public void follow(){
-        moveTo(target.getLocation());
+   @Override
+    public void tick() {
+        if(targetinSight()) {
+            //follow(mobileObject);
+            goToObjInView();
+        }
+        else{
+            //randomlyMoveinRange();
+            //moveTo(destination);
+        }
     }
-
-
 
 }

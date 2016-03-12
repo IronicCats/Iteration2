@@ -2,6 +2,7 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
@@ -11,12 +12,16 @@ import Model.Stats.StatStructure;
  * Created by mazumderm on 3/5/2016.
  */
 public abstract class Abilities {
+    String name;
+    String description;
     Effect effects;
     Requirement requirement;
     Effect cost;
     //constructor
-    public Abilities(Effect effects, Requirement requirement, Effect cost) {
+    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost) {
 
+        this.name = name;
+        this.description = description;
         this.effects = effects;
         this.requirement = requirement;
         this.cost = cost;
@@ -48,5 +53,5 @@ public abstract class Abilities {
     }
 
     //operations
-    public abstract void execute(Location location);
+    public abstract void execute(MobileObject m, Location targeterLocation);
 }

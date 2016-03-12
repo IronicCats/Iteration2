@@ -1,5 +1,6 @@
 package Utilities.AIUtilities;
 
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -11,10 +12,10 @@ import java.util.ArrayList;
  */
 public class FindTilesInSight {
 
-    public static ArrayList<Tile> find(Location location, Map map, int view) {
+    public static ArrayList<Tile> find(Location location, Map map, int view, ViewLocation viewLoc) {
 
 
-        ArrayList<Tile> tilesinView = FindTilesAround.find(location,map,view);
+        ArrayList<Tile> tilesinView = FindTilesAround.find(location,map,view,viewLoc);
 
         ArrayList<Tile> tilesinSight = new ArrayList<Tile>();
 

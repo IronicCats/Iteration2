@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -48,7 +49,6 @@ import java.util.Random;
             randomlyMoveinRange();
             //moveTo(destination);
         }
-
     }
 
     //Moves to destination
@@ -59,7 +59,6 @@ import java.util.Random;
             if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
                     AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving");
             }
         }
     }
@@ -84,11 +83,11 @@ import java.util.Random;
     }
 
     public ArrayList<Tile> getTilesinView(){
-        return FindTilesAround.find(AI.getLocation(), map, AI.getView());
+        return FindTilesAround.find(AI.getLocation(), map, AI.getView(), AI.getViewLocation());
     }
 
     public ArrayList<Tile> getTilesinSight(){
-        return FindTilesInSight.find(AI.getLocation(),map,AI.getView());
+        return FindTilesAround.find(AI.getLocation(), map, AI.getView(), AI.getViewLocation());
     }
 
     public void  randomlyMoveinRange(){
@@ -124,7 +123,7 @@ import java.util.Random;
     //This method should be somewhere else TODO: put this somewhere else
     public void followThenAttackinRange(int attackRange){
 
-        if(FindTargetinTiles.find(FindTilesAround.find(AI.getLocation(), map, attackRange),target)){
+        if(FindTargetinTiles.find(FindTilesAround.find(AI.getLocation(), map, attackRange, AI.getViewLocation()),target)){
          //   AI.attack();
         }
         follow();

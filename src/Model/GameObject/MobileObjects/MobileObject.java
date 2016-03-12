@@ -19,7 +19,7 @@ e.g., Pet, Projectile, Vehicle, Entity.
 It holds all common attributes between the above listed objects.
 Also inherits location from GameObject
 */
-public abstract class MobileObject extends GameObject{
+public abstract class MobileObject extends GameObject {
 
     protected Map map;
 
@@ -42,8 +42,8 @@ public abstract class MobileObject extends GameObject{
         view = 2;
         range = 2;
         id = 0;
-
     }
+
     public MobileObject(Location location, int id,  Stats stats) {
         super(location);
         canMove = true;
@@ -54,25 +54,36 @@ public abstract class MobileObject extends GameObject{
         view = 2;
         range = 2;
         this.id = id;
-
     }
 
     public void move(int degrees){
-        if(canMove) {
-            canMove = false;
-            location = Location.newLocation(degrees, location);
-            location.setDir(degrees);
-            registerTile(location);
-            alert();
+        if(location.getDir() == degrees) {
+            if (canMove) {
+                canMove = false;
+                location = Location.newLocation(degrees, location);
+                location.setDir(degrees);
+                registerTile(location);
+                alert();
+            }
+        }else {
+            face(degrees);
         }
     }
 
+    public void face(int degrees) {
+        location.setDir(degrees);
+        alert();
+    }
 
+    public Map getMap(){
+        return this.map;
+    }
     public Stats getStats() {
         return stats;
     }
 
-    public int getMovement() { return stats.getMovement(); }
+    public int getMovement() {
+        return stats.getMovement(); }
 
     public ViewLocation getViewLocation() {
         return viewLocation;
@@ -119,6 +130,8 @@ public abstract class MobileObject extends GameObject{
     public int getRange() {
         return range;
     }
+
+
 
     public void setRange(int range) {
         this.range = range;

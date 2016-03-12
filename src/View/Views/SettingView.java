@@ -19,5 +19,7 @@ public class SettingView implements Renderable{
 
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(width/10, height/10, width*4/5, height*4/5);
+
+
     }
 }
