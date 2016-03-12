@@ -14,7 +14,7 @@ import java.util.Queue;
 /**
  * Created by Aidan on 3/9/2016.
  */
-public class FindTilesinRange {
+public class FindTilesAround {
 
     public static ArrayList<Tile> find(Location Loc, Map map, int sight) {
 
@@ -38,11 +38,11 @@ public class FindTilesinRange {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
                 if(BFS[i][j] != null) {
                     if (Math.abs(Loc.getX() - BFS[i][j].getLocation().getX()) <= sight && Math.abs(Loc.getY() - BFS[i][j].getLocation().getY()) <= sight) {
-                        range.add(BFS[i][j]);
+                                range.add(BFS[i][j]);
+                            }
+                        }
                     }
                 }
-            }
-        }
         return range;
     }
 }
