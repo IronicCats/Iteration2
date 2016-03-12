@@ -20,8 +20,8 @@ public class SettingController extends Controller {
             return;
         }
         if (e.getKeyCode() == Settings.ESC) {
-            state.switchState(State.GAMESTATE);
-            System.out.println("Game was in settings and is now resumed");
+            state.switchState(State.PAUSESTATE);
+            System.out.println("Game was in settings and is at pause menu");
         }
 
     }

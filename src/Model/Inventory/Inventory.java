@@ -4,6 +4,7 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Money;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -64,10 +65,20 @@ public class Inventory implements Subject{
     } // end get
 
     public void place(Item item) {
+        if(item instanceof Money) {                         /* item type is money, add quantity to money var */
+            modifyMoney(((Money) item).getQuantity());
+
+            return;
+        }
         pack.place(item);
         System.out.println(item.getName() + " added to inventory");
         alert();
     } // end place
+
+    public void modifyMoney(int amount) {
+        pack.modifyMoney(amount);
+        System.out.println("Money is " + pack.getMoney());
+    } // end spendMoney
 
     public Item remove(int index) {
         Item item = pack.remove(index);

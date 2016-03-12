@@ -59,7 +59,6 @@ import java.util.Random;
             if(Navigation.checkMove(end, map, AI)) {   //Check you can move to the tile you want to go to
                     AI.move(start.getDir());     //Get the direction of your tile and move accordingly
                     AI.alert();
-                    System.out.println("Moving");
             }
         }
     }
