@@ -64,6 +64,7 @@ public class Sneak extends Occupation{
     }
 
     public void recomputeOccupationalAbilities(){
+        //basic attack
         setBasicAttack(new DirectAbility(
                 "Attack",
                 "Basic attack of sneak",
@@ -71,6 +72,8 @@ public class Sneak extends Occupation{
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
+        //compute occupational abilities
+        getOccupationalAbilities().clear();
     }
 }
 
