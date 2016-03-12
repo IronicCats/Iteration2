@@ -111,6 +111,7 @@ public class MobileObjectView implements Renderable, Observer {
                 Settings.PLAYERHEIGHT,
                 null
         );
+
     }
 
     @Override

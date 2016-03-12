@@ -54,9 +54,11 @@ public abstract class Tile implements Subject {
         look at this beautiful anticohesion!  I'll fix it later
          */
         Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        MobileObject tempObject = tempTile.getObject();
-        if(tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
-            ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
+        if(tempTile != null) {
+            MobileObject tempObject = tempTile.getObject();
+            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
+                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
+            }
         }
         if (hasItems()) {
             items = ((Character) object).takeItems(items);

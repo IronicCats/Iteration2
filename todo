@@ -46,3 +46,7 @@ Shopkeeping:
         money can be found on the ground, dropped by enemies
     Shopkeeper as subclass of FriendlyNPC
         leave dialog, move references to pack and whatnot
+
+Change text on bottom left to not stay open for as long
+Change static settings integer names
+Drop coins on death (in addition to inventory/equipment)

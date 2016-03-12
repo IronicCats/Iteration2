@@ -44,12 +44,8 @@ public abstract class Character extends Entity {
     public Character(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation.getStats(), occupation);
         this.inventory = inventory;
+        attack = occupation.getBasicAttack();
 
-    } // end constructor
-
-    public Character(Location location, int id, CharacterStats stats, Occupation occupation, Inventory inventory) {
-         super(location, id, stats, occupation);
-        this.inventory = inventory;
     } // end constructor
 
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
@@ -151,8 +147,10 @@ public abstract class Character extends Entity {
                 attack(attack);
             case ability1:
                 attack(ability1);
+                break;
             case ability2:
                 attack(ability2);
+                break;
             case ability3:
                 attack(ability3);
                 break;

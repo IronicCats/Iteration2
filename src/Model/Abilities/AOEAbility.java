@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class AOEAbility extends Abilities{
     int degreeMovement;
+    int radius;
 
     public AOEAbility(String name, String description, int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost){
         super(name, description, effects, requirements, cost);
