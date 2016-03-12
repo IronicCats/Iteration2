@@ -14,9 +14,9 @@ public class checkAbilityRange {
         ArrayList<Abilities> abilitiesInRange = new ArrayList<Abilities>();
 
         for(Abilities ability: abilities){
-            //if(ability.getRange >= range){
-            //abilitiesInRange.add(ability);
-            //}
+            if(ability.getRange() >= range){
+            abilitiesInRange.add(ability);
+            }
         }
         return abilitiesInRange;
     }
