@@ -16,18 +16,10 @@ import Model.Stats.StatStructure;
  */
 public class DirectAbility extends Abilities {
 
-    int range;
-
     public DirectAbility(String name, String description, Effect effects, Requirement requirement, Effect cost) {
 
-        super(name, description, effects, requirement, cost);
-        this.range = 1;
+        super(name, description, effects, requirement, cost, 1);
     }
 
-    public DirectAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int range) {
-
-        super(name, description, effects, requirement, cost);
-        this.range = range;
-    }
 
 }

@@ -17,14 +17,16 @@ public abstract class Abilities {
     Effect effects;
     Requirement requirement;
     Effect cost;
+    int range;
     //constructor
-    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost) {
+    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost, int range) {
 
         this.name = name;
         this.description = description;
         this.effects = effects;
         this.requirement = requirement;
         this.cost = cost;
+        this.range = range;
     }
 
     //accessor
@@ -50,5 +52,13 @@ public abstract class Abilities {
 
     public void setCost(Effect cost){
         this.cost = cost;
+    }
+
+    public int getRange(){
+        return this.range;
+    }
+
+    public void setRange(int range){
+        this.range = range;
     }
 }
