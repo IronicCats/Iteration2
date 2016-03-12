@@ -47,6 +47,7 @@ Shopkeeping:
 Change text on bottom left to not stay open for as long
 Remove NPC fully from map on death
     Currently you cannot walk on a tile where an NPC has died
+Interact with chests, doors, ...
 
 AI
     FriendlyAI
