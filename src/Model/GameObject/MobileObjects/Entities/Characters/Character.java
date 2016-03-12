@@ -13,9 +13,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
-import Model.Inventory.EquipmentSlotEnum;
-import Model.Inventory.Inventory;
-import Model.Inventory.Pack;
+import Model.Inventory.*;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.CharacterStats;
@@ -49,6 +47,7 @@ public abstract class Character extends Entity implements Observer{
         attack = occupation.getBasicAttack();
         System.out.println(attack);
         getStats().addObserver(this);
+        this.addObserver(occupation);
 
     } // end constructor
 
@@ -205,6 +204,30 @@ public abstract class Character extends Entity implements Observer{
 
     public boolean isDead() {
         return !getStats().isAlive();
+    }
+
+    public int getMoney(){
+        return getPack().getMoney();
+    }
+
+    public void setMoney(int money){
+        getPack().setMoney(money);
+    }
+
+    public void modifyMoney(int money){
+        getPack().modifyMoney(money);
+    }
+
+    public Equipment getEquipment(){
+        return inventory.getEquipment();
+    }
+
+    public Takable getWeaponInSlot(EquipmentSlotEnum s){
+        return getEquipment().getSlot(s);
+    }
+
+    public EquipmentTypeEnum getEquippedWeaponInSlot(EquipmentSlotEnum s){
+        return ((Weapon)(getWeaponInSlot(s))).getType();
     }
 
     @Override
