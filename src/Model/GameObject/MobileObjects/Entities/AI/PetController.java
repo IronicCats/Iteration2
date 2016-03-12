@@ -18,7 +18,7 @@ public class PetController extends AIcontroller {
     public void tick() {
         if(targetinSight()) {
             //follow(mobileObject);
-            goToObjInSight();
+            goToObjInView();
         }
         else{
             //randomlyMoveinRange();
