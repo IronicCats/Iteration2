@@ -2,7 +2,7 @@ package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
 import Model.Map.Map;
@@ -78,10 +78,10 @@ public class MobileObjectFactory {
                                         new Item[] {ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, location)},
                                         10),
                                 new Equipment()),
-                        new NPCController(map));
+                        new Enemycontroller(map));
             case SMALL_CAT:
             case BLUE:
-                return new NPC(location, id, new Smasher(), new Inventory(), new NPCController(map));
+                return new NPC(location, id, new Smasher(), new Inventory(), new Enemycontroller(map));
             case FAT_CAT:
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
@@ -98,7 +98,7 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new NPCController(map),
+                        new Enemycontroller(map),
                         new ArrayList<>());
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
@@ -113,7 +113,7 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new NPCController(map),
+                        new Enemycontroller(map),
                         new ArrayList<>());
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack());

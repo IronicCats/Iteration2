@@ -1,6 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;
 import Model.Location;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class FriendlyNPC extends NPC {
     private ArrayList<String> dialog;
 
-    public FriendlyNPC(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
+    public FriendlyNPC(Location location, int id, Occupation occupation, Inventory inventory, Enemycontroller controller, ArrayList<String> dialog) {
         super(location, id, occupation, inventory, controller);
         this.dialog = dialog;
     } // end constructor

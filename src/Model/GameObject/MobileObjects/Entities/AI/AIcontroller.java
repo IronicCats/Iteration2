@@ -27,7 +27,6 @@ import java.util.Random;
         //TODO: Take in an array of possible targets. When looking at tiles in sight
         //check to see if one of the nearby mobile objects is one of my possible targets
         //then set target
-        MobileObjectEnum[] possibleTargets;
         Random random = new Random(System.currentTimeMillis());
         Location baseLoc;
 
@@ -129,16 +128,6 @@ import java.util.Random;
 
     }
 
-    //This method should be somewhere else TODO: put this somewhere else
-    public void followThenAttackinRange(int attackRange){
-        //TODO: take out attack range parameter and search through list of possible attacks instead. Also implment AI.attack
-        if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
-         //   AI.attack();
-        }
-        follow();
-
-    }
-
     public void followReturnToBaseWhenOutofRange(){
         if(targetinView()){
             follow();
@@ -151,7 +140,6 @@ import java.util.Random;
     }
 
     public void runawayWheNearDeath(int runawayRange){
-        //if(nearDeath)
         int temp = random.nextInt(30);
         if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
             Location randomLoc = RandomLocation.computeRandomLocation(baseLoc,runawayRange);
@@ -159,6 +147,10 @@ import java.util.Random;
                 moveTo(randomLoc);
             }
         }
+    }
+
+    public boolean canFace(){
+        return CanFace.find(AI,target,map);
     }
 
     public void setDestination(Location location) {
@@ -177,7 +169,8 @@ import java.util.Random;
 
     @Override
     public void update() {
-
+        AI.getStats();
+        //if health of AI is below certain level then runawaynearDeath
     }
 
     @Override
