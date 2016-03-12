@@ -11,7 +11,7 @@ public class RemoveTrap extends ExecutableAbility{
 
     //constructor
     public RemoveTrap(String name, String description, Effect effects, Requirement requirement, Effect cost, int skillLevel) {
-        super(name, description, effects, requirement, cost, skillLevel);
+        super(name, description, effects, requirement, cost, skillLevel,1);
     }
 
     //operations

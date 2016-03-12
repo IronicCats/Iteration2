@@ -16,22 +16,22 @@ public class View implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-    public View(MainScreen mainScreen){
+    public View(MainScreen mainScreen) {
         canvas = mainScreen.getCanvas();
         mainScreen.setVisible(true);
     }
 
     public void run() {
-        while(true) {
+        while (true) {
             long lastTime = System.currentTimeMillis();
 
 
             render();
 
             double delta = System.currentTimeMillis() - lastTime;
-            if(delta < 50) {
+            if (delta < 50) {
                 try {
-                    Thread.sleep(((long)(50 - delta)));
+                    Thread.sleep(((long) (50 - delta)));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -42,7 +42,7 @@ public class View implements Runnable {
 
     public void render() {
         bs = this.getCanvas().getBufferStrategy();
-        if(bs == null) {
+        if (bs == null) {
             this.getCanvas().createBufferStrategy(3);
             return;
         }
@@ -51,7 +51,7 @@ public class View implements Runnable {
         g.clearRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
         g.setColor(new Color(52, 255, 94));
         g.fillRect(0, 0, Settings.GAMEWIDTH, Settings.GAMEHEIGHT);
-        if(State.getCurrentState() != null ) {
+        if (State.getCurrentState() != null) {
             State.getCurrentState().render(g);
         }
         bs.show();
@@ -64,6 +64,8 @@ public class View implements Runnable {
     }
 
 
-    public Canvas getCanvas() { return canvas; }
+    public Canvas getCanvas() {
+        return canvas;
+    }
 
 }

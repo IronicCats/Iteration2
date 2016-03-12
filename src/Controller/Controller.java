@@ -5,8 +5,6 @@ import State.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Joshua Kegley on 2/24/2016.

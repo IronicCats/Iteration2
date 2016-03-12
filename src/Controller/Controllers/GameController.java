@@ -3,11 +3,10 @@ package Controller.Controllers;
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
 import State.State;
-import Utilities.Settings;
 import State.States.GameState.GameState;
+import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
-import java.util.Set;
 
 
 /**

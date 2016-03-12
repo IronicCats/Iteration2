@@ -12,7 +12,6 @@ import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
-import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
@@ -22,7 +21,6 @@ import Utilities.Observer;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 
-import javax.xml.stream.events.Characters;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -56,10 +54,10 @@ public abstract class Character extends Entity implements Observer{
         //System.out.println("Here");
         ArrayList<Item> tempItems = new ArrayList<>(items);
         Iterator<Item> it = tempItems.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Item i = it.next();
-            if(i instanceof Takable) {//if its takable
-                if(pickup(i)) {//and i was able to pick it up
+            if (i instanceof Takable) {//if its takable
+                if (pickup(i)) {//and i was able to pick it up
                     DisplayMessage.addMessage(new GameMessage("You picked up: " + i.getName(), 3));
                     items.remove(i); //remove it from the items
                 }
@@ -71,7 +69,7 @@ public abstract class Character extends Entity implements Observer{
     public void interact(Item item) {
         if (item instanceof Interactable) {
             //HUH?
-        }else if (item instanceof OneShot) {
+        } else if (item instanceof OneShot) {
             getStats().applyEffect(((OneShot) item).getEffect());
 
         }
@@ -79,20 +77,20 @@ public abstract class Character extends Entity implements Observer{
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
-        ((CharacterStats)getStats()).applyEquipmentModification(weapon.getEquipmentModification());
+        ((CharacterStats) getStats()).applyEquipmentModification(weapon.getEquipmentModification());
     } // end equip
 
     public void equip(Armor armor) {
         inventory.equip(armor);
-        ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
+        ((CharacterStats) getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
-        ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+        ((CharacterStats) getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
-    public void unmount(){
+    public void unmount() {
         //getStats().resetMovement();
         // change sprite
     } // end unmount
@@ -116,12 +114,13 @@ public abstract class Character extends Entity implements Observer{
 
     public boolean pickup(Item item) {
 
-        if(inventory.getPackSpaceLeft() > 0){
+        if (inventory.getPackSpaceLeft() > 0) {
             inventory.place(item);
             return true;
         }
         return false;
     } // end pickup
+
     public void emptyPack() {
         DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
         getTile().addItems(inventory.emptyPack());
@@ -132,13 +131,13 @@ public abstract class Character extends Entity implements Observer{
     } // end applyEffect
 
     public void setInitialLevel(int level) {
-        for(int i = 0; i < level; i++) {
+        for (int i = 0; i < level; i++) {
             getStats().levelUp();
         }
     } // end setInitialLevel
 
     public void execute(CommandsEnum e) {
-        switch(e){
+        switch (e) {
             case interact:
                 interactWithTile();
                 break;
@@ -163,13 +162,16 @@ public abstract class Character extends Entity implements Observer{
     }
 
     public CharacterStats getStats() {
-        return (CharacterStats)stats;
+        return (CharacterStats) stats;
     }
-    public Inventory getInventory(){
+
+    public Inventory getInventory() {
         return inventory;
     }
 
-    public Pack getPack() { return inventory.getPack(); }
+    public Pack getPack() {
+        return inventory.getPack();
+    }
 
     public boolean isDead() {
         return !getStats().isAlive();

@@ -1,12 +1,11 @@
 package Model.GameObject.Item.Items.Takables.Equippable;
 
-import Model.GameObject.Item.Items.Takable;
+import Model.Effects.EquipmentModification;
 import Model.Inventory.EquipmentTypeEnum;
 import Model.Location;
 import Model.Requirement;
-import Model.Effects.EquipmentModification;
-import Utilities.Observer;
 import Model.Stats.StatsEnum;
+import Utilities.Observer;
 
 /**
  * Created by Wimberley on 2/25/16.
@@ -24,9 +23,10 @@ public class Armor extends Equippable {
         super(id, name, description, value, location, requirements, type, e);
     } // end constructor
 
-    public int getDefense(){
+    public int getDefense() {
         return effect.getModification().getStat(StatsEnum.ARMOR_RATING);
     }
+
     public void setDefense(int defense) {
         effect.getModification().modifyStat(StatsEnum.ARMOR_RATING, defense);
     }

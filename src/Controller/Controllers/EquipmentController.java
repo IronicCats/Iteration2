@@ -1,8 +1,9 @@
 package Controller.Controllers;
 
 import Controller.Controller;
-import State.States.GameState.EquipmentState;
 import State.State;
+import State.States.GameState.EquipmentState;
+
 import java.awt.event.KeyEvent;
 
 /**

@@ -10,9 +10,10 @@ import java.awt.*;
  */
 public class EquipmentState extends State {
     GameState game;
-    public EquipmentState(GameState GS){
+
+    public EquipmentState(GameState GS) {
         setController(new EquipmentController(this));
-        game=GS;
+        game = GS;
     }
 
     public void switchState() {
@@ -23,8 +24,9 @@ public class EquipmentState extends State {
     }
 
     public void render(Graphics g) {
-    game.render(g);
+        game.render(g);
     }
+
     @Override
 
     public void switchState(State state) {

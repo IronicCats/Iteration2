@@ -2,16 +2,14 @@ package Model.Map;
 
 
 import Model.Abilities.Abilities;
-import Model.GameObject.Item.Item;
-import Model.GameObject.Item.Items.Obstacle;
-import Model.GameObject.MobileObjects.Entities.Characters.*;
-import Model.GameObject.MobileObjects.Entities.Characters.Character;
-import Model.GameObject.MobileObjects.MobileObject;
-import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import State.State;
-import State.States.GameState.TradeState;
+import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.MobileObject;
+import Model.Location;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -19,10 +17,10 @@ import java.util.ArrayList;
 
 /**
  * Created by Aidan on 3/1/2016.
- *
+ * <p>
  * TODO:
- *  interact() needs to have different implementations based on instanceof
- *      alternately, replace player.takeItems(...) to reflect different interactions
+ * interact() needs to have different implementations based on instanceof
+ * alternately, replace player.takeItems(...) to reflect different interactions
  */
 public abstract class Tile implements Subject {
 
@@ -39,7 +37,7 @@ public abstract class Tile implements Subject {
 
     private AreaEffectEnum ar;
 
-    public Tile(Location location, boolean isWalkable){
+    public Tile(Location location, boolean isWalkable) {
         items = new ArrayList<>();
         hasObject = false;
         this.location = location;
@@ -50,33 +48,29 @@ public abstract class Tile implements Subject {
     }
 
 
-    public void interact(Location playersLocation) {
-        //If Im standing on any items, pick them up
+    public void interact() {
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
             alert();
         }
-        /*
-        look at this beautiful anticohesion!  I'll fix it later
-         TODO: Fix This?!
-         */
-        Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        if(tempTile != null) {
-            MobileObject tempObject = tempTile.getObject();
-            //Why is this not just tempObject.interact()?
-            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
-                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
-            }
+        System.out.println("Interacting with tile");
+        Map.map.carryInteraction(object);
+
+    }
+
+    public void receiveInteraction(MobileObject interacter) {
+        if (hasObject()) {
+            object.interact(interacter);
         }
-        //
     }
 
     public void sendAttack(Character character, Abilities ability) {
         Map.map.carryAttack(character, ability);
     }
+
     public void receiveAttack(Character c, Abilities a) {
-        if(hasObject()) {
-            ((Character)object).receiveAttack(c, a);
+        if (hasObject()) {
+            ((Character) object).receiveAttack(c, a);
         }
     }
 
@@ -87,26 +81,25 @@ public abstract class Tile implements Subject {
     }
 
     public void addItems(ArrayList<Item> items) {
-        for (Item i: items) {
+        for (Item i : items) {
             this.items.add(i);
         }
         alert();
     }
 
 
-
-    public void setAreaEffectTile(AreaEffect a){
+    public void setAreaEffectTile(AreaEffect a) {
         this.areaEffect = a;
         this.ar = a.getAreaEffect();
         hasAreaEffect = true;
         alert();
     }
 
-    public AreaEffect getAreaEffect(){
+    public AreaEffect getAreaEffect() {
         return this.areaEffect;
     }
 
-    public AreaEffectEnum getAreaEffectEnum(){
+    public AreaEffectEnum getAreaEffectEnum() {
         return this.ar;
     }
 
@@ -119,16 +112,16 @@ public abstract class Tile implements Subject {
     }
 
     public Tile register(MobileObject object) {
-            this.object = object;
-            hasObject = true;
-            if (object instanceof Player) {
-                visited = true;
-                if(this.getHasAreaEffect()){
-                    ((Player)object).applyEffect(areaEffect.getEffect());
-                }
+        this.object = object;
+        hasObject = true;
+        if (object instanceof Player) {
+            visited = true;
+            if (this.getHasAreaEffect()) {
+                ((Player) object).applyEffect(areaEffect.getEffect());
             }
-            alert();
-            return this;
+        }
+        alert();
+        return this;
     }
 
     public void deregister() {
@@ -138,10 +131,9 @@ public abstract class Tile implements Subject {
     }
 
 
-
     public boolean isWalkable() {
-        for(Item i: items){
-            if(i instanceof Obstacle){
+        for (Item i : items) {
+            if (i instanceof Obstacle) {
                 return false;
             }
         }
@@ -157,12 +149,12 @@ public abstract class Tile implements Subject {
         return items.size() > 0;
     }
 
-    public Location getLocation(){
+    public Location getLocation() {
         return location;
     }
 
     //access if the current tile has an area effect or not
-    public boolean getHasAreaEffect(){
+    public boolean getHasAreaEffect() {
         return hasAreaEffect;
     }
 
@@ -174,7 +166,9 @@ public abstract class Tile implements Subject {
         return visited;
     }
 
-    public void setIsVisited() { visited = true; }
+    public void setIsVisited() {
+        visited = true;
+    }
 
     @Override
     public void addObserver(Observer o) {
@@ -188,7 +182,7 @@ public abstract class Tile implements Subject {
 
     @Override
     public void alert() {
-        for(Observer o: observers) {
+        for (Observer o : observers) {
             o.update();
         }
     }

@@ -1,9 +1,7 @@
 package State.States.GameState;
 
-import Controller.Controllers.PauseController;
 import Controller.Controllers.SaveController;
 import State.State;
-import View.Views.PauseView;
 import View.Views.SaveView;
 
 import java.awt.*;
@@ -14,10 +12,11 @@ import java.awt.*;
 public class SaveState extends State {
     private GameState game;
     private SaveView saveView;
-    public SaveState(GameState GS){
+
+    public SaveState(GameState GS) {
         saveView = new SaveView();
         setController(new SaveController(this));
-        game=GS;
+        game = GS;
 
     }
 
@@ -25,10 +24,11 @@ public class SaveState extends State {
 
     }
 
-    public void moveUp(){
+    public void moveUp() {
         saveView.previous();
     }
-    public void moveDown(){
+
+    public void moveDown() {
         saveView.next();
     }
 

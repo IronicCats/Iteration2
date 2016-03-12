@@ -22,9 +22,11 @@ public class Money extends Takable {
     }
 
     public Money(int id, String name, String description, int value, Location location, Requirement requirement, Effect effect, int quantity) {
-         super(id, name, description, value, location, requirement, effect);
+        super(id, name, description, value, location, requirement, effect);
         this.quantity = quantity;
     } // end constructor
 
-    public int getQuantity() { return quantity; }
+    public int getQuantity() {
+        return quantity;
+    }
 } // end class Money
