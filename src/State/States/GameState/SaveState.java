@@ -29,7 +29,8 @@ public class SaveState extends State {
     }
 
     public void render(Graphics g) {
-        //game.render(g);
+        game.render(g);
+        saveView.render(g);
     }
 
     @Override
