@@ -59,5 +59,9 @@ public class ItemView implements Observer, Renderable {
                 null
         );
     }
+    public void render(Graphics g, int placeX, int placeY, int sizeX, int sizeY) {
+        //draw it
+        g.drawImage(sprite,placeX,placeY,sizeX,sizeY,null);
+    }
 
 }
