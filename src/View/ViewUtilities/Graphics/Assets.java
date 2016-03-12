@@ -1,6 +1,7 @@
 package View.ViewUtilities.Graphics;
 
 import java.awt.image.BufferedImage;
+import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,9 @@ public class Assets {
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
     public static ArrayList<BufferedImage> PET;
-    public static ArrayList<BufferedImage> NPC;
+    public static ArrayList<BufferedImage> BLUE_NPC;
+    public static ArrayList<BufferedImage> CAT_NPC;
+    public static ArrayList<BufferedImage> DAVE_PET;
 
     // end NPC's
 
@@ -44,6 +47,7 @@ public class Assets {
     public static BufferedImage SHIELD;
     public static BufferedImage CHEST_KEY;
     public static BufferedImage HOUSE;
+    public static BufferedImage CATNIP;
     // end of items
 
     public static BufferedImage SKULL;
@@ -125,6 +129,9 @@ public class Assets {
         SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
         HOUSE = houseSheet.crop(0,0,32,32);
 
+        SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
+        CATNIP = moneySheet.crop(0,0,32,32);
+
         // End of tiles
 
         //Entities
@@ -143,31 +150,48 @@ public class Assets {
         PLAYER.add(player5.crop(0, 0, 32, 32));
         PLAYER.add(player6.crop(0, 0, 32, 32));
 
-        PET = new ArrayList<>();
-        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
-        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
-        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
-        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/Pet1.png"));
-        PET.add(pet1.crop(0,0,32,32));
-        PET.add(pet2.crop(0,0,32,32));
-        PET.add(pet3.crop(0,0,32,32));
-        PET.add(pet4.crop(0,0,32,32));
-        //TODO: Mike, fix this bullshit
-        PET.add(pet3.crop(0,0,32,32));
-        PET.add(pet4.crop(0,0,32,32));
+        CAT_NPC = new ArrayList<>();
+        SpriteSheet cat1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
+        SpriteSheet cat2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
+        SpriteSheet cat3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
+        SpriteSheet cat4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
+        SpriteSheet cat5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
+        SpriteSheet cat6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
+        CAT_NPC.add(cat1.crop(0,0,32,32));
+        CAT_NPC.add(cat2.crop(0,0,32,32));
+        CAT_NPC.add(cat3.crop(0,0,32,32));
+        CAT_NPC.add(cat4.crop(0,0,32,32));
+        CAT_NPC.add(cat5.crop(0,0,32,32));
+        CAT_NPC.add(cat6.crop(0,0,32,32));
 
-        NPC = new ArrayList<>();
-        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
+        BLUE_NPC = new ArrayList<>();
+        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNorth.png"));
+        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNE.png"));
+        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSE.png"));
         SpriteSheet npc4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        NPC.add(npc1.crop(0,0,32,32));
-        NPC.add(npc2.crop(0,0,32,32));
-        NPC.add(npc3.crop(0,0,32,32));
-        NPC.add(npc4.crop(0,0,32,32));
-        //TODO: Mike, fix this bullshit
-        NPC.add(npc3.crop(0,0,32,32));
-        NPC.add(npc4.crop(0,0,32,32));
+        SpriteSheet npc5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSW.png"));
+        SpriteSheet npc6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNW.png"));
+        BLUE_NPC.add(npc1.crop(0,0,32,32));
+        BLUE_NPC.add(npc2.crop(0,0,32,32));
+        BLUE_NPC.add(npc3.crop(0,0,32,32));
+        BLUE_NPC.add(npc4.crop(0,0,32,32));
+        BLUE_NPC.add(npc5.crop(0,0,32,32));
+        BLUE_NPC.add(npc6.crop(0,0,32,32));
+
+        DAVE_PET = new ArrayList<>();
+        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
+        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
+        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
+        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
+        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
+        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
+        DAVE_PET.add(pet1.crop(0,0,32,32));
+        DAVE_PET.add(pet2.crop(0,0,32,32));
+        DAVE_PET.add(pet3.crop(0,0,32,32));
+        DAVE_PET.add(pet4.crop(0,0,32,32));
+        DAVE_PET.add(pet5.crop(0,0,32,32));
+        DAVE_PET.add(pet6.crop(0,0,32,32));
+
         // End entities
 
         //Decals

@@ -74,8 +74,8 @@ public class Utilities {
         return (((sight * Settings.TILEWIDTH) - (playX == tileX ? 0:Settings.TILEWIDTH / 4) - pixelX) + Settings.TILEHEIGHT/2);
     }
 
-    public static boolean outOfSite(ViewLocation playerLocation, ViewLocation tileLocation) {
-        double sight = calculateSight(ViewSettings.SIGHT, tileLocation.getX(), playerLocation.getX());
+    public static boolean outOfSite(ViewLocation playerLocation, ViewLocation tileLocation, int view) {
+        double sight = calculateSight(view, tileLocation.getX(), playerLocation.getX());
         if(Math.abs(tileLocation.getX() - playerLocation.getX()) > sight ){
             return true;
         }

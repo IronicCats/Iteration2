@@ -71,7 +71,6 @@ public class Map implements Subject {
 
         }catch (Exception e) {
             System.out.println(e);
-            System.out.println("Error while adding Item to Map");
         }
     }
 
@@ -81,7 +80,6 @@ public class Map implements Subject {
             tiles[a.getX()][a.getY()].alert();
         }catch (Exception e) {
             System.out.println(e);
-            System.out.println("Error while adding AreaEffect to Map");
         }
     }
 

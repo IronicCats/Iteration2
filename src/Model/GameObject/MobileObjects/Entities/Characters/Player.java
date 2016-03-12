@@ -47,12 +47,13 @@ public class Player extends Character implements Observer{
     } // end constructor
 
     // takes in the degrees associated with key press and updates player location
-    public void move(int degrees){
+
+/*    public void move(int degrees){
         location = Location.newLocation(degrees, location);
         registerTile(location);
         alert();
     } // end move
-
+*/
     @Override
     public void update() {
         ((CharacterStats)getStats()).update();

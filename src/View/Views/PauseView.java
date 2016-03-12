@@ -27,9 +27,6 @@ public class PauseView implements Renderable {
         height= Settings.GAMEHEIGHT;
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(width/2-200, height/2-250, 400, 500);
-        //g.drawImage(Assets.BACK,width/2,height/2,width,height,null);
-        //g.drawImage(Assets.LEFT,0,height*1/5,width*7/24,height*4/5,null);
-        //g.drawImage(Assets.RIGHT,width*17/24,height*1/5,width*7/24,height*4/5,null);
         for(int i = 0; i < pauseMenuItems.length; ++i) {
             g.setFont(new Font("Arial", Font.PLAIN, 40));
             FontMetrics fm = g.getFontMetrics();

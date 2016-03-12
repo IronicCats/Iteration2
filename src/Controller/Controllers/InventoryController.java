@@ -23,7 +23,6 @@ public class InventoryController extends Controller {
         }
         if(e.getKeyCode() == KeyEvent.VK_I){
             state.switchState(State.GAMESTATE);
-            System.out.println("Going back to the future");
         }
         else if(e.getKeyCode() == Settings.UP || e.getKeyCode() == KeyEvent.VK_UP) {          /* move cursor up */
             ((InventoryState)state).up();

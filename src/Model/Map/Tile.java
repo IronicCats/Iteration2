@@ -35,6 +35,7 @@ public abstract class Tile implements Subject {
     private boolean hasObject;
     private boolean hasAreaEffect;
     private boolean visited;
+
     private AreaEffectEnum ar;
 
     public Tile(Location location, boolean isWalkable){
@@ -53,13 +54,14 @@ public abstract class Tile implements Subject {
         look at this beautiful anticohesion!  I'll fix it later
          */
         Tile tempTile = Map.map.getTile(Location.newLocation(playersLocation.getDir(), this.location));     /* get tile in front of player */
-        MobileObject tempObject = tempTile.getObject();
-        if(tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
-            ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
+        if(tempTile != null) {
+            MobileObject tempObject = tempTile.getObject();
+            if (tempObject instanceof Shopkeeper) {      /* check for Shopkeeper at that tile */
+                ((Shopkeeper) tempObject).initiateTrade(((Player) object).getPack());
+            }
         }
         if (hasItems()) {
             items = ((Character) object).takeItems(items);
-            System.out.print("Telling player to take items");
             alert();
         }
     }
@@ -119,6 +121,9 @@ public abstract class Tile implements Subject {
             hasObject = true;
             if (object instanceof Player) {
                 visited = true;
+                if(this.getHasAreaEffect()){
+                    ((Player)object).applyEffect(areaEffect.getEffect());
+                }
             }
             alert();
             return this;
