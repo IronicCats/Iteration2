@@ -22,6 +22,14 @@ public class FriendlyNPC extends NPC {
         this.dialog = dialog;
     } // end constructor
 
+    @Override
+    public void tick() {
+        if (friendlyController != null) {
+            getStats().tick();
+            friendlyController.tick();
+        }
+    } // end tick
+
     public String getRandomDialog() {
         return dialog.get((int) (Math.random() * dialog.size()));
     } // end getRandomDialog
