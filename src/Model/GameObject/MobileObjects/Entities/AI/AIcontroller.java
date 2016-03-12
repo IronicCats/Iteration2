@@ -35,7 +35,7 @@ import java.util.Random;
             this.map = map;
         }
 
-        private MobileObject AI;
+        protected MobileObject AI;
         private Location destination = new Location(0,2,0);
         public void setAI(MobileObject AI) {this.AI = AI;}
 
