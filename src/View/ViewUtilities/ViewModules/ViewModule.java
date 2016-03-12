@@ -14,9 +14,9 @@ public class ViewModule {
 
     public static void renderHealthBox(Graphics g, int health, int maxHealth, int x, int y) {
         g.setColor(Color.WHITE);
-        g.drawRect(x, y - 5, 60, 8);
+        g.drawRect(x, y - 5, 60, 5);
         g.setColor(calculateHealthColor(((double) health / maxHealth)));
-        g.fillRect(x + 1, y - 4, (int) (((double) health / (double) maxHealth) * 60), 7);
+        g.fillRect(x + 1, y - 4, (int) (((double) health / (double) maxHealth) * 59), 4);
     }
 
     public static Color calculateHealthColor(double ratio) {
