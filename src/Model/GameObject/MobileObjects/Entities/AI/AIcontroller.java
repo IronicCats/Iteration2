@@ -8,6 +8,7 @@ import Model.Map.Tile;
 import Model.Tickable;
 import Utilities.AIUtilities.*;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MapUtilities.RangeofTilesinSight;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.Observer;
 
@@ -99,6 +100,15 @@ import java.util.Random;
         }
     }
 
+    public void tryToPickUpRandomly(int percentPickup){
+        int temp = random.nextInt(30);
+        if(temp == 1){
+            if(map.getTile(AI.getLocation().getX(),AI.getLocation().getY()).hasItems()){
+                //AI.pickupItem
+            }
+        }
+    }
+
     public boolean targetinFront() {
         Location targetTile = Location.newLocation(AI.getLocation().getDir(),AI.getLocation());
         if(map.getTile(targetTile).getObject() == target){
@@ -121,12 +131,34 @@ import java.util.Random;
 
     //This method should be somewhere else TODO: put this somewhere else
     public void followThenAttackinRange(int attackRange){
-
-        if(FindTargetinTiles.find(FindTilesAround.find(AI.getLocation(), map, attackRange, AI.getViewLocation()),target)){
+        //TODO: take out attack range parameter and search through list of possible attacks instead. Also implment AI.attack
+        if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
          //   AI.attack();
         }
         follow();
 
+    }
+
+    public void followReturnToBaseWhenOutofRange(){
+        if(targetinView()){
+            follow();
+        }
+        returntoBase();
+    }
+
+    public void returntoBase(){
+        moveTo(baseLoc);
+    }
+
+    public void runawayWheNearDeath(int runawayRange){
+        //if(nearDeath)
+        int temp = random.nextInt(30);
+        if(temp == 1) { // arbitrary number; 60 ticks/second means one movement per 10 seconds on average
+            Location randomLoc = RandomLocation.computeRandomLocation(baseLoc,runawayRange);
+            if(map.getTile(randomLoc.getX(),randomLoc.getY()) != null) {
+                moveTo(randomLoc);
+            }
+        }
     }
 
     public void setDestination(Location location) {

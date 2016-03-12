@@ -54,8 +54,6 @@ public class GameController extends Controller {
                 ((GameState) state).move(Settings.NE);
             } else if (e.getKeyCode() == Settings.ESC) {        /* open pause menu */
                 state.switchState(State.PAUSESTATE);
-            } else if (e.getKeyCode() == Settings.SPACE) {      /* execute attack? */
-                System.out.println("space pressed");
             } else if (e.getKeyCode() == Settings.E) {          /* open equipment state */
                 state.switchState(State.EQUIPMENTSTATE);
             } else if (e.getKeyCode() == Settings.ATTACK) {
