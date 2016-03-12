@@ -20,8 +20,8 @@ public class HostileNPC extends NPC {
 
     @Override
     public void tick() {
-        if (controller != null) {
-            controller.tick();
+        if (enemyController != null) {
+            enemyController.tick();
         }
     } // end tick
 
