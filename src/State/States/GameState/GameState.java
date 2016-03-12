@@ -115,6 +115,10 @@ public class GameState extends State {
         return camera;
     }
 
+    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {return mobileObjects;}
+
+    public static Map getMap() {return map;}
+
     @Override
     public void tick() {
         player.tick();
