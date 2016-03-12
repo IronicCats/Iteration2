@@ -9,6 +9,7 @@ import Model.Stats.PetStats;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Tickable;
+import Utilities.Settings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,14 +42,14 @@ public class Pet extends MobileObject implements Tickable{
         controller.setAI(this);
     } // end default constructor
 
-    public Pet(PetController controller, Location location, int id, PetStats stats, Pack pack, boolean owned) {
+    public Pet(PetController controller, Location location, int id, PetStats stats, Pack pack) {
         super(location, id, stats);
         base = location;
         this.controller = controller;
         this.stats = stats;
         this.pack = pack;
-        this.owned = owned;
-
+        stats.setMovement(6);
+        //this.setSight(Settings.MAPHEIGHT);
         controller.setAI(this);
     } // end constructor
 
@@ -76,9 +77,14 @@ public class Pet extends MobileObject implements Tickable{
         return items;
     }
 
+    public PetController getController() {
+        return controller;
+    }
+
     public void setOwnership(Player player){
         this.owned = true;
         this.player = player;
+        this.controller.setTarget(player);
     }
 
     public void pickup(Item item) {
