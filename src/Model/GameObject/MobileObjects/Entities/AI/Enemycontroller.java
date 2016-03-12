@@ -11,16 +11,17 @@ import Utilities.MapUtilities.RangeofTilesinSight;
  * Created by Aidan on 3/7/2016.
  */
 public class Enemycontroller extends AIcontroller {
+
     public Enemycontroller(Map map) {
         super(map);
     }
 
-    HostileNPC enemy;
+
 
     @Override
     public void tick() {
         if(targetinView()) {
-            followThenAttackinRange();
+            //followThenAttackinRange();
         }
         else{
            randomlyMoveinRange();
@@ -28,12 +29,13 @@ public class Enemycontroller extends AIcontroller {
     }
 
     public void followThenAttackinRange(){
-       // if(canFace() && checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities())
-        //if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
+        if(canFace()) {
+            
+            //if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
             //enemy.execute(CommandsEnum.ability1);
-        //}
-        //follow();
-
+            //}
+            //follow();
+        }
     }
 
     @Override

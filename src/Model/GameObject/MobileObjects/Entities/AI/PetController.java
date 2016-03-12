@@ -19,8 +19,8 @@ public class PetController extends AIcontroller {
     public void tick() {
         if (targetinView()) {
             //follow();
-            //goToObjInView();
-            //System.out.println(targetinSight());
+           // goToObjInView();
+            System.out.println(targetinSight());
         } else {
             //randomlyMoveinRange();
             //moveTo(destination);
