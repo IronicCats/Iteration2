@@ -39,7 +39,7 @@ public class MobileObjectFactory {
         NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map);
         enemy.getController().setBaseLoc(new Location(0,0));
         objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
-
+        enemy.getStats().setLife(2);
         // Enemy one
         NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map);
         enemy1.getController().setBaseLoc(new Location(4,5));

@@ -1,10 +1,15 @@
 package View.Views;
 
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Utilities.*;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import View.ViewUtilities.Renderable;
+import View.ViewUtilities.ViewModules.ViewModule;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -103,6 +108,9 @@ public class MobileObjectView implements Renderable, Observer {
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
+       if(entity instanceof Character && ((Character)entity).isDead()) {
+           return;
+       }
         tween();
         g.drawImage(sprites.get(active),
                 (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
@@ -111,6 +119,15 @@ public class MobileObjectView implements Renderable, Observer {
                 Settings.PLAYERHEIGHT,
                 null
         );
+        if(!(entity instanceof Player) && !(entity instanceof Pet)){
+
+            ViewModule.renderHealthBox(g,
+                    ((Character)entity).getStats().getLife(),
+                    ((Character)entity).getStats().getBaseLife(),
+                    (int)viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2*2)),
+                    (int)viewLocation.getY() - cameraYOffset - (Settings.TILEWIDTH / (2*2))
+            );
+        }
     }
 
     @Override
