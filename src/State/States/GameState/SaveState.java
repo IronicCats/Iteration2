@@ -25,11 +25,19 @@ public class SaveState extends State {
 
     }
 
+    public void moveUp(){
+        saveView.previous();
+    }
+    public void moveDown(){
+        saveView.next();
+    }
+
     public void tick() {
     }
 
     public void render(Graphics g) {
-        //game.render(g);
+        game.render(g);
+        saveView.render(g);
     }
 
     @Override
