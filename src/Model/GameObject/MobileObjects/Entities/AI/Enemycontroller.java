@@ -1,24 +1,19 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
-import Model.Abilities.Abilities;
-import Model.Abilities.CommandsEnum;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.Map.Map;
 import Utilities.AIUtilities.DirectionofTarget;
-import Utilities.AIUtilities.DistanceFromFaceableTarget;
-import Utilities.AbilitiesUtilities.checkAbilityRange;
-import Utilities.MapUtilities.RangeofTilesinSight;
 
 /**
  * Created by Aidan on 3/7/2016.
  */
-public class Enemycontroller extends AIcontroller {
+public class EnemyController extends AIController {
 
-    public Enemycontroller(Map map) {
+    HostileNPC enemy;
+
+    public EnemyController(Map map) {
         super(map);
     }
-
-    HostileNPC enemy =  (HostileNPC)AI;
 
     public void setEnemy(HostileNPC enemy) {
         this.enemy = enemy;

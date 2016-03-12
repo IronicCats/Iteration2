@@ -19,7 +19,7 @@ import java.util.Random;
  * Created by Aidan on 3/6/2016.
  */
 
-    public abstract class AIcontroller implements Tickable, Observer {
+    public abstract class AIController implements Tickable, Observer {
 
         Map map;
         MobileObject target;
@@ -30,11 +30,12 @@ import java.util.Random;
         Random random = new Random(System.currentTimeMillis());
         Location baseLoc;
 
-        public AIcontroller(Map map){
+        public AIController(Map map){
             this.map = map;
         }
 
     protected MobileObject AI;
+
     private Location destination = new Location(0, 2, 0);
 
     public void setAI(MobileObject AI) {
@@ -181,4 +182,4 @@ import java.util.Random;
     @Override
     public void remove() {
     }
-} // end class AIcontroller
+} // end class AIController

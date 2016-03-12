@@ -63,6 +63,13 @@ public class Pack {
         return anItem;
     } // end remove
 
+    /*public Item remove(ItemsEnum enums) {
+        Item anItem = items[index];
+        items[index] = null;
+        count--;
+        return anItem;
+    } // end remove*/
+
     public Item get(int index) {
         return items[index];
     } // end get
