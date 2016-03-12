@@ -21,7 +21,7 @@ public class PetStats extends Stats implements Subject {
         effects = new ArrayList<>();
         finishTimes = new ArrayList<>();
         observers = new ArrayList<>();
-        movement = 0;
+        movement = 3;
     } // end default constructor
 
     public PetStats(StatStructure ss) {

@@ -44,8 +44,8 @@ public abstract class MobileObject extends GameObject {
         sight = 2;
         range = 2;
         id = 0;
-
     }
+
     public MobileObject(Location location, int id,  Stats stats) {
         super(location);
         canMove = true;
@@ -56,7 +56,6 @@ public abstract class MobileObject extends GameObject {
         sight = 2;
         range = 2;
         this.id = id;
-
     }
 
     public void move(int degrees){
@@ -133,6 +132,8 @@ public abstract class MobileObject extends GameObject {
     public int getRange() {
         return range;
     }
+
+
 
     public void setRange(int range) {
         this.range = range;
