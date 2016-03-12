@@ -117,7 +117,6 @@ public class TileView implements Observer, Renderable {
 
     public void mobileObjects(Graphics g, int xOffset, int yOffset, Location playerLocation) {
         if(tile.hasObject() && mobileObjectView == null){
-            System.out.println("getting object view");
             mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
         }else if(!tile.hasObject()){
             mobileObjectView = null;
