@@ -337,7 +337,6 @@ public class CharacterStats extends Stats implements Subject {
                     break;
             }
         }
-        update();
     } // end applyEffect
 
     public void removeEffect(Effect e) {
@@ -417,6 +416,12 @@ public class CharacterStats extends Stats implements Subject {
                 this.livesLeft += livesLeft;
                 if (livesLeft > baseLives)
                     livesLeft = baseLives;
+                break;
+            case LIFE:
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.life += this.life * amount / 100;
+                else
+                    this.life += amount;
                 break;
             default:
                 break;
