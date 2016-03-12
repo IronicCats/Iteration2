@@ -3,6 +3,7 @@ package State.States.GameState;
 import Controller.Controllers.TradeController;
 import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Quest;
 import Model.Inventory.Pack;
 import State.State;
 import Utilities.ItemUtilities.ItemFactory;
@@ -55,7 +56,16 @@ public class TradeState extends State {
         switch(command) {
             case make_transaction:
                 System.out.println("making transaction...");
+                transaction();
                 break;
+            case up:
+                up();
+            case down:
+                down();
+            case left:
+                left();
+            case right:
+                right();
             default:
                 System.out.println("Don't send that command to the TradeState");
         }
@@ -101,7 +111,7 @@ public class TradeState extends State {
 
         if(selector <= 15) {                             /* player's pack */
             good = playerPack.get(selector);                /* selling item */
-            if(good == null)
+            if(good == null || !(good instanceof Quest)) /* can't trade quest items */
                 return;
             newValue = (int)(good.getValue() * 0.9);
 
@@ -109,14 +119,14 @@ public class TradeState extends State {
                 /*
                 execute sale
                  */
-                System.out.println("Executing sale " + good.getName() + " for " + newValue);
+                System.out.println("Selling " + good.getName() + " for " + newValue);
                 playerPack.modifyMoney(newValue);
                 shopPack.modifyMoney(-newValue);
                 shopPack.place(playerPack.remove(selector));
             } // end if
         } else  {                                       /* shopkeeper's pack */
             good = shopPack.get(selector-16);               /* buying item */
-            if(good == null)
+            if(good == null || !(good instanceof Quest)) /* can't trade quest items */
                 return;
             newValue = (int)(good.getValue() * 1.1);
 
@@ -124,7 +134,7 @@ public class TradeState extends State {
                 /*
                 execute purchase
                  */
-                System.out.println("Executing purchase " + good.getName() + " for " + newValue);
+                System.out.println("Buying " + good.getName() + " for " + newValue);
                 playerPack.modifyMoney(-newValue);
                 shopPack.modifyMoney(newValue);
                 playerPack.place(shopPack.remove(selector-16));
