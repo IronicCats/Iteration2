@@ -464,6 +464,7 @@ public class CharacterStats extends Stats implements Subject {
 
     @Override
     public void alert() {
+        System.out.println("Alerts is being called");
         for(Observer o : observers) {
             o.update();
         }
