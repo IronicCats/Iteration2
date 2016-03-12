@@ -60,12 +60,16 @@ public class TradeState extends State {
                 break;
             case up:
                 up();
+                break;
             case down:
                 down();
+                break;
             case left:
                 left();
+                break;
             case right:
                 right();
+                break;
             default:
                 System.out.println("Don't send that command to the TradeState");
         }

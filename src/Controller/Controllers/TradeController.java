@@ -54,7 +54,7 @@ public class TradeController extends Controller {
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
             ((TradeState)state).executeCommand(CommandsEnum.right);
         }
-        else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
+        else if(e.getKeyCode() == Settings.ENTER) {       /* initiate transaction */
             ((TradeState)state).executeCommand(CommandsEnum.make_transaction);
         }
 
