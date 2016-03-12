@@ -268,7 +268,7 @@ public class ItemFactory {
                         "A locked chest",
                         -1,
                         location,
-                        new Requirement(makeItem(ItemsEnum.CHEST_KEY, null)));
+                        new Requirement(ItemsEnum.CHEST_KEY));
             case DOOR_KEY:
                 return new Quest(id,
                         "Door key",
@@ -290,7 +290,7 @@ public class ItemFactory {
                         "A locked door",
                         -1,
                         location,
-                        new Requirement(makeItem(ItemsEnum.DOOR_KEY, null)));
+                        new Requirement(ItemsEnum.DOOR_KEY));
             case HELMET:
                 return new Armor(id,
                         "Helmet",

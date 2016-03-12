@@ -11,6 +11,7 @@ import Model.Stats.Stats;
 import Model.Stats.StatsEnum;
 
 import java.lang.reflect.Array;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -48,6 +49,14 @@ public abstract class Occupation implements Subject, Observer {
         pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
+        occupationalAbilities = new ArrayList<>();
+        basicSkillAbilities = new ArrayList<>();
+
+        //basic skills
+        basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
+        basicSkills.put(SkillsEnum.BARGAIN, 0);
+        basicSkills.put(SkillsEnum.OBSERVATION, 0);
+
         //set basic abilities
         basicSkillAbilities.add(new DirectAbility(
                                 "Bind Wound",
@@ -114,6 +123,10 @@ public abstract class Occupation implements Subject, Observer {
 
     public Abilities getBasicAttack(){
         return basicAttack;
+    }
+
+    public ArrayList<Abilities> getOccupationalAbilities(){
+        return this.occupationalAbilities;
     }
 
 

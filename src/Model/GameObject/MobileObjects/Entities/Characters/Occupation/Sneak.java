@@ -17,13 +17,21 @@ public class Sneak extends Occupation{
     public Sneak()
     {
         super("Sneak", "Specializes in ranged weapons,evading detection, and removing traps ", new int [] {5,5,7,5,5,0,5});
+        //set basic occupational skills
+        //set occupational skills
+        modifyOccupationalSkills(SkillsEnum.PICKPOCK, 0);
+        modifyOccupationalSkills(SkillsEnum.DRTRAP, 0);
+        modifyOccupationalSkills(SkillsEnum.CREEP, 0);
+        modifyOccupationalSkills(SkillsEnum.RANGEWEAP, 0);
+
+
         setBasicAttack(new DirectAbility(
                 //basic attack for sneak is a direct ability that involves hitting another entity
                //basic attack is calculated based on strength
                //distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
                 "Attack",
                 "Basic attack of sneak",
-                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())),
+                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getOffensiveRating())),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));

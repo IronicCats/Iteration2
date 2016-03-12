@@ -6,6 +6,8 @@ import Model.Effects.Effect;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
+import Utilities.ItemUtilities.ItemFactory;
+import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.Map;
 
@@ -19,16 +21,54 @@ public class Smasher extends Occupation {
 
         super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 5});
 
+        //set occupational skills
+        modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);
+        modifyOccupationalSkills(SkillsEnum.TWOHANDWEAP, 0);
+        modifyOccupationalSkills(SkillsEnum.BRAWL, 0);
+
+
         //basic attack for smasher is a direct ability that involves hitting another entity
         //basic attack is calculated based on strength and brawl skill level
         // distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
         setBasicAttack(new DirectAbility(
                             "Attack",
                             "Basic attack of smasher",
-                            new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())),
+                            new Effect(new StatStructure(StatsEnum.LIFE, this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())),
                             new Requirement(0),
                             new Effect(new StatStructure(StatsEnum.MANA, 0))
                         ));
+
+        //initialize all available occupational abilities
+        getOccupationalAbilities().add(new DirectAbility(
+                                            "Stick Sword",
+                                            "Attack the person in front of you with a stick sword",
+                                            new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating()))),
+                                            new Requirement(ItemsEnum.STICK_SWORD),
+                                            new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        getOccupationalAbilities().add(new DirectAbility(
+                                            "Stick Greatsword",
+                                            "Attack the person in front of you with a stick greatsword",
+                                            new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating()))),
+                                            new Requirement(ItemsEnum.STICK_GREATSWORD),
+                                            new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        getOccupationalAbilities().add(new DirectAbility(
+                                           "Swordfish Dagger",
+                                           "Attack the person in front of you with a swordfish dagger",
+                                            new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating()))),
+                                            new Requirement(ItemsEnum.SWORDFISH_DAGGER),
+                                            new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        getOccupationalAbilities().add(new DirectAbility(
+                                           "Swordfish Lance",
+                                           "Attack the person in front of you with a swordfish lance",
+                                            new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating()))),
+                                            new Requirement(ItemsEnum.SWORDFISH_LANCE),
+                                            new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        getOccupationalAbilities().add(new DirectAbility(
+                                          "Swordfish Dagger",
+                                          "Attack the person in front of you with a swordfish dagger",
+                                           new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating()))),
+                                           new Requirement(ItemsEnum.SWORDFISH_DAGGER),
+                                           new Effect(new StatStructure(StatsEnum.MANA, 0))));
     }
 
     //operations
@@ -64,7 +104,6 @@ public class Smasher extends Occupation {
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
-        //basic skills
         //occupational skills
     }
 }
