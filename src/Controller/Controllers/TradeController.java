@@ -43,19 +43,19 @@ public class TradeController extends Controller {
                 System.out.println("exiting TradeState");
         }
         else if(e.getKeyCode() == Settings.UP || e.getKeyCode() == KeyEvent.VK_UP) {          /* move cursor up */
-            ((TradeState)state).up();
+            ((TradeState)state).executeCommand(CommandsEnum.up);
         }
         else if(e.getKeyCode() == Settings.DOWN || e.getKeyCode() == KeyEvent.VK_DOWN) {        /* move cursor down */
-            ((TradeState)state).down();
+            ((TradeState)state).executeCommand(CommandsEnum.down);
         }
         else if(e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == KeyEvent.VK_LEFT) {   /* move cursor down */
-            ((TradeState)state).left();
+            ((TradeState)state).executeCommand(CommandsEnum.left);
         }
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
-            ((TradeState)state).right();
+            ((TradeState)state).executeCommand(CommandsEnum.right);
         }
         else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
-            ((TradeState)state).transaction();
+            ((TradeState)state).executeCommand(CommandsEnum.make_transaction);
         }
 
 
