@@ -45,14 +45,14 @@ public class TradeView implements Renderable, Observer{
         //making the title
 
         //making the views
-        for(int i=0;i<16;++i){
+        for(int i=0;i<32;++i){
             if(i<16){
                 if(playerPack.get(i)==null)itemView[i]=null;
                 else itemView[i]= ItemFactory.makeAsset(playerPack.get(i).getItemType(), playerPack.get(i));
             }
             else {
-                if(shopPack.get(i)==null)itemView[i]=null;
-                else itemView[i]= ItemFactory.makeAsset(shopPack.get(i).getItemType(), shopPack.get(i));
+                if(shopPack.get(i-16)==null)itemView[i]=null;
+                else itemView[i]= ItemFactory.makeAsset(shopPack.get(i-16).getItemType(), shopPack.get(i-16));
             }
         }
 
@@ -139,7 +139,8 @@ public class TradeView implements Renderable, Observer{
 
     }
     public void renderDescriptions(Graphics g,int s){
-
+        g.setColor(new Color(12, 12, 12, 250));
+        g.fillRect(width*3/20, height*31/40, width*6/20, height*1/10);
     }
 
 

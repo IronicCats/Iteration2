@@ -109,13 +109,16 @@ public class InventoryView implements Renderable, Observer {
     //System.out.print(Settings.GAMEWIDTH+"   "+Settings.GAMEHEIGHT+" \n");
     }
     public void renderIcons(Graphics g) {
-
+        g.setColor(new Color(12, 12, 12, 250));
+        g.fillRect(width*3/20, height*31/40, width*6/20, height*1/10);
     }
     public void renderDescriptions(Graphics g) {
 
     }
     public void renderStats(Graphics g) {
-
+        g.setColor(new Color(12, 12, 12, 200));
+        g.fillRect(width*3/20, height*1/4, width*6/20, height*5/10);
+        //LIVES_LEFT, STRENGTH, AGILITY, INTELLECT, HARDINESS, EXPERIENCE, MOVEMENT, LEVEL, LIFE, MANA, OFFENSIVE_RATING, DEFENSIVE_RATING, ARMOR_RATING;
     }
     public void renderItems(){
         for(int i = 0; i<16; ++i){
