@@ -1,7 +1,6 @@
 package View.ViewUtilities.Graphics;
 
 import java.awt.image.BufferedImage;
-import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 
 /**
@@ -64,73 +63,73 @@ public class Assets {
         //Tiles
         //Fog Tiles
         SpriteSheet FogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/fullfog.png"));
-        FOGTILE = FogTileSheet.crop(0,0,32,28);
+        FOGTILE = FogTileSheet.crop(0, 0, 32, 28);
         SpriteSheet HalfFogTileSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/halffog.png"));
-        HALFFOGTILE = HalfFogTileSheet.crop(0,0,32,28);
+        HALFFOGTILE = HalfFogTileSheet.crop(0, 0, 32, 28);
 
         //Basic TIles
         SpriteSheet HexTileGrassSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/grassHex.png"));
-        GRASSHEXTILE = HexTileGrassSheet.crop(0,0,32,28);
+        GRASSHEXTILE = HexTileGrassSheet.crop(0, 0, 32, 28);
 
         SpriteSheet HexTileWaterSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/waterHex.png"));
-        WATERHEXTILE = HexTileWaterSheet.crop(0,0,32,28);
+        WATERHEXTILE = HexTileWaterSheet.crop(0, 0, 32, 28);
 
         SpriteSheet HexTileMountainSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/mountainHex.png"));
-        MOUNTAINHEXTILE = HexTileMountainSheet.crop(0,0,32,28);
+        MOUNTAINHEXTILE = HexTileMountainSheet.crop(0, 0, 32, 28);
         // End of Tiles
 
         //Items
 
         SpriteSheet bagSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ItemBag.png"));
-        BAGOFITEMS = bagSheet.crop(0,0,32,32);
+        BAGOFITEMS = bagSheet.crop(0, 0, 32, 32);
 
         SpriteSheet potionHealthSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HealthPotion.png"));
-        HEALTH_POTION = potionHealthSheet.crop(0,0,32,32);
+        HEALTH_POTION = potionHealthSheet.crop(0, 0, 32, 32);
 
         SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
-        MANA_POTION = potionManaSheet.crop(0,0,32,32);
+        MANA_POTION = potionManaSheet.crop(0, 0, 32, 32);
 
         SpriteSheet closedChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
-        CLOSED_TREASURE_CHEST = closedChestSheet.crop(0,0,32,28);
+        CLOSED_TREASURE_CHEST = closedChestSheet.crop(0, 0, 32, 28);
 
         SpriteSheet openChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenChest.png"));
-        OPEN_TREASURE_CHEST = openChestSheet.crop(0,0,32,28);
+        OPEN_TREASURE_CHEST = openChestSheet.crop(0, 0, 32, 28);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
-        STICK_SWORD = stickSwordSheet.crop(0,0,32,32);
+        STICK_SWORD = stickSwordSheet.crop(0, 0, 32, 32);
 
         SpriteSheet stickGreatSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickGreatSword.png"));
-        STICK_GREATSWORD = stickGreatSwordSheet.crop(0,0,32,32);
+        STICK_GREATSWORD = stickGreatSwordSheet.crop(0, 0, 32, 32);
 
         SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
-        LASER_POINTER = laserPointerSheet.crop(0,0,32,32);
+        LASER_POINTER = laserPointerSheet.crop(0, 0, 32, 32);
 
         SpriteSheet helmetSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Helmet.png"));
-        HELMET = helmetSheet.crop(0,0,32,32);
+        HELMET = helmetSheet.crop(0, 0, 32, 32);
 
         SpriteSheet chestPlateSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ChestPlate.png"));
-        CHESTPLATE = chestPlateSheet.crop(0,0,32,32);
+        CHESTPLATE = chestPlateSheet.crop(0, 0, 32, 32);
 
         SpriteSheet pantsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Pants.png"));
-        PANTS = pantsSheet.crop(0,0,32,32);
+        PANTS = pantsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet bootsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Boots.png"));
-        BOOTS = bootsSheet.crop(0,0,32,32);
+        BOOTS = bootsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gauntlets.png"));
-        GAUNTLETS = gauntletsSheet.crop(0,0,32,32);
+        GAUNTLETS = gauntletsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
-        SHIELD = shieldSheet.crop(0,0,32,32);
+        SHIELD = shieldSheet.crop(0, 0, 32, 32);
 
         SpriteSheet keySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Key.png"));
-        CHEST_KEY = keySheet.crop(0,0,32,32);
+        CHEST_KEY = keySheet.crop(0, 0, 32, 32);
 
         SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
-        HOUSE = houseSheet.crop(0,0,32,32);
+        HOUSE = houseSheet.crop(0, 0, 32, 32);
 
         SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
-        CATNIP = moneySheet.crop(0,0,32,32);
+        CATNIP = moneySheet.crop(0, 0, 32, 32);
 
         // End of tiles
 
@@ -157,12 +156,12 @@ public class Assets {
         SpriteSheet cat4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
         SpriteSheet cat5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
         SpriteSheet cat6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
-        CAT_NPC.add(cat1.crop(0,0,32,32));
-        CAT_NPC.add(cat2.crop(0,0,32,32));
-        CAT_NPC.add(cat3.crop(0,0,32,32));
-        CAT_NPC.add(cat4.crop(0,0,32,32));
-        CAT_NPC.add(cat5.crop(0,0,32,32));
-        CAT_NPC.add(cat6.crop(0,0,32,32));
+        CAT_NPC.add(cat1.crop(0, 0, 32, 32));
+        CAT_NPC.add(cat2.crop(0, 0, 32, 32));
+        CAT_NPC.add(cat3.crop(0, 0, 32, 32));
+        CAT_NPC.add(cat4.crop(0, 0, 32, 32));
+        CAT_NPC.add(cat5.crop(0, 0, 32, 32));
+        CAT_NPC.add(cat6.crop(0, 0, 32, 32));
 
         BLUE_NPC = new ArrayList<>();
         SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNorth.png"));
@@ -171,12 +170,12 @@ public class Assets {
         SpriteSheet npc4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
         SpriteSheet npc5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSW.png"));
         SpriteSheet npc6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNW.png"));
-        BLUE_NPC.add(npc1.crop(0,0,32,32));
-        BLUE_NPC.add(npc2.crop(0,0,32,32));
-        BLUE_NPC.add(npc3.crop(0,0,32,32));
-        BLUE_NPC.add(npc4.crop(0,0,32,32));
-        BLUE_NPC.add(npc5.crop(0,0,32,32));
-        BLUE_NPC.add(npc6.crop(0,0,32,32));
+        BLUE_NPC.add(npc1.crop(0, 0, 32, 32));
+        BLUE_NPC.add(npc2.crop(0, 0, 32, 32));
+        BLUE_NPC.add(npc3.crop(0, 0, 32, 32));
+        BLUE_NPC.add(npc4.crop(0, 0, 32, 32));
+        BLUE_NPC.add(npc5.crop(0, 0, 32, 32));
+        BLUE_NPC.add(npc6.crop(0, 0, 32, 32));
 
         DAVE_PET = new ArrayList<>();
         SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
@@ -185,24 +184,24 @@ public class Assets {
         SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
         SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
         SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
-        DAVE_PET.add(pet1.crop(0,0,32,32));
-        DAVE_PET.add(pet2.crop(0,0,32,32));
-        DAVE_PET.add(pet3.crop(0,0,32,32));
-        DAVE_PET.add(pet4.crop(0,0,32,32));
-        DAVE_PET.add(pet5.crop(0,0,32,32));
-        DAVE_PET.add(pet6.crop(0,0,32,32));
+        DAVE_PET.add(pet1.crop(0, 0, 32, 32));
+        DAVE_PET.add(pet2.crop(0, 0, 32, 32));
+        DAVE_PET.add(pet3.crop(0, 0, 32, 32));
+        DAVE_PET.add(pet4.crop(0, 0, 32, 32));
+        DAVE_PET.add(pet5.crop(0, 0, 32, 32));
+        DAVE_PET.add(pet6.crop(0, 0, 32, 32));
 
         // End entities
 
         //Decals
         SpriteSheet skullSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Skull.png"));
-        SKULL = skullSheet.crop(0,0,32,32);
+        SKULL = skullSheet.crop(0, 0, 32, 32);
 
         SpriteSheet redCrossSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/RedCross.png"));
-        REDCROSS = redCrossSheet.crop(0,0,32,32);
+        REDCROSS = redCrossSheet.crop(0, 0, 32, 32);
 
         SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
-        STAR = starSheet.crop(0,0,32,32);
+        STAR = starSheet.crop(0, 0, 32, 32);
 
         //menu
         LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");

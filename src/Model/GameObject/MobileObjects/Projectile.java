@@ -26,20 +26,20 @@ public class Projectile extends MobileObject {
         return this.effects;
     }
 
-    public void setEffects(Effect e){
+    public void setEffects(Effect e) {
         this.effects = e;
     }
 
-    public int getRange(){
+    public int getRange() {
         return this.range;
     }
 
-    public void setRange(int r){
+    public void setRange(int r) {
         this.range = r;
     }
 
     @Override
-    public void move(int degrees){
+    public void move(int degrees) {
         // some code
     }
 

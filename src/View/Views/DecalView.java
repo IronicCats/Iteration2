@@ -5,7 +5,6 @@ import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
 import View.ViewUtilities.Renderable;
-import Utilities.Utilities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -50,8 +49,8 @@ public class DecalView implements Observer, Renderable {
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
         g.drawImage(sprite,
-                cameraXOffset + (Settings.TILEWIDTH/ 2 - Settings.DEFAULTITEMWIDTH /2),
-                cameraYOffset + (Settings.TILEHEIGHT/ 2 - Settings.DEFAULTITEMHEIGHT/2),
+                cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH / 2),
+                cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT / 2),
                 Settings.DEFAULTITEMWIDTH,
                 Settings.DEFAULTITEMHEIGHT,
                 null

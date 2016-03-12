@@ -11,13 +11,14 @@ import java.util.ArrayList;
  * Created by Joshua Kegley on 3/1/2016.
  */
 public abstract class GameObject implements Subject, Tickable {
-    
+
     private ArrayList<Observer> observers;
     protected Location location;
 
     public GameObject() {
         observers = new ArrayList<>();
-        location = new Location(0,0);}
+        location = new Location(0, 0);
+    }
 
     public GameObject(Location location) {
         observers = new ArrayList<>();
@@ -35,10 +36,14 @@ public abstract class GameObject implements Subject, Tickable {
     public int getX() {
         return location.getX();
     }
+
     public int getY() {
         return location.getY();
     }
-    public int getDir() {return location.getDir(); }
+
+    public int getDir() {
+        return location.getDir();
+    }
 
     public String toString() {
         return "GameObject with Location: " + location.toString();
@@ -56,13 +61,13 @@ public abstract class GameObject implements Subject, Tickable {
 
     @Override
     public void alert() {
-        for(Observer o: observers){
+        for (Observer o : observers) {
             o.update();
         }
     }
 
     @Override
     public void tick() {
-        
+
     }
 }

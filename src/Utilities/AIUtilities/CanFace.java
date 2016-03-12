@@ -1,7 +1,6 @@
 package Utilities.AIUtilities;
 
 import Model.GameObject.MobileObjects.MobileObject;
-import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 
@@ -94,7 +93,7 @@ public class CanFace {
 
             }
         }
-        return FindTargetinTiles.find(tilesinSight,target);
+        return FindTargetinTiles.find(tilesinSight, target);
     }
 }
 

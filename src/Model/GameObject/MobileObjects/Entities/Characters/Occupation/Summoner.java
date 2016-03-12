@@ -15,10 +15,9 @@ import java.util.Map;
 public class Summoner extends Occupation {
 
     //constructor
-    public Summoner()
-    {
+    public Summoner() {
 
-        super("Summoner", "Specializes in spell casting", new int [] {5,5,5,7,5,0,5});
+        super("Summoner", "Specializes in spell casting", new int[]{5, 5, 5, 7, 5, 0, 5});
 
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ENCHANT, 0);
@@ -41,39 +40,37 @@ public class Summoner extends Occupation {
     }
 
     //operations
-    public  void modifyOccupationalSkills(SkillsEnum s, int value){
+    public void modifyOccupationalSkills(SkillsEnum s, int value) {
         //checking for summoner related skill change
-        if(s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF){
-            Map<SkillsEnum, Integer> m  = this.getOccupationalSkills(); //attaining the occupational skills
+        if (s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF) {
+            Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
             m.put(s, value); //changing the occupational skills
             this.setOccupationalSkills(m); //setting the occupational skills
-        }
-        else {
+        } else {
             //do nothing
         }
         alert();
     }
 
-    public int getOccupationalSkillsValue(SkillsEnum s){
-        if(s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF){
+    public int getOccupationalSkillsValue(SkillsEnum s) {
+        if (s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF) {
             return getOccupationalSkills().get(s);
-        }
-        else {
+        } else {
             System.out.println("This skill is not available to you");
             return 0;
         }
     }
 
-    public void recomputeOccupationalAbilities(){
+    public void recomputeOccupationalAbilities() {
         //basic attack of just hitting another entity
         setBasicAttack(new DirectAbility(
-                             //basic attack for summoner is hitting the opposing person with a staff
-                            //basic attack is calculated based on strength
-                             "Staff hit",
-                             "whacks the enemy with your staff",
-                              new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
-                              new Requirement(ItemsEnum.CATNIP_STAFF),
-                              new Effect(new StatStructure(StatsEnum.MANA, 0))
+                //basic attack for summoner is hitting the opposing person with a staff
+                //basic attack is calculated based on strength
+                "Staff hit",
+                "whacks the enemy with your staff",
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
+                new Requirement(ItemsEnum.CATNIP_STAFF),
+                new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
         //compute occupational abilities
         getOccupationalAbilities().clear();

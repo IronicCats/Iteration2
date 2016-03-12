@@ -1,4 +1,3 @@
-
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.DirectAbility;
@@ -6,7 +5,6 @@ import Model.Effects.Effect;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
-import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.Map;
@@ -79,24 +77,22 @@ public class Smasher extends Occupation {
     }
 
     //operations
-    public void modifyOccupationalSkills(SkillsEnum s, int value){
+    public void modifyOccupationalSkills(SkillsEnum s, int value) {
         //checking for smasher related skill change
-        if(s==SkillsEnum.ONEHANDWEAP || s== SkillsEnum.TWOHANDWEAP || s==SkillsEnum.BRAWL){
+        if (s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL) {
             Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
             m.put(s, value); //changing the occupational skills
             this.setOccupationalSkills(m); //setting the occupational skills
-        }
-        else {
+        } else {
             //do nothing
         }
         alert();
     }
 
-    public int getOccupationalSkillsValue(SkillsEnum s){
-        if(s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL){
-                return getOccupationalSkills().get(s);
-        }
-        else {
+    public int getOccupationalSkillsValue(SkillsEnum s) {
+        if (s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL) {
+            return getOccupationalSkills().get(s);
+        } else {
             System.out.println("This skill is not available to you");
             return 0;
         }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Created by broskj on 3/6/16.
- *
+ * <p>
  * Stats class for use by Player and NPC (e.g., enemy)
  */
 public class CharacterStats extends Stats implements Subject {
@@ -164,7 +164,7 @@ public class CharacterStats extends Stats implements Subject {
         Each tick, check for expired Effects and check if player's XP is greater than the threshhold to level up
          */
         if (!effects.isEmpty()) {
-            for (int i = effects.size()-1; i >= 0; --i) {
+            for (int i = effects.size() - 1; i >= 0; --i) {
                 if (System.currentTimeMillis() >= finishTimes.get(i)) {
                     System.out.println("Effect expired.");
                     removeEffect(effects.get(i));
@@ -179,7 +179,7 @@ public class CharacterStats extends Stats implements Subject {
         /*
         check for level up
          */
-        if(experience >= xpThreshold) {
+        if (experience >= xpThreshold) {
             levelUp();
         }
     } // end checkLevelUp
@@ -225,10 +225,10 @@ public class CharacterStats extends Stats implements Subject {
         effects.clear();
         finishTimes.clear();
 
-        if(livesLeft > 1) {
+        if (livesLeft > 1) {
             livesLeft--;
             alive = true;
-        }else {
+        } else {
             alive = false;
         }
 
@@ -245,7 +245,7 @@ public class CharacterStats extends Stats implements Subject {
     } // end kill
 
     public void applyEffect(Effect[] e) {
-        for (Effect effect : e){
+        for (Effect effect : e) {
             applyEffect(effect);
         }
     } // end applyEffect
@@ -275,17 +275,17 @@ public class CharacterStats extends Stats implements Subject {
                 {StatsEnum.LEVEL, 1} -> Level Up (experience is set to 0)
                 {StatsEnum.LIVES_LEFT, -1} -> Kill Player
          */
-        if(e.getDuration() > 0) {
+        if (e.getDuration() > 0) {
             effects.add(e);
             finishTimes.add(System.currentTimeMillis() + e.getDuration());
         }
 
-        for(StatsEnum s : e.getModification().getKeySet()) {
+        for (StatsEnum s : e.getModification().getKeySet()) {
             //System.out.println("Effect to be applied: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
-            switch (s){
+            switch (s) {
                 // primary stats
                 case LIVES_LEFT:
-                    if(e.getModification().getStat(s) < 0) {
+                    if (e.getModification().getStat(s) < 0) {
                         for (int i = 0; i < Math.abs(e.getModification().getStat(s)); i++) {
                             //kill();
                         }
@@ -303,28 +303,26 @@ public class CharacterStats extends Stats implements Subject {
                     break;
                 // derived stats
                 case LEVEL:
-                    if(e.getModification().getStat(s) > 0) {
+                    if (e.getModification().getStat(s) > 0) {
                         for (int i = 0; i < e.getModification().getStat(s); i++) {
                             levelUp();
                         }
                     }
                     break;
                 case LIFE:
-                    if(e.getModification().getStat(s) + life > baseLife)
+                    if (e.getModification().getStat(s) + life > baseLife)
                         resetLife();
-                    else if((e.getModification().getStat(s) + life) <= 0) {
+                    else if ((e.getModification().getStat(s) + life) <= 0) {
                         kill();
-                    }
-                    else
+                    } else
                         modifyStat(s, e.getType(), e.getModification().getStat(s));
                     break;
                 case MANA:
-                    if(e.getModification().getStat(s) + mana > baseMana)
+                    if (e.getModification().getStat(s) + mana > baseMana)
                         resetMana();
-                    else if(e.getModification().getStat(s) + mana <= 0) {
+                    else if (e.getModification().getStat(s) + mana <= 0) {
                         emptyMana();
-                    }
-                    else
+                    } else
                         modifyStat(s, e.getType(), e.getModification().getStat(s));
                     break;
                 case OFFENSIVE_RATING:
@@ -340,12 +338,12 @@ public class CharacterStats extends Stats implements Subject {
     } // end applyEffect
 
     public void removeEffect(Effect e) {
-        for(StatsEnum s : e.getModification().getKeySet()) {
+        for (StatsEnum s : e.getModification().getKeySet()) {
             //System.out.println("Effect to be removed: " + s + " by " + e.getModification().getStat(s) + " for duration " + e.getDuration());
-            switch (s){
+            switch (s) {
                 // primary stats
                 case LIVES_LEFT:
-                    if(e.getModification().getStat(s) < 0) {
+                    if (e.getModification().getStat(s) < 0) {
                         for (int i = 0; i < Math.abs(e.getModification().getStat(s)); i++) {
                             kill();
                         }
@@ -377,44 +375,44 @@ public class CharacterStats extends Stats implements Subject {
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
         switch (s) {
             case STRENGTH:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.strength += this.strength * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.strength += this.strength * amount / 100;
                 else
                     this.strength += amount;
                 break;
             case AGILITY:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.agility += this.agility * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.agility += this.agility * amount / 100;
                 else
                     this.agility += amount;
                 break;
             case INTELLECT:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.intellect += this.intellect * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.intellect += this.intellect * amount / 100;
                 else
                     this.intellect += amount;
                 break;
             case HARDINESS:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.hardiness += this.hardiness * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.hardiness += this.hardiness * amount / 100;
                 else
                     this.hardiness += amount;
                 break;
             case EXPERIENCE:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.experience += this.experience * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.experience += this.experience * amount / 100;
                 else
                     this.experience += amount;
                 break;
             case MOVEMENT:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.movement += this.movement * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.movement += this.movement * amount / 100;
                 else
                     this.movement += amount;
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
-                if(livesLeft > baseLives)
+                if (livesLeft > baseLives)
                     livesLeft = baseLives;
                 break;
             default:
@@ -426,11 +424,11 @@ public class CharacterStats extends Stats implements Subject {
 
     public void applyEquipmentModification(EquipmentModification e) {
         equipmentModifications.add(e);
-        if(e.hasWeaponValue()) {
+        if (e.hasWeaponValue()) {
             equippedWeapon += e.getWeaponRating();
             System.out.println("Weapon modification applied: " + e.getWeaponRating());
         }
-        if(e.hasArmorValue()) {
+        if (e.hasArmorValue()) {
             equippedArmor += e.getArmorRating();
             System.out.println("Armor modification applied: " + e.getArmorRating());
         }
@@ -441,11 +439,11 @@ public class CharacterStats extends Stats implements Subject {
 
     public void removeEquipmentModification(EquipmentModification e) {
         equipmentModifications.remove(e);
-        if(e.hasWeaponValue()) {
+        if (e.hasWeaponValue()) {
             equippedWeapon -= e.getWeaponRating();
             System.out.println("Weapon modification removed: " + e.getWeaponRating());
         }
-        if(e.hasArmorValue()) {
+        if (e.hasArmorValue()) {
             equippedArmor -= e.getArmorRating();
             System.out.println("Armor modification removed: " + e.getArmorRating());
         }
@@ -467,56 +465,186 @@ public class CharacterStats extends Stats implements Subject {
     @Override
     public void alert() {
         System.out.println("Alerts is being called");
-        for(Observer o : observers) {
+        for (Observer o : observers) {
             o.update();
         }
     } // end alert
 
-    public int getLivesLeft() { return livesLeft; }
-    public int getBaseLives() { return baseLives; }
-    public int getStrength() { return strength; }
-    public int getBaseStr() { return baseStr; }
-    public int getAgility() { return agility; }
-    public int getBaseAgi() { return baseAgi; }
-    public int getIntellect() { return intellect; }
-    public int getBaseIntel() { return baseIntel; }
-    public int getHardiness() { return hardiness; }
-    public int getBaseHard() { return baseHard; }
-    public int getExperience() { return experience; }
-    public int getBaseMovement() { return baseMovement; }
-    public int getXpThreshhold() { return xpThreshold; }
-    public int getLevel() { return level; }
-    public int getLife() { return life; }
-    public int getBaseLife() { return baseLife; }
-    public int getMana() { return mana; }
-    public int getBaseMana() { return baseMana; }
-    public int getOffensiveRating() { return offensiveRating; }
-    public int getDefensiveRating() { return defensiveRating; }
-    public int getArmorRating() { return armorRating; }
-    public void resetLife() { this.life = this.baseLife; }
-    public void resetMana() { this.mana = this.baseMana; }
-    public void emptyMana() { this.mana = 0; }
+    public int getLivesLeft() {
+        return livesLeft;
+    }
 
-    public void setLevel(int level) {this.level = level;}
-    public void setLivesLeft(int livesLeft) {this.livesLeft = livesLeft;}
-    public void setStrength(int strength) {this.strength = strength;}
-    public void setAgility(int agility) {this.agility = agility;}
-    public void setIntellect(int intellect) {this.intellect = intellect;}
-    public void setHardiness(int hardiness) {this.hardiness = hardiness;}
-    public void setExperience(int experience) {this.experience = experience;}
-    public void setLife(int life) {this.life = life;}
-    public void setMana(int mana) {this.mana = mana;}
-    public void setOffensiveRating(int offensiveRating) {this.offensiveRating = offensiveRating;}
-    public void setDefensiveRating(int defensiveRating) {this.defensiveRating = defensiveRating;}
-    public void setArmorRating(int armorRating) {this.armorRating = armorRating;}
-    public void setBaseLives(int baseLives) {this.baseLives = baseLives;}
-    public void setBaseStr(int baseStr) {this.baseStr = baseStr;}
-    public void setBaseAgi(int baseAgi) {this.baseAgi = baseAgi;}
-    public void setBaseIntel(int baseIntel) {this.baseIntel = baseIntel;}
-    public void setBaseHard(int baseHard) {this.baseHard = baseHard;}
-    public void setBaseMovement(int baseMovement) {this.baseMovement = baseMovement;}
-    public void setBaseMana(int baseMana) {this.baseMana = baseMana;}
-    public void setBaseLife(int baseLife) {this.baseLife = baseLife;}
+    public int getBaseLives() {
+        return baseLives;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getBaseStr() {
+        return baseStr;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public int getBaseAgi() {
+        return baseAgi;
+    }
+
+    public int getIntellect() {
+        return intellect;
+    }
+
+    public int getBaseIntel() {
+        return baseIntel;
+    }
+
+    public int getHardiness() {
+        return hardiness;
+    }
+
+    public int getBaseHard() {
+        return baseHard;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public int getBaseMovement() {
+        return baseMovement;
+    }
+
+    public int getXpThreshhold() {
+        return xpThreshold;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public int getBaseLife() {
+        return baseLife;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public int getBaseMana() {
+        return baseMana;
+    }
+
+    public int getOffensiveRating() {
+        return offensiveRating;
+    }
+
+    public int getDefensiveRating() {
+        return defensiveRating;
+    }
+
+    public int getArmorRating() {
+        return armorRating;
+    }
+
+    public void resetLife() {
+        this.life = this.baseLife;
+    }
+
+    public void resetMana() {
+        this.mana = this.baseMana;
+    }
+
+    public void emptyMana() {
+        this.mana = 0;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setLivesLeft(int livesLeft) {
+        this.livesLeft = livesLeft;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
+    }
+
+    public void setIntellect(int intellect) {
+        this.intellect = intellect;
+    }
+
+    public void setHardiness(int hardiness) {
+        this.hardiness = hardiness;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setOffensiveRating(int offensiveRating) {
+        this.offensiveRating = offensiveRating;
+    }
+
+    public void setDefensiveRating(int defensiveRating) {
+        this.defensiveRating = defensiveRating;
+    }
+
+    public void setArmorRating(int armorRating) {
+        this.armorRating = armorRating;
+    }
+
+    public void setBaseLives(int baseLives) {
+        this.baseLives = baseLives;
+    }
+
+    public void setBaseStr(int baseStr) {
+        this.baseStr = baseStr;
+    }
+
+    public void setBaseAgi(int baseAgi) {
+        this.baseAgi = baseAgi;
+    }
+
+    public void setBaseIntel(int baseIntel) {
+        this.baseIntel = baseIntel;
+    }
+
+    public void setBaseHard(int baseHard) {
+        this.baseHard = baseHard;
+    }
+
+    public void setBaseMovement(int baseMovement) {
+        this.baseMovement = baseMovement;
+    }
+
+    public void setBaseMana(int baseMana) {
+        this.baseMana = baseMana;
+    }
+
+    public void setBaseLife(int baseLife) {
+        this.baseLife = baseLife;
+    }
 
     public boolean isAlive() {
         return alive;
