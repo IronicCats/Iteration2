@@ -112,9 +112,9 @@ public class Pack {
         }
         for(int i = 0; i < cap; i++) {
             if(items[i] != null) {
-                if(items[i].getId() == itemsEnum.ordinal()) {       /* if the id (assigned based on the ordinal) */
-                    return true;                                        /* matches the itemsEnum ordinal */
-                }
+            }
+            if(items[i].getItemType() == itemsEnum) {
+                return true;
             }
         }
         return false;
