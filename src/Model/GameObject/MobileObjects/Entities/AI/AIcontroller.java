@@ -43,7 +43,6 @@ import java.util.Random;
         if(target != null) {
             //follow(mobileObject);
             goToObjInView();
-            System.out.println(targetinSight());
         }
         else{
             randomlyMoveinRange();
@@ -87,7 +86,7 @@ import java.util.Random;
     }
 
     public ArrayList<Tile> getTilesinSight(){
-        return FindTilesAround.find(AI.getLocation(), map, AI.getView(), AI.getViewLocation());
+        return FindTilesInSight.find(getTilesinView(),AI.getLocation(),AI.getView());
     }
 
     public void  randomlyMoveinRange(){

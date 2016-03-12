@@ -38,7 +38,7 @@ public class FindTilesAround {
         for (int i = 0; i < Settings.MAPWIDTH; i++) {
             for (int j = 0; j < Settings.MAPHEIGHT; j++) {
 
-                if (!Utilities.outOfSite(viewLoc, new ViewLocation(BFS[i][j].getLocation().getX(), BFS[i][j].getLocation().getY()))) {
+                if (!Utilities.outOfSite(viewLoc, new ViewLocation(BFS[i][j].getLocation().getX(), BFS[i][j].getLocation().getY()), sight)) {
                     range.add(BFS[i][j]);
                 }
 
