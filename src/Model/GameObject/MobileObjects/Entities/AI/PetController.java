@@ -20,6 +20,7 @@ public class PetController extends AIcontroller {
 
     @Override
     public void tick() {
+
         if(targetinView() && this.player != null) {
             randomlyMoveinRange();
         }

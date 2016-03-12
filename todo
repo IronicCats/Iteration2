@@ -61,7 +61,7 @@ AI
     HostileAI
         Wander around base randomly
         If character in sight
-            Follow, attack until out of range or target is dead
+            Follow, attack until out of range
     PetAI
         Wander around base randomly
         If given required item (sushi)
