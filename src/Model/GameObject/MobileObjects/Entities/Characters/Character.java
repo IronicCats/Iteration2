@@ -18,6 +18,7 @@ import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
 import Model.Location;
 import Model.Stats.CharacterStats;
+import Utilities.Observer;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 
@@ -28,7 +29,7 @@ import java.util.Iterator;
 /**
  * Created by broskj on 3/6/16.
  */
-public abstract class Character extends Entity {
+public abstract class Character extends Entity implements Observer{
     protected Inventory inventory;
     protected Abilities attack;
     protected Abilities ability1;
@@ -39,6 +40,7 @@ public abstract class Character extends Entity {
     public Character() {
         super();
         this.inventory = new Inventory();
+        getStats().addObserver(this);
     } // end default constructor
 
     public Character(Location location, int id, Occupation occupation, Inventory inventory) {
@@ -46,6 +48,7 @@ public abstract class Character extends Entity {
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
         System.out.println(attack);
+        getStats().addObserver(this);
 
     } // end constructor
 
@@ -73,8 +76,6 @@ public abstract class Character extends Entity {
 
         }
     } // end interact
-
-
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
@@ -128,9 +129,6 @@ public abstract class Character extends Entity {
 
     public void applyEffect(Effect... e) {
         ((CharacterStats)getStats()).applyEffect(e);
-        if(!getStats().isAlive()) {
-            emptyPack();
-        }
     } // end applyEffect
 
     public void setInitialLevel(int level) {
@@ -176,6 +174,17 @@ public abstract class Character extends Entity {
     public boolean isDead() {
         return !getStats().isAlive();
     }
+
+    @Override
+    public void update() {
+        if(!getStats().isAlive()) {
+            emptyPack();
+            getStats().revive();
+        }
+    } // end update
+
+    @Override
+    public void remove() {}
 
     @Override
     public void tick() {
