@@ -16,9 +16,10 @@ public class PetController extends AIcontroller {
 
    @Override
     public void tick() {
-        if(targetinSight()) {
+        if(targetinView()) {
             //follow(mobileObject);
-            goToObjInSight();
+            goToObjInView();
+            System.out.println(targetinSight());
         }
         else{
             //randomlyMoveinRange();

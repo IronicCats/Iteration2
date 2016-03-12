@@ -1,15 +1,15 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Model.Tickable;
-import Utilities.AIUtilities.Astar;
-import Utilities.AIUtilities.FindTilesinRange;
-import Utilities.AIUtilities.RandomLocation;
+import Utilities.AIUtilities.*;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.Observer;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +18,7 @@ import java.util.Random;
 /**
  * Created by Aidan on 3/6/2016.
  */
-    public abstract class AIcontroller implements Tickable {
+    public abstract class AIcontroller implements Tickable, Observer {
 
         Map map;
         MobileObject target;
@@ -42,7 +42,7 @@ import java.util.Random;
     public void tick() {
         if(target != null) {
             //follow(mobileObject);
-            goToObjInSight();
+            goToObjInView();
         }
         else{
             randomlyMoveinRange();
@@ -75,14 +75,18 @@ import java.util.Random;
     }
 
     //Waits for a particular mobileobject to be in sight and when in sight, follows that mobileobject
-    public void goToObjInSight() {
-        if(targetinSight()){
+    public void goToObjInView() {
+        if(targetinView()){
             follow();
         }
     }
 
+    public ArrayList<Tile> getTilesinView(){
+        return FindTilesAround.find(AI.getLocation(), map, AI.getView(), AI.getViewLocation());
+    }
+
     public ArrayList<Tile> getTilesinSight(){
-        return FindTilesinRange.find(AI.getLocation(), map, AI.getSight(), AI.getViewLocation());
+        return FindTilesInSight.find(getTilesinView(),AI.getLocation(),AI.getView());
     }
 
     public void  randomlyMoveinRange(){
@@ -103,15 +107,26 @@ import java.util.Random;
         return false;
     }
 
-    public boolean targetinSight(){
-        ArrayList<Tile> range = getTilesinSight();
+    public boolean targetinView(){
 
-        for (Tile tile : range) {
-            if (tile.getObject() == target) {
-                return true;
-            }
+        return FindTargetinTiles.find(getTilesinView(),target);
+
+    }
+
+    public boolean targetinSight(){
+
+        return FindTargetinTiles.find(getTilesinSight(),target);
+
+    }
+
+    //This method should be somewhere else TODO: put this somewhere else
+    public void followThenAttackinRange(int attackRange){
+
+        if(FindTargetinTiles.find(FindTilesAround.find(AI.getLocation(), map, attackRange, AI.getViewLocation()),target)){
+         //   AI.attack();
         }
-        return false;
+        follow();
+
     }
 
     public void setDestination(Location location) {
@@ -128,5 +143,13 @@ import java.util.Random;
         this.baseLoc = baseLoc;
     }
 
+    @Override
+    public void update() {
 
+    }
+
+    @Override
+    public void remove() {
+
+    }
 } // end class AIcontroller
