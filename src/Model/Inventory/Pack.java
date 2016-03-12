@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.ArrayList;
 
@@ -104,6 +105,20 @@ public class Pack {
         tempItems.add(new Money(money));
         return tempItems;
     } // end dump
+
+    public boolean contains(ItemsEnum itemsEnum) {
+        if(itemsEnum == null) {
+            return true;
+        }
+        for(int i = 0; i < cap; i++) {
+            if(items[i] != null) {
+                if(items[i].getId() == itemsEnum.ordinal()) {       /* if the id (assigned based on the ordinal) */
+                    return true;                                        /* matches the itemsEnum ordinal */
+                }
+            }
+        }
+        return false;
+    } // end contains
 
     public int getCount() { return count; }
     public int getMoney() { return money; }
