@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Abilities.Abilities;
 import Model.Abilities.CommandsEnum;
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
@@ -29,6 +30,11 @@ import java.util.Iterator;
  */
 public abstract class Character extends Entity {
     protected Inventory inventory;
+    protected Abilities attack;
+    protected Abilities ability1;
+    protected Abilities ability2;
+    protected Abilities ability3;
+
 
     public Character() {
         super();
@@ -38,6 +44,7 @@ public abstract class Character extends Entity {
     public Character(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation.getStats(), occupation);
         this.inventory = inventory;
+
     } // end constructor
 
     public Character(Location location, int id, CharacterStats stats, Occupation occupation, Inventory inventory) {
@@ -98,7 +105,7 @@ public abstract class Character extends Entity {
     } // end unmount
 
 
-    public void attack() {
+    public void attack(Abilities abilitity) {
         getTile().recieveAttack(this);
     }
 
@@ -141,11 +148,13 @@ public abstract class Character extends Entity {
                 emptyPack();
                 break;
             case attack:
-                attack();
+                attack(attack);
             case ability1:
+                attack(ability1);
             case ability2:
+                attack(ability2);
             case ability3:
-                useAbility(e);
+                attack(ability3);
                 break;
         }
 

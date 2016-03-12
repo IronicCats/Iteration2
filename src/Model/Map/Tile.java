@@ -171,6 +171,8 @@ public abstract class Tile implements Subject {
         return visited;
     }
 
+    public void setIsVisited() { visited = true; }
+
     @Override
     public void addObserver(Observer o) {
         observers.add(o);
