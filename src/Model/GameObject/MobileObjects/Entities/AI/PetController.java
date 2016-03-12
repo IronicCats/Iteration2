@@ -20,7 +20,6 @@ public class PetController extends AIcontroller {
         if (targetinView()) {
             //follow();
             //goToObjInView();
-            System.out.println(CanFace.find(AI, target, map));
             //System.out.println(targetinSight());
         } else {
             //randomlyMoveinRange();
@@ -28,4 +27,13 @@ public class PetController extends AIcontroller {
         }
     }
 
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void remove() {
+
+    }
 }
