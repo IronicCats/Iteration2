@@ -105,19 +105,8 @@ public class Pack {
         return tempItems;
     } // end dump
 
-    public int getCount() {
-        return count;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    public void modifyMoney(int money) {
-        this.money += money;
-    }
+    public int getCount() { return count; }
+    public int getMoney() { return money; }
+    public void setMoney(int money) { this.money = money; }
+    public void modifyMoney(int money) { this.money += money; }
 } // end class Pack
