@@ -222,10 +222,12 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void tick() {
+        System.out.println("isDead" + isDead());
         if (!isDead()) {
             getStats().tick();
             //respawn eventually
         }
+
     }
 
 } // end class Character

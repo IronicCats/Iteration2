@@ -31,6 +31,8 @@ public class NPC extends Character implements Tickable {
     @Override
     public void tick() {
         if (controller != null) {
+
+            getStats().tick();
             controller.tick();
         }
     } // end tick

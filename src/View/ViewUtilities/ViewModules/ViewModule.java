@@ -19,17 +19,21 @@ public class ViewModule {
         g.fillRect(x + 1, y - 4, (int) (((double) health / (double) maxHealth) * 59), 4);
     }
 
-    public static Color calculateHealthColor(double ratio) {
-        int gr = (int) (255 * ratio * 100) / 100;
-        int red = (int) (255 * (100 - ratio * 100)) / 100;
-        int blu = 0;
-        if (gr > 255 || red > 255) {
-            return new Color(255, 255, 255);
-        } else if (gr < 0 || red < 0) {
-            return new Color(0, 0, 0);
+    public static Color calculateHealthColor(double power) {
+        double blue = 0.0;
+        double green = 0.0;
+        double red = 0.0;
+        if( 0<=power && power <0.5 ) { //first, green stays at 100 %, red raises to 100 %
+                red = 1.0;
         }
+        green = 2 * power;
+        if( 0.5<=power && power <=1 ){ //then red stays at 100 %, green decays
+                green = 1.0;
+        }
+        red = 1.0 - 2 * (power-0.5);
 
-        return new Color(red, gr, blu);
+        return new Color((int) red*255, (int)green*255, (int)blue*255);
+        //return Color.getHSBColor((float)(1 - ratio), 1, 1);
     }
 
 }
