@@ -22,12 +22,14 @@ public class TradeState extends State {
             shopPack;
     private TradeView tradeView;
     private int selector;
+
     public TradeState(GameState game){
         this.game=game;
         setController(new TradeController(this));
         selector=0;
         tradeView=new TradeView();
     }
+
     public TradeState(GameState game, Pack playerPack, Pack shopPack) {
         setController(new TradeController(this));
         this.game = game;
@@ -35,7 +37,9 @@ public class TradeState extends State {
         this.shopPack = shopPack;
         playerItems = new HashMap<>();
         shopItems = new HashMap<>();
+        setController(new TradeController(this));
         selector=0;
+        tradeView=new TradeView();
         for(Item item : playerPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
@@ -43,6 +47,7 @@ public class TradeState extends State {
         }for(Item item : shopPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
+                System.out.println("Shopkeeper has item " + item.getName());
             }
         }
     } // end constructor
@@ -94,5 +99,44 @@ public class TradeState extends State {
         else selector--;
         System.out.println(selector);
     }
+
+    public void transaction() {
+        Item good;
+        int newValue;
+
+        if(selector <= 15) {                             /* player's pack */
+            good = playerPack.get(selector);                /* selling item */
+            if(good == null)
+                return;
+            System.out.println(good.getName() + " at position " + selector);
+            newValue = (int)(good.getValue() * 0.9);
+
+            if(shopPack.getMoney() >= newValue) {
+                /*
+                execute sale
+                 */
+                System.out.println("Executing sale " + good.getName() + " for " + newValue);
+                playerPack.modifyMoney(newValue);
+                shopPack.modifyMoney(-newValue);
+                shopPack.place(playerPack.remove(selector));
+            } // end if
+        } else  {                                       /* shopkeeper's pack */
+            good = shopPack.get(selector-16);               /* buying item */
+            if(good == null)
+                return;
+            System.out.println(good.getName() + " at position " + (selector-16));
+            newValue = (int)(good.getValue() * 1.1);
+
+            if(playerPack.getMoney() >= newValue) {
+                /*
+                execute purchase
+                 */
+                System.out.println("Executing purchase " + good.getName() + " for " + newValue);
+                playerPack.modifyMoney(-newValue);
+                shopPack.modifyMoney(newValue);
+                playerPack.place(shopPack.remove(selector-16));
+            } // end if
+        }
+    } // end transaction
 
 } // end TradeState

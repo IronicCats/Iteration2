@@ -64,6 +64,7 @@ public class TradeController extends Controller {
         }
         else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
             System.out.println("YOLO -> ENTER");
+            ((TradeState)state).transaction();
         }
 
 
