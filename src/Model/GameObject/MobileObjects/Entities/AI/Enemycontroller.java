@@ -19,18 +19,18 @@ public class Enemycontroller extends AIcontroller {
 
     @Override
     public void tick() {
-        /*if(targetinView()) {
+        if(targetinView()) {
             followThenAttackinRange();
         }
         else{
-           //randomlyMoveinRange();
-        }*/
+           randomlyMoveinRange();
+        }
     }
 
     public void followThenAttackinRange(){
        // if(canFace() && checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities())
         //if(targetinSight() && RangeofTilesinSight.find(AI.getLocation(),target.getLocation()) >= attackRange){
-            enemy.execute(CommandsEnum.ability1);
+            //enemy.execute(CommandsEnum.ability1);
         //}
         //follow();
 
