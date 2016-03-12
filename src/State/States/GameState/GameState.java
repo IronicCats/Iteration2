@@ -5,14 +5,8 @@ import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
-import Model.GameObject.MobileObjects.Entities.Characters.NPC;
-import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
-import Model.Inventory.Inventory;
-import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.GameObject.Item.Item;
@@ -23,11 +17,10 @@ import Utilities.MapUtilities.*;
 import State.State;
 import Utilities.MapUtilities.MakeMap;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
-import Utilities.MobileObjectUtilities.NPCFactory;
+import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
-import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MobileObjectView;
@@ -71,28 +64,17 @@ public class GameState extends State {
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT,map);
 
         //creating a new player
-        player =  NPCFactory.Player();
-        NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+        player =  MobileObjectFactory.Player();
+        MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-
-        //
-        /*NPC enemy = new NPC(new Location(6, 4), new Smasher(), new Inventory(), new NPCController(map));
-        enemy.getController().setBaseLoc(new Location(6,4));
-        mobileObjects.put(enemy, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy));
-
-        /*NPC enemy1 = new NPC(new Location(3, 2), new Smasher(), new Inventory(), new NPCController(map));
-        enemy1.getController().setBaseLoc(new Location(0,0));
-        enemy1.getController().setMobileObject(player);
-
-        mobileObjects.put(enemy1, NPCFactory.makeAsset(MobileObjectEnum.KITTEN, enemy1));*/
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = NPCFactory.Init(map);
-        mobileObjects.put(player, NPCFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+        mobileObjects = MobileObjectFactory.Init(map);
+        mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
 
         //area effect

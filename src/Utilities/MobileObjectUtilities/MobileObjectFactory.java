@@ -29,7 +29,7 @@ import java.util.HashMap;
  * Created by broskj on 3/6/16.
  */
 
-public class NPCFactory {
+public class MobileObjectFactory {
 
     public static HashMap<MobileObject, MobileObjectView> Init(Map map){
 
@@ -120,4 +120,4 @@ public class NPCFactory {
         }
         return null;
     } // end makeAsset
-} // end class NPCFactory
+} // end class MobileObjectFactory
