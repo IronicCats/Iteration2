@@ -30,8 +30,4 @@ public class DirectAbility extends Abilities {
         this.range = range;
     }
 
-    public void execute(MobileObject m, Location targeterLocation){
-        //get the tile that the targeter can target
-        //for all entities on the tile apply the effect
-    }
 }

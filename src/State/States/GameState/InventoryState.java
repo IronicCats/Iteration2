@@ -87,9 +87,9 @@ public class InventoryState extends State{
         }
         else if(pack.get(selector) instanceof Usable){
             player.applyEffect(pack.use(selector));
+            inventory.remove(selector);
         }
-
-    };
+    } // end interact
 
     public void drop(){}
 }

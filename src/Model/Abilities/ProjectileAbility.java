@@ -40,8 +40,4 @@ public class ProjectileAbility extends Abilities {
         this.projectile = p;
     }
 
-    public void execute(MobileObject m, Location targeterLocation){
-
-
-    }
 }

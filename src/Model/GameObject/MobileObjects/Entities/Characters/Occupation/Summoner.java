@@ -1,5 +1,12 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
+import Model.Abilities.DirectAbility;
+import Model.Effects.Effect;
+import Model.Requirement;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
+import Utilities.ItemUtilities.ItemsEnum;
+
 import java.util.Map;
 
 /**
@@ -21,7 +28,15 @@ public class Summoner extends Occupation {
 
 
         //basic attack of just hitting another entity
-
+        setBasicAttack(new DirectAbility(
+                //basic attack for summoner is hitting the opposing person with a staff
+                //basic attack is calculated based on strength
+                "Staff hit",
+                "whacks the enemy with your staff",
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
+                new Requirement(ItemsEnum.CATNIP_STAFF),
+                new Effect(new StatStructure(StatsEnum.MANA, 0))
+        ));
 
     }
 
@@ -50,6 +65,18 @@ public class Summoner extends Occupation {
     }
 
     public void recomputeOccupationalAbilities(){
+        //basic attack of just hitting another entity
+        setBasicAttack(new DirectAbility(
+                             //basic attack for summoner is hitting the opposing person with a staff
+                            //basic attack is calculated based on strength
+                             "Staff hit",
+                             "whacks the enemy with your staff",
+                              new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
+                              new Requirement(ItemsEnum.CATNIP_STAFF),
+                              new Effect(new StatStructure(StatsEnum.MANA, 0))
+        ));
+        //compute occupational abilities
+        getOccupationalAbilities().clear();
 
     }
 }

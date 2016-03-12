@@ -2,6 +2,7 @@ package Model.Inventory;
 
 import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Utilities.Observer;
 
@@ -96,6 +97,7 @@ public class Pack {
                 items[i] = null;
             }
         }
+        tempItems.add(new Money(money));
         return tempItems;
     } // end dump
 

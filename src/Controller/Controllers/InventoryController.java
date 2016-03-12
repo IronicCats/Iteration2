@@ -24,27 +24,26 @@ public class InventoryController extends Controller {
         if(e.getKeyCode() == KeyEvent.VK_I){
             state.switchState(State.GAMESTATE);
         }
-        else if(e.getKeyCode() == Settings.E) {
+        else if(e.getKeyCode() == Settings.EQUIP) {
             state.switchState(State.EQUIPMENTSTATE);
+        }
+        else if(e.getKeyCode() == Settings.DROP) {
+            ((InventoryState)state).drop();
         }
         else if(e.getKeyCode() == Settings.UP || e.getKeyCode() == KeyEvent.VK_UP) {          /* move cursor up */
             ((InventoryState)state).up();
-            System.out.println("YOLO -> UP");
         }
         else if(e.getKeyCode() == Settings.DOWN || e.getKeyCode() == KeyEvent.VK_DOWN) {        /* move cursor down */
             ((InventoryState)state).down();
-            System.out.println("YOLO -> DOWN");
         }
         else if(e.getKeyCode() == Settings.DOWN_LEFT || e.getKeyCode() == Settings.UP_LEFT || e.getKeyCode() == KeyEvent.VK_LEFT) {   /* move cursor down */
             ((InventoryState)state).left();
-            System.out.println("YOLO -> LEFT");
         }
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
             ((InventoryState)state).right();
-            System.out.println("YOLO -> RIGHT");
         }
-        else if(e.getKeyCode() == Settings.ENTER) {       /* sell item/confirm/... */
-            System.out.println("YOLO -> ENTER");
+        else if(e.getKeyCode() == Settings.INTERACT) {       /* interact */
+            ((InventoryState)state).interact();
         }
     }
 }

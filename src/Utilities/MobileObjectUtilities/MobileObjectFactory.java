@@ -2,6 +2,7 @@ package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.AI.NPCController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
@@ -69,20 +70,37 @@ public class MobileObjectFactory {
     public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map) {
         int id = npcEnum.ordinal();
         switch (npcEnum) {
+            case BLUE:
             case KITTEN:
                 return new NPC(location,
                         id,
                         new Smasher(),
                         new Inventory(
                                 new Pack(
-                                        new Item[] {ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, location)},
-                                        10),
+                                        ItemFactory.makeRandomItems(location),
+                                        (int)(Math.random() * 10) + 1),
                                 new Equipment()),
                         new NPCController(map));
             case SMALL_CAT:
-            case BLUE:
-                return new NPC(location, id, new Smasher(), new Inventory(), new NPCController(map));
+                return new NPC(location,
+                        id,
+                        new Smasher(),
+                        new Inventory(
+                                new Pack(
+                                        ItemFactory.makeRandomItems(location),
+                                        (int)(Math.random() * 25) + 1),
+                                new Equipment()),
+                        new NPCController(map));
             case FAT_CAT:
+                return new NPC(location,
+                        id,
+                        new Smasher(),
+                        new Inventory(
+                                new Pack(
+                                        ItemFactory.makeRandomItems(location),
+                                        (int)(Math.random() * 50) + 1),
+                                new Equipment()),
+                        new NPCController(map));
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
