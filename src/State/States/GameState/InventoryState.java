@@ -1,6 +1,12 @@
 package State.States.GameState;
 
 import Controller.Controllers.InventoryController;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Usable;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import State.State;
 import View.Views.InventoryView;
 
@@ -11,12 +17,19 @@ import java.awt.*;
  */
 public class InventoryState extends State{
     GameState game;
-    InventoryView invView=new InventoryView();
+    Inventory inventory;
+    Player player;
+    Pack pack;
+    InventoryView invView;
     int selector;
     public InventoryState(GameState GS){
         setController(new InventoryController(this));
         game=GS;
         selector=0;
+        player=game.getPlayer();
+        inventory=player.getInventory();
+        pack=player.getPack();
+        invView=new InventoryView(pack);
     }
 
     public void switchState() {
@@ -29,6 +42,7 @@ public class InventoryState extends State{
     public void render(Graphics g) {
         game.render(g);
         invView.render(g,selector);
+
     }
 
     @Override
@@ -36,6 +50,7 @@ public class InventoryState extends State{
 
         setState(state);
     }
+    //movement functions
     public void up(){
         if(selector-4<0)selector+=12;
         else selector-=4;
@@ -56,4 +71,19 @@ public class InventoryState extends State{
         else selector--;
         System.out.println(selector);
     }
+    //interaction
+    public void interact(){
+        if(pack.get(selector) instanceof Weapon){
+            inventory.equip((Weapon)pack.get(selector));
+        }
+        else if(pack.get(selector) instanceof Armor){
+            inventory.equip((Armor)pack.get(selector));
+        }
+        else if(pack.get(selector) instanceof Usable){
+            player.applyEffect(pack.use(selector));
+        }
+
+    };
+
+    public void drop(){}
 }

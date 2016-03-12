@@ -4,6 +4,7 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.Item.Items.Takables.Usable;
 import Utilities.Observer;
 import Utilities.Subject;
 

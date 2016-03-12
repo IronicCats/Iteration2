@@ -111,6 +111,7 @@ public class GameState extends State {
         map.placeAreaEffect(b);
 
         map.setMapItems(mapItems);
+
     }
 
     public void switchState() {

@@ -14,6 +14,8 @@ import Model.Inventory.Inventory;
 import Model.Location;
 import Model.Stats.CharacterStats;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import State.State;
+import State.States.GameState.InventoryState;
 import Utilities.Observer;
 
 import java.util.ArrayList;
@@ -34,12 +36,14 @@ public class Player extends Character implements Observer{
 
     public Player() {
         super();
+
     } // end default constructor
 
     public Player(Location location, int id, Occupation occupation, Inventory inventory){
         super(location, id, occupation, inventory);
         inventory.addObserver(this);
         stats.setMovement(10);
+        //State.INVENTORYSTATE.setConnect(this);
     } // end constructor
 
     // takes in the degrees associated with key press and updates player location
