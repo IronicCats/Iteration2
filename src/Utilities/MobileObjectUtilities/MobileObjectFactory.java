@@ -34,18 +34,18 @@ public class MobileObjectFactory {
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
 
         // Enemy zero
-        NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map);
+        NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
         enemy.getController().setBaseLoc(new Location(0,0));
         objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
 
         // Enemy one
-        NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map);
+        NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
         enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map);
-        davePet.setOwnership(player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         if(GameState.getPlayer() != null) {
@@ -55,7 +55,7 @@ public class MobileObjectFactory {
         return objects;
     }
 
-    public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map) {
+    public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map, Player player) {
         switch (npcEnum) {
             case KITTEN:
                 return new NPC(location,
@@ -74,7 +74,7 @@ public class MobileObjectFactory {
             case CORGI_SHOPKEEPER:
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
-               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack());
+               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
