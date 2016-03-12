@@ -48,7 +48,6 @@ import java.util.Random;
             randomlyMoveinRange();
             //moveTo(destination);
         }
-
     }
 
     //Moves to destination
@@ -83,7 +82,7 @@ import java.util.Random;
     }
 
     public ArrayList<Tile> getTilesinSight(){
-        return FindTilesinRange.find(AI.getLocation(), map, AI.getSight());
+        return FindTilesinRange.find(AI.getLocation(), map, AI.getSight(), AI.getViewLocation());
     }
 
     public void  randomlyMoveinRange(){
