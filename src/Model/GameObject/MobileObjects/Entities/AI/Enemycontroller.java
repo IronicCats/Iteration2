@@ -16,7 +16,11 @@ public class Enemycontroller extends AIcontroller {
         super(map);
     }
 
+    HostileNPC enemy;
 
+    public void setEnemy(HostileNPC enemy) {
+        this.enemy = enemy;
+    }
 
     @Override
     public void tick() {
