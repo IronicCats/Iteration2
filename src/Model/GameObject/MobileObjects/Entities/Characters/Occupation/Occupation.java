@@ -61,7 +61,7 @@ public abstract class Occupation implements Subject, Observer {
         basicSkillAbilities.add(new DirectAbility(
                                 "Bind Wound",
                                  "Uses a bind wound skill",
-                                  new Effect(new StatStructure(StatsEnum.LIFE, this.getOccupationalSkillsValue(SkillsEnum.BINDWOUNDS) + 1)),
+                                  new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                                   new Requirement(0),
                                   new Effect(new StatStructure(StatsEnum.MANA, 0))));
 
@@ -98,7 +98,7 @@ public abstract class Occupation implements Subject, Observer {
     //skill related methods
 
     public void modifyBasicSkills(SkillsEnum s, int value){
-        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+        if(s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION){
             basicSkills.put(s, value);
         }
         else {
@@ -108,7 +108,7 @@ public abstract class Occupation implements Subject, Observer {
     }
 
     public int getBasicSkillValue(SkillsEnum s){
-        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+        if(s.equals(s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION)){
             return basicSkills.get(s);
         }
         else{
@@ -178,7 +178,7 @@ public abstract class Occupation implements Subject, Observer {
         basicSkillAbilities.add(new DirectAbility(
                 "Bind Wound",
                 "Uses a bind wound skill",
-                new Effect(new StatStructure(StatsEnum.LIFE, this.getOccupationalSkillsValue(SkillsEnum.BINDWOUNDS) + 1)),
+                new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))));
         //recomputes occupational abilities

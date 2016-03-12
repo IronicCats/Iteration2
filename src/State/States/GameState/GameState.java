@@ -73,7 +73,7 @@ public class GameState extends State {
         MakeMap.populateItems(mapItems.keySet().toArray(new Item [mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = MobileObjectFactory.Init(map);
+        mobileObjects = MobileObjectFactory.Init(map, player);
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
 
@@ -115,13 +115,14 @@ public class GameState extends State {
         return camera;
     }
 
+    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {return mobileObjects;}
+
+    public static Map getMap() {return map;}
+
     @Override
     public void tick() {
-        player.tick();
         for (MobileObject key : mobileObjects.keySet()) {
-            if(!(key instanceof Player)) {
-                key.tick();
-            }
+            key.tick();
         }
     }
 

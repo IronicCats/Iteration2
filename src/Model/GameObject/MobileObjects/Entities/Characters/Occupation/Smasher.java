@@ -33,7 +33,7 @@ public class Smasher extends Occupation {
         setBasicAttack(new DirectAbility(
                             "Attack",
                             "Basic attack of smasher",
-                            new Effect(new StatStructure(StatsEnum.LIFE, this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())),
+                            new Effect(new StatStructure(StatsEnum.LIFE, -1 *(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating()))),
                             new Requirement(0),
                             new Effect(new StatStructure(StatsEnum.MANA, 0))
                         ));
@@ -74,7 +74,7 @@ public class Smasher extends Occupation {
     //operations
     public void modifyOccupationalSkills(SkillsEnum s, int value){
         //checking for smasher related skill change
-        if(s.equals(SkillsEnum.ONEHANDWEAP) || s.equals(SkillsEnum.TWOHANDWEAP) || s.equals(SkillsEnum.BRAWL)){
+        if(s==SkillsEnum.ONEHANDWEAP || s== SkillsEnum.TWOHANDWEAP || s==SkillsEnum.BRAWL){
             Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
             m.put(s, value); //changing the occupational skills
             this.setOccupationalSkills(m); //setting the occupational skills
@@ -86,7 +86,8 @@ public class Smasher extends Occupation {
     }
 
     public int getOccupationalSkillsValue(SkillsEnum s){
-        if(s.equals(SkillsEnum.ONEHANDWEAP) || s.equals(SkillsEnum.TWOHANDWEAP) || s.equals(SkillsEnum.BRAWL)){
+        System.out.println(s);
+        if(s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL){
                 return getOccupationalSkills().get(s);
         }
         else {

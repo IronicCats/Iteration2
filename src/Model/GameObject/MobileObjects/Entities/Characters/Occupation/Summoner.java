@@ -28,7 +28,7 @@ public class Summoner extends Occupation {
     //operations
     public  void modifyOccupationalSkills(SkillsEnum s, int value){
         //checking for summoner related skill change
-        if(s.equals(SkillsEnum.ENCHANT) || s.equals(SkillsEnum.BOON) || s.equals(SkillsEnum.BANE) || s.equals(SkillsEnum.STAFF)){
+        if(s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF){
             Map<SkillsEnum, Integer> m  = this.getOccupationalSkills(); //attaining the occupational skills
             m.put(s, value); //changing the occupational skills
             this.setOccupationalSkills(m); //setting the occupational skills
@@ -40,7 +40,7 @@ public class Summoner extends Occupation {
     }
 
     public int getOccupationalSkillsValue(SkillsEnum s){
-        if(s.equals(SkillsEnum.ENCHANT) || s.equals(SkillsEnum.BOON) || s.equals(SkillsEnum.BANE) || s.equals(SkillsEnum.BANE)){
+        if(s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF){
             return getOccupationalSkills().get(s);
         }
         else {

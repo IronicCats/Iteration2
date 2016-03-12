@@ -16,8 +16,6 @@ import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
 import Model.Location;
 import Model.Stats.PetStats;
-
-import State.State;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -33,12 +31,9 @@ import java.util.HashMap;
 
 public class MobileObjectFactory {
 
-    public static HashMap<MobileObject, MobileObjectView> Init(Map map){
+    public static HashMap<MobileObject, MobileObjectView> Init(Map map, Player player){
 
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
-        // pet
-        //MobileObject pet = makeNPC(MobileObjectEnum.DAVE_PET, new Location(3, 3), new Pack(), map);
-        //objects.put(pet, makeAsset(MobileObjectEnum.DAVE_PET, pet));
 
         // Enemy zero
         NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map);
@@ -58,6 +53,11 @@ public class MobileObjectFactory {
         //enemy.getController().setMobileObject(player);
         //enemy.getController().setBaseLoc(new Location(0,0));
         //enemy1.getController().setBaseLoc(new Location(0,0));
+
+        // pet
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map);
+        davePet.setOwnership(player);
+        objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         if(GameState.getPlayer() != null) {
             //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
@@ -116,7 +116,7 @@ public class MobileObjectFactory {
                         new NPCController(map),
                         new ArrayList<>());
             case DAVE_PET:
-               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), false);
+               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack());
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -149,7 +149,7 @@ public class MobileObjectFactory {
                 return new MobileObjectView(mobileObject, Assets.BLUE_NPC);
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
-                return new MobileObjectView(mobileObject, Assets.PET);
+                return new MobileObjectView(mobileObject, Assets.DAVE_PET);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
