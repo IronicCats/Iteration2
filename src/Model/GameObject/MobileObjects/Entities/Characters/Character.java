@@ -131,6 +131,11 @@ public abstract class Character extends Entity implements Observer{
         getTile().addItems(inventory.emptyPack());
     } // end emptyPack
 
+    public void drop(int index) {
+        DisplayMessage.addMessage(new GameMessage("You dropped your " + inventory.get(index), 3));
+        getTile().addItem(inventory.remove(index));
+    }
+
     public void applyEffect(Effect... e) {
         ((CharacterStats)getStats()).applyEffect(e);
     } // end applyEffect
