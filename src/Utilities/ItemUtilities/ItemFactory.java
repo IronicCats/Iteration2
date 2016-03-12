@@ -48,7 +48,7 @@ public class ItemFactory {
         initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(2, 2));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 2));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // helmet
@@ -469,7 +469,7 @@ public class ItemFactory {
             case EXPERIENCE_POTION:
             case MOVEMENT_POTION:
             case STICK_SWORD:
-                return new ItemView(item, Assets.MANA_POTION);
+                return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
             case SWORDFISH_DAGGER:
             case SWORDFISH_LANCE:

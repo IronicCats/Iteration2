@@ -6,7 +6,7 @@ import Model.Map.Map;
 /**
  * Created by Aidan on 3/6/2016.
  */
-public class PetController extends AIcontroller {
+public class PetController extends AIController {
 
     public PetController(Map map) {
         super(map);
@@ -20,6 +20,7 @@ public class PetController extends AIcontroller {
 
     @Override
     public void tick() {
+
         if(targetinView() && this.player != null) {
             randomlyMoveinRange();
         }
@@ -27,6 +28,7 @@ public class PetController extends AIcontroller {
             randomlyMoveinRange();
         }
         else{
+            System.out.println("Following");
             follow();
         }
     }

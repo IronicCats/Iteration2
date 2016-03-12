@@ -58,7 +58,7 @@ public class Pet extends MobileObject implements Tickable {
 
     @Override
     public void tick() {
-        if(this.getController().targetinSight() && this.requirement.hasRequiredItem(player.getPack())){
+        if(this.getController().targetinView() && this.requirement.hasRequiredItem(player.getPack())){
             setOwnership();
         }
         if(controller != null) {
@@ -99,6 +99,9 @@ public class Pet extends MobileObject implements Tickable {
         this.owned = true;
         this.getController().setPlayer(this.player);
         this.getController().setBaseLoc(this.player.getLocation());
+        for(int i = 0; i < player.getPack().getCount(); i++){
+
+        }
     }
 
     public void pickup(Item item) {
