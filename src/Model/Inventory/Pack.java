@@ -1,6 +1,7 @@
 package Model.Inventory;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Money;
 import Utilities.Observer;
 
 import java.util.ArrayList;
@@ -88,6 +89,7 @@ public class Pack {
                 items[i] = null;
             }
         }
+        tempItems.add(new Money(money));
         return tempItems;
     } // end dump
 
