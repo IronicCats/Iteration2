@@ -119,6 +119,8 @@ public class InventoryView implements Renderable, Observer {
         g.setColor(new Color(12, 12, 12, 200));
         g.fillRect(width*3/20, height*1/4, width*6/20, height*5/10);
         //LIVES_LEFT, STRENGTH, AGILITY, INTELLECT, HARDINESS, EXPERIENCE, MOVEMENT, LEVEL, LIFE, MANA, OFFENSIVE_RATING, DEFENSIVE_RATING, ARMOR_RATING;
+        g.setColor(new Color(255,255,255));
+        g.drawString();
     }
     public void renderItems(){
         for(int i = 0; i<16; ++i){
