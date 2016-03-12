@@ -93,7 +93,6 @@ public class Smasher extends Occupation {
     }
 
     public int getOccupationalSkillsValue(SkillsEnum s){
-        //System.out.println(s);
         if(s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL){
                 return getOccupationalSkills().get(s);
         }
