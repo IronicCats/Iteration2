@@ -138,5 +138,7 @@ public abstract class MobileObject extends GameObject {
         this.range = range;
     }
 
-
+    public MobileObjectEnum getID() {
+        return MobileObjectEnum.values()[id];
+    }
 }
