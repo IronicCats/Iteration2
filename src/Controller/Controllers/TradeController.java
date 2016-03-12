@@ -3,7 +3,6 @@ package Controller.Controllers;
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
 import State.State;
-import State.States.GameState.InventoryState;
 import State.States.GameState.TradeState;
 import Utilities.Settings;
 
@@ -54,7 +53,7 @@ public class TradeController extends Controller {
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
             ((TradeState)state).executeCommand(CommandsEnum.right);
         }
-        else if(e.getKeyCode() == Settings.ENTER) {       /* initiate transaction */
+        else if(e.getKeyCode() == Settings.INTERACT) {       /* initiate transaction */
             ((TradeState)state).executeCommand(CommandsEnum.make_transaction);
         }
 

@@ -1,13 +1,10 @@
 package View.Views;
 
 import Model.Map.Map;
-import Utilities.Utilities;
-import Utilities.*;
+import Utilities.Observer;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
 
 
 /**
@@ -17,7 +14,7 @@ public class EquipmentView implements Renderable, Observer {
 
     private Map map;
 
-    public EquipmentView(Map map){
+    public EquipmentView(Map map) {
         this.map = map;
 
         map.addObserver(this);

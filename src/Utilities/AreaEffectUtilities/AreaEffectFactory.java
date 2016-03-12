@@ -1,14 +1,11 @@
 package Utilities.AreaEffectUtilities;
 
 
-import Model.Location;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.Location;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
-import Utilities.Utilities;
-
-import java.util.HashMap;
 
 
 /**
@@ -16,8 +13,8 @@ import java.util.HashMap;
  */
 public class AreaEffectFactory {
 
-    public static AreaEffect makeAreaEffect(AreaEffectEnum a, Location location){
-        switch(a){
+    public static AreaEffect makeAreaEffect(AreaEffectEnum a, Location location) {
+        switch (a) {
             case DAMAGE:
                 return CreateAreaEffect.addDamage(
                         "Damage",
@@ -60,7 +57,7 @@ public class AreaEffectFactory {
     }// end
 
     public static DecalView makeAsset(AreaEffectEnum areaEffectEnum, AreaEffect areaEffect) {
-        switch(areaEffectEnum) {
+        switch (areaEffectEnum) {
             case DAMAGE:
             case LEVELUP:
                 return new DecalView(areaEffect, Assets.STAR);

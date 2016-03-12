@@ -1,11 +1,11 @@
 package Utilities.AIUtilities;
 
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
 import Utilities.MapUtilities.Neighbors;
 import Utilities.Settings;
-import Model.GameObject.MobileObjects.ViewLocation;
 import Utilities.Utilities;
 
 import java.util.ArrayList;

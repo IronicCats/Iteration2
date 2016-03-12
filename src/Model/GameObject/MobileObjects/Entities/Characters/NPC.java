@@ -29,7 +29,7 @@ public class NPC extends Character implements Tickable {
 
     @Override
     public void tick() {
-        if(controller != null) {
+        if (controller != null) {
             controller.tick();
         }
     } // end tick

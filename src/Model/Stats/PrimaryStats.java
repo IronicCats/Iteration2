@@ -74,10 +74,14 @@ public class PrimaryStats implements Subject {
     implement subject methods
      */
     @Override
-    public void addObserver(Utilities.Observer o) { observers.add(o); }
+    public void addObserver(Utilities.Observer o) {
+        observers.add(o);
+    }
 
     @Override
-    public void removeObserver(Utilities.Observer o) { observers.remove(o); }
+    public void removeObserver(Utilities.Observer o) {
+        observers.remove(o);
+    }
 
     @Override
     public void alert() {
@@ -126,44 +130,44 @@ public class PrimaryStats implements Subject {
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
         switch (s) {
             case STRENGTH:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.strength += this.strength * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.strength += this.strength * amount / 100;
                 else
                     this.strength += amount;
                 break;
             case AGILITY:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.agility += this.agility * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.agility += this.agility * amount / 100;
                 else
                     this.agility += amount;
                 break;
             case INTELLECT:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.intellect += this.intellect * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.intellect += this.intellect * amount / 100;
                 else
                     this.intellect += amount;
                 break;
             case HARDINESS:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.hardiness += this.hardiness * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.hardiness += this.hardiness * amount / 100;
                 else
                     this.hardiness += amount;
                 break;
             case EXPERIENCE:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.experience += this.experience * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.experience += this.experience * amount / 100;
                 else
                     this.experience += amount;
                 break;
             case MOVEMENT:
-                if(m.equals(ModificationEnum.PERCENT))
-                    this.movement += this.movement * amount/100;
+                if (m.equals(ModificationEnum.PERCENT))
+                    this.movement += this.movement * amount / 100;
                 else
                     this.movement += amount;
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
-                if(livesLeft > baseLives)
+                if (livesLeft > baseLives)
                     livesLeft = baseLives;
                 break;
             default:
@@ -173,18 +177,59 @@ public class PrimaryStats implements Subject {
         alert();
     } // end modifyStats
 
-    public int getLivesLeft() { return livesLeft; }
-    public int getBaseLives() { return baseLives; }
-    public int getStrength() { return strength; }
-    public int getBaseStr() { return baseStr; }
-    public int getAgility() { return agility; }
-    public int getBaseAgi() { return baseAgi; }
-    public int getIntellect() { return intellect; }
-    public int getBaseIntel() { return baseIntel; }
-    public int getHardiness() { return hardiness; }
-    public int getBaseHard() { return baseHard; }
-    public int getExperience() { return experience; }
-    public int getMovement() { return movement; }
-    public int getBaseMovement() { return baseMovement; }
-    public int getXpThreshhold() { return xpThreshhold; }
+    public int getLivesLeft() {
+        return livesLeft;
+    }
+
+    public int getBaseLives() {
+        return baseLives;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getBaseStr() {
+        return baseStr;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public int getBaseAgi() {
+        return baseAgi;
+    }
+
+    public int getIntellect() {
+        return intellect;
+    }
+
+    public int getBaseIntel() {
+        return baseIntel;
+    }
+
+    public int getHardiness() {
+        return hardiness;
+    }
+
+    public int getBaseHard() {
+        return baseHard;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public int getMovement() {
+        return movement;
+    }
+
+    public int getBaseMovement() {
+        return baseMovement;
+    }
+
+    public int getXpThreshhold() {
+        return xpThreshhold;
+    }
 } // end class PrimaryStats

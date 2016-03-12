@@ -51,7 +51,4 @@ public abstract class Abilities {
     public void setCost(Effect cost){
         this.cost = cost;
     }
-
-    //operations
-    public abstract void execute(MobileObject m, Location targeterLocation);
 }
