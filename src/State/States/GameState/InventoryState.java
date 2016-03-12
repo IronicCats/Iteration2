@@ -1,12 +1,14 @@
 package State.States.GameState;
 
 import Controller.Controllers.InventoryController;
+
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
+
 import State.State;
 import View.Views.InventoryView;
 
@@ -17,20 +19,24 @@ import java.awt.*;
  */
 public class InventoryState extends State{
     GameState game;
+
     Inventory inventory;
     Player player;
     Pack pack;
     InventoryView invView;
     int selector;
+
     public InventoryState(GameState GS){
         setController(new InventoryController(this));
         game=GS;
         selector=0;
+
         player=game.getPlayer();
         inventory=player.getInventory();
         pack=player.getPack();
         invView=new InventoryView(pack);
     }
+
 
     public void switchState() {
 
