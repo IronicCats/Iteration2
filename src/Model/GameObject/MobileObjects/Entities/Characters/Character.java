@@ -99,6 +99,7 @@ public abstract class Character extends Entity {
 
 
     public void attack() {
+
         getTile().recieveAttack(this);
     }
 
@@ -143,6 +144,7 @@ public abstract class Character extends Entity {
             case attack:
                 attack();
             case ability1:
+
             case ability2:
             case ability3:
                 useAbility(e);

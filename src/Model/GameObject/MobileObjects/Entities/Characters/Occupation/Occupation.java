@@ -11,6 +11,7 @@ import Model.Stats.Stats;
 import Model.Stats.StatsEnum;
 
 import java.lang.reflect.Array;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -29,8 +30,8 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
-    private Abilities[] occupationalAbilities;
-    private Abilities[] basicSkillAbilities;
+    private ArrayList<Abilities> occupationalAbilities;
+    private ArrayList<Abilities> basicSkillAbilities;
     private Abilities basicAttack;
     private int pastLevel;
 
@@ -48,9 +49,21 @@ public abstract class Occupation implements Subject, Observer {
         pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
+        occupationalAbilities = new ArrayList<>();
+        basicSkillAbilities = new ArrayList<>();
+
+        //basic skills
         basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
         basicSkills.put(SkillsEnum.BARGAIN, 0);
         basicSkills.put(SkillsEnum.OBSERVATION, 0);
+
+        //set basic abilities
+        basicSkillAbilities.add(new DirectAbility(
+                                "Bind Wound",
+                                 "Uses a bind wound skill",
+                                  new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
+                                  new Requirement(0),
+                                  new Effect(new StatStructure(StatsEnum.MANA, 0))));
 
     }
 
@@ -85,7 +98,7 @@ public abstract class Occupation implements Subject, Observer {
     //skill related methods
 
     public void modifyBasicSkills(SkillsEnum s, int value){
-        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+        if(s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION){
             basicSkills.put(s, value);
         }
         else {
@@ -95,7 +108,7 @@ public abstract class Occupation implements Subject, Observer {
     }
 
     public int getBasicSkillValue(SkillsEnum s){
-        if(s.equals(SkillsEnum.BINDWOUNDS) || s.equals(SkillsEnum.BARGAIN) || s.equals(SkillsEnum.OBSERVATION)){
+        if(s.equals(s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION)){
             return basicSkills.get(s);
         }
         else{
@@ -112,13 +125,17 @@ public abstract class Occupation implements Subject, Observer {
         return basicAttack;
     }
 
+    public ArrayList<Abilities> getOccupationalAbilities(){
+        return this.occupationalAbilities;
+    }
+
 
     //different occupational skills for each occupation
     public abstract void modifyOccupationalSkills(SkillsEnum s, int value);
 
     public abstract int getOccupationalSkillsValue(SkillsEnum s);
 
-
+    public abstract void recomputeOccupationalAbilities();
     /*
    implement subject methods
     */
@@ -140,6 +157,7 @@ public abstract class Occupation implements Subject, Observer {
      */
     @Override
     public void update() {
+        //leveling up triggers adding a counter to some skill
         if(pastLevel != playerStats.getLevel()){
             pastLevel = playerStats.getLevel();
             /**
@@ -147,12 +165,24 @@ public abstract class Occupation implements Subject, Observer {
             SkillsEnum s;
             modifyOccupationalSkills(s, getOccupationalSkillsValue(s) + 1);
              **/
-
-            /**
-             * recompute all abilites
-             * differs with each occupation
-             */
         }
+
+        //recompute abilities each time a stat changes
+        /**
+         * recompute all abilites
+         * differs with each occupation
+         */
+        //recomputes basic abilities
+        basicSkillAbilities.clear(); //clears old abilities
+        //adding newly computed abilities
+        basicSkillAbilities.add(new DirectAbility(
+                "Bind Wound",
+                "Uses a bind wound skill",
+                new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        //recomputes occupational abilities
+        recomputeOccupationalAbilities();
     } // end update
 
     @Override
