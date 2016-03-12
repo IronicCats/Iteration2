@@ -16,7 +16,6 @@ public class RemoveTrap extends ExecutableAbility{
 
     //operations
 
-
     public void execute(MobileObject targeter, MobileObject targeted){
 
     }
