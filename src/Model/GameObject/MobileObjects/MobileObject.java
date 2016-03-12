@@ -20,7 +20,7 @@ e.g., Pet, Projectile, Vehicle, Entity.
 It holds all common attributes between the above listed objects.
 Also inherits location from GameObject
 */
-public abstract class MobileObject extends GameObject{
+public abstract class MobileObject extends GameObject {
 
     protected Map map;
 
@@ -49,13 +49,22 @@ public abstract class MobileObject extends GameObject{
     }
 
     public void move(int degrees){
-        if(canMove) {
-            canMove = false;
-            location = Location.newLocation(degrees, location);
-            location.setDir(degrees);
-            registerTile(location);
-            alert();
+        if(location.getDir() == degrees) {
+            if (canMove) {
+                canMove = false;
+                location = Location.newLocation(degrees, location);
+                location.setDir(degrees);
+                registerTile(location);
+                alert();
+            }
+        }else {
+            face(degrees);
         }
+    }
+
+    public void face(int degrees) {
+        location.setDir(degrees);
+        alert();
     }
 
 

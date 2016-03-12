@@ -23,7 +23,7 @@ public class GameController extends Controller {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!canGetInput()) { return; }
-        System.out.println("Game: " + e.getKeyCode());
+        //System.out.println("Game: " + e.getKeyCode());
 
         //If camera movement is true then move camera instead of player
         if(e.getKeyCode() == Settings.ENTER){
@@ -68,7 +68,6 @@ public class GameController extends Controller {
             } else if (e.getKeyCode() == Settings.I) {          /* open inventory state */
                 state.switchState(State.INVENTORYSTATE);
             } else if (e.getKeyCode() == Settings.M) {          /* open map state */
-                System.out.println("m pressed");
             } else if (e.getKeyCode() == Settings.Q) {          /* execute interaction */
                 ((GameState) state).executePlayerCommand(CommandsEnum.interact);
             } else if (e.getKeyCode() == Settings.D) {          /* execute inventory dump (temporary?) */

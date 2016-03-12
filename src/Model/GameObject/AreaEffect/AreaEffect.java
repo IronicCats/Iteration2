@@ -19,7 +19,6 @@ public class AreaEffect extends GameObject {
     //constructor
     public AreaEffect(String name, String description, AreaEffectEnum areaEffect, Location location) {
         super(location);
-        System.out.println(location);
         this.name = name;
         this.description = description;
         this.areaEffect = areaEffect;

@@ -20,7 +20,6 @@ public class EquipmentController extends Controller {
         }
         if(e.getKeyCode() == KeyEvent.VK_E){
             state.switchState(State.GAMESTATE);
-            System.out.println("ayylmao");
         }
     }
 }

@@ -21,7 +21,6 @@ public class InventoryController extends Controller {
         }
         if(e.getKeyCode() == KeyEvent.VK_I){
             state.switchState(State.GAMESTATE);
-            System.out.println("ayylmao");
         }
     }
 }
