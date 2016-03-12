@@ -43,6 +43,7 @@ public class Sneak extends Occupation {
                                          new Requirement(0),
                                          new Effect(new StatStructure(StatsEnum.MANA, 0)),
                                          getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+
     }
 
     //operations
@@ -78,6 +79,13 @@ public class Sneak extends Occupation {
         ));
         //compute occupational abilities
         getOccupationalAbilities().clear();
+        getOccupationalAbilities().add(new PickPocket("Pick Pocket",
+                                                      "Helps you steal another entity's money",
+                                                       new Effect(new StatStructure(StatsEnum.LIFE, 0)),
+                                                       new Requirement(0),
+                                                       new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                                                       getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
     }
+
 }
 

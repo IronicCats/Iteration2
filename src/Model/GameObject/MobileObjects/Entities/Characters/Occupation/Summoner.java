@@ -37,6 +37,10 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
 
+        //enchantments
+        //boon
+        //bane
+
     }
 
     //operations
