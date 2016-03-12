@@ -27,6 +27,8 @@ public class Sneak extends Occupation{
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
+
+        //computes occupational abilities
     }
 
     //operations
@@ -51,6 +53,16 @@ public class Sneak extends Occupation{
             System.out.println("This skill is not available to you");
             return 0;
         }
+    }
+
+    public void recomputeOccupationalAbilities(){
+        setBasicAttack(new DirectAbility(
+                "Attack",
+                "Basic attack of sneak",
+                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, 0))
+        ));
     }
 }
 

@@ -19,11 +19,6 @@ public class Smasher extends Occupation {
 
         super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 5});
 
-        //set occupational skills
-        modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);
-        modifyOccupationalSkills(SkillsEnum.TWOHANDWEAP, 0);
-        modifyOccupationalSkills(SkillsEnum.BRAWL, 0);
-
         //basic attack for smasher is a direct ability that involves hitting another entity
         //basic attack is calculated based on strength and brawl skill level
         // distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
@@ -58,5 +53,18 @@ public class Smasher extends Occupation {
             System.out.println("This skill is not available to you");
             return 0;
         }
+    }
+
+    public void recomputeOccupationalAbilities(){
+        //basic attack
+        setBasicAttack(new DirectAbility(
+                "Attack",
+                "Basic attack of smasher",
+                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, 0))
+        ));
+        //basic skills
+        //occupational skills
     }
 }
