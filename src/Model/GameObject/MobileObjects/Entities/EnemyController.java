@@ -1,5 +1,6 @@
-package Model.GameObject.MobileObjects.Entities.AI;
+package Model.GameObject.MobileObjects.Entities;
 
+import Model.GameObject.MobileObjects.Entities.Characters.AIController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.Map.Map;
 import Utilities.AIUtilities.DirectionofTarget;

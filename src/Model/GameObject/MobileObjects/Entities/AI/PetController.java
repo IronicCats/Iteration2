@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.MobileObjects.Entities.Characters.AIController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Map.Map;
 
