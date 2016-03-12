@@ -1,6 +1,7 @@
 package Model.Map;
 
 
+import Model.Abilities.Abilities;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.*;
@@ -66,15 +67,12 @@ public abstract class Tile implements Subject {
         }
     }
 
-    public void recieveAttack(Character character) {
-        Location location = Location.newLocation(character.getDir(), this.location);
-        Map.map.carryAttack(character, location);
-
+    public void sendAttack(Character character, Abilities ability) {
+        Map.map.carryAttack(character, ability);
     }
-    public void deliverAttack(Character character) {
-        Location location = Location.newLocation(character.getDir(), this.location);
+    public void receiveAttack(Character c, Abilities a) {
         if(hasObject()) {
-            ((Character)object).recieveAttack(character);
+            ((Character)object).receiveAttack(c, a);
         }
     }
 
@@ -171,6 +169,8 @@ public abstract class Tile implements Subject {
     public boolean isVisited() {
         return visited;
     }
+
+    public void setIsVisited() { visited = true; }
 
     @Override
     public void addObserver(Observer o) {

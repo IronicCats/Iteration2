@@ -72,7 +72,6 @@ public class Inventory implements Subject{
         }
         pack.place(item);
         System.out.println(item.getName() + " added to inventory");
-        alert();
     } // end place
 
     public void modifyMoney(int amount) {
@@ -82,7 +81,6 @@ public class Inventory implements Subject{
 
     public Item remove(int index) {
         Item item = pack.remove(index);
-        alert();
         return item;
     } // end remove
 

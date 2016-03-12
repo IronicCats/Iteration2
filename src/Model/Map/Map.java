@@ -1,10 +1,10 @@
 package Model.Map;
 
+import Model.Abilities.Abilities;
+import Model.Abilities.DirectAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
-import Model.GameObject.MobileObjects.Entities.Characters.NPC;
-import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Utilities.Settings;
@@ -83,8 +83,12 @@ public class Map implements Subject {
         }
     }
 
-    public void carryAttack(Character c, Location l) {
-        getTile(l).deliverAttack(c);
+    public void carryAttack(Character c, Abilities a) {
+        if(a instanceof DirectAbility){
+            getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
+        }else {
+            System.out.println("Not a Direct Ability");
+        }
     }
 
     public Location getSpawn(){

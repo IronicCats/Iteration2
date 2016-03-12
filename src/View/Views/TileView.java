@@ -116,7 +116,8 @@ public class TileView implements Observer, Renderable {
     }
 
     public void mobileObjects(Graphics g, int xOffset, int yOffset, Location playerLocation) {
-        if(tile.hasObject() && mobileObjectView == null){
+        if(tile.hasObject() && mobileObjectView == null && !Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)){
+
             mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
         }else if(!tile.hasObject()){
             mobileObjectView = null;
@@ -130,11 +131,14 @@ public class TileView implements Observer, Renderable {
         if(Utilities.outOfSite(new ViewLocation(playerLocation.getX(), playerLocation.getY()), this.viewLocation, ViewSettings.SIGHT)) {//tile.visited
             if (tile.isVisited()) {
                 g.drawImage(Assets.HALFFOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
-
+                return;
             } else {
+                mobileObjectView = null;
                 g.drawImage(Assets.FOGTILE, xOffset, yOffset, Settings.TILEWIDTH, Settings.TILEHEIGHT, null);
-
+                return;
             }
         }
+        tile.setIsVisited();
+
     }
 }
