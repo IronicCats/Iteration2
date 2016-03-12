@@ -24,6 +24,9 @@ public class InventoryController extends Controller {
         if(e.getKeyCode() == KeyEvent.VK_I){
             state.switchState(State.GAMESTATE);
         }
+        else if(e.getKeyCode() == Settings.E) {
+            state.switchState(State.EQUIPMENTSTATE);
+        }
         else if(e.getKeyCode() == Settings.UP || e.getKeyCode() == KeyEvent.VK_UP) {          /* move cursor up */
             ((InventoryState)state).up();
             System.out.println("YOLO -> UP");
