@@ -161,8 +161,7 @@ import java.util.Random;
     } // end setDestination
 
     public void setTarget(MobileObject mobileObject) {
-        this.target = mobileObject;
-    }
+        this.target = mobileObject; }
 
     public Location getBaseLoc() {
         return baseLoc;
@@ -180,6 +179,5 @@ import java.util.Random;
 
     @Override
     public void remove() {
-
     }
 } // end class AIcontroller

@@ -1,8 +1,7 @@
 package Model;
 
-import Model.GameObject.Item.Item;
-import Model.GameObject.Item.Items.Takables.Quest;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.Inventory.Pack;
 import Utilities.ItemUtilities.ItemsEnum;
 
 /**
@@ -65,12 +64,21 @@ public class Requirement {
         this.requiredOccupation = requiredOccupation;
     } // end constructor
 
+    public boolean meetsLevel(int level){
+        if(level == requiredLevel){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /* takes in players inventory and iterates through pack to determine if player
        has required item*/
-   /* public boolean hasRequiredItem(Inventory inventory){
-        if(requiredItem != null){
-            for(int i = 0; i < inventory.size(); i++) {
-                if (inventory.pack.items[i] == requiredItem) {
+   public boolean hasRequiredItem(Pack pack){
+        if(requiredItemEnum != null){
+            for(int i = 0; i < pack.getCount(); i++) {
+                if (pack.getItems()[i].getItemType() == requiredItemEnum) {
                     return true;
                 }
             }
@@ -79,14 +87,13 @@ public class Requirement {
         else{
             return true;
         }
-    }*/
+    }
 
-    /*public boolean meetsRequirements(int playerLevel, Inventory inventory){
-        if(hasRequiredItem(inventory) && meetsLevel(playerLevel)){
+    public boolean meetsRequirements(int playerLevel, Pack pack) {
+        if (hasRequiredItem(pack) && meetsLevel(playerLevel)) {
             return true;
-        }
-        else{977\7\
+        } else {
             return false;
         }
-     */
+    }
 }

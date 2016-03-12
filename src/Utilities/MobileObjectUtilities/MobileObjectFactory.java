@@ -3,8 +3,9 @@ package Utilities.MobileObjectUtilities;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.AI.Enemycontroller;
-import Model.GameObject.MobileObjects.Entities.AI.NPCController;
+import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -37,27 +38,28 @@ public class MobileObjectFactory {
         HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
 
         // Enemy zero
-        NPC enemy = (NPC) makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map);
-        enemy.getController().setBaseLoc(new Location(0, 0));
-        objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
+        NPC enemy = (NPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
+        enemy.getController().setBaseLoc(new Location(0,0));
+        enemy.getController().setTarget(player);
         enemy.getStats().setLife(2);
+        objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
+
         // Enemy one
-        NPC enemy1 = (NPC) makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map);
-        enemy1.getController().setBaseLoc(new Location(4, 5));
+        NPC enemy1 = (NPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
+        enemy1.getController().setTarget(player);
+        enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
         // Shopkeeper one
-        Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(0, 3), map);
+        Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(0, 3), map, player);
         shopkeeper1.getController().setBaseLoc(new Location(0, 3));
+        enemy.getController().setTarget(player);
         objects.put(shopkeeper1, makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER, shopkeeper1));
-
-        //enemy.getController().setMobileObject(player);
-        //enemy.getController().setBaseLoc(new Location(0,0));
-        //enemy1.getController().setBaseLoc(new Location(0,0));
+        enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet) makeNPC(MobileObjectEnum.DAVE_PET, new Location(5, 5), map);
-        davePet.setOwnership(player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         if (GameState.getPlayer() != null) {
@@ -67,7 +69,7 @@ public class MobileObjectFactory {
         return objects;
     }
 
-    public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map) {
+    public static MobileObject makeNPC(MobileObjectEnum npcEnum, Location location, Map map, Player player) {
         int id = npcEnum.ordinal();
         switch (npcEnum) {
             case KITTEN:
@@ -116,7 +118,7 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new Enemycontroller(map),
+                        new FriendlyController(map),
                         new ArrayList<>());
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
@@ -131,10 +133,10 @@ public class MobileObjectFactory {
                                 }, 500),
                                 new Equipment()
                         ),
-                        new Enemycontroller(map),
+                        new FriendlyController(map),
                         new ArrayList<>());
             case DAVE_PET:
-                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack());
+               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
