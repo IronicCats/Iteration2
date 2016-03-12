@@ -2,7 +2,7 @@ package Utilities.MobileObjectUtilities;
 
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
-import Model.GameObject.MobileObjects.Entities.EnemyController;
+import Model.GameObject.MobileObjects.Entities.AI.EnemyController;
 import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;

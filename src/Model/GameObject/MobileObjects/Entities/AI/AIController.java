@@ -1,4 +1,4 @@
-package Model.GameObject.MobileObjects.Entities.Characters;
+package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
