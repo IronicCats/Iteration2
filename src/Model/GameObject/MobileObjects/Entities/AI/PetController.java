@@ -28,7 +28,6 @@ public class PetController extends AIController {
             randomlyMoveinRange();
         }
         else{
-            System.out.println("Following");
             follow();
         }
     }

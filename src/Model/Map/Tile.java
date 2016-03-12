@@ -5,6 +5,7 @@ import Model.Abilities.Abilities;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -133,11 +134,10 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle) {
+            if (i instanceof Obstacle || i instanceof Interactable) {
                 return false;
             }
         }
-        // add && !hasObject()
         return isWalkable && !hasObject;
     }
 
