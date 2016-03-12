@@ -37,6 +37,7 @@ public class Sneak extends Occupation{
         ));
 
         //computes occupational abilities
+       
     }
 
     //operations

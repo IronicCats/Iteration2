@@ -174,6 +174,7 @@ public abstract class Occupation implements Subject, Observer {
          */
         //recomputes basic abilities
         basicSkillAbilities.clear(); //clears old abilities
+
         //adding newly computed abilities
         basicSkillAbilities.add(new DirectAbility(
                 "Bind Wound",
@@ -181,8 +182,10 @@ public abstract class Occupation implements Subject, Observer {
                 new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))));
+
         //recomputes occupational abilities
         recomputeOccupationalAbilities();
+
     } // end update
 
     @Override
