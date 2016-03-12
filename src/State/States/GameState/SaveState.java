@@ -25,6 +25,13 @@ public class SaveState extends State {
 
     }
 
+    public void moveUp(){
+        saveView.previous();
+    }
+    public void moveDown(){
+        saveView.next();
+    }
+
     public void tick() {
     }
 

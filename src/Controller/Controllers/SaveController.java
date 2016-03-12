@@ -2,6 +2,7 @@ package Controller.Controllers;
 
 import Controller.Controller;
 import State.State;
+import State.States.GameState.SaveState;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
@@ -10,8 +11,10 @@ import java.awt.event.KeyEvent;
  * Created by Dartyx on 3/7/2016.
  */
 public class SaveController extends Controller {
+    private int currentState;
     public SaveController(State state) {
         super(state);
+        currentState = 1;
     } // end constructor
 
     @Override
@@ -24,5 +27,36 @@ public class SaveController extends Controller {
             System.out.println("Game was Paused, returning from saveState.");
         }
 
+        if (e.getKeyCode() == KeyEvent.VK_UP && currentState > 1) {
+            currentState--;
+            ((SaveState) state).moveUp();
+            //System.out.println("state = " + currentState);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN && currentState < 4) {
+            currentState++;
+            ((SaveState) state).moveDown();
+            //System.out.println("state =" + currentState);
+        }
+
+        if (e.getKeyCode() == 10) {
+            switch (currentState) {
+                case 1:
+                    //saveFile1
+                    break;
+                case 2:
+                    //saveFile2
+                    break;
+                case 3:
+                    //saveFile3
+                    break;
+                case 4:
+                    System.out.println("Switching to settingState");
+                    state.switchState(State.PAUSESTATE);
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
 }
