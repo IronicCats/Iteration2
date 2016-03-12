@@ -94,6 +94,11 @@ public class InventoryState extends State {
         }
     } // end interact
 
+    public void equip() {
+
+    } // end equip
+
     public void drop() {
-    }
+        player.drop(selector);
+    } // end drop
 }
