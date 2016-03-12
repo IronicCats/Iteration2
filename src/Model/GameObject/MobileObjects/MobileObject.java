@@ -113,7 +113,7 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interactWithTile() {
-        tile.interact(this.location);
+        tile.interact();
     }
 
     public Tile getTile(){
@@ -141,4 +141,8 @@ public abstract class MobileObject extends GameObject {
     public MobileObjectEnum getID() {
         return MobileObjectEnum.values()[id];
     }
+
+    public void interact(MobileObject mo) {
+        System.out.println("No Interaction defined");
+    };
 }

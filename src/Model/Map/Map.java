@@ -91,10 +91,17 @@ public class Map implements Subject {
         }
     }
 
+    public void carryInteraction(MobileObject mo) {
+        Location destination = Location.newLocation(mo.getDir(), mo.getLocation());
+        if(isInMap(destination)) {
+            System.out.println("Tile within map");
+            getTile(destination).receiveInteraction(mo);
+        }
+    }
+
     public Location getSpawn(){
         return spawn;
     }
-
     public int getWidth() {
         return width;
     }
@@ -150,6 +157,13 @@ public class Map implements Subject {
         this.mapItems = mapItems;
     }
 
+    public boolean isInMap(Location l) {
+        if(l.getX() < map.getWidth() || l.getX() > map.getWidth() || l.getY() < map.getHeight() || l.getY() > map.getHeight()) {
+            System.out.println("Trying to interact outside map");
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {
