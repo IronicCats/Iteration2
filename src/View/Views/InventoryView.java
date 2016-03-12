@@ -1,12 +1,18 @@
 package View.Views;
 
+import Model.GameObject.Item.Item;
+import Model.Inventory.Inventory;
+import Model.Inventory.Pack;
 import Model.Map.Map;
+import Utilities.ItemUtilities.ItemFactory;
 import Utilities.Observer;
 import Utilities.Settings;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Created by Dartyx on 3/6/2016.
@@ -14,14 +20,22 @@ import java.awt.*;
 public class InventoryView implements Renderable, Observer {
     //private Map map;
     //int selector;
-
+    Pack pack;
+    ItemView itemView[] = new ItemView[16];
+    HashMap<Item,ItemView> playerItems;
     int width,height;
     double mX,mY;
-    public InventoryView(){
-
+    public InventoryView(Pack pack){
+        this.pack=pack;
         //this.map = map;
         //selector=0;
         //map.addObserver(this);
+        //for(Item item : pack.getItems()) {
+        //    if (item != null) {
+        //        playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));
+        //    }
+        //}
+        for(int i=0;i<16;++i)itemView[i]=null;
     }
 
     @Override
@@ -40,6 +54,12 @@ public class InventoryView implements Renderable, Observer {
         g.fillRect(width/10, height/10, width*4/5, height*4/5);
         //making the title
 
+        //fill out the itemview
+        for(int i=0;i<16;++i){
+            if(pack.get(i)==null)itemView[i]=null;
+            else itemView[i]= ItemFactory.makeAsset(pack.get(i).getItemType(), pack.get(i));
+        }
+
         //render the pack
         renderPack(g,s);
         //render the bottom right icons
@@ -48,6 +68,7 @@ public class InventoryView implements Renderable, Observer {
         renderDescriptions(g);
         //render the stats
         renderStats(g);
+        renderItems();
     }
 
     public void renderPack(Graphics g, int s) {
@@ -70,13 +91,14 @@ public class InventoryView implements Renderable, Observer {
         for(int i=0;i<16;++i){
             if(i!=s){
                 g.drawImage(Assets.BOX2,tempX,tempY,size,size,null);
+                // if(itemView[i]!=null)itemView[i].render(g,tempX,tempY,size,size);
                 //g.drawString("ayy"+i,tempX,tempY);
                 //tempX+=64+10;
             }
             else{
                 g.drawImage(Assets.BOX,tempX,tempY,size,size,null);
             }
-
+            if(itemView[i]!=null)itemView[i].render(g,tempX,tempY,size,size);
             tempX+=size+intX;
             if(i%4==3){
                 tempY+=size+intY;
@@ -87,12 +109,25 @@ public class InventoryView implements Renderable, Observer {
     //System.out.print(Settings.GAMEWIDTH+"   "+Settings.GAMEHEIGHT+" \n");
     }
     public void renderIcons(Graphics g) {
-
+        g.setColor(new Color(12, 12, 12, 250));
+        g.fillRect(width*3/20, height*31/40, width*6/20, height*1/10);
     }
     public void renderDescriptions(Graphics g) {
 
     }
     public void renderStats(Graphics g) {
+        g.setColor(new Color(12, 12, 12, 200));
+        g.fillRect(width*3/20, height*1/4, width*6/20, height*5/10);
+        //LIVES_LEFT, STRENGTH, AGILITY, INTELLECT, HARDINESS, EXPERIENCE, MOVEMENT, LEVEL, LIFE, MANA, OFFENSIVE_RATING, DEFENSIVE_RATING, ARMOR_RATING;
+        g.setColor(new Color(255,255,255));
+        //g.drawString();
+    }
+    public void renderItems(){
+        for(int i = 0; i<16; ++i){
+            if(pack.get(i)!=null){
+
+            }
+        }
 
     }
 

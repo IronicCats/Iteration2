@@ -1,7 +1,9 @@
 package Model.Inventory;
 
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
+import Model.GameObject.Item.Items.Takables.Usable;
 import Utilities.Observer;
 
 import java.util.ArrayList;
@@ -64,6 +66,12 @@ public class Pack {
     } // end get
 
     public Item[] getItems() { return items; }
+
+    public Effect use(int i){
+        Effect temp = ((Usable)items[i]).getEffect();
+        items[i]=null;
+        return temp;
+    }
 
     public void examine() {
         if(count == 0) {

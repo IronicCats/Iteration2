@@ -86,11 +86,6 @@ public abstract class Character extends Entity {
         ((CharacterStats)getStats()).applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
-    public void mount(Vehicle vehicle){
-        //getStats().setMovement(vehicle.getMovement());
-        // change sprite
-    } // end mount
-
     public void unequip(EquipmentSlotEnum slot) {
         inventory.unequip(slot);
         ((CharacterStats)getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
@@ -116,10 +111,6 @@ public abstract class Character extends Entity {
         //But for now, just apply effect
         System.out.println(ability.getEffects().toString());
         this.applyEffect(ability.getEffects());
-    }
-
-    public void useAbility(CommandsEnum e) {
-        //tile.useAbility(this, getAbility(e))
     }
 
     public boolean pickup(Item item) {
