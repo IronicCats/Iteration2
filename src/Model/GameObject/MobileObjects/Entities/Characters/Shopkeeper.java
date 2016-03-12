@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * Created by broskj on 3/10/16.
  */
 public class Shopkeeper extends FriendlyNPC {
-    public Shopkeeper(Location location, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
-        super(location, occupation, inventory, controller, dialog);
+    public Shopkeeper(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller, ArrayList<String> dialog) {
+        super(location, id, occupation, inventory, controller, dialog);
     } // end constructor
 
     public void initiateTrade(Pack playerPack) {

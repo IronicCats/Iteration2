@@ -19,12 +19,13 @@ public class NPC extends Character implements Tickable {
     Random random;
     Location base;
 
-    public NPC(Location location, Occupation occupation, Inventory inventory, NPCController controller) {
-        super(location, occupation, inventory);
+    public NPC(Location location, int id, Occupation occupation, Inventory inventory, NPCController controller) {
+        super(location, id, occupation, inventory);
         controller.setAI(this);
         this.controller = controller;
         base = location;
         random = new Random(System.currentTimeMillis());
+        stats.setMovement(7);
     }
 
     @Override
@@ -41,6 +42,7 @@ public class NPC extends Character implements Tickable {
     public void setController(NPCController controller) {
         this.controller = controller;
     }
+
 
     // inventory = NPCinventory
 }

@@ -37,6 +37,7 @@ public class GameController extends Controller {
                 waitingTime = 500;
                 ((GameState) state).setCameraMoving(cameraMoves);
             }
+            System.out.println("camera moving");
         }
 
             if (e.getKeyCode() == Settings.UP || e.getKeyCode() == 38) {
@@ -57,6 +58,8 @@ public class GameController extends Controller {
                 System.out.println("space pressed");
             } else if (e.getKeyCode() == Settings.E) {          /* open equipment state */
                 state.switchState(State.EQUIPMENTSTATE);
+            } else if (e.getKeyCode() == KeyEvent.VK_V) {
+                state.switchState(State.TRADESTATE);
             } else if (e.getKeyCode() == Settings.ATTACK) {
                 ((GameState) state).executePlayerCommand(CommandsEnum.attack);
             } else if (e.getKeyCode() == Settings.ONE) {        /* execute ability1 */

@@ -10,9 +10,10 @@ public class RandomLocation {
 
     private static Random random = new Random(System.currentTimeMillis());;
 
-    public static Location computeRandomLocation(Location base) {
-        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(3)/*stats.getMovement()*/,
-                            base.getY() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(3))/*stats.getMovement()*/;
+
+    public static Location computeRandomLocation(Location base,int range) {
+        return new Location(base.getX() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(range)/*stats.getMovement()*/,
+                            base.getY() + (int)Math.pow(-1, random.nextInt(2)) * random.nextInt(range))/*stats.getMovement()*/;
     }
 
 }

@@ -37,6 +37,8 @@ public class InitialState extends State {
         SAVESTATE = saveState;
         LoadState loadState = new LoadState(gameState);
         LOADSTATE = loadState;
+        TradeState tradeState = new TradeState(gameState);
+        TRADESTATE = tradeState;
 
     }
 
