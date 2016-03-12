@@ -53,6 +53,9 @@ public class Assets {
     public static BufferedImage LEFT;
     public static BufferedImage RIGHT;
     public static BufferedImage BACK;
+    public static BufferedImage BOX;
+    public static BufferedImage BOX2;
+
 
     public static void init() {
         //Tiles
@@ -184,6 +187,11 @@ public class Assets {
         LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");
         RIGHT = new ImageLoader().loadImage("/Pics/RIGHT1.png");
         BACK = new ImageLoader().loadImage("/Pics/blue.jpg");
+        BOX = new ImageLoader().loadImage("/Pics/box.png");
+        BOX2 = new ImageLoader().loadImage("/Pics/box2.png");
+
+        //SpriteSheet invBox = new SpriteSheet(new ImageLoader().loadImage("/Pics/box.png"));
+        //BOX = invBox.crop(0,0,32,32);
 
     }
 }

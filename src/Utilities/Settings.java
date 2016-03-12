@@ -6,6 +6,9 @@ package Utilities;
 public class Settings {
     public static int GAMEWIDTH = 800;
     public static int GAMEHEIGHT = 600;
+
+    //public static int multiplyX = GAMEWIDTH/800;
+    //public static int multiplyY = GAMEHEIGHT/600;
     //TODO: WTF? NO?
     public static int MAPWIDTH;
     public static int MAPHEIGHT;
@@ -33,10 +36,11 @@ public class Settings {
     public static int DOWN_RIGHT = 99;
 
     public static int TAB = 0x09;
-    public static int ENTER = 0x0D;
+    public static int ENTER = 10;
     public static int ESC = 0x1B;
 
-    public static int SPACE = 0;
+
+    public static int SPACE = 0x20;
     public static int ATTACK = 0x20;
     public static int ONE = 0x31;
     public static int TWO = 0x32;

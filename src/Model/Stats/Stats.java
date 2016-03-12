@@ -1,11 +1,18 @@
 package Model.Stats;
 
+import Utilities.Observer;
+import Utilities.Subject;
+
+import java.util.ArrayList;
+
 /**
  * Created by broskj on 3/6/16.
  */
-public class Stats {
+public class Stats  {
     private int movement,
             baseMovement;
+
+    ArrayList<Observer> observers;
 
     public Stats() {
         movement = 0;
@@ -22,4 +29,6 @@ public class Stats {
     public void setMovement(int movement) { this.movement = movement;}
 
     public void resetMovement(){ this.movement = baseMovement;}
+
+
 } // end class Stats

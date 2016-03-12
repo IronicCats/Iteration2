@@ -27,7 +27,6 @@ public class PauseController extends Controller{
         }
         if (e.getKeyCode() == Settings.ESC) {
             state.switchState(State.GAMESTATE);
-            System.out.println("Game was Paused");
         }
 
         if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
@@ -43,23 +42,18 @@ public class PauseController extends Controller{
         if(e.getKeyCode() == 10) {
             switch(currentState){
                 case 1:
-                    System.out.println("Switching to gameState");
                     state.switchState(State.GAMESTATE);
                     break;
                 case 2:
-                    System.out.println("Switching to saveState");
                     state.switchState(State.SAVESTATE);
                     break;
                 case 3:
-                    System.out.println("Switching to loadState");
                     state.switchState(State.LOADSTATE);
                     break;
                 case 4:
-                    System.out.println("Switching to settingState");
                     state.switchState(State.SETTINGSTATE);
                     break;
                 case 5:
-                    System.out.println("leaving");
                     System.exit(0);
                     break;
                 default:
