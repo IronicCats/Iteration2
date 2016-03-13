@@ -144,6 +144,11 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interact(MobileObject mo) {
+        System.out.println("in here");
+        if(mo instanceof Vehicle){
+            ((Vehicle) mo).interact();
+            System.out.println("trying to mount");
+        }
         DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
     }
 }

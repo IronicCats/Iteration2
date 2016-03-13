@@ -11,12 +11,14 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Equipment;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
 import Model.Location;
 import Model.Map.Map;
 import Model.Stats.PetStats;
+import Model.Stats.Stats;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
@@ -62,6 +64,11 @@ public class MobileObjectFactory {
         Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
+
+        //vehicle
+        Vehicle roomba = (Vehicle)makeNPC(MobileObjectEnum.ROOMBA, new Location(4,1), map, player);
+        objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
+        roomba.getStats().setMovement(5);
 
         if (GameState.getPlayer() != null) {
             //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
@@ -138,6 +145,8 @@ public class MobileObjectFactory {
                         new ArrayList<>());
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
+            case ROOMBA:
+                return new Vehicle(location,0,new Stats());
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -172,6 +181,8 @@ public class MobileObjectFactory {
             case WOLF_SHOPKEEPER:
             case DAVE_PET:
                 return new MobileObjectView(mobileObject, Assets.DAVE_PET);
+            case ROOMBA:
+                return new MobileObjectView(mobileObject, Assets.ROOMBA);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:

@@ -51,9 +51,13 @@ public class Assets {
     public static BufferedImage SUSHI;
     // end of items
 
+    //vehicles
+    public static ArrayList<BufferedImage> ROOMBA;
+
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
     public static BufferedImage STAR;
+    public static BufferedImage FIRE;
     public static BufferedImage LEFT;
     public static BufferedImage RIGHT;
     public static BufferedImage BACK;
@@ -141,6 +145,22 @@ public class Assets {
 
         // End of tiles
 
+        //Vehciles
+        ROOMBA = new ArrayList<>();
+        SpriteSheet roomba1 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba2 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba3 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba4 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba5 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba6 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        ROOMBA.add(roomba1.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba2.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba3.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba4.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba5.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba6.crop(0, 0, 32, 32));
+
+
         //Entities
 
         PLAYER = new ArrayList<>();
@@ -210,6 +230,9 @@ public class Assets {
 
         SpriteSheet starSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Star.png"));
         STAR = starSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet fireSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Fire.png"));
+        FIRE = fireSheet.crop(0, 0, 32, 32);
 
         //menu
         LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");
