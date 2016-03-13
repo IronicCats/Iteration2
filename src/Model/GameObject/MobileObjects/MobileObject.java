@@ -62,24 +62,26 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void move(int degrees) {
-        System.out.println("in here");
+
+        //System.out.println("in here");
         if (location.getDir() == degrees) {
-            System.out.println("I am facing " + degrees);
-            System.out.println("vehicle movment speed " + getMovement());
+            //System.out.println("I am facing " + degrees);
+            //System.out.println("vehicle movment speed " + getMovement());
             if (canMove) {
                 canMove = false;
                 location = Location.newLocation(degrees, location);
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
-                if(this instanceof Vehicle)
-                System.out.println("i alerted");
+
+                //if(this instanceof Vehicle)
+                //System.out.println("i alerted");
             }
         } else {
             face(degrees);
         }
         if(this instanceof Player){
-            System.out.println(getMovement());
+            //System.out.println("movement is " + getMovement());
         }
 
     }
@@ -108,6 +110,10 @@ public abstract class MobileObject extends GameObject {
     public void setViewLocation(ViewLocation viewLocation) {
         this.viewLocation = viewLocation;
     }
+    public void updateViewLocation(float x, float y) {
+        viewLocation.setX(x);
+        viewLocation.setY(y);
+    }
 
     public void resetLocation() {
         this.viewLocation = new ViewLocation(baseLocation.getX(), baseLocation.getY());
@@ -123,12 +129,21 @@ public abstract class MobileObject extends GameObject {
 
 
     public Tile registerTile(Location location) {
-        tile.deregister();
+        deregister();
         while (map.getTile(location).hasObject()) {
             //Waiting to register with the next tile;
         }
         tile = map.register(this);
         return tile;
+    }
+
+    public void deregister() {
+        if(tile != null) {
+            tile.deregister();
+            tile = null;
+        }else {
+            System.out.println("Already deregistered");
+        }
     }
 
     public void interactWithTile() {
@@ -138,6 +153,7 @@ public abstract class MobileObject extends GameObject {
     public Tile getTile() {
         return tile;
     }
+
 
     public int getView() {
         return view;

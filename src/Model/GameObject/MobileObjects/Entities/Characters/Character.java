@@ -49,7 +49,7 @@ public abstract class Character extends Entity implements Observer{
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
         bindWounds = occupation.getBindWounds();
-        System.out.println(attack);
+        //System.out.println(attack);
         getStats().addObserver(this);
         this.addObserver(occupation);
 
@@ -98,8 +98,10 @@ public abstract class Character extends Entity implements Observer{
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        if(inventory.getSlot(slot) == null)
+            return;
+        getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
         inventory.unequip(slot);
-        ((CharacterStats) getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
     public void mount(Vehicle vehicle){
@@ -270,6 +272,8 @@ public abstract class Character extends Entity implements Observer{
         if(!getStats().isAlive()) {
             emptyPack();
             getStats().revive();
+        } else {
+            getStats().update();
         }
     } // end update
 
@@ -278,13 +282,13 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void tick() {
-        System.out.println("isDead" + isDead());
-        if (isDead()) {
+        if (isDead() && getTile() != null) {
             getTile().deregister();
-            map.addToRespawnQueue(this);
             //respawn eventually
-        } else {
+            deregister();
+        }else {
             getStats().tick();
         }
+
     } // end tick
 } // end class Character

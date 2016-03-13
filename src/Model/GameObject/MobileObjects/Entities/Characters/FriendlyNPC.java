@@ -4,6 +4,8 @@ import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;
 import Model.Location;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 
 import java.util.ArrayList;
 
@@ -24,10 +26,21 @@ public class FriendlyNPC extends NPC {
 
     @Override
     public void tick() {
-        if (friendlyController != null) {
+        if (isDead() && getTile() != null) {
+            getTile().deregister();
+            //respawn eventually
+            deregister();
+        }else {
             getStats().tick();
-            friendlyController.tick();
+            if (friendlyController != null) {
+                friendlyController.tick();
+            }
+            if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
+                System.out.println(getRandomDialog());
+                //DisplayMessage.addMessage(new GameMessage(getRandomDialog(), 1));
+            }
         }
+
     } // end tick
 
     public String getRandomDialog() {

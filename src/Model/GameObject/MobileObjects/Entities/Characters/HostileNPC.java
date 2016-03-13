@@ -20,8 +20,15 @@ public class HostileNPC extends NPC {
 
     @Override
     public void tick() {
-        if (enemyController != null) {
-            enemyController.tick();
+        if (isDead() && getTile() != null) {
+            getTile().deregister();
+            //respawn eventually
+            deregister();
+        }else {
+            getStats().tick();
+            if (enemyController != null) {
+                enemyController.tick();
+            }
         }
     } // end tick
 

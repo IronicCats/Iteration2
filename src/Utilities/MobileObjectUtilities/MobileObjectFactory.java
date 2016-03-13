@@ -1,5 +1,6 @@
 package Utilities.MobileObjectUtilities;
 
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.AI.EnemyController;
@@ -11,6 +12,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Equipment;
 import Model.Inventory.Inventory;
@@ -72,6 +74,7 @@ public class MobileObjectFactory {
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
         roomba.getStats().setMovement(12);
 
+
         return objects;
     }
 
@@ -125,7 +128,13 @@ public class MobileObjectFactory {
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Corgi stuff for sale");
+                            add("More corgi stuff for sale");
+                            add("hello world");
+                            add("foo");
+                            add("bar");
+                        }});
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
@@ -135,16 +144,23 @@ public class MobileObjectFactory {
                                         ItemFactory.makeItem(ItemsEnum.STICK_SWORD, location),
                                         ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, location),
                                         ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, location),
-                                        ItemFactory.makeItem(ItemsEnum.HAIRBALL, location)
                                 }, 500),
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Wolf stuff for sale");
+                            add("More wolf stuff for sale");
+                            add("dlrow olleh");
+                            add("oof");
+                            add("rab");
+                        }});
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
                 return new Vehicle(location,0,new Stats(50));
+            case HAIRBALL:
+                return new Projectile(location,id,new Stats(25), new Effect(), 2);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -159,9 +175,15 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
         Player player = new Player(new Location(0, 1), 2, new Smasher(), new Inventory());
-        ;
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
+    }
+
+    public static Projectile Hairball(Location location, Effect effect, Player player, Map map ){
+
+        Projectile hairball = (Projectile) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
+        return hairball;
+
     }
 
     public static MobileObjectView makeAsset(MobileObjectEnum npcEnum, MobileObject mobileObject) {

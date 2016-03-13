@@ -312,15 +312,6 @@ public class ItemFactory {
                         new Requirement(new Summoner()),
                         EquipmentTypeEnum.TWO_HANDED,
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)));
-            case HAIRBALL:
-                return new Weapon(id,
-                        "Hairball",
-                        "A hairball projectile",
-                        12,
-                        location,
-                        new Requirement(new Sneak()),
-                        EquipmentTypeEnum.TWO_HANDED,
-                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 4)));
             case LASER_POINTER:
                 return new Weapon(id,
                         "Laser pointer",
@@ -564,7 +555,6 @@ public class ItemFactory {
             case PUFFER_FISH_FLAIL:
             case MOUSE_ON_A_STRING_WAND:
             case CATNIP_STAFF:
-            case HAIRBALL:
             case LASER_POINTER:
                 return new ItemView(item, Assets.LASER_POINTER);
             case FISH_BOOMERANG:

@@ -262,9 +262,6 @@ public class SaveLoad {
                                 case 15:
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, l);
                                     break;
-                                case 16:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HAIRBALL, l);
-                                    break;
                                 case 17:
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, l);
                                     break;
