@@ -34,7 +34,7 @@ public class Summoner extends Occupation {
 
 
         //basic attack of just hitting another entity
-        setBasicAttack(new DirectAbility(
+        /*setBasicAttack(new DirectAbility(
                 //basic attack for summoner is hitting the opposing person with a staff
                 //basic attack is calculated based on strength
                 "Staff hit",
@@ -63,7 +63,7 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.OFFENSIVE_RATING, getOccupationalSkillsValue(SkillsEnum.BOON) + 5), ModificationEnum.PERCENT, 7000),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -11))
-        ));
+        ));*/
         //bane
         setOccupationalAbilities(new ProjectileAbility("Hairball",
                 "Fling hairballs at enemies",
@@ -72,7 +72,7 @@ public class Summoner extends Occupation {
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -4 ))
         ));
-        setOccupationalAbilities(new AOEAbility("Water Sprinkler",
+       /* setOccupationalAbilities(new AOEAbility("Water Sprinkler",
                 "Fling water at enemies",
                 60,
                 2,
@@ -87,7 +87,7 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)) + 4)),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -11 ))
-        ));
+        ));*/
 
     }
 
@@ -116,7 +116,7 @@ public class Summoner extends Occupation {
 
     public void recomputeOccupationalAbilities() {
         //basic attack of just hitting another entity
-        getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))));
+        //getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))));
         //compute occupational abilities
         //enchantments
         //boon

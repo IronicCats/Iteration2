@@ -121,7 +121,8 @@ public class Map implements Subject {
             ((ProjectileAbility) a).setProjectile(p);
             mobileObjects.put(p,MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL,p));
             ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
-        }else {
+        }
+        else {
             System.out.println("Not a Direct Ability");
         }
     }
