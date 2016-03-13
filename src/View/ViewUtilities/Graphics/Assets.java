@@ -32,6 +32,12 @@ public class Assets {
     public static ArrayList<BufferedImage> TREASURE_CHEST;
     public static ArrayList<BufferedImage> WOODEN_DOOR;
     public static BufferedImage MANA_POTION;
+    public static BufferedImage AGILITY_POTION;
+    public static BufferedImage EXPERIENCE_POTION;
+    public static BufferedImage HARDINESS_POTION;
+    public static BufferedImage INTELLECT_POTION;
+    public static BufferedImage MOVEMENT_POTION;
+    public static BufferedImage STRENGTH_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
     public static BufferedImage PUFFER_FISH_MACE;
@@ -101,6 +107,24 @@ public class Assets {
 
         SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
         MANA_POTION = potionManaSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionAgilitySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/AgilityPotion.png"));
+        AGILITY_POTION = potionAgilitySheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionExperienceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ExperiencePotion.png"));
+        EXPERIENCE_POTION = potionExperienceSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionHardinessSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HardinessPotion.png"));
+        HARDINESS_POTION = potionHardinessSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionIntellectSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/IntellectPotion.png"));
+        INTELLECT_POTION = potionIntellectSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionMovementSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MovementPotion.png"));
+        MOVEMENT_POTION = potionMovementSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionStrengthPotion = new SpriteSheet(new ImageLoader().loadImage("/Items/StrengthPotion.png"));
+        STRENGTH_POTION = potionStrengthPotion.crop(0, 0, 32, 32);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
         STICK_SWORD = stickSwordSheet.crop(0, 0, 32, 32);
