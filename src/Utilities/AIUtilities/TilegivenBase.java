@@ -9,7 +9,7 @@ import Model.Map.Tile;
 public class TilegivenBase {
 
     public static Location find(Location base){
-        
+
         switch (base.getDir()) {
             case 45:
                 return new Location(base.getX() + 2, base.getY() -1, 45);

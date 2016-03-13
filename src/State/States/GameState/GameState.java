@@ -20,6 +20,7 @@ import Utilities.MapUtilities.MakeMap;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
+import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
@@ -178,6 +179,7 @@ public class GameState extends State {
             key.tick();
 
         }
+        RespawnQueue.tick();
     }
 
     public void render(Graphics g) {

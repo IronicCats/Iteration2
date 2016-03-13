@@ -40,7 +40,7 @@ public abstract class MobileObject extends GameObject {
         canMove = true;
         stats = new Stats();
         viewLocation = new ViewLocation(location.getX(), location.getY());
-        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
+        baseLocation = new Location(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
         view = 2;
@@ -52,13 +52,14 @@ public abstract class MobileObject extends GameObject {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
-        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
+        baseLocation = new Location(location.getX(), location.getY());
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
         view = 2;
         range = 2;
         this.id = id;
+        System.out.println(baseLocation);
     }
 
     public void move(int degrees) {
@@ -142,8 +143,6 @@ public abstract class MobileObject extends GameObject {
         if(tile != null) {
             tile.deregister();
             tile = null;
-        }else {
-            System.out.println("Already deregistered");
         }
     }
 
@@ -179,5 +178,9 @@ public abstract class MobileObject extends GameObject {
 
     public void interact(MobileObject mo) {
         DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
+    }
+
+    public Location getBaseLocation() {
+        return baseLocation;
     }
 }

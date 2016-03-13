@@ -178,4 +178,5 @@ public class MobileObjectView implements Renderable, Observer {
     }
 }
 
+
 //Move from oldX, OldY (Starts at center of a tile),
