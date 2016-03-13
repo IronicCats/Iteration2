@@ -3,6 +3,7 @@ package Model.Abilities;
 import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.Inventory.Pack;
 import Model.Requirement;
 
 /**

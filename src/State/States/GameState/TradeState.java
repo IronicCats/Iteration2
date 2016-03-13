@@ -54,6 +54,9 @@ public class TradeState extends State {
 
     public void executeCommand(CommandsEnum command) {
         switch (command) {
+            case bargain:
+                System.out.println("Bargaining");
+                break;
             case make_transaction:
                 System.out.println("making transaction...");
                 transaction();
