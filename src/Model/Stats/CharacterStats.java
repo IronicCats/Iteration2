@@ -155,7 +155,7 @@ public class CharacterStats extends Stats implements Subject {
         defensiveRating = agility + level;
         armorRating = equippedArmor + hardiness;
 
-        alert();
+        //alert();
     } // end update
 
     public void checkExpiredEffect() {
@@ -448,6 +448,7 @@ public class CharacterStats extends Stats implements Subject {
     } // end applyEquipmentModification
 
     public void removeEquipmentModification(EquipmentModification e) {
+        System.out.println("removeEquipmentModification");
         equipmentModifications.remove(e);
         if (e.hasWeaponValue()) {
             equippedWeapon -= e.getWeaponRating();
