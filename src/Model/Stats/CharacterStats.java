@@ -433,7 +433,7 @@ public class CharacterStats extends Stats implements Subject {
             default:
                 break;
         }
-        System.out.println(s + " modified by " + amount + " (" + m + ").");
+        //System.out.println(s + " modified by " + amount + " (" + m + ").");
         update();
         alert();
     } // end modifyStats
@@ -482,7 +482,7 @@ public class CharacterStats extends Stats implements Subject {
 
     @Override
     public void alert() {
-        System.out.println("Alerts is being called");
+        //System.out.println("Alerts is being called");
         for (Observer o : observers) {
             o.update();
         }

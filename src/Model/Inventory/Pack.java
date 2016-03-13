@@ -108,6 +108,7 @@ public class Pack {
         Money moneyToDrop = getMoneyAsItem(location);
         if(moneyToDrop != null) {
             tempItems.add(getMoneyAsItem(location));
+            money = 0;
         }
         return tempItems;
     } // end dump
