@@ -12,6 +12,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import State.State;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -69,11 +70,12 @@ public abstract class Tile implements Subject {
             object.interact(interacter);
         }
         for(Item item: items){
-            if(item instanceof Interactable){
+            if(item instanceof Interactable && interacter instanceof Player){
                 // enum for changed asset should be right after original enum (yes I know)
-                ((Interactable) item).toggleView();
-                alert();
-                System.out.println("You interacted with a chest!");
+                if(!((Interactable) item).getState() && ((Interactable) item).getRequirements().hasRequiredItem(((Player) interacter).getPack())){
+                    ((Interactable) item).toggleState();
+                    alert();
+                }
             }
         }
     }
@@ -127,6 +129,12 @@ public abstract class Tile implements Subject {
         return this.areaEffect;
     }
 
+    public void removeAreaEffect(){
+        this.areaEffect = null;
+        this.hasAreaEffect = false;
+        this.ar = null;
+    }
+
     public AreaEffectEnum getAreaEffectEnum() {
         return this.ar;
     }
@@ -144,12 +152,13 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
+        }
+        if(object instanceof Character){
             if (this.getHasAreaEffect()) {
-                ((Player) object).applyEffect(areaEffect.getEffect());
+                ((Character) object).applyEffect(areaEffect.getEffect());
             }
             if(this.getHasTeleportAreaEffect()){
-                teleportAreaEffect.teleportPlayer(((Player) object));
-                System.out.println("This tile has an effect");
+                teleportAreaEffect.teleportPlayer(((Character) object));
             }
         }
         alert();

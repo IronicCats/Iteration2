@@ -102,7 +102,7 @@ public abstract class Character extends Entity implements Observer{
     public void mount(Vehicle vehicle){
 
         this.getStats().setMovement(vehicle.getMovement());
-        vehicle.interact();
+        //vehicle.interact();
 
     }
 
@@ -185,7 +185,7 @@ public abstract class Character extends Entity implements Observer{
                 emptyPack();
                 break;
             case attack:
-                System.out.println("Attacking with: " + attack);
+                System.out.println("Attacking with: " + attack.getName());
                 attack(this.attack);
                 break;
             case ability1:
@@ -199,6 +199,23 @@ public abstract class Character extends Entity implements Observer{
                 break;
         }
 
+    }
+
+    public ArrayList<Abilities> getAbilities(){
+        ArrayList<Abilities> abilities = new ArrayList<Abilities>();
+        if(attack != null){
+            abilities.add(attack);
+        }
+        if(ability1 != null){
+            abilities.add(ability1);
+        }
+        if (ability2 != null){
+            abilities.add(ability2);
+        }
+        if(ability3 != null){
+            abilities.add(ability3);
+        }
+        return abilities;
     }
 
     public CharacterStats getStats() {

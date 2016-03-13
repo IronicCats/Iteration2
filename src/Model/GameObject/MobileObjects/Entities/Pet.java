@@ -59,8 +59,10 @@ public class Pet extends MobileObject implements Tickable {
 
     @Override
     public void tick() {
-        if(this.getController().targetinView() && this.requirement.hasRequiredItem(player.getPack())){
-            setOwnership();
+        if(!owned) {
+            if (this.getController().targetinView() && this.requirement.hasRequiredItem(player.getPack())) {
+                setOwnership();
+            }
         }
         if(controller != null) {
             controller.tick();
@@ -101,6 +103,8 @@ public class Pet extends MobileObject implements Tickable {
         this.getController().setPlayer(this.player);
         this.getController().setBaseLoc(this.player.getLocation());
         this.player.getPack().remove(ItemsEnum.SUSHI);
+        System.out.println("check");
+        requirement = new Requirement();
         DisplayMessage.addMessage(new GameMessage("MHHMMMMM! I love me some SUSH", 4));
     }
 

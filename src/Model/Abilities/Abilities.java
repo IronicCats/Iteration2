@@ -30,6 +30,9 @@ public abstract class Abilities {
     }
 
     //accessor
+    public String getName(){
+        return this.name;
+    }
     public Effect getEffects(){
         return this.effects;
     }

@@ -2,6 +2,7 @@ package View.Views;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -13,6 +14,7 @@ import Utilities.Utilities;
 import View.ViewUtilities.Renderable;
 import View.ViewUtilities.ViewModules.ViewModule;
 
+import javax.sound.midi.SysexMessage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -91,9 +93,14 @@ public class MobileObjectView implements Renderable, Observer {
     public void tween() {
         if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
+<<<<<<< HEAD
             pause();
+=======
+
+>>>>>>> c1ca20ca836cdaa0dadae3115de7c2bb8439f43a
             return;
         }
+
         entity.setCanMove(false);
         if (entity instanceof Player){
             System.out.println("Movement Displayed" + sinWave());
@@ -142,6 +149,7 @@ public class MobileObjectView implements Renderable, Observer {
 
     @Override
     public void update() {
+        movement = entity.getMovement();
         setDirection(entity.getDir());
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());

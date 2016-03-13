@@ -42,11 +42,9 @@ public class AreaEffect extends GameObject {
         {
             StatStructure modification = new StatStructure(StatsEnum.LEVEL, 1);
             effect = new Effect(modification);
-        } else if (areaEffect == AreaEffectEnum.TELEPORT) {
-            //code depends on changes made to Stats and Effect
         } else if (areaEffect == AreaEffectEnum.TRAP) {
             StatStructure modification = new StatStructure(StatsEnum.MOVEMENT, -100);
-            effect = new Effect(modification, ModificationEnum.PERCENT, 3);
+            effect = new Effect(modification, ModificationEnum.PERCENT, 15000);
         }
 
     }

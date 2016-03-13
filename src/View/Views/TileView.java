@@ -1,6 +1,7 @@
 package View.Views;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.ViewLocation;
@@ -65,6 +66,7 @@ public class TileView implements Observer, Renderable {
                     }
                 }
             } else {
+<<<<<<< HEAD
                 item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
                 if(item instanceof Money){
                     System.out.println("Moneyyyyy");
@@ -73,6 +75,21 @@ public class TileView implements Observer, Renderable {
                 itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
 
 
+=======
+                item = tile.getItems().get(0);
+                if(item instanceof Interactable) {
+                    if (((Interactable) item).getState()) {
+                        System.out.println("toggleState!");
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                        itemView.adjustView();
+                    } else {
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                    }
+                }
+                else{
+                    itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                }
+>>>>>>> c1ca20ca836cdaa0dadae3115de7c2bb8439f43a
             }
 
         } else {

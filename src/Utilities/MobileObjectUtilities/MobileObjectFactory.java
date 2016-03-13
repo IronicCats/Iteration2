@@ -54,8 +54,8 @@ public class MobileObjectFactory {
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
         // Shopkeeper one
-        Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(0, 3), map, player);
-        shopkeeper1.getController().setBaseLoc(new Location(0, 3));
+        Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(2, 3), map, player);
+        shopkeeper1.getController().setBaseLoc(new Location(2, 3));
         enemy.getController().setTarget(player);
         objects.put(shopkeeper1, makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER, shopkeeper1));
         enemy.getStats().setLife(2);
@@ -66,9 +66,9 @@ public class MobileObjectFactory {
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         //vehicle
-        Vehicle roomba = (Vehicle)makeNPC(MobileObjectEnum.ROOMBA, new Location(4,1), map, player);
+        Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
-        roomba.getStats().setMovement(5);
+        roomba.getStats().setMovement(12);
 
         if (GameState.getPlayer() != null) {
             //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
@@ -146,7 +146,7 @@ public class MobileObjectFactory {
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
-                return new Vehicle(location,0,new Stats());
+                return new Vehicle(location,0,new Stats(50));
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
