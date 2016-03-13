@@ -44,7 +44,7 @@ public class AreaEffect extends GameObject {
             effect = new Effect(modification);
         } else if (areaEffect == AreaEffectEnum.TRAP) {
             StatStructure modification = new StatStructure(StatsEnum.MOVEMENT, -100);
-            effect = new Effect(modification, ModificationEnum.PERCENT, 15000);
+            effect = new Effect(modification, ModificationEnum.PERCENT, 5000);
         }
 
     }
