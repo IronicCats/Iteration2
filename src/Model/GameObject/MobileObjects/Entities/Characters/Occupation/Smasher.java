@@ -26,17 +26,13 @@ public class Smasher extends Occupation {
         modifyOccupationalSkills(SkillsEnum.TWOHANDWEAP, 0);
         modifyOccupationalSkills(SkillsEnum.BRAWL, 0);
 
-        //set the weapon
-        equipmentType = null;
-
-
         //basic attack for smasher is a direct ability that involves hitting another entity
         //basic attack is calculated based on strength and brawl skill level
         // distinct from Sneak in that the Smasher will have different stats involved in the calculation of the effect and have the brawl skill
         if(equipmentType == null){
             setBasicAttack(new DirectAbility(
-                    "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "Basic Fist Attack",
+                    "Attack using just the fists",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))
@@ -44,8 +40,8 @@ public class Smasher extends Occupation {
         }
         else if(equipmentType == EquipmentTypeEnum.ONE_HANDED){
             setBasicAttack(new DirectAbility(
-                    "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "One Handed Weapon Attack",
+                    "Attack using whatever one-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))
@@ -54,7 +50,7 @@ public class Smasher extends Occupation {
         else if(equipmentType == EquipmentTypeEnum.TWO_HANDED){
             setBasicAttack(new DirectAbility(
                     "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "Attack using whatever two-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))
@@ -87,15 +83,15 @@ public class Smasher extends Occupation {
     }
 
     public void setWeaponType(EquipmentTypeEnum e){
-
+        this.equipmentType = e;
     }
 
     public void recomputeOccupationalAbilities() {
         //basic attack
         if(equipmentType == null){
             setBasicAttack(new DirectAbility(
-                    "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "Basic Fist Attack",
+                    "Attack using just the fists",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))
@@ -103,8 +99,8 @@ public class Smasher extends Occupation {
         }
         else if(equipmentType == EquipmentTypeEnum.ONE_HANDED){
             setBasicAttack(new DirectAbility(
-                    "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "One Handed Weapon Attack ",
+                    "Attack using whatever one-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))
@@ -112,8 +108,8 @@ public class Smasher extends Occupation {
         }
         else if(equipmentType == EquipmentTypeEnum.TWO_HANDED){
             setBasicAttack(new DirectAbility(
-                    "Attack",
-                    "Attack using whatever weapon is equipped",
+                    "Two Handed Weapon Attack",
+                    "Attack using whatever two-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
                     new Effect(new StatStructure(StatsEnum.MANA, 0))

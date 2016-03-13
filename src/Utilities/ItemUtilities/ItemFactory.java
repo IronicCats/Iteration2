@@ -88,9 +88,77 @@ public class ItemFactory {
         /*Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
         initItems.put(tuna, ItemFactory.makeAsset(ItemsEnum.TUNA, tuna));*/
 
-        // tuna
+        // sushi
         Item sushi = ItemFactory.makeItem(ItemsEnum.SUSHI, new Location(8, 8));
         initItems.put(sushi, ItemFactory.makeAsset(ItemsEnum.SUSHI, sushi));
+
+        // Vertical fence
+        Item vertFence1 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(12, 13));
+        initItems.put(vertFence1, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence1));
+
+        Item vertFence2 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(12, 14));
+        initItems.put(vertFence2, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence2));
+
+        Item vertFence3 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(12, 15));
+        initItems.put(vertFence3, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence3));
+
+        Item vertFence4 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(12, 16));
+        initItems.put(vertFence4, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence4));
+
+        Item vertFence6 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(17, 13));
+        initItems.put(vertFence6, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence6));
+
+        Item vertFence7 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(17, 14));
+        initItems.put(vertFence7, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence7));
+
+        Item vertFence8 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(17, 15));
+        initItems.put(vertFence8, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence8));
+
+        Item vertFence9 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(17, 16));
+        initItems.put(vertFence9, ItemFactory.makeAsset(ItemsEnum.VERT_FENCE, vertFence9));
+
+        // Horizontal fence
+
+        Item horizFence = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(12, 12));
+        initItems.put(horizFence, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence));
+
+        Item horizFence0 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(13, 12));
+        initItems.put(horizFence0, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence0));
+
+        Item horizFence1 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(14, 12));
+        initItems.put(horizFence1, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence1));
+
+        Item horizFence3 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(16, 12));
+        initItems.put(horizFence3, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence3));
+
+        Item horizFence4 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(17, 12));
+        initItems.put(horizFence4, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence4));
+
+        Item horizFence10 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(12, 17));
+        initItems.put(horizFence10, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence10));
+
+        Item horizFence5 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(13, 17));
+        initItems.put(horizFence5, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence5));
+
+        Item horizFence6 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(14, 17));
+        initItems.put(horizFence6, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence6));
+
+        Item horizFence7 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(15, 17));
+        initItems.put(horizFence7, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence7));
+
+        Item horizFence8 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(16, 17));
+        initItems.put(horizFence8, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence8));
+
+        Item horizFence9 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(17, 17));
+        initItems.put(horizFence9, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence9));
+
+        // door
+        Item woodenDoor = ItemFactory.makeItem(ItemsEnum.WOODEN_DOOR, new Location(15, 12));
+        initItems.put(woodenDoor, ItemFactory.makeAsset(ItemsEnum.WOODEN_DOOR, woodenDoor));
+
+        // door key
+        Item doorKey = ItemFactory.makeItem(ItemsEnum.DOOR_KEY, new Location(11, 11));
+        initItems.put(doorKey, ItemFactory.makeAsset(ItemsEnum.DOOR_KEY, doorKey));
 
         //coin stacks
         Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1, 2));
@@ -443,6 +511,31 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         null);
+            case VERT_FENCE:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
+            case HORIZ_FENCE_ODD:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
+            case HORIZ_FENCE_EVEN:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
+            case WOODEN_DOOR:
+                return new Interactable(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location,
+                        new Requirement(ItemsEnum.DOOR_KEY));
             default:
                 return null;
         }
@@ -480,6 +573,7 @@ public class ItemFactory {
             case CLOSED_TREASURE_CHEST:
                 return new ItemView(item, Assets.TREASURE_CHEST);
             case DOOR_KEY:
+                return new ItemView(item, Assets.DOOR_KEY);
             case OPEN_DOOR:
             case CLOSED_DOOR:
             case HELMET:
@@ -505,6 +599,14 @@ public class ItemFactory {
             case MEDIUM_COIN_STACK:
             case LARGE_COIN_STACK:
                 return new ItemView(item, Assets.CATNIP);
+            case HORIZ_FENCE_ODD:
+                return new ItemView(item, Assets.HORIZ_FENCE_ODD);
+            case HORIZ_FENCE_EVEN:
+                return new ItemView(item, Assets.HORIZ_FENCE_EVEN);
+            case VERT_FENCE:
+                return new ItemView(item, Assets.VERT_FENCE);
+            case WOODEN_DOOR:
+                return new ItemView(item, Assets.WOODEN_DOOR);
             default:
                 return null;
         }

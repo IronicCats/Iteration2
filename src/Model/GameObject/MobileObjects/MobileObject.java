@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -61,17 +62,26 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void move(int degrees) {
+        System.out.println("in here");
         if (location.getDir() == degrees) {
+            System.out.println("I am facing " + degrees);
+            System.out.println("vehicle movment speed " + getMovement());
             if (canMove) {
                 canMove = false;
                 location = Location.newLocation(degrees, location);
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
+                if(this instanceof Vehicle)
+                System.out.println("i alerted");
             }
         } else {
             face(degrees);
         }
+        if(this instanceof Player){
+            System.out.println(getMovement());
+        }
+
     }
 
     public void face(int degrees) {
@@ -151,11 +161,6 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interact(MobileObject mo) {
-        System.out.println("in here");
-        if(mo instanceof Vehicle){
-            ((Vehicle) mo).interact();
-            System.out.println("trying to mount");
-        }
         DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
     }
 }

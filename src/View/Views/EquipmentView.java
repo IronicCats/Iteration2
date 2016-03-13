@@ -1,6 +1,9 @@
 package View.Views;
 
+import Model.GameObject.Item.Items.Takable;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Equippable;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
@@ -14,6 +17,7 @@ import Model.Stats.CharacterStats;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.Observer;
 import Utilities.Settings;
+import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 
 import java.awt.*;
@@ -73,11 +77,9 @@ public class EquipmentView implements Renderable, Observer {
         if (equipment.getSlot(EquipmentSlotEnum.MAINHAND) == null) equipView[3] = null;
             else equipView[3] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.MAINHAND).getItemType(), equipment.getSlot(EquipmentSlotEnum.MAINHAND));
 
-        if (equipment.getSlot(EquipmentSlotEnum.OFFHAND) == null) equipView[5] = null;
-            else equipView[5] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.OFFHAND).getItemType(), equipment.getSlot(EquipmentSlotEnum.OFFHAND));
-
-        if (equipment.getSlot(EquipmentSlotEnum.SHIELD) == null) equipView[5] = null;
-            else equipView[5] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.SHIELD).getItemType(), equipment.getSlot(EquipmentSlotEnum.SHIELD));
+        if (equipment.getSlot(EquipmentSlotEnum.OFFHAND) == null&&equipment.getSlot(EquipmentSlotEnum.SHIELD) == null) equipView[5] = null;
+            else if(equipment.getSlot(EquipmentSlotEnum.OFFHAND) != null)equipView[5] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.OFFHAND).getItemType(), equipment.getSlot(EquipmentSlotEnum.OFFHAND));
+            else if(equipment.getSlot(EquipmentSlotEnum.OFFHAND) == null)equipView[5] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.SHIELD).getItemType(), equipment.getSlot(EquipmentSlotEnum.SHIELD));
 
         if (equipment.getSlot(EquipmentSlotEnum.HEAD) == null) equipView[1] = null;
             else equipView[1] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.HEAD).getItemType(), equipment.getSlot(EquipmentSlotEnum.HEAD));
@@ -89,7 +91,7 @@ public class EquipmentView implements Renderable, Observer {
             else equipView[7] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.LEGS).getItemType(), equipment.getSlot(EquipmentSlotEnum.LEGS));
 
         if (equipment.getSlot(EquipmentSlotEnum.GLOVES) == null) equipView[6] = null;
-            else equipView[6] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.GLOVES).getItemType(), equipment.getSlot(EquipmentSlotEnum.GLOVES));
+            else equipView[6] = equipView[8]=ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.GLOVES).getItemType(), equipment.getSlot(EquipmentSlotEnum.GLOVES));
 
         if (equipment.getSlot(EquipmentSlotEnum.BOOTS) == null) equipView[10] = null;
             else equipView[10] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.BOOTS).getItemType(), equipment.getSlot(EquipmentSlotEnum.BOOTS));
@@ -114,20 +116,37 @@ public class EquipmentView implements Renderable, Observer {
         //renderEquipment(g,s);
     }
     public void renderSlots(Graphics g, int s){
+        double ds = 64 * 4 / 5 * mX;
+        int size = ((int) ds);
+        double incY = 10 * mY;
+        int intY = ((int) incY);
+        double incX = 10 * mX;
+        int intX = ((int) incX);
+        int tempX = width / 2;//+ intX / 2;i
+        int tempY = height / 2 - (4 * (size + intY)) / 2;
 
 
+        g.setColor(new Color(12, 12, 12, 200));
+        g.fillRect(tempX, tempY, 4 * (size + intX), (-2) * tempY + height);
+        tempX+= intX+size/2;
+        tempY += intY / 2;
         for(int i=0;i<12;++i){
-            if((i!=0) || (i!=2) || (i!=8)){
-
+            if((i!=0) && (i!=2)){
+                if (i != s) {
+                    g.drawImage(Assets.BOX2, tempX, tempY, size, size, null);
+                } else {
+                    g.drawImage(Assets.BOX, tempX, tempY, size, size, null);
+                }
             }
-
-
+            if (equipView[i] != null) equipView[i].render(g, tempX, tempY, size, size);
+            tempX += size + intX;
+            if (i % 3 == 2) {
+                tempY += size + intY;
+                tempX = width / 2 + intX +size/2;
+            }
         }
     }
     public void renderIcons(Graphics g, int s){
-
-    }
-    public void renderDescriptions(Graphics g, int s){
         double ds=64*4/5*mX;
         int size= ((int)ds);
         size=size*3/4;
@@ -153,12 +172,6 @@ public class EquipmentView implements Renderable, Observer {
             g.setColor(new Color(12, 12, 12, 250));
             g.fillOval(x,y,size,size);
             g.setColor(new Color(255, 255, 255, 250));
-            g.drawString("Q",x+size/4,y+size/2);
-            x+=size+intX;
-
-            g.setColor(new Color(12, 12, 12, 250));
-            g.fillOval(x,y,size,size);
-            g.setColor(new Color(255, 255, 255, 250));
             g.drawString("D",x+size/4,y+size/2);
             x+=size+intX;
         }
@@ -180,6 +193,60 @@ public class EquipmentView implements Renderable, Observer {
         g.setColor(new Color(255, 255, 255, 250));
         g.drawString("I",x+size/4,y+size/2);
     }
+    public void renderDescriptions(Graphics g, int s){
+        Takable temp=null;
+        switch(s){
+            case 1:
+                temp=equipment.getSlot(EquipmentSlotEnum.HEAD);
+                break;
+            case 3:
+                temp=equipment.getSlot(EquipmentSlotEnum.MAINHAND);
+                break;
+            case 4:
+                temp=equipment.getSlot(EquipmentSlotEnum.CHEST);
+                break;
+            case 5:
+                temp=equipment.getSlot(EquipmentSlotEnum.OFFHAND);
+                if(temp==null)temp=equipment.getSlot(EquipmentSlotEnum.SHIELD);
+                break;
+            case 6:
+                temp=equipment.getSlot(EquipmentSlotEnum.GLOVES);
+                break;
+            case 7:
+                temp=equipment.getSlot(EquipmentSlotEnum.HEAD);
+                break;
+            case 8:
+                temp=equipment.getSlot(EquipmentSlotEnum.GLOVES);
+                break;
+            case 9:
+                temp=equipment.getSlot(EquipmentSlotEnum.ACCESSORY1);
+                break;
+            case 10:
+                temp=equipment.getSlot(EquipmentSlotEnum.BOOTS);
+                break;
+            case 11:
+                temp=equipment.getSlot(EquipmentSlotEnum.ACCESSORY2);
+                break;
+            default:
+                break;
+        }
+        if (temp != null) {
+            int x=width*3/20;
+            int y=height*31/40;
+            double incY=10*mY;
+            int intY=((int)incY);
+            g.setColor(new Color(12, 12, 12, 250));
+            g.fillRect(x,y, width*6/20, height*1/10);
+            g.setColor(new Color(255,255,255));
+            g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
+            y+=intY*1.5;
+            g.drawString("Name: "+temp.getName(),x,y);y+=2*intY;
+            g.drawString("Desc: "+temp.getDescription(),x,y);y+=2*intY;
+            if(temp instanceof Weapon)g.drawString("Damage: "+((Weapon) temp).getDamage(),x,y);
+            else if(temp instanceof Armor)g.drawString("Armor: "+((Armor) temp).getDefense(),x,y);
+        }
+    }
+
     public void renderStats(Graphics g){
         double incX=10*mX;
         int intX=((int)incX);

@@ -19,8 +19,7 @@ import java.util.HashMap;
 public class TradeState extends State {
 
     private HashMap<Item, ItemView> playerItems, shopItems;
-    private Pack playerPack,
-            shopPack;
+    private Pack playerPack, shopPack;
     private TradeView tradeView;
     private int selector;
 

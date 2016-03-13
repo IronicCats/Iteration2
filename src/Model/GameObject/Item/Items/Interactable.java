@@ -35,8 +35,9 @@ public class Interactable extends Item {
         this.type = ItemsEnum.values()[id];
     }
 
-    public void toggleView(){
-        setID(id + 1);
+    public void toggleState(){
+        state = !state;
+        alert();
     }
 
     public Requirement getRequirements() {
