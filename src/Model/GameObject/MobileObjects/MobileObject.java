@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -72,6 +73,10 @@ public abstract class MobileObject extends GameObject {
         } else {
             face(degrees);
         }
+        if(this instanceof Player){
+            System.out.println(getMovement());
+        }
+
     }
 
     public void face(int degrees) {

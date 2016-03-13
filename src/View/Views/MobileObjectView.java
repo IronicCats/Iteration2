@@ -2,6 +2,7 @@ package View.Views;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -135,6 +136,7 @@ public class MobileObjectView implements Renderable, Observer {
 
     @Override
     public void update() {
+        movement = entity.getMovement();
         setDirection(entity.getDir());
         goalX = Utilities.calculateTileCenterXLocation(entity.getX(), entity.getY());
         goalY = Utilities.calculateTileCenterYLocation(entity.getX(), entity.getY());
