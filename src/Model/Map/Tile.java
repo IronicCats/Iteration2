@@ -72,9 +72,10 @@ public abstract class Tile implements Subject {
         for(Item item: items){
             if(item instanceof Interactable){
                 // enum for changed asset should be right after original enum (yes I know)
-                ((Interactable) item).toggleView();
-                alert();
-                System.out.println("You interacted with a chest!");
+                if(!((Interactable) item).getState()){
+                    ((Interactable) item).toggleState();
+                    alert();
+                }
             }
         }
     }

@@ -23,6 +23,7 @@ public class ItemView implements Observer, Renderable {
     private BufferedImage sprite;
     private ArrayList<BufferedImage> sprites;
     private Location location;
+    private BufferedImage active;
 
 
     public ItemView(Item item, BufferedImage sprite) {
@@ -36,6 +37,7 @@ public class ItemView implements Observer, Renderable {
         this.item = item;
         this.sprites = sprites;
         this.location = item.getLocation();
+        active = this.sprites.get(0);
         item.addObserver(this);
     }
 
@@ -63,8 +65,19 @@ public class ItemView implements Observer, Renderable {
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         //draw it
-        if(item instanceof Obstacle || item instanceof Interactable) {
+        if(item instanceof Obstacle) {
             g.drawImage(sprite,
+                    cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH),
+                    cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT),
+                    Settings.DEFAULTITEMWIDTH * 2,
+                    Settings.DEFAULTITEMHEIGHT * 2,
+                    null
+            );
+            return;
+        }
+
+        if(item instanceof Interactable) {
+            g.drawImage(active,
                     cameraXOffset + (Settings.TILEWIDTH / 2 - Settings.DEFAULTITEMWIDTH),
                     cameraYOffset + (Settings.TILEHEIGHT / 2 - Settings.DEFAULTITEMHEIGHT),
                     Settings.DEFAULTITEMWIDTH * 2,
@@ -86,6 +99,10 @@ public class ItemView implements Observer, Renderable {
     public void render(Graphics g, int placeX, int placeY, int sizeX, int sizeY) {
         //draw it
         g.drawImage(sprite, placeX, placeY, sizeX, sizeY, null);
+    }
+
+    public void adjustView(){
+        active = sprites.get(1);
     }
 
 }
