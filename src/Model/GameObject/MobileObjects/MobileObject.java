@@ -78,7 +78,8 @@ public abstract class MobileObject extends GameObject {
                 //if(this instanceof Vehicle)
                 //System.out.println("i alerted");
             }
-        } else {
+        }
+        else {
             face(degrees);
         }
         if(this instanceof Player){
