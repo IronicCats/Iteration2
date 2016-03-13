@@ -73,7 +73,7 @@ public class EquipmentState extends State {
                 player.unequip(EquipmentSlotEnum.GLOVES);
                 break;
             case 7:
-                player.unequip(EquipmentSlotEnum.HEAD);
+                player.unequip(EquipmentSlotEnum.LEGS);
                 break;
             case 8:
                 player.unequip(EquipmentSlotEnum.GLOVES);

@@ -93,7 +93,7 @@ public class EquipmentView implements Renderable, Observer {
         if (equipment.getSlot(EquipmentSlotEnum.LEGS) == null) equipView[7] = null;
             else equipView[7] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.LEGS).getItemType(), equipment.getSlot(EquipmentSlotEnum.LEGS));
 
-        if (equipment.getSlot(EquipmentSlotEnum.GLOVES) == null) equipView[6] = null;
+        if (equipment.getSlot(EquipmentSlotEnum.GLOVES) == null) equipView[6] = equipView[8]= null;
             else equipView[6] = equipView[8]=ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.GLOVES).getItemType(), equipment.getSlot(EquipmentSlotEnum.GLOVES));
 
         if (equipment.getSlot(EquipmentSlotEnum.BOOTS) == null) equipView[10] = null;
@@ -278,7 +278,7 @@ public class EquipmentView implements Renderable, Observer {
 
         g.drawString("Stats",tempMove,y);y+=2*intY;
         g.setFont(new Font("Arial", Font.PLAIN, 18*intY/10));
-        g.drawString(""+t,x,y);y+=2*intY;
+        g.drawString("Lvl "+stats.getLevel()+" "+t,x,y);y+=2*intY;
         g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
         g.drawString("Health: "+stats.getLife(),x,y);y+=2*intY;
         g.drawString("Mana: "+stats.getMana(),x,y);y+=2*intY;
@@ -289,6 +289,8 @@ public class EquipmentView implements Renderable, Observer {
         g.drawString("Offensive Rating: "+stats.getOffensiveRating(),x,y);y+=2*intY;
         g.drawString("Defensive Rating: "+stats.getDefensiveRating(),x,y);y+=2*intY;
         g.drawString("Armor Rating: "+stats.getArmorRating(),x,y);y+=2*intY;
+        g.drawString("Movement: "+stats.getMovement(),x,y);y+=2*intY;
+        g.drawString("Money(Catnip): "+inventory.getPack().getMoney(),x,y);y+=2*intY;
     }
     public void renderEquipment(Graphics g, int s){
 
