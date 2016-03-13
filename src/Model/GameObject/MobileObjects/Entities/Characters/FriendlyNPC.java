@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Abilities.Abilities;
 import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;
@@ -25,20 +26,19 @@ public class FriendlyNPC extends NPC {
     } // end constructor
 
     @Override
+    public void receiveAttack(Character c, Abilities a) {
+        System.out.println("Can't attack Friendlies");
+    }
+
+    @Override
     public void tick() {
-        if (isDead() && getTile() != null) {
-            getTile().deregister();
-            //respawn eventually
-            deregister();
-        }else {
-            getStats().tick();
-            if (friendlyController != null) {
-                friendlyController.tick();
-            }
-            if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
-                System.out.println(getRandomDialog());
-                //DisplayMessage.addMessage(new GameMessage(getRandomDialog(), 1));
-            }
+        getStats().tick();
+        if (friendlyController != null) {
+            friendlyController.tick();
+        }
+        if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
+            System.out.println(getRandomDialog());
+            //DisplayMessage.addMessage(new GameMessage(getRandomDialog(), 1));
         }
 
     } // end tick

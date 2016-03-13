@@ -54,6 +54,7 @@ public class Settings {
     public static int INVENTORY = 0x49;
     public static int MAP = 0x4D;
     public static int INTERACT = 81;
+    public static int SKILLS = 0x53;
     public static int F = 70;
     public static boolean FOG = false;
 

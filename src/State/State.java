@@ -19,6 +19,7 @@ public class State implements Tickable, Renderable {
     public static InventoryState INVENTORYSTATE;
     public static InitialState INITIALSTATE;
     public static TradeState TRADESTATE;
+    public static SkillsState SKILLSSTATE;
 
     public static LoadState LOADSTATE;
     public static SaveState SAVESTATE;

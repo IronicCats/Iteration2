@@ -7,6 +7,7 @@ import Model.GameObject.MobileObjects.Projectile;
 import Model.Inventory.EquipmentTypeEnum;
 import Model.Requirement;
 import Model.Stats.StatStructure;
+import Model.Stats.Stats;
 import Model.Stats.StatsEnum;
 import Utilities.ItemUtilities.ItemsEnum;
 
@@ -43,7 +44,14 @@ public class Summoner extends Occupation {
         //enchantments
         //boon
         //bane
-
+        setOccupationalAbilities(new ProjectileAbility("Hairball",
+                "Fling hair at people",
+                new Stats(20),
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * getOccupationalSkillsValue(SkillsEnum.BANE))),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, -4 ))
+        ));
+        
     }
 
     //operations

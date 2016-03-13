@@ -8,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
 import Model.GameObject.MobileObjects.Entities.Pet;
@@ -42,7 +43,7 @@ public class MobileObjectFactory {
 
         // Enemy zero
         HostileNPC enemy = (HostileNPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
-        enemy.getController().setBaseLoc(new Location(0,0));
+        enemy.getController().setBaseLoc(new Location(9,0));
         enemy.getController().setEnemy(enemy);
         enemy.getController().setTarget(player);
         enemy.getStats().setLife(2);
@@ -52,12 +53,12 @@ public class MobileObjectFactory {
         HostileNPC enemy1 = (HostileNPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
         enemy1.getController().setTarget(player);
         enemy1.getController().setEnemy(enemy1);
-        enemy1.getController().setBaseLoc(new Location(4,5));
+        enemy1.getController().setBaseLoc(new Location(10,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
-
+        
         // Shopkeeper one
         Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(2, 3), map, player);
-        shopkeeper1.getController().setBaseLoc(new Location(2, 3));
+        shopkeeper1.getController().setBaseLoc(new Location(11, 3));
         enemy.getController().setTarget(player);
         objects.put(shopkeeper1, makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER, shopkeeper1));
         enemy.getStats().setLife(2);
@@ -161,6 +162,7 @@ public class MobileObjectFactory {
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
+
             case LASER:
             case BOOMERANG:
             default:

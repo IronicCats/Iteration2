@@ -30,6 +30,8 @@ public class InitialState extends State {
         EquipmentState equipementState = new EquipmentState();//adding the equipment state
         EQUIPMENTSTATE = equipementState;
         //switchState(MENUSTATE);
+        SkillsState skillsState = new SkillsState();
+        SKILLSSTATE = skillsState;
 
         PauseState pauseState = new PauseState(); // adding pause state
         PAUSESTATE = pauseState;

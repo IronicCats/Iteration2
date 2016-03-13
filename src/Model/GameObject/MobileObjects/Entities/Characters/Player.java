@@ -33,14 +33,6 @@ public class Player extends Character{
         inventory.addObserver(this);
     } // end constructor
 
-    // takes in the degrees associated with key press and updates player location
-
-/*    public void move(int degrees){
-        location = Location.newLocation(degrees, location);
-        registerTile(location);
-        alert();
-    } // end move
-*/
 
     public void examinePack() {
         inventory.examine();
@@ -51,5 +43,4 @@ public class Player extends Character{
     public void tick() {
         ((CharacterStats) getStats()).tick();
     }
-
 } // end class Player
