@@ -21,7 +21,13 @@ public class Vehicle extends MobileObject {
     public void interact(MobileObject mo) {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
+            getMounted(mo);
+
         }
+    }
+
+    public void getMounted(MobileObject mo){
+
     }
 
     @Override
