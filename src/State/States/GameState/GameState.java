@@ -173,12 +173,9 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        //FIXME
-       // if(pause)
-            //return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
-            
+
         }
     }
 

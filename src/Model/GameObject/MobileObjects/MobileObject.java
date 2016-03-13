@@ -123,12 +123,21 @@ public abstract class MobileObject extends GameObject {
 
 
     public Tile registerTile(Location location) {
-        tile.deregister();
+        deregister();
         while (map.getTile(location).hasObject()) {
             //Waiting to register with the next tile;
         }
         tile = map.register(this);
         return tile;
+    }
+
+    public void deregister() {
+        if(tile != null) {
+            tile.deregister();
+            tile = null;
+        }else {
+            System.out.println("Already deregistered");
+        }
     }
 
     public void interactWithTile() {
@@ -138,6 +147,7 @@ public abstract class MobileObject extends GameObject {
     public Tile getTile() {
         return tile;
     }
+
 
     public int getView() {
         return view;

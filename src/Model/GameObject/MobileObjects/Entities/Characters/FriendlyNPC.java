@@ -26,14 +26,21 @@ public class FriendlyNPC extends NPC {
 
     @Override
     public void tick() {
-        if (friendlyController != null) {
+        if (isDead() && getTile() != null) {
+            getTile().deregister();
+            //respawn eventually
+            deregister();
+        }else {
             getStats().tick();
-            friendlyController.tick();
+            if (friendlyController != null) {
+                friendlyController.tick();
+            }
+            if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
+                System.out.println(getRandomDialog());
+                //DisplayMessage.addMessage(new GameMessage(getRandomDialog(), 1));
+            }
         }
-        if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
-            System.out.println(getRandomDialog());
-            //DisplayMessage.addMessage(new GameMessage(getRandomDialog(), 1));
-        }
+
     } // end tick
 
     public String getRandomDialog() {
