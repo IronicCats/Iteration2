@@ -102,12 +102,14 @@ public class Pack {
             if (items[i] != null) {
                 tempItems.add(items[i]);
                 items[i] = null;
+                --count;
             }
         }
 
         Money moneyToDrop = getMoneyAsItem(location);
         if(moneyToDrop != null) {
             tempItems.add(getMoneyAsItem(location));
+            money = 0;
         }
         return tempItems;
     } // end dump
