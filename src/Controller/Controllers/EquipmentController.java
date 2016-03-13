@@ -22,7 +22,7 @@ public class EquipmentController extends Controller {
             return;
         }
         if(e.getKeyCode() == Settings.EQUIP){
-            state.switchState(State.GAMESTATE);
+            state.switchState(state.getPreviousState());
         }
         else if(e.getKeyCode() == Settings.INVENTORY){
             state.switchState(State.INVENTORYSTATE);
