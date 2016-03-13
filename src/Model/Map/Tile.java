@@ -4,6 +4,7 @@ package Model.Map;
 import Model.Abilities.Abilities;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
@@ -36,6 +37,8 @@ public abstract class Tile implements Subject {
     private boolean hasObject;
     private boolean hasAreaEffect;
     private boolean visited;
+    private boolean hasTeleportAreaEffect;
+    private TeleportAreaEffect teleportAreaEffect;
 
     private AreaEffectEnum ar;
 
@@ -47,6 +50,7 @@ public abstract class Tile implements Subject {
         visited = false;
         observers = new ArrayList<>();
         hasAreaEffect = false;
+        hasTeleportAreaEffect = false;
     }
 
 
@@ -105,6 +109,20 @@ public abstract class Tile implements Subject {
         alert();
     }
 
+    public void setTeleportAreaEffectTile(TeleportAreaEffect t) {
+        this.teleportAreaEffect = t;
+        hasTeleportAreaEffect = true;
+        alert();
+    }
+
+    public boolean getHasTeleportAreaEffect(){
+        return this.hasTeleportAreaEffect;
+    }
+
+    public TeleportAreaEffect getTeleportAreaEffect(){
+        return this.teleportAreaEffect;
+    }
+
     public AreaEffect getAreaEffect() {
         return this.areaEffect;
     }
@@ -128,6 +146,10 @@ public abstract class Tile implements Subject {
             visited = true;
             if (this.getHasAreaEffect()) {
                 ((Player) object).applyEffect(areaEffect.getEffect());
+            }
+            if(this.getHasTeleportAreaEffect()){
+                teleportAreaEffect.teleportPlayer(((Player) object));
+                System.out.println("This tile has an effect");
             }
         }
         alert();
