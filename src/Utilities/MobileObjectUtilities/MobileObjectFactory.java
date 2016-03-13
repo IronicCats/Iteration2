@@ -157,7 +157,6 @@ public class MobileObjectFactory {
             case ROOMBA:
                 return new Vehicle(location, id , new Stats(50));
             case HAIRBALL:
-                return new Projectile(location,id,new Stats(25), new Effect(), 2);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -176,9 +175,9 @@ public class MobileObjectFactory {
         return player;
     }
 
-    public static Projectile Hairball(Location location, Effect effect, Player player, Map map ){
+    public static Projectile Hairball(Location location, Effect effect ){
 
-        Projectile hairball = (Projectile) makeNPC(MobileObjectEnum.ROOMBA, location, map, player);
+        Projectile hairball = new Projectile(location,MobileObjectEnum.HAIRBALL.ordinal(),new Stats(25), effect, 2);
         return hairball;
 
     }
