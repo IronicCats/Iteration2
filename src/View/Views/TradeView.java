@@ -1,5 +1,7 @@
 package View.Views;
 
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.Inventory.Pack;
 import Model.Map.Map;
 import Utilities.ItemUtilities.ItemFactory;
@@ -45,6 +47,15 @@ public class TradeView implements Renderable, Observer {
         g.setColor(new Color(12, 12, 12, 130));
         g.fillRect(width / 10, height / 10, width * 4 / 5, height * 4 / 5);
         //making the title
+        //making the title
+        double incY=10*mY;
+        int intY=((int)incY);
+        g.setColor(new Color(255, 255, 255, 255));
+        g.setFont(new Font("Arial", Font.PLAIN, 40*intY/10));
+        FontMetrics fm = g.getFontMetrics();
+        int totalWidth = (fm.stringWidth("Trade Window"));
+        int tempMove= (width-totalWidth)/2;
+        g.drawString("Trade Window",tempMove,height/10+40*intY/10);
 
         //making the views
         for (int i = 0; i < 32; ++i) {
@@ -58,6 +69,7 @@ public class TradeView implements Renderable, Observer {
         }
 
         //render the pack
+        g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
         renderPackOne(g, s);
         renderPackTwo(g, s);
         //render the bottom right icons
@@ -144,8 +156,40 @@ public class TradeView implements Renderable, Observer {
     }
 
     public void renderDescriptions(Graphics g, int s) {
+        if(s<16&&playerPack.get(s)!=null) {
+            g.setColor(new Color(12, 12, 12, 250));
+            g.fillRect(width * 3 / 20, height * 31 / 40, width * 6 / 20, height * 1 / 10);
+        }
+        else if( (s>15&&shopPack.get(s-16)!=null)){
+            g.setColor(new Color(12, 12, 12, 250));
+            g.fillRect(width * 3 / 20, height * 31 / 40, width * 6 / 20, height * 1 / 10);
+        }
+        int x=width*3/20;
+        int y=height*31/40;
+        double incY=10*mY;
+        int intY=((int)incY);
         g.setColor(new Color(12, 12, 12, 250));
-        g.fillRect(width * 3 / 20, height * 31 / 40, width * 6 / 20, height * 1 / 10);
+        //g.fillRect(x,y, width*6/20, height*1/10);
+        g.setColor(new Color(255,255,255));
+        g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
+        y+=intY*1.5;
+        if(s<16 && playerPack.get(s)!=null) {
+            g.drawString("Name: " + playerPack.get(s).getName(), x, y);
+            y += 2 * intY;
+            g.drawString("Description: " + playerPack.get(s).getDescription(), x, y);
+            y += 2 * intY;
+            if (playerPack.get(s) instanceof Weapon) g.drawString("Damage: " + ((Weapon) playerPack.get(s)).getDamage(), x, y);
+            else if (playerPack.get(s) instanceof Armor) g.drawString("Armor: " + ((Armor) playerPack.get(s)).getDefense(), x, y);
+        }
+        else if(s>15 && shopPack.get(s-16)!=null){
+            s-=16;
+            g.drawString("Name: " + shopPack.get(s).getName(), x, y);
+            y += 2 * intY;
+            g.drawString("Description: " + shopPack.get(s).getDescription(), x, y);
+            y += 2 * intY;
+            if (shopPack.get(s) instanceof Weapon) g.drawString("Damage: " + ((Weapon) shopPack.get(s)).getDamage(), x, y);
+            else if (shopPack.get(s) instanceof Armor) g.drawString("Armor: " + ((Armor) shopPack.get(s)).getDefense(), x, y);
+        }
     }
 
 
