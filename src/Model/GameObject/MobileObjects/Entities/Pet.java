@@ -53,7 +53,7 @@ public class Pet extends MobileObject implements Tickable {
         stats.setMovement(6);
         this.requirement = new Requirement(reqItem);
         this.player = player;
-        this.controller.setBaseLoc(new Location(10,10));
+        this.controller.setBaseLoc(new Location(15,15));
         controller.setAI(this);
     } // end constructor
 
