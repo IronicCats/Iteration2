@@ -176,7 +176,7 @@ public abstract class Character extends Entity implements Observer{
     } // end applyEffect
 
     public void setInitialLevel(int level) {
-        for (int i = 0; i < level; i++) {
+        for (int i = 0; i < level-1; i++) {
             getStats().levelUp();
         }
     } // end setInitialLevel

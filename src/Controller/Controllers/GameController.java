@@ -74,6 +74,8 @@ public class GameController extends Controller {
                 ((GameState) state).executePlayerCommand(CommandsEnum.drop);
             } else if(e.getKeyCode() == Settings.F){
                 Settings.FOG = !Settings.FOG;
+            } else if (e.getKeyCode() == Settings.SKILLS) {         /* open skills */
+                state.switchState(State.SKILLSSTATE);
             }
 
         //these are already listed above
