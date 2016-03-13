@@ -157,8 +157,7 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
         Player player = new Player(new Location(0, 1), 2, new Smasher(), new Inventory());
-        ;
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
 
