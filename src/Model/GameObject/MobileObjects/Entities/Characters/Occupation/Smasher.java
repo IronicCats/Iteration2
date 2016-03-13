@@ -89,31 +89,13 @@ public class Smasher extends Occupation {
     public void recomputeOccupationalAbilities() {
         //basic attack
         if(equipmentType == null){
-            setBasicAttack(new DirectAbility(
-                    "Basic Fist Attack",
-                    "Attack using just the fists",
-                    new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
-                    new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
-            ));
+           getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))));
         }
         else if(equipmentType == EquipmentTypeEnum.ONE_HANDED){
-            setBasicAttack(new DirectAbility(
-                    "One Handed Weapon Attack ",
-                    "Attack using whatever one-handed weapon is equipped",
-                    new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))),
-                    new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
-            ));
+           getBasicAttack().setEffects( new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))));
         }
         else if(equipmentType == EquipmentTypeEnum.TWO_HANDED){
-            setBasicAttack(new DirectAbility(
-                    "Two Handed Weapon Attack",
-                    "Attack using whatever two-handed weapon is equipped",
-                    new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))),
-                    new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
-            ));
+           getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))));
         }
     }
 }

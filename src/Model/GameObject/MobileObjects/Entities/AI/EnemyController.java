@@ -50,7 +50,7 @@ public class EnemyController extends AIController {
                 }
             }
             else {
-                Abilities a = checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities());
+                Abilities a = checkAbilityRange.check(enemy.getAbilities());
                 if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
                     //enemy.attack(a);
                 }

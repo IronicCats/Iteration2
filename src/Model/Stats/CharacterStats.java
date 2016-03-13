@@ -155,7 +155,7 @@ public class CharacterStats extends Stats implements Subject {
         defensiveRating = agility + level;
         armorRating = equippedArmor + hardiness;
 
-        alert();
+        //alert();
     } // end update
 
     public void checkExpiredEffect() {
@@ -249,6 +249,7 @@ public class CharacterStats extends Stats implements Subject {
 
     public void applyEffect(Effect[] e) {
         for (Effect effect : e) {
+            System.out.println(e);
             applyEffect(effect);
         }
     } // end applyEffect

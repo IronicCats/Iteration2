@@ -32,6 +32,7 @@ public class EquipmentView implements Renderable, Observer {
     Inventory inventory;
     Player player;
     Equipment equipment;
+    CharacterStats stats;
     ItemView equipView[] = new ItemView[12];
 
 
@@ -41,6 +42,8 @@ public class EquipmentView implements Renderable, Observer {
         this.player = player;
         this.inventory=player.getInventory();
         this.equipment=inventory.getEquipment();
+        stats = player.getStats();
+        stats.addObserver(this);
     }
 
     @Override
@@ -259,7 +262,6 @@ public class EquipmentView implements Renderable, Observer {
 
         g.fillRect(x, y, width*6/20, height*5/10);
         x+=intX;
-        CharacterStats temp = player.getStats();
         g.setColor(new Color(255,255,255));
         y+=4*intY;
         String t;
@@ -278,22 +280,23 @@ public class EquipmentView implements Renderable, Observer {
         g.setFont(new Font("Arial", Font.PLAIN, 18*intY/10));
         g.drawString(""+t,x,y);y+=2*intY;
         g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
-        g.drawString("Health: "+temp.getLife(),x,y);y+=2*intY;
-        g.drawString("Mana: "+temp.getMana(),x,y);y+=2*intY;
-        g.drawString("Strength: "+temp.getStrength(),x,y);y+=2*intY;
-        g.drawString("Agility: "+temp.getAgility(),x,y);y+=2*intY;
-        g.drawString("Intellect: "+temp.getIntellect(),x,y);y+=2*intY;
-        g.drawString("Hardiness: "+temp.getHardiness(),x,y);y+=2*intY;
-        g.drawString("Offensive Rating: "+temp.getOffensiveRating(),x,y);y+=2*intY;
-        g.drawString("Defensive Rating: "+temp.getDefensiveRating(),x,y);y+=2*intY;
-        g.drawString("Armor Rating: "+temp.getArmorRating(),x,y);y+=2*intY;
+        g.drawString("Health: "+stats.getLife(),x,y);y+=2*intY;
+        g.drawString("Mana: "+stats.getMana(),x,y);y+=2*intY;
+        g.drawString("Strength: "+stats.getStrength(),x,y);y+=2*intY;
+        g.drawString("Agility: "+stats.getAgility(),x,y);y+=2*intY;
+        g.drawString("Intellect: "+stats.getIntellect(),x,y);y+=2*intY;
+        g.drawString("Hardiness: "+stats.getHardiness(),x,y);y+=2*intY;
+        g.drawString("Offensive Rating: "+stats.getOffensiveRating(),x,y);y+=2*intY;
+        g.drawString("Defensive Rating: "+stats.getDefensiveRating(),x,y);y+=2*intY;
+        g.drawString("Armor Rating: "+stats.getArmorRating(),x,y);y+=2*intY;
     }
     public void renderEquipment(Graphics g, int s){
 
     }
     @Override
     public void update() {
-
+        System.out.println("update called");
+        stats = player.getStats();
     }
 
     @Override
