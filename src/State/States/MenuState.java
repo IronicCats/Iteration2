@@ -22,10 +22,6 @@ public class MenuState extends State {
         return;
     }
 
-    public void switchState(State state) {
-        setState(state);
-    }
-
     public void moveUp() {
         menuView.previous();
     }

@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
  * Created by Joshua Kegley on 2/24/2016.
  */
 public abstract class Controller implements KeyListener {
+
     public State state;
     protected long lastPressProcessed = 0;
     public int waitingTime = 500;

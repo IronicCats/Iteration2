@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Inventory;
 import Model.Location;
+import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import Utilities.Observer;
 
@@ -30,8 +31,6 @@ public class Player extends Character{
     public Player(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation, inventory);
         inventory.addObserver(this);
-        stats.setMovement(10);
-        //State.INVENTORYSTATE.setConnect(this);
     } // end constructor
 
 
@@ -39,4 +38,9 @@ public class Player extends Character{
         inventory.examine();
         //emptyPack();
     } // end emptyPack
+
+
+    public void tick() {
+        ((CharacterStats) getStats()).tick();
+    }
 } // end class Player

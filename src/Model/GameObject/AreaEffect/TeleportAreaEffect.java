@@ -22,6 +22,7 @@ public class TeleportAreaEffect extends GameObject {
     public Location getEndLocation(){
         return this.endLocation;
     }
+
     public void teleportPlayer(MobileObject mobileObject){
         mobileObject.setLocation(endLocation);
         mobileObject.updateViewLocation(Utilities.calculateTileCenterXLocation(mobileObject.getX(), mobileObject.getY()), Utilities.calculateTileCenterYLocation(mobileObject.getX(), mobileObject.getY()));

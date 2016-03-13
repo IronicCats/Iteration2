@@ -2,11 +2,14 @@ package Model.GameObject.MobileObjects;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
+import Model.Map.Tile;
 import Model.Stats.Stats;
 import State.State;
-import State.States.GameState.TradeState;
 import State.States.GameState.VehicleState;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.Utilities;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -16,8 +19,7 @@ import State.States.GameState.VehicleState;
 public class Vehicle extends MobileObject {
 
     private Effect effect; // used to hold added defensive rating from vehicle. Also attack rating if hitting another entity
-    private MobileObject driver;
-
+    private Entity driver;
 
     public Vehicle(Location location, int id, Stats stats) {
         super(location, id, stats);
@@ -26,23 +28,23 @@ public class Vehicle extends MobileObject {
     public void interact(MobileObject mo) {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
-            setDriver(mo);
-            getMounted(mo);
+            setDriver((Entity)mo);
+            mount();
         }
     }
 
-    public void getMounted(MobileObject mo){
-        VehicleState vehicleState = new VehicleState(this);
-        State.GAMESTATE.switchState(vehicleState);
-        mo.getStats().setMovement(this.getMovement());
+    public void mount(){
+        State.switchState(new VehicleState(this)); // switch to vehicle state
     }
 
-    public void getUnmounted(){
-        System.out.println();
+    public void unmount(){
     }
 
-    public void setDriver(MobileObject mo){
+    public void setDriver(Entity mo){
         this.driver = mo;
     }
 
+    public Entity getDriver() {
+        return driver;
+    }
 }

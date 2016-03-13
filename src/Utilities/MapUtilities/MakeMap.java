@@ -44,7 +44,6 @@ public class MakeMap {
         } catch (IOException e) {
             System.out.println(e);
             System.out.println("Failed");
-
         }
 
         //Reads in map from map.txt

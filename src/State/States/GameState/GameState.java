@@ -72,16 +72,21 @@ public class GameState extends State {
         player = MobileObjectFactory.Player();
         player.setInitialLevel(5);
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
-        //player.setInitialLevel(2);
-        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
+        //creating a new player
+        player = MobileObjectFactory.Player();
+
         // initializing NPC's
         mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+
+        // syncing mobile objects with map
         map.setMobileObjects(mobileObjects);
 
         //area effect
@@ -154,7 +159,7 @@ public class GameState extends State {
     public void setCameraMoving(boolean movement) {
         cameraMoving = movement;
         if (!cameraMoving) {
-            camera.centerOnPlayer(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
+            camera.centerOnObject(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
         }
     }
 
@@ -178,21 +183,15 @@ public class GameState extends State {
     public void tick() {
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
-
         }
         RespawnQueue.tick();
     }
 
     public void render(Graphics g) {
-        //FIXME
-        //if(pause)
-           // return;
-        if (!cameraMoving ) {
-
-            camera.centerOnPlayer(player);
+        if(!cameraMoving){
+            camera.centerOnObject(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
-
         DisplayMessage.render(g);
     }
 
@@ -204,6 +203,10 @@ public class GameState extends State {
     public void playerExamineInventory() {
         player.examinePack();
     } // end playerExamineInventory
+
+    public MapView getMapView() {
+        return mapView;
+    }
 
     public static Player getPlayer() {
         return player;
@@ -226,10 +229,5 @@ public class GameState extends State {
 
     public void togglePause(){
         pause = !pause;
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

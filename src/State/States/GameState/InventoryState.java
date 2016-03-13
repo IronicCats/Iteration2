@@ -35,11 +35,6 @@ public class InventoryState extends State {
 
     }
 
-
-    public void switchState() {
-
-    }
-
     public void tick() {
     }
 
@@ -47,12 +42,6 @@ public class InventoryState extends State {
         State.GAMESTATE.render(g);
         invView.render(g, selector);
 
-    }
-
-    @Override
-    public void switchState(State state) {
-
-        setState(state);
     }
 
     //movement functions

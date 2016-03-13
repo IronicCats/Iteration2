@@ -71,7 +71,6 @@ public class MobileObjectFactory {
         //vehicle
         Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
-        roomba.getStats().setMovement(12);
 
 
         return objects;
@@ -157,7 +156,7 @@ public class MobileObjectFactory {
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
-                return new Vehicle(location,0,new Stats(50));
+                return new Vehicle(location, id , new Stats(50));
             case HAIRBALL:
                 return new Projectile(location,id,new Stats(25), new Effect(), 2);
             case SHEEP_VEHICLE:
@@ -174,8 +173,8 @@ public class MobileObjectFactory {
 
     public static Player Player() {
         // player
-        Player player = new Player(new Location(0, 1), 2, new Summoner(), new Inventory());
-        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
 
