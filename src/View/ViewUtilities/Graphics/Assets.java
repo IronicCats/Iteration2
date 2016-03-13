@@ -29,8 +29,7 @@ public class Assets {
     //items
     public static BufferedImage BAGOFITEMS;
     public static BufferedImage HEALTH_POTION;
-    public static BufferedImage CLOSED_TREASURE_CHEST;
-    public static BufferedImage OPEN_TREASURE_CHEST;
+    public static ArrayList<BufferedImage> TREASURE_CHEST;
     public static BufferedImage MANA_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
@@ -91,12 +90,6 @@ public class Assets {
         SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
         MANA_POTION = potionManaSheet.crop(0, 0, 32, 32);
 
-        SpriteSheet closedChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
-        CLOSED_TREASURE_CHEST = closedChestSheet.crop(0, 0, 32, 28);
-
-        SpriteSheet openChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenChest.png"));
-        OPEN_TREASURE_CHEST = openChestSheet.crop(0, 0, 32, 28);
-
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
         STICK_SWORD = stickSwordSheet.crop(0, 0, 32, 32);
 
@@ -139,7 +132,15 @@ public class Assets {
         SpriteSheet sushiSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Sushi.png"));
         SUSHI = sushiSheet.crop(0,0,32,32);
 
-        // End of tiles
+        // interactables
+
+        TREASURE_CHEST = new ArrayList<>();
+        SpriteSheet closedChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedChest.png"));
+        SpriteSheet openChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenChest.png"));
+        TREASURE_CHEST.add(closedChestSheet.crop(0, 0, 32, 28));
+        TREASURE_CHEST.add(openChestSheet.crop(0, 0, 32, 28));
+
+        // End of items
 
         //Entities
 

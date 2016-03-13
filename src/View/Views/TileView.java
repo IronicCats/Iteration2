@@ -45,7 +45,7 @@ public class TileView implements Observer, Renderable {
 
     }
 
-    public BufferedImage getSprite() {
+    public BufferedImage setSprite() {
         return sprite;
     }
 

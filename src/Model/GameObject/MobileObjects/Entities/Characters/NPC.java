@@ -24,6 +24,4 @@ public class NPC extends Character implements Tickable {
         random = new Random(System.currentTimeMillis());
         stats.setMovement(7);
     }
-
-    // inventory = NPCinventory
 }

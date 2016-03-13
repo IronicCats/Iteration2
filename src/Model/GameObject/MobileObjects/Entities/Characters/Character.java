@@ -227,5 +227,4 @@ public abstract class Character extends Entity implements Observer{
         }
 
     }
-
 } // end class Character

@@ -21,6 +21,7 @@ import Model.Stats.StatsEnum;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.ItemView;
 
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
@@ -278,13 +279,6 @@ public class ItemFactory {
                         location,
                         new Requirement(),
                         new Effect());
-            case OPEN_TREASURE_CHEST:
-                return new Interactable(id,
-                        "Unlocked chest",
-                        "An unlocked chest",
-                        -1,
-                        location,
-                        new Requirement());
             case CLOSED_TREASURE_CHEST:
                 return new Interactable(id,
                         "Closed chest",
@@ -483,10 +477,8 @@ public class ItemFactory {
             case FISH_BOOMERANG:
             case CHEST_KEY:
                 return new ItemView(item, Assets.CHEST_KEY);
-            case OPEN_TREASURE_CHEST:
-                return new ItemView(item, Assets.OPEN_TREASURE_CHEST);
             case CLOSED_TREASURE_CHEST:
-                return new ItemView(item, Assets.CLOSED_TREASURE_CHEST);
+                return new ItemView(item, Assets.TREASURE_CHEST);
             case DOOR_KEY:
             case OPEN_DOOR:
             case CLOSED_DOOR:

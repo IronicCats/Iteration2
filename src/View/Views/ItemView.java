@@ -11,6 +11,7 @@ import View.ViewUtilities.Renderable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 /**
@@ -20,12 +21,20 @@ public class ItemView implements Observer, Renderable {
 
     private Item item;
     private BufferedImage sprite;
+    private ArrayList<BufferedImage> sprites;
     private Location location;
 
 
     public ItemView(Item item, BufferedImage sprite) {
         this.item = item;
         this.sprite = sprite;
+        this.location = item.getLocation();
+        item.addObserver(this);
+    }
+
+    public ItemView(Item item, ArrayList<BufferedImage> sprites) {
+        this.item = item;
+        this.sprites = sprites;
         this.location = item.getLocation();
         item.addObserver(this);
     }
