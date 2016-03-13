@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import Model.Stats.Stats;
 
@@ -17,8 +18,10 @@ public class Vehicle extends MobileObject {
         super(location, id, stats);
     }
 
-    public void interact(){
-
+    public void interact(MobileObject mo) {
+        if (mo instanceof Player) {
+            System.out.println("Mounting Car");
+        }
     }
 
     @Override

@@ -99,7 +99,7 @@ public abstract class Character extends Entity implements Observer{
     public void mount(Vehicle vehicle){
 
         this.getStats().setMovement(vehicle.getMovement());
-        vehicle.interact();
+        //vehicle.interact();
 
     }
 
