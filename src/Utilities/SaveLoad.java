@@ -220,12 +220,10 @@ public class SaveLoad {
                             ItemsEnum a = ItemsEnum.values()[id];
                             itemArray[k] = ItemFactory.makeItem(a,l);
                             mapItems.put(itemArray[k],ItemFactory.makeAsset(a,itemArray[k]));
-
                             
                            // System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
                            // System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
                             //mapItems.put(itemArray[k],ItemFactory.makeAsset(ItemsEnum.PANTS,itemArray[k]));
-
 
 
                         }

@@ -57,35 +57,35 @@ public class EquipmentState extends State {
     public void unequip(){
         switch(s){
             case 1:
-                inventory.unequip(EquipmentSlotEnum.HEAD);
+                player.unequip(EquipmentSlotEnum.HEAD);
                 break;
             case 3:
-                inventory.unequip(EquipmentSlotEnum.MAINHAND);
+                player.unequip(EquipmentSlotEnum.MAINHAND);
                 break;
             case 4:
-                inventory.unequip(EquipmentSlotEnum.CHEST);
+                player.unequip(EquipmentSlotEnum.CHEST);
                 break;
             case 5:
-                inventory.unequip(EquipmentSlotEnum.OFFHAND);
-                inventory.unequip(EquipmentSlotEnum.SHIELD);
+                player.unequip(EquipmentSlotEnum.OFFHAND);
+                player.unequip(EquipmentSlotEnum.SHIELD);
                 break;
             case 6:
-                inventory.unequip(EquipmentSlotEnum.GLOVES);
+                player.unequip(EquipmentSlotEnum.GLOVES);
                 break;
             case 7:
-                inventory.unequip(EquipmentSlotEnum.HEAD);
+                player.unequip(EquipmentSlotEnum.HEAD);
                 break;
             case 8:
-                inventory.unequip(EquipmentSlotEnum.GLOVES);
+                player.unequip(EquipmentSlotEnum.GLOVES);
                 break;
             case 9:
-                inventory.unequip(EquipmentSlotEnum.ACCESSORY1);
+                player.unequip(EquipmentSlotEnum.ACCESSORY1);
                 break;
             case 10:
-                inventory.unequip(EquipmentSlotEnum.BOOTS);
+                player.unequip(EquipmentSlotEnum.BOOTS);
                 break;
             case 11:
-                inventory.unequip(EquipmentSlotEnum.ACCESSORY2);
+                player.unequip(EquipmentSlotEnum.ACCESSORY2);
                 break;
             default:
                 break;
