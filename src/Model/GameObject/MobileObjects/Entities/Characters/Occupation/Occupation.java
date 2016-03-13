@@ -2,6 +2,7 @@ package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
+import Model.Abilities.SelfAbility;
 import Model.Effects.Effect;
 import Model.Inventory.EquipmentTypeEnum;
 import Model.Requirement;
@@ -26,8 +27,8 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
-    private ArrayList<Abilities> occupationalAbilities;
-    private ArrayList<Abilities> basicSkillAbilities;
+    private Map<SkillsEnum, Abilities> occupationalAbilities;
+    private Map<SkillsEnum, Abilities> basicSkillAbilities;
     private Abilities basicAttack;
     private int pastLevel;
     private EquipmentTypeEnum weaponType;
@@ -45,8 +46,8 @@ public abstract class Occupation implements Subject, Observer {
         pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
-        occupationalAbilities = new ArrayList<>();
-        basicSkillAbilities = new ArrayList<>();
+        occupationalAbilities = new EnumMap(SkillsEnum.class);
+        basicSkillAbilities = new EnumMap(SkillsEnum.class);
 
         //basic skills
         basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
@@ -54,7 +55,7 @@ public abstract class Occupation implements Subject, Observer {
         basicSkills.put(SkillsEnum.OBSERVATION, 0);
 
         //set basic abilities
-        basicSkillAbilities.add(new DirectAbility(
+        basicSkillAbilities.put(SkillsEnum.BINDWOUNDS, new SelfAbility(
                 "Bind Wound",
                 "Uses a bind wound skill",
                 new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
@@ -121,7 +122,7 @@ public abstract class Occupation implements Subject, Observer {
         return basicAttack;
     }
 
-    public ArrayList<Abilities> getOccupationalAbilities() {
+    public Map<SkillsEnum, Abilities> getOccupationalAbilities() {
         return this.occupationalAbilities;
     }
 
@@ -129,6 +130,9 @@ public abstract class Occupation implements Subject, Observer {
         this.weaponType = e;
     }
 
+    public Abilities getBindWounds(){
+        return basicSkillAbilities.get(SkillsEnum.BINDWOUNDS);
+    }
     //different occupational skills for each occupation
     public abstract void modifyOccupationalSkills(SkillsEnum s, int value);
 
@@ -174,7 +178,7 @@ public abstract class Occupation implements Subject, Observer {
         //recompute abilities each time a stat changes
         //recomputes basic abilities
         basicSkillAbilities.clear(); //clears old abilities
-        basicSkillAbilities.add(new DirectAbility(
+        basicSkillAbilities.put(SkillsEnum.BINDWOUNDS,new SelfAbility(
                                      "Bind Wound",
                                      "Uses a bind wound skill",
                                       new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
