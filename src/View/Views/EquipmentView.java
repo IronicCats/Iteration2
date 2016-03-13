@@ -1,6 +1,9 @@
 package View.Views;
 
+import Model.GameObject.Item.Items.Takable;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Equippable;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Usable;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
@@ -191,8 +194,59 @@ public class EquipmentView implements Renderable, Observer {
         g.drawString("I",x+size/4,y+size/2);
     }
     public void renderDescriptions(Graphics g, int s){
-
+        Takable temp=null;
+        switch(s){
+            case 1:
+                temp=equipment.getSlot(EquipmentSlotEnum.HEAD);
+                break;
+            case 3:
+                temp=equipment.getSlot(EquipmentSlotEnum.MAINHAND);
+                break;
+            case 4:
+                temp=equipment.getSlot(EquipmentSlotEnum.CHEST);
+                break;
+            case 5:
+                temp=equipment.getSlot(EquipmentSlotEnum.OFFHAND);
+                if(temp==null)temp=equipment.getSlot(EquipmentSlotEnum.SHIELD);
+                break;
+            case 6:
+                temp=equipment.getSlot(EquipmentSlotEnum.GLOVES);
+                break;
+            case 7:
+                temp=equipment.getSlot(EquipmentSlotEnum.HEAD);
+                break;
+            case 8:
+                temp=equipment.getSlot(EquipmentSlotEnum.GLOVES);
+                break;
+            case 9:
+                temp=equipment.getSlot(EquipmentSlotEnum.ACCESSORY1);
+                break;
+            case 10:
+                temp=equipment.getSlot(EquipmentSlotEnum.BOOTS);
+                break;
+            case 11:
+                temp=equipment.getSlot(EquipmentSlotEnum.ACCESSORY2);
+                break;
+            default:
+                break;
+        }
+        if (temp != null) {
+            int x=width*3/20;
+            int y=height*31/40;
+            double incY=10*mY;
+            int intY=((int)incY);
+            g.setColor(new Color(12, 12, 12, 250));
+            g.fillRect(x,y, width*6/20, height*1/10);
+            g.setColor(new Color(255,255,255));
+            g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
+            y+=intY*1.5;
+            g.drawString("Name: "+temp.getName(),x,y);y+=2*intY;
+            g.drawString("Desc: "+temp.getDescription(),x,y);y+=2*intY;
+            if(temp instanceof Weapon)g.drawString("Damage: "+((Weapon) temp).getDamage(),x,y);
+            else if(temp instanceof Armor)g.drawString("Armor: "+((Armor) temp).getDefense(),x,y);
+        }
     }
+
     public void renderStats(Graphics g){
         double incX=10*mX;
         int intX=((int)incX);
