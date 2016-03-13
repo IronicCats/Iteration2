@@ -286,9 +286,14 @@ public abstract class Character extends Entity implements Observer{
             getTile().deregister();
             //respawn eventually
             deregister();
+            moveToRespawnQueue();
         }else {
             getStats().tick();
         }
 
     } // end tick
+
+    public void moveToRespawnQueue() {
+
+    }
 } // end class Character

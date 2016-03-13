@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters;
 
+import Model.Abilities.Abilities;
 import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.Inventory.Inventory;
@@ -23,6 +24,11 @@ public class FriendlyNPC extends NPC {
         friendlyController.setAI(this);
         this.dialog = dialog;
     } // end constructor
+
+    @Override
+    public void receiveAttack(Character c, Abilities a) {
+        System.out.println("Can't attack Friendlies");
+    }
 
     @Override
     public void tick() {
