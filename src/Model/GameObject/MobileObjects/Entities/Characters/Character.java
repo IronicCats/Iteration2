@@ -221,11 +221,13 @@ public abstract class Character extends Entity implements Observer{
     @Override
     public void tick() {
         System.out.println("isDead" + isDead());
-        if (!isDead()) {
-            getStats().tick();
+        if (isDead()) {
+            getTile().deregister();
+            map.addToRespawnQueue(this);
             //respawn eventually
+        } else {
+            getStats().tick();
         }
-
-    }
+    } // end tick
 
 } // end class Character
