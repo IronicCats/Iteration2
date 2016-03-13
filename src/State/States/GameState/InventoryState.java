@@ -29,10 +29,12 @@ public class InventoryState extends State {
         game = GS;
         selector = 0;
 
-        player = game.getPlayer();
-        inventory = player.getInventory();
-        pack = player.getPack();
-        invView = new InventoryView(pack);
+
+        player=game.getPlayer();
+        inventory=player.getInventory();
+        pack=player.getPack();
+        invView=new InventoryView(pack,player);
+
     }
 
 
@@ -81,6 +83,7 @@ public class InventoryState extends State {
     }
 
     //interaction
+
     public void interact() {
         if (pack.get(selector) instanceof Weapon || pack.get(selector) instanceof Armor) {
             equip();
@@ -94,7 +97,9 @@ public class InventoryState extends State {
         player.equip(selector);
     } // end equip
 
+
     public void drop() {
         player.drop(selector);
     } // end drop
+
 }

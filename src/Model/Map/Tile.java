@@ -6,6 +6,7 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
  * interact() needs to have different implementations based on instanceof
  * alternately, replace player.takeItems(...) to reflect different interactions
  */
+
 public abstract class Tile implements Subject {
 
     private Location location;
@@ -65,6 +67,14 @@ public abstract class Tile implements Subject {
     public void receiveInteraction(MobileObject interacter) {
         if (hasObject()) {
             object.interact(interacter);
+        }
+        for(Item item: items){
+            if(item instanceof Interactable){
+                // enum for changed asset should be right after original enum (yes I know)
+                ((Interactable) item).toggleView();
+                alert();
+                System.out.println("You interacted with a chest!");
+            }
         }
     }
 
@@ -155,11 +165,10 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle) {
+            if (i instanceof Obstacle || i instanceof Interactable) {
                 return false;
             }
         }
-        // add && !hasObject()
         return isWalkable && !hasObject;
     }
 
