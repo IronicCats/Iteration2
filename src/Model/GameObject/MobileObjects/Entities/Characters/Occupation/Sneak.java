@@ -77,3 +77,4 @@ public class Sneak extends Occupation {
 
 }
 
+

@@ -53,6 +53,8 @@ public class MobileObjectFactory {
         enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
 
+        
+
         // Shopkeeper one
         Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(2, 3), map, player);
         shopkeeper1.getController().setBaseLoc(new Location(2, 3));

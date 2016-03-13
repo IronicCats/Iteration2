@@ -12,6 +12,7 @@ import Model.Stats.StatsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Integer> basicSkills;
     private Map<SkillsEnum, Integer> occupationalSkills;
     private ArrayList<Observer> observers;
-    private Map<SkillsEnum, Abilities> occupationalAbilities;
+    private ArrayList<Abilities> occupationalAbilities;
     private Map<SkillsEnum, Abilities> basicSkillAbilities;
     private Abilities basicAttack;
     private int pastLevel;
@@ -46,7 +47,7 @@ public abstract class Occupation implements Subject, Observer {
         pastLevel = playerStats.getLevel();
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
-        occupationalAbilities = new EnumMap(SkillsEnum.class);
+        occupationalAbilities = new ArrayList<>();
         basicSkillAbilities = new EnumMap(SkillsEnum.class);
 
         //basic skills
@@ -122,7 +123,7 @@ public abstract class Occupation implements Subject, Observer {
         return basicAttack;
     }
 
-    public Map<SkillsEnum, Abilities> getOccupationalAbilities() {
+    public ArrayList<Abilities> getOccupationalAbilities() {
         return this.occupationalAbilities;
     }
 
