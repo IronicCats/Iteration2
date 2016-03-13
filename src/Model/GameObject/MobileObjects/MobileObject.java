@@ -46,7 +46,6 @@ public abstract class MobileObject extends GameObject {
         view = id;
         range = 2;
         id = 0;
-        stats.setMovement(10);
     }
 
     public MobileObject(Location location, int id, Stats stats) {
@@ -60,7 +59,6 @@ public abstract class MobileObject extends GameObject {
         view = id;
         range = 2;
         this.id = id;
-        stats.setMovement(10);
     }
 
     public void move(int degrees) {
