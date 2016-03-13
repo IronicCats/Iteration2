@@ -139,6 +139,7 @@ public abstract class Tile implements Subject {
             }
             if(this.getHasTeleportAreaEffect()){
                 teleportAreaEffect.teleportPlayer(((Player) object));
+                System.out.println("This tile has an effect");
             }
         }
         alert();
