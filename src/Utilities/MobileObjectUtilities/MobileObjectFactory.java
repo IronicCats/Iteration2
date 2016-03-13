@@ -72,7 +72,6 @@ public class MobileObjectFactory {
         Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
 
-
         return objects;
     }
 
@@ -162,7 +161,6 @@ public class MobileObjectFactory {
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
-
             case LASER:
             case BOOMERANG:
             default:
@@ -173,14 +171,14 @@ public class MobileObjectFactory {
 
     public static Player Player() {
         // player
-        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
         player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
 
     public static Projectile Hairball(Location location, Effect effect, Player player, Map map ){
 
-        Projectile hairball = (Projectile) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
+        Projectile hairball = (Projectile) makeNPC(MobileObjectEnum.ROOMBA, location, map, player);
         return hairball;
 
     }

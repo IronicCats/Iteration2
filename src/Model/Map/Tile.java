@@ -95,7 +95,7 @@ public abstract class Tile implements Subject {
     }
 
     public void receiveProjectileAttack(Projectile p) {
-        if (hasObject()) {
+        if (hasObject() && (!(object instanceof Projectile))) {
             ((Character) object).receiveProjectileAttack(p.getEffect());
         }
     }
