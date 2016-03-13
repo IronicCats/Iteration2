@@ -29,7 +29,7 @@ public abstract class MobileObject extends GameObject {
     protected Tile tile;
     // private Nav navigation
     protected Stats stats;
-    private boolean canMove;
+    protected boolean canMove;
     private Location baseLocation;
     private ViewLocation viewLocation;
     private int view, range;
@@ -46,7 +46,6 @@ public abstract class MobileObject extends GameObject {
         view = id;
         range = 2;
         id = 0;
-        stats.setMovement(10);
     }
 
     public MobileObject(Location location, int id, Stats stats) {
@@ -60,7 +59,6 @@ public abstract class MobileObject extends GameObject {
         view = id;
         range = 2;
         this.id = id;
-        stats.setMovement(10);
     }
 
     public void move(int degrees) {

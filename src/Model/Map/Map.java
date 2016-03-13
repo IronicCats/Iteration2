@@ -116,8 +116,8 @@ public class Map implements Subject {
             getTile(c.getLocation()).receiveAttack(c, a);
         } else if(a instanceof ProjectileAbility){
             System.out.println("Projectile Ability Set");
-            ((ProjectileAbility) a).setProjectile(new Projectile(c.getLocation(),14, ((ProjectileAbility) a).getProjectileStats(), a.getEffects(),a.getRange()));
-            ((ProjectileAbility) a).getProjectile().move(c.getDir());
+            ((ProjectileAbility) a).setProjectile(new Projectile(Location.newLocation(c.getDir(),c.getLocation()),14, ((ProjectileAbility) a).getProjectileStats(), a.getEffects(),a.getRange()));
+            ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
         }else {
             System.out.println("Not a Direct Ability");
         }

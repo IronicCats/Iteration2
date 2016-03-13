@@ -1,8 +1,13 @@
 package Model.GameObject.MobileObjects;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
+import Model.Map.Tile;
+import Model.Stats.CharacterStats;
 import Model.Stats.Stats;
+import Utilities.AIUtilities.TilegivenBase;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -13,7 +18,6 @@ public class Projectile extends MobileObject {
 
     private Effect effects;
     int range;
-    private Location base,destination;
 
     //constructor
     public Projectile(Location location, int id, Stats stats, Effect effects, int range) {
@@ -39,11 +43,19 @@ public class Projectile extends MobileObject {
         this.range = r;
     }
 
-    @Override
-    public void move(int degrees) {
-
-
-
+    public void execute(Location base) {
+        Tile start = map.getTile(Location.newLocation(base.getDir(),base));
+        if(start.hasObject()){
+            start.receiveProjectileAttack(this);
+        }
+        else{
+            this.location = start.getLocation();
+            move(start.getLocation().getDir());
+        }
     }
+
+    public void applyEffect() {
+        ((CharacterStats)getStats()).applyEffect(effects);
+    } // end applyEffect
 
 }

@@ -8,7 +8,9 @@ import Model.Map.Tile;
  */
 public class TilegivenBase {
 
-    public static Location find(Location base){
+    //TODO: check infinite range not just
+
+    public static Location find(Location base, int range){
 
         switch (base.getDir()) {
             case 45:
