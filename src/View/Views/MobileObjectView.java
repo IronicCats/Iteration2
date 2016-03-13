@@ -99,7 +99,7 @@ public class MobileObjectView implements Renderable, Observer {
 
         entity.setCanMove(false);
         if (entity instanceof Player){
-            System.out.println("Movement Displayed" + sinWave());
+            //System.out.println("Movement Displayed" + sinWave());
         }
         System.out.println((++current % 3) + 1);
         if (goalX != viewLocation.getX()) {
