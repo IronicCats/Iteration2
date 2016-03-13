@@ -22,10 +22,10 @@ public class InventoryController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == Settings.ESC || e.getKeyCode() == Settings.INVENTORY) {
-            ((InventoryState)state).switchState(State.GAMESTATE);
+        if(e.getKeyCode() == Settings.ESC ) {
+            ((InventoryState)state).switchState(State.PAUSESTATE);
         }
-        else if(e.getKeyCode() == KeyEvent.VK_I){
+        else if(e.getKeyCode() == KeyEvent.VK_I|| e.getKeyCode() == Settings.INVENTORY){
             state.switchState(State.GAMESTATE);
         }
         else if(e.getKeyCode() == Settings.EQUIP) {
