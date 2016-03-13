@@ -10,15 +10,15 @@ import java.awt.*;
  * Created by Dartyx on 3/7/2016.
  */
 public class LoadState extends State {
-    private GameState game;
+
     private LoadView loadView;
 
-    private int lastState;  //0 = Menu,1 = Pause
-    public LoadState(GameState GS){
 
+    private int lastState;  //0 = Menu,1 = Pause
+    public LoadState() {
         loadView = new LoadView();
         setController(new LoadController(this));
-        game = GS;
+
 
     }
 
