@@ -93,11 +93,7 @@ public class MobileObjectView implements Renderable, Observer {
     public void tween() {
         if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
-<<<<<<< HEAD
             pause();
-=======
-
->>>>>>> c1ca20ca836cdaa0dadae3115de7c2bb8439f43a
             return;
         }
 
