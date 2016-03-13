@@ -120,8 +120,6 @@ public abstract class Character extends Entity implements Observer{
     public void unequip(EquipmentSlotEnum slot) {
         if(inventory.getSlot(slot) == null)
             return;
-        getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
-        inventory.unequip(slot);
 
         if(inventory.getSlot(slot) instanceof Weapon) {
             System.out.println("it's a weapon");
@@ -137,6 +135,9 @@ public abstract class Character extends Entity implements Observer{
                     break;
             }
         }
+
+        getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
+        inventory.unequip(slot);
     } // end unequip
 
     public void mount(Vehicle vehicle){

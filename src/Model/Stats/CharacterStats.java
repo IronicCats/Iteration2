@@ -53,12 +53,18 @@ public class CharacterStats extends Stats implements Subject {
 
         level = 1;
         baseLives = 0;
+        livesLeft = baseLives;
         baseStr = 0;
+        strength = baseStr;
         baseAgi = 0;
+        agility = baseAgi;
         baseIntel = 0;
+        intellect = baseIntel;
         baseHard = 0;
+        hardiness = baseHard;
         experience = 0;
-        baseLives = 0;
+        baseMovement = 0;
+        movement = baseMovement;
         baseLife = baseHard + level;
         baseMana = baseIntel + level;
 
@@ -100,6 +106,7 @@ public class CharacterStats extends Stats implements Subject {
         baseAgi = ss.getStat(StatsEnum.AGILITY);
         baseIntel = ss.getStat(StatsEnum.INTELLECT);
         baseHard = ss.getStat(StatsEnum.HARDINESS);
+        baseMovement = ss.getStat(StatsEnum.MOVEMENT);
         baseLife = baseHard + level;
         baseMana = baseIntel + level;
 
@@ -108,6 +115,7 @@ public class CharacterStats extends Stats implements Subject {
         agility = baseAgi;
         intellect = baseIntel;
         hardiness = baseHard;
+        movement = baseMovement;
         experience = ss.getStat(StatsEnum.EXPERIENCE);
         life = baseLife;
         mana = baseMana;
@@ -412,14 +420,14 @@ public class CharacterStats extends Stats implements Subject {
                     this.experience += amount;
                 break;
             case MOVEMENT:
-                System.out.println("old movement is " + this.movement);
+                System.out.println("old movement is " + movement);
                 if (m.equals(ModificationEnum.PERCENT)){
-                    this.movement += this.baseMovement * amount / 100;
+                    movement += this.baseMovement * amount / 100;
                     //System.out.println("TEST STATS " + this.movement);
                 }
                 else
-                    this.movement += amount;
-                System.out.println("New movement is " + this.movement);
+                    movement += amount;
+                System.out.println("New movement is " + movement);
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
