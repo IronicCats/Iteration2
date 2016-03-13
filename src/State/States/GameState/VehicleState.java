@@ -1,23 +1,16 @@
 package State.States.GameState;
 
 import Controller.Controllers.VehicleController;
-import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
-import Model.Map.Map;
 import State.State;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Settings;
-import Utilities.Utilities;
-import View.ViewUtilities.Camera;
 import View.Views.MessageBox.DisplayMessage;
-import View.Views.MapView;
-import Model.Map.Map;
 import View.Views.MessageBox.GameMessage;
 import View.Views.MobileObjectView;
 
