@@ -95,8 +95,8 @@ public abstract class Character extends Entity implements Observer{
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
         inventory.unequip(slot);
-        ((CharacterStats) getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
     public void mount(Vehicle vehicle){
@@ -263,6 +263,8 @@ public abstract class Character extends Entity implements Observer{
         if(!getStats().isAlive()) {
             emptyPack();
             getStats().revive();
+        } else {
+            getStats().update();
         }
     } // end update
 
