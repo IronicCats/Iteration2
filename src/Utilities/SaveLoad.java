@@ -318,15 +318,15 @@ public class SaveLoad {
                                     break;
 
                             }
-                            System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
-                            System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
+                           // System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
+                           // System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
 
                         }
 
                     }
 
 
-                    ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
+                   // ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
                     //THIS ARRAYLIST AND ADDITEMS STUFF WAS RECENTLY ADDED TO SEE IF IT COULD FIX THE THING
 
                     Location lg = new Location(i,j);
@@ -336,7 +336,8 @@ public class SaveLoad {
 
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
 
                     }
                     else if(terrainType.equalsIgnoreCase("water")) {
@@ -344,12 +345,14 @@ public class SaveLoad {
 
                         tiles[i][j] = new Water(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
 
                     } else if (terrainType.equalsIgnoreCase("mountain")) {
                         tiles[i][j] = new Mountain(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
                     }
                     //System.out.println(tiles[i][j].toString());
 
@@ -498,9 +501,19 @@ public class SaveLoad {
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
         mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
-        mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
+       // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
         //mobileObjects.put(player,)
         gameMap.setMobileObjects(mobileObjects);
+
+        ////////////////////////////////////// TEST
+        Iterator it = mobileObjects.entrySet().iterator();
+        while (it.hasNext()) {
+            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
+            System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
+            //it.remove(); ??? Says it avoids CurrentModificationException
+        }
+
+        ///////////////////////////////
     }
 
     //---------------------------------------------------------------------//
