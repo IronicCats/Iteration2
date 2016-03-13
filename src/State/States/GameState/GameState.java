@@ -84,11 +84,13 @@ public class GameState extends State {
         AreaEffect c = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(4, 4));
         //AreaEffect d = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(8, 4));
         TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,4), new Location(3,3));
+       // AreaEffect f = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(10, 4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
         map.placeAreaEffect(c);
         //map.placeAreaEffect(d);
         map.placeTeleportAreaEffectBeginning(e);
+       // map.placeAreaEffect(f);
 
         map.setMapItems(mapItems);
 

@@ -10,13 +10,13 @@ import java.awt.*;
  * Created by Dartyx on 3/9/2016.
  */
 public class SettingState extends State {
-    private GameState game;
+
     private SettingView settingView;
 
-    public SettingState(GameState GS) {
+    public SettingState() {
         settingView = new SettingView();
         setController(new SettingController(this));
-        game = GS;
+
 
     }
 
@@ -28,7 +28,7 @@ public class SettingState extends State {
     }
 
     public void render(Graphics g) {
-        game.render(g);
+        State.GAMESTATE.render(g);
         settingView.render(g);
     }
 

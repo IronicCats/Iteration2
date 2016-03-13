@@ -12,12 +12,12 @@ import java.awt.*;
 public class PauseState extends State {
 
     private PauseView pauseView;
-    private GameState game;
 
-    public PauseState(GameState GS) {
+
+    public PauseState() {
         pauseView = new PauseView();
         setController(new PauseController(this));
-        game = GS;
+
     }
 
     public void tick() {
@@ -33,7 +33,7 @@ public class PauseState extends State {
 
     // passes in pause view and map view
     public void render(Graphics g) {
-        game.render(g);
+        State.GAMESTATE.render(g);
         pauseView.render(g);
     }
 

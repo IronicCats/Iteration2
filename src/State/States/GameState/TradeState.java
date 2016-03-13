@@ -17,7 +17,7 @@ import java.util.HashMap;
  * Created by broskj on 3/9/16.
  */
 public class TradeState extends State {
-    private GameState game;
+
     private HashMap<Item, ItemView> playerItems, shopItems;
     private Pack playerPack,
             shopPack;
@@ -31,9 +31,9 @@ public class TradeState extends State {
         tradeView=new TradeView();
     }*/
 
-    public TradeState(GameState game, Pack playerPack, Pack shopPack) {
+    public TradeState(Pack playerPack, Pack shopPack) {
         setController(new TradeController(this));
-        this.game = game;
+
         this.playerPack = playerPack;
         this.shopPack = shopPack;
         playerItems = new HashMap<>();
@@ -80,7 +80,7 @@ public class TradeState extends State {
     }
 
     public void render(Graphics g) {
-        game.render(g);
+        State.GAMESTATE.render(g);
         tradeView.render(g, selector);
     }
 

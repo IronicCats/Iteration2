@@ -23,19 +23,19 @@ public class InitialState extends State {
         GAMESTATE = gameState;
 
 
-        InventoryState inventoryState = new InventoryState(gameState);//adding the inv state
+        InventoryState inventoryState = new InventoryState();//adding the inv state
         INVENTORYSTATE = inventoryState;
-        EquipmentState equipementState = new EquipmentState(gameState);//adding the equipment state
+        EquipmentState equipementState = new EquipmentState();//adding the equipment state
         EQUIPMENTSTATE = equipementState;
         //switchState(MENUSTATE);
 
-        PauseState pauseState = new PauseState(gameState); // adding pause state
+        PauseState pauseState = new PauseState(); // adding pause state
         PAUSESTATE = pauseState;
-        SettingState settingState = new SettingState(gameState);
+        SettingState settingState = new SettingState();
         SETTINGSTATE = settingState;
-        SaveState saveState = new SaveState(gameState);
+        SaveState saveState = new SaveState();
         SAVESTATE = saveState;
-        LoadState loadState = new LoadState(gameState);
+        LoadState loadState = new LoadState();
         LOADSTATE = loadState;
         //TradeState tradeState = new TradeState(gameState);
         //TRADESTATE = tradeState;
