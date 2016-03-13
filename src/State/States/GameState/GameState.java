@@ -130,10 +130,13 @@ public class GameState extends State {
         while (it.hasNext()) {
             java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
             //System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
-            MobileObject a = (MobileObject)pair.getKey();
+            //MobileObject a = (MobileObject)pair.getKey();
+           // MobileObjectView ab = (MobileObjectView)pair.getValue();
             //int x = a.getX();
             //int y = a.getY();
-            map.getTile(a.getLocation()).register(a);
+            map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
+
+
             //it.remove(); ??? Says it avoids CurrentModificationException
         }
         if(!mapItems.isEmpty()) {
@@ -151,7 +154,7 @@ public class GameState extends State {
 
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);
-        mapView.update();
+        //mapView.update();
     }
 
     public void switchState() {
