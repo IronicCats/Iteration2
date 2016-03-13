@@ -36,9 +36,27 @@ public class ItemFactory {
 
         HashMap<Item, ItemView> initItems = new HashMap<>();
 
-        // health potion
-        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
+        // potion stack
+        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));        /* health potion */
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
+
+        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(0, 0));       /* agility potion */
+        initItems.put(ap, ItemFactory.makeAsset(ItemsEnum.AGILITY_POTION, ap));
+
+        Item ep = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, new Location(0, 0));    /* experience potion */
+        initItems.put(ep, ItemFactory.makeAsset(ItemsEnum.EXPERIENCE_POTION, ep));
+
+        Item hardp = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, new Location(0, 0));    /* hardiness potion */
+        initItems.put(hardp, ItemFactory.makeAsset(ItemsEnum.HARDINESS_POTION, hardp));
+
+        Item ip = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, new Location(0, 0));    /* intellect potion */
+        initItems.put(ip, ItemFactory.makeAsset(ItemsEnum.INTELLECT_POTION, ip));
+
+        Item mp = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, new Location(0, 0));    /* movement potion */
+        initItems.put(mp, ItemFactory.makeAsset(ItemsEnum.MOVEMENT_POTION, mp));
+
+        Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));    /* strength potion */
+        initItems.put(sp, ItemFactory.makeAsset(ItemsEnum.STRENGTH_POTION, sp));
 
         // closed treasure chest
         Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
@@ -541,11 +559,17 @@ public class ItemFactory {
             case MANA_POTION:
                 return new ItemView(item, Assets.MANA_POTION);
             case STRENGTH_POTION:
+                return new ItemView(item, Assets.STRENGTH_POTION);
             case AGILITY_POTION:
+                return new ItemView(item, Assets.AGILITY_POTION);
             case INTELLECT_POTION:
+                return new ItemView(item, Assets.INTELLECT_POTION);
             case HARDINESS_POTION:
+                return new ItemView(item, Assets.HARDINESS_POTION);
             case EXPERIENCE_POTION:
+                return new ItemView(item, Assets.EXPERIENCE_POTION);
             case MOVEMENT_POTION:
+                return new ItemView(item, Assets.MOVEMENT_POTION);
             case STICK_SWORD:
                 return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
