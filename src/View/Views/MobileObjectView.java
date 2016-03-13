@@ -4,6 +4,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Utilities.Observer;
@@ -121,7 +122,7 @@ public class MobileObjectView implements Renderable, Observer {
                 Settings.PLAYERHEIGHT,
                 null
         );
-        if (!(entity instanceof Player) && !(entity instanceof Pet)) {
+        if (!(entity instanceof Player) && !(entity instanceof Pet) && !(entity instanceof Vehicle)) {
 
             ViewModule.renderHealthBox(g,
                     ((Character) entity).getStats().getLife(),

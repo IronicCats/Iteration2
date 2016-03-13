@@ -13,6 +13,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.*;
 import Model.Location;
 import Model.Requirement;
@@ -94,6 +95,13 @@ public abstract class Character extends Entity implements Observer{
         inventory.unequip(slot);
         ((CharacterStats) getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
+
+    public void mount(Vehicle vehicle){
+
+        this.getStats().setMovement(vehicle.getMovement());
+        vehicle.interact();
+
+    }
 
     public void unmount() {
         //getStats().resetMovement();

@@ -17,6 +17,9 @@ public class Vehicle extends MobileObject {
         super(location, id, stats);
     }
 
+    public void interact(){
+
+    }
 
     @Override
     public void move(int degrees) {

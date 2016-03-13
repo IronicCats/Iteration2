@@ -51,6 +51,9 @@ public class Assets {
     public static BufferedImage SUSHI;
     // end of items
 
+    //vehicles
+    public static ArrayList<BufferedImage> ROOMBA;
+
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
     public static BufferedImage STAR;
@@ -141,6 +144,22 @@ public class Assets {
         SUSHI = sushiSheet.crop(0,0,32,32);
 
         // End of tiles
+
+        //Vehciles
+        ROOMBA = new ArrayList<>();
+        SpriteSheet roomba1 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba2 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba3 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba4 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba5 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        SpriteSheet roomba6 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
+        ROOMBA.add(roomba1.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba2.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba3.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba4.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba5.crop(0, 0, 32, 32));
+        ROOMBA.add(roomba6.crop(0, 0, 32, 32));
+
 
         //Entities
 
