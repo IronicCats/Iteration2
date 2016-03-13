@@ -129,6 +129,12 @@ public abstract class Tile implements Subject {
         return this.areaEffect;
     }
 
+    public void removeAreaEffect(){
+        this.areaEffect = null;
+        this.hasAreaEffect = false;
+        this.ar = null;
+    }
+
     public AreaEffectEnum getAreaEffectEnum() {
         return this.ar;
     }
@@ -146,11 +152,13 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
+        }
+        if(object instanceof Character){
             if (this.getHasAreaEffect()) {
-                ((Player) object).applyEffect(areaEffect.getEffect());
+                ((Character) object).applyEffect(areaEffect.getEffect());
             }
             if(this.getHasTeleportAreaEffect()){
-                teleportAreaEffect.teleportPlayer(((Player) object));
+                teleportAreaEffect.teleportPlayer(((Character) object));
             }
         }
         alert();

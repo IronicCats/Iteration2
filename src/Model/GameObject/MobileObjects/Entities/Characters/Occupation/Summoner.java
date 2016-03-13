@@ -4,6 +4,7 @@ import Model.Abilities.DirectAbility;
 import Model.Abilities.ProjectileAbility;
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Projectile;
+import Model.Inventory.EquipmentTypeEnum;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
@@ -66,6 +67,7 @@ public class Summoner extends Occupation {
             return 0;
         }
     }
+
 
     public void recomputeOccupationalAbilities() {
         //basic attack of just hitting another entity

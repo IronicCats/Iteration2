@@ -3,6 +3,7 @@ package View.Views;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Tile;
@@ -16,6 +17,7 @@ import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 import View.ViewUtilities.ViewSettings;
+import com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,6 +56,7 @@ public class TileView implements Observer, Renderable {
     public void update() {
         if (tile.hasItems()) {
             Item item;
+            System.out.println(tile.getItems());
             if (tile.amountOfItems() > 1) {
                 itemView = ItemFactory.makeAsset(ItemsEnum.BAGOFITEMS, tile.getItems().get(0));
                 for (Item i : tile.getItems()) {
@@ -63,6 +66,7 @@ public class TileView implements Observer, Renderable {
                     }
                 }
             } else {
+
                 item = tile.getItems().get(0);
                 if(item instanceof Interactable) {
                     if (((Interactable) item).getState()) {
