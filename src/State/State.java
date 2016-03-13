@@ -25,6 +25,7 @@ public class State implements Tickable, Renderable {
     public static SettingState SETTINGSTATE;
     public static EquipmentState EQUIPMENTSTATE;
     public static PauseState PAUSESTATE;
+    public static VehicleState VEHICLESTATE;
 
     public static Canvas canvas;
     public static State currentState = null;
@@ -67,7 +68,7 @@ public class State implements Tickable, Renderable {
 
     @Override
     public void tick() {
-        System.out.println("At basic tick");
+
     }
 
     @Override

@@ -16,6 +16,8 @@ import State.States.GameState.VehicleState;
 public class Vehicle extends MobileObject {
 
     private Effect effect; // used to hold added defensive rating from vehicle. Also attack rating if hitting another entity
+    private MobileObject driver;
+
 
     public Vehicle(Location location, int id, Stats stats) {
         super(location, id, stats);
@@ -24,18 +26,23 @@ public class Vehicle extends MobileObject {
     public void interact(MobileObject mo) {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
+            setDriver(mo);
             getMounted(mo);
         }
     }
 
     public void getMounted(MobileObject mo){
-        VehicleState vehicleState = new VehicleState();
+        VehicleState vehicleState = new VehicleState(this);
+        State.GAMESTATE.switchState(vehicleState);
         mo.getStats().setMovement(this.getMovement());
-        State.setState(vehicleState);
     }
 
-    @Override
-    public void move(int degrees) {
-        // some code
+    public void getUnmounted(){
+        System.out.println();
     }
+
+    public void setDriver(MobileObject mo){
+        this.driver = mo;
+    }
+
 }

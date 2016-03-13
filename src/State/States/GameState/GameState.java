@@ -142,7 +142,7 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
-        if (!cameraMoving) {
+        if (!cameraMoving ) {
             camera.centerOnPlayer(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());

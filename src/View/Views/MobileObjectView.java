@@ -13,6 +13,7 @@ import Utilities.Utilities;
 import View.ViewUtilities.Renderable;
 import View.ViewUtilities.ViewModules.ViewModule;
 
+import javax.sound.midi.SysexMessage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -87,8 +88,10 @@ public class MobileObjectView implements Renderable, Observer {
     public void tween() {
         if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
+
             return;
         }
+
         entity.setCanMove(false);
 
         if (goalX != viewLocation.getX()) {
