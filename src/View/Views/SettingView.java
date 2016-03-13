@@ -60,7 +60,7 @@ public class SettingView implements Renderable {
             fm = g.getFontMetrics();
             fontW = (fm.stringWidth(array[i]));
             xMove= tempX+(width/4-fontW)/2;
-            yMove=tempY+(height*3/32)/2+fm.getHeight()/2;
+            yMove=tempY+(height*3/32)/2+fm.getHeight()/4;
             g.drawString(array[i],xMove,yMove);
 
 

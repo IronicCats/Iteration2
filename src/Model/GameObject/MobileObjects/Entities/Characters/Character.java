@@ -13,13 +13,16 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.*;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.CharacterStats;
+import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.Observer;
+import Utilities.Utilities;
 import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 
@@ -49,6 +52,9 @@ public abstract class Character extends Entity implements Observer{
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
         bindWounds = occupation.getBindWounds();
+        if(occupation instanceof Summoner){
+            ability1 = occupation.getAbilityAt(0);
+        }
         //System.out.println(attack);
         getStats().addObserver(this);
         this.addObserver(occupation);
@@ -118,7 +124,6 @@ public abstract class Character extends Entity implements Observer{
 
 
     public void attack(Abilities a) {
-        System.out.println("Executing ability: " + a);
         if (a == null) {
             System.out.println("Ability not set");
             return;
@@ -129,7 +134,6 @@ public abstract class Character extends Entity implements Observer{
     public void receiveAttack(Character attacker, Abilities ability) {
         //Calculate Damage done based on Offensive Rating and Defensive Rating
         //But for now, just apply effect
-        System.out.println(ability.getEffects().toString());
         this.applyEffect(ability.getEffects());
     }
 
@@ -144,7 +148,8 @@ public abstract class Character extends Entity implements Observer{
 
     public void emptyPack() {
         DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
-        getTile().addItems(inventory.emptyPack());
+        //System.out.println("emptying pack at location " + getTile().getLocation());
+        getTile().addItems(inventory.emptyPack(location));
     } // end emptyPack
 
     public void drop(int index) {
@@ -172,7 +177,7 @@ public abstract class Character extends Entity implements Observer{
     } // end applyEffect
 
     public void setInitialLevel(int level) {
-        for (int i = 0; i < level; i++) {
+        for (int i = 0; i < level-1; i++) {
             getStats().levelUp();
         }
     } // end setInitialLevel
@@ -239,6 +244,20 @@ public abstract class Character extends Entity implements Observer{
         return inventory.getPack();
     }
 
+    public boolean revive() {
+        location.setX(getBaseLocation().getX());
+        location.setY(getBaseLocation().getY());
+        updateViewLocation(Utilities.calculateTileCenterXLocation(getX(), getY()), Utilities.calculateTileCenterYLocation(getX(), getY()));
+        if(map.getTile(location).hasObject()){
+            System.out.println("Uh Oh, something is already on your base location");
+            return false;
+        }
+        registerTile(location);
+        alert();
+        getStats().revive();
+        return true;
+    }
+
     public boolean isDead() {
         return !getStats().isAlive();
     }
@@ -269,12 +288,7 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void update() {
-        if(!getStats().isAlive()) {
-            emptyPack();
-            getStats().revive();
-        } else {
-            getStats().update();
-        }
+
     } // end update
 
     @Override
@@ -282,13 +296,34 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void tick() {
-        if (isDead() && getTile() != null) {
-            getTile().deregister();
+        if(this instanceof Player) {
+
+        }
+        if (isDead()) {
             //respawn eventually
-            deregister();
+            die();
+            moveToRespawnQueue();
         }else {
             getStats().tick();
         }
 
     } // end tick
+
+    public void die() {
+        if(getTile() != null) {
+            emptyPack();
+            deregister();
+        }
+    }
+
+    public void moveToRespawnQueue() {
+        if(RespawnQueue.isInQueue(this)){
+            return;
+        }else {
+            RespawnQueue.addCharacter(this);
+            System.out.println("You Ded " + this);
+        }
+    }
+
+
 } // end class Character

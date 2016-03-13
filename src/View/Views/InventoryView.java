@@ -233,7 +233,7 @@ public class InventoryView implements Renderable, Observer {
 
         g.drawString("Stats",tempMove,y);y+=2*intY;
         g.setFont(new Font("Arial", Font.PLAIN, 18*intY/10));
-        g.drawString(""+t,x,y);y+=2*intY;
+        g.drawString("Lvl "+temp.getLevel()+" "+t,x,y);y+=2*intY;
         g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
         g.drawString("Health: "+temp.getLife(),x,y);y+=2*intY;
         g.drawString("Mana: "+temp.getMana(),x,y);y+=2*intY;

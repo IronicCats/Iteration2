@@ -11,12 +11,16 @@ import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
+import State.States.GameState.GameState;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by Aidan on 3/1/2016.
@@ -62,7 +66,6 @@ public abstract class Tile implements Subject {
         }
         System.out.println("Interacting with tile");
         Map.map.carryInteraction(object);
-
     }
 
     public void receiveInteraction(MobileObject interacter) {
@@ -85,7 +88,7 @@ public abstract class Tile implements Subject {
     }
 
     public void receiveAttack(Character c, Abilities a) {
-        if (hasObject()) {
+        if (hasObject() && !(object instanceof Vehicle)) {
             ((Character) object).receiveAttack(c, a);
         }
     }
@@ -98,7 +101,9 @@ public abstract class Tile implements Subject {
 
     public void addItems(ArrayList<Item> items) {
         for (Item i : items) {
-            this.items.add(i);
+            if (i != null) {
+                this.items.add(i);
+            }
         }
         alert();
     }
@@ -174,7 +179,7 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle || i instanceof Interactable && !((Interactable) i).getState()) {
+            if (i instanceof Obstacle || i instanceof Interactable && (!((Interactable) i).getState())) {
                 return false;
             }
         }

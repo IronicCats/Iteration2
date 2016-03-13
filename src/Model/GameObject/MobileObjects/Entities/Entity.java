@@ -4,6 +4,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Model.Map.Tile;
 import Model.Stats.Stats;
 
 /**
@@ -29,6 +30,11 @@ public abstract class Entity extends MobileObject {
         super(location, id, stats);
         //this.stats = stats;
         this.occupation = occupation;
+    }
+
+    public Tile dismountOntoTile(Location location) {
+        tile = map.register(this);
+        return tile;
     }
 
     /*

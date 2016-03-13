@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Model.Location;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 
@@ -95,20 +96,39 @@ public class Pack {
         return cap - count;
     }
 
-    public ArrayList<Item> dump() {
+    public ArrayList<Item> dump(Location location) {
         ArrayList<Item> tempItems = new ArrayList<>();
         for (int i = 0; i < items.length; ++i) {
             if (items[i] != null) {
                 tempItems.add(items[i]);
                 items[i] = null;
+                --count;
             }
         }
 
-        tempItems.add(new Money(money));
-        System.out.println("ABout to drop pacK");
-        System.out.println(tempItems.get(0).getClass());
+        Money moneyToDrop = getMoneyAsItem(location);
+        if(moneyToDrop != null) {
+            tempItems.add(getMoneyAsItem(location));
+            money = 0;
+        }
         return tempItems;
     } // end dump
+
+    public Money getMoneyAsItem(Location location) {
+        Money moneyToGet;
+        if(money == 0) {
+            return null;
+        }
+        if(money < 10) {
+            moneyToGet = (Money)ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, location);
+        } else if (money < 25) {
+            moneyToGet = (Money)ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, location);
+        } else {
+            moneyToGet = (Money)ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, location);
+        }
+        moneyToGet.setQuantity(money);
+        return moneyToGet;
+    } // end getMoneyAsItem
 
     public void setNull(int i){
         items[i]=null;

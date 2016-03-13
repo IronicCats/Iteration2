@@ -17,13 +17,12 @@ public class SettingState extends State {
     public SettingState() {
         settingView = new SettingView();
         setController(new SettingController(this));
+
         s=0;
 
     }
 
-    public void switchState() {
 
-    }
 
     public void tick() {
     }
@@ -33,10 +32,9 @@ public class SettingState extends State {
         settingView.render(g,s);
     }
 
-    @Override
-    public void switchState(State state) {
-        setState(state);
-    }
+
+
+
     public void up(){
         if(s==0||s==5){s+=4;}
         else {s--;}
@@ -52,5 +50,43 @@ public class SettingState extends State {
     public void right(){
         if(s<5){s+=5;}
         else {s-=5;}
+    }
+    public void change() {
+        switch (s) {
+            case 0:
+                //up
+                break;
+            case 1:
+                //up left key
+                break;
+            case 2:
+                //up right key
+                break;
+            case 3:
+                //down
+                break;
+            case 4:
+                //down left key
+                break;
+            case 5:
+                //down right key
+                break;
+            case 6:
+                //attack
+                break;
+            case 7:
+                //interact
+                break;
+            case 8:
+                //nothing yet
+                break;
+            case 9:
+                //nothing yet
+                break;
+            default:
+                break;
+
+
+        }
     }
 }

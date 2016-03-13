@@ -212,6 +212,7 @@ public class CharacterStats extends Stats implements Subject {
         mana = baseMana;
 
         update();
+        alert();
     } // end levelUp
 
     public void kill() {
@@ -238,12 +239,14 @@ public class CharacterStats extends Stats implements Subject {
         mana = baseMana;
 
         update();
+        alert();
     } // end kill
 
     public void revive() {
         if(livesLeft > 1) {
             alive = true;
             update();
+            alert();
         }
     } // end revive
 
@@ -373,6 +376,7 @@ public class CharacterStats extends Stats implements Subject {
             }
         }
         update();
+        alert();
     } // end removeEffect
 
     public void modifyStat(StatsEnum s, ModificationEnum m, int amount) {
@@ -429,8 +433,9 @@ public class CharacterStats extends Stats implements Subject {
             default:
                 break;
         }
-        System.out.println(s + " modified by " + amount + " (" + m + ").");
+        //System.out.println(s + " modified by " + amount + " (" + m + ").");
         update();
+        alert();
     } // end modifyStats
 
     public void applyEquipmentModification(EquipmentModification e) {
@@ -446,6 +451,7 @@ public class CharacterStats extends Stats implements Subject {
         applyEffect(new Effect(e.getModification(), e.getType(), 0));
 
         update();
+        alert();
     } // end applyEquipmentModification
 
     public void removeEquipmentModification(EquipmentModification e) {
@@ -461,6 +467,7 @@ public class CharacterStats extends Stats implements Subject {
         removeEffect(new Effect(e.getModification(), e.getType(), 0));
 
         update();
+        alert();
     } // end removeEquipmentModification
 
     @Override
@@ -475,7 +482,7 @@ public class CharacterStats extends Stats implements Subject {
 
     @Override
     public void alert() {
-        System.out.println("Alerts is being called");
+        //System.out.println("Alerts is being called");
         for (Observer o : observers) {
             o.update();
         }

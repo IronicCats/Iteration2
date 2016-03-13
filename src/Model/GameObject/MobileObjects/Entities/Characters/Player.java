@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Inventory;
 import Model.Location;
+import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import Utilities.Observer;
 
@@ -30,18 +31,8 @@ public class Player extends Character{
     public Player(Location location, int id, Occupation occupation, Inventory inventory) {
         super(location, id, occupation, inventory);
         inventory.addObserver(this);
-        stats.setMovement(10);
-        //State.INVENTORYSTATE.setConnect(this);
     } // end constructor
 
-    // takes in the degrees associated with key press and updates player location
-
-/*    public void move(int degrees){
-        location = Location.newLocation(degrees, location);
-        registerTile(location);
-        alert();
-    } // end move
-*/
 
     public void examinePack() {
         inventory.examine();

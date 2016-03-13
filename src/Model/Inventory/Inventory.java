@@ -5,6 +5,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
+import Model.Location;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
@@ -100,8 +101,8 @@ public class Inventory implements Subject {
         pack.examine();
     } // end examine
 
-    public ArrayList<Item> emptyPack() {
-        return pack.dump();
+    public ArrayList<Item> emptyPack(Location location) {
+        return pack.dump(location);
     } // end emptyPack
 
     public Takable getSlot(EquipmentSlotEnum slot) {
