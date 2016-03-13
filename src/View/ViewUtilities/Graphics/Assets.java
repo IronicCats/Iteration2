@@ -55,6 +55,7 @@ public class Assets {
     public static BufferedImage REDCROSS;
     public static BufferedImage STAR;
     public static BufferedImage FIRE;
+    public static BufferedImage PORTAL;
     public static BufferedImage LEFT;
     public static BufferedImage RIGHT;
     public static BufferedImage BACK;
@@ -214,6 +215,9 @@ public class Assets {
 
         SpriteSheet fireSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Fire.png"));
         FIRE = fireSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet portalSheet = new SpriteSheet(new ImageLoader().loadImage("/Decals/Portal.png"));
+        PORTAL = portalSheet.crop(0, 0, 32, 32);
 
         //menu
         LEFT = new ImageLoader().loadImage("/Pics/LEFT1.png");

@@ -78,6 +78,10 @@ public class TileView implements Observer, Renderable {
             decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
         }
 
+        if(tile.getHasTeleportAreaEffect()){
+            decalView = AreaEffectFactory.makeAsset(tile.getTeleportAreaEffect());
+        }
+
         if (tile.hasObject()) {
             if (State.getCurrentState() == State.GAMESTATE) {
                 mobileObjectView = State.GAMESTATE.getMobileObjectView(tile.getObject());
