@@ -9,6 +9,7 @@ import Model.Requirement;
  * Created by mazumderm on 3/12/2016.
  */
 public class PickPocket extends ExecutableAbility {
+    int skillLevel;
 
     //constructor
     public PickPocket(String name, String description, Effect effects, Requirement requirement, Effect cost, int skillLevel) {
@@ -16,6 +17,14 @@ public class PickPocket extends ExecutableAbility {
     }
 
     //operations
+
+    public int getSkillLevel(){
+        return this.skillLevel;
+    }
+
+    public void setSkillLevel(int skillLevel){
+        this.skillLevel = skillLevel;
+    }
 
     public void execute(MobileObject targeter, MobileObject targeted){
         if(getSkillLevel() == 0){

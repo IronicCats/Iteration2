@@ -48,6 +48,7 @@ public class Settings {
     public static int ONE = 0x31;
     public static int TWO = 0x32;
     public static int THREE = 0x33;
+    public static int FOUR = 0x34;
     public static int DROP = 0x44;
     public static int EQUIP = 69;
     public static int INVENTORY = 0x49;
