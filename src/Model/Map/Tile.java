@@ -12,6 +12,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import State.State;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -149,7 +150,6 @@ public abstract class Tile implements Subject {
             }
             if(this.getHasTeleportAreaEffect()){
                 teleportAreaEffect.teleportPlayer(((Player) object));
-                System.out.println("This tile has an effect");
             }
         }
         alert();
