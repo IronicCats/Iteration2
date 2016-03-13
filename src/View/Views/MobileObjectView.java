@@ -18,6 +18,7 @@ import javax.sound.midi.SysexMessage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by Joshua Kegley on 3/5/2016.
@@ -119,13 +120,26 @@ public class MobileObjectView implements Renderable, Observer {
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
         tween();
-        g.drawImage(sprites.get(active),
-                (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
-                (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
-                Settings.PLAYERWIDTH,
-                Settings.PLAYERHEIGHT,
-                null
-        );
+        //RENDER THE VEHICLE BIGGER
+        if(entity instanceof Vehicle) {
+            g.drawImage(sprites.get(active),
+                    (int) viewLocation.getX() - cameraXOffset - ((Settings.TILEWIDTH / 2 ) - Settings.PLAYERWIDTH/(2*2) + 15),
+                    (int) viewLocation.getY() - cameraYOffset - ((Settings.TILEHEIGHT / 2 ) - Settings.PLAYERHEIGHT/(2*2) + 15),
+                    Settings.PLAYERWIDTH * 2,
+                    Settings.PLAYERHEIGHT * 2,
+                    null
+            );
+        }else {
+            g.drawImage(sprites.get(active),
+                    (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
+                    (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
+                    Settings.PLAYERWIDTH,
+                    Settings.PLAYERHEIGHT,
+                    null
+            );
+        }
+
+
         if (!(entity instanceof Player) && !(entity instanceof Pet) && !(entity instanceof Vehicle)) {
 
             ViewModule.renderHealthBox(g,
