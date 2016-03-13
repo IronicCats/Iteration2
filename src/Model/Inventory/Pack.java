@@ -63,13 +63,6 @@ public class Pack {
         return anItem;
     } // end remove
 
-    /*public Item remove(ItemsEnum enums) {
-        Item anItem = items[index];
-        items[index] = null;
-        count--;
-        return anItem;
-    } // end remove*/
-
     public Item get(int index) {
         return items[index];
     } // end get
@@ -124,14 +117,25 @@ public class Pack {
         }
         for(int i = 0; i < cap; i++) {
             if(items[i] != null) {
-            }
-            if(items[i].getItemType() == itemsEnum) {
-                return true;
+                if(items[i].getItemType() == itemsEnum) {
+                    return true;
+                }
             }
         }
         return false;
     } // end contains
 
+    public void remove(ItemsEnum itemsEnum) {
+        if(itemsEnum == null) {
+        }
+        for(int i = 0; i < cap; i++) {
+            if(items[i] != null) {
+                if(items[i].getItemType() == itemsEnum) {
+                    remove(i);
+                }
+            }
+        }
+    } // end contains
 
     public int getCount() { return count; }
     public int getMoney() { return money; }

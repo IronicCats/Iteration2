@@ -1,6 +1,7 @@
 package View.Views;
 
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -14,15 +15,25 @@ import java.awt.image.BufferedImage;
  */
 public class DecalView implements Observer, Renderable {
     private AreaEffect areaEffect;
+    private TeleportAreaEffect teleportAreaEffect;
     private BufferedImage sprite;
     private Location location;
 
 
     public DecalView(AreaEffect areaEffect, BufferedImage sprite) {
         this.areaEffect = areaEffect;
+        this.teleportAreaEffect = null;
         this.sprite = sprite;
         this.location = areaEffect.getLocation();
         areaEffect.addObserver(this);
+    }
+
+    public DecalView(TeleportAreaEffect teleportAreaEffect, BufferedImage sprite){
+        this.areaEffect = null;
+        this.teleportAreaEffect = teleportAreaEffect;
+        this.sprite = sprite;
+        this.location = teleportAreaEffect.getLocation();
+        teleportAreaEffect.addObserver(this);
     }
 
     public BufferedImage getSprite() {
@@ -31,7 +42,12 @@ public class DecalView implements Observer, Renderable {
 
     @Override
     public void update() {
-        location = areaEffect.getLocation();
+        if(areaEffect != null){
+            location = areaEffect.getLocation();
+        }
+        else if(teleportAreaEffect != null){
+            location = teleportAreaEffect.getLocation();
+        }
     }
 
     @Override
