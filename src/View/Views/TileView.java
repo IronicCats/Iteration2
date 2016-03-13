@@ -1,6 +1,7 @@
 package View.Views;
 
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
@@ -62,10 +63,19 @@ public class TileView implements Observer, Renderable {
                     }
                 }
             } else {
-                item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
-                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
-
-
+                item = tile.getItems().get(0);
+                if(item instanceof Interactable) {
+                    if (((Interactable) item).getState()) {
+                        System.out.println("toggleState!");
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                        itemView.adjustView();
+                    } else {
+                        itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                    }
+                }
+                else{
+                    itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
+                }
             }
 
         } else {
