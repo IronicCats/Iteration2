@@ -40,7 +40,7 @@ public abstract class MobileObject extends GameObject {
         canMove = true;
         stats = new Stats();
         viewLocation = new ViewLocation(location.getX(), location.getY());
-        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
+        baseLocation = new Location(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
         view = 2;
@@ -52,16 +52,18 @@ public abstract class MobileObject extends GameObject {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
-        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
+        baseLocation = new Location(location.getX(), location.getY());
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
         view = 2;
         range = 2;
         this.id = id;
+        System.out.println(baseLocation);
     }
 
     public void move(int degrees) {
+
         //System.out.println("in here");
         if (location.getDir() == degrees) {
             //System.out.println("I am facing " + degrees);
@@ -72,10 +74,12 @@ public abstract class MobileObject extends GameObject {
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
+
                 //if(this instanceof Vehicle)
                 //System.out.println("i alerted");
             }
-        } else {
+        }
+        else {
             face(degrees);
         }
         if(this instanceof Player){
@@ -108,6 +112,10 @@ public abstract class MobileObject extends GameObject {
     public void setViewLocation(ViewLocation viewLocation) {
         this.viewLocation = viewLocation;
     }
+    public void updateViewLocation(float x, float y) {
+        viewLocation.setX(x);
+        viewLocation.setY(y);
+    }
 
     public void resetLocation() {
         this.viewLocation = new ViewLocation(baseLocation.getX(), baseLocation.getY());
@@ -123,12 +131,19 @@ public abstract class MobileObject extends GameObject {
 
 
     public Tile registerTile(Location location) {
-        tile.deregister();
+        deregister();
         while (map.getTile(location).hasObject()) {
             //Waiting to register with the next tile;
         }
         tile = map.register(this);
         return tile;
+    }
+
+    public void deregister() {
+        if(tile != null) {
+            tile.deregister();
+            tile = null;
+        }
     }
 
     public void interactWithTile() {
@@ -138,6 +153,7 @@ public abstract class MobileObject extends GameObject {
     public Tile getTile() {
         return tile;
     }
+
 
     public int getView() {
         return view;
@@ -162,5 +178,9 @@ public abstract class MobileObject extends GameObject {
 
     public void interact(MobileObject mo) {
         DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
+    }
+
+    public Location getBaseLocation() {
+        return baseLocation;
     }
 }

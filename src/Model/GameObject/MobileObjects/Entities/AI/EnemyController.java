@@ -4,6 +4,7 @@ import Model.Abilities.Abilities;
 import Model.GameObject.MobileObjects.Entities.AI.AIController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.Map.Map;
 import Utilities.AIUtilities.DirectionofTarget;
 import Utilities.AIUtilities.DistanceFromFaceableTarget;
@@ -36,25 +37,33 @@ public class EnemyController extends AIController {
         }
     }
 
+    @Override
+    public void follow(){
+        moveTo(target.getLocation());
+    }
 
+    //TODO: add delay to attacks based off of speed
     public void followThenAttackinRange() {
         if (canFace()) {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
-            /*if (enemy.getOccupation() instanceof Smasher) {
+            if (enemy.getOccupation() instanceof Smasher) {
                 if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
+                    System.out.println("attacking");
                     enemy.attack(enemy.getAbilities().get(0));
-                } else {
+                }
+                else if(DistanceFromFaceableTarget.calculate(enemy, target) > 1){
                     follow();
                 }
-            } else {
-                Abilities a = checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities());
+            }
+            else if (enemy.getOccupation() instanceof Summoner) {
+                Abilities a = checkAbilityRange.check(enemy.getAbilities());
                 if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
                     //enemy.attack(a);
-                } else {
-                    follow();
                 }
-
-            }*/
+            }
+        }
+        else{
+            follow();
         }
     }
 

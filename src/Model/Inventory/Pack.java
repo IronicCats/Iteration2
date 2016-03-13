@@ -4,6 +4,7 @@ import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.Item.Items.Takables.Usable;
+import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ public class Pack {
                 items[i] = null;
             }
         }
+
         tempItems.add(new Money(money));
         System.out.println("ABout to drop pacK");
         System.out.println(tempItems.get(0).getClass());

@@ -7,17 +7,18 @@ import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
+import Model.Stats.Stats;
 
 /**
  * Created by mazumderm on 3/6/2016.
  */
 public class ProjectileAbility extends Abilities {
     Projectile projectile;
+    Stats projectileStats;
 
-
-    public ProjectileAbility(String name, String description, Projectile projectile, Requirement requirements, Effect cost){
-        super(name, description, projectile.getEffect(), requirements, cost, projectile.getRange());
-        this.projectile = projectile;
+    public ProjectileAbility(String name, String description, Stats stats, Effect effect, Requirement requirements, Effect cost){
+        super(name, description, effect, requirements, cost,2);
+        this.projectileStats = stats;
 
     }
 
@@ -29,6 +30,14 @@ public class ProjectileAbility extends Abilities {
 
     public void setProjectile(Projectile p){
         this.projectile = p;
+    }
+
+    public Stats getProjectileStats(){
+        return this.projectileStats;
+    }
+
+    public void setProjectileStats(Stats stats){
+        this.projectileStats = stats;
     }
 
 }

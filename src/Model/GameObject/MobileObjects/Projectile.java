@@ -13,6 +13,7 @@ public class Projectile extends MobileObject {
 
     private Effect effects;
     int range;
+    private Location base,destination;
 
     //constructor
     public Projectile(Location location, int id, Stats stats, Effect effects, int range) {
@@ -40,7 +41,9 @@ public class Projectile extends MobileObject {
 
     @Override
     public void move(int degrees) {
-        // some code
+
+
+
     }
 
 }

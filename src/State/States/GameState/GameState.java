@@ -20,6 +20,7 @@ import Utilities.MapUtilities.MakeMap;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
+import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
@@ -69,6 +70,7 @@ public class GameState extends State {
 
         //creating a new player
         player = MobileObjectFactory.Player();
+        player.setInitialLevel(5);
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
         //player.setInitialLevel(2);
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
@@ -174,12 +176,11 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        //FIXME
-       // if(pause)
-            //return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
+
         }
+        RespawnQueue.tick();
     }
 
     public void render(Graphics g) {
