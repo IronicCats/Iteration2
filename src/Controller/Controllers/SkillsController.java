@@ -39,6 +39,9 @@ public class SkillsController extends Controller {
         } else if (e.getKeyCode() == Settings.ESC) {            /* open pausestate */
             state.switchState(State.PAUSESTATE);
         }
+        /**
+         * add code to reassign hotkeys for abilities
+         */
     } // end keyPressed
 
 } // end class SkillsController
