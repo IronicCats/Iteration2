@@ -20,7 +20,7 @@ public class Shopkeeper extends FriendlyNPC {
     } // end constructor
 
     public void initiateTrade(Pack playerPack) {
-        TradeState tradeState = new TradeState(State.GAMESTATE, playerPack, getPack());
+        TradeState tradeState = new TradeState( playerPack, getPack());
         State.setState(tradeState);
     } // end initiateTrade
 

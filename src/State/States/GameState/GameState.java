@@ -4,6 +4,7 @@ import Controller.Controllers.GameController;
 import Model.Abilities.CommandsEnum;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -82,10 +83,14 @@ public class GameState extends State {
         AreaEffect b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6, 4));
         AreaEffect c = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(4, 4));
         //AreaEffect d = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(8, 4));
+        TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,4), new Location(3,3));
+       // AreaEffect f = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(10, 4));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
         map.placeAreaEffect(c);
         //map.placeAreaEffect(d);
+        map.placeTeleportAreaEffectBeginning(e);
+       // map.placeAreaEffect(f);
 
         map.setMapItems(mapItems);
 

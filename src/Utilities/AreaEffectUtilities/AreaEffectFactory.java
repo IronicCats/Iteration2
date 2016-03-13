@@ -3,6 +3,7 @@ package Utilities.AreaEffectUtilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.Location;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
@@ -56,6 +57,10 @@ public class AreaEffectFactory {
         }
     }// end
 
+    public static TeleportAreaEffect makeTeleportAreaEffect(Location beginning, Location ending) {
+        return new TeleportAreaEffect(beginning, ending);
+    }// end
+
     public static DecalView makeAsset(AreaEffectEnum areaEffectEnum, AreaEffect areaEffect) {
         switch (areaEffectEnum) {
             case DAMAGE:
@@ -74,4 +79,8 @@ public class AreaEffectFactory {
                 return null;
         }
     } // end makeAsset
+
+    public static DecalView makeAsset(TeleportAreaEffect a){
+            return new DecalView(a, Assets.PORTAL);
+    }
 }

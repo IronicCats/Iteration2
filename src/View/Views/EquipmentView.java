@@ -115,6 +115,14 @@ public class EquipmentView implements Renderable, Observer {
     }
     public void renderSlots(Graphics g, int s){
 
+
+        for(int i=0;i<12;++i){
+            if((i!=0) || (i!=2) || (i!=8)){
+
+            }
+
+
+        }
     }
     public void renderIcons(Graphics g, int s){
 

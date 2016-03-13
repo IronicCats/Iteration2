@@ -16,7 +16,6 @@ import java.awt.*;
  * Created by Dartyx on 3/6/2016.
  */
 public class InventoryState extends State {
-    GameState game;
 
     Inventory inventory;
     Player player;
@@ -24,13 +23,12 @@ public class InventoryState extends State {
     InventoryView invView;
     int selector;
 
-    public InventoryState(GameState GS) {
+    public InventoryState() {
         setController(new InventoryController(this));
-        game = GS;
         selector = 0;
 
 
-        player=game.getPlayer();
+        player=State.GAMESTATE.getPlayer();
         inventory=player.getInventory();
         pack=player.getPack();
         invView=new InventoryView(pack,player);
@@ -46,7 +44,7 @@ public class InventoryState extends State {
     }
 
     public void render(Graphics g) {
-        game.render(g);
+        State.GAMESTATE.render(g);
         invView.render(g, selector);
 
     }

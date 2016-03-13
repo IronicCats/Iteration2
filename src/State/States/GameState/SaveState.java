@@ -10,13 +10,13 @@ import java.awt.*;
  * Created by Andy on 3/3/2016.
  */
 public class SaveState extends State {
-    private GameState game;
+
     private SaveView saveView;
 
-    public SaveState(GameState GS) {
+    public SaveState() {
         saveView = new SaveView();
         setController(new SaveController(this));
-        game = GS;
+
 
     }
 
@@ -36,7 +36,7 @@ public class SaveState extends State {
     }
 
     public void render(Graphics g) {
-        game.render(g);
+        State.GAMESTATE.render(g);
         saveView.render(g);
     }
 

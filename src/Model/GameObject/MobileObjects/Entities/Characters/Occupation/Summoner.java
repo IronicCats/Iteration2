@@ -80,6 +80,8 @@ public class Summoner extends Occupation {
         ));
         //compute occupational abilities
         getOccupationalAbilities().clear();
-
+        //enchantments
+        //boon
+        //bane
     }
 }
