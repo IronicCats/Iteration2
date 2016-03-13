@@ -5,5 +5,5 @@ package Utilities.MobileObjectUtilities;
  */
 public enum MobileObjectEnum {
     KITTEN, BLUE, PLAYER, SMALL_CAT, FAT_CAT, CORGI_SHOPKEEPER, WOLF_SHOPKEEPER, DAVE_PET, SHEEP_VEHICLE, LOW_RIDER,
-    SADDLED_DOG, LASER, BOOMERANG, ROOMBA
+    SADDLED_DOG, LASER, BOOMERANG, ROOMBA, HAIRBALL
 } // end enum MobileObjectEnum

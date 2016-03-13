@@ -72,6 +72,7 @@ import java.util.Random;
 
     //Moves to location of a mobileobject
     public void follow() {
+        System.out.println("following");
         if (oldTargetLocation == null || AI.getLocation().equals(oldTargetLocation)) {
             oldTargetLocation = target.getLocation();
         }

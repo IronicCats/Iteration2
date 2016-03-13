@@ -62,6 +62,7 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void move(int degrees) {
+
         //System.out.println("in here");
         if (location.getDir() == degrees) {
             //System.out.println("I am facing " + degrees);
@@ -72,6 +73,7 @@ public abstract class MobileObject extends GameObject {
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
+
                 //if(this instanceof Vehicle)
                 //System.out.println("i alerted");
             }
