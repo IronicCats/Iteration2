@@ -16,8 +16,6 @@ public class Navigation {
     public Navigation() {
     }
 
-    ;
-
     public static boolean checkMove(Location location, Map map, MobileObject type) {
         if (location.getY() < 0 || location.getY() >= map.getHeight()) {
             return false;
