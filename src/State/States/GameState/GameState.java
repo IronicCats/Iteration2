@@ -178,11 +178,7 @@ public class GameState extends State {
             //return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
-            if(key instanceof Character && ((Character) key).isDead()){
-                System.out.println("Removing " + key.getID());
-                map.deRegister(key.getLocation());
-                mobileObjects.remove(key);
-            }
+            
         }
     }
 
