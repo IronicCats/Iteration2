@@ -29,7 +29,7 @@ public abstract class MobileObject extends GameObject {
     private Tile tile;
     // private Nav navigation
     protected Stats stats;
-    private boolean canMove;
+    protected boolean canMove;
     private Location baseLocation;
     private ViewLocation viewLocation;
     private int view, range;

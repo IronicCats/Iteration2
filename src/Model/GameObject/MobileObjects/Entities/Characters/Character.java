@@ -131,10 +131,14 @@ public abstract class Character extends Entity implements Observer{
         getTile().sendAttack(this, a);
     }
 
-    public void receiveAttack(Character attacker, Abilities ability) {
+    public void receiveAttack(Character c,Abilities ability) {
         //Calculate Damage done based on Offensive Rating and Defensive Rating
         //But for now, just apply effect
         this.applyEffect(ability.getEffects());
+    }
+
+    public void receiveProjectileAttack(Effect e){
+        this.applyEffect(e);
     }
 
     public boolean pickup(Item item) {
