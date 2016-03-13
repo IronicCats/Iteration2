@@ -141,9 +141,6 @@ public class SaveLoad {
         }
         //gs.setMobileObjects(mobileObjects);
 
-       // ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
-
-        //player.setViewLocation(vl);
         System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
         //gs.setMapView(gamemapView);
 
@@ -220,9 +217,10 @@ public class SaveLoad {
                             ItemsEnum a = ItemsEnum.values()[id];
                             itemArray[k] = ItemFactory.makeItem(a,l);
                             mapItems.put(itemArray[k],ItemFactory.makeAsset(a,itemArray[k]));
-                            
-                           // System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
-                           // System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
+                            System.out.println("Item ID:" + id);
+
+                           System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
+                           System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
                             //mapItems.put(itemArray[k],ItemFactory.makeAsset(ItemsEnum.PANTS,itemArray[k]));
 
 
