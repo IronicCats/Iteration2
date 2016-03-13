@@ -50,7 +50,7 @@ public class Projectile extends MobileObject {
         }
         else{
             this.location = start.getLocation();
-            move(start.getLocation().getDir());
+            //move(start.getLocation().getDir());
         }
     }
 
