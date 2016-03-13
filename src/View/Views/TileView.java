@@ -66,16 +66,7 @@ public class TileView implements Observer, Renderable {
                     }
                 }
             } else {
-<<<<<<< HEAD
-                item = tile.getItems().get(0);//IF THERE IS ONLY, USE THE ONLY ONE
-                if(item instanceof Money){
-                    System.out.println("Moneyyyyy");
-                    return;
-                }
-                itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
 
-
-=======
                 item = tile.getItems().get(0);
                 if(item instanceof Interactable) {
                     if (((Interactable) item).getState()) {
@@ -89,7 +80,6 @@ public class TileView implements Observer, Renderable {
                 else{
                     itemView = ItemFactory.makeAsset(ItemsEnum.values()[item.getId()], tile.getItems().get(0));
                 }
->>>>>>> c1ca20ca836cdaa0dadae3115de7c2bb8439f43a
             }
 
         } else {
