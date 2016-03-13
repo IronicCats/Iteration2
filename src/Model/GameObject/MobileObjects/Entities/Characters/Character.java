@@ -249,6 +249,7 @@ public abstract class Character extends Entity implements Observer{
         location.setY(getBaseLocation().getY());
         updateViewLocation(Utilities.calculateTileCenterXLocation(getX(), getY()), Utilities.calculateTileCenterYLocation(getX(), getY()));
         if(map.getTile(location).hasObject()){
+            System.out.println("Uh Oh, something is already on your base location");
             return false;
         }
         registerTile(location);
@@ -287,12 +288,7 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void update() {
-        if(!getStats().isAlive()) {
-            emptyPack();
-            getStats().revive();
-        } else {
-            getStats().update();
-        }
+
     } // end update
 
     @Override
@@ -300,15 +296,25 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void tick() {
+        if(this instanceof Player) {
+
+        }
         if (isDead()) {
             //respawn eventually
-            deregister();
-            revive();
+            die();
+            moveToRespawnQueue();
         }else {
             getStats().tick();
         }
 
     } // end tick
+
+    public void die() {
+        if(getTile() != null) {
+            emptyPack();
+            deregister();
+        }
+    }
 
     public void moveToRespawnQueue() {
         if(RespawnQueue.isInQueue(this)){
