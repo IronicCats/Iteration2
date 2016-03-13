@@ -42,7 +42,7 @@ public class Pet extends MobileObject implements Tickable {
         stats.setMovement(8);
         this.requirement = new Requirement(reqItem);
         this.player = player;
-        this.controller.setBaseLoc(new Location(15,15));
+        this.controller.setBaseLoc(new Location(5,10));
         controller.setAI(this);
     } // end constructor
 
@@ -50,6 +50,7 @@ public class Pet extends MobileObject implements Tickable {
     public void tick() {
         if(!owned) {
             if (this.getController().targetinView() && this.requirement.hasRequiredItem(player.getPack())) {
+                System.out.println("Made it negra");
                 setOwnership();
             }
         }
