@@ -113,6 +113,11 @@ public class Pack {
         return tempItems;
     } // end dump
 
+    public void setNull(int i){
+        items[i]=null;
+    }
+
+
     public boolean contains(ItemsEnum itemsEnum) {
         if(itemsEnum == null) {
             return true;
@@ -126,6 +131,7 @@ public class Pack {
         }
         return false;
     } // end contains
+
 
     public int getCount() { return count; }
     public int getMoney() { return money; }
