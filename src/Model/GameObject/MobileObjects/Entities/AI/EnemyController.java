@@ -4,6 +4,7 @@ import Model.Abilities.Abilities;
 import Model.GameObject.MobileObjects.Entities.AI.AIController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.Map.Map;
 import Utilities.AIUtilities.DirectionofTarget;
 import Utilities.AIUtilities.DistanceFromFaceableTarget;
@@ -41,7 +42,7 @@ public class EnemyController extends AIController {
         moveTo(target.getLocation());
     }
 
-
+    //TODO: add delay to attacks based off of speed
     public void followThenAttackinRange() {
         if (canFace()) {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
@@ -54,7 +55,7 @@ public class EnemyController extends AIController {
                     follow();
                 }
             }
-            else {
+            else if (enemy.getOccupation() instanceof Summoner) {
                 Abilities a = checkAbilityRange.check(enemy.getAbilities());
                 if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
                     //enemy.attack(a);

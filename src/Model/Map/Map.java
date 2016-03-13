@@ -2,12 +2,14 @@ package Model.Map;
 
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
+import Model.Abilities.ProjectileAbility;
 import Model.Abilities.SelfAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
@@ -109,10 +111,14 @@ public class Map implements Subject {
     public void carryAttack(Character c, Abilities a) {
         if (a instanceof DirectAbility) {
             getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
-        }else if(a instanceof SelfAbility){
+        } else if (a instanceof SelfAbility) {
             System.out.println("This is a self ability");
             getTile(c.getLocation()).receiveAttack(c, a);
-         }else {
+        } else if(a instanceof ProjectileAbility){
+            System.out.println("Projectile Ability Set");
+            ((ProjectileAbility) a).setProjectile(new Projectile(c.getLocation(),14, ((ProjectileAbility) a).getProjectileStats(), a.getEffects(),a.getRange()));
+            ((ProjectileAbility) a).getProjectile().move(c.getDir());
+        }else {
             System.out.println("Not a Direct Ability");
         }
     }
