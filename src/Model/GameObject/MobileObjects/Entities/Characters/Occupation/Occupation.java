@@ -124,7 +124,13 @@ public abstract class Occupation implements Subject, Observer {
     }
 
     public ArrayList<Abilities> getOccupationalAbilities() {
-        return this.occupationalAbilities;
+        return occupationalAbilities;
+    }
+
+    public void setOccupationalAbilities(Abilities a){getOccupationalAbilities().add(a);}
+
+    public Abilities getAbilityAt(int i){
+        return getOccupationalAbilities().get(i);
     }
 
     public void setWeaponType(EquipmentTypeEnum e){

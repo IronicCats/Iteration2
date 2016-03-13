@@ -44,14 +44,14 @@ public class Summoner extends Occupation {
         //enchantments
         //boon
         //bane
-        getOccupationalAbilities().add(new ProjectileAbility("Hairball",
-                                                              "Fling hair at people",
-                                                              new Stats(20),
-                                                              new Effect(new StatStructure(StatsEnum.LIFE, -1 * getOccupationalSkillsValue(SkillsEnum.BANE))),
-                                                                new Requirement(1),
-                                                                new Effect(new StatStructure(StatsEnum.MANA, -4 ))
-                ));
-
+        setOccupationalAbilities(new ProjectileAbility("Hairball",
+                "Fling hair at people",
+                new Stats(20),
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * getOccupationalSkillsValue(SkillsEnum.BANE))),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, -4 ))
+        ));
+        
     }
 
     //operations
