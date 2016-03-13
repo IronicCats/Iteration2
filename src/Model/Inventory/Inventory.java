@@ -128,7 +128,9 @@ public class Inventory implements Subject {
 
     @Override
     public void alert() {
+        System.out.println("Inventory alert called");
         for (Observer o : observers) {
+            System.out.println("observed by " + o.getClass());
             o.update();
         }
     } // end alert
