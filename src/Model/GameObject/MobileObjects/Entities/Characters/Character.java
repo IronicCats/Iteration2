@@ -260,5 +260,4 @@ public abstract class Character extends Entity implements Observer{
             getStats().tick();
         }
     } // end tick
-
 } // end class Character

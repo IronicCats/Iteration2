@@ -11,6 +11,7 @@ import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Tickable;
 import Utilities.ItemUtilities.ItemsEnum;
+import View.Views.MessageBox.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,9 +100,8 @@ public class Pet extends MobileObject implements Tickable {
         this.owned = true;
         this.getController().setPlayer(this.player);
         this.getController().setBaseLoc(this.player.getLocation());
-        for(int i = 0; i < player.getPack().getCount(); i++){
-
-        }
+        this.player.getPack().remove(ItemsEnum.SUSHI);
+        DisplayMessage.addMessage(new GameMessage("MHHMMMMM! I love me some SUSH", 4));
     }
 
     public void pickup(Item item) {

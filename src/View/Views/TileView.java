@@ -45,7 +45,7 @@ public class TileView implements Observer, Renderable {
 
     }
 
-    public BufferedImage getSprite() {
+    public BufferedImage setSprite() {
         return sprite;
     }
 
@@ -76,6 +76,10 @@ public class TileView implements Observer, Renderable {
         //initialize decalView
         if (tile.getHasAreaEffect()) {
             decalView = AreaEffectFactory.makeAsset(tile.getAreaEffectEnum(), tile.getAreaEffect());
+        }
+
+        if(tile.getHasTeleportAreaEffect()){
+            decalView = AreaEffectFactory.makeAsset(tile.getTeleportAreaEffect());
         }
 
         if (tile.hasObject()) {
