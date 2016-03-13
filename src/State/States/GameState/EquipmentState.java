@@ -3,6 +3,7 @@ package State.States.GameState;
 import Controller.Controllers.EquipmentController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Equipment;
+import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
 import Model.Inventory.Pack;
 import State.State;
@@ -29,34 +30,68 @@ public class EquipmentState extends State {
         this.inventory=player.getInventory();
         this.equipment=inventory.getEquipment();
         equipmentView = new EquipmentView(player);
-        s=0;
+        s=1;
     }
     public void up(){
         if(s==1){s+=9;}
         else if(s==3||s==5){s+=6;}
-        else if(s==11){s-=6;}
         else s-=3;
     }
     public void down(){
-        if(s==5){s-=6;}
-        else if(s==9||s==11){s-=6;}
+        if(s==9||s==11){s-=6;}
         else if(s==10){s-=9;}
         else s+=3;
     }
     public void left(){
         if(s==1){}
-        else if(s==3||s==9){s-=2;}
-        else if(s==6){s++;}
+        else if(s==3||s==9){s+=2;}
+        else if(s==6){s+=2;}
         else s--;
     }
     public void right(){
         if(s==1){}
-        else if(s==5||s==11){s-=2;}
-        else if(s==7){s--;}
+        else if(s%3==2){s-=2;}
         else s++;
 
     }
-
+    public void unequip(){
+        switch(s){
+            case 1:
+                inventory.unequip(EquipmentSlotEnum.HEAD);
+                break;
+            case 3:
+                inventory.unequip(EquipmentSlotEnum.MAINHAND);
+                break;
+            case 4:
+                inventory.unequip(EquipmentSlotEnum.CHEST);
+                break;
+            case 5:
+                inventory.unequip(EquipmentSlotEnum.OFFHAND);
+                inventory.unequip(EquipmentSlotEnum.SHIELD);
+                break;
+            case 6:
+                inventory.unequip(EquipmentSlotEnum.GLOVES);
+                break;
+            case 7:
+                inventory.unequip(EquipmentSlotEnum.HEAD);
+                break;
+            case 8:
+                inventory.unequip(EquipmentSlotEnum.GLOVES);
+                break;
+            case 9:
+                inventory.unequip(EquipmentSlotEnum.ACCESSORY1);
+                break;
+            case 10:
+                inventory.unequip(EquipmentSlotEnum.BOOTS);
+                break;
+            case 11:
+                inventory.unequip(EquipmentSlotEnum.ACCESSORY2);
+                break;
+            default:
+                break;
+        }
+    }
+    public void drop(){}
     public void switchState() {
 
     }

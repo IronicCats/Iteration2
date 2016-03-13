@@ -70,6 +70,9 @@ public abstract class Character extends Entity implements Observer{
                     }
                     items.remove(i); //remove it from the items
                 }
+            }else if(i instanceof OneShot) {
+                interact(i);
+                items.remove(i);
             }
         }
         return items;
@@ -86,12 +89,12 @@ public abstract class Character extends Entity implements Observer{
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
-        ((CharacterStats) getStats()).applyEquipmentModification(weapon.getEquipmentModification());
+        getStats().applyEquipmentModification(weapon.getEquipmentModification());
     } // end equip
 
     public void equip(Armor armor) {
         inventory.equip(armor);
-        ((CharacterStats) getStats()).applyEquipmentModification(armor.getEquipmentModification());
+        getStats().applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
@@ -102,7 +105,7 @@ public abstract class Character extends Entity implements Observer{
     public void mount(Vehicle vehicle){
 
         this.getStats().setMovement(vehicle.getMovement());
-        vehicle.interact();
+        //vehicle.interact();
 
     }
 
@@ -203,6 +206,23 @@ public abstract class Character extends Entity implements Observer{
                 break;
         }
 
+    }
+
+    public ArrayList<Abilities> getAbilities(){
+        ArrayList<Abilities> abilities = new ArrayList<Abilities>();
+        if(attack != null){
+            abilities.add(attack);
+        }
+        if(ability1 != null){
+            abilities.add(ability1);
+        }
+        if (ability2 != null){
+            abilities.add(ability2);
+        }
+        if(ability3 != null){
+            abilities.add(ability3);
+        }
+        return abilities;
     }
 
     public CharacterStats getStats() {

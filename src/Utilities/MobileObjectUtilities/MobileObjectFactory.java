@@ -61,18 +61,14 @@ public class MobileObjectFactory {
         enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(13,13), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         //vehicle
-        Vehicle roomba = (Vehicle)makeNPC(MobileObjectEnum.ROOMBA, new Location(4,1), map, player);
+        Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
-        roomba.getStats().setMovement(5);
-
-        if (GameState.getPlayer() != null) {
-            //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
-        }
+        roomba.getStats().setMovement(12);
 
         return objects;
     }
@@ -146,7 +142,7 @@ public class MobileObjectFactory {
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
-                return new Vehicle(location,0,new Stats());
+                return new Vehicle(location,0,new Stats(50));
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
