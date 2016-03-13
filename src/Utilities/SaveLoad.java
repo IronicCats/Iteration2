@@ -119,7 +119,7 @@ public class SaveLoad {
         loadPlayer(filePath);
         loadMobileObjects(filePath);
         gs.setMap(gameMap);
-        gs.setMapView(gamemapView);
+        //gs.setMapView(gamemapView);
 
         gs.setPlayer((Player)player);
 
