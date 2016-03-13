@@ -177,13 +177,7 @@ public abstract class Occupation implements Subject, Observer {
 
         //recompute abilities each time a stat changes
         //recomputes basic abilities
-        basicSkillAbilities.clear(); //clears old abilities
-        basicSkillAbilities.put(SkillsEnum.BINDWOUNDS,new SelfAbility(
-                                     "Bind Wound",
-                                     "Uses a bind wound skill",
-                                      new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
-                                      new Requirement(0),
-                                      new Effect(new StatStructure(StatsEnum.MANA, 0))));
+        basicSkillAbilities.get(SkillsEnum.BINDWOUNDS).setEffects(new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)));
 
         //recomputes occupational abilities
         recomputeOccupationalAbilities();
