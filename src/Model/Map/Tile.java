@@ -70,9 +70,9 @@ public abstract class Tile implements Subject {
             object.interact(interacter);
         }
         for(Item item: items){
-            if(item instanceof Interactable){
+            if(item instanceof Interactable && interacter instanceof Player){
                 // enum for changed asset should be right after original enum (yes I know)
-                if(!((Interactable) item).getState()){
+                if(!((Interactable) item).getState() && ((Interactable) item).getRequirements().hasRequiredItem(((Player) interacter).getPack())){
                     ((Interactable) item).toggleState();
                     alert();
                 }
