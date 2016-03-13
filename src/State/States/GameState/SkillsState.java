@@ -194,5 +194,4 @@ public class SkillsState extends State {
         skillsView.render(g, cursor);
     } // end render
 
-    public void switchState(State state) { setState(state); }
 } // end class SkillsState

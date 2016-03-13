@@ -1,8 +1,10 @@
 package State.States;
 
 
+import Model.GameObject.MobileObjects.Vehicle;
 import State.State;
 import State.States.GameState.*;
+import Utilities.MobileObjectUtilities.MobileObjectFactory;
 
 import java.awt.*;
 
@@ -39,6 +41,7 @@ public class InitialState extends State {
         SAVESTATE = saveState;
         LoadState loadState = new LoadState();
         LOADSTATE = loadState;
+
         //TradeState tradeState = new TradeState(gameState);
         //TRADESTATE = tradeState;
 
@@ -51,10 +54,5 @@ public class InitialState extends State {
     @Override
     public void render(Graphics g) {
 
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

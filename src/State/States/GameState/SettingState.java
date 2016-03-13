@@ -16,12 +16,6 @@ public class SettingState extends State {
     public SettingState() {
         settingView = new SettingView();
         setController(new SettingController(this));
-
-
-    }
-
-    public void switchState() {
-
     }
 
     public void tick() {
@@ -30,10 +24,5 @@ public class SettingState extends State {
     public void render(Graphics g) {
         State.GAMESTATE.render(g);
         settingView.render(g);
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

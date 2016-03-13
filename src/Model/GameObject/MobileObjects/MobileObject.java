@@ -1,7 +1,7 @@
 package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
-import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -26,10 +26,10 @@ public abstract class MobileObject extends GameObject {
     protected Map map;
 
     private float speed;
-    private Tile tile;
+    protected Tile tile;
     // private Nav navigation
     protected Stats stats;
-    private boolean canMove;
+    protected boolean canMove;
     private Location baseLocation;
     private ViewLocation viewLocation;
     private int view, range;
@@ -43,7 +43,7 @@ public abstract class MobileObject extends GameObject {
         baseLocation = new Location(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-        view = 2;
+        view = id;
         range = 2;
         id = 0;
     }
@@ -56,36 +56,25 @@ public abstract class MobileObject extends GameObject {
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
-        view = 2;
+        view = id;
         range = 2;
         this.id = id;
-        System.out.println(baseLocation);
     }
 
     public void move(int degrees) {
-
         //System.out.println("in here");
         if (location.getDir() == degrees) {
-            //System.out.println("I am facing " + degrees);
-            //System.out.println("vehicle movment speed " + getMovement());
             if (canMove) {
                 canMove = false;
                 location = Location.newLocation(degrees, location);
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
-
-                //if(this instanceof Vehicle)
-                //System.out.println("i alerted");
             }
         }
         else {
             face(degrees);
         }
-        if(this instanceof Player){
-            //System.out.println("movement is " + getMovement());
-        }
-
     }
 
     public void face(int degrees) {
@@ -112,6 +101,7 @@ public abstract class MobileObject extends GameObject {
     public void setViewLocation(ViewLocation viewLocation) {
         this.viewLocation = viewLocation;
     }
+
     public void updateViewLocation(float x, float y) {
         viewLocation.setX(x);
         viewLocation.setY(y);
@@ -132,9 +122,6 @@ public abstract class MobileObject extends GameObject {
 
     public Tile registerTile(Location location) {
         deregister();
-        while (map.getTile(location).hasObject()) {
-            //Waiting to register with the next tile;
-        }
         tile = map.register(this);
         return tile;
     }
