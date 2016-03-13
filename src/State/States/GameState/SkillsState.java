@@ -68,8 +68,16 @@ public class SkillsState extends State {
                 else
                     cursor += 3;
                 break;
-            case "Sneak":
             case "Summoner":
+                if (cursor == 0 || cursor == 1 || cursor == 2) {
+                    cursor += 15;
+                } else if (cursor == 3 || cursor == 4 || cursor == 5) {
+                    cursor -= 3;
+                } else {
+                    cursor -= 4;
+                }
+                break;
+            case "Sneak":
                 if(cursor == 0 || cursor == 1)
                     cursor = 5;
                 else if(cursor == 2)
@@ -89,8 +97,18 @@ public class SkillsState extends State {
             case "Smasher":
                 up();
                 break;
-            case "Sneak":
             case "Summoner":
+                if (cursor == 15 || cursor == 16 || cursor == 17) {
+                    cursor -= 15;
+                } else if (cursor == 18) {
+                    cursor = 2;
+                } else if (cursor == 0 || cursor == 1 || cursor == 2) {
+                    cursor += 3;
+                } else {
+                    cursor += 4;
+                }
+                break;
+            case "Sneak":
                 if(cursor == 0 || cursor == 1)
                     cursor = 3;
                 else if(cursor == 2)
@@ -114,8 +132,17 @@ public class SkillsState extends State {
                 else
                     cursor += 2;
                 break;
-            case "Sneak":
             case "Summoner":
+                if(cursor == 0) {
+                    cursor = 2;
+                } else if (cursor == 3 || cursor == 7 ||
+                        cursor == 11 || cursor == 15) {
+                    cursor += 3;
+                } else {
+                    cursor -= 1;
+                }
+                break;
+            case "Sneak":
                 if(cursor == 0)
                     cursor = 2;
                 else if(cursor == 1 || cursor == 2 ||
@@ -123,6 +150,7 @@ public class SkillsState extends State {
                     cursor -= 1;
                 else
                     cursor += 1;
+                break;
             default:
                 break;
         }
@@ -137,8 +165,17 @@ public class SkillsState extends State {
                 else
                     cursor -= 2;
                 break;
-            case "Sneak":
             case "Summoner":
+                if (cursor == 2) {
+                    cursor = 0;
+                } else if (cursor == 6 || cursor == 10 ||
+                        cursor == 14 || cursor == 18) {
+                    cursor -= 3;
+                } else {
+                    cursor += 1;
+                }
+                break;
+            case "Sneak":
                 if(cursor == 0 || cursor == 1 ||
                         cursor == 3 || cursor == 5)
                     cursor += 1;
