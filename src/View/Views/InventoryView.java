@@ -244,6 +244,8 @@ public class InventoryView implements Renderable, Observer {
         g.drawString("Offensive Rating: "+temp.getOffensiveRating(),x,y);y+=2*intY;
         g.drawString("Defensive Rating: "+temp.getDefensiveRating(),x,y);y+=2*intY;
         g.drawString("Armor Rating: "+temp.getArmorRating(),x,y);y+=2*intY;
+        g.drawString("Movement: "+temp.getMovement(),x,y);y+=2*intY;
+        g.drawString("Money(Catnip): "+pack.getMoney(),x,y);y+=2*intY;
 
 
     }
