@@ -123,10 +123,10 @@ public class MobileObjectView implements Renderable, Observer {
         //RENDER THE VEHICLE BIGGER
         if(entity instanceof Vehicle) {
             g.drawImage(sprites.get(active),
-                    (int) viewLocation.getX() - cameraXOffset - ((Settings.TILEWIDTH / 2 ) - Settings.PLAYERWIDTH/(2*2) + 15),
-                    (int) viewLocation.getY() - cameraYOffset - ((Settings.TILEHEIGHT / 2 ) - Settings.PLAYERHEIGHT/(2*2) + 15),
-                    Settings.PLAYERWIDTH * 2,
-                    Settings.PLAYERHEIGHT * 2,
+                    (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / 2 ),
+                    (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / 2 ),
+                    Settings.TILEWIDTH,
+                    Settings.TILEWIDTH,
                     null
             );
         }else {

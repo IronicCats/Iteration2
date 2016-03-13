@@ -11,6 +11,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -116,8 +117,10 @@ public class Map implements Subject {
             getTile(c.getLocation()).receiveAttack(c, a);
         } else if(a instanceof ProjectileAbility){
             System.out.println("Projectile Ability Set");
-            ((ProjectileAbility) a).setProjectile(new Projectile(c.getLocation(),14, ((ProjectileAbility) a).getProjectileStats(), a.getEffects(),a.getRange()));
-            ((ProjectileAbility) a).getProjectile().move(c.getDir());
+            Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(),c.getLocation()), a.getEffects());
+            ((ProjectileAbility) a).setProjectile(p);
+            mobileObjects.put(p,MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL,p));
+            ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
         }else {
             System.out.println("Not a Direct Ability");
         }
