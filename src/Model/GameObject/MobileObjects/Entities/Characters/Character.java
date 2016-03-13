@@ -13,6 +13,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.*;
@@ -51,6 +52,9 @@ public abstract class Character extends Entity implements Observer{
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
         bindWounds = occupation.getBindWounds();
+        if(occupation instanceof Summoner){
+            ability1 = occupation.getAbilityAt(0);
+        }
         //System.out.println(attack);
         getStats().addObserver(this);
         this.addObserver(occupation);
