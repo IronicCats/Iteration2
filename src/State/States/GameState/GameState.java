@@ -122,29 +122,29 @@ public class GameState extends State {
         mapView.update();
 
 
-        //WHAT I NEED TO DO IS FOR EACH MOBILE OBJECT GET IT'S LOCATION AND REGISTER WITH THAT TILE
+        //IT WORKS BITCH YES
         Iterator it = mobileObjects.entrySet().iterator();
         while (it.hasNext()) {
             java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
-            System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
+            //System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
             MobileObject a = (MobileObject)pair.getKey();
             //int x = a.getX();
             //int y = a.getY();
             map.getTile(a.getLocation()).register(a);
             //it.remove(); ??? Says it avoids CurrentModificationException
         }
-        //this doesn't work because it hasn't registered with tile properly
-        /*for(int i = 0; i < map.getWidth(); i++)
-        {
-            for(int j = 0; i < map.getHeight();i++){
-                if(map.getTile(i,j).hasObject()){
-                    System.out.println("I get here and should register");
-                    map.getTile(i,j).register(map.getTile(i,j).getObject());
-                }
-            }
-        }*/
-        //map.getTile(1,1).register(player); //TEST HOLY SHIT IT KIND OF WORKS
+        if(!mapItems.isEmpty()) {
+            Iterator ia = mapItems.entrySet().iterator();
+            while (ia.hasNext()) {
+                java.util.Map.Entry q = (java.util.Map.Entry) ia.next();
+                System.out.println(q.getKey() + "  This is the related view: " + q.getValue());
 
+                Item b = (Item) q.getKey();
+                System.out.println(b);
+
+                map.getTile(b.getLocation()).addItem(b);
+            }
+        }
 
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);

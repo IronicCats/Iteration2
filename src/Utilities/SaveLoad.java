@@ -102,6 +102,9 @@ public class SaveLoad {
     public static void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjectMap) {
         mobileObjects = mobileObjectMap;
     }
+    public static void setMapItems(HashMap<Item,ItemView> mapItemsMap){
+        mapItems = mapItemsMap;
+    }
 
     public static void setCurrFileName(String fileName) {
         currFileName = fileName;
@@ -115,6 +118,8 @@ public class SaveLoad {
     public static void load(String fileName) {
         //gs = new GameState();
         currFileName = fileName;
+        mapItems = new HashMap<>();
+        decals = new HashMap<>();
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
@@ -212,114 +217,16 @@ public class SaveLoad {
                             l.setY(j);
 
                             //I'm probably going to need some huge if statement or something. Idk
+                            ItemsEnum a = ItemsEnum.values()[id];
+                            itemArray[k] = ItemFactory.makeItem(a,l);
+                            mapItems.put(itemArray[k],ItemFactory.makeAsset(a,itemArray[k]));
 
-                            switch (id) {
-                                case 0:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, l);
-                                    break;
-                                case 1:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MANA_POTION, l);
-                                    break;
-                                case 2:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, l);
-                                    break;
-                                case 3:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, l);
-                                    break;
-                                case 4:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, l);
-                                    break;
-                                case 5:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, l);
-                                    break;
-                                case 6:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, l);
-                                    break;
-                                case 7:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, l);
-                                    break;
-                                case 8:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, l);
-                                    break;
-                                case 9:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, l);
-                                    break;
-                                case 10:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, l);
-                                    break;
-                                case 11:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, l);
-                                    break;
-                                case 12:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, l);
-                                    break;
-                                case 13:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, l);
-                                    break;
-                                case 14:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, l);
-                                    break;
-                                case 15:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, l);
-                                    break;
-                                case 16:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HAIRBALL, l);
-                                    break;
-                                case 17:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, l);
-                                    break;
-                                case 18:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG, l);
-                                    break;
-                                case 19:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, l);
-                                    break;
-                                case 20:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_TREASURE_CHEST, l);
-                                    break;
-                                case 21:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, l);
-                                    break;
-                                case 22:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOOR_KEY, l);
-                                    break;
-                                case 23:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_DOOR, l);
-                                    break;
-                                case 24:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_DOOR, l);
-                                    break;
-                                case 25:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HELMET, l);
-                                    break;
-                                case 26:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, l);
-                                    break;
-                                case 27:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PLATELEGS, l);
-                                    break;
-                                case 28:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.GAUNTLETS, l);
-                                    break;
-                                case 29:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.BOOTS, l);
-                                    break;
-                                case 30:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SHIELD, l);
-                                    break;
-                                case 31:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MILDLY_COOL_RING, l);
-                                    break;
-                                case 32:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOPE_RING, l);
-                                    break;
-                                case 33:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PANTS, l);
-                                    break;
-
-                            }
+                            
                            // System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
                            // System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
+                            //mapItems.put(itemArray[k],ItemFactory.makeAsset(ItemsEnum.PANTS,itemArray[k]));
+
+
 
                         }
 
