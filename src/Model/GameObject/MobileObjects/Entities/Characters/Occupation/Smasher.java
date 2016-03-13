@@ -19,7 +19,7 @@ public class Smasher extends Occupation {
     //constructor
     public Smasher() {
 
-        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 5, 12});
+        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 8, 12});
 
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);

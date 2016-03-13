@@ -24,7 +24,7 @@ public class Summoner extends Occupation {
     //constructor
     public Summoner() {
 
-        super("Summoner", "Specializes in spell casting", new int[]{5, 5, 5, 7, 5, 0, 5, 12});
+        super("Summoner", "Specializes in spell casting", new int[]{5, 5, 5, 7, 5, 0, 10, 12});
 
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ENCHANT, 0);
