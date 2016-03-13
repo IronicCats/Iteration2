@@ -5,8 +5,8 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import Model.Stats.Stats;
 import State.State;
-import State.States.GameState.TradeState;
 import State.States.GameState.VehicleState;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -27,18 +27,19 @@ public class Vehicle extends MobileObject {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
             setDriver(mo);
-            getMounted(mo);
+            mount();
         }
     }
 
-    public void getMounted(MobileObject mo){
-        VehicleState vehicleState = new VehicleState(this);
-        State.GAMESTATE.switchState(vehicleState);
-        mo.getStats().setMovement(this.getMovement());
+    public void mount(){
+        driver.setLocation(this.getLocation()); // players location is vehicle location
+        State.switchState(new VehicleState(this)); // switch to vehicle state
+        driver.setView(this.getView()); // sets view of vehicle to player
     }
 
-    public void getUnmounted(){
-        System.out.println();
+    public void unmount(){
+        driver.setLocation(new Location(this.getLocation().getX(), this.getLocation().getY() + 1));
+        driver.setView(MobileObjectEnum.PLAYER.ordinal());
     }
 
     public void setDriver(MobileObject mo){

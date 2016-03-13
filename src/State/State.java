@@ -33,7 +33,8 @@ public class State implements Tickable, Renderable {
     private Controller controller;
 
 
-    public void switchState(State state) {
+    public static void switchState(State state) {
+        setState(state);
     }
 
     public static void setState(State state) {

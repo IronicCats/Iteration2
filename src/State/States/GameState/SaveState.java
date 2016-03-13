@@ -20,10 +20,6 @@ public class SaveState extends State {
 
     }
 
-    public void switchState() {
-
-    }
-
     public void moveUp() {
         saveView.previous();
     }
@@ -38,10 +34,5 @@ public class SaveState extends State {
     public void render(Graphics g) {
         State.GAMESTATE.render(g);
         saveView.render(g);
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

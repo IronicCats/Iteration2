@@ -65,18 +65,20 @@ public class GameState extends State {
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT, map);
 
-        //creating a new player
-        player = MobileObjectFactory.Player();
-        MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
+        //creating a new player
+        player = MobileObjectFactory.Player();
+
         // initializing NPC's
         mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+
+        // syncing mobile objects with map
         map.setMobileObjects(mobileObjects);
 
         //area effect
@@ -97,10 +99,6 @@ public class GameState extends State {
 
     }
 
-    public void switchState() {
-
-    }
-
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
         if (cameraMoving) {
@@ -115,7 +113,7 @@ public class GameState extends State {
     public void setCameraMoving(boolean movement) {
         cameraMoving = movement;
         if (!cameraMoving) {
-            camera.centerOnPlayer(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
+            camera.centerOnObject(player); //If you set the camera to not moving. Center on the player to revert back to original offsets
         }
     }
 
@@ -144,7 +142,7 @@ public class GameState extends State {
 
     public void render(Graphics g) {
         if (!cameraMoving ) {
-            camera.centerOnPlayer(player);
+            camera.centerOnObject(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
 
@@ -160,12 +158,13 @@ public class GameState extends State {
         player.examinePack();
     } // end playerExamineInventory
 
-    public static Player getPlayer() {
-        return player;
+    public MapView getMapView() {
+        return mapView;
     }
 
-    @Override
-    public void switchState(State state) {
-        setState(state);
+
+
+    public static Player getPlayer() {
+        return player;
     }
 }

@@ -2,6 +2,7 @@ package Controller.Controllers;
 
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
+import Model.GameObject.MobileObjects.Vehicle;
 import State.State;
 import State.States.GameState.GameState;
 import State.States.GameState.VehicleState;
@@ -43,12 +44,12 @@ public class VehicleController extends Controller {
         } else if (e.getKeyCode() == Settings.INVENTORY) {          /* open inventory state */
             state.switchState(State.INVENTORYSTATE);
         } else if (e.getKeyCode() == Settings.MAP) {          /* open map state */
-        } else if (e.getKeyCode() == Settings.DROP) {          /* execute inventory dump (temporary?) */
-            ((VehicleState)state).unMount();
+        } else if (e.getKeyCode() == Settings.INTERACT) {/* execute inventory dump (temporary?) */
+            System.out.println("Supposed to unmount!");
+            ((VehicleState)state).unmount();
         } else if(e.getKeyCode() == Settings.F){
             Settings.FOG = !Settings.FOG;
         }
-
         //these are already listed above
         //if(e.getKeyCode() == KeyEvent.VK_)state.switchState(StatesEnum.GameState);
         //if(e.getKeyCode() == KeyEvent.VK_I)state.switchState(State.INVENTORYSTATE);

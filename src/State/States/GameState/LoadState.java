@@ -20,19 +20,10 @@ public class LoadState extends State {
 
     }
 
-    public void switchState() {
-
-    }
-
     public void tick() {
     }
 
     public void render(Graphics g) {
         //game.render(g);
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

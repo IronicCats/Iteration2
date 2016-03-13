@@ -43,9 +43,10 @@ public abstract class MobileObject extends GameObject {
         baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
         map = GameState.map;
         tile = map.register(this);
-        view = 2;
+        view = id;
         range = 2;
         id = 0;
+        stats.setMovement(10);
     }
 
     public MobileObject(Location location, int id, Stats stats) {
@@ -56,24 +57,20 @@ public abstract class MobileObject extends GameObject {
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
-        view = 2;
+        view = id;
         range = 2;
         this.id = id;
+        stats.setMovement(10);
     }
 
     public void move(int degrees) {
-        System.out.println("in here");
         if (location.getDir() == degrees) {
-            System.out.println("I am facing " + degrees);
-            System.out.println("vehicle movment speed " + getMovement());
             if (canMove) {
                 canMove = false;
                 location = Location.newLocation(degrees, location);
                 location.setDir(degrees);
                 registerTile(location);
                 alert();
-                if(this instanceof Vehicle)
-                System.out.println("i alerted");
             }
         } else {
             face(degrees);

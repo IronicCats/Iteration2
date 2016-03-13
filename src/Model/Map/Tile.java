@@ -11,8 +11,10 @@ import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
+import State.States.GameState.GameState;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -62,7 +64,6 @@ public abstract class Tile implements Subject {
         }
         System.out.println("Interacting with tile");
         Map.map.carryInteraction(object);
-
     }
 
     public void receiveInteraction(MobileObject interacter) {

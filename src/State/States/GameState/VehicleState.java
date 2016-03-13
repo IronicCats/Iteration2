@@ -7,7 +7,11 @@ import Model.Location;
 import Model.Map.Map;
 import State.State;
 import Utilities.MapUtilities.Navigation;
+import Utilities.Settings;
 import View.ViewUtilities.Camera;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MapView;
+import Model.Map.Map;
 
 import java.awt.*;
 
@@ -19,21 +23,18 @@ public class VehicleState extends State{
     private Vehicle vehicle;
 
     @Override
-    public void render(Graphics g) {
-        State.GAMESTATE.render(g);
-    }
-    @Override
     public void tick() {
         State.GAMESTATE.tick();
     }
 
     public VehicleState(Vehicle vehicle) {
-        setController(new VehicleController(this));
         this.vehicle = vehicle;
+        setController(new VehicleController(this));
     }
 
-    public void unMount(){
-        vehicle.getUnmounted();
+    public void unmount(){
+        vehicle.unmount();
+        State.switchState(State.GAMESTATE);
     }
 
     public void move(int degrees) {
@@ -43,6 +44,14 @@ public class VehicleState extends State{
         } else {
             vehicle.face(degrees);
         }
+    }
+
+    @Override
+    public void render(Graphics g) {
+        GAMESTATE.getCamera().centerOnObject(vehicle);
+        GAMESTATE.getMapView().render(g, GAMESTATE.getCamera().getxOffset(), GAMESTATE.getCamera().getyOffset(), vehicle.getLocation());
+
+        DisplayMessage.render(g);
     }
 }
 

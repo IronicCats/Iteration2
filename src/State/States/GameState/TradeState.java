@@ -83,12 +83,6 @@ public class TradeState extends State {
         tradeView.render(g, selector);
     }
 
-    @Override
-
-    public void switchState(State state) {
-        setState(state);
-    }
-
     public void up() {
         if (selector - 4 < 0 && selector < 16) selector += 12;
         else if (selector - 4 < 16 && selector > 15) selector += 12;
