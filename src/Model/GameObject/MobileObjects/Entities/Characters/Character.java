@@ -67,6 +67,9 @@ public abstract class Character extends Entity implements Observer{
                     }
                     items.remove(i); //remove it from the items
                 }
+            }else if(i instanceof OneShot) {
+                interact(i);
+                items.remove(i);
             }
         }
         return items;
@@ -83,12 +86,12 @@ public abstract class Character extends Entity implements Observer{
 
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
-        ((CharacterStats) getStats()).applyEquipmentModification(weapon.getEquipmentModification());
+        getStats().applyEquipmentModification(weapon.getEquipmentModification());
     } // end equip
 
     public void equip(Armor armor) {
         inventory.equip(armor);
-        ((CharacterStats) getStats()).applyEquipmentModification(armor.getEquipmentModification());
+        getStats().applyEquipmentModification(armor.getEquipmentModification());
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
