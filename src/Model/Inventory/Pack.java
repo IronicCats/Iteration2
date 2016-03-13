@@ -102,7 +102,10 @@ public class Pack {
                 items[i] = null;
             }
         }
-        tempItems.add(new Money(money));
+        if(money > 0) {
+            tempItems.add(new Money(money));
+            money = 0;
+        }
         return tempItems;
     } // end dump
 

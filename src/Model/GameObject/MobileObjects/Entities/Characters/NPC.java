@@ -23,5 +23,7 @@ public class NPC extends Character implements Tickable {
         base = location;
         random = new Random(System.currentTimeMillis());
         stats.setMovement(7);
+        getStats().setBaseLives(1);
+        getStats().setLivesLeft(1);
     }
 }

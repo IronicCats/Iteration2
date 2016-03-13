@@ -7,6 +7,7 @@ import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
@@ -30,6 +31,7 @@ import View.Views.MobileObjectView;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -39,7 +41,7 @@ public class GameState extends State {
 
     private HashMap<Item, ItemView> mapItems;
     private HashMap<AreaEffect, DecalView> decals;
-    private HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private ConcurrentHashMap<MobileObject, MobileObjectView> mobileObjects;
     public static Map map;
     private Camera camera;
     private MapView mapView;
@@ -55,7 +57,7 @@ public class GameState extends State {
         cameraMoving = false;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
-        mobileObjects = new HashMap<>();
+        mobileObjects = new ConcurrentHashMap<>();
 
         map = MakeMap.makeMap();
         mapView = MakeMap.makeMapView(map);
@@ -74,7 +76,7 @@ public class GameState extends State {
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
         // initializing NPC's
-        mobileObjects = MobileObjectFactory.Init(map, player);
+        mobileObjects = (MobileObjectFactory.Init(map, player));
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
 
@@ -124,7 +126,7 @@ public class GameState extends State {
         return camera;
     }
 
-    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {
+    public ConcurrentHashMap<MobileObject, MobileObjectView> getMobileObjects() {
         return mobileObjects;
     }
 
@@ -135,7 +137,15 @@ public class GameState extends State {
     @Override
     public void tick() {
         for (MobileObject key : mobileObjects.keySet()) {
-            key.tick();
+            if(key instanceof Character && ((Character)key).isDead()) {
+                System.out.println("Removing " + key.getID());
+                map.deRegister(key.getLocation());
+                map.addToRespawnQueue(key);
+                //mobileObjects.remove(key);
+            } else {
+                key.tick();
+                map.tickRespawnQueue();
+            }
         }
     }
 

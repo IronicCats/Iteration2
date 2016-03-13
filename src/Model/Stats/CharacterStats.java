@@ -225,8 +225,15 @@ public class CharacterStats extends Stats implements Subject {
         effects.clear();
         finishTimes.clear();
 
-        alive = false;
         livesLeft--;
+        if(livesLeft == 0)
+            alive = false;
+        update();
+    } // end kill
+
+    public void revive() {
+        alive = true;
+        livesLeft = baseLives;
 
         strength = baseStr;
         agility = baseAgi;
@@ -238,13 +245,6 @@ public class CharacterStats extends Stats implements Subject {
         mana = baseMana;
 
         update();
-    } // end kill
-
-    public void revive() {
-        if(livesLeft > 1) {
-            alive = true;
-            update();
-        }
     } // end revive
 
     public void applyEffect(Effect[] e) {

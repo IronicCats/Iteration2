@@ -12,12 +12,11 @@ import java.util.ArrayList;
 public class RespawnQueue implements Tickable{
     private Map map;
     private static ArrayList<MobileObject> queue;
-    protected static int lastProcessedTime;
+    protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
 
     public RespawnQueue() {
         map = null;
         queue = new ArrayList<>();
-        lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
     }
 
     public void registerMap(Map map) {
@@ -25,10 +24,13 @@ public class RespawnQueue implements Tickable{
     } // end registerMap
 
     public void push(MobileObject object) {
+        System.out.println("push called");
         queue.add(object);
+        lastProcessedTime = (int)System.currentTimeMillis();
     } // end push
 
     public void pop() {
+        System.out.println("pop called");
         map.respawn(queue.get(0));
         queue.remove(0);
     } // end pop
@@ -36,7 +38,8 @@ public class RespawnQueue implements Tickable{
     @Override
     public void tick() {
         if(queue.size() > 0) {
-            pop();
+            if((int)(System.currentTimeMillis() / 1000L) - lastProcessedTime > 30)
+                pop();
         }
     } // end tick
 } // end class RespawnQueue

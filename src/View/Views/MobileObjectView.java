@@ -110,10 +110,6 @@ public class MobileObjectView implements Renderable, Observer {
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
-        if (entity instanceof Character && ((Character) entity).isDead()) {
-            System.out.println("Dead");
-            return;
-        }
         tween();
         g.drawImage(sprites.get(active),
                 (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),

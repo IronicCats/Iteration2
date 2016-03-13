@@ -2,6 +2,7 @@ package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
+import Model.Effects.ModificationEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
@@ -136,28 +137,36 @@ public class ItemFactory {
                         "A potion that boosts strength",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.STRENGTH, 10)));
+                        new Effect(new StatStructure(StatsEnum.STRENGTH, 10),
+                                ModificationEnum.REAL,
+                                30000));
             case AGILITY_POTION:
                 return new Usable(id,
                         "Agility potion",
                         "A potion that boosts agility",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.AGILITY, 10)));
+                        new Effect(new StatStructure(StatsEnum.AGILITY, 10),
+                                ModificationEnum.REAL,
+                                30000));
             case INTELLECT_POTION:
                 return new Usable(id,
                         "Intellect potion",
                         "A potion that boosts intellect",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.INTELLECT, 10)));
+                        new Effect(new StatStructure(StatsEnum.INTELLECT, 10),
+                                ModificationEnum.REAL,
+                                30000));
             case HARDINESS_POTION:
                 return new Usable(id,
                         "Hardiness potion",
                         "A potion that boosts hardiness",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.HARDINESS, 10)));
+                        new Effect(new StatStructure(StatsEnum.HARDINESS, 10),
+                                ModificationEnum.REAL,
+                                30000));
             case EXPERIENCE_POTION:
                 return new Usable(id,
                         "Experience potion",
@@ -171,7 +180,9 @@ public class ItemFactory {
                         "A potion that raises movement",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.MOVEMENT, 10)));
+                        new Effect(new StatStructure(StatsEnum.MOVEMENT, 10),
+                                ModificationEnum.REAL,
+                                30000));
             case STICK_SWORD:
                 return new Weapon(id,
                         "Stick Sword",

@@ -23,6 +23,13 @@ public class HostileNPC extends NPC {
         if (enemyController != null) {
             enemyController.tick();
         }
+        if (isDead()) {
+            getTile().deregister();
+            map.addToRespawnQueue(this);
+            //respawn eventually
+        } else {
+            getStats().tick();
+        }
     } // end tick
 
     public EnemyController getController(){

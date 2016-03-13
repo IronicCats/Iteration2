@@ -95,12 +95,14 @@ public abstract class MobileObject extends GameObject {
         return viewLocation;
     }
 
+    public Location getBaseLocation() { return baseLocation; }
+
     public void setViewLocation(ViewLocation viewLocation) {
         this.viewLocation = viewLocation;
     }
 
     public void resetLocation() {
-        this.viewLocation = new ViewLocation(baseLocation.getX(), baseLocation.getY());
+        this.viewLocation = new ViewLocation(location.getX(), location.getY());
     }
 
     public boolean canMove() {

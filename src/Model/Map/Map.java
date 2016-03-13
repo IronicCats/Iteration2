@@ -8,6 +8,8 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import State.State;
+import Utilities.ItemUtilities.ItemFactory;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
 import Utilities.RespawnQueue;
@@ -17,6 +19,8 @@ import View.Views.ItemView;
 import View.Views.MobileObjectView;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Aidan on 3/1/2016.
@@ -30,7 +34,7 @@ public class Map implements Subject {
     private Location spawn;
     protected Observer observer;
 
-    private HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private ConcurrentHashMap<MobileObject, MobileObjectView> mobileObjects;
     private RespawnQueue respawnQueue;
     private HashMap<Item, ItemView> mapItems;
 
@@ -168,11 +172,11 @@ public class Map implements Subject {
         tile.alert();
     }
 
-    public HashMap<MobileObject, MobileObjectView> getMobileObjects() {
+    public ConcurrentHashMap<MobileObject, MobileObjectView> getMobileObjects() {
         return mobileObjects;
     }
 
-    public void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjects) {
+    public void setMobileObjects(ConcurrentHashMap<MobileObject, MobileObjectView> mobileObjects) {
         this.mobileObjects = mobileObjects;
     }
 
@@ -193,7 +197,9 @@ public class Map implements Subject {
     }
 
     public void respawn(MobileObject object) {
+        System.out.println("respawn " + object.getID());
         object.resetLocation();
+        ((Character)object).respawn();
         mobileObjects.put(object, MobileObjectFactory.makeAsset(object.getID(), object));
     } // end respawn
 
@@ -201,6 +207,10 @@ public class Map implements Subject {
         mobileObjects.remove(object);
         respawnQueue.push(object);
     } // end addToRespawnQueue
+
+    public void tickRespawnQueue() {
+        respawnQueue.tick();
+    }
 
     @Override
     public String toString() {

@@ -43,6 +43,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Andy on 3/5/2016.
@@ -56,7 +57,7 @@ public class SaveLoad {
     private static Map gameMap;     //list of all maps may be needed
     private static GameState game;
     private static MapView gamemapView;
-    private static HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private static ConcurrentHashMap<MobileObject, MobileObjectView> mobileObjects;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
@@ -86,7 +87,7 @@ public class SaveLoad {
         gamemapView = m;
     }
 
-    public static void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjectMap) {
+    public static void setMobileObjects(ConcurrentHashMap<MobileObject, MobileObjectView> mobileObjectMap) {
         mobileObjects = mobileObjectMap;
     }
 
@@ -467,7 +468,7 @@ public class SaveLoad {
 
     }
 
-    private static Node getMobileObjects(Document doc, HashMap<MobileObject, MobileObjectView> mO) {
+    private static Node getMobileObjects(Document doc, ConcurrentHashMap<MobileObject, MobileObjectView> mO) {
         Element mobileObjects = doc.createElement("mobileObjects"); // gets entity with createElement
         Attr test = doc.createAttribute("test");
         Iterator it = mO.entrySet().iterator();

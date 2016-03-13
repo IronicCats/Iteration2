@@ -28,6 +28,14 @@ public class FriendlyNPC extends NPC {
             getStats().tick();
             friendlyController.tick();
         }
+        if (isDead()) {
+            System.out.println("Dead!!");
+            getTile().deregister();
+            map.addToRespawnQueue(this);
+            //respawn eventually
+        } else {
+            getStats().tick();
+        }
     } // end tick
 
     public String getRandomDialog() {

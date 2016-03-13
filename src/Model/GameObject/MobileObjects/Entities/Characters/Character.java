@@ -110,7 +110,7 @@ public abstract class Character extends Entity implements Observer{
 
 
     public void attack(Abilities a) {
-        System.out.println("Executing ability: " + a);
+        //System.out.println("Executing ability: " + a);
         if (a == null) {
             System.out.println("Ability not set");
             return;
@@ -121,7 +121,7 @@ public abstract class Character extends Entity implements Observer{
     public void receiveAttack(Character attacker, Abilities ability) {
         //Calculate Damage done based on Offensive Rating and Defensive Rating
         //But for now, just apply effect
-        System.out.println(ability.getEffects().toString());
+        //System.out.println(ability.getEffects().toString());
         this.applyEffect(ability.getEffects());
     }
 
@@ -135,8 +135,10 @@ public abstract class Character extends Entity implements Observer{
     } // end pickup
 
     public void emptyPack() {
-        DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
-        getTile().addItems(inventory.emptyPack());
+        if(!getPack().empty()) {
+            DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
+            getTile().addItems(inventory.emptyPack());
+        }
     } // end emptyPack
 
     public void drop(int index) {
@@ -242,7 +244,9 @@ public abstract class Character extends Entity implements Observer{
     public void update() {
         if(!getStats().isAlive()) {
             emptyPack();
-            getStats().revive();
+            if(getStats().getLivesLeft() > 1)
+            getTile().deregister();
+            map.addToRespawnQueue(this);
         }
     } // end update
 
@@ -260,4 +264,8 @@ public abstract class Character extends Entity implements Observer{
             getStats().tick();
         }
     } // end tick
+
+    public void respawn() {
+        getStats().revive();
+    } // end respawn
 } // end class Character

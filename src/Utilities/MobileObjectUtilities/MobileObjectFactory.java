@@ -27,6 +27,7 @@ import View.Views.MobileObjectView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by broskj on 3/6/16.
@@ -34,9 +35,9 @@ import java.util.HashMap;
 
 public class MobileObjectFactory {
 
-    public static HashMap<MobileObject, MobileObjectView> Init(Map map, Player player) {
+    public static ConcurrentHashMap<MobileObject, MobileObjectView> Init(Map map, Player player) {
 
-        HashMap<MobileObject, MobileObjectView> objects = new HashMap<>();
+        ConcurrentHashMap<MobileObject, MobileObjectView> objects = new ConcurrentHashMap<>();
 
         // Enemy zero
         HostileNPC enemy = (HostileNPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
@@ -56,9 +57,9 @@ public class MobileObjectFactory {
         // Shopkeeper one
         Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(0, 3), map, player);
         shopkeeper1.getController().setBaseLoc(new Location(0, 3));
-        enemy.getController().setTarget(player);
+        shopkeeper1.getController().setTarget(player);
+        shopkeeper1.getStats().setLife(2);
         objects.put(shopkeeper1, makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER, shopkeeper1));
-        enemy.getStats().setLife(2);
 
         // pet
         Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
