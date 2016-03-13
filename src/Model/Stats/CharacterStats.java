@@ -53,12 +53,18 @@ public class CharacterStats extends Stats implements Subject {
 
         level = 1;
         baseLives = 0;
+        livesLeft = baseLives;
         baseStr = 0;
+        strength = baseStr;
         baseAgi = 0;
+        agility = baseAgi;
         baseIntel = 0;
+        intellect = baseIntel;
         baseHard = 0;
+        hardiness = baseHard;
         experience = 0;
-        baseLives = 0;
+        baseMovement = 0;
+        movement = baseMovement;
         baseLife = baseHard + level;
         baseMana = baseIntel + level;
 
@@ -100,6 +106,7 @@ public class CharacterStats extends Stats implements Subject {
         baseAgi = ss.getStat(StatsEnum.AGILITY);
         baseIntel = ss.getStat(StatsEnum.INTELLECT);
         baseHard = ss.getStat(StatsEnum.HARDINESS);
+        baseMovement = ss.getStat(StatsEnum.MOVEMENT);
         baseLife = baseHard + level;
         baseMana = baseIntel + level;
 
@@ -108,6 +115,7 @@ public class CharacterStats extends Stats implements Subject {
         agility = baseAgi;
         intellect = baseIntel;
         hardiness = baseHard;
+        movement = baseMovement;
         experience = ss.getStat(StatsEnum.EXPERIENCE);
         life = baseLife;
         mana = baseMana;
@@ -383,25 +391,25 @@ public class CharacterStats extends Stats implements Subject {
         switch (s) {
             case STRENGTH:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.strength += this.strength * amount / 100;
+                    this.strength += this.baseStr * amount / 100;
                 else
                     this.strength += amount;
                 break;
             case AGILITY:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.agility += this.agility * amount / 100;
+                    this.agility += this.baseAgi * amount / 100;
                 else
                     this.agility += amount;
                 break;
             case INTELLECT:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.intellect += this.intellect * amount / 100;
+                    this.intellect += this.baseIntel * amount / 100;
                 else
                     this.intellect += amount;
                 break;
             case HARDINESS:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.hardiness += this.hardiness * amount / 100;
+                    this.hardiness += this.baseHard * amount / 100;
                 else
                     this.hardiness += amount;
                 break;
@@ -412,12 +420,14 @@ public class CharacterStats extends Stats implements Subject {
                     this.experience += amount;
                 break;
             case MOVEMENT:
+                System.out.println("old movement is " + movement);
                 if (m.equals(ModificationEnum.PERCENT)){
-                    this.movement += this.movement * amount / 100;
-                    System.out.println("TEST STATS " + this.movement);
+                    movement += this.baseMovement * amount / 100;
+                    //System.out.println("TEST STATS " + this.movement);
                 }
                 else
-                    this.movement += amount;
+                    movement += amount;
+                System.out.println("New movement is " + movement);
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
