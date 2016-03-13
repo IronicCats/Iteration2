@@ -31,9 +31,7 @@ import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import View.ViewUtilities.Graphics.Assets;
-import View.Views.MapView;
-import View.Views.MobileObjectView;
-import View.Views.TileView;
+import View.Views.*;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -45,6 +43,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -61,6 +61,8 @@ public class SaveLoad {
     private static GameState game;
     private static MapView gamemapView;
     private static HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private static HashMap<AreaEffect, DecalView> decals;
+    private static HashMap<Item, ItemView> mapItems;
     private static GameState gs;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
@@ -111,17 +113,17 @@ public class SaveLoad {
 
     //---------------------------------LOAD--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void load(String fileName) {
-        gs = new GameState();
+        //gs = new GameState();
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
         loadMobileObjects(filePath);
-        gs.setMap(gameMap);
-        gs.setMapView(gamemapView);
+        //gs.setMap(gameMap);
+        //gs.setMapView(gamemapView);
 
-        gs.setPlayer((Player)player);
+        //gs.setPlayer((Player)player);
 
         ((Player) player).update();
         if(mobileObjects.isEmpty()){
@@ -132,15 +134,16 @@ public class SaveLoad {
         if (gs == null){
             System.out.println("This is null");
         }
-        gs.setMobileObjects(mobileObjects);
+        //gs.setMobileObjects(mobileObjects);
 
-        ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
+       // ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
 
-        player.setViewLocation(vl);
+        //player.setViewLocation(vl);
         System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
         //gs.setMapView(gamemapView);
 
         System.out.println("Everything has been loaded!");
+        gs = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
         State.GAMESTATE = gs;
         gs.togglePause();
     }
@@ -314,20 +317,26 @@ public class SaveLoad {
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.PANTS, l);
                                     break;
 
-
                             }
-
+                            System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
+                            System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
 
                         }
 
                     }
+
+
+                    ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
+
+
                     Location lg = new Location(i,j);
-                    //System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
+                    System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
                     if(terrainType.equalsIgnoreCase("grass")) {
                         //System.out.println("I get the grass.");
 
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
 
                     }
                     else if(terrainType.equalsIgnoreCase("water")) {
@@ -335,10 +344,12 @@ public class SaveLoad {
 
                         tiles[i][j] = new Water(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
 
                     } else if (terrainType.equalsIgnoreCase("mountain")) {
                         tiles[i][j] = new Mountain(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
                     }
                     //System.out.println(tiles[i][j].toString());
 
@@ -350,9 +361,8 @@ public class SaveLoad {
 
 
             Map recreateMap = new Map(tiles, mapWidth, mapHeight, spawn);
-            //SaveLoad.setGameMap(recreateMap);
             gameMap = recreateMap;
-            MapView mv = new MapView(recreateMap, tv);
+            MapView mv = new MapView(gameMap, tv);
 
             gamemapView = mv;
             mv.update();
@@ -420,7 +430,7 @@ public class SaveLoad {
 
                 //load inventory FIXME
                 Inventory inv = new Inventory();
-                Player peer = new Player(l,2,occupation,inv);
+                Player peer = new Player(l,2,occupation,inv); //THIS SHOULD BE WORKING
 
                 player = peer;
                 //^ this will be location,occupation,inventory,stats
