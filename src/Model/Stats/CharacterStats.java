@@ -448,7 +448,6 @@ public class CharacterStats extends Stats implements Subject {
     } // end applyEquipmentModification
 
     public void removeEquipmentModification(EquipmentModification e) {
-        System.out.println("removeEquipmentModification");
         equipmentModifications.remove(e);
         if (e.hasWeaponValue()) {
             equippedWeapon -= e.getWeaponRating();
