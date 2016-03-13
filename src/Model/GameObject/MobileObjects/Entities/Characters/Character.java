@@ -182,7 +182,7 @@ public abstract class Character extends Entity implements Observer{
                 emptyPack();
                 break;
             case attack:
-                System.out.println("Attacking with: " + attack);
+                System.out.println("Attacking with: " + attack.getName());
                 attack(this.attack);
                 break;
             case ability1:
