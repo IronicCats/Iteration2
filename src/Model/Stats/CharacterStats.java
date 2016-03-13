@@ -383,25 +383,25 @@ public class CharacterStats extends Stats implements Subject {
         switch (s) {
             case STRENGTH:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.strength += this.strength * amount / 100;
+                    this.strength += this.baseStr * amount / 100;
                 else
                     this.strength += amount;
                 break;
             case AGILITY:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.agility += this.agility * amount / 100;
+                    this.agility += this.baseAgi * amount / 100;
                 else
                     this.agility += amount;
                 break;
             case INTELLECT:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.intellect += this.intellect * amount / 100;
+                    this.intellect += this.baseIntel * amount / 100;
                 else
                     this.intellect += amount;
                 break;
             case HARDINESS:
                 if (m.equals(ModificationEnum.PERCENT))
-                    this.hardiness += this.hardiness * amount / 100;
+                    this.hardiness += this.baseHard * amount / 100;
                 else
                     this.hardiness += amount;
                 break;
@@ -412,12 +412,17 @@ public class CharacterStats extends Stats implements Subject {
                     this.experience += amount;
                 break;
             case MOVEMENT:
+                System.out.println("old movement is " + this.movement);
                 if (m.equals(ModificationEnum.PERCENT)){
-                    this.movement += this.movement * amount / 100;
-                    System.out.println("TEST STATS " + this.movement);
+                    this.movement += this.baseMovement * amount / 100;
+                    //System.out.println("TEST STATS " + this.movement);
                 }
                 else
                     this.movement += amount;
+                System.out.println("New movement is " + this.movement);
+                /**
+                 * add movment to equipment modifications instead
+                 */
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
