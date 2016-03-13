@@ -123,7 +123,13 @@ public class MobileObjectFactory {
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Corgi stuff for sale");
+                            add("More corgi stuff for sale");
+                            add("hello world");
+                            add("foo");
+                            add("bar");
+                        }});
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
@@ -138,7 +144,13 @@ public class MobileObjectFactory {
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Wolf stuff for sale");
+                            add("More wolf stuff for sale");
+                            add("dlrow olleh");
+                            add("oof");
+                            add("rab");
+                        }});
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
