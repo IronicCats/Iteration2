@@ -20,8 +20,16 @@ public class EquipmentController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == Settings.ESC || e.getKeyCode() == Settings.EQUIP){
+        if(e.getKeyCode() == Settings.EQUIP){
             state.switchState(State.GAMESTATE);
         }
+        else if(e.getKeyCode() == Settings.INVENTORY){
+            state.switchState(State.INVENTORYSTATE);
+        }
+        else if(e.getKeyCode() == Settings.ESC){
+            state.switchState(State.PAUSESTATE);
+        }
+
+
     }
 }
