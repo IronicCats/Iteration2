@@ -11,6 +11,7 @@ import Utilities.AbilitiesUtilities.checkAbilityRange;
 /**
  * Created by Aidan on 3/7/2016.
  */
+
 public class EnemyController extends AIController {
 
     HostileNPC enemy;
@@ -38,12 +39,12 @@ public class EnemyController extends AIController {
     public void followThenAttackinRange() {
         if (canFace()) {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
-            Abilities a = checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities());
+           /* Abilities a = checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities());
             if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
                 //enemy.attack(a);
             } else {
                 follow();
-            }
+            }*/
         }
             else {
                 follow();
