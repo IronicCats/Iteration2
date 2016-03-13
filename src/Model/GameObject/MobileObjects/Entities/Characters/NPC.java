@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class NPC extends Character implements Tickable {
 
-    AIController controller;
     Random random;
     Location base;
 
@@ -25,24 +24,4 @@ public class NPC extends Character implements Tickable {
         random = new Random(System.currentTimeMillis());
         stats.setMovement(7);
     }
-
-    @Override
-    public void tick() {
-        if (controller != null) {
-
-            getStats().tick();
-            controller.tick();
-        }
-    } // end tick
-
-    public AIController getController() {
-        return controller;
-    }
-
-    public void setController(EnemyController controller) {
-        this.controller = controller;
-    }
-
-
-    // inventory = NPCinventory
 }

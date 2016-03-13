@@ -1,6 +1,7 @@
 package Model.Abilities;
 
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Requirement;
 
@@ -15,21 +16,25 @@ public class PickPocket extends ExecutableAbility {
     }
 
     //operations
-    public int getSkillLevel(){
-        return this.getSkillLevel();
-    }
-    public void execute(MobileObject targeted){
+
+    public void execute(MobileObject targeter, MobileObject targeted){
         if(getSkillLevel() == 0){
-            //can't get anything
+            //can't take any object
         }
         else if(getSkillLevel() == 1){
-
+            int moneyTaken = (int)(.25 * ((Character)targeted).getMoney());
+            ((Character)targeted).modifyMoney(moneyTaken * -1);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
         else if(getSkillLevel() == 2){
-
+            int moneyTaken = (int)(.5 * ((Character)targeted).getMoney());
+            ((Character)targeted).modifyMoney(moneyTaken * -1);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
         else {
-
+            int moneyTaken = ((Character)targeted).getMoney();
+            ((Character)targeted).setMoney(0);
+            ((Character)targeter).modifyMoney(moneyTaken);
         }
     }
 }

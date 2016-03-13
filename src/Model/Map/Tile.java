@@ -4,7 +4,9 @@ package Model.Map;
 import Model.Abilities.Abilities;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
  * interact() needs to have different implementations based on instanceof
  * alternately, replace player.takeItems(...) to reflect different interactions
  */
+
 public abstract class Tile implements Subject {
 
     private Location location;
@@ -34,6 +37,8 @@ public abstract class Tile implements Subject {
     private boolean hasObject;
     private boolean hasAreaEffect;
     private boolean visited;
+    private boolean hasTeleportAreaEffect;
+    private TeleportAreaEffect teleportAreaEffect;
 
     private AreaEffectEnum ar;
 
@@ -45,6 +50,7 @@ public abstract class Tile implements Subject {
         visited = false;
         observers = new ArrayList<>();
         hasAreaEffect = false;
+        hasTeleportAreaEffect = false;
     }
 
 
@@ -61,6 +67,14 @@ public abstract class Tile implements Subject {
     public void receiveInteraction(MobileObject interacter) {
         if (hasObject()) {
             object.interact(interacter);
+        }
+        for(Item item: items){
+            if(item instanceof Interactable){
+                // enum for changed asset should be right after original enum (yes I know)
+                ((Interactable) item).toggleView();
+                alert();
+                System.out.println("You interacted with a chest!");
+            }
         }
     }
 
@@ -95,6 +109,20 @@ public abstract class Tile implements Subject {
         alert();
     }
 
+    public void setTeleportAreaEffectTile(TeleportAreaEffect t) {
+        this.teleportAreaEffect = t;
+        hasTeleportAreaEffect = true;
+        alert();
+    }
+
+    public boolean getHasTeleportAreaEffect(){
+        return this.hasTeleportAreaEffect;
+    }
+
+    public TeleportAreaEffect getTeleportAreaEffect(){
+        return this.teleportAreaEffect;
+    }
+
     public AreaEffect getAreaEffect() {
         return this.areaEffect;
     }
@@ -119,6 +147,10 @@ public abstract class Tile implements Subject {
             if (this.getHasAreaEffect()) {
                 ((Player) object).applyEffect(areaEffect.getEffect());
             }
+            if(this.getHasTeleportAreaEffect()){
+                teleportAreaEffect.teleportPlayer(((Player) object));
+                System.out.println("This tile has an effect");
+            }
         }
         alert();
         return this;
@@ -133,11 +165,10 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle) {
+            if (i instanceof Obstacle || i instanceof Interactable) {
                 return false;
             }
         }
-        // add && !hasObject()
         return isWalkable && !hasObject;
     }
 

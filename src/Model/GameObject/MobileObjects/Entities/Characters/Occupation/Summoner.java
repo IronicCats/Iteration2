@@ -1,7 +1,9 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
 import Model.Abilities.DirectAbility;
+import Model.Abilities.ProjectileAbility;
 import Model.Effects.Effect;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
 import Model.Stats.StatsEnum;
@@ -36,6 +38,10 @@ public class Summoner extends Occupation {
                 new Requirement(ItemsEnum.CATNIP_STAFF),
                 new Effect(new StatStructure(StatsEnum.MANA, 0))
         ));
+
+        //enchantments
+        //boon
+        //bane
 
     }
 
@@ -74,6 +80,8 @@ public class Summoner extends Occupation {
         ));
         //compute occupational abilities
         getOccupationalAbilities().clear();
-
+        //enchantments
+        //boon
+        //bane
     }
 }
