@@ -31,6 +31,7 @@ public abstract class Occupation implements Subject, Observer {
     private Map<SkillsEnum, Abilities> basicSkillAbilities;
     private Abilities basicAttack;
     private int pastLevel;
+    private int unassignedSkillPoints;
     private EquipmentTypeEnum weaponType;
 
     //constructor
@@ -44,6 +45,7 @@ public abstract class Occupation implements Subject, Observer {
         playerStats = new CharacterStats(initialStats);
         playerStats.addObserver(this);
         pastLevel = playerStats.getLevel();
+        unassignedSkillPoints = 0;
         this.basicSkills = new EnumMap(SkillsEnum.class);
         this.occupationalSkills = new EnumMap(SkillsEnum.class);
         occupationalAbilities = new EnumMap(SkillsEnum.class);
@@ -77,6 +79,8 @@ public abstract class Occupation implements Subject, Observer {
         return playerStats;
     }
 
+    public int getUnassignedSkillPoints() { return unassignedSkillPoints; }
+
     public Map<SkillsEnum, Integer> getBasicSkills() {
         return basicSkills;
     }
@@ -96,11 +100,39 @@ public abstract class Occupation implements Subject, Observer {
 
     //skill related methods
 
+    public void incrementSkill(SkillsEnum skill) {
+        if(unassignedSkillPoints > 0) {
+            switch (skill) {
+                case BINDWOUNDS:
+                case BARGAIN:
+                case OBSERVATION:
+                    modifyBasicSkills(skill, getBasicSkillValue(skill) + 1);
+                    break;
+                case ONEHANDWEAP:
+                case TWOHANDWEAP:
+                case BRAWL:
+                case ENCHANT:
+                case BOON:
+                case BANE:
+                case STAFF:
+                case PICKPOCK:
+                case DRTRAP:
+                case CREEP:
+                case RANGEWEAP:
+                    modifyOccupationalSkills(skill, getOccupationalSkillsValue(skill) + 1);
+                    break;
+                default:
+                    System.out.println("What skill are you even trying to modify?");
+                    break;
+            }
+        }
+    } // end incrementSkill
+
     public void modifyBasicSkills(SkillsEnum s, int value) {
         if (s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION) {
             basicSkills.put(s, value);
-        } else {
-            //do nothing
+            unassignedSkillPoints--;
+            System.out.println("Skill point assigned, now " + unassignedSkillPoints);
         }
         alert();
     }
@@ -168,6 +200,8 @@ public abstract class Occupation implements Subject, Observer {
         //leveling up triggers adding a counter to some skill
         if (pastLevel != playerStats.getLevel()) {
             pastLevel = playerStats.getLevel();
+            unassignedSkillPoints++;
+            System.out.println("Skill point assigned, now " + unassignedSkillPoints);
             /**
              //change the skills
              SkillsEnum s;
