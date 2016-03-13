@@ -33,7 +33,7 @@ public class Player extends Character{
         stats.setMovement(10);
         //State.INVENTORYSTATE.setConnect(this);
     } // end constructor
-    
+
 
     public void examinePack() {
         inventory.examine();
