@@ -56,7 +56,7 @@ public class TileView implements Observer, Renderable {
     public void update() {
         if (tile.hasItems()) {
             Item item;
-            System.out.println(tile.getItems());
+            //System.out.println(tile.getItems());
             if (tile.amountOfItems() > 1) {
                 itemView = ItemFactory.makeAsset(ItemsEnum.BAGOFITEMS, tile.getItems().get(0));
                 for (Item i : tile.getItems()) {
