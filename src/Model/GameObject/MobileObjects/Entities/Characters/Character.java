@@ -148,7 +148,7 @@ public abstract class Character extends Entity implements Observer{
 
     public void emptyPack() {
         DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
-        getTile().addItems(inventory.emptyPack());
+        getTile().addItems(inventory.emptyPack(location));
     } // end emptyPack
 
     public void drop(int index) {
