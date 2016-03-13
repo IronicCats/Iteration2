@@ -1,7 +1,7 @@
 package Model.GameObject.MobileObjects;
 
 import Model.GameObject.GameObject;
-import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.Location;
 import Model.Map.Map;
 import Model.Map.Tile;
@@ -26,7 +26,7 @@ public abstract class MobileObject extends GameObject {
     protected Map map;
 
     private float speed;
-    private Tile tile;
+    protected Tile tile;
     // private Nav navigation
     protected Stats stats;
     private boolean canMove;
@@ -64,6 +64,7 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void move(int degrees) {
+        //System.out.println("in here");
         if (location.getDir() == degrees) {
             if (canMove) {
                 canMove = false;
@@ -75,10 +76,6 @@ public abstract class MobileObject extends GameObject {
         } else {
             face(degrees);
         }
-        if(this instanceof Player){
-            System.out.println(getMovement());
-        }
-
     }
 
     public void face(int degrees) {
@@ -106,6 +103,11 @@ public abstract class MobileObject extends GameObject {
         this.viewLocation = viewLocation;
     }
 
+    public void updateViewLocation(float x, float y) {
+        viewLocation.setX(x);
+        viewLocation.setY(y);
+    }
+
     public void resetLocation() {
         this.viewLocation = new ViewLocation(baseLocation.getX(), baseLocation.getY());
     }
@@ -120,12 +122,18 @@ public abstract class MobileObject extends GameObject {
 
 
     public Tile registerTile(Location location) {
-        tile.deregister();
-        while (map.getTile(location).hasObject()) {
-            //Waiting to register with the next tile;
-        }
+        deregister();
         tile = map.register(this);
         return tile;
+    }
+
+    public void deregister() {
+        if(tile != null) {
+            tile.deregister();
+            tile = null;
+        }else {
+            System.out.println("Already deregistered");
+        }
     }
 
     public void interactWithTile() {
@@ -135,6 +143,7 @@ public abstract class MobileObject extends GameObject {
     public Tile getTile() {
         return tile;
     }
+
 
     public int getView() {
         return view;

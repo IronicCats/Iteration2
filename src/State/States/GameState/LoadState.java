@@ -13,6 +13,8 @@ public class LoadState extends State {
 
     private LoadView loadView;
 
+
+    private int lastState;  //0 = Menu,1 = Pause
     public LoadState() {
         loadView = new LoadView();
         setController(new LoadController(this));
@@ -20,10 +22,24 @@ public class LoadState extends State {
 
     }
 
+    public void setLastState(int lastState) {
+        this.lastState = lastState;
+    }
+
+    public int getLastState() {
+        return lastState;
+    }
+
+    public void moveUp(){
+        loadView.previous();
+    }
+    public void moveDown(){loadView.next();}
+
     public void tick() {
     }
 
     public void render(Graphics g) {
         //game.render(g);
+        loadView.render(g);
     }
 }

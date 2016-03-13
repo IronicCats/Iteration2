@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
+import Model.Abilities.SelfAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
@@ -10,7 +11,6 @@ import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
-import Utilities.RespawnQueue;
 import Utilities.Settings;
 import Utilities.Subject;
 import View.Views.ItemView;
@@ -31,7 +31,6 @@ public class Map implements Subject {
     protected Observer observer;
 
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
-    private RespawnQueue respawnQueue;
     private HashMap<Item, ItemView> mapItems;
 
 
@@ -41,8 +40,6 @@ public class Map implements Subject {
         this.height = height;
         this.spawn = spawn;
         map = this;
-        respawnQueue = new RespawnQueue();
-        respawnQueue.registerMap(this);
     }
 
     public Tile getTile(int x, int y) {
@@ -112,7 +109,10 @@ public class Map implements Subject {
     public void carryAttack(Character c, Abilities a) {
         if (a instanceof DirectAbility) {
             getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
-        } else {
+        }else if(a instanceof SelfAbility){
+            System.out.println("This is a self ability");
+            getTile(c.getLocation()).receiveAttack(c, a);
+         }else {
             System.out.println("Not a Direct Ability");
         }
     }
@@ -192,15 +192,6 @@ public class Map implements Subject {
         return true;
     }
 
-    public void respawn(MobileObject object) {
-        object.resetLocation();
-        mobileObjects.put(object, MobileObjectFactory.makeAsset(object.getID(), object));
-    } // end respawn
-
-    public void addToRespawnQueue(MobileObject object) {
-        mobileObjects.remove(object);
-        respawnQueue.push(object);
-    } // end addToRespawnQueue
 
     @Override
     public String toString() {

@@ -12,7 +12,7 @@ public class FriendlyController extends AIController {
         super(map);
     }
 
-    boolean beingAttacked;
+    boolean beingAttacked = false;
 
     @Override
     public void tick() {

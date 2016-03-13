@@ -15,6 +15,7 @@ import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
 import State.States.GameState.GameState;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -175,7 +176,7 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle || i instanceof Interactable && !((Interactable) i).getState()) {
+            if (i instanceof Obstacle || i instanceof Interactable && (!((Interactable) i).getState())) {
                 return false;
             }
         }

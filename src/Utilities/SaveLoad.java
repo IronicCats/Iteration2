@@ -13,6 +13,7 @@ import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Inventory.Equipment;
 import Model.Inventory.EquipmentSlotEnum;
 import Model.Inventory.Inventory;
@@ -22,14 +23,15 @@ import Model.Map.Tile;
 import Model.Map.Tiles.Grass;
 import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
-import Model.Stats.CharacterStats;
+import Model.Stats.*;
+import State.State;
 import State.States.GameState.GameState;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import View.ViewUtilities.Graphics.Assets;
-import View.Views.MapView;
-import View.Views.MobileObjectView;
-import View.Views.TileView;
+import View.Views.*;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,6 +43,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -57,10 +61,19 @@ public class SaveLoad {
     private static GameState game;
     private static MapView gamemapView;
     private static HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private static HashMap<AreaEffect, DecalView> decals;
+    private static HashMap<Item, ItemView> mapItems;
+    private static GameState gs;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
 
-    public static Entity getPlayer() {// this will be changed later
+
+
+    public static GameState getGameState() {
+        return gs;
+    }
+
+    public static Entity getPlayer(){// this will be changed later
         return player;
 
     }
@@ -100,12 +113,39 @@ public class SaveLoad {
 
     //---------------------------------LOAD--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void load(String fileName) {
+        //gs = new GameState();
         currFileName = fileName;
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
+        loadMobileObjects(filePath);
+        //gs.setMap(gameMap);
+        //gs.setMapView(gamemapView);
+
+        //gs.setPlayer((Player)player);
+
+        ((Player) player).update();
+        if(mobileObjects.isEmpty()){
+            System.out.println("This is empty");
+        }
+        else
+            System.out.println("This isn't empty");
+        if (gs == null){
+            System.out.println("This is null");
+        }
+        //gs.setMobileObjects(mobileObjects);
+
+       // ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
+
+        //player.setViewLocation(vl);
+        System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
+        //gs.setMapView(gamemapView);
+
         System.out.println("Everything has been loaded!");
+        gs = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
+        State.GAMESTATE = gs;
+        gs.togglePause();
     }
 
     public static void loadMap(Map inputMap, String fileName) {
@@ -222,9 +262,6 @@ public class SaveLoad {
                                 case 15:
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, l);
                                     break;
-                                case 16:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HAIRBALL, l);
-                                    break;
                                 case 17:
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, l);
                                     break;
@@ -277,28 +314,39 @@ public class SaveLoad {
                                     itemArray[k] = ItemFactory.makeItem(ItemsEnum.PANTS, l);
                                     break;
 
-
                             }
-
+                            System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
+                            System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
 
                         }
 
                     }
-                    Location lg = new Location(i, j);
+
+
+                    ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
+                    //THIS ARRAYLIST AND ADDITEMS STUFF WAS RECENTLY ADDED TO SEE IF IT COULD FIX THE THING
+
+                    Location lg = new Location(i,j);
                     System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
-                    if (terrainType.equalsIgnoreCase("grass")) {
-                        System.out.println("I get the grass.");
+                    if(terrainType.equalsIgnoreCase("grass")) {
+                        //System.out.println("I get the grass.");
+
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
 
-                    } else if (terrainType.equalsIgnoreCase("water")) {
-                        System.out.println("I get the water.");
+                    }
+                    else if(terrainType.equalsIgnoreCase("water")) {
+                        //System.out.println("I get the water.");
+
                         tiles[i][j] = new Water(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
 
                     } else if (terrainType.equalsIgnoreCase("mountain")) {
                         tiles[i][j] = new Mountain(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE);
+                        tiles[i][j].addItems(itemArrayList);
                     }
                     //System.out.println(tiles[i][j].toString());
 
@@ -310,9 +358,8 @@ public class SaveLoad {
 
 
             Map recreateMap = new Map(tiles, mapWidth, mapHeight, spawn);
-            //SaveLoad.setGameMap(recreateMap);
             gameMap = recreateMap;
-            MapView mv = new MapView(recreateMap, tv);
+            MapView mv = new MapView(gameMap, tv);
 
             gamemapView = mv;
             mv.update();
@@ -338,31 +385,33 @@ public class SaveLoad {
             Document doc = docBuilder.parse(new File(file));
             doc.getDocumentElement().normalize();
 
-            NodeList entities = doc.getElementsByTagName("entities"); //might have to be player
+            NodeList mobileObjects = doc.getElementsByTagName("mobileObjects"); //might have to be player
             //Checks the type of the avatar and sets information
             //System.out.println("length =" + entities.getLength()); TODO erase
-            for (int i = 0; i < entities.getLength(); i++) {
-                Element entity = (Element) entities.item(i); // this is a player
+            for (int i = 0; i < mobileObjects.getLength(); i++) {
+                Element entity = (Element) mobileObjects.item(i); // this is a player
                 NodeList p = doc.getElementsByTagName("player");
-                Element pl = (Element) p.item(0);
-                // if (entity.getAttribute("player").equals("player")) {
-                int x = Integer.parseInt(pl.getAttribute("locX"));
-                int y = Integer.parseInt(pl.getAttribute("locY"));
-                int d = Integer.parseInt(pl.getAttribute("direction"));
-                String occupationString = pl.getAttribute("occupation");
-                //System.out.println("Occupation:" + occupation);
 
-                //System.out.println("x=" + x + " y=" + y + " direction=" + d);
-                Location l = new Location(x, y, d);
-                //Location l = new Location(x,y);
-                //avatar.setLocation(l);
-                System.out.println(player.toString());
+                Element pl = (Element)p.item(0);
+               // if (entity.getAttribute("player").equals("player")) {
+                    int x = Integer.parseInt(pl.getAttribute("locX"));
+                    int y = Integer.parseInt(pl.getAttribute("locY"));
+                    int d = Integer.parseInt(pl.getAttribute("direction"));
+                    String occupationString = pl.getAttribute("occupation");
+                    //System.out.println("Occupation:" + occupation);
 
-                //player.setLocation(l);
-                //Player p = new Player(l,)
+                    System.out.println("x=" + x + " y=" + y + " direction=" + d);
+                    Location l = new Location(x,y,d);
+                    //Location l = new Location(x,y);
+                    //avatar.setLocation(l);
+                    //System.out.println(player.toString()); //FIXME this broke it for some reason
 
-                //Player peer = new Player()
-                //Assign occupation when creating new player, don't update jesus fucking christ what is wrong with me.
+                    //player.setLocation(l);
+                    //Player p = new Player(l,)
+
+                    //Player peer = new Player()
+                            //Assign occupation when creating new player, don't update jesus fucking christ what is wrong with me.
+
                 Occupation occupation = null;
                 switch (occupationString) {
                     case "Smasher":
@@ -376,8 +425,11 @@ public class SaveLoad {
                         break;
                 }
 
-                //load inventory
-                Player peer = new Player();
+                //load inventory FIXME
+                Inventory inv = new Inventory();
+                Player peer = new Player(l,2,occupation,inv); //THIS SHOULD BE WORKING
+
+                player = peer;
                 //^ this will be location,occupation,inventory,stats
 
 
@@ -433,6 +485,19 @@ public class SaveLoad {
 
     private static void loadPets(String filename) {
 
+    }
+
+    private static void loadMobileObjects(String filename){
+        Location l = new Location(2,2,0);
+        //Stats stats = new Stats();
+        //Pet a = MobileObjectFactory.makeNPC();
+        //Pet a = new FriendlyNPC()
+        System.out.println("It should be here.");
+        //gameMap.setMobileObjects(mobileObjects);
+        mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+        mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
+        //mobileObjects.put(player,)
+        gameMap.setMobileObjects(mobileObjects);
     }
 
     //---------------------------------------------------------------------//

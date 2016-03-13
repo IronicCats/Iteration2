@@ -63,6 +63,8 @@ public class GameController extends Controller {
                 ((GameState) state).executePlayerCommand(CommandsEnum.ability2);
             } else if (e.getKeyCode() == Settings.THREE) {      /* execute ability3 */
                 ((GameState) state).executePlayerCommand(CommandsEnum.ability3);
+            }   else if(e.getKeyCode() == Settings.FOUR){      /* execute Bind Wounds */
+                ((GameState) state).executePlayerCommand(CommandsEnum.bindWounds);
             } else if (e.getKeyCode() == Settings.INVENTORY) {          /* open inventory state */
                 state.switchState(State.INVENTORYSTATE);
             } else if (e.getKeyCode() == Settings.MAP) {          /* open map state */

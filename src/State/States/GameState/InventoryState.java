@@ -48,25 +48,25 @@ public class InventoryState extends State {
     public void up() {
         if (selector - 4 < 0) selector += 12;
         else selector -= 4;
-        System.out.println(selector);
+        //System.out.println(selector);
     }
 
     public void down() {
         if (selector + 4 > 15) selector -= 12;
         else selector += 4;
-        System.out.println(selector);
+        //System.out.println(selector);
     }
 
     public void right() {
         if (selector % 4 == 3) selector -= 3;
         else selector++;
-        System.out.println(selector);
+        //System.out.println(selector);
     }
 
     public void left() {
         if (selector % 4 == 0) selector += 3;
         else selector--;
-        System.out.println(selector);
+        //System.out.println(selector);
     }
 
     //interaction

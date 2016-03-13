@@ -52,7 +52,6 @@ public class MobileObjectView implements Renderable, Observer {
         this.movement = entity.getMovement();
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
-        System.out.println(sprites.size());
         this.active = 3;
         this.current = 0;
         this.movement = entity.getMovement();
@@ -69,7 +68,6 @@ public class MobileObjectView implements Renderable, Observer {
         this.movement = entity.getMovement();
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
-        System.out.println(sprites.size());
         this.active = 3;
         this.current = 0;
         this.movement = entity.getMovement();
@@ -120,9 +118,6 @@ public class MobileObjectView implements Renderable, Observer {
     }
 
     public void render(Graphics g, int cameraXOffset, int cameraYOffset) {
-        if (entity instanceof Character && ((Character) entity).isDead()) {
-            return;
-        }
         tween();
         g.drawImage(sprites.get(active),
                 (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),

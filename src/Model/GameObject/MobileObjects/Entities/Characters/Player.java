@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.Inventory;
 import Model.Location;
+import Model.Map.Tile;
 import Model.Stats.CharacterStats;
 import Utilities.Observer;
 
@@ -50,4 +51,5 @@ public class Player extends Character{
     public void tick() {
         ((CharacterStats) getStats()).tick();
     }
+
 } // end class Player
