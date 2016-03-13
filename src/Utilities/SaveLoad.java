@@ -119,7 +119,7 @@ public class SaveLoad {
         loadPlayer(filePath);
         loadMobileObjects(filePath);
         gs.setMap(gameMap);
-        //gs.setMapView(gamemapView);
+        gs.setMapView(gamemapView);
 
         gs.setPlayer((Player)player);
 
@@ -141,6 +141,8 @@ public class SaveLoad {
         //gs.setMapView(gamemapView);
 
         System.out.println("Everything has been loaded!");
+        State.GAMESTATE = gs;
+        gs.togglePause();
     }
 
     public static void loadMap(Map inputMap, String fileName) {

@@ -48,10 +48,12 @@ public class GameState extends State {
     private boolean cameraMoving;
 
     private static Player player;
+    private boolean pause;
 
 
     public GameState() {
         //need to change this
+        pause = true;
         cameraMoving = false;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
@@ -94,6 +96,18 @@ public class GameState extends State {
 
     }
 
+    public GameState(Player p,Map m, MapView mv,HashMap<MobileObject, MobileObjectView> mo,HashMap<AreaEffect, DecalView> d,HashMap<Item, ItemView> mi){
+        pause = true;
+        cameraMoving = false;
+        setController(new GameController(this));
+        player = p;
+        map = m;
+        mapView = mv;
+        mobileObjects = mo;
+        decals = d;
+        mapItems = mi;
+    }
+
     public void switchState() {
 
     }
@@ -134,12 +148,16 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        if(pause)
+            return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
         }
     }
 
     public void render(Graphics g) {
+        if(pause)
+            return;
         if (!cameraMoving) {
             camera.centerOnPlayer(player);
         }
@@ -174,6 +192,10 @@ public class GameState extends State {
 
     public void setMobileObjects(HashMap<MobileObject, MobileObjectView> mo) {
         mobileObjects = mo;
+    }
+
+    public void togglePause(){
+        pause = !pause;
     }
 
     @Override
