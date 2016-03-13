@@ -72,6 +72,7 @@ public class GameState extends State {
         player = MobileObjectFactory.Player();
         player.setInitialLevel(5);
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+        //player.setInitialLevel(2);
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
 
         // initializing items
