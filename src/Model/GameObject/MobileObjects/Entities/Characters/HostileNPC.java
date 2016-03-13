@@ -24,7 +24,7 @@ public class HostileNPC extends NPC {
     public void tick() {
         if (isDead()) {
             //respawn eventually
-            deregister();
+            die();
             moveToRespawnQueue();
         }else if(!isDead()) {
             getStats().tick();
