@@ -4,6 +4,7 @@ import Controller.Controllers.TradeController;
 import Model.Abilities.CommandsEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Quest;
+import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Pack;
 import State.State;
 import Utilities.ItemUtilities.ItemFactory;
@@ -20,20 +21,15 @@ public class TradeState extends State {
 
     private HashMap<Item, ItemView> playerItems, shopItems;
     private Pack playerPack, shopPack;
+    Player player;
     private TradeView tradeView;
     private int selector;
 
-    /*public TradeState(GameState game){
-        this.game=game;
-        setController(new TradeController(this));
-        selector=0;
-        tradeView=new TradeView();
-    }*/
-
-    public TradeState(Pack playerPack, Pack shopPack) {
+    public TradeState(Player player, Pack shopPack) {
         setController(new TradeController(this));
 
-        this.playerPack = playerPack;
+        this.player = player;
+        this.playerPack = player.getPack();
         this.shopPack = shopPack;
         playerItems = new HashMap<>();
         shopItems = new HashMap<>();

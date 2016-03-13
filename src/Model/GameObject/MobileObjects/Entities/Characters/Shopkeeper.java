@@ -19,14 +19,14 @@ public class Shopkeeper extends FriendlyNPC {
         super(location, id, occupation, inventory, controller, dialog);
     } // end constructor
 
-    public void initiateTrade(Pack playerPack) {
-        TradeState tradeState = new TradeState( playerPack, getPack());
+    public void initiateTrade(Player player) {
+        TradeState tradeState = new TradeState( player, getPack());
         State.setState(tradeState);
     } // end initiateTrade
 
     public void interact(MobileObject mo) {
         if (mo instanceof Player) {
-            initiateTrade(((Player) mo).getPack());
+            initiateTrade(((Player) mo));
         }
     }
 } // end class Shopkeeper
