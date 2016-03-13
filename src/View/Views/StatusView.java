@@ -11,6 +11,8 @@ public class StatusView implements Renderable {
 
     @Override
     public void render(Graphics g) {
-
+        g.drawString("I'm a bithc", 50, 50);
     }
+
+
 }
