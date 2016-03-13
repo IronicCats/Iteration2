@@ -327,7 +327,7 @@ public class SaveLoad {
 
 
                     ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
-
+                    //THIS ARRAYLIST AND ADDITEMS STUFF WAS RECENTLY ADDED TO SEE IF IT COULD FIX THE THING
 
                     Location lg = new Location(i,j);
                     System.out.println("This is the terrain type of " + i + "," + j + " " + terrainType);
