@@ -22,10 +22,10 @@ public class InventoryController extends Controller {
         if (!canGetInput()) {
             return;
         }
-        if(e.getKeyCode() == Settings.ESC || e.getKeyCode() == Settings.INVENTORY) {
-            ((InventoryState)state).switchState(State.GAMESTATE);
+        if(e.getKeyCode() == Settings.ESC ) {
+            ((InventoryState)state).switchState(State.PAUSESTATE);
         }
-        else if(e.getKeyCode() == KeyEvent.VK_I){
+        else if(e.getKeyCode() == KeyEvent.VK_I|| e.getKeyCode() == Settings.INVENTORY){
             state.switchState(State.GAMESTATE);
         }
         else if(e.getKeyCode() == Settings.EQUIP) {
@@ -50,6 +50,12 @@ public class InventoryController extends Controller {
             ((InventoryState)state).interact();
         }
         else if(e.getKeyCode() == Settings.DROP) {
+            ((InventoryState)state).drop();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_Q){
+            ((InventoryState)state).interact();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_D){
             ((InventoryState)state).drop();
         }
     }
