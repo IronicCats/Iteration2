@@ -103,6 +103,10 @@ public class Pack {
                 items[i] = null;
             }
         }
+
+        tempItems.add(new Money(money));
+        System.out.println("ABout to drop pacK");
+        System.out.println(tempItems.get(0).getClass());
         return tempItems;
     } // end dump
 

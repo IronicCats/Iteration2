@@ -42,6 +42,8 @@ public class EquipmentController extends Controller {
         else if(e.getKeyCode() == Settings.DOWN_RIGHT || e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {  /* move cursor down */
             ((EquipmentState)state).right();
         }
-
+        else if(e.getKeyCode() == KeyEvent.VK_Q){
+            ((EquipmentState)state).unequip();
+        }
     }
 }

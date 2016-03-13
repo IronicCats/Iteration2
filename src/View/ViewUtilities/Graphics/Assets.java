@@ -30,6 +30,7 @@ public class Assets {
     public static BufferedImage BAGOFITEMS;
     public static BufferedImage HEALTH_POTION;
     public static ArrayList<BufferedImage> TREASURE_CHEST;
+    public static ArrayList<BufferedImage> WOODEN_DOOR;
     public static BufferedImage MANA_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
@@ -48,6 +49,10 @@ public class Assets {
     public static BufferedImage CATNIP;
     public static BufferedImage TUNA;
     public static BufferedImage SUSHI;
+    public static BufferedImage VERT_FENCE;
+    public static BufferedImage HORIZ_FENCE_ODD;
+    public static BufferedImage HORIZ_FENCE_EVEN;
+    public static BufferedImage DOOR_KEY;
     // end of items
 
     //vehicles
@@ -137,6 +142,18 @@ public class Assets {
         SpriteSheet sushiSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Sushi.png"));
         SUSHI = sushiSheet.crop(0,0,32,32);
 
+        SpriteSheet vertFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FenceVertical.png"));
+        VERT_FENCE = vertFenceSheet.crop(0,0,32,32);
+
+        SpriteSheet horizXOddFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HorizFenceXOdd.png"));
+        HORIZ_FENCE_ODD = horizXOddFenceSheet.crop(0,0,32,32);
+
+        SpriteSheet horizXEvenFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HorizFenceXEven.png"));
+        HORIZ_FENCE_EVEN = horizXEvenFenceSheet.crop(0,0,32,32);
+
+        SpriteSheet doorKeySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/DoorKey.png"));
+        DOOR_KEY = doorKeySheet.crop(0,0,32,32);
+
         // interactables
 
         TREASURE_CHEST = new ArrayList<>();
@@ -144,6 +161,14 @@ public class Assets {
         SpriteSheet openChestSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenChest.png"));
         TREASURE_CHEST.add(closedChestSheet.crop(0, 0, 32, 28));
         TREASURE_CHEST.add(openChestSheet.crop(0, 0, 32, 28));
+
+        WOODEN_DOOR = new ArrayList<>();
+        SpriteSheet woodenDoorClosedSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/WoodenDoorClosed.png"));
+        SpriteSheet woodenDoorOpenSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/WoodenDoorOpen.png"));
+        WOODEN_DOOR.add(woodenDoorClosedSheet.crop(0, 0, 32, 28));
+        WOODEN_DOOR.add(woodenDoorOpenSheet.crop(0, 0, 32, 28));
+
+        // end interactables
 
         // End of items
 

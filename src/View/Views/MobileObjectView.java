@@ -30,6 +30,8 @@ public class MobileObjectView implements Renderable, Observer {
 
     private int movement;
     private int active;
+    private int current;
+    private boolean incrementing = true;
     private int width;
     private int height;
 
@@ -52,6 +54,7 @@ public class MobileObjectView implements Renderable, Observer {
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
         this.active = 3;
+        this.current = 0;
         this.movement = entity.getMovement();
     } // end constructor
 
@@ -68,11 +71,12 @@ public class MobileObjectView implements Renderable, Observer {
         this.height = sprites.get(0).getHeight();
         System.out.println(sprites.size());
         this.active = 3;
+        this.current = 0;
         this.movement = entity.getMovement();
     }
 
     public void pause() {
-        active = 0;
+        current = 0;
     }
 
     @Override
@@ -89,12 +93,15 @@ public class MobileObjectView implements Renderable, Observer {
     public void tween() {
         if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
-
+            pause();
             return;
         }
 
         entity.setCanMove(false);
-
+        if (entity instanceof Player){
+            //System.out.println("Movement Displayed" + sinWave());
+        }
+        System.out.println((++current % 3) + 1);
         if (goalX != viewLocation.getX()) {
             if (goalX > viewLocation.getX()) {
                 viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
@@ -163,6 +170,17 @@ public class MobileObjectView implements Renderable, Observer {
         } else if (degrees == Settings.NW) {
             this.active = 5;
         }
+    }
+
+    public int sinWave() {
+        if(incrementing && current < 3){
+            ++current;
+        }else if(!incrementing && current > 0) {
+            --current;
+        }else if (current == 3 || current == 0) {
+            incrementing = !incrementing;
+        }
+        return current;
     }
 }
 
