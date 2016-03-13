@@ -124,6 +124,7 @@ public abstract class Character extends Entity implements Observer{
         inventory.unequip(slot);
 
         if(inventory.getSlot(slot) instanceof Weapon) {
+            System.out.println("it's a weapon");
             switch (((Weapon) inventory.getSlot(slot)).getType()) {
                 case ONE_HANDED:
                 case SHIELD:
@@ -159,10 +160,14 @@ public abstract class Character extends Entity implements Observer{
         getTile().sendAttack(this, a);
     }
 
-    public void receiveAttack(Character attacker, Abilities ability) {
+    public void receiveAttack(Character c,Abilities ability) {
         //Calculate Damage done based on Offensive Rating and Defensive Rating
         //But for now, just apply effect
         this.applyEffect(ability.getEffects());
+    }
+
+    public void receiveProjectileAttack(Effect e){
+        this.applyEffect(e);
     }
 
     public boolean pickup(Item item) {

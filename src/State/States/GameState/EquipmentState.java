@@ -104,10 +104,4 @@ public class EquipmentState extends State {
         equipmentView.render(g,s);
     }
 
-    @Override
-
-    public void switchState(State state) {
-        setState(state);
-    }
-
 }

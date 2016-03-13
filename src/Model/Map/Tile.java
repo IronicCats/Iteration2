@@ -11,9 +11,12 @@ import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
+import State.States.GameState.GameState;
+import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
 
@@ -64,7 +67,6 @@ public abstract class Tile implements Subject {
         }
         System.out.println("Interacting with tile");
         Map.map.carryInteraction(object);
-
     }
 
     public void receiveInteraction(MobileObject interacter) {
@@ -89,6 +91,12 @@ public abstract class Tile implements Subject {
     public void receiveAttack(Character c, Abilities a) {
         if (hasObject() && !(object instanceof Vehicle)) {
             ((Character) object).receiveAttack(c, a);
+        }
+    }
+
+    public void receiveProjectileAttack(Projectile p) {
+        if (hasObject() && (!(object instanceof Projectile))) {
+            ((Character) object).receiveProjectileAttack(p.getEffect());
         }
     }
 
@@ -178,7 +186,7 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle || i instanceof Interactable && !((Interactable) i).getState()) {
+            if (i instanceof Obstacle || i instanceof Interactable && (!((Interactable) i).getState())) {
                 return false;
             }
         }

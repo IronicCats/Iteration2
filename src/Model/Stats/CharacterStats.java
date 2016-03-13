@@ -420,9 +420,6 @@ public class CharacterStats extends Stats implements Subject {
                 else
                     this.movement += amount;
                 System.out.println("New movement is " + this.movement);
-                /**
-                 * add movment to equipment modifications instead
-                 */
                 break;
             case LIVES_LEFT:
                 this.livesLeft += livesLeft;
