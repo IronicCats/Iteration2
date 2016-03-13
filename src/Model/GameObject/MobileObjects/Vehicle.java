@@ -4,6 +4,9 @@ import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import Model.Stats.Stats;
+import State.State;
+import State.States.GameState.TradeState;
+import State.States.GameState.VehicleState;
 
 /**
  * Created by Wimberley on 3/3/16.
@@ -22,12 +25,13 @@ public class Vehicle extends MobileObject {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
             getMounted(mo);
-
         }
     }
 
     public void getMounted(MobileObject mo){
-
+        VehicleState vehicleState = new VehicleState();
+        mo.getStats().setMovement(this.getMovement());
+        State.setState(vehicleState);
     }
 
     @Override
