@@ -102,6 +102,7 @@ public class Pack {
             if (items[i] != null) {
                 tempItems.add(items[i]);
                 items[i] = null;
+                --count;
             }
         }
 
