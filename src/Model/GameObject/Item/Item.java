@@ -16,12 +16,12 @@ import java.util.ArrayList;
 // Parent class of all items. Holds attributes common to ALL items
 public abstract class Item extends GameObject implements Subject {
 
-    private int id; // used to determine type of item
+    protected int id; // used to determine type of item
     private String name;
     private String description;
     private int value;
     private ArrayList<Observer> observers;
-    private ItemsEnum type;
+    protected ItemsEnum type;
 
     public Item() {
         super();

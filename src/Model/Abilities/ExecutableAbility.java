@@ -18,5 +18,9 @@ public abstract class ExecutableAbility extends Abilities {
     }
 
     //operations
-    public abstract void execute(MobileObject targeted);
+    public int getSkillLevel(){
+        return this.getSkillLevel();
+    }
+
+    public abstract void execute(MobileObject targeter, MobileObject targeted);
 }

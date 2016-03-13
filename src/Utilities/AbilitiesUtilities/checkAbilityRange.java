@@ -9,16 +9,18 @@ import java.util.ArrayList;
  */
 public class checkAbilityRange {
 
-    public static ArrayList<Abilities> check(ArrayList<Abilities> abilities, int range){
+    public static Abilities check(ArrayList<Abilities> abilities){
 
-        ArrayList<Abilities> abilitiesInRange = new ArrayList<Abilities>();
+        Abilities maxAbility = abilities.get(0);
+        int range = abilities.get(0).getRange();
 
         for(Abilities ability: abilities){
-            if(ability.getRange() >= range){
-            abilitiesInRange.add(ability);
+            if(ability.getRange() > range){
+                range = ability.getRange();
+                maxAbility = ability;
             }
         }
-        return abilitiesInRange;
+        return maxAbility;
     }
 
 }

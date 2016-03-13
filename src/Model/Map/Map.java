@@ -3,11 +3,14 @@ package Model.Map;
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
+import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
+import Utilities.RespawnQueue;
 import Utilities.Settings;
 import Utilities.Subject;
 import View.Views.ItemView;
@@ -28,6 +31,7 @@ public class Map implements Subject {
     protected Observer observer;
 
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private RespawnQueue respawnQueue;
     private HashMap<Item, ItemView> mapItems;
 
 
@@ -37,7 +41,8 @@ public class Map implements Subject {
         this.height = height;
         this.spawn = spawn;
         map = this;
-
+        respawnQueue = new RespawnQueue();
+        respawnQueue.registerMap(this);
     }
 
     public Tile getTile(int x, int y) {
@@ -79,6 +84,26 @@ public class Map implements Subject {
         try {
             tiles[a.getX()][a.getY()].setAreaEffectTile(a);
             tiles[a.getX()][a.getY()].alert();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void placeTeleportAreaEffectBeginning(TeleportAreaEffect t){
+        try {
+            tiles[t.getX()][t.getY()].setTeleportAreaEffectTile(t);
+            tiles[t.getX()][t.getY()].alert();
+            this.placeTeleportAreaEffectEnding(new TeleportAreaEffect(t.getEndLocation(), t.getLocation())); //place other portal
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void placeTeleportAreaEffectEnding(TeleportAreaEffect t){
+        try {
+            tiles[t.getX()][t.getY()].setTeleportAreaEffectTile(t);
+            tiles[t.getX()][t.getY()].alert();
+            //not calling the other method because that has already been placed
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -166,6 +191,16 @@ public class Map implements Subject {
         }
         return true;
     }
+
+    public void respawn(MobileObject object) {
+        object.resetLocation();
+        mobileObjects.put(object, MobileObjectFactory.makeAsset(object.getID(), object));
+    } // end respawn
+
+    public void addToRespawnQueue(MobileObject object) {
+        mobileObjects.remove(object);
+        respawnQueue.push(object);
+    } // end addToRespawnQueue
 
     @Override
     public String toString() {

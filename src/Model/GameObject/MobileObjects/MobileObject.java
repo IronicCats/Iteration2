@@ -29,6 +29,7 @@ public abstract class MobileObject extends GameObject {
     // private Nav navigation
     protected Stats stats;
     private boolean canMove;
+    private Location baseLocation;
     private ViewLocation viewLocation;
     private int view, range;
     private int id;
@@ -38,6 +39,7 @@ public abstract class MobileObject extends GameObject {
         canMove = true;
         stats = new Stats();
         viewLocation = new ViewLocation(location.getX(), location.getY());
+        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
         map = GameState.map;
         tile = map.register(this);
         view = 2;
@@ -49,6 +51,7 @@ public abstract class MobileObject extends GameObject {
         super(location);
         canMove = true;
         viewLocation = new ViewLocation(location.getX(), location.getY());
+        baseLocation = new Location((int)viewLocation.getX(), (int)viewLocation.getY());
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
@@ -94,6 +97,10 @@ public abstract class MobileObject extends GameObject {
 
     public void setViewLocation(ViewLocation viewLocation) {
         this.viewLocation = viewLocation;
+    }
+
+    public void resetLocation() {
+        this.viewLocation = new ViewLocation(baseLocation.getX(), baseLocation.getY());
     }
 
     public boolean canMove() {
@@ -144,6 +151,11 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void interact(MobileObject mo) {
+        System.out.println("in here");
+        if(mo instanceof Vehicle){
+            ((Vehicle) mo).interact();
+            System.out.println("trying to mount");
+        }
         DisplayMessage.addMessage(new GameMessage("No Interaction Possible", 2));
     }
 }

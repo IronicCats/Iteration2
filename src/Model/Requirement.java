@@ -94,7 +94,7 @@ public class Requirement {
     }
 
     public boolean meetsRequirements(int playerLevel, Pack pack, Occupation occupation) {
-        if (hasRequiredItem(pack) && meetsLevel(playerLevel) && isRequiredOccupation(occupation)) {
+        if (isRequiredOccupation(occupation) && meetsLevel(playerLevel) && hasRequiredItem(pack)) {
             return true;
         }
         return false;

@@ -41,17 +41,13 @@
         Settings file in place, need to configure values
 
 Shopkeeping:
-    ShopView, ShopState
-    Entities need money
-        money can be found on the ground, dropped by enemies
     Shopkeeper as subclass of FriendlyNPC
         leave dialog, move references to pack and whatnot
 
 Change text on bottom left to not stay open for as long
 Remove NPC fully from map on death
     Currently you cannot walk on a tile where an NPC has died
-Check equippable requirement on interact with equipment (InventoryState)
-
+Interact with chests, doors, ...
 
 AI
     FriendlyAI
