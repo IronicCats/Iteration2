@@ -35,7 +35,6 @@ public class Assets {
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
     public static BufferedImage PUFFER_FISH_MACE;
-    public static BufferedImage HAIRBALL;
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
     public static BufferedImage CHESTPLATE;
@@ -57,6 +56,9 @@ public class Assets {
 
     //vehicles
     public static ArrayList<BufferedImage> ROOMBA;
+
+    //projectile
+    public static BufferedImage HAIRBALL;
 
     public static BufferedImage SKULL;
     public static BufferedImage REDCROSS;
@@ -186,6 +188,15 @@ public class Assets {
         ROOMBA.add(roomba4.crop(0, 0, 32, 32));
         ROOMBA.add(roomba5.crop(0, 0, 32, 32));
         ROOMBA.add(roomba6.crop(0, 0, 32, 32));
+
+        //Projectiles
+        SpriteSheet hairball1 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+        SpriteSheet hairball2 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+        SpriteSheet hairball3 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+        SpriteSheet hairball4 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+        SpriteSheet hairball5 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+        SpriteSheet hairball6 = new SpriteSheet((new ImageLoader().loadImage("/Vehciles/Hairball.png")));
+
 
 
         //Entities
