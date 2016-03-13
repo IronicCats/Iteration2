@@ -40,7 +40,9 @@ public class Projectile extends MobileObject {
 
     @Override
     public void move(int degrees) {
-        // some code
+
+
+
     }
 
 }
