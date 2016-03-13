@@ -40,21 +40,24 @@ public class EnemyController extends AIController {
     public void followThenAttackinRange() {
         if (canFace()) {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
-            /*if (enemy.getOccupation() instanceof Smasher) {
-                if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
+            if (enemy.getOccupation() instanceof Smasher) {
+                if (DistanceFromFaceableTarget.calculate(target, enemy) == 1) {
+                    System.out.println("attacking");
                     enemy.attack(enemy.getAbilities().get(0));
-                } else {
+                }
+                else{
                     follow();
                 }
-            } else {
+            }
+            else {
                 Abilities a = checkAbilityRange.check(enemy.getOccupation().getOccupationalAbilities());
                 if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
                     //enemy.attack(a);
-                } else {
-                    follow();
                 }
-
-            }*/
+            }
+        }
+        else{
+            follow();
         }
     }
 
