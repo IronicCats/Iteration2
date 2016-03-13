@@ -19,6 +19,7 @@ public class State implements Tickable, Renderable {
     public static InventoryState INVENTORYSTATE;
     public static InitialState INITIALSTATE;
     public static TradeState TRADESTATE;
+    public static SkillsState SKILLSSTATE;
 
     public static LoadState LOADSTATE;
     public static SaveState SAVESTATE;
@@ -33,7 +34,8 @@ public class State implements Tickable, Renderable {
     private Controller controller;
 
 
-    public void switchState(State state) {
+    public static void switchState(State state) {
+        setState(state);
     }
 
     public static void setState(State state) {

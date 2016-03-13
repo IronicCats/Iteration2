@@ -48,7 +48,7 @@ public class EnemyController extends AIController {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
             if (enemy.getOccupation() instanceof Smasher) {
                 if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
-                    System.out.println("attacking");
+                    //System.out.println("attacking");
                     enemy.attack(enemy.getAbilities().get(0));
                 }
                 else if(DistanceFromFaceableTarget.calculate(enemy, target) > 1){

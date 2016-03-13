@@ -152,7 +152,8 @@ public abstract class Character extends Entity implements Observer{
 
     public void emptyPack() {
         DisplayMessage.addMessage(new GameMessage("You emptied your Pack", 3));
-        getTile().addItems(inventory.emptyPack());
+        //System.out.println("emptying pack at location " + getTile().getLocation());
+        getTile().addItems(inventory.emptyPack(location));
     } // end emptyPack
 
     public void drop(int index) {
@@ -180,7 +181,7 @@ public abstract class Character extends Entity implements Observer{
     } // end applyEffect
 
     public void setInitialLevel(int level) {
-        for (int i = 0; i < level; i++) {
+        for (int i = 0; i < level-1; i++) {
             getStats().levelUp();
         }
     } // end setInitialLevel
@@ -252,6 +253,7 @@ public abstract class Character extends Entity implements Observer{
         location.setY(getBaseLocation().getY());
         updateViewLocation(Utilities.calculateTileCenterXLocation(getX(), getY()), Utilities.calculateTileCenterYLocation(getX(), getY()));
         if(map.getTile(location).hasObject()){
+            System.out.println("Uh Oh, something is already on your base location");
             return false;
         }
         registerTile(location);
@@ -290,12 +292,7 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void update() {
-        if(!getStats().isAlive()) {
-            emptyPack();
-            getStats().revive();
-        } else {
-            getStats().update();
-        }
+
     } // end update
 
     @Override
@@ -303,15 +300,25 @@ public abstract class Character extends Entity implements Observer{
 
     @Override
     public void tick() {
+        if(this instanceof Player) {
+
+        }
         if (isDead()) {
             //respawn eventually
-            deregister();
-            revive();
+            die();
+            moveToRespawnQueue();
         }else {
             getStats().tick();
         }
 
     } // end tick
+
+    public void die() {
+        if(getTile() != null) {
+            emptyPack();
+            deregister();
+        }
+    }
 
     public void moveToRespawnQueue() {
         if(RespawnQueue.isInQueue(this)){

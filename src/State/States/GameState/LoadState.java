@@ -30,9 +30,6 @@ public class LoadState extends State {
         return lastState;
     }
 
-    public void switchState() {
-
-    }
     public void moveUp(){
         loadView.previous();
     }
@@ -44,10 +41,5 @@ public class LoadState extends State {
     public void render(Graphics g) {
         //game.render(g);
         loadView.render(g);
-    }
-
-    @Override
-    public void switchState(State state) {
-        setState(state);
     }
 }

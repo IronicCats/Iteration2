@@ -2,14 +2,27 @@ package State.States.GameState;
 
 import Controller.Controllers.VehicleController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
+import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
 import Model.Map.Map;
 import State.State;
 import Utilities.MapUtilities.Navigation;
+import Utilities.MobileObjectUtilities.MobileObjectEnum;
+import Utilities.MobileObjectUtilities.MobileObjectFactory;
+import Utilities.Settings;
+import Utilities.Utilities;
 import View.ViewUtilities.Camera;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MapView;
+import Model.Map.Map;
+import View.Views.MessageBox.GameMessage;
+import View.Views.MobileObjectView;
 
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 3/12/2016.
@@ -17,23 +30,36 @@ import java.awt.*;
 public class VehicleState extends State{
 
     private Vehicle vehicle;
+    private HashMap<MobileObject, MobileObjectView> mobileObjects;
 
     @Override
-    public void render(Graphics g) {
-        State.GAMESTATE.render(g);
-    }
-    @Override
     public void tick() {
-        State.GAMESTATE.tick();
+        for (MobileObject key : mobileObjects.keySet()) {
+            key.tick();
+        }
     }
 
     public VehicleState(Vehicle vehicle) {
-        setController(new VehicleController(this));
         this.vehicle = vehicle;
+        this.vehicle.getDriver().deregister();
+        mobileObjects = GAMESTATE.getMobileObjects();
+        setController(new VehicleController(this));
+        mobileObjects.remove(this.vehicle.getDriver());
     }
 
-    public void unMount(){
-        vehicle.getUnmounted();
+    public void unmount(){
+        Location loc = location();
+        if(loc != null) {
+            vehicle.unmount();
+            vehicle.getDriver().setLocation(loc);
+            vehicle.getDriver().setViewLocation(new ViewLocation(vehicle.getDriver().getX(), vehicle.getDriver().getY()));
+            mobileObjects.put(vehicle.getDriver(), MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, vehicle.getDriver()));
+            vehicle.getDriver().dismountOntoTile(loc);
+            State.switchState(State.GAMESTATE);
+        }
+        else{
+            DisplayMessage.addMessage(new GameMessage("You cannot unmount here", 2));
+        }
     }
 
     public void move(int degrees) {
@@ -42,6 +68,37 @@ public class VehicleState extends State{
             vehicle.move(degrees);
         } else {
             vehicle.face(degrees);
+        }
+    }
+
+    @Override
+    public void render(Graphics g) {
+        GAMESTATE.getCamera().centerOnObject(vehicle);
+        GAMESTATE.getMapView().render(g, GAMESTATE.getCamera().getxOffset(), GAMESTATE.getCamera().getyOffset(), vehicle.getLocation());
+        DisplayMessage.render(g);
+    }
+
+    public Location location(){
+        if(Navigation.checkMove(Location.newLocation(Settings.NORTH, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.NORTH, vehicle.getLocation());
+        }
+        else if(Navigation.checkMove(Location.newLocation(Settings.NE, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.NE, vehicle.getLocation());
+        }
+        else if(Navigation.checkMove(Location.newLocation(Settings.SE, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.SE, vehicle.getLocation());
+        }
+        else if(Navigation.checkMove(Location.newLocation(Settings.SOUTH, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.SOUTH, vehicle.getLocation());
+        }
+        else if(Navigation.checkMove(Location.newLocation(Settings.SW, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.SW, vehicle.getLocation());
+        }
+        else if(Navigation.checkMove(Location.newLocation(Settings.NW, vehicle.getLocation()), GAMESTATE.getMap(), this.vehicle.getDriver())){
+            return Location.newLocation(Settings.NW, vehicle.getLocation());
+        }
+        else{
+            return null;
         }
     }
 }
