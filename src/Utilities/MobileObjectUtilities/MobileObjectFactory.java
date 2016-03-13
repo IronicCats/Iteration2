@@ -61,7 +61,7 @@ public class MobileObjectFactory {
         enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(13,13), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
@@ -69,10 +69,6 @@ public class MobileObjectFactory {
         Vehicle roomba = (Vehicle)makeNPC(MobileObjectEnum.ROOMBA, new Location(4,1), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
         roomba.getStats().setMovement(5);
-
-        if (GameState.getPlayer() != null) {
-            //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
-        }
 
         return objects;
     }
