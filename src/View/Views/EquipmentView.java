@@ -295,7 +295,7 @@ public class EquipmentView implements Renderable, Observer {
     }
     @Override
     public void update() {
-        System.out.println("update called");
+        //System.out.println("update called");
         stats = player.getStats();
     }
 

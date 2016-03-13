@@ -49,7 +49,7 @@ public abstract class Character extends Entity implements Observer{
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
         bindWounds = occupation.getBindWounds();
-        System.out.println(attack);
+        //System.out.println(attack);
         getStats().addObserver(this);
         this.addObserver(occupation);
 
@@ -98,6 +98,8 @@ public abstract class Character extends Entity implements Observer{
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        if(inventory.getSlot(slot) == null)
+            return;
         getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
         inventory.unequip(slot);
     } // end unequip

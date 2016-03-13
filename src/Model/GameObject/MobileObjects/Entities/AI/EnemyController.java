@@ -29,7 +29,6 @@ public class EnemyController extends AIController {
     @Override
     public void tick() {
         if(targetinView()) {
-            System.out.println("target is in view");
             followThenAttackinRange();
         }
         else{
@@ -44,17 +43,14 @@ public class EnemyController extends AIController {
 
 
     public void followThenAttackinRange() {
-        System.out.println(canFace());
         if (canFace()) {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
             if (enemy.getOccupation() instanceof Smasher) {
-                System.out.println("distance: " + DistanceFromFaceableTarget.calculate(enemy, target));
                 if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
                     System.out.println("attacking");
-                    //enemy.attack(enemy.getAbilities().get(0));
+                    enemy.attack(enemy.getAbilities().get(0));
                 }
                 else if(DistanceFromFaceableTarget.calculate(enemy, target) > 1){
-                    System.out.println("facing but need to be closer");
                     follow();
                 }
             }
@@ -66,7 +62,6 @@ public class EnemyController extends AIController {
             }
         }
         else{
-            System.out.println("In view but need to move to face");
             follow();
         }
     }

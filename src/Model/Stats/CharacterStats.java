@@ -249,7 +249,7 @@ public class CharacterStats extends Stats implements Subject {
 
     public void applyEffect(Effect[] e) {
         for (Effect effect : e) {
-            System.out.println(e);
+            //System.out.println(e);
             applyEffect(effect);
         }
     } // end applyEffect

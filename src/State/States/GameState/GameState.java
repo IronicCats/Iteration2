@@ -116,9 +116,9 @@ public class GameState extends State {
 
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
         map.setMobileObjects(mobileObjects);
-        System.out.println(getMobileObjectView(player));
-        System.out.println("x:" +Integer.toString(player.getLocation().getX()));
-        System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        //System.out.println(getMobileObjectView(player));
+        //System.out.println("x:" +Integer.toString(player.getLocation().getX()));
+        //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
         mapView.update();
 
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
@@ -131,13 +131,14 @@ public class GameState extends State {
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
-        System.out.println("x:" +Integer.toString(player.getLocation().getX()));
-        System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        //System.out.println("x:" +Integer.toString(player.getLocation().getX()));
+        //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        /*
         if(player.canMove())
             System.out.println("Player can move.");
         else
             System.out.println("Player can't move");
-
+        */
 
         if (cameraMoving) {
             camera.move(degrees);
@@ -178,6 +179,7 @@ public class GameState extends State {
             //return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
+            
         }
     }
 

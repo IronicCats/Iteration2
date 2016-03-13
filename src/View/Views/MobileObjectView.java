@@ -52,7 +52,6 @@ public class MobileObjectView implements Renderable, Observer {
         this.movement = entity.getMovement();
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
-        System.out.println(sprites.size());
         this.active = 3;
         this.current = 0;
         this.movement = entity.getMovement();
@@ -69,7 +68,6 @@ public class MobileObjectView implements Renderable, Observer {
         this.movement = entity.getMovement();
         this.width = sprites.get(0).getWidth();
         this.height = sprites.get(0).getHeight();
-        System.out.println(sprites.size());
         this.active = 3;
         this.current = 0;
         this.movement = entity.getMovement();
@@ -101,7 +99,6 @@ public class MobileObjectView implements Renderable, Observer {
         if (entity instanceof Player){
             //System.out.println("Movement Displayed" + sinWave());
         }
-        System.out.println((++current % 3) + 1);
         if (goalX != viewLocation.getX()) {
             if (goalX > viewLocation.getX()) {
                 viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
