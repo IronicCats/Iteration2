@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
+import Model.Abilities.SelfAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
@@ -112,7 +113,10 @@ public class Map implements Subject {
     public void carryAttack(Character c, Abilities a) {
         if (a instanceof DirectAbility) {
             getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
-        } else {
+        }else if(a instanceof SelfAbility){
+            System.out.println("This is a self ability");
+            getTile(c.getLocation()).receiveAttack(c, a);
+         }else {
             System.out.println("Not a Direct Ability");
         }
     }
