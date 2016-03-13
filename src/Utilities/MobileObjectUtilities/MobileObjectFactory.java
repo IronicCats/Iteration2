@@ -142,7 +142,6 @@ public class MobileObjectFactory {
                                         ItemFactory.makeItem(ItemsEnum.STICK_SWORD, location),
                                         ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, location),
                                         ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, location),
-                                        ItemFactory.makeItem(ItemsEnum.HAIRBALL, location)
                                 }, 500),
                                 new Equipment()
                         ),
