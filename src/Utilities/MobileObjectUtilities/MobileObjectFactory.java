@@ -8,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
 import Model.GameObject.MobileObjects.Entities.Pet;
@@ -54,6 +55,8 @@ public class MobileObjectFactory {
         enemy1.getController().setEnemy(enemy1);
         enemy1.getController().setBaseLoc(new Location(4,5));
         objects.put(enemy1, makeAsset(MobileObjectEnum.BLUE, enemy1));
+
+        
 
         // Shopkeeper one
         Shopkeeper shopkeeper1 = (Shopkeeper) makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER, new Location(2, 3), map, player);
@@ -172,7 +175,7 @@ public class MobileObjectFactory {
 
     public static Player Player() {
         // player
-        Player player = new Player(new Location(0, 1), 2, new Smasher(), new Inventory());
+        Player player = new Player(new Location(0, 1), 2, new Summoner(), new Inventory());
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
