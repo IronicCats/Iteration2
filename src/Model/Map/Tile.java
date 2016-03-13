@@ -174,7 +174,7 @@ public abstract class Tile implements Subject {
 
     public boolean isWalkable() {
         for (Item i : items) {
-            if (i instanceof Obstacle || i instanceof Interactable) {
+            if (i instanceof Obstacle || i instanceof Interactable && !((Interactable) i).getState()) {
                 return false;
             }
         }

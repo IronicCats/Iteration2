@@ -61,7 +61,7 @@ public class MobileObjectFactory {
         enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(13,13), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
@@ -69,10 +69,6 @@ public class MobileObjectFactory {
         Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
         roomba.getStats().setMovement(12);
-
-        if (GameState.getPlayer() != null) {
-            //enemy1.getController().setMobileObject(State.GAMESTATE.getPlayer());
-        }
 
         return objects;
     }
@@ -127,7 +123,13 @@ public class MobileObjectFactory {
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Corgi stuff for sale");
+                            add("More corgi stuff for sale");
+                            add("hello world");
+                            add("foo");
+                            add("bar");
+                        }});
             case WOLF_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
@@ -142,7 +144,13 @@ public class MobileObjectFactory {
                                 new Equipment()
                         ),
                         new FriendlyController(map),
-                        new ArrayList<>());
+                        new ArrayList<String>() {{
+                            add("Wolf stuff for sale");
+                            add("More wolf stuff for sale");
+                            add("dlrow olleh");
+                            add("oof");
+                            add("rab");
+                        }});
             case DAVE_PET:
                return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
@@ -161,8 +169,7 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
         Player player = new Player(new Location(0, 1), 2, new Smasher(), new Inventory());
-        ;
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
 

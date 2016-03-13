@@ -13,10 +13,12 @@ import java.awt.event.KeyEvent;
  */
 public class SaveController extends Controller {
     private int currentState;
+
     public SaveController(State state) {
         super(state);
         currentState = 1;
     } // end constructor
+
 
     @Override
     public void keyPressed(KeyEvent e) {

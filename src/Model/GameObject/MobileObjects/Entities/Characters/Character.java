@@ -12,6 +12,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Inventory.*;
@@ -31,6 +32,7 @@ import java.util.Iterator;
 public abstract class Character extends Entity implements Observer{
     protected Inventory inventory;
     protected Abilities attack;
+    protected Abilities bindWounds;
     protected Abilities ability1;
     protected Abilities ability2;
     protected Abilities ability3;
@@ -46,7 +48,8 @@ public abstract class Character extends Entity implements Observer{
         super(location, id, occupation.getStats(), occupation);
         this.inventory = inventory;
         attack = occupation.getBasicAttack();
-        System.out.println(attack);
+        bindWounds = occupation.getBindWounds();
+        //System.out.println(attack);
         getStats().addObserver(this);
         this.addObserver(occupation);
 
@@ -95,8 +98,10 @@ public abstract class Character extends Entity implements Observer{
     } // end equip
 
     public void unequip(EquipmentSlotEnum slot) {
+        if(inventory.getSlot(slot) == null)
+            return;
+        getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
         inventory.unequip(slot);
-        ((CharacterStats) getStats()).removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
     } // end unequip
 
     public void mount(Vehicle vehicle){
@@ -188,6 +193,10 @@ public abstract class Character extends Entity implements Observer{
                 System.out.println("Attacking with: " + attack.getName());
                 attack(this.attack);
                 break;
+            case bindWounds:
+                System.out.println("Binding Wounds");
+                attack(this.bindWounds);
+                break;
             case ability1:
                 attack(ability1);
                 break;
@@ -263,6 +272,8 @@ public abstract class Character extends Entity implements Observer{
         if(!getStats().isAlive()) {
             emptyPack();
             getStats().revive();
+        } else {
+            getStats().update();
         }
     } // end update
 

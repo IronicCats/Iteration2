@@ -44,15 +44,17 @@ public class GameState extends State {
     public static Map map;
     private Camera camera;
     private MapView mapView;
-    SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
+    //SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
     private boolean cameraMoving;
 
     private static Player player;
+    private boolean pause;
 
 
     public GameState() {
         //need to change this
+        pause = true;
         cameraMoving = false;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
@@ -68,7 +70,7 @@ public class GameState extends State {
         //creating a new player
         player = MobileObjectFactory.Player();
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
@@ -97,12 +99,46 @@ public class GameState extends State {
 
     }
 
+    public GameState(Player p,Map m, MapView mv,HashMap<MobileObject, MobileObjectView> mo,HashMap<AreaEffect, DecalView> d,HashMap<Item, ItemView> mi){
+        pause = true;
+        cameraMoving = false;
+        map = m;
+        mapView = mv;
+        setController(new GameController(this));
+        camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT, map);
+        player = p;
+
+
+        mobileObjects = mo;
+        decals = d;
+        mapItems = mi;
+
+        mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+        map.setMobileObjects(mobileObjects);
+        //System.out.println(getMobileObjectView(player));
+        //System.out.println("x:" +Integer.toString(player.getLocation().getX()));
+        //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        mapView.update();
+
+        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
+        map.placeAreaEffect(a);
+    }
+
     public void switchState() {
 
     }
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
+        //System.out.println("x:" +Integer.toString(player.getLocation().getX()));
+        //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        /*
+        if(player.canMove())
+            System.out.println("Player can move.");
+        else
+            System.out.println("Player can't move");
+        */
+
         if (cameraMoving) {
             camera.move(degrees);
         } else if (Navigation.checkMove(Location.newLocation(degrees, player.getLocation()), map, player) & player.canMove()) { // returns if new location is walkable
@@ -137,6 +173,9 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        //FIXME
+       // if(pause)
+            //return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
             if(key instanceof Character && ((Character) key).isDead()){
@@ -148,7 +187,11 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
+        //FIXME
+        //if(pause)
+           // return;
         if (!cameraMoving ) {
+
             camera.centerOnPlayer(player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
@@ -167,6 +210,25 @@ public class GameState extends State {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    public static void setPlayer(Player player) {
+        GameState.player = player;
+    }
+
+    public static void setMap(Map map) {
+        GameState.map = map;
+    }
+    public  void setMapView(MapView mv){
+        mapView = mv;
+    }
+
+    public void setMobileObjects(HashMap<MobileObject, MobileObjectView> mo) {
+        mobileObjects = mo;
+    }
+
+    public void togglePause(){
+        pause = !pause;
     }
 
     @Override

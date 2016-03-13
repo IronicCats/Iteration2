@@ -37,13 +37,12 @@ public class Sneak extends Occupation {
         ));
 
         //computes occupational abilities
-        getOccupationalAbilities().add(new PickPocket("Pick Pocket",
-                                        "Helps you steal another entity's money",
-                                         new Effect(new StatStructure(StatsEnum.LIFE, 0)),
-                                         new Requirement(0),
-                                         new Effect(new StatStructure(StatsEnum.MANA, 0)),
-                                         getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
-
+        getOccupationalAbilities().put(SkillsEnum.PICKPOCK,new PickPocket("Pick Pocket",
+                                         "Helps you steal another entity's money",
+                                          new Effect(new StatStructure(StatsEnum.LIFE, 0)),
+                                          new Requirement(0),
+                                          new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                                          getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
     }
 
     //operations
@@ -70,21 +69,10 @@ public class Sneak extends Occupation {
 
     public void recomputeOccupationalAbilities() {
         //basic attack
-        setBasicAttack(new DirectAbility(
-                "Attack",
-                "Basic attack of sneak",
-                new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())),
-                new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))
-        ));
+       getBasicAttack().setEffects( new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())));
+
         //compute occupational abilities
-        getOccupationalAbilities().clear();
-        getOccupationalAbilities().add(new PickPocket("Pick Pocket",
-                                                      "Helps you steal another entity's money",
-                                                       new Effect(new StatStructure(StatsEnum.LIFE, 0)),
-                                                       new Requirement(0),
-                                                       new Effect(new StatStructure(StatsEnum.MANA, 0)),
-                                                       getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+        ((PickPocket)(getOccupationalAbilities().get(SkillsEnum.PICKPOCK))).setSkillLevel(getOccupationalSkillsValue(SkillsEnum.PICKPOCK));
     }
 
 }
