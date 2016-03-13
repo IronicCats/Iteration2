@@ -67,7 +67,9 @@ public class Requirement {
     } // end constructor
 
     public int getRequiredLevel() { return requiredLevel; }
+
     public ItemsEnum getRequiredItemEnum() { return requiredItemEnum; }
+
     public Occupation getRequiredOccupation() { return requiredOccupation; }
 
     public boolean meetsLevel(int level) {

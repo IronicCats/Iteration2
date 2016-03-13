@@ -1,6 +1,8 @@
 package View.ViewUtilities;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Map.Map;
 import Utilities.Observer;
 import Utilities.Settings;
@@ -38,11 +40,11 @@ public class Camera implements Observer {
         }
     }
 
-    public void centerOnPlayer(Player player) {
+    public void centerOnObject(MobileObject mo) {
         gameWidth = Settings.GAMEWIDTH;
         gameHeight = Settings.GAMEHEIGHT;
-        xOffset = (int) player.getViewLocation().getX() - gameWidth / 2 + Settings.PLAYERWIDTH / 2;
-        yOffset = (int) player.getViewLocation().getY() - gameHeight / 2 + Settings.PLAYERHEIGHT / 2;
+        xOffset = (int) mo.getViewLocation().getX() - gameWidth / 2 + Settings.PLAYERWIDTH / 2;
+        yOffset = (int) mo.getViewLocation().getY() - gameHeight / 2 + Settings.PLAYERHEIGHT / 2;
         keepCameraOnMap();
     }
 

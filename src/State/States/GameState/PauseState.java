@@ -36,10 +36,4 @@ public class PauseState extends State {
         State.GAMESTATE.render(g);
         pauseView.render(g);
     }
-
-    @Override
-    public void switchState(State state) {
-
-        setState(state);
-    }
 }
