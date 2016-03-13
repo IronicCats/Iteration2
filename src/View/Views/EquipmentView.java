@@ -93,7 +93,7 @@ public class EquipmentView implements Renderable, Observer {
         if (equipment.getSlot(EquipmentSlotEnum.LEGS) == null) equipView[7] = null;
             else equipView[7] = ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.LEGS).getItemType(), equipment.getSlot(EquipmentSlotEnum.LEGS));
 
-        if (equipment.getSlot(EquipmentSlotEnum.GLOVES) == null) equipView[6] = null;
+        if (equipment.getSlot(EquipmentSlotEnum.GLOVES) == null) equipView[6] = equipView[6]= null;
             else equipView[6] = equipView[8]=ItemFactory.makeAsset(equipment.getSlot(EquipmentSlotEnum.GLOVES).getItemType(), equipment.getSlot(EquipmentSlotEnum.GLOVES));
 
         if (equipment.getSlot(EquipmentSlotEnum.BOOTS) == null) equipView[10] = null;
