@@ -407,8 +407,10 @@ public class CharacterStats extends Stats implements Subject {
                     this.experience += amount;
                 break;
             case MOVEMENT:
-                if (m.equals(ModificationEnum.PERCENT))
+                if (m.equals(ModificationEnum.PERCENT)){
                     this.movement += this.movement * amount / 100;
+                    System.out.println("TEST STATS " + this.movement);
+                }
                 else
                     this.movement += amount;
                 break;

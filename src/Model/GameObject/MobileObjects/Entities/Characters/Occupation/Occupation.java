@@ -3,6 +3,7 @@ package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 import Model.Abilities.Abilities;
 import Model.Abilities.DirectAbility;
 import Model.Effects.Effect;
+import Model.Inventory.EquipmentTypeEnum;
 import Model.Requirement;
 import Model.Stats.CharacterStats;
 import Model.Stats.StatStructure;
@@ -29,6 +30,7 @@ public abstract class Occupation implements Subject, Observer {
     private ArrayList<Abilities> basicSkillAbilities;
     private Abilities basicAttack;
     private int pastLevel;
+    private EquipmentTypeEnum weaponType;
 
     //constructor
     public Occupation(String name, String description, int[] val) {
@@ -123,6 +125,9 @@ public abstract class Occupation implements Subject, Observer {
         return this.occupationalAbilities;
     }
 
+    public void setWeaponType(EquipmentTypeEnum e){
+        this.weaponType = e;
+    }
 
     //different occupational skills for each occupation
     public abstract void modifyOccupationalSkills(SkillsEnum s, int value);
@@ -167,20 +172,14 @@ public abstract class Occupation implements Subject, Observer {
         }
 
         //recompute abilities each time a stat changes
-        /**
-         * recompute all abilites
-         * differs with each occupation
-         */
         //recomputes basic abilities
         basicSkillAbilities.clear(); //clears old abilities
-
-        //adding newly computed abilities
         basicSkillAbilities.add(new DirectAbility(
-                "Bind Wound",
-                "Uses a bind wound skill",
-                new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
-                new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))));
+                                     "Bind Wound",
+                                     "Uses a bind wound skill",
+                                      new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
+                                      new Requirement(0),
+                                      new Effect(new StatStructure(StatsEnum.MANA, 0))));
 
         //recomputes occupational abilities
         recomputeOccupationalAbilities();
