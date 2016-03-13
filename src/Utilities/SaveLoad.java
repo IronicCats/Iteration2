@@ -118,8 +118,11 @@ public class SaveLoad {
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
         loadPlayer(filePath);
         loadMobileObjects(filePath);
-        gs.setPlayer((Player)player);
         gs.setMap(gameMap);
+        gs.setMapView(gamemapView);
+
+        gs.setPlayer((Player)player);
+
         ((Player) player).update();
         if(mobileObjects.isEmpty()){
             System.out.println("This is empty");
@@ -483,6 +486,8 @@ public class SaveLoad {
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
         mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+        mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
+        //mobileObjects.put(player,)
         gameMap.setMobileObjects(mobileObjects);
     }
 
