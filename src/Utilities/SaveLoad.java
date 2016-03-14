@@ -417,20 +417,24 @@ public class SaveLoad {
     }
     public static void loadInventory(Element player,Inventory in){
         NodeList temp = player.getElementsByTagName("inventory");
-        for(int i = 0; i < temp.getLength();i++) {
-            Location l = new Location(-1,-1);
-            Element prime = (Element) temp.item(i);
-            Element item = (Element)prime.getElementsByTagName("item").item(0);
-            String id = item.getAttribute("id");
-            System.out.println("i: " + i);
-            int k = Integer.parseInt(id);
-            //Item a = ItemFactory.makeItem(,l)
-            ItemsEnum tempEnum = ItemsEnum.values()[k];
-            Item a= ItemFactory.makeItem(tempEnum,l);
-            in.place(a);
+        System.out.println("TEMP LENGHT" + temp.getLength());
+        if(temp.getLength() != 0) {
+            for (int i = 0; i < temp.getLength(); i++) {
+                Location l = new Location(-1, -1);
+                Element prime = (Element) temp.item(i);
+                Element item = (Element) prime.getElementsByTagName("item").item(0);
+                if(item != null) {
+                    String id = item.getAttribute("id");
+                    System.out.println("i: " + i);
+                    int k = Integer.parseInt(id);
+                    //Item a = ItemFactory.makeItem(,l)
+                    ItemsEnum tempEnum = ItemsEnum.values()[k];
+                    Item a = ItemFactory.makeItem(tempEnum, l);
+                    in.place(a);
+                }
 
+            }
         }
-
         NodeList tempEquip = player.getElementsByTagName("equipped");
         Location equipLoc = new Location(-1,-1);
         ItemsEnum tempEnumE;
