@@ -41,7 +41,7 @@ public abstract class Occupation implements Subject, Observer {
         this.name = name;
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH, StatsEnum.AGILITY,
-                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
+                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT, StatsEnum.MANA};
         initialStats = new StatStructure(stats, val);
         playerStats = new CharacterStats(initialStats);
         playerStats.addObserver(this);
@@ -63,7 +63,8 @@ public abstract class Occupation implements Subject, Observer {
                 "Uses a bind wound skill",
                 new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))));
+                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                4));
 
     }
 

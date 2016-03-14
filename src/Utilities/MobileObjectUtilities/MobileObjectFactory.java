@@ -50,7 +50,7 @@ public class MobileObjectFactory {
         objects.put(enemy, makeAsset(MobileObjectEnum.KITTEN, enemy));
 
         // Enemy one
-        HostileNPC enemy1 = (HostileNPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 3), map, player);
+        HostileNPC enemy1 = (HostileNPC)makeNPC(MobileObjectEnum.BLUE, new Location(6, 6), map, player);
         enemy1.getController().setTarget(player);
         enemy1.getController().setEnemy(enemy1);
         enemy1.getController().setBaseLoc(new Location(10,5));
@@ -64,7 +64,7 @@ public class MobileObjectFactory {
         enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(13,13), map, player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(5,10), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
@@ -153,11 +153,10 @@ public class MobileObjectFactory {
                             add("rab");
                         }});
             case DAVE_PET:
-               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
+               return new Pet(new PetController(map), location, MobileObjectEnum.DAVE_PET.ordinal(), new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
                 return new Vehicle(location, id , new Stats(50));
             case HAIRBALL:
-                return new Projectile(location,id,new Stats(25), new Effect(), 2);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:
@@ -171,14 +170,15 @@ public class MobileObjectFactory {
 
     public static Player Player() {
         // player
+
         Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
-        player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
+        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
 
-    public static Projectile Hairball(Location location, Effect effect, Player player, Map map ){
+    public static Projectile Hairball(Location location, Effect effect ){
 
-        Projectile hairball = (Projectile) makeNPC(MobileObjectEnum.ROOMBA, location, map, player);
+        Projectile hairball = new Projectile(location,MobileObjectEnum.HAIRBALL.ordinal(),new Stats(25), effect, 2);
         return hairball;
 
     }

@@ -3,6 +3,7 @@ package Model.GameObject.MobileObjects;
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Stats.Stats;
@@ -20,15 +21,17 @@ public class Vehicle extends MobileObject {
 
     private Effect effect; // used to hold added defensive rating from vehicle. Also attack rating if hitting another entity
     private Entity driver;
+    private Pet pet;
 
     public Vehicle(Location location, int id, Stats stats) {
         super(location, id, stats);
+        pet = null;
     }
 
     public void interact(MobileObject mo) {
         if (mo instanceof Player) {
             System.out.println("Mounting Car");
-            setDriver((Entity)mo);
+            setRiders((Entity)mo);
             mount();
         }
     }
@@ -40,8 +43,15 @@ public class Vehicle extends MobileObject {
     public void unmount(){
     }
 
-    public void setDriver(Entity mo){
+    public void setRiders(Entity mo){
         this.driver = mo;
+        if(driver.getPet().getOwned()){
+            pet = driver.getPet();
+        }
+    }
+
+    public Pet getPet(){
+        return pet;
     }
 
     public Entity getDriver() {

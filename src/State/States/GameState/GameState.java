@@ -9,6 +9,7 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
@@ -86,6 +87,13 @@ public class GameState extends State {
         // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
 
+        // syncing pet with player
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet){
+                player.setPet((Pet)key);
+            }
+        }
+
         // syncing mobile objects with map
         map.setMobileObjects(mobileObjects);
 
@@ -93,13 +101,13 @@ public class GameState extends State {
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         AreaEffect b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6, 4));
         AreaEffect c = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(4, 4));
-        //AreaEffect d = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(10, 2));
+        AreaEffect d = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(10, 2));
         TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,4), new Location(3,3));
-        AreaEffect f = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(10, 4));
+        AreaEffect f = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(2, 5));
         map.placeAreaEffect(a);
         map.placeAreaEffect(b);
         map.placeAreaEffect(c);
-        //map.placeAreaEffect(d);
+        map.placeAreaEffect(d);
         map.placeTeleportAreaEffectBeginning(e);
         map.placeAreaEffect(f);
 

@@ -19,7 +19,7 @@ public class Smasher extends Occupation {
     //constructor
     public Smasher() {
 
-        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 5});
+        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 8, 12});
 
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);
@@ -35,7 +35,8 @@ public class Smasher extends Occupation {
                     "Attack using just the fists",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
+                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    2
             ));
         }
         else if(equipmentType == EquipmentTypeEnum.ONE_HANDED){
@@ -44,7 +45,8 @@ public class Smasher extends Occupation {
                     "Attack using whatever one-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
+                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    2
             ));
         }
         else if(equipmentType == EquipmentTypeEnum.TWO_HANDED){
@@ -53,7 +55,8 @@ public class Smasher extends Occupation {
                     "Attack using whatever two-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0))
+                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    2
             ));
         }
 

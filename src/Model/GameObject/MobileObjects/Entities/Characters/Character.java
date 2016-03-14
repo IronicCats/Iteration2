@@ -4,6 +4,7 @@ import Model.Abilities.Abilities;
 import Model.Abilities.CommandsEnum;
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
+import Model.Effects.ModificationEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.OneShot;
@@ -20,6 +21,7 @@ import Model.Inventory.*;
 import Model.Location;
 import Model.Requirement;
 import Model.Stats.CharacterStats;
+import Model.Stats.StatsEnum;
 import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.Observer;
 import Utilities.Utilities;
@@ -54,6 +56,7 @@ public abstract class Character extends Entity implements Observer{
         bindWounds = occupation.getBindWounds();
         if(occupation instanceof Summoner){
             ability1 = occupation.getAbilityAt(0);
+            ability2 = occupation.getAbilityAt(1);
         }
         //System.out.println(attack);
         getStats().addObserver(this);
@@ -96,6 +99,18 @@ public abstract class Character extends Entity implements Observer{
     public void equip(Weapon weapon) {
         inventory.equip(weapon);
         getStats().applyEquipmentModification(weapon.getEquipmentModification());
+
+        switch (weapon.getType()) {
+            case ONE_HANDED:
+            case SHIELD:
+                getStats().modifyStat(StatsEnum.MOVEMENT, ModificationEnum.PERCENT, -25);
+                break;
+            case TWO_HANDED:
+                getStats().modifyStat(StatsEnum.MOVEMENT, ModificationEnum.PERCENT, -50);
+                break;
+            default:
+                break;
+        }
     } // end equip
 
     public void equip(Armor armor) {
@@ -106,6 +121,22 @@ public abstract class Character extends Entity implements Observer{
     public void unequip(EquipmentSlotEnum slot) {
         if(inventory.getSlot(slot) == null)
             return;
+
+        if(inventory.getSlot(slot) instanceof Weapon) {
+            System.out.println("it's a weapon");
+            switch (((Weapon) inventory.getSlot(slot)).getType()) {
+                case ONE_HANDED:
+                case SHIELD:
+                    getStats().modifyStat(StatsEnum.MOVEMENT, ModificationEnum.PERCENT, 25);
+                    break;
+                case TWO_HANDED:
+                    getStats().modifyStat(StatsEnum.MOVEMENT, ModificationEnum.PERCENT, 25);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         getStats().removeEquipmentModification((EquipmentModification) inventory.getSlot(slot).getEffect());
         inventory.unequip(slot);
     } // end unequip
@@ -288,6 +319,10 @@ public abstract class Character extends Entity implements Observer{
 
     public EquipmentTypeEnum getEquippedWeaponInSlot(EquipmentSlotEnum s){
         return ((Weapon)(getWeaponInSlot(s))).getType();
+    }
+
+    public int getBasicSkillsValue(SkillsEnum s){
+        return occupation.getBasicSkillValue(s);
     }
 
     @Override

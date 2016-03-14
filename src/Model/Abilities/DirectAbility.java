@@ -16,9 +16,9 @@ import Model.Stats.StatStructure;
  */
 public class DirectAbility extends Abilities {
 
-    public DirectAbility(String name, String description, Effect effects, Requirement requirement, Effect cost) {
+    public DirectAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int cooldown) {
 
-        super(name, description, effects, requirement, cost, 1);
+        super(name, description, effects, requirement, cost, 1, cooldown);
     }
 
 

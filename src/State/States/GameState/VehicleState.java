@@ -1,23 +1,16 @@
 package State.States.GameState;
 
 import Controller.Controllers.VehicleController;
-import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
-import Model.Map.Map;
 import State.State;
 import Utilities.MapUtilities.Navigation;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Settings;
-import Utilities.Utilities;
-import View.ViewUtilities.Camera;
 import View.Views.MessageBox.DisplayMessage;
-import View.Views.MapView;
-import Model.Map.Map;
 import View.Views.MessageBox.GameMessage;
 import View.Views.MobileObjectView;
 
@@ -42,19 +35,34 @@ public class VehicleState extends State{
     public VehicleState(Vehicle vehicle) {
         this.vehicle = vehicle;
         this.vehicle.getDriver().deregister();
+        if(this.vehicle.getPet() != null){
+            this.vehicle.getPet().deregister();
+        }
         mobileObjects = GAMESTATE.getMobileObjects();
         setController(new VehicleController(this));
         mobileObjects.remove(this.vehicle.getDriver());
+        mobileObjects.remove(this.vehicle.getPet());
     }
 
     public void unmount(){
-        Location loc = location();
-        if(loc != null) {
+        Location playerLoc = location();
+
+        if(playerLoc != null) {
             vehicle.unmount();
-            vehicle.getDriver().setLocation(loc);
+            vehicle.getDriver().setLocation(playerLoc);
             vehicle.getDriver().setViewLocation(new ViewLocation(vehicle.getDriver().getX(), vehicle.getDriver().getY()));
             mobileObjects.put(vehicle.getDriver(), MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, vehicle.getDriver()));
-            vehicle.getDriver().dismountOntoTile(loc);
+            vehicle.getDriver().dismountOntoTile(playerLoc);
+            if(this.vehicle.getPet() != null){
+                Location petLoc = location();
+                if(petLoc != null) {
+                    vehicle.getPet().setLocation(petLoc);
+                    vehicle.getPet().setViewLocation(new ViewLocation(vehicle.getDriver().getX(), vehicle.getDriver().getY()));
+                    mobileObjects.put(vehicle.getPet(), MobileObjectFactory.makeAsset(MobileObjectEnum.DAVE_PET, vehicle.getPet()));
+                    vehicle.getPet().dismountOntoTile(petLoc);
+                    vehicle.getPet().setOwnership();
+                }
+            }
             State.switchState(State.GAMESTATE);
         }
         else{

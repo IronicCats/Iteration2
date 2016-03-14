@@ -93,7 +93,12 @@ public class Astar {
                 }
             }
         }
+        if(path.get(0) == null || path.get(1) == null){
+            path.add(start);
+            path.add(start);
+        }
         return path;
     }
+
 
 }
