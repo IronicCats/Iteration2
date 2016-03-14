@@ -23,15 +23,15 @@ public class SkillsController extends Controller {
         }
 
         if(e.getKeyCode() == Settings.UP) {
-
+            ((SkillsState)state).up();
         } else if (e.getKeyCode() == Settings.DOWN) {           /* cursor down */
-
+            ((SkillsState)state).down();
         } else if (e.getKeyCode() == Settings.DOWN_LEFT ||      /* cursor left */
                 e.getKeyCode() == Settings.UP_LEFT) {
-
+            ((SkillsState)state).left();
         } else if (e.getKeyCode() == Settings.DOWN_RIGHT ||     /* cursor right */
                 e.getKeyCode() == Settings.UP_RIGHT) {
-
+            ((SkillsState)state).right();
         } else if (e.getKeyCode() == Settings.INTERACT) {       /* assign skill point */
             ((SkillsState)state).executePlayerCommand(CommandsEnum.interact);
         } else if (e.getKeyCode() == Settings.SKILLS) {         /* exit to gamestate */
