@@ -424,10 +424,10 @@ public class SaveLoad {
         //gameMap.setMobileObjects(mobileObjects);
        // mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
         //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
-        FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
-        a.getController().setBaseLoc(new Location(11, 3));
+        //FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        //a.getController().setBaseLoc(new Location(11, 3));
 
-        mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
+        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
 
         
        // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
