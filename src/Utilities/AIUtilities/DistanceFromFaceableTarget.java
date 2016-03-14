@@ -34,7 +34,7 @@ public class DistanceFromFaceableTarget {
                 return 2;
             }
 
-            else if (negXdis == 1 && negYdis == 1) {
+            else if (negXdis == 1 && negYdis == 0) {
                 return 1;
             }
             else if (negXdis == 2 && negYdis == 1) {
