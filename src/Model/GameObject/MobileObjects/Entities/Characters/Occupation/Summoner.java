@@ -34,19 +34,20 @@ public class Summoner extends Occupation {
 
 
         //basic attack of just hitting another entity
-        /*setBasicAttack(new DirectAbility(
+        setBasicAttack(new DirectAbility(
                 //basic attack for summoner is hitting the opposing person with a staff
                 //basic attack is calculated based on strength
-                "Staff hit",
-                "whacks the enemy with your staff",
+                "Slap",
+                "whacks the enemy ",
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
-                new Requirement(ItemsEnum.CATNIP_STAFF),
+                new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0)),
                 2
         ));
 
         //enchantments
         //boon
+        /*
         setOccupationalAbilities(new SelfAbility("Superheal",
                 "A better version of binding wounds",
                 new Effect(new StatStructure(StatsEnum.LIFE, getOccupationalSkillsValue(SkillsEnum.BOON) + 2)),
@@ -123,11 +124,6 @@ public class Summoner extends Occupation {
 
 
     public void recomputeOccupationalAbilities() {
-        //basic attack of just hitting another entity
-        //getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))));
-        //compute occupational abilities
-        //enchantments
-        //boon
-        //bane
+
     }
 }

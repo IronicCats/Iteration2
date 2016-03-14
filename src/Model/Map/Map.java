@@ -136,7 +136,7 @@ public class Map implements Subject {
          else {
             System.out.println("Not a Direct Ability");
         }
-        
+
     }
 
     public void carryInteraction(MobileObject mo) {
