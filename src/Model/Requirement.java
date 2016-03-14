@@ -84,7 +84,6 @@ public class Requirement {
    public boolean hasRequiredItem(Pack pack){
        if(requiredItemEnum == null || pack.contains(requiredItemEnum))
            return true;
-       DisplayMessage.addMessage(new GameMessage("Need " + requiredItemEnum, 3));
        return false;
     } // end hasRequiredItem
 
