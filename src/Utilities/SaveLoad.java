@@ -5,6 +5,7 @@ import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
@@ -419,9 +420,10 @@ public class SaveLoad {
         for(int i = 0; i < temp.getLength();i++) {
             Location l = new Location(-1,-1);
             Element prime = (Element) temp.item(i);
-            Element item = (Element)prime.getElementsByTagName("item");
+            Element item = (Element)prime.getElementsByTagName("item").item(0);
             String id = item.getAttribute("id");
-            int k = Integer.parseInt("id");
+            System.out.println("i: " + i);
+            int k = Integer.parseInt(id);
             //Item a = ItemFactory.makeItem(,l)
             ItemsEnum tempEnum = ItemsEnum.values()[k];
             Item a= ItemFactory.makeItem(tempEnum,l);
@@ -438,7 +440,7 @@ public class SaveLoad {
 
 
         Element head = (Element) tempEquip.item(0);
-        Element equipItem = (Element)head.getElementsByTagName("item");
+        Element equipItem = (Element)head.getElementsByTagName("head").item(0);
 
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
@@ -449,8 +451,8 @@ public class SaveLoad {
         }
 
 
-        Element chest = (Element) tempEquip.item(1);
-        equipItem = (Element)chest.getElementsByTagName("item");
+        Element chest = (Element) tempEquip.item(0);
+        equipItem = (Element)chest.getElementsByTagName("chest").item(0);
 
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
@@ -460,8 +462,8 @@ public class SaveLoad {
             in.equip((Armor) z);
         }
 
-        Element gloves = (Element) tempEquip.item(2);
-        equipItem = (Element)gloves.getElementsByTagName("item");
+        Element gloves = (Element) tempEquip.item(0);
+        equipItem = (Element)gloves.getElementsByTagName("gloves").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
@@ -470,8 +472,8 @@ public class SaveLoad {
             in.equip((Armor) z);
         }
 
-        Element boots = (Element) tempEquip.item(3);
-        equipItem = (Element)boots.getElementsByTagName("item");
+        Element boots = (Element) tempEquip.item(0);
+        equipItem = (Element)boots.getElementsByTagName("boots").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
@@ -480,8 +482,8 @@ public class SaveLoad {
             in.equip((Armor) z);
         }
 
-        Element legs = (Element) tempEquip.item(4);
-        equipItem = (Element)legs.getElementsByTagName("item");
+        Element legs = (Element) tempEquip.item(0);
+        equipItem = (Element)legs.getElementsByTagName("legs").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
@@ -490,8 +492,8 @@ public class SaveLoad {
             in.equip((Armor) z);
         }
 
-        Element shield = (Element) tempEquip.item(5);
-        equipItem = (Element)shield.getElementsByTagName("item");
+        Element shield = (Element) tempEquip.item(0);
+        equipItem = (Element)shield.getElementsByTagName("shield").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
@@ -499,18 +501,27 @@ public class SaveLoad {
             z = ItemFactory.makeItem(tempEnumE, equipLoc);
             in.equip((Armor) z);
         }
-        Element mainHand = (Element) tempEquip.item(6);
-        equipItem = (Element)mainHand.getElementsByTagName("item");
+        Element mainHand = (Element) tempEquip.item(0);
+        equipItem = (Element)mainHand.getElementsByTagName("mainHand").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
             tempEnumE = ItemsEnum.values()[equipIdint];
             z = ItemFactory.makeItem(tempEnumE, equipLoc);
-            in.equip((Armor) z);
+            in.equip((Weapon) z);
         }
 
-        Element offHand = (Element) tempEquip.item(7);
-        equipItem = (Element)offHand.getElementsByTagName("item");
+        Element offHand = (Element) tempEquip.item(0);
+        equipItem = (Element)offHand.getElementsByTagName("offHand").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Weapon) z);
+        }
+        Element accessory1 = (Element)tempEquip.item(0);
+        equipItem = (Element)accessory1.getElementsByTagName("accessory1").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
@@ -518,17 +529,8 @@ public class SaveLoad {
             z = ItemFactory.makeItem(tempEnumE, equipLoc);
             in.equip((Armor) z);
         }
-        Element accessory1 = (Element)tempEquip.item(8);
-        equipItem = (Element)accessory1.getElementsByTagName("item");
-        equipId = equipItem.getAttribute("id");
-        equipIdint = Integer.parseInt(equipId);
-        if(equipIdint != -1) {
-            tempEnumE = ItemsEnum.values()[equipIdint];
-            z = ItemFactory.makeItem(tempEnumE, equipLoc);
-            in.equip((Armor) z);
-        }
-        Element accessory2 = (Element)tempEquip.item(9);
-        equipItem = (Element)accessory2.getElementsByTagName("item");
+        Element accessory2 = (Element)tempEquip.item(0);
+        equipItem = (Element)accessory2.getElementsByTagName("accessory2").item(0);
         equipId = equipItem.getAttribute("id");
         equipIdint = Integer.parseInt(equipId);
         if(equipIdint != -1) {
