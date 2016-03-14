@@ -2,6 +2,7 @@ package Utilities.ItemUtilities;
 
 import Model.Effects.Effect;
 import Model.Effects.EquipmentModification;
+import Model.Effects.ModificationEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
@@ -277,7 +278,7 @@ public class ItemFactory {
                         "A potion that boosts agility",
                         8,
                         location, new Requirement(),
-                        new Effect(new StatStructure(StatsEnum.AGILITY, 10)));
+                        new Effect(new StatStructure(StatsEnum.AGILITY, 200), ModificationEnum.PERCENT, 5000));
             case INTELLECT_POTION:
                 return new Usable(id,
                         "Intellect potion",
