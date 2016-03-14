@@ -32,6 +32,17 @@ public class VehicleState extends State{
         }
     }
 
+    public void reinit() {
+        this.vehicle.getDriver().deregister();
+        if(this.vehicle.getPet() != null){
+            this.vehicle.getPet().deregister();
+        }
+        mobileObjects = GAMESTATE.getMobileObjects();
+        setController(new VehicleController(this));
+        mobileObjects.remove(this.vehicle.getDriver());
+        mobileObjects.remove(this.vehicle.getPet());
+    } // end reinit
+
     public VehicleState(Vehicle vehicle) {
         this.vehicle = vehicle;
         this.vehicle.getDriver().deregister();
