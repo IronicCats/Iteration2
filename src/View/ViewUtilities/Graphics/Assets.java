@@ -42,6 +42,8 @@ public class Assets {
     public static BufferedImage STRENGTH_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
+    public static BufferedImage SWORDFISH_DAGGER;
+    public static BufferedImage SWORDFISH_LANCE;
     public static BufferedImage PUFFER_FISH_MACE;
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
@@ -137,6 +139,12 @@ public class Assets {
 
         SpriteSheet stickGreatSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickGreatSword.png"));
         STICK_GREATSWORD = stickGreatSwordSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet swordfishDaggerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishDagger.png"));
+        SWORDFISH_DAGGER = swordfishDaggerSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet swordfishLanceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishLance.png"));
+        SWORDFISH_LANCE = swordfishLanceSheet.crop(0, 0, 32, 32);
 
         SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
         LASER_POINTER = laserPointerSheet.crop(0, 0, 32, 32);

@@ -74,6 +74,14 @@ public class ItemFactory {
         Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
         initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
 
+        // swordfish dagger
+        Item swordfishDagger = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, new Location(3, 0));
+        initItems.put(swordfishDagger, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_DAGGER, swordfishDagger));
+
+        // swordfish lance
+        Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
+        initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
+
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
         initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
@@ -583,7 +591,9 @@ public class ItemFactory {
             case STICK_GREATSWORD:
                 return new ItemView(item, Assets.STICK_GREATSWORD);
             case SWORDFISH_DAGGER:
+                return new ItemView(item, Assets.SWORDFISH_DAGGER);
             case SWORDFISH_LANCE:
+                return new ItemView(item, Assets.SWORDFISH_LANCE);
             case PUFFER_FISH_MACE:
             case PUFFER_FISH_FLAIL:
             case MOUSE_ON_A_STRING_WAND:
