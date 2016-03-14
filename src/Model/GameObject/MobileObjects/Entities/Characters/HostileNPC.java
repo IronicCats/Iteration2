@@ -63,6 +63,10 @@ public class HostileNPC extends NPC {
        lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
    }
 
+    public void takeAwayTarget(){
+        enemyController.takeAwaytarget();
+    }
+
     public boolean getSleep(){
         return this.sleeping;
     }

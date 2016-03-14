@@ -1,5 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
+import Model.Abilities.CreepAbility;
 import Model.Abilities.DirectAbility;
 import Model.Abilities.PickPocket;
 import Model.Abilities.RemoveTrap;
@@ -45,6 +46,7 @@ public class Sneak extends Occupation {
                 new Requirement(0),
                 0,
                 getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+
         getOccupationalAbilities().add(new RemoveTrap("Remove trap",
                 "you can attempt to remove a trap",
                 new Effect(new StatStructure(StatsEnum.LIFE, 0)),
@@ -53,6 +55,12 @@ public class Sneak extends Occupation {
                 0,
                 0,
                 getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+
+        getOccupationalAbilities().add(new CreepAbility("Creep around",
+                "you can sneak past HostilNPCs",
+                null,
+                new Requirement(0),0,0,0));
+
     }
 
     //operations
