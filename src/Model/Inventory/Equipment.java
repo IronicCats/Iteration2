@@ -54,16 +54,13 @@ public class Equipment {
     public void equip(Weapon weapon) {
         switch (weapon.getType()) {
             case ONE_HANDED:
-                if (mainhand != null && offhand != null) {
-                    unequip(EquipmentSlotEnum.OFFHAND);
+                if (mainhand != null) {
+                    unequip(EquipmentSlotEnum.MAINHAND);
                 }
-                if (mainhand == null) {
-                    mainhand = weapon;
-                } else if (offhand == null) {
-                    offhand = weapon;
-                }
+                mainhand = weapon;
                 break;
             case TWO_HANDED:
+            case DOUBLE_HANDED:
                 if (mainhand != null) {
                     unequip(EquipmentSlotEnum.MAINHAND);
                 }

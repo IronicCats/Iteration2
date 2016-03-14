@@ -170,6 +170,8 @@ public class GameState extends State {
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);
         //mapView.update();
+        statusView = new StatusView(player);
+
     }
 
     public void switchState() {
