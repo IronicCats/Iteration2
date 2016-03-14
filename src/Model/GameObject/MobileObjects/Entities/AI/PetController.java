@@ -1,9 +1,11 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
+import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
+import Model.Inventory.Pack;
 import Model.Map.Map;
 import Utilities.AIUtilities.FindTargetinTiles;
 
@@ -67,7 +69,10 @@ public class PetController extends AIController {
         if (map.getTile(AI.getLocation().getX(), AI.getLocation().getY()).hasItems()) {
             if (temp == 1) {
                 map.getTile(AI.getLocation().getX(), AI.getLocation().getY()).interact();            }
+
         }
+
+
     }
 
 
