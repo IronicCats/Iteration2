@@ -1,5 +1,7 @@
 package View.ViewUtilities.Graphics;
 
+import sun.awt.image.BufferedImageDevice;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -56,6 +58,8 @@ public class Assets {
     public static BufferedImage LARGE_CATNIP;
     public static BufferedImage TUNA;
     public static BufferedImage SUSHI;
+    public static BufferedImage OPEN_DOOR;
+    public static BufferedImage CLOSED_DOOR;
     public static BufferedImage VERT_FENCE;
     public static BufferedImage HORIZ_FENCE_ODD;
     public static BufferedImage HORIZ_FENCE_EVEN;
@@ -178,6 +182,12 @@ public class Assets {
 
         SpriteSheet sushiSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Sushi.png"));
         SUSHI = sushiSheet.crop(0,0,32,32);
+
+        SpriteSheet openDoorSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenDoor.png"));
+        OPEN_DOOR = openDoorSheet.crop(0,0,32,32);
+
+        SpriteSheet closedDoorSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedDoor.png"));
+        CLOSED_DOOR = closedDoorSheet.crop(0,0,32,32);
 
         SpriteSheet vertFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FenceVertical.png"));
         VERT_FENCE = vertFenceSheet.crop(0,0,32,32);

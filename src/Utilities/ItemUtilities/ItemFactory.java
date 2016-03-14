@@ -598,7 +598,9 @@ public class ItemFactory {
             case DOOR_KEY:
                 return new ItemView(item, Assets.DOOR_KEY);
             case OPEN_DOOR:
+                return new ItemView(item, Assets.OPEN_DOOR);
             case CLOSED_DOOR:
+                return new ItemView(item, Assets.CLOSED_DOOR);
             case HELMET:
                 return new ItemView(item, Assets.HELMET);
             case CHESTPLATE:
