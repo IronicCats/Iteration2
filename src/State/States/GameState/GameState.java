@@ -13,6 +13,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
 import Model.Map.Map;
 import Model.Stats.Stats;
@@ -229,8 +230,13 @@ public class GameState extends State {
     public void tick() {
         if(loading)
             return;
-        for (MobileObject key : mobileObjects.keySet()) {
-            key.tick();
+        try {
+            for (MobileObject key : mobileObjects.keySet()) {
+                key.tick();
+            }
+        }
+        catch(Exception e){
+            System.out.println("oops");
         }
         RespawnQueue.tick();
     }
