@@ -70,6 +70,10 @@ public class ItemFactory {
         Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
         initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
 
+        // wooden gloves
+        Item woodenGloves = ItemFactory.makeItem(ItemsEnum.WOODEN_GLOVES, new Location(4, 2));
+        initItems.put(woodenGloves, ItemFactory.makeAsset(ItemsEnum.WOODEN_GLOVES, woodenGloves));
+
         // swordfish dagger
         Item swordfishDagger = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, new Location(3, 0));
         initItems.put(swordfishDagger, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_DAGGER, swordfishDagger));
@@ -307,6 +311,15 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Stick Greatsword",
                         "A sword made from a big stick",
+                        15,
+                        location,
+                        new Requirement(new Smasher()),
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)));
+            case WOODEN_GLOVES:
+                return new Weapon(id,
+                        "Wooden gloves",
+                        "Some lightweight wooden gloves",
                         15,
                         location,
                         new Requirement(new Smasher()),
@@ -610,14 +623,18 @@ public class ItemFactory {
                 return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
                 return new ItemView(item, Assets.STICK_GREATSWORD);
+            case WOODEN_GLOVES:
+                return new ItemView(item, Assets.WOODEN_GLOVES);
             case SWORDFISH_DAGGER:
                 return new ItemView(item, Assets.SWORDFISH_DAGGER);
             case SWORDFISH_LANCE:
                 return new ItemView(item, Assets.SWORDFISH_LANCE);
+            case SWORDFISH_GAUNTLETS:
             case PUFFER_FISH_MACE:
                 return new ItemView(item, Assets.PUFFER_FISH_MACE);
             case PUFFER_FISH_FLAIL:
                 return new ItemView(item, Assets.PUFFER_FISH_FLAIL);
+            case PUFFER_FISH_KNUCKLES:
             case MOUSE_ON_A_STRING_WAND:
                 return new ItemView(item, Assets.MOUSE_ON_A_STRING_WAND);
             case CATNIP_STAFF:
