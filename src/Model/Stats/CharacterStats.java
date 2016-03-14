@@ -210,6 +210,8 @@ public class CharacterStats extends Stats implements Subject {
         baseAgi *= statMultiplier;
         baseIntel *= statMultiplier;
         baseHard *= statMultiplier;
+        baseLife = baseHard + level;
+        baseMana = baseIntel + level;
 
         strength = baseStr;
         agility = baseAgi;
