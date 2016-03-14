@@ -29,7 +29,7 @@ public class EnemyController extends AIController {
 
     @Override
     public void tick() {
-        if(!enemy.isSleeping()) {
+        if(!enemy.getSleep()) {
             if (targetinView()) {
                 followThenAttackinRange();
             } else {
@@ -50,7 +50,7 @@ public class EnemyController extends AIController {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
             if (enemy.getOccupation() instanceof Smasher) {
                 if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
-                    if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= 3) {
+                    if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= enemy.getAbilities().get(0).getCooldown()) {
                         System.out.println("attacking");
                         lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
                         enemy.attack(enemy.getAbilities().get(0));
