@@ -130,7 +130,7 @@ public class GameState extends State {
         mapView.update();
 
 
-        //IT WORKS BITCH YES
+        //idk
         Iterator it = mobileObjects.entrySet().iterator();
         while (it.hasNext()) {
             java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
@@ -139,7 +139,8 @@ public class GameState extends State {
            // MobileObjectView ab = (MobileObjectView)pair.getValue();
             //int x = a.getX();
             //int y = a.getY();
-            map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
+              map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
+            ((MobileObject) pair.getKey()).registerTile(((MobileObject)pair.getKey()).getLocation());
 
 
             //it.remove(); ??? Says it avoids CurrentModificationException
@@ -156,7 +157,8 @@ public class GameState extends State {
                 map.getTile(b.getLocation()).addItem(b);
             }
         }
-
+        map.setMapItems(mapItems);
+        map.setMobileObjects(mobileObjects);
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);
         //mapView.update();
@@ -184,6 +186,7 @@ public class GameState extends State {
         } else {
             player.face(degrees);
         }
+
     }
 
     public void setCameraMoving(boolean movement) {
