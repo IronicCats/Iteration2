@@ -197,11 +197,11 @@ public class ItemFactory {
         Item horizFence3 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(16, 12));
         initItems.put(horizFence3, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence3));
 
-        Item horizFence4 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(17, 12));
-        initItems.put(horizFence4, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence4));
+        Item cornerFenceOdd = ItemFactory.makeItem(ItemsEnum.CORNER_FENCE_ODD, new Location(17, 12));
+        initItems.put(cornerFenceOdd, ItemFactory.makeAsset(ItemsEnum.CORNER_FENCE_ODD, cornerFenceOdd));
 
-        Item horizFence10 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(12, 17));
-        initItems.put(horizFence10, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence10));
+        Item cornerFenceEven = ItemFactory.makeItem(ItemsEnum.CORNER_FENCE_EVEN, new Location(12, 17));
+        initItems.put(cornerFenceEven, ItemFactory.makeAsset(ItemsEnum.CORNER_FENCE_EVEN, cornerFenceEven));
 
         Item horizFence5 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(13, 17));
         initItems.put(horizFence5, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence5));
@@ -613,6 +613,18 @@ public class ItemFactory {
                         "This fence is blocking the path",
                         100,
                         location);
+            case CORNER_FENCE_EVEN:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
+            case CORNER_FENCE_ODD:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
             case WOODEN_DOOR:
                 return new Interactable(id,
                         "Wooden Fence",
@@ -675,6 +687,10 @@ public class ItemFactory {
                 return new ItemView(item, Assets.CHEST_KEY);
             case CLOSED_TREASURE_CHEST:
                 return new ItemView(item, Assets.TREASURE_CHEST);
+            case CORNER_FENCE_EVEN:
+                return new ItemView(item, Assets.CORNER_FENCE_EVEN);
+            case CORNER_FENCE_ODD:
+                return new ItemView(item, Assets.CORNER_FENCE_ODD);
             case DOOR_KEY:
                 return new ItemView(item, Assets.DOOR_KEY);
             case OPEN_DOOR:

@@ -76,6 +76,9 @@ public class Assets {
     public static BufferedImage HORIZ_FENCE_ODD;
     public static BufferedImage HORIZ_FENCE_EVEN;
     public static BufferedImage DOOR_KEY;
+    public static BufferedImage CORNER_FENCE_EVEN;
+    public static BufferedImage CORNER_FENCE_ODD;
+
     // end of items
 
     //vehicles
@@ -242,6 +245,12 @@ public class Assets {
 
         SpriteSheet horizXEvenFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HorizFenceXEven.png"));
         HORIZ_FENCE_EVEN = horizXEvenFenceSheet.crop(0,0,32,32);
+
+        SpriteSheet cornerOddSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FenceCornerOdd.png"));
+        CORNER_FENCE_ODD = cornerOddSheet.crop(0,0,32,32);
+
+        SpriteSheet cornerEvenSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FenceCornerEven.png"));
+        CORNER_FENCE_EVEN = cornerEvenSheet.crop(0,0,32,32);
 
         SpriteSheet doorKeySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/DoorKey.png"));
         DOOR_KEY = doorKeySheet.crop(0,0,32,32);
