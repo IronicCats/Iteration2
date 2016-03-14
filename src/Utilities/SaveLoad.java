@@ -119,17 +119,7 @@ public class SaveLoad {
         gs = new GameState(true);
         State.GAMESTATE = gs;
 
-        State.INVENTORYSTATE  = new InventoryState();//adding the inv state
 
-        State.EQUIPMENTSTATE  = new EquipmentState();//adding the equipment state
-
-        State.SKILLSSTATE  = new SkillsState();
-
-        State.PAUSESTATE = new PauseState(); // adding pause state
-
-        State.SETTINGSTATE  = new SettingState();
-        State.SAVESTATE = new SaveState();
-        State.LOADSTATE  = new LoadState();
 
         currFileName = fileName;
         mapItems = new HashMap<>();
@@ -164,7 +154,17 @@ public class SaveLoad {
         System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
 
         System.out.println("Everything has been loaded!");
+        State.INVENTORYSTATE  = new InventoryState();//adding the inv state
 
+        State.EQUIPMENTSTATE  = new EquipmentState();//adding the equipment state
+
+        State.SKILLSSTATE  = new SkillsState();
+
+        State.PAUSESTATE = new PauseState(); // adding pause state
+
+        State.SETTINGSTATE  = new SettingState();
+        State.SAVESTATE = new SaveState();
+        State.LOADSTATE  = new LoadState();
         gs.toggleloading();
 
 
@@ -429,6 +429,7 @@ public class SaveLoad {
         //mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
          //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
         FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        
         mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
         //a.getController().setBaseLoc(new Location(11, 3));
 
