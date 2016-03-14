@@ -42,7 +42,7 @@ public class TradeState extends State {
                 "Get a better deal",
                 new Effect(new StatStructure(StatsEnum.LIFE, 0)),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                0,
                 player.getBasicSkillsValue(SkillsEnum.BARGAIN),
                 0);
         playerItems = new HashMap<>();

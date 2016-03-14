@@ -108,40 +108,46 @@ public class Map implements Subject {
     }
 
     public void carryAttack(Character c, Abilities a) {
-        if (a instanceof DirectAbility) { //when using direct ability
-            getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
-        } else if (a instanceof SelfAbility) {  //using a self ability
-            System.out.println("This is a self ability");
-            getTile(c.getLocation()).receiveAttack(c, a);
+        if(a.getManaCost() > c.getStats().getMana()){
+            System.out.println("You can't afford to use this ability");
         }
+        else{
+            if (a instanceof DirectAbility) { //when using direct ability
+                getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
+            } else if (a instanceof SelfAbility) {  //using a self ability
+                System.out.println("This is a self ability");
+                getTile(c.getLocation()).receiveAttack(c, a);
+            }
+            else if (a instanceof ProjectileAbility) { //using a projectile ability
 
-        else if (a instanceof ProjectileAbility) { //using a projectile ability
+                System.out.println("Projectile Ability Set");
+                //if()
+                Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
+                ((ProjectileAbility) a).setProjectile(p);
+                mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
+                ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
 
-            System.out.println("Projectile Ability Set");
-            //if()
-            Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
-            ((ProjectileAbility) a).setProjectile(p);
-            mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
-            ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
+            }
 
-        }
-
-        else if(a instanceof AOEAbility) { //using an area of effect ability
-            System.out.println("AOEAbility");
-            if (((AOEAbility) (a)).getDegreeMovement() == 60) {
-                Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
-                for (int i = 0; i < t.length; i++) {
-                    t[i].receiveAttack(c, a);
-                }
-            } else if (((AOEAbility) (a)).getDegreeMovement() == 360) {
-                Tile[] t = Neighbors.neighbors(c.getTile(), this);
-                for (int i = 0; i < t.length; i++) {
-                    t[i].receiveAttack(c, a);
+            else if(a instanceof AOEAbility) { //using an area of effect ability
+                System.out.println("AOEAbility");
+                if (((AOEAbility) (a)).getDegreeMovement() == 60) {
+                    Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
+                    for (int i = 0; i < t.length; i++) {
+                        t[i].receiveAttack(c, a);
+                    }
+                } else if (((AOEAbility) (a)).getDegreeMovement() == 360) {
+                    Tile[] t = Neighbors.neighbors(c.getTile(), this);
+                    for (int i = 0; i < t.length; i++) {
+                        t[i].receiveAttack(c, a);
+                    }
                 }
             }
-        }
-         else {
-            System.out.println("Not a Direct Ability");
+            else {
+                System.out.println("Not a Direct Ability");
+            }
+
+            c.applyEffect(a.getCost());
         }
 
     }

@@ -35,7 +35,7 @@ public class Smasher extends Occupation {
                     "Attack using just the fists",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    0,
                     2
             ));
         }
@@ -45,7 +45,7 @@ public class Smasher extends Occupation {
                     "Attack using whatever one-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    0,
                     2
             ));
         }
@@ -55,7 +55,7 @@ public class Smasher extends Occupation {
                     "Attack using whatever two-handed weapon is equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    0,
                     2
             ));
         }
@@ -65,7 +65,7 @@ public class Smasher extends Occupation {
                     "Attack using whatever brawling gloves are equipped",
                     new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))),
                     new Requirement(0),
-                    new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                    0,
                     2
             ));
         }
