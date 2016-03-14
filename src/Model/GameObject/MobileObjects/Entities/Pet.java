@@ -71,6 +71,7 @@ public class Pet extends MobileObject implements Tickable {
         return owned;
     }
 
+
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         ArrayList<Item> tempItems = new ArrayList<>(items);
         Iterator<Item> it = tempItems.iterator();
@@ -87,7 +88,7 @@ public class Pet extends MobileObject implements Tickable {
     public PetController getController() {
         return controller;
     }
-    public void setTarget(MobileObject mobileObject) { System.out.println("target being set");controller.setTarget(mobileObject); }
+    public void setTarget(MobileObject mobileObject) { controller.setTarget(mobileObject); }
 
     public void setOwnership() {
         owned = true;
