@@ -80,7 +80,7 @@ public class GameState extends State {
         //creating a new player
         player = MobileObjectFactory.Player();
 
-        // initializing NPC's
+        // initializing NPC'selection
         mobileObjects = MobileObjectFactory.Init(map, player);
 
         // adding player to hash map
