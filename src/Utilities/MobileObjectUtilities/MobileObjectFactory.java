@@ -93,7 +93,7 @@ public class MobileObjectFactory {
             case BLUE:
                 return new HostileNPC(location,
                         id,
-                        new Smasher(),
+                        new Summoner(),
                         new Inventory(
                                 new Pack(
                                         ItemFactory.makeRandomItems(location),
