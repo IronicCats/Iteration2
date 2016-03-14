@@ -66,7 +66,7 @@ public class SkillsView implements Renderable, Observer {
         }
         else if(player.getOccupation() instanceof Summoner){
             //render specific skills
-            tempY+=
+            //tempY+=
             for(int i=3;i<15;++i){
 
 

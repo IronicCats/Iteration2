@@ -31,8 +31,8 @@ public class StatusView implements Renderable {
         width = Settings.GAMEWIDTH;
         height = Settings.GAMEHEIGHT;
 
-        mX = ((double) Settings.GAMEWIDTH) / 800d;
-        mY = ((double) Settings.GAMEHEIGHT) / 600d;
+        mX = Settings.GAMEWIDTH / 800;
+        mY = Settings.GAMEHEIGHT / 600;
         incY=10*mY;
         intY=((int)incY);
         renderClass(g);
@@ -42,6 +42,7 @@ public class StatusView implements Renderable {
     }
 
     public void renderClass(Graphics g) {
+        //System.out.println(width+" "+height);
         g.setFont(new Font("Arial", Font.PLAIN, 20*intY/10));
 
         FontMetrics fm = g.getFontMetrics();
@@ -74,7 +75,9 @@ public class StatusView implements Renderable {
     }
 
     public void renderQuickKeys(Graphics g) {
-
+        g.setColor(new Color(12, 12, 12, 160));
+        //System.out.println(height*11/12+" "+height/12);
+        g.fillRect(width/4,height*11/12,width/2,height/12);
 
     }
 
