@@ -16,4 +16,5 @@ public abstract class ExecutableAbility extends Abilities {
     }
 
     public abstract void execute(MobileObject targeter, MobileObject targeted);
+
 }
