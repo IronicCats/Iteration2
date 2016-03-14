@@ -185,6 +185,7 @@ public class SaveLoad {
         State.SAVESTATE = new SaveState();
         State.LOADSTATE  = new LoadState();
         gs.toggleloading();
+        gs.setPlayer(player);
 
 
 
@@ -591,11 +592,11 @@ public class SaveLoad {
         //Stats stats = new Stats();
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
-        //mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+         mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
          //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
-        FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
-        a.getController().setBaseLoc(new Location(10, 10));
-        mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
+        //FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        //a.getController().setBaseLoc(new Location(10, 10));
+        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
 
 
         ////////////////////////////////////// TEST
