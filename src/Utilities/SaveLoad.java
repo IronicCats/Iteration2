@@ -138,6 +138,13 @@ public class SaveLoad {
         gs.setMobileObjects(mobileObjects);
 
         gs.initGameState();
+        for(Item item: mapItems.keySet()){
+            gameMap.getTile(item.getLocation()).addItem(item);
+        }
+        gameMap.setMapItems(mapItems);
+        for(AreaEffect areaEffect: decals.keySet()){
+            gameMap.getTile(areaEffect.getLocation());
+        }
 
 
         //((Player) player).update();
@@ -429,16 +436,9 @@ public class SaveLoad {
         //mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
          //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
         FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
-        
+        a.getController().setBaseLoc(new Location(10, 10));
         mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
-        //a.getController().setBaseLoc(new Location(11, 3));
 
-        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
-
-        
-       // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
-        //mobileObjects.put(player,)
-        //gameMap.setMobileObjects(mobileObjects);
 
         ////////////////////////////////////// TEST
         Iterator it = mobileObjects.entrySet().iterator();

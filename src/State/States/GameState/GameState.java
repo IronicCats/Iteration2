@@ -55,7 +55,7 @@ public class GameState extends State {
 
     public GameState() {
         //need to change this
-        loading = true;
+        loading = false;
         cameraMoving = false;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
@@ -236,7 +236,7 @@ public class GameState extends State {
         if(loading)
             return;
         for (MobileObject key : mobileObjects.keySet()) {
-            //key.tick();
+            key.tick();
         }
         RespawnQueue.tick();
     }
