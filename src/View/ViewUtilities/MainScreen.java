@@ -27,8 +27,9 @@ public class MainScreen extends JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
 
-
         Dimension canvasDimension = new Dimension(windowWidth, windowHeight);
+        setMinimumSize(canvasDimension);
+
         canvas = new Canvas();
         canvas.setPreferredSize(canvasDimension);
         canvas.setMinimumSize(canvasDimension);

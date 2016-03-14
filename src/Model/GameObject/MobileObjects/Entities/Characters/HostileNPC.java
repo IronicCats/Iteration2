@@ -13,11 +13,15 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 public class HostileNPC extends NPC {
 
     EnemyController enemyController;
+    boolean sleeping;
+    int hostilityRating;
 
-    public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, EnemyController enemyController) {
+    public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, EnemyController enemyController,int hostilityRating) {
         super(location, id, occupation, inventory);
         this.enemyController = enemyController;
         enemyController.setAI(this);
+        sleeping = false;
+        this.hostilityRating = hostilityRating;
     } // end constructor
 
     @Override
@@ -43,5 +47,13 @@ public class HostileNPC extends NPC {
         return "HostileNPC{" +
                 "enemyController=" + enemyController +
                 '}';
+    }
+
+    public boolean isSleeping() {
+        return sleeping;
+    }
+
+    public void setSleeping(boolean sleeping) {
+        this.sleeping = sleeping;
     }
 } // end class HostileNPC

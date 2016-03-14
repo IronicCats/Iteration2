@@ -47,7 +47,6 @@ public class Summoner extends Occupation {
 
         //enchantments
         //boon
-        /*
         setOccupationalAbilities(new SelfAbility("Superheal",
                 "A better version of binding wounds",
                 new Effect(new StatStructure(StatsEnum.LIFE, getOccupationalSkillsValue(SkillsEnum.BOON) + 2)),
@@ -68,7 +67,7 @@ public class Summoner extends Occupation {
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -11)),
                 5
-        ));*/
+        ));
         //bane
         setOccupationalAbilities(new ProjectileAbility("Hairball",
                 "Fling hairballs at enemies",
@@ -87,7 +86,6 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.MANA, -7 )),
                 5
         ));
-        /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
                 360,
@@ -96,7 +94,7 @@ public class Summoner extends Occupation {
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -11 )),
                 7
-        ));*/
+        ));
 
     }
 

@@ -53,9 +53,9 @@ public abstract class Occupation implements Subject, Observer {
         basicSkillAbilities = new EnumMap(SkillsEnum.class);
 
         //basic skills
-        basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
-        basicSkills.put(SkillsEnum.BARGAIN, 0);
-        basicSkills.put(SkillsEnum.OBSERVATION, 0);
+        basicSkills.put(SkillsEnum.BINDWOUNDS, 1);
+        basicSkills.put(SkillsEnum.BARGAIN, 1);
+        basicSkills.put(SkillsEnum.OBSERVATION, 1);
 
         //set basic abilities
         basicSkillAbilities.put(SkillsEnum.BINDWOUNDS, new SelfAbility(
@@ -178,7 +178,20 @@ public abstract class Occupation implements Subject, Observer {
 
     public void setWeaponType(EquipmentTypeEnum e){
         if(this instanceof Smasher){
-           // if(e == null || e == EquipmentTypeEnum. )
+            if(e == null || e == EquipmentTypeEnum.DOUBLE_HANDED ){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/4))));
+            }
+            else if(e == EquipmentTypeEnum.ONE_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))));
+            }
+            else if(e == EquipmentTypeEnum.TWO_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/2))));
+            }
+        }
+        else if(this instanceof  Summoner){
+            if(e == EquipmentTypeEnum.TWO_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.STAFF) + getStats().getOffensiveRating())/2))));
+            }
         }
 
     }
