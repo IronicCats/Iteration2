@@ -1,9 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.Abilities.AOEAbility;
-import Model.Abilities.DirectAbility;
-import Model.Abilities.ProjectileAbility;
-import Model.Abilities.SelfAbility;
+import Model.Abilities.*;
 import Model.Effects.Effect;
 import Model.Effects.ModificationEnum;
 import Model.GameObject.MobileObjects.Projectile;
@@ -77,15 +74,23 @@ public class Summoner extends Occupation {
                 -4,
                 3
         ));
-       setOccupationalAbilities(new AOEAbility("Water Sprinkler",
+        setOccupationalAbilities(new AOEAbility("Water Sprinkler",
                 "Fling water at enemies",
                 60,
                 1,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)+ 2))),
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE) + 2))),
                 new Requirement(0),
                 -7,
                 5
         ));
+
+        setOccupationalAbilities(new EnchantmentAbility("Make sleep",
+                "Puts hostileNPCs to sleep",
+                null, new Requirement(0),
+                5, 1, 2, 3));
+
+    }
+        /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
                 360,
@@ -96,9 +101,10 @@ public class Summoner extends Occupation {
                 7
         ));
 
-    }
+    }*/
 
-    //operations
+        //operations
+
     public void modifyOccupationalSkills(SkillsEnum s, int value) {
         //checking for summoner related skill change
         if (s == SkillsEnum.ENCHANT || s == SkillsEnum.BOON || s == SkillsEnum.BANE || s == SkillsEnum.STAFF) {
@@ -125,3 +131,6 @@ public class Summoner extends Occupation {
 
     }
 }
+
+
+

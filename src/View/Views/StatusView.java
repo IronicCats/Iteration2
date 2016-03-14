@@ -29,6 +29,7 @@ public class StatusView implements Renderable {
     public StatusView(Player player) {
         this.player = player;
     }
+    public void setPlayer(Player player) { this.player = player; }
 
     @Override
     public void render(Graphics g) {
