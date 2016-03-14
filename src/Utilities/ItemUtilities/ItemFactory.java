@@ -82,6 +82,14 @@ public class ItemFactory {
         Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
         initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
 
+        // pufferfish mace
+        Item pufferfishMace = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, new Location(2, 0));
+        initItems.put(pufferfishMace, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_MACE, pufferfishMace));
+
+        // pufferfish flail
+        Item pufferfishFlail = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, new Location(2, 1));
+        initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
+
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
         initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
@@ -595,7 +603,9 @@ public class ItemFactory {
             case SWORDFISH_LANCE:
                 return new ItemView(item, Assets.SWORDFISH_LANCE);
             case PUFFER_FISH_MACE:
+                return new ItemView(item, Assets.PUFFER_FISH_MACE);
             case PUFFER_FISH_FLAIL:
+                return new ItemView(item, Assets.PUFFER_FISH_FLAIL);
             case MOUSE_ON_A_STRING_WAND:
             case CATNIP_STAFF:
             case LASER_POINTER:
