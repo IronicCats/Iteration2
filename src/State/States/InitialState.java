@@ -18,6 +18,9 @@ public class InitialState extends State {
         INITIALSTATE = this;
         State.canvas = canvas;
         currentState = this;
+        //Character Creation
+        CreateState createState = new CreateState();
+        CREATESTATE = createState;
         //Create the MainMenu
         MenuState menu = new MenuState();
         MENUSTATE = menu;

@@ -46,6 +46,15 @@ public class EquipmentView implements Renderable, Observer {
         stats.addObserver(this);
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+        inventory = player.getInventory();
+        equipment = inventory.getEquipment();
+        stats = player.getStats();
+        stats.addObserver(this);
+    }
+
+
     @Override
     public void render(Graphics g) {
 
