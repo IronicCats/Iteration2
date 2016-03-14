@@ -153,7 +153,7 @@ public class MobileObjectFactory {
                             add("rab");
                         }});
             case DAVE_PET:
-               return new Pet(new PetController(map), location, 0, new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
+               return new Pet(new PetController(map), location, MobileObjectEnum.DAVE_PET.ordinal(), new PetStats(), new Pack(), player, ItemsEnum.SUSHI);
             case ROOMBA:
                 return new Vehicle(location, id , new Stats(50));
             case HAIRBALL:
