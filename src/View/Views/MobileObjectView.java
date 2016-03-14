@@ -119,12 +119,23 @@ public class MobileObjectView implements Renderable, Observer {
                 viewLocation.setX(Math.max(viewLocation.getX() - (int)(movement*(7/4d)), goalX));
             }
         }
-        if (goalY != viewLocation.getY()) {
-            if (goalY > viewLocation.getY()) {
-                viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
+        if(goalX == viewLocation.getX()) {
+            if (goalY != viewLocation.getY()) {
+                if (goalY > viewLocation.getY()) {
+                    viewLocation.setY(Math.min(viewLocation.getY() + (int)(movement*(7/4d)), goalY));
+                }
+                if (goalY < viewLocation.getY()) {
+                    viewLocation.setY(Math.max(viewLocation.getY() - (int)(movement*(7/4d)), goalY));
+                }
             }
-            if (goalY < viewLocation.getY()) {
-                viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
+        }else {
+            if (goalY != viewLocation.getY()) {
+                if (goalY > viewLocation.getY()) {
+                    viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
+                }
+                if (goalY < viewLocation.getY()) {
+                    viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
+                }
             }
         }
     }

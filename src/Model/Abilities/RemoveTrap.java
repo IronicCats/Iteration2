@@ -9,17 +9,7 @@ import Model.Requirement;
  */
 public class RemoveTrap extends Abilities {
 
-    int skillLevel;
     public RemoveTrap(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown, int skillLevel){
-        super(name, description, effects, requirement, manaCost, range, cooldown);
-        this.skillLevel = skillLevel;
-    }
-
-    public int getSkill(){
-        return this.skillLevel;
-    }
-
-    public void removeTrap(){
-
+        super(name, description, effects, requirement, manaCost, range, cooldown, skillLevel);
     }
 }

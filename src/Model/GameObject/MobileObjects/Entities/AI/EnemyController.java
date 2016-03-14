@@ -50,7 +50,7 @@ public class EnemyController extends AIController {
     //TODO: add delay to attacks based off of speed
     public void followThenAttackinRange() {
         int temp = random.nextInt(enemy.getHostilityRating() * 10);
-       // if (temp == 1 || imAttacking) {
+        if (temp == 1 || imAttacking) {
             imAttacking = true;
             if (canFace()) {
                 enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
@@ -73,7 +73,7 @@ public class EnemyController extends AIController {
             } else {
                 follow();
             }
-       // }
+        }
         }
 
         @Override
