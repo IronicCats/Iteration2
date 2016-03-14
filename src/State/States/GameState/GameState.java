@@ -80,7 +80,7 @@ public class GameState extends State {
         //creating a new player
         player = MobileObjectFactory.Player();
 
-        // initializing NPC's
+        // initializing NPC'selection
         mobileObjects = MobileObjectFactory.Init(map, player);
 
         // adding player to hash map
@@ -179,6 +179,8 @@ public class GameState extends State {
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);
         //mapView.update();
+        statusView = new StatusView(player);
+
     }
 
     public void switchState() {
@@ -247,7 +249,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
-        statusView.render(g);
+        if(State.getCurrentState() == GAMESTATE)statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {

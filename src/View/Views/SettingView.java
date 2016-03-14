@@ -1,5 +1,6 @@
 package View.Views;
 
+import State.States.GameState.SettingState;
 import Utilities.Settings;
 import View.ViewUtilities.Renderable;
 
@@ -9,15 +10,18 @@ import java.awt.*;
  * Created by Dartyx on 3/9/2016.
  */
 public class SettingView implements Renderable {
+
     private int width, height;
     double mX,mY;
-    String array[]={"Up Key","Up Left Key","Up Right Key","Down Key","Down Left Key","Down Right Key","Attack Key","Interact Key","",""};
+
+    String array[]={"North Key","NE Key","SE Key","South Key","SW Key","NW Key","Attack Key","Interact Key","Inventory Key","Equipment Key"};
+
     public SettingView() {
 
     }
     public void render(Graphics g){}
 
-    public void render(Graphics g, int s) {
+    public void render(Graphics g, int s, boolean newKey) {
         width = Settings.GAMEWIDTH;
         height = Settings.GAMEHEIGHT;
 
@@ -34,7 +38,7 @@ public class SettingView implements Renderable {
         int intX = ((int) incX);
         int resetX,resetY,tempX,tempY;
         resetX=width/2;
-        resetY=height/4;
+        resetY=175;
         tempX=resetX+intX/2;
         tempY=resetY;
         //making the giant box
@@ -47,8 +51,19 @@ public class SettingView implements Renderable {
         int totalWidth = (fm.stringWidth("Settings"));
         int tempMove= (width-totalWidth)/2;
         g.drawString("Settings",tempMove,height/10+40*intY/10);
+        if(!newKey) {
+            int totalWidth2 = (fm.stringWidth("Select key to change!"));
+            int tempMove2 = (width - totalWidth2) / 2;
+            g.drawString("Select key to change!", tempMove2, height / 10 + 40 * intY / 5);
+        }
+        else{
+            int totalWidth2 = (fm.stringWidth("Press desired key for new function"));
+            int tempMove2 = (width - totalWidth2) / 2;
+            g.drawString("Press desired key for new function", tempMove2, height / 10 + 40 * intY / 5);
+        }
         //making the individual boxes
         tempX=resetX-width/4-intX/2;
+
         for(int i=0;i<10;i++){
             //print out square
             if(i==s)g.setColor(new Color(12, 12, 12, 255));
@@ -62,7 +77,6 @@ public class SettingView implements Renderable {
             xMove= tempX+(width/4-fontW)/2;
             yMove=tempY+(height*3/32)/2+fm.getHeight()/4;
             g.drawString(array[i],xMove,yMove);
-
 
             //move on
             tempY+=height*3/32+intY;
