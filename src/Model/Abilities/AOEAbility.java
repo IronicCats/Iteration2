@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AOEAbility extends Abilities{
     int degreeMovement;
 
-    public AOEAbility(String name, String description, int degreeMovement, int range, Effect effects, Requirement requirements, Effect cost, int cooldown){
+    public AOEAbility(String name, String description, int degreeMovement, int range, Effect effects, Requirement requirements, int cost, int cooldown){
         super(name, description, effects, requirements, cost, range, cooldown);
         this.degreeMovement = degreeMovement;
     }
