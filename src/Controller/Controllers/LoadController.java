@@ -49,6 +49,7 @@ public class LoadController extends Controller{
                     System.out.println("SaveFile1 should be loading.");
                     State.GAMESTATE = SaveLoad.getGameState();//need to set it properly
                     State.GAMESTATE.setPlayer((Player)SaveLoad.getPlayer());
+
                     ((Player) SaveLoad.getPlayer()).update();
                     //SaveLoad.getGameMap().
                     if(State.LOADSTATE.getLastState() == 0){
