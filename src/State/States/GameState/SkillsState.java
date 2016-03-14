@@ -26,8 +26,10 @@ public class SkillsState extends State {
     Occupation occupation;
     Map<SkillsEnum, Integer> basicSkills, occupationalSkills;
     int cursor;
+    public int set1,set2,set3;
 
     public SkillsState() {
+        set1=set2=set3=0;
         setController(new SkillsController(this));
 
         this.player = State.GAMESTATE.getPlayer();
@@ -45,77 +47,140 @@ public class SkillsState extends State {
         basicSkills = occupation.getBasicSkills();
         occupationalSkills = occupation.getOccupationalSkills();
     }
-    public void set(){
+    public void set(int s){
         switch (occupation.getName()) {
-            case "Smasher":
-                if (cursor ==0) {
-                    //player.ability1=occupation.getAbilityAt();
-                    //occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
-                }
-                else if (cursor == 1) {
-                    occupation.incrementSkill(SkillsEnum.BARGAIN);
-                }
-                else if (cursor == 2) {
-                    occupation.incrementSkill(SkillsEnum.OBSERVATION);
-                }
-                else if (cursor == 3) {
-                    occupation.incrementSkill(SkillsEnum.ONEHANDWEAP);
-                }
-                else if (cursor == 4) {
-                    occupation.incrementSkill(SkillsEnum.TWOHANDWEAP);
+            case "Summoner":
+                if (cursor ==4) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(3);
+                        set1=0;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(3);
+                        set2=0;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(3);
+                        set3=0;
+                    }
+
                 }
                 else if (cursor == 5) {
-                    occupation.incrementSkill(SkillsEnum.BRAWL);
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(4);
+                        set1=1;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(4);
+                        set2=1;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(4);
+                        set3=1;
+                    }
                 }
-
-
-                break;
-            case "Summoner":
-                if (cursor ==0) {
-                    occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
+                else if (cursor == 6) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(5);
+                        set1=2;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(5);
+                        set2=2;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(5);
+                        set3=2;
+                    }
                 }
-                else if (cursor == 1) {
-                    occupation.incrementSkill(SkillsEnum.BARGAIN);
+                else if (cursor == 8) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(0);
+                        set1=3;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(0);
+                        set2=3;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(0);
+                        set3=3;
+                    }
                 }
-                else if (cursor == 2) {
-                    occupation.incrementSkill(SkillsEnum.OBSERVATION);
+                else if (cursor == 9) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(1);
+                        set1=4;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(1);
+                        set2=4;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(1);
+                        set2=4;
+                    }
                 }
-                else if (cursor == 3) {
-                    occupation.incrementSkill(SkillsEnum.BANE);
-                }
-                else if (cursor == 7) {
-                    occupation.incrementSkill(SkillsEnum.BOON);
-                }
-                else if (cursor == 11) {
-                    occupation.incrementSkill(SkillsEnum.ENCHANT);
-                }
-                else if (cursor == 15) {
-                    occupation.incrementSkill(SkillsEnum.STAFF);
+                else if (cursor == 10) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(2);
+                        set1=5;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(2);
+                        set2=5;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(2);
+                        set3=5;
+                    }
                 }
 
                 break;
             case "Sneak":
-                if (cursor ==0) {
-                    occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
-                }
-                else if (cursor == 1) {
-                    occupation.incrementSkill(SkillsEnum.BARGAIN);
-                }
-                else if (cursor == 2) {
-                    occupation.incrementSkill(SkillsEnum.OBSERVATION);
-                }
-                else if (cursor == 3) {
-                    occupation.incrementSkill(SkillsEnum.DRTRAP);
+                if (cursor ==3) {
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(1);
+                        set1=0;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(1);
+                        set2=0;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(1);
+                        set3=0;
+                    }
                 }
                 else if (cursor == 4) {
-                    occupation.incrementSkill(SkillsEnum.CREEP);
-                }
-                else if (cursor == 5) {
-                    occupation.incrementSkill(SkillsEnum.RANGEWEAP);
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(2);
+                        set1=1;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(2);
+                        set2=1;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(2);
+                        set3=1;
+                    }
                 }
                 else if (cursor == 6) {
-                    occupation.incrementSkill(SkillsEnum.PICKPOCK);
+                    if(s==1){
+                        player.ability1=occupation.getAbilityAt(0);
+                        set1=3;
+                    }
+                    else if(s==2){
+                        player.ability2=occupation.getAbilityAt(0);
+                        set2=3;
+                    }
+                    else if(s==3){
+                        player.ability3=occupation.getAbilityAt(0);
+                        set3=3;
+                    }
                 }
+
 
 
                 break;
