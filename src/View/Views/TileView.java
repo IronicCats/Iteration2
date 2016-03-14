@@ -17,7 +17,6 @@ import Utilities.Utilities;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 import View.ViewUtilities.ViewSettings;
-import com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
