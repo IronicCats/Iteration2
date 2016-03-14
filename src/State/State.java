@@ -30,11 +30,12 @@ public class State implements Tickable, Renderable {
 
     public static Canvas canvas;
     public static State currentState = null;
+    public static State previousState = null;
 
     private Controller controller;
 
-
     public static void switchState(State state) {
+        previousState = currentState;
         setState(state);
     }
 
@@ -49,6 +50,10 @@ public class State implements Tickable, Renderable {
 
     public static State getCurrentState() {
         return currentState;
+    }
+
+    public static State getPreviousState() {
+        return previousState;
     }
 
     public Controller getController() {
