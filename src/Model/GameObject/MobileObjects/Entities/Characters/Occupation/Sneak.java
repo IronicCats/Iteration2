@@ -33,7 +33,8 @@ public class Sneak extends Occupation {
                 "Basic attack of sneak",
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))
+                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                2
         ));
 
         //computes occupational abilities
@@ -71,8 +72,7 @@ public class Sneak extends Occupation {
         //basic attack
        getBasicAttack().setEffects( new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())));
 
-        //compute occupational abilities
-        //((PickPocket)(getOccupationalAbilities().get(SkillsEnum.PICKPOCK))).setSkillLevel(getOccupationalSkillsValue(SkillsEnum.PICKPOCK));
+        
     }
 
 }
