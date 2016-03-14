@@ -7,9 +7,6 @@ public class Settings {
     public static int GAMEWIDTH = 800;
     public static int GAMEHEIGHT = 600;
 
-    //public static int multiplyX = GAMEWIDTH/800;
-    //public static int multiplyY = GAMEHEIGHT/600;
-    //TODO: WTF? NO?
     public static int MAPWIDTH;
     public static int MAPHEIGHT;
     //MAP WIDTH AND HEIGHT CAN CHANGE, SHOULD BE STATIC

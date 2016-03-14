@@ -37,26 +37,27 @@ public class ItemFactory {
 
         HashMap<Item, ItemView> initItems = new HashMap<>();
 
+
         // potion stack
-        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));        /* health potion */
+        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
 
-        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(0, 0));       /* agility potion */
+        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(0, 0));
         initItems.put(ap, ItemFactory.makeAsset(ItemsEnum.AGILITY_POTION, ap));
 
-        Item ep = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, new Location(0, 0));    /* experience potion */
+        Item ep = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, new Location(0, 0));
         initItems.put(ep, ItemFactory.makeAsset(ItemsEnum.EXPERIENCE_POTION, ep));
 
-        Item hardp = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, new Location(0, 0));    /* hardiness potion */
+        Item hardp = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, new Location(0, 0));
         initItems.put(hardp, ItemFactory.makeAsset(ItemsEnum.HARDINESS_POTION, hardp));
 
-        Item ip = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, new Location(0, 0));    /* intellect potion */
+        Item ip = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, new Location(0, 0));
         initItems.put(ip, ItemFactory.makeAsset(ItemsEnum.INTELLECT_POTION, ip));
 
-        Item mp = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, new Location(0, 0));    /* movement potion */
+        Item mp = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, new Location(0, 0));
         initItems.put(mp, ItemFactory.makeAsset(ItemsEnum.MOVEMENT_POTION, mp));
 
-        Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));    /* strength potion */
+        Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));
         initItems.put(sp, ItemFactory.makeAsset(ItemsEnum.STRENGTH_POTION, sp));
 
         // closed treasure chest
@@ -152,8 +153,9 @@ public class ItemFactory {
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         // tuna
-        /*Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
-        initItems.put(tuna, ItemFactory.makeAsset(ItemsEnum.TUNA, tuna));*/
+        Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
+        initItems.put(tuna, ItemFactory.makeAsset(
+        ItemsEnum.TUNA, tuna));
 
         // sushi
         Item sushi = ItemFactory.makeItem(ItemsEnum.SUSHI, new Location(8, 8));
