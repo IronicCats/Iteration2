@@ -72,8 +72,10 @@ public class SkillsState extends State {
                     cursor += 3;
                 break;
             case "Summoner":
-                if (cursor == 0 || cursor == 1 || cursor == 2) {
+                if (cursor == 0){
                     cursor += 15;
+                }   else if(cursor == 1 || cursor == 2) {
+                    cursor+=11;
                 } else if (cursor == 3 || cursor == 4 || cursor == 5) {
                     cursor -= 3;
                 } else {
@@ -101,9 +103,11 @@ public class SkillsState extends State {
                 up();
                 break;
             case "Summoner":
-                if (cursor == 15 || cursor == 16 || cursor == 17) {
+                if (cursor == 15) {
                     cursor -= 15;
-                } else if (cursor == 18) {
+                } else if(cursor == 12 || cursor == 13) {
+                    cursor -= 11;
+                } else if (cursor == 14) {
                     cursor = 2;
                 } else if (cursor == 0 || cursor == 1 || cursor == 2) {
                     cursor += 3;
@@ -139,8 +143,10 @@ public class SkillsState extends State {
                 if(cursor == 0) {
                     cursor = 2;
                 } else if (cursor == 3 || cursor == 7 ||
-                        cursor == 11 || cursor == 15) {
+                        cursor == 11) {
                     cursor += 3;
+                } else if(cursor == 15){
+
                 } else {
                     cursor -= 1;
                 }
@@ -172,8 +178,10 @@ public class SkillsState extends State {
                 if (cursor == 2) {
                     cursor = 0;
                 } else if (cursor == 6 || cursor == 10 ||
-                        cursor == 14 || cursor == 18) {
+                        cursor == 14 ) {
                     cursor -= 3;
+                } else if(cursor == 15){
+
                 } else {
                     cursor += 1;
                 }

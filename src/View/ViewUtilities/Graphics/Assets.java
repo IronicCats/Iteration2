@@ -28,6 +28,11 @@ public class Assets {
     public static ArrayList<BufferedImage> BLUE_NPC;
     public static ArrayList<BufferedImage> CAT_NPC;
     public static ArrayList<BufferedImage> DAVE_PET;
+    public static ArrayList<BufferedImage> allArt;
+    public static ArrayList<BufferedImage> summonerArt;
+    public static ArrayList<BufferedImage> sneakArt;
+    public static ArrayList<BufferedImage> smasherArt;
+    public static ArrayList<BufferedImage> spellArt;
 
     // end NPC's
 
@@ -392,6 +397,40 @@ public class Assets {
 
         SpriteSheet circle = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/rope.png"));
         CIRCLE = circle.crop(0, 0, 600, 600);
+        //this is where i literally pass out and say eff it
+        allArt=new ArrayList<>();
+        allArt.add(new ImageLoader().loadImage("/Spells/Bind.png"));
+        allArt.add(new ImageLoader().loadImage("/Spells/Bargin.png"));
+        allArt.add(new ImageLoader().loadImage("/Spells/Observation.png"));
+        //this is where i literally pass out and say eff it
+        smasherArt=new ArrayList<>();
+        smasherArt.add(new ImageLoader().loadImage("/Spells/One.png"));
+        smasherArt.add(new ImageLoader().loadImage("/Spells/Two.png"));
+        smasherArt.add(new ImageLoader().loadImage("/Spells/Brawl.jpg"));
+        //this is where i literally pass out and say eff it
+        sneakArt=new ArrayList<>();
+        sneakArt.add(new ImageLoader().loadImage("/Spells/Trap.png"));
+        sneakArt.add(new ImageLoader().loadImage("/Spells/Creep.png"));
+        sneakArt.add(new ImageLoader().loadImage("/Spells/Ranged.png"));
+        sneakArt.add(new ImageLoader().loadImage("/Spells/Pick.jpg"));
+        //this is where i literally pass out and say eff it
+        summonerArt=new ArrayList<>();
+        summonerArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        summonerArt.add(new ImageLoader().loadImage("/Spells/Boon.png"));
+        summonerArt.add(new ImageLoader().loadImage("/Spells/Enchant.png"));
+        summonerArt.add(new ImageLoader().loadImage("/Spells/Staff.png"));
+        //spells for summoner
+        spellArt=new ArrayList<>();
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+
 
     }
 }

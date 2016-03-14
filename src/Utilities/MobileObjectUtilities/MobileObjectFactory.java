@@ -8,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
@@ -171,7 +172,7 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
 
-        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
+        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
