@@ -67,7 +67,7 @@ public class MenuView implements Renderable {
         g.setFont(new Font("Papyrus", Font.PLAIN, 100));
         g.setColor(new Color(255, 255, 255));
         FontMetrics fm = g.getFontMetrics();
-        g.drawString("Ironic Cats", width / 2 - fm.stringWidth("Ironic Cats") / 2, 25 + fm.getHeight() / 2);
+        g.drawString("IronicCats", width / 2 - fm.stringWidth("Ironic Cats") / 2, 25 + fm.getHeight() / 2);
 
     }
 

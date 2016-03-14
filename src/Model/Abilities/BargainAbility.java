@@ -15,7 +15,7 @@ public class BargainAbility extends Abilities{
 
     int skillValue;
 
-    public BargainAbility(String name, String description, Effect effects, Requirement requirement, Effect cost,  int skillValue, int cooldown){
+    public BargainAbility(String name, String description, Effect effects, Requirement requirement, int cost,  int skillValue, int cooldown){
         super(name,description,effects, requirement,cost, 1, cooldown);
         this.skillValue = skillValue;
     }
