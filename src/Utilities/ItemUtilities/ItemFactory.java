@@ -323,7 +323,7 @@ public class ItemFactory {
                         15,
                         location,
                         new Requirement(new Smasher()),
-                        EquipmentTypeEnum.TWO_HANDED,
+                        EquipmentTypeEnum.DOUBLE_HANDED,
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)));
             case SWORDFISH_DAGGER:
                 return new Weapon(id,
@@ -343,6 +343,15 @@ public class ItemFactory {
                         new Requirement(5, new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)));
+            case SWORDFISH_GAUNTLETS:
+                return new Weapon(id,
+                        "Swordfish gauntlets",
+                        "Gauntlets made from a swordfish",
+                        100,
+                        location,
+                        new Requirement(5, new Smasher()),
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)));
             case PUFFER_FISH_MACE:
                 return new Weapon(id,
                         "Puffer fish mace",
@@ -356,6 +365,15 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A heavy mace made from a deadly puffer fish",
+                        350,
+                        location,
+                        new Requirement(15, new Smasher()),
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 18)));
+            case PUFFER_FISH_KNUCKLES:
+                return new Weapon(id,
+                        "Puffer fish knuckles",
+                        "Some heavy knuckle weapons",
                         350,
                         location,
                         new Requirement(15, new Smasher()),
