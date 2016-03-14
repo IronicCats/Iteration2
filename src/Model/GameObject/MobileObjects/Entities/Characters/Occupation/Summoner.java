@@ -41,7 +41,8 @@ public class Summoner extends Occupation {
                 "whacks the enemy with your staff",
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
                 new Requirement(ItemsEnum.CATNIP_STAFF),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))
+                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                2
         ));
 
         //enchantments
@@ -50,19 +51,22 @@ public class Summoner extends Occupation {
                 "A better version of binding wounds",
                 new Effect(new StatStructure(StatsEnum.LIFE, getOccupationalSkillsValue(SkillsEnum.BOON) + 2)),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -4 ))
+                new Effect(new StatStructure(StatsEnum.MANA, -4 )),
+                5
         ));
         setOccupationalAbilities(new SelfAbility("Damage Bonus",
                 "Offensive bonus for 5 seconds",
                 new Effect(new StatStructure(StatsEnum.OFFENSIVE_RATING, getOccupationalSkillsValue(SkillsEnum.BOON) + 3), ModificationEnum.PERCENT, 5000),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -7))
+                new Effect(new StatStructure(StatsEnum.MANA, -7)),
+                7
         ));
         setOccupationalAbilities(new SelfAbility("Defensive Bonus",
                 "Defensive Bonus for 7 seconds",
                 new Effect(new StatStructure(StatsEnum.OFFENSIVE_RATING, getOccupationalSkillsValue(SkillsEnum.BOON) + 5), ModificationEnum.PERCENT, 7000),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -11))
+                new Effect(new StatStructure(StatsEnum.MANA, -11)),
+                5
         ));*/
         //bane
         setOccupationalAbilities(new ProjectileAbility("Hairball",
@@ -70,23 +74,27 @@ public class Summoner extends Occupation {
                 new Stats(20),
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -4 ))
+                new Effect(new StatStructure(StatsEnum.MANA, -4 )),
+                3
         ));
-       /* setOccupationalAbilities(new AOEAbility("Water Sprinkler",
+       setOccupationalAbilities(new AOEAbility("Water Sprinkler",
                 "Fling water at enemies",
                 60,
-                2,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)) + 2)),
+                1,
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)+ 2))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -7 ))
+                new Effect(new StatStructure(StatsEnum.MANA, -7 )),
+                5
         ));
+        /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
                 360,
-                2,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)) + 4)),
+                1,
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE) + 4))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, -11 ))
+                new Effect(new StatStructure(StatsEnum.MANA, -11 )),
+                7
         ));*/
 
     }

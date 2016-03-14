@@ -43,7 +43,8 @@ public class TradeState extends State {
                 new Effect(new StatStructure(StatsEnum.LIFE, 0)),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, 0)),
-                player.getBasicSkillsValue(SkillsEnum.BARGAIN));
+                player.getBasicSkillsValue(SkillsEnum.BARGAIN),
+                0);
         playerItems = new HashMap<>();
         shopItems = new HashMap<>();
         setController(new TradeController(this));

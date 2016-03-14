@@ -35,19 +35,34 @@ public class VehicleState extends State{
     public VehicleState(Vehicle vehicle) {
         this.vehicle = vehicle;
         this.vehicle.getDriver().deregister();
+        if(this.vehicle.getPet() != null){
+            this.vehicle.getPet().deregister();
+        }
         mobileObjects = GAMESTATE.getMobileObjects();
         setController(new VehicleController(this));
         mobileObjects.remove(this.vehicle.getDriver());
+        mobileObjects.remove(this.vehicle.getPet());
     }
 
     public void unmount(){
-        Location loc = location();
-        if(loc != null) {
+        Location playerLoc = location();
+
+        if(playerLoc != null) {
             vehicle.unmount();
-            vehicle.getDriver().setLocation(loc);
+            vehicle.getDriver().setLocation(playerLoc);
             vehicle.getDriver().setViewLocation(new ViewLocation(vehicle.getDriver().getX(), vehicle.getDriver().getY()));
             mobileObjects.put(vehicle.getDriver(), MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, vehicle.getDriver()));
-            vehicle.getDriver().dismountOntoTile(loc);
+            vehicle.getDriver().dismountOntoTile(playerLoc);
+            if(this.vehicle.getPet() != null){
+                Location petLoc = location();
+                if(petLoc != null) {
+                    vehicle.getPet().setLocation(petLoc);
+                    vehicle.getPet().setViewLocation(new ViewLocation(vehicle.getDriver().getX(), vehicle.getDriver().getY()));
+                    mobileObjects.put(vehicle.getPet(), MobileObjectFactory.makeAsset(MobileObjectEnum.DAVE_PET, vehicle.getPet()));
+                    vehicle.getPet().dismountOntoTile(petLoc);
+                    vehicle.getPet().setOwnership();
+                }
+            }
             State.switchState(State.GAMESTATE);
         }
         else{
