@@ -97,18 +97,19 @@ public class GameState extends State {
         map.setMobileObjects(mobileObjects);
 
         //area effect
+
+        TeleportAreaEffect e = new TeleportAreaEffect(new Location(18,13), new Location(18, 11));
         areaEffects = AreaEffectFactory.init();
-        TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,6), new Location(10,10));
-        map.placeTeleportAreaEffectBeginning(e);
 
         for(AreaEffect effect: areaEffects){
             map.placeAreaEffect(effect);
         }
 
+        map.placeTeleportAreaEffectBeginning(e);
+
         map.setMapItems(mapItems);
 
         statusView = new StatusView(player);
-
     }
 
     public GameState(boolean bs){

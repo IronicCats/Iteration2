@@ -96,7 +96,7 @@ public class Map implements Subject {
         try {
             tiles[t.getX()][t.getY()].setTeleportAreaEffectTile(t);
             tiles[t.getX()][t.getY()].alert();
-            this.placeTeleportAreaEffectEnding(new TeleportAreaEffect(t.getEndLocation(), t.getLocation())); //place other portal
+            placeTeleportAreaEffectEnding(new TeleportAreaEffect(t.getEndLocation(), t.getLocation())); //place other portal
         } catch (Exception e) {
             System.out.println(e);
         }

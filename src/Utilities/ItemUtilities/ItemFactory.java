@@ -40,10 +40,10 @@ public class ItemFactory {
 
 
         // potion stack
-        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(10, 10));
+        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(20, 10));
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
 
-        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(10, 10));
+        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(20, 10));
         initItems.put(ap, ItemFactory.makeAsset(ItemsEnum.AGILITY_POTION, ap));
 
         /*
