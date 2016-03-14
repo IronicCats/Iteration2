@@ -4,6 +4,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import State.State;
 import Utilities.Settings;
 import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
@@ -105,9 +106,13 @@ public void renderClass(Graphics g) {
         int tempY=height*41/48;
         int size=width*3/48;
         if(player.getOccupation()instanceof Sneak){
-            for(int i=0;i<3;++i){
+            for(int i=0;i<4;++i){
                 g.setColor(new Color(12, 12, 12, 230));
                 g.fillRect(tempX,tempY,size,size);
+                if(i==0){g.drawImage(Assets.sneakArt.get(State.SKILLSSTATE.set1),tempX,tempY,size,size,null);}
+                else if(i==1){g.drawImage(Assets.sneakArt.get(State.SKILLSSTATE.set2),tempX,tempY,size,size,null);}
+                else if(i==2){g.drawImage(Assets.sneakArt.get(State.SKILLSSTATE.set3),tempX,tempY,size,size,null);}
+                else g.drawImage(Assets.allArt.get(0),tempX,tempY,size,size,null);
                 tempX+=size+size/12;
             }
 
@@ -116,7 +121,12 @@ public void renderClass(Graphics g) {
             for(int i=0;i<4;++i){
                 g.setColor(new Color(12, 12, 12, 230));
                 g.fillRect(tempX,tempY,size,size);
+                if(i==0){g.drawImage(Assets.spellArt.get(State.SKILLSSTATE.set1),tempX,tempY,size,size,null);}
+                else if(i==1){g.drawImage(Assets.spellArt.get(State.SKILLSSTATE.set2),tempX,tempY,size,size,null);}
+                else if(i==2){g.drawImage(Assets.spellArt.get(State.SKILLSSTATE.set3),tempX,tempY,size,size,null);}
+                else g.drawImage(Assets.allArt.get(0),tempX,tempY,size,size,null);
                 tempX+=size+size/12;
+
             }
 
         }
@@ -124,6 +134,8 @@ public void renderClass(Graphics g) {
             for(int i=0;i<2;++i){
                 g.setColor(new Color(12, 12, 12, 230));
                 g.fillRect(tempX,tempY,size,size);
+                if(i==0){g.drawImage(Assets.smasherArt.get(0),tempX,tempY,size,size,null);}
+                else if(i==1){g.drawImage(Assets.allArt.get(0),tempX,tempY,size,size,null);}
                 tempX+=size+size/12;
             }
 

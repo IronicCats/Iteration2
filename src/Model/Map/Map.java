@@ -176,6 +176,9 @@ public class Map implements Subject {
                     getTile(Location.newLocation(c.getDir(), c.getLocation())).removeAreaEffect();
                 }
             }
+            else if(a instanceof PickPocket){
+                ((PickPocket) a).execute(c,getTile(Location.newLocation(c.getDir(), c.getLocation())).getObject());
+            }
             else {
                 System.out.println("Not a Direct Ability");
                 c.applyEffect(a.getCost());
