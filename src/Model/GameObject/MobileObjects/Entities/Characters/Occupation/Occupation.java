@@ -41,7 +41,7 @@ public abstract class Occupation implements Subject, Observer {
         this.name = name;
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH, StatsEnum.AGILITY,
-                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT, StatsEnum.MANA};
+                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
         initialStats = new StatStructure(stats, val);
         playerStats = new CharacterStats(initialStats);
         playerStats.addObserver(this);
@@ -53,9 +53,9 @@ public abstract class Occupation implements Subject, Observer {
         basicSkillAbilities = new EnumMap(SkillsEnum.class);
 
         //basic skills
-        basicSkills.put(SkillsEnum.BINDWOUNDS, 0);
-        basicSkills.put(SkillsEnum.BARGAIN, 0);
-        basicSkills.put(SkillsEnum.OBSERVATION, 0);
+        basicSkills.put(SkillsEnum.BINDWOUNDS, 1);
+        basicSkills.put(SkillsEnum.BARGAIN, 1);
+        basicSkills.put(SkillsEnum.OBSERVATION, 1);
 
         //set basic abilities
         basicSkillAbilities.put(SkillsEnum.BINDWOUNDS, new SelfAbility(
@@ -63,7 +63,7 @@ public abstract class Occupation implements Subject, Observer {
                 "Uses a bind wound skill",
                 new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                0,
                 4));
 
     }
@@ -166,10 +166,6 @@ public abstract class Occupation implements Subject, Observer {
         return getOccupationalAbilities().get(i);
     }
 
-    public void setWeaponType(EquipmentTypeEnum e){
-        this.weaponType = e;
-    }
-
     public Abilities getBindWounds(){
         return basicSkillAbilities.get(SkillsEnum.BINDWOUNDS);
     }
@@ -179,6 +175,26 @@ public abstract class Occupation implements Subject, Observer {
     public abstract int getOccupationalSkillsValue(SkillsEnum s);
 
     public abstract void recomputeOccupationalAbilities();
+
+    public void setWeaponType(EquipmentTypeEnum e){
+        if(this instanceof Smasher){
+            if(e == null || e == EquipmentTypeEnum.DOUBLE_HANDED ){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/4))));
+            }
+            else if(e == EquipmentTypeEnum.ONE_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))));
+            }
+            else if(e == EquipmentTypeEnum.TWO_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/2))));
+            }
+        }
+        else if(this instanceof  Summoner){
+            if(e == EquipmentTypeEnum.TWO_HANDED){
+                getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.STAFF) + getStats().getOffensiveRating())/2))));
+            }
+        }
+
+    }
 
     /*
    implement subject methods

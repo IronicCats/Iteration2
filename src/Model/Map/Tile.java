@@ -2,6 +2,8 @@ package Model.Map;
 
 
 import Model.Abilities.Abilities;
+import Model.Abilities.DetectTrap;
+import Model.Abilities.Observe;
 import Model.Abilities.ProjectileAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
@@ -10,6 +12,8 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -18,6 +22,7 @@ import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
 import State.States.GameState.GameState;
+import Utilities.AIUtilities.FindTilesAround;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
@@ -169,6 +174,13 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
+            //Observe o = new Observe((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.OBSERVATION)));
+            ArrayList<Tile> tilesToBeChecked = FindTilesAround.find(object.getLocation(), object.getMap(), 2, object.getViewLocation());
+            //o.checkSurroundingTiles(tilesToBeChecked);
+            if((((Player)(object)).getOccupation() instanceof Sneak)){
+                DetectTrap d = new DetectTrap((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.DRTRAP)));
+                d.checkSurroundingTiles(tilesToBeChecked);
+            }
         }
         if(object instanceof Character){
             if (this.getHasAreaEffect()) {

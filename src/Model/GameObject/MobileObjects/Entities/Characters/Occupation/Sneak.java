@@ -1,7 +1,9 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
+import Model.Abilities.CreepAbility;
 import Model.Abilities.DirectAbility;
 import Model.Abilities.PickPocket;
+import Model.Abilities.RemoveTrap;
 import Model.Effects.Effect;
 import Model.Requirement;
 import Model.Stats.StatStructure;
@@ -33,17 +35,32 @@ public class Sneak extends Occupation {
                 "Basic attack of sneak",
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                0,
                 2
         ));
 
         //computes occupational abilities
         getOccupationalAbilities().add(new PickPocket("Pick Pocket",
-                                         "Helps you steal another entity's money",
-                                          new Effect(new StatStructure(StatsEnum.LIFE, 0)),
-                                          new Requirement(0),
-                                          new Effect(new StatStructure(StatsEnum.MANA, 0)),
-                                          getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+                "Helps you steal another entity's money",
+                new Effect(new StatStructure(StatsEnum.LIFE, 0)),
+                new Requirement(0),
+                0,
+                getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+
+        getOccupationalAbilities().add(new RemoveTrap("Remove trap",
+                "you can attempt to remove a trap",
+                new Effect(new StatStructure(StatsEnum.LIFE, 0)),
+                new Requirement(0),
+                0,
+                0,
+                0,
+                getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
+
+        getOccupationalAbilities().add(new CreepAbility("Creep around",
+                "you can sneak past HostilNPCs",
+                null,
+                new Requirement(0),0,0,0));
+
     }
 
     //operations
@@ -71,8 +88,8 @@ public class Sneak extends Occupation {
     public void recomputeOccupationalAbilities() {
         //basic attack
        getBasicAttack().setEffects( new Effect(new StatStructure(StatsEnum.LIFE, getStats().getStrength() + getStats().getOffensiveRating())));
-
-        
+        getAbilityAt(0).setSkillLevel(getOccupationalSkillsValue(SkillsEnum.PICKPOCK));
+        getAbilityAt(1).setSkillLevel(getOccupationalSkillsValue(SkillsEnum.DRTRAP));
     }
 
 }

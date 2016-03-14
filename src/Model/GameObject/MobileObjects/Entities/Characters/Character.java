@@ -14,6 +14,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -56,7 +57,12 @@ public abstract class Character extends Entity implements Observer{
         bindWounds = occupation.getBindWounds();
         if(occupation instanceof Summoner){
             ability1 = occupation.getAbilityAt(0);
-            ability2 = occupation.getAbilityAt(1);
+            ability2 = occupation.getAbilityAt(3);
+            ability3 = occupation.getAbilityAt(5);
+        }
+        if((occupation instanceof Sneak)){
+            ability1 = occupation.getAbilityAt(0);
+            ability2 = occupation.getAbilityAt(2);
         }
         //System.out.println(attack);
         getStats().addObserver(this);
@@ -148,6 +154,7 @@ public abstract class Character extends Entity implements Observer{
 
     }
 
+
     public void unmount() {
         //getStats().resetMovement();
         // change sprite
@@ -155,13 +162,13 @@ public abstract class Character extends Entity implements Observer{
 
 
     public void attack(Abilities a) {
-        //leave this here.
-       // occupation.setWeaponType(getEquippedWeaponInSlot(EquipmentSlotEnum.MAINHAND));
+        occupation.setWeaponType(getEquippedWeaponInSlot(EquipmentSlotEnum.MAINHAND));
         if (a == null) {
             System.out.println("Ability not set");
             return;
         }
         getTile().sendAttack(this, a);
+
     }
 
     public void receiveAttack(Character c,Abilities ability) {
@@ -295,10 +302,10 @@ public abstract class Character extends Entity implements Observer{
         return true;
     }
 
+
     public boolean isDead() {
         return !getStats().isAlive();
     }
-
     public int getMoney(){
         return getPack().getMoney();
     }
@@ -320,7 +327,10 @@ public abstract class Character extends Entity implements Observer{
     }
 
     public EquipmentTypeEnum getEquippedWeaponInSlot(EquipmentSlotEnum s){
-        return ((Weapon)(getWeaponInSlot(s))).getType();
+        if(getWeaponInSlot(s) != null)
+            return ((Weapon)(getWeaponInSlot(s))).getType();
+        else
+            return null;
     }
 
     public int getBasicSkillsValue(SkillsEnum s){

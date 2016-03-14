@@ -2,11 +2,13 @@ package Model.Abilities;
 
 import Model.Effects.Effect;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 
 /**
  * Created by mazumderm on 3/5/2016.
@@ -17,18 +19,34 @@ public abstract class Abilities {
     Effect effects;
     Requirement requirement;
     Effect cost;
+    int manaCost;
     int range;
     int cooldown;
+    int skillLevel;
     //constructor
-    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost, int range, int cooldown) {
+    public Abilities(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown) {
 
         this.name = name;
         this.description = description;
         this.effects = effects;
         this.requirement = requirement;
-        this.cost = cost;
+        this.cost = new Effect(new StatStructure(StatsEnum.MANA, manaCost));
         this.range = range;
         this.cooldown = cooldown;
+        this.manaCost = manaCost;
+    }
+
+    public Abilities(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown, int skillLvel) {
+
+        this.name = name;
+        this.description = description;
+        this.effects = effects;
+        this.requirement = requirement;
+        this.cost = new Effect(new StatStructure(StatsEnum.MANA, manaCost));
+        this.range = range;
+        this.cooldown = cooldown;
+        this.manaCost = manaCost;
+        this.skillLevel = skillLevel;
     }
 
     //accessor
@@ -69,6 +87,22 @@ public abstract class Abilities {
 
     public int getCooldown(){
         return this.cooldown;
+    }
+
+    public int getManaCost(){
+        return this.manaCost;
+    }
+
+    public void setManaCost(int manaCost){
+        this.manaCost = manaCost;
+    }
+
+    public int getSkillLevel(){
+        return this.skillLevel;
+    }
+
+    public void setSkillLevel(int s){
+        this.skillLevel = s;
     }
 
 }

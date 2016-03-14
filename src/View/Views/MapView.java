@@ -2,6 +2,7 @@ package View.Views;
 
 import Model.Location;
 import Model.Map.Map;
+import State.States.GameState.GameState;
 import Utilities.Observer;
 import Utilities.Settings;
 import Utilities.Utilities;
@@ -36,10 +37,10 @@ public class MapView implements Observer, Renderable {
         for (int y = 0; y < map.getHeight(); ++y) {
             for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
                 //ONLY RENDER THINGS VISIBLE IN THE VIEW
-                if((x <= playerLocation.getX() && x >= (playerLocation.getX() - (visibleX)))
+                if(GameState.GAMESTATE.cameraMoving || (x <= playerLocation.getX() && x >= (playerLocation.getX() - (visibleX)))
                         ||
                         (x >= playerLocation.getX() && x <= (playerLocation.getX() + (visibleX)))) {
-                    if((y <= playerLocation.getY() && y >= (playerLocation.getY() - (visibleY)))
+                    if( GameState.GAMESTATE.cameraMoving || (y <= playerLocation.getY() && y >= (playerLocation.getY() - (visibleY)))
                             ||
                             (y >= playerLocation.getY() && y <= (playerLocation.getY() + (visibleY)))) {
                         tileViews[x][y].renderTile(g,
@@ -65,10 +66,10 @@ public class MapView implements Observer, Renderable {
         }
         for (int y = 0; y < map.getHeight(); ++y) {
             for (int x = 0; x < map.getWidth(); ++x) {  //you have to shiftover all tiles to the left
-                if((x <= playerLocation.getX() && x >= (playerLocation.getX() - (visibleX)))
+                if( GameState.GAMESTATE.cameraMoving|| (x <= playerLocation.getX() && x >= (playerLocation.getX() - (visibleX)))
                         ||
                         (x >= playerLocation.getX() && x <= (playerLocation.getX() + (visibleX)))) {
-                    if ((y <= playerLocation.getY() && y >= (playerLocation.getY() - (visibleY)))
+                    if ( GameState.GAMESTATE.cameraMoving || (y <= playerLocation.getY() && y >= (playerLocation.getY() - (visibleY)))
                             ||
                             (y >= playerLocation.getY() && y <= (playerLocation.getY() + (visibleY)))) {
 

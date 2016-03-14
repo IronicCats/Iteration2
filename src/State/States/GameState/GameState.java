@@ -278,17 +278,7 @@ public class GameState extends State {
             }
         }
 
-        //mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
-/*
-        for (MobileObject key : mobileObjects.keySet()) {
-            if(key instanceof Pet){
-                ((Pet) key).setTarget(player);
-                player.setPet((Pet)key);
-            } else if(key instanceof HostileNPC) {
-                ((HostileNPC) key).setTarget(player);
-            }
-        }
-*/
+        statusView.setPlayer(player);
         map.setMobileObjects(mobileObjects);
 
     } // end setPlayer

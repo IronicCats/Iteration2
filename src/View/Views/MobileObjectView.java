@@ -12,6 +12,7 @@ import Model.Location;
 import Utilities.Observer;
 import Utilities.Settings;
 import Utilities.Utilities;
+import View.ViewUtilities.Graphics.Assets;
 import View.ViewUtilities.Renderable;
 import View.ViewUtilities.ViewModules.ViewModule;
 
@@ -40,6 +41,8 @@ public class MobileObjectView implements Renderable, Observer {
 
     private ViewLocation viewLocation;
     private float goalX, goalY;
+
+    private ArrayList<ArrayList<BufferedImage>> playerAnimations;
 
     public MobileObjectView(MobileObject entity, BufferedImage sprite) {
         ArrayList<BufferedImage> temp = new ArrayList<>();
@@ -73,6 +76,17 @@ public class MobileObjectView implements Renderable, Observer {
         this.active = 3;
         this.current = 0;
         this.movement = entity.getMovement();
+        if(entity instanceof Player) {
+            if(((Player) entity).getOccupation().getName() == "Smasher"){
+                playerAnimations = Assets.SMASHERSEQUENCE;
+
+            }else if(((Player) entity).getOccupation().getName() == "Summoner") {
+                playerAnimations = Assets.SUMMONERSEQUENCE;
+
+            }else {
+                playerAnimations = Assets.SNEAKERSEQUENCE;
+            }
+        }
     }
 
     public void pause() {
@@ -107,18 +121,29 @@ public class MobileObjectView implements Renderable, Observer {
         }
         if (goalX != viewLocation.getX()) {
             if (goalX > viewLocation.getX()) {
-                viewLocation.setX(Math.min(viewLocation.getX() + movement, goalX));
+                viewLocation.setX(Math.min(viewLocation.getX() + (int)(movement*(7/4d)), goalX));
             }
             if (goalX < viewLocation.getX()) {
-                viewLocation.setX(Math.max(viewLocation.getX() - movement, goalX));
+                viewLocation.setX(Math.max(viewLocation.getX() - (int)(movement*(7/4d)), goalX));
             }
         }
-        if (goalY != viewLocation.getY()) {
-            if (goalY > viewLocation.getY()) {
-                viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
+        if(goalX == viewLocation.getX()) {
+            if (goalY != viewLocation.getY()) {
+                if (goalY > viewLocation.getY()) {
+                    viewLocation.setY(Math.min(viewLocation.getY() + (int)(movement*(7/4d)), goalY));
+                }
+                if (goalY < viewLocation.getY()) {
+                    viewLocation.setY(Math.max(viewLocation.getY() - (int)(movement*(7/4d)), goalY));
+                }
             }
-            if (goalY < viewLocation.getY()) {
-                viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
+        }else {
+            if (goalY != viewLocation.getY()) {
+                if (goalY > viewLocation.getY()) {
+                    viewLocation.setY(Math.min(viewLocation.getY() + movement, goalY));
+                }
+                if (goalY < viewLocation.getY()) {
+                    viewLocation.setY(Math.max(viewLocation.getY() - movement, goalY));
+                }
             }
         }
     }
@@ -135,8 +160,15 @@ public class MobileObjectView implements Renderable, Observer {
                     null
             );
 
-        }
-        else {
+        }else if(entity instanceof Player){
+            g.drawImage(sprites.get(sinWave()),
+                    (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
+                    (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
+                    Settings.PLAYERWIDTH,
+                    Settings.PLAYERHEIGHT,
+                    null
+            );
+        }else {
             g.drawImage(sprites.get(active),
                     (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
                     (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
@@ -173,17 +205,23 @@ public class MobileObjectView implements Renderable, Observer {
 
     public void setDirection(int degrees) {
         if (degrees == Settings.NORTH) {
-            this.active = 0;
-        } else if (degrees == Settings.NE) {
             this.active = 1;
+        } else if (degrees == Settings.NE) {
+            this.active = 0;
+
         } else if (degrees == Settings.SE) {
-            this.active = 2;
-        } else if (degrees == Settings.SOUTH) {
-            this.active = 3;
-        } else if (degrees == Settings.SW) {
-            this.active = 4;
-        } else if (degrees == Settings.NW) {
             this.active = 5;
+
+        } else if (degrees == Settings.SOUTH) {
+            this.active = 4;
+
+        } else if (degrees == Settings.SW) {
+            this.active = 3;
+        } else if (degrees == Settings.NW) {
+            this.active = 2;
+        }
+        if(playerAnimations != null) {
+            sprites = playerAnimations.get(active);
         }
     }
 

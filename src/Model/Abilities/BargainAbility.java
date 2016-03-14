@@ -13,23 +13,13 @@ import java.util.Random;
  */
 public class BargainAbility extends Abilities{
 
-    int skillValue;
-
-    public BargainAbility(String name, String description, Effect effects, Requirement requirement, Effect cost,  int skillValue, int cooldown){
-        super(name,description,effects, requirement,cost, 1, cooldown);
-        this.skillValue = skillValue;
+    public BargainAbility(String name, String description, Effect effects, Requirement requirement, int cost,  int skillValue, int cooldown){
+        super(name,description,effects, requirement,cost, 1, cooldown, skillValue);
     }
 
-    public int getSkillValue(){
-        return this.skillValue;
-    }
-
-    public void setSkillValue(int value){
-        this.skillValue = value;
-    }
     public int bargain(int itemValue, boolean isSelling) {
         if (isSelling) {
-            switch (skillValue) {
+            switch (getSkillLevel()) {
                 case 0:
                     System.out.println("Price stayed the same");
                     return itemValue;
@@ -44,7 +34,7 @@ public class BargainAbility extends Abilities{
                     return (int) (itemValue * 1.7);
             }
         } else {
-            switch (skillValue) {
+            switch (getSkillLevel()) {
                 case 0:
                     System.out.println("Price stayed the same");
                     return itemValue;
