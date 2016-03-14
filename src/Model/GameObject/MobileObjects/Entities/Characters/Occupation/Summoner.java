@@ -77,20 +77,21 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.MANA, -4 )),
                 3
         ));
-       /* setOccupationalAbilities(new AOEAbility("Water Sprinkler",
+       setOccupationalAbilities(new AOEAbility("Water Sprinkler",
                 "Fling water at enemies",
                 60,
-                2,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)) + 2)),
+                1,
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)+ 2))),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -7 )),
                 5
         ));
+        /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
                 360,
-                2,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)) + 4)),
+                1,
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE) + 4))),
                 new Requirement(0),
                 new Effect(new StatStructure(StatsEnum.MANA, -11 )),
                 7

@@ -17,6 +17,9 @@ public class Assets {
     public static BufferedImage WATERHEXTILE;
     public static BufferedImage MOUNTAINHEXTILE;
 
+    public static BufferedImage SMASHER;
+    public static BufferedImage SUMMONER;
+    public static BufferedImage SNEAK;
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
     public static ArrayList<BufferedImage> PET;
@@ -77,6 +80,9 @@ public class Assets {
     public static BufferedImage BOX;
     public static BufferedImage BOX2;
 
+
+    //DECORATION
+    public static BufferedImage CIRCLE;
 
     public static void init() {
         //Tiles
@@ -230,6 +236,14 @@ public class Assets {
 
 
 
+        //Front Views
+        SpriteSheet smasher = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/smasher.png"));
+        SpriteSheet summoner = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/summoner.png"));
+        SpriteSheet sneak = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/sneaker.png"));
+        SMASHER = smasher.crop(0, 0, 32, 32);
+        SUMMONER = summoner.crop(0, 0, 32, 32);
+        SNEAK = sneak.crop(0, 0, 32, 32);
+
         //Entities
 
         PLAYER = new ArrayList<>();
@@ -315,6 +329,9 @@ public class Assets {
 
         //SpriteSheet invBox = new SpriteSheet(new ImageLoader().loadImage("/Pics/box.png"));
         //BOX = invBox.crop(0,0,32,32);
+
+        SpriteSheet circle = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/rope.png"));
+        CIRCLE = circle.crop(0, 0, 600, 600);
 
     }
 }

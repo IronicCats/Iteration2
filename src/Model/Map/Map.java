@@ -1,9 +1,6 @@
 package Model.Map;
 
-import Model.Abilities.Abilities;
-import Model.Abilities.DirectAbility;
-import Model.Abilities.ProjectileAbility;
-import Model.Abilities.SelfAbility;
+import Model.Abilities.*;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
@@ -11,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
+import Utilities.MapUtilities.Neighbors;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import Utilities.Observer;
@@ -110,22 +108,35 @@ public class Map implements Subject {
     }
 
     public void carryAttack(Character c, Abilities a) {
-        if (a instanceof DirectAbility) {
+        if (a instanceof DirectAbility) { //when using direct ability
             getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
-        } else if (a instanceof SelfAbility) {
+        } else if (a instanceof SelfAbility) {  //using a self ability
             System.out.println("This is a self ability");
             getTile(c.getLocation()).receiveAttack(c, a);
-        } else if(a instanceof ProjectileAbility){
+        } else if (a instanceof ProjectileAbility) { //using a projectile ability
             System.out.println("Projectile Ability Set");
-            Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(),c.getLocation()), a.getEffects());
+            Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
             ((ProjectileAbility) a).setProjectile(p);
-            System.out.println(p.getDir());
-            mobileObjects.put(p,MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL,p));
+            mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
             ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
+        } else if(a instanceof AOEAbility) { //using an area of effect ability
+            System.out.println("AOEAbility");
+            if (((AOEAbility) (a)).getDegreeMovement() == 60) {
+                Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
+                for (int i = 0; i < t.length; i++) {
+                    t[i].receiveAttack(c, a);
+                }
+            } else if (((AOEAbility) (a)).getDegreeMovement() == 360) {
+                Tile[] t = Neighbors.neighbors(c.getTile(), this);
+                for (int i = 0; i < t.length; i++) {
+                    t[i].receiveAttack(c, a);
+                }
+            }
         }
-        else {
+         else {
             System.out.println("Not a Direct Ability");
         }
+        
     }
 
     public void carryInteraction(MobileObject mo) {
