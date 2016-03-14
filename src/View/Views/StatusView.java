@@ -80,7 +80,7 @@ public void renderClass(Graphics g) {
         int y=height*10/12+height/48;
         double life=player.getStats().getLife();
         double maxLife= player.getStats().getBaseLife();
-        System.out.println(life+" "+maxLife);
+        //System.out.println(life+" "+maxLife);
         g.setColor(Color.BLACK);
         //HEALTH
         g.drawRect(x + 10, y - 5, width/5, height/24);
