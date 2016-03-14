@@ -49,7 +49,7 @@ public class TradeState extends State {
         shopItems = new HashMap<>();
         setController(new TradeController(this));
         selector = 0;
-        tradeView = new TradeView(playerPack, shopPack);
+        tradeView = new TradeView(playerPack, shopPack, bargain);
         for (Item item : playerPack.getItems()) {
             if (item != null) {
                 playerItems.put(item, ItemFactory.makeAsset(item.getItemType(), item));

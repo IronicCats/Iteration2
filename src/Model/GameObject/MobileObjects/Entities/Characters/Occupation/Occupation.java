@@ -122,6 +122,7 @@ public abstract class Occupation implements Subject, Observer {
                 case CREEP:
                 case RANGEWEAP:
                     modifyOccupationalSkills(skill, getOccupationalSkillsValue(skill) + 1);
+                    unassignedSkillPoints--;
                     break;
                 default:
                     System.out.println("What skill are you even trying to modify?");
@@ -140,7 +141,7 @@ public abstract class Occupation implements Subject, Observer {
     }
 
     public int getBasicSkillValue(SkillsEnum s) {
-        if (s.equals(s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION)) {
+        if (s == SkillsEnum.BINDWOUNDS || s == SkillsEnum.BARGAIN || s == SkillsEnum.OBSERVATION) {
             return basicSkills.get(s);
         } else {
             return 0;

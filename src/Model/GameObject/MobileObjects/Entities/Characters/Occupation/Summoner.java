@@ -90,18 +90,20 @@ public class Summoner extends Occupation {
                 5, 1, 2, 3));
 
     }
+
         /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
                 360,
                 1,
-                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE) + 4))),
+                new Effect(new StatStructure(StatsEnum.LIFE, -1 * (this.getOccupationalSkillsValue(SkillsEnum.BANE)) + 4))),
                 new Requirement(0),
                 -11,
                 7
         ));
+        */
 
-    }*/
+
 
         //operations
 
@@ -128,6 +130,13 @@ public class Summoner extends Occupation {
 
 
     public void recomputeOccupationalAbilities() {
+        getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))));
+        getAbilityAt(0).setEffects( new Effect(new StatStructure(StatsEnum.LIFE, getOccupationalSkillsValue(SkillsEnum.BOON) + 2)));
+        getAbilityAt(1).setEffects( new Effect(new StatStructure(StatsEnum.OFFENSIVE_RATING, getOccupationalSkillsValue(SkillsEnum.BOON) + 3 * 100), ModificationEnum.PERCENT, 5000));
+        getAbilityAt(2).setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)))));
+        getAbilityAt(3).setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE)))));
+        getAbilityAt(4).setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getOccupationalSkillsValue(SkillsEnum.BANE) + 2))));
+
 
     }
 }
