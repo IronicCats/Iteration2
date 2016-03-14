@@ -15,11 +15,4 @@ public class EnchantmentAbility extends Abilities{
         this.skillLevel = skilLevel;
     }
 
-    public void execute(){
-
-
-
-    }
-
-
 }
