@@ -46,10 +46,10 @@ import java.util.Random;
     public void tick() {
         if (target != null) {
             //follow(mobileObject);
-            goToObjInView();
+            //goToObjInView();
         }
         else {
-            randomlyMoveinRange();
+            //randomlyMoveinRange();
             //moveTo(destination);
         }
     }
