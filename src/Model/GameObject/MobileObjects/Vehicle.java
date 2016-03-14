@@ -8,6 +8,7 @@ import Model.Location;
 import Model.Map.Tile;
 import Model.Stats.Stats;
 import State.State;
+import State.States.GameState.GameState;
 import State.States.GameState.VehicleState;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.Utilities;
@@ -44,9 +45,16 @@ public class Vehicle extends MobileObject {
     }
 
     public void setRiders(Entity mo){
+        /*
         this.driver = mo;
         if(driver.getPet().getOwned()){
             pet = driver.getPet();
+        }*/
+        this.driver = State.GAMESTATE.getPlayer();
+        if(driver.getPet() != null) {
+            if (driver.getPet().getOwned()) {
+                pet = driver.getPet();
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Location;
 import State.State;
 import State.States.GameState.GameState;
+import State.States.GameState.VehicleState;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import View.Views.CreateView;
 
