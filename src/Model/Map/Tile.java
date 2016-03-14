@@ -2,6 +2,7 @@ package Model.Map;
 
 
 import Model.Abilities.Abilities;
+import Model.Abilities.ProjectileAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
@@ -89,7 +90,7 @@ public abstract class Tile implements Subject {
     }
 
     public void receiveAttack(Character c, Abilities a) {
-        if (hasObject() && !(object instanceof Vehicle)) {
+        if (hasObject() && !(object instanceof Vehicle) && !(object instanceof Projectile)) {
             ((Character) object).receiveAttack(c, a);
         }
     }
@@ -99,7 +100,6 @@ public abstract class Tile implements Subject {
         ((Character) object).receiveProjectileAttack(p.getEffect());
 
     }
-
 
     public void addItem(Item item) {
         items.add(item);

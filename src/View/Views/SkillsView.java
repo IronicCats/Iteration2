@@ -25,6 +25,12 @@ public class SkillsView implements Renderable, Observer {
         this.occupation = player.getOccupation();
     } // end constructor
 
+    public void setPlayer(Player player) {
+        this.player = player;
+        occupation = player.getOccupation();
+    }
+
+
     public void render(Graphics g, int cursor) {
         width = Settings.GAMEWIDTH;
         height = Settings.GAMEHEIGHT;

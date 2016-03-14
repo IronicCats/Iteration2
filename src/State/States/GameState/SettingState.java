@@ -12,14 +12,16 @@ import java.awt.*;
 public class SettingState extends State {
 
     private SettingView settingView;
-    int s;
+    int selection;
+
+    public int getSelection(){
+        return selection;
+    }
 
     public SettingState() {
         settingView = new SettingView();
         setController(new SettingController(this));
-
-        s=0;
-
+        selection =0;
     }
 
 
@@ -29,64 +31,31 @@ public class SettingState extends State {
 
     public void render(Graphics g) {
         State.GAMESTATE.render(g);
-        settingView.render(g,s);
+        settingView.render(g, selection, ((SettingController)getController()).getStatus());
     }
-
-
-
 
     public void up(){
-        if(s==0||s==5){s+=4;}
-        else {s--;}
+        if(selection ==0|| selection ==5){
+            selection +=4;}
+        else {
+            selection--;}
     }
     public void down(){
-        if(s==4||s==9){s-=4;}
-        else {s++;}
+        if(selection ==4|| selection ==9){
+            selection -=4;}
+        else {
+            selection++;}
     }
     public void left(){
-        if(s<5){s+=5;}
-        else {s-=5;}
+        if(selection <5){
+            selection +=5;}
+        else {
+            selection -=5;}
     }
     public void right(){
-        if(s<5){s+=5;}
-        else {s-=5;}
-    }
-    public void change() {
-        switch (s) {
-            case 0:
-                //up
-                break;
-            case 1:
-                //up left key
-                break;
-            case 2:
-                //up right key
-                break;
-            case 3:
-                //down
-                break;
-            case 4:
-                //down left key
-                break;
-            case 5:
-                //down right key
-                break;
-            case 6:
-                //attack
-                break;
-            case 7:
-                //interact
-                break;
-            case 8:
-                //nothing yet
-                break;
-            case 9:
-                //nothing yet
-                break;
-            default:
-                break;
-
-
-        }
+        if(selection <5){
+            selection +=5;}
+        else {
+            selection -=5;}
     }
 }

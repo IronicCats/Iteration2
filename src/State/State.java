@@ -2,6 +2,7 @@ package State;
 
 import Controller.Controller;
 import Model.Tickable;
+import State.States.CreateState;
 import State.States.GameState.*;
 import State.States.InitialState;
 import State.States.MenuState;
@@ -18,6 +19,7 @@ public class State implements Tickable, Renderable {
     public static MenuState MENUSTATE;
     public static InventoryState INVENTORYSTATE;
     public static InitialState INITIALSTATE;
+    public static CreateState CREATESTATE;
     public static TradeState TRADESTATE;
     public static SkillsState SKILLSSTATE;
 
@@ -35,7 +37,9 @@ public class State implements Tickable, Renderable {
     private Controller controller;
 
     public static void switchState(State state) {
-        previousState = currentState;
+        if(currentState instanceof GameState || currentState instanceof VehicleState){
+            previousState = currentState;
+        }
         setState(state);
     }
 

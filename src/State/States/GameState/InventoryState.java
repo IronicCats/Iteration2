@@ -35,6 +35,14 @@ public class InventoryState extends State {
 
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+        inventory = player.getInventory();
+        pack = inventory.getPack();
+        invView.setPlayer(player);
+    }
+
+
     public void tick() {
     }
 

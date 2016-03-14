@@ -62,7 +62,6 @@ public abstract class MobileObject extends GameObject {
     }
 
     public void move(int degrees) {
-        //System.out.println("in here");
         if (location.getDir() == degrees) {
             if (canMove) {
                 canMove = false;

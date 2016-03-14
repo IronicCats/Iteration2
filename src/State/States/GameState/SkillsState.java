@@ -37,10 +37,20 @@ public class SkillsState extends State {
         occupationalSkills = occupation.getOccupationalSkills();
         cursor = 0;
     } // end constructor
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        this.occupation = player.getOccupation();
+        skillsView.setPlayer(player);
+        basicSkills = occupation.getBasicSkills();
+        occupationalSkills = occupation.getOccupationalSkills();
+    }
+
     public void render(Graphics g) {
         State.GAMESTATE.render(g);
         skillsView.render(g, cursor);
     } // end render
+
     public void executePlayerCommand(CommandsEnum command) {
         switch(command) {
             case up:
