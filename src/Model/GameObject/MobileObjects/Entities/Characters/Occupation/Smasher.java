@@ -19,7 +19,7 @@ public class Smasher extends Occupation {
     //constructor
     public Smasher() {
 
-        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 5, 5, 5, 0, 8, 12});
+        super("Smasher", "Specializes in hand-to-hand combat", new int[]{5, 7, 9, 5, 5, 0, 8, 12});
 
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ONEHANDWEAP, 0);
@@ -90,15 +90,7 @@ public class Smasher extends Occupation {
     }
 
     public void recomputeOccupationalAbilities() {
-        //basic attack
-        if(equipmentType == null){
-           getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.BRAWL) + getStats().getOffensiveRating())/3))));
-        }
-        else if(equipmentType == EquipmentTypeEnum.ONE_HANDED){
-           getBasicAttack().setEffects( new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.ONEHANDWEAP) + getStats().getOffensiveRating())/3))));
-        }
-        else if(equipmentType == EquipmentTypeEnum.TWO_HANDED){
-           getBasicAttack().setEffects(new Effect(new StatStructure(StatsEnum.LIFE, -1 * ((int)(this.getOccupationalSkillsValue(SkillsEnum.TWOHANDWEAP) + getStats().getOffensiveRating())/3))));
-        }
+
+
     }
 }

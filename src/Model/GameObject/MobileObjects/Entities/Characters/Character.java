@@ -148,6 +148,7 @@ public abstract class Character extends Entity implements Observer{
 
     }
 
+
     public void unmount() {
         //getStats().resetMovement();
         // change sprite

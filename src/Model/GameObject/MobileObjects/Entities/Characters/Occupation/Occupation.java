@@ -41,7 +41,7 @@ public abstract class Occupation implements Subject, Observer {
         this.name = name;
         this.description = description;
         StatsEnum[] stats = new StatsEnum[]{StatsEnum.LIVES_LEFT, StatsEnum.STRENGTH, StatsEnum.AGILITY,
-                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT, StatsEnum.MANA};
+                StatsEnum.INTELLECT, StatsEnum.HARDINESS, StatsEnum.EXPERIENCE, StatsEnum.MOVEMENT};
         initialStats = new StatStructure(stats, val);
         playerStats = new CharacterStats(initialStats);
         playerStats.addObserver(this);
@@ -166,10 +166,6 @@ public abstract class Occupation implements Subject, Observer {
         return getOccupationalAbilities().get(i);
     }
 
-    public void setWeaponType(EquipmentTypeEnum e){
-        this.weaponType = e;
-    }
-
     public Abilities getBindWounds(){
         return basicSkillAbilities.get(SkillsEnum.BINDWOUNDS);
     }
@@ -179,6 +175,13 @@ public abstract class Occupation implements Subject, Observer {
     public abstract int getOccupationalSkillsValue(SkillsEnum s);
 
     public abstract void recomputeOccupationalAbilities();
+
+    public void setWeaponType(EquipmentTypeEnum e){
+        if(this instanceof Smasher){
+           // if(e == null || e == EquipmentTypeEnum. )
+        }
+
+    }
 
     /*
    implement subject methods
