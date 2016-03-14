@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Projectile;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.GameObject.MobileObjects.ViewLocation;
 import Model.Location;
@@ -129,7 +130,9 @@ public class MobileObjectView implements Renderable, Observer {
                     Settings.TILEWIDTH,
                     null
             );
-        }else {
+
+        }
+        else {
             g.drawImage(sprites.get(active),
                     (int) viewLocation.getX() - cameraXOffset - (Settings.TILEWIDTH / (2 * 2)),
                     (int) viewLocation.getY() - cameraYOffset - (Settings.TILEHEIGHT / (2 * 2)),
@@ -140,7 +143,7 @@ public class MobileObjectView implements Renderable, Observer {
         }
 
 
-        if (!(entity instanceof Player) && !(entity instanceof Pet) && !(entity instanceof Vehicle)) {
+        if (!(entity instanceof Player) && !(entity instanceof Pet) && !(entity instanceof Vehicle) && !(entity instanceof Projectile)) {
 
             ViewModule.renderHealthBox(g,
                     ((Character) entity).getStats().getLife(),
