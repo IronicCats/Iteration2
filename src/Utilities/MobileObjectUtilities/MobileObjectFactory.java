@@ -87,7 +87,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 10) + 1),
                                 new Equipment()),
-                        new EnemyController(map));
+                        new EnemyController(map),5);
             case SMALL_CAT:
             case BLUE:
                 return new HostileNPC(location,
@@ -98,7 +98,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 25) + 1),
                                 new Equipment()),
-                        new EnemyController(map));
+                        new EnemyController(map),10);
             case FAT_CAT:
                 return new HostileNPC(location,
                         id,
@@ -108,7 +108,7 @@ public class MobileObjectFactory {
                                         ItemFactory.makeRandomItems(location),
                                         (int) (Math.random() * 50) + 1),
                                 new Equipment()),
-                        new EnemyController(map));
+                        new EnemyController(map),2);
             case CORGI_SHOPKEEPER:
                 return new Shopkeeper(location,
                         id,
@@ -171,7 +171,7 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
 
-        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
