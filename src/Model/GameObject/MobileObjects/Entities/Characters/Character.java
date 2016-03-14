@@ -39,9 +39,9 @@ public abstract class Character extends Entity implements Observer{
     protected Inventory inventory;
     protected Abilities attack;
     protected Abilities bindWounds;
-    protected Abilities ability1;
-    protected Abilities ability2;
-    protected Abilities ability3;
+    public Abilities ability1;
+    public Abilities ability2;
+    public Abilities ability3;
 
 
     public Character() {

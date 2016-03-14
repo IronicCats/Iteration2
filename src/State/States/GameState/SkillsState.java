@@ -49,7 +49,8 @@ public class SkillsState extends State {
         switch (occupation.getName()) {
             case "Smasher":
                 if (cursor ==0) {
-                    occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
+                    //player.ability1=occupation.getAbilityAt();
+                    //occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
                 }
                 else if (cursor == 1) {
                     occupation.incrementSkill(SkillsEnum.BARGAIN);
