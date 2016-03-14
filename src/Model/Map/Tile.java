@@ -3,6 +3,7 @@ package Model.Map;
 
 import Model.Abilities.Abilities;
 import Model.Abilities.DetectTrap;
+import Model.Abilities.Observe;
 import Model.Abilities.ProjectileAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
@@ -173,9 +174,11 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
+            //Observe o = new Observe((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.OBSERVATION)));
+            ArrayList<Tile> tilesToBeChecked = FindTilesAround.find(object.getLocation(), object.getMap(), 2, object.getViewLocation());
+            //o.checkSurroundingTiles(tilesToBeChecked);
             if((((Player)(object)).getOccupation() instanceof Sneak)){
                 DetectTrap d = new DetectTrap((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.DRTRAP)));
-                ArrayList<Tile> tilesToBeChecked = FindTilesAround.find(object.getLocation(), object.getMap(), 2, object.getViewLocation());
                 d.checkSurroundingTiles(tilesToBeChecked);
             }
         }
