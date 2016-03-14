@@ -54,10 +54,8 @@ public class Vehicle extends MobileObject {
             this.driver = State.GAMESTATE.getPlayer();
         else
             this.driver = mo;
-        if(driver.getPet() != null) {
-            if (driver.getPet().getOwned()) {
-                pet = driver.getPet();
-            }
+        if (driver.getPet().getOwned()) {
+            pet = driver.getPet();
         }
     }
 
