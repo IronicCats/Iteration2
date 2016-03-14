@@ -56,6 +56,7 @@ public abstract class Character extends Entity implements Observer{
         bindWounds = occupation.getBindWounds();
         if(occupation instanceof Summoner){
             ability1 = occupation.getAbilityAt(0);
+            ability2 = occupation.getAbilityAt(1);
         }
         //System.out.println(attack);
         getStats().addObserver(this);
