@@ -62,13 +62,57 @@ public class ItemFactory {
         Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
         initItems.put(closedTreasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, closedTreasureChest));
 
-        // laser pointer
-        Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(3, 4));
-        initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
-
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 2));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 0));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
+
+        // stick greatsword
+        Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
+        initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
+
+        // wooden gloves
+        Item woodenGloves = ItemFactory.makeItem(ItemsEnum.WOODEN_GLOVES, new Location(4, 2));
+        initItems.put(woodenGloves, ItemFactory.makeAsset(ItemsEnum.WOODEN_GLOVES, woodenGloves));
+
+        // swordfish dagger
+        Item swordfishDagger = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, new Location(3, 0));
+        initItems.put(swordfishDagger, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_DAGGER, swordfishDagger));
+
+        // swordfish lance
+        Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
+        initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
+
+        // swordfish lance
+        Item swordfishGauntlets = ItemFactory.makeItem(ItemsEnum.SWORDFISH_GAUNTLETS, new Location(3, 2));
+        initItems.put(swordfishGauntlets, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_GAUNTLETS, swordfishGauntlets));
+
+        // pufferfish mace
+        Item pufferfishMace = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, new Location(2, 0));
+        initItems.put(pufferfishMace, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_MACE, pufferfishMace));
+
+        // pufferfish flail
+        Item pufferfishFlail = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, new Location(2, 1));
+        initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
+
+        // pufferfish knuckles
+        Item pufferfishKnuckles = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_KNUCKLES, new Location(2, 2));
+        initItems.put(pufferfishKnuckles, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_KNUCKLES, pufferfishKnuckles));
+
+        // mouse wand
+        Item mouseOnAStringWand = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, new Location(5, 0));
+        initItems.put(mouseOnAStringWand, ItemFactory.makeAsset(ItemsEnum.MOUSE_ON_A_STRING_WAND, mouseOnAStringWand));
+
+        // catnip staff
+        Item catnipStaff = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, new Location(5, 1));
+        initItems.put(catnipStaff, ItemFactory.makeAsset(ItemsEnum.CATNIP_STAFF, catnipStaff));
+
+        // fish boomerang
+        Item fishBoomerang = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG, new Location(6, 0));
+        initItems.put(fishBoomerang, ItemFactory.makeAsset(ItemsEnum.FISH_BOOMERANG, fishBoomerang));
+
+        // laser pointer
+        Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(6, 1));
+        initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
@@ -77,6 +121,10 @@ public class ItemFactory {
         // chest armor
         Item chestPlate = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, new Location(5, 5));
         initItems.put(chestPlate, ItemFactory.makeAsset(ItemsEnum.CHESTPLATE, chestPlate));
+
+        // chest armor
+        Item platelegs = ItemFactory.makeItem(ItemsEnum.PLATELEGS, new Location(5, 4));
+        initItems.put(platelegs, ItemFactory.makeAsset(ItemsEnum.PLATELEGS, platelegs));
 
         // pants
         Item pants = ItemFactory.makeItem(ItemsEnum.PANTS, new Location(6, 5));
@@ -276,6 +324,15 @@ public class ItemFactory {
                         new Requirement(new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)));
+            case WOODEN_GLOVES:
+                return new Weapon(id,
+                        "Wooden gloves",
+                        "Some lightweight wooden gloves",
+                        15,
+                        location,
+                        new Requirement(new Smasher()),
+                        EquipmentTypeEnum.DOUBLE_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 6)));
             case SWORDFISH_DAGGER:
                 return new Weapon(id,
                         "Swordfish dagger",
@@ -294,6 +351,15 @@ public class ItemFactory {
                         new Requirement(5, new Smasher()),
                         EquipmentTypeEnum.TWO_HANDED,
                         new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)));
+            case SWORDFISH_GAUNTLETS:
+                return new Weapon(id,
+                        "Swordfish gauntlets",
+                        "Gauntlets made from a swordfish",
+                        100,
+                        location,
+                        new Requirement(5, new Smasher()),
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 10)));
             case PUFFER_FISH_MACE:
                 return new Weapon(id,
                         "Puffer fish mace",
@@ -307,6 +373,15 @@ public class ItemFactory {
                 return new Weapon(id,
                         "Puffer fish mace",
                         "A heavy mace made from a deadly puffer fish",
+                        350,
+                        location,
+                        new Requirement(15, new Smasher()),
+                        EquipmentTypeEnum.TWO_HANDED,
+                        new EquipmentModification(new StatStructure(StatsEnum.OFFENSIVE_RATING, 18)));
+            case PUFFER_FISH_KNUCKLES:
+                return new Weapon(id,
+                        "Puffer fish knuckles",
+                        "Some heavy knuckle weapons",
                         350,
                         location,
                         new Requirement(15, new Smasher()),
@@ -573,15 +648,29 @@ public class ItemFactory {
             case STICK_SWORD:
                 return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
+                return new ItemView(item, Assets.STICK_GREATSWORD);
+            case WOODEN_GLOVES:
+                return new ItemView(item, Assets.WOODEN_GLOVES);
             case SWORDFISH_DAGGER:
+                return new ItemView(item, Assets.SWORDFISH_DAGGER);
             case SWORDFISH_LANCE:
+                return new ItemView(item, Assets.SWORDFISH_LANCE);
+            case SWORDFISH_GAUNTLETS:
+                return new ItemView(item, Assets.SWORDFISH_GAUNTLETS);
             case PUFFER_FISH_MACE:
+                return new ItemView(item, Assets.PUFFER_FISH_MACE);
             case PUFFER_FISH_FLAIL:
+                return new ItemView(item, Assets.PUFFER_FISH_FLAIL);
+            case PUFFER_FISH_KNUCKLES:
+                return new ItemView(item, Assets.PUFFER_FISH_KNUCKLES);
             case MOUSE_ON_A_STRING_WAND:
+                return new ItemView(item, Assets.MOUSE_ON_A_STRING_WAND);
             case CATNIP_STAFF:
+                return new ItemView(item, Assets.CATNIP_STAFF);
             case LASER_POINTER:
                 return new ItemView(item, Assets.LASER_POINTER);
             case FISH_BOOMERANG:
+                return new ItemView(item, Assets.FISH_BOOMERANG);
             case CHEST_KEY:
                 return new ItemView(item, Assets.CHEST_KEY);
             case CLOSED_TREASURE_CHEST:
@@ -589,7 +678,9 @@ public class ItemFactory {
             case DOOR_KEY:
                 return new ItemView(item, Assets.DOOR_KEY);
             case OPEN_DOOR:
+                return new ItemView(item, Assets.OPEN_DOOR);
             case CLOSED_DOOR:
+                return new ItemView(item, Assets.CLOSED_DOOR);
             case HELMET:
                 return new ItemView(item, Assets.HELMET);
             case CHESTPLATE:
@@ -597,6 +688,7 @@ public class ItemFactory {
             case PANTS:
                 return new ItemView(item, Assets.PANTS);
             case PLATELEGS:
+                return new ItemView(item, Assets.PLATELEGS);
             case GAUNTLETS:
                 return new ItemView(item, Assets.GAUNTLETS);
             case BOOTS:
@@ -610,9 +702,11 @@ public class ItemFactory {
             case SUSHI:
                 return new ItemView(item, Assets.SUSHI);
             case SMALL_COIN_STACK:
+                return new ItemView(item, Assets.SMALL_CATNIP);
             case MEDIUM_COIN_STACK:
+                return new ItemView(item, Assets.MEDIUM_CATNIP);
             case LARGE_COIN_STACK:
-                return new ItemView(item, Assets.CATNIP);
+                return new ItemView(item, Assets.LARGE_CATNIP);
             case HORIZ_FENCE_ODD:
                 return new ItemView(item, Assets.HORIZ_FENCE_ODD);
             case HORIZ_FENCE_EVEN:
