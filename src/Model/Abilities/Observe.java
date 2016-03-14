@@ -31,16 +31,19 @@ public class Observe extends PassiveAbility {
             if(skillLevel == 0){
                 if (ti.hasObject()){
                    DisplayMessage.addMessage(new GameMessage(" Defensive Rating " + (defensiveRating - 3), 10));
+                    break;
                 }
             }
             else if(skillLevel == 1 ){
                 if (ti.hasObject()){
                     DisplayMessage.addMessage(new GameMessage(" Defensive Rating " + defensiveRating + "\n" + " Occupation" + occupation, 10));
+                    break;
                 }
             }
             else{
                 if (ti.hasObject()){
                     DisplayMessage.addMessage(new GameMessage(" Offensive Rating " + offensiveRating , 10));
+                    break;
                 }
             }
         }
