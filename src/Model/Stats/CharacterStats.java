@@ -230,7 +230,6 @@ public class CharacterStats extends Stats implements Subject {
          out of lives
         decrements lives, resets any boosts from stats
          */
-        System.out.println("Oh dear, you are dead!");
         effects.clear();
         finishTimes.clear();
 
