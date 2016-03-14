@@ -31,26 +31,41 @@ public class StatusView implements Renderable {
         width = Settings.GAMEWIDTH;
         height = Settings.GAMEHEIGHT;
 
-        mX = ((double) Settings.GAMEWIDTH) / 800;
-        mY = ((double) Settings.GAMEHEIGHT) / 600;
+        mX = ((double) Settings.GAMEWIDTH) / 800d;
+        mY = ((double) Settings.GAMEHEIGHT) / 600d;
         incY=10*mY;
         intY=((int)incY);
         renderClass(g);
         renderStats(g);
-
+        renderQuickKeys(g);
 
     }
 
     public void renderClass(Graphics g) {
-        g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.PLAIN, 20*intY/10));
 
         FontMetrics fm = g.getFontMetrics();
         int circleWidth = ((int) mX * 100);
         int totalWidth = (fm.stringWidth(player.getOccupation().getName()));
-        int tempMove= width - ((int)(mX)*125) - circleWidth/2 + totalWidth/2;
-        g.setColor(Color.RED);
-        g.drawString(player.getOccupation().getName(),tempMove, 25 );
+
+        Image image;
+        if(player.getOccupation().getName() == "Summoner") {
+            image = Assets.SUMMONER;
+        }else if(player.getOccupation().getName() == "Smasher"){
+            image = Assets.SMASHER;
+        }else {
+            image = Assets.SNEAK;
+        }
+        g.setColor(new Color(12, 12, 12, 160));
+        g.fillOval((width - ((int)(mX)*125)), 30,(int) mX * 98, (int) mX * 94);
+
+        int tempMove = (width - ((int)(mX)*125)) + (circleWidth/2 - ((int) mX * 65)/2) + 5;
+        g.drawImage(image,tempMove, 45, (int) mX * 65, (int) mX * 65, null);
+        //TEXT FOR CLASS
+        g.setColor(Color.WHITE);
+        tempMove= (width - ((int)(mX)*125)) + (circleWidth/2 - totalWidth/2);
+        g.drawString(player.getOccupation().getName(), tempMove, 25 );
+        ///Cicrcle DESIGN
         g.drawImage(Assets.CIRCLE, (width - ((int)(mX)*125)), 25,(int) mX * 100, (int) mX * 100, null);
     }
 
@@ -58,6 +73,21 @@ public class StatusView implements Renderable {
 
     }
 
+    public void renderQuickKeys(Graphics g) {
+        g.setColor(new Color(12, 12, 12, 160));
+        int quickButtons = 0;
+        if(player.getOccupation().getName() == "Summoner") {
+            quickButtons = 4;
+        }else if(player.getOccupation().getName() == "Smasher"){
+            quickButtons = 2;
+        }else {
+            quickButtons = 4;
+        }
+        int widthOfBoxs = quickButtons * 27;
+        for(int i = 0; i < quickButtons; ++i) {
+            g.fillRect((27 * i), height - 75, width/2 - widthOfBoxs/2, 25);
+        }
+    }
 
 
 
