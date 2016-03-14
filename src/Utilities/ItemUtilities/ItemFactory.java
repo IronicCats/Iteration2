@@ -5,6 +5,7 @@ import Model.Effects.EquipmentModification;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
@@ -242,10 +243,12 @@ public class ItemFactory {
         Item[] items = new Item[amount];
         for (int i = 0; i < amount; i++) {
             items[i] = ItemFactory.makeItem(ItemsEnum.values()[(int) (Math.random() * ItemsEnum.values().length)], location);
+            if(!(items[i] instanceof Takable)){
+                i--; // removes if item is not takable
+            }
         }
         return items;
     } // end makeRandomItems
-
 
     public static Item makeItem(ItemsEnum itemsEnum, Location location) {
         int id = itemsEnum.ordinal();
