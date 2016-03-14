@@ -13,6 +13,7 @@ import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
+import Model.Stats.Stats;
 import State.State;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
@@ -25,14 +26,12 @@ import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
-import View.Views.DecalView;
-import View.Views.ItemView;
-import View.Views.MapView;
+import View.Views.*;
 import View.Views.MessageBox.DisplayMessage;
-import View.Views.MobileObjectView;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
@@ -40,13 +39,13 @@ import java.util.HashMap;
  */
 public class GameState extends State {
 
+    private StatusView statusView;
     private HashMap<Item, ItemView> mapItems;
     private HashMap<AreaEffect, DecalView> decals;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
     public static Map map;
     private Camera camera;
     private MapView mapView;
-    //SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
     private boolean cameraMoving;
 
@@ -113,6 +112,8 @@ public class GameState extends State {
 
         map.setMapItems(mapItems);
 
+        statusView = new StatusView(player);
+
     }
 
     public GameState(Player p,Map m, MapView mv,HashMap<MobileObject, MobileObjectView> mo,HashMap<AreaEffect, DecalView> d,HashMap<Item, ItemView> mi){
@@ -136,8 +137,39 @@ public class GameState extends State {
         //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
         mapView.update();
 
+
+        //idk
+        Iterator it = mobileObjects.entrySet().iterator();
+        while (it.hasNext()) {
+            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
+            //System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
+            //MobileObject a = (MobileObject)pair.getKey();
+           // MobileObjectView ab = (MobileObjectView)pair.getValue();
+            //int x = a.getX();
+            //int y = a.getY();
+              map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
+            ((MobileObject) pair.getKey()).registerTile(((MobileObject)pair.getKey()).getLocation());
+
+
+            //it.remove(); ??? Says it avoids CurrentModificationException
+        }
+        if(!mapItems.isEmpty()) {
+            Iterator ia = mapItems.entrySet().iterator();
+            while (ia.hasNext()) {
+                java.util.Map.Entry q = (java.util.Map.Entry) ia.next();
+                System.out.println(q.getKey() + "  This is the related view: " + q.getValue());
+
+                Item b = (Item) q.getKey();
+                System.out.println(b);
+
+                map.getTile(b.getLocation()).addItem(b);
+            }
+        }
+        map.setMapItems(mapItems);
+        map.setMobileObjects(mobileObjects);
         AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
         map.placeAreaEffect(a);
+        //mapView.update();
     }
 
     public void switchState() {
@@ -146,8 +178,8 @@ public class GameState extends State {
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
-        //System.out.println("x:" +Integer.toString(player.getLocation().getX()));
-        //System.out.println("y:" +Integer.toString(player.getLocation().getY()));
+        System.out.println("x:" +Integer.toString(player.getLocation().getX()));
+        System.out.println("y:" +Integer.toString(player.getLocation().getY()));
         /*
         if(player.canMove())
             System.out.println("Player can move.");
@@ -162,6 +194,7 @@ public class GameState extends State {
         } else {
             player.face(degrees);
         }
+
     }
 
     public void setCameraMoving(boolean movement) {
@@ -201,6 +234,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
+        statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {

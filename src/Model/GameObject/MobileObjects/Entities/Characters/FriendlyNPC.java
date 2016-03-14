@@ -33,8 +33,7 @@ public class FriendlyNPC extends NPC {
     @Override
     public void tick() {
         getStats().tick();
-        if (friendlyController != null) {
-            friendlyController.tick();
+        if (friendlyController != null) {            friendlyController.tick();
         }
         if((int)(Math.random() * 600) + 1 == 1 && dialog.size() > 0) {
             System.out.println(getRandomDialog());
