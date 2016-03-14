@@ -62,12 +62,8 @@ public class ItemFactory {
         Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
         initItems.put(closedTreasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, closedTreasureChest));
 
-        // laser pointer
-        Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(3, 4));
-        initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
-
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 2));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 0));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // stick greatsword
@@ -93,11 +89,18 @@ public class ItemFactory {
         // mouse wand
         Item mouseOnAStringWand = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, new Location(5, 0));
         initItems.put(mouseOnAStringWand, ItemFactory.makeAsset(ItemsEnum.MOUSE_ON_A_STRING_WAND, mouseOnAStringWand));
-        initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
 
         // catnip staff
         Item catnipStaff = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, new Location(5, 1));
         initItems.put(catnipStaff, ItemFactory.makeAsset(ItemsEnum.CATNIP_STAFF, catnipStaff));
+
+        // fish boomerang
+        Item fishBoomerang = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG, new Location(6, 0));
+        initItems.put(fishBoomerang, ItemFactory.makeAsset(ItemsEnum.FISH_BOOMERANG, fishBoomerang));
+
+        // laser pointer
+        Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(6, 1));
+        initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
@@ -622,6 +625,7 @@ public class ItemFactory {
             case LASER_POINTER:
                 return new ItemView(item, Assets.LASER_POINTER);
             case FISH_BOOMERANG:
+                return new ItemView(item, Assets.FISH_BOOMERANG);
             case CHEST_KEY:
                 return new ItemView(item, Assets.CHEST_KEY);
             case CLOSED_TREASURE_CHEST:
