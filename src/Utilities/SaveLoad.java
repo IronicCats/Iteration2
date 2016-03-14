@@ -1,6 +1,7 @@
 package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
@@ -25,6 +26,7 @@ import Model.Map.Tiles.Water;
 import Model.Stats.*;
 import State.State;
 import State.States.GameState.*;
+import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
@@ -143,8 +145,10 @@ public class SaveLoad {
         }
         gameMap.setMapItems(mapItems);
         for(AreaEffect areaEffect: decals.keySet()){
-            gameMap.getTile(areaEffect.getLocation());
+            gameMap.getTile(areaEffect.getLocation()).setAreaEffectTile(areaEffect);
         }
+
+        //gameMap setdecals? It should load in properly now.
 
 
         //((Player) player).update();
@@ -214,18 +218,21 @@ public class SaveLoad {
 
                     Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
                     String terrainType = terrainElement.getAttribute("terrainType");
-                    //how are we telling something that it's a grass/water/mountain?
 
 
-                    AreaEffect areaEffect = null;       //blank areaEffect to fill in
+                    //AreaEffect areaEffect = null;       //blank areaEffect to fill in
                     NodeList areaEffectNodes = tileElement.getElementsByTagName("areaEffect");
                     if (areaEffectNodes.getLength() > 0) {
                         Element areaEffectElement = (Element) areaEffectNodes.item(0);
                         String areaEffectEnum = areaEffectElement.getAttribute("enum");
 
-                        switch (areaEffectEnum) {
-                            //a case for each enum
-                        }
+                        AreaEffect areaEffect1 = null;
+                        AreaEffectEnum a = AreaEffectEnum.valueOf(areaEffectEnum) ;
+                        Location areaLoc = new Location(i,j,270);
+                        System.out.println("This enum is being loaded in:" + areaEffectEnum + " at location " + areaLoc.toString());
+                        areaEffect1 = AreaEffectFactory.makeAreaEffect(a,areaLoc);
+                        decals.put(areaEffect1,AreaEffectFactory.makeAsset(a,areaEffect1));
+
 
                     }
                     //decal stuff but I don't even have that saving yet
@@ -823,6 +830,26 @@ public class SaveLoad {
             areaEnum.setValue(t.getAreaEffectEnum().toString());    //sets that attribute as AreaEffectEnum as a string
             areaEffect.setAttributeNode(areaEnum);                  //set AttributeNode of element
             tile.appendChild(areaEffect);                           //appends Node to element;
+        }
+        if(t.getHasTeleportAreaEffect()){
+            Element teleportAreaEffect = doc.createElement("teleportAreaEffect");
+
+            Attr teleportEnumX = doc.createAttribute("locX");
+            Attr teleportEnumY = doc.createAttribute("locY");
+            Attr teleportDestX = doc.createAttribute("destX");
+            Attr teleportDestY = doc.createAttribute("destY");
+
+            teleportEnumX.setValue(Integer.toString(t.getTeleportAreaEffect().getX()));
+            teleportEnumY.setValue(Integer.toString(t.getTeleportAreaEffect().getY()));
+            teleportDestX.setValue(Integer.toString(t.getTeleportAreaEffect().getEndLocation().getX()));
+            teleportDestY.setValue(Integer.toString(t.getTeleportAreaEffect().getEndLocation().getY()));
+
+            teleportAreaEffect.setAttributeNode(teleportEnumX);
+            teleportAreaEffect.setAttributeNode(teleportEnumY);
+            teleportAreaEffect.setAttributeNode(teleportDestX);
+            teleportAreaEffect.setAttributeNode(teleportDestY);
+
+            tile.appendChild(teleportAreaEffect);
         }
         //if(t.)
         //Decal
