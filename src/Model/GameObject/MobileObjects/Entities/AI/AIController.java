@@ -104,15 +104,6 @@ import java.util.Random;
         }
     }
 
-    public void tryToPickUpRandomly(int percentPickup) {
-        int temp = random.nextInt(30);
-        if (temp == 1) {
-            if (map.getTile(AI.getLocation().getX(), AI.getLocation().getY()).hasItems()) {
-                //AI.pickupItem
-            }
-        }
-    }
-
     public boolean targetinFront() {
         Location targetTile = Location.newLocation(AI.getLocation().getDir(), AI.getLocation());
         if (map.getTile(targetTile).getObject() == target) {
@@ -163,8 +154,9 @@ import java.util.Random;
         this.destination = location;
     } // end setDestination
 
-    public void setTarget(MobileObject mobileObject) {
-        this.target = mobileObject; }
+    public void setTarget(MobileObject mobileObject) {System.out.println("target being set");
+        this.target = mobileObject;
+    }
 
     public Location getBaseLoc() {
         return baseLoc;

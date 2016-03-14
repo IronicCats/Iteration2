@@ -14,6 +14,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -66,7 +67,11 @@ public abstract class Tile implements Subject {
 
 
     public void interact() {
-        if (hasItems()) {
+        if(object instanceof Pet){
+            items = ((Pet) object).takeItems(items);
+            alert();
+        }
+        else if (hasItems()){
             items = ((Character) object).takeItems(items);
             alert();
         }

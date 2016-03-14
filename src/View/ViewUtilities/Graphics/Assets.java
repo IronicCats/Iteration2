@@ -1,5 +1,6 @@
 package View.ViewUtilities.Graphics;
 
+import javafx.util.BuilderFactory;
 import sun.awt.image.BufferedImageDevice;
 
 import java.awt.image.BufferedImage;
@@ -24,6 +25,8 @@ public class Assets {
     public static BufferedImage SNEAK;
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
+    public static ArrayList<ArrayList<BufferedImage>> PLAYERANIMATION;
+
     public static ArrayList<BufferedImage> PET;
     public static ArrayList<BufferedImage> BLUE_NPC;
     public static ArrayList<BufferedImage> CAT_NPC;
@@ -307,26 +310,36 @@ public class Assets {
         //Entities
 
         PLAYER = new ArrayList<>();
-        SpriteSheet player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerNorth.png"));
-        SpriteSheet player2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerNE.png"));
-        SpriteSheet player3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerSE.png"));
-        SpriteSheet player4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerSouth.png"));
-        SpriteSheet player5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerSW.png"));
-        SpriteSheet player6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerNW.png"));
-        PLAYER.add(player1.crop(0, 0, 30, 30));
-        PLAYER.add(player2.crop(0, 0, 32, 32));
-        PLAYER.add(player3.crop(0, 0, 32, 32));
-        PLAYER.add(player4.crop(0, 0, 32, 32));
-        PLAYER.add(player5.crop(0, 0, 32, 32));
-        PLAYER.add(player6.crop(0, 0, 32, 32));
+        SpriteSheet player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerNE.png"));
+        PLAYER.add(player1.crop(0, 0, 32, 32));
+        PLAYER.add(player1.crop(0, 32, 32, 32));
+        PLAYER.add(player1.crop(0, 64, 32, 32));
+        PLAYER.add(player1.crop(0, 96, 32, 32));
+        PLAYER.add(player1.crop(0, 128, 32, 32));
+        PLAYER.add(player1.crop(0, 160, 32, 32));
+
+        PLAYERANIMATION = new ArrayList<>();
+        for(int i = 0; i < 6; ++i) {
+            ArrayList<BufferedImage> temp = new ArrayList<>();
+            temp.add(player1.crop(0, (i*32), 32, 32));
+            temp.add(player1.crop(32, (i*32), 32, 32));
+            temp.add(player1.crop(64, (i*32), 32, 32));
+            temp.add(player1.crop(96, (i*32), 32, 32));
+
+            PLAYERANIMATION.add(temp);
+        }
+
+        System.out.println(PLAYERANIMATION);
+
+
 
         CAT_NPC = new ArrayList<>();
-        SpriteSheet cat1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
-        SpriteSheet cat2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
-        SpriteSheet cat3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
-        SpriteSheet cat4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
-        SpriteSheet cat5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
-        SpriteSheet cat6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
+        SpriteSheet cat2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
+        SpriteSheet cat1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
+        SpriteSheet cat6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
+        SpriteSheet cat5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
+        SpriteSheet cat4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
+        SpriteSheet cat3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
         CAT_NPC.add(cat1.crop(0, 0, 32, 32));
         CAT_NPC.add(cat2.crop(0, 0, 32, 32));
         CAT_NPC.add(cat3.crop(0, 0, 32, 32));
@@ -335,12 +348,12 @@ public class Assets {
         CAT_NPC.add(cat6.crop(0, 0, 32, 32));
 
         BLUE_NPC = new ArrayList<>();
-        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNorth.png"));
-        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNE.png"));
-        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSE.png"));
-        SpriteSheet npc4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
-        SpriteSheet npc5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSW.png"));
-        SpriteSheet npc6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNW.png"));
+        SpriteSheet npc2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNorth.png"));
+        SpriteSheet npc1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNE.png"));
+        SpriteSheet npc6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSE.png"));
+        SpriteSheet npc5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSouth.png"));
+        SpriteSheet npc4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueSW.png"));
+        SpriteSheet npc3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/BlueNW.png"));
         BLUE_NPC.add(npc1.crop(0, 0, 32, 32));
         BLUE_NPC.add(npc2.crop(0, 0, 32, 32));
         BLUE_NPC.add(npc3.crop(0, 0, 32, 32));
@@ -349,12 +362,12 @@ public class Assets {
         BLUE_NPC.add(npc6.crop(0, 0, 32, 32));
 
         DAVE_PET = new ArrayList<>();
-        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorth.png"));
-        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthEast.png"));
-        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthEast.png"));
-        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouth.png"));
-        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthWest.png"));
-        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthWest.png"));
+        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorth.png"));
+        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthEast.png"));
+        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthEast.png"));
+        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouth.png"));
+        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthWest.png"));
+        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthWest.png"));
         DAVE_PET.add(pet1.crop(0, 0, 32, 32));
         DAVE_PET.add(pet2.crop(0, 0, 32, 32));
         DAVE_PET.add(pet3.crop(0, 0, 32, 32));

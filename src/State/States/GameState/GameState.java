@@ -272,8 +272,21 @@ public class GameState extends State {
     public void setPlayer(Player player) {
         GameState.player = player;
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+
+        // initializing NPC'selection
+        mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
 
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet) {
+                player.setPet((Pet) key);
+            }
+        }
+
+        //mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+/*
         for (MobileObject key : mobileObjects.keySet()) {
             if(key instanceof Pet){
                 ((Pet) key).setTarget(player);
@@ -282,7 +295,7 @@ public class GameState extends State {
                 ((HostileNPC) key).setTarget(player);
             }
         }
-
+*/
         map.setMobileObjects(mobileObjects);
 
     } // end setPlayer
