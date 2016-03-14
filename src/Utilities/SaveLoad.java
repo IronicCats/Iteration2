@@ -2,6 +2,7 @@ package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
@@ -64,6 +65,8 @@ public class SaveLoad {
     private static HashMap<MobileObject, MobileObjectView> mobileObjects;
     private static HashMap<AreaEffect, DecalView> decals;
     private static HashMap<Item, ItemView> mapItems;
+    private static ArrayList<TeleportAreaEffect> teleportAreaEffectsA = new ArrayList<TeleportAreaEffect>();
+
     private static GameState gs;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
@@ -147,6 +150,9 @@ public class SaveLoad {
         for(AreaEffect areaEffect: decals.keySet()){
             gameMap.getTile(areaEffect.getLocation()).setAreaEffectTile(areaEffect);
         }
+        for(TeleportAreaEffect teleportAreaEffect: teleportAreaEffectsA){
+            gameMap.getTile(teleportAreaEffect.getLocation()).setTeleportAreaEffectTile(teleportAreaEffect);
+        }
 
         //gameMap setdecals? It should load in properly now.
 
@@ -204,6 +210,8 @@ public class SaveLoad {
             //if there is problem it may be here
             Tile[][] tiles = new Tile[mapWidth][mapHeight]; //this might not be good in our implementation
             TileView[][] tv = new TileView[mapWidth][mapHeight];
+            //TeleportAreaEffect[] teleportAreaEffectsArray;
+            ArrayList<TeleportAreaEffect> teleportAreaEffectsArrayList = new ArrayList<TeleportAreaEffect>();
             //was mapHeight/mapWitdth
 
             NodeList rows = doc.getElementsByTagName("row");
@@ -233,7 +241,22 @@ public class SaveLoad {
                         areaEffect1 = AreaEffectFactory.makeAreaEffect(a,areaLoc);
                         decals.put(areaEffect1,AreaEffectFactory.makeAsset(a,areaEffect1));
 
+                    }
+                    NodeList teleportEffectNode = tileElement.getElementsByTagName("teleportAreaEffect");
+                    if(teleportEffectNode.getLength() > 0)
+                    {
+                        Element teleportEffectElement = (Element)teleportEffectNode.item(0);
+                        String teleX = teleportEffectElement.getAttribute("locX");
+                        String teleY = teleportEffectElement.getAttribute("locY");
+                        String destX = teleportEffectElement.getAttribute("destX");
+                        String destY = teleportEffectElement.getAttribute("destY");
 
+                        Location teleLoc = new Location(Integer.parseInt(teleX),Integer.parseInt(teleY));
+                        Location destLoc = new Location(Integer.parseInt(destX),Integer.parseInt(destY));
+
+                        TeleportAreaEffect tAE = new TeleportAreaEffect(teleLoc,destLoc);
+                        teleportAreaEffectsArrayList.add(tAE);
+                        teleportAreaEffectsA.add(tAE);
                     }
                     //decal stuff but I don't even have that saving yet
 
@@ -278,6 +301,7 @@ public class SaveLoad {
 
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
+
                         //if(!itemArrayList.isEmpty())
                             //tiles[i][j].addItems(itemArrayList);
 
