@@ -29,10 +29,12 @@ public class EnemyController extends AIController {
 
     @Override
     public void tick() {
-        if (targetinView()) {
-            followThenAttackinRange();
-        } else {
-            randomlyMoveinRange();
+        if(!enemy.isSleeping()) {
+            if (targetinView()) {
+                followThenAttackinRange();
+            } else {
+                randomlyMoveinRange();
+            }
         }
     }
 

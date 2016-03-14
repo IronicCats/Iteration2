@@ -113,13 +113,20 @@ public class Map implements Subject {
         } else if (a instanceof SelfAbility) {  //using a self ability
             System.out.println("This is a self ability");
             getTile(c.getLocation()).receiveAttack(c, a);
-        } else if (a instanceof ProjectileAbility) { //using a projectile ability
+        }
+
+        else if (a instanceof ProjectileAbility) { //using a projectile ability
+
             System.out.println("Projectile Ability Set");
+            //if()
             Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
             ((ProjectileAbility) a).setProjectile(p);
             mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
             ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
-        } else if(a instanceof AOEAbility) { //using an area of effect ability
+
+        }
+
+        else if(a instanceof AOEAbility) { //using an area of effect ability
             System.out.println("AOEAbility");
             if (((AOEAbility) (a)).getDegreeMovement() == 60) {
                 Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
