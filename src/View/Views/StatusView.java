@@ -74,19 +74,8 @@ public class StatusView implements Renderable {
     }
 
     public void renderQuickKeys(Graphics g) {
-        g.setColor(new Color(12, 12, 12, 160));
-        int quickButtons = 0;
-        if(player.getOccupation().getName() == "Summoner") {
-            quickButtons = 4;
-        }else if(player.getOccupation().getName() == "Smasher"){
-            quickButtons = 2;
-        }else {
-            quickButtons = 4;
-        }
-        int widthOfBoxs = quickButtons * 27;
-        for(int i = 0; i < quickButtons; ++i) {
-            g.fillRect((27 * i), height - 75, width/2 - widthOfBoxs/2, 25);
-        }
+
+
     }
 
 
