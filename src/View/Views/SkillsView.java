@@ -146,7 +146,7 @@ public class SkillsView implements Renderable, Observer {
                 g.drawImage(Assets.smasherArt.get(i-3),tempX+size*1/12,tempY+size*1/12,size*10/12,size*10/12,null);
                 g.setFont(new Font("Arial", Font.PLAIN, 30*intY/10));
                 g.setColor(Color.BLACK);
-                g.drawString(""+player.getOccupation().getBasicSkillValue(ayy[i-3]),tempX,tempY+width /12);
+                g.drawString(""+player.getOccupation().getOccupationalSkillsValue(arrayylmao[i-3]),tempX,tempY+width /12);
                 tempX+=width/6;
             }
             g.setColor(Color.BLACK);

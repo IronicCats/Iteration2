@@ -76,10 +76,13 @@ public class Smasher extends Occupation {
     //operations
     public void modifyOccupationalSkills(SkillsEnum s, int value) {
         //checking for smasher related skill change
+        //System.out.println("madeit");
         if (s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL) {
-            Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
-            m.put(s, value); //changing the occupational skills
-            this.setOccupationalSkills(m); //setting the occupational skills
+            //Map<SkillsEnum, Integer> m = this.getOccupationalSkills(); //attaining the occupational skills
+            //m.put(s, value); //changing the occupational skills
+           // this.setOccupationalSkills(m); //setting the occupational skills
+            this.getOccupationalSkills().put(s,value);
+            //System.out.println(this.getOccupationalSkills().toString());
         } else {
             //do nothing
         }
@@ -88,7 +91,9 @@ public class Smasher extends Occupation {
 
     public int getOccupationalSkillsValue(SkillsEnum s) {
         if (s == SkillsEnum.ONEHANDWEAP || s == SkillsEnum.TWOHANDWEAP || s == SkillsEnum.BRAWL) {
+            //System.out.println(getOccupationalSkills().get(s));
             return getOccupationalSkills().get(s);
+
         } else {
             System.out.println("This skill is not available to you");
             return 0;
