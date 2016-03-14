@@ -39,23 +39,23 @@ import java.util.Iterator;
  */
 public class GameState extends State {
 
-    private StatusView statusView;
-    private HashMap<Item, ItemView> mapItems;
-    private HashMap<AreaEffect, DecalView> decals;
-    private HashMap<MobileObject, MobileObjectView> mobileObjects;
+    public StatusView statusView;
+    public HashMap<Item, ItemView> mapItems;
+    public HashMap<AreaEffect, DecalView> decals;
+    public HashMap<MobileObject, MobileObjectView> mobileObjects;
     public static Map map;
-    private Camera camera;
-    private MapView mapView;
+    public Camera camera;
+    public MapView mapView;
 
-    private boolean cameraMoving;
+   public boolean cameraMoving;
 
-    private static Player player;
-    private boolean pause;
+    public static Player player;
+    public boolean loading;
 
 
     public GameState() {
         //need to change this
-        pause = true;
+        loading = false;
         cameraMoving = false;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
@@ -116,8 +116,17 @@ public class GameState extends State {
 
     }
 
+    public GameState(boolean bs){
+        loading = true;
+        //map = SaveLoad.getGameMap();
+       // mapView = MakeMap.makeMapView(map);
+
+        setController(new GameController(this));
+        //player = S
+    }
+
     public GameState(Player p,Map m, MapView mv,HashMap<MobileObject, MobileObjectView> mo,HashMap<AreaEffect, DecalView> d,HashMap<Item, ItemView> mi){
-        pause = true;
+        loading = true;
         cameraMoving = false;
         map = m;
         mapView = mv;
@@ -180,8 +189,6 @@ public class GameState extends State {
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
-        System.out.println("x:" +Integer.toString(player.getLocation().getX()));
-        System.out.println("y:" +Integer.toString(player.getLocation().getY()));
         /*
         if(player.canMove())
             System.out.println("Player can move.");
@@ -224,6 +231,8 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        if(loading)
+            return;
         for (MobileObject key : mobileObjects.keySet()) {
             key.tick();
         }
@@ -231,8 +240,10 @@ public class GameState extends State {
     }
 
     public void render(Graphics g) {
+        if(loading)
+            return;
         if(!cameraMoving){
-            camera.centerOnObject(player);
+            camera.centerOnObject(GameState.player);
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
@@ -290,7 +301,18 @@ public class GameState extends State {
         mobileObjects = mo;
     }
 
-    public void togglePause(){
-        pause = !pause;
+    public void toggleloading(){
+        loading = !loading;
+    }
+
+
+    public void initGameState() {
+        camera = new Camera(Settings.GAMEWIDTH,Settings.GAMEHEIGHT,map);
+        mapView = MakeMap.makeMapView(map);
+        statusView = new StatusView(player);
+        map.setMobileObjects(mobileObjects);
+        mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+
     }
 }
+
