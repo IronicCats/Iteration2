@@ -118,11 +118,16 @@ public class Map implements Subject {
         else if (a instanceof ProjectileAbility) { //using a projectile ability
 
             System.out.println("Projectile Ability Set");
-            //if()
-            Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
-            ((ProjectileAbility) a).setProjectile(p);
-            mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
-            ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
+            Tile infront = getTile(Location.newLocation(c.getDir(), c.getLocation()));
+            if(infront.hasObject()){
+                infront.receiveAttack(c,a);
+            }
+            else {
+                Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
+                ((ProjectileAbility) a).setProjectile(p);
+                mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
+                ((ProjectileAbility) a).getProjectile().execute();
+            }
 
         }
 
@@ -143,7 +148,6 @@ public class Map implements Subject {
          else {
             System.out.println("Not a Direct Ability");
         }
-        
     }
 
     public void carryInteraction(MobileObject mo) {

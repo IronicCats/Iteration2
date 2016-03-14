@@ -94,6 +94,10 @@ public class MobileObjectView implements Renderable, Observer {
         if (goalX == viewLocation.getX() && goalY == viewLocation.getY()) {
             entity.setCanMove(true);
             pause();
+            if(entity instanceof Projectile){
+                entity.deregister();
+                entity.getMap().getMobileObjects().remove(entity);
+            }
             return;
         }
 
@@ -193,6 +197,9 @@ public class MobileObjectView implements Renderable, Observer {
         }
         return current;
     }
+
+
+
 }
 
 
