@@ -1,8 +1,5 @@
 package View.ViewUtilities.Graphics;
 
-import javafx.util.BuilderFactory;
-import sun.awt.image.BufferedImageDevice;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
