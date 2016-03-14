@@ -46,6 +46,8 @@ public class Assets {
     public static BufferedImage SWORDFISH_LANCE;
     public static BufferedImage PUFFER_FISH_MACE;
     public static BufferedImage PUFFER_FISH_FLAIL;
+    public static BufferedImage MOUSE_ON_A_STRING_WAND;
+    public static BufferedImage CATNIP_STAFF;
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
     public static BufferedImage CHESTPLATE;
@@ -152,6 +154,12 @@ public class Assets {
 
         SpriteSheet pufferfishFlailSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishFlail.png"));
         PUFFER_FISH_FLAIL = pufferfishFlailSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet mouseOnAStringWandSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MouseWand.png"));
+        MOUSE_ON_A_STRING_WAND = mouseOnAStringWandSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet catnipStaffSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/CatnipStaff.png"));
+        CATNIP_STAFF = catnipStaffSheet.crop(0, 0, 32, 32);
 
         SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
         LASER_POINTER = laserPointerSheet.crop(0, 0, 32, 32);

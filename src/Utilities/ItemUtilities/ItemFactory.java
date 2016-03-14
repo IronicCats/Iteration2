@@ -90,6 +90,15 @@ public class ItemFactory {
         Item pufferfishFlail = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, new Location(2, 1));
         initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
 
+        // mouse wand
+        Item mouseOnAStringWand = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, new Location(5, 0));
+        initItems.put(mouseOnAStringWand, ItemFactory.makeAsset(ItemsEnum.MOUSE_ON_A_STRING_WAND, mouseOnAStringWand));
+        initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
+
+        // catnip staff
+        Item catnipStaff = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, new Location(5, 1));
+        initItems.put(catnipStaff, ItemFactory.makeAsset(ItemsEnum.CATNIP_STAFF, catnipStaff));
+
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
         initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
@@ -607,7 +616,9 @@ public class ItemFactory {
             case PUFFER_FISH_FLAIL:
                 return new ItemView(item, Assets.PUFFER_FISH_FLAIL);
             case MOUSE_ON_A_STRING_WAND:
+                return new ItemView(item, Assets.MOUSE_ON_A_STRING_WAND);
             case CATNIP_STAFF:
+                return new ItemView(item, Assets.CATNIP_STAFF);
             case LASER_POINTER:
                 return new ItemView(item, Assets.LASER_POINTER);
             case FISH_BOOMERANG:
