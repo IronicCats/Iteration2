@@ -5,9 +5,11 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
+import Utilities.AIUtilities.FindTilesAround;
 import Utilities.MapUtilities.Neighbors;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
@@ -17,6 +19,7 @@ import Utilities.Subject;
 import View.Views.ItemView;
 import View.Views.MobileObjectView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -129,6 +132,16 @@ public class Map implements Subject {
                 ((ProjectileAbility) a).getProjectile().execute();
             }
 
+        }
+
+        else if(a instanceof EnchantmentAbility){
+            System.out.println("using enchantment ability");
+            ArrayList<Tile> range = FindTilesAround.find(c.getLocation(),this,a.getRange(),c.getViewLocation());
+            for(Tile tile: range){
+                if (tile.getObject() instanceof HostileNPC) {
+                    ((HostileNPC) tile.getObject()).makeSleep();
+                }
+            }
         }
 
         else if(a instanceof AOEAbility) { //using an area of effect ability

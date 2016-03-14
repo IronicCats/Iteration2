@@ -1,9 +1,6 @@
 package Model.GameObject.MobileObjects.Entities.Characters.Occupation;
 
-import Model.Abilities.AOEAbility;
-import Model.Abilities.DirectAbility;
-import Model.Abilities.ProjectileAbility;
-import Model.Abilities.SelfAbility;
+import Model.Abilities.*;
 import Model.Effects.Effect;
 import Model.Effects.ModificationEnum;
 import Model.GameObject.MobileObjects.Projectile;
@@ -86,6 +83,12 @@ public class Summoner extends Occupation {
                 new Effect(new StatStructure(StatsEnum.MANA, -7 )),
                 5
         ));
+
+        setOccupationalAbilities(new EnchantmentAbility("Make sleep",
+                "Puts hostileNPCs to sleep",
+                null,new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, -5 )),1,2,3));
+
         /*
         setOccupationalAbilities(new AOEAbility("Circle of Flames",
                 "Everyone within a two tile radius is set on fire",
