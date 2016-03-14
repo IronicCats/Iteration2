@@ -9,6 +9,7 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
@@ -85,6 +86,13 @@ public class GameState extends State {
 
         // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+
+        // syncing pet with player
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet){
+                player.setPet((Pet)key);
+            }
+        }
 
         // syncing mobile objects with map
         map.setMobileObjects(mobileObjects);

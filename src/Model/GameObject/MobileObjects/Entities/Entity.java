@@ -20,10 +20,20 @@ public abstract class Entity extends MobileObject {
     //protected Stats stats;
     protected Occupation occupation;
 
+    Pet pet;
+
     public Entity() {
         super();
         //stats = new Stats();
         occupation = new Smasher();
+    }
+
+    public void setPet(Pet pet){
+        this.pet = pet;
+    }
+
+    public Pet getPet() {
+        return pet;
     }
 
     public Entity(Location location, int id, Stats stats, Occupation occupation) {

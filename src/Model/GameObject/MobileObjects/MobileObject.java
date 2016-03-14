@@ -43,7 +43,7 @@ public abstract class MobileObject extends GameObject {
         baseLocation = new Location(location.getX(), location.getY());
         map = GameState.map;
         tile = map.register(this);
-        view = id;
+        view = 2;
         range = 2;
         id = 0;
     }
@@ -56,7 +56,7 @@ public abstract class MobileObject extends GameObject {
         this.stats = stats;
         map = GameState.map;
         tile = map.register(this);
-        view = id;
+        view = 2;
         range = 2;
         this.id = id;
     }

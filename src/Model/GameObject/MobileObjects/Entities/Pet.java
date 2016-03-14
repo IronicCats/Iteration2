@@ -5,6 +5,7 @@ import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Pack;
+import Model.Map.Tile;
 import Model.Requirement;
 import Model.Stats.PetStats;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -39,7 +40,6 @@ public class Pet extends MobileObject implements Tickable {
         this.controller = controller;
         this.stats = stats;
         this.pack = pack;
-        this.controller.setTarget(player);
         stats.setMovement(8);
         this.requirement = new Requirement(reqItem);
         this.player = player;
@@ -50,8 +50,7 @@ public class Pet extends MobileObject implements Tickable {
     @Override
     public void tick() {
         if(!owned) {
-            if (controller.targetinView()) {
-                System.out.println("Made it negra");
+            if (controller.targetinView() && requirement.hasRequiredItem(player.getPack())) {
                 setOwnership();
             }
         }
@@ -90,13 +89,17 @@ public class Pet extends MobileObject implements Tickable {
     }
 
     public void setOwnership() {
-        this.owned = true;
-        this.getController().setPlayer(this.player);
-        this.getController().setBaseLoc(this.player.getLocation());
-        this.player.getPack().remove(ItemsEnum.SUSHI);
-        System.out.println("check");
+        owned = true;
+        controller.setPlayer(player);
+        controller.setBaseLoc(player.getLocation());
+        player.getPack().remove(ItemsEnum.SUSHI);
         requirement = new Requirement();
         DisplayMessage.addMessage(new GameMessage("MHHMMMMM! I love me some SUSH", 4));
+    }
+
+    public Tile dismountOntoTile(Location location) {
+        tile = map.register(this);
+        return tile;
     }
 
     public void pickup(Item item) {
