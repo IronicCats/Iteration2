@@ -8,8 +8,8 @@ import Model.Requirement;
  */
 public class SelfAbility extends Abilities {
 
-    public SelfAbility(String name, String description, Effect effects, Requirement requirement, Effect cost) {
+    public SelfAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int cooldown) {
 
-        super(name, description, effects, requirement, cost, 1);
+        super(name, description, effects, requirement, cost, 1, cooldown);
     }
 }

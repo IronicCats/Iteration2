@@ -63,7 +63,8 @@ public abstract class Occupation implements Subject, Observer {
                 "Uses a bind wound skill",
                 new Effect(new StatStructure(StatsEnum.LIFE, this.getBasicSkillValue(SkillsEnum.BINDWOUNDS) + 1)),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0))));
+                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                4));
 
     }
 
