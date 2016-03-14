@@ -714,15 +714,29 @@ public class SaveLoad {
     private static Node getInventory(Document doc, Inventory inv) {
         Element inventory = doc.createElement("inventory");
 
-
-        for (int i = 0; i < 16 - inv.getPackSpaceLeft(); i++) {
+        int temp = inv.getPackSpaceLeft();
+        temp = 16 - temp;
+        /*for (int i = 0; i < 16 - inv.getPackSpaceLeft(); i++) {
             Element iItem = doc.createElement("item");
-
-            Attr id = doc.createAttribute("id");
-            id.setValue(Integer.toString(inv.get(i).getId()));
-            iItem.setAttributeNode(id);
-
-            inventory.appendChild(iItem);
+            if(inv.get(i) != null) {
+                Attr id = doc.createAttribute("id");
+                id.setValue(Integer.toString(inv.get(i).getId()));
+                iItem.setAttributeNode(id);
+                inventory.appendChild(iItem);
+            }
+            inv.
+        }*/
+        int i = 0;
+        while(temp != 0){
+            Element iItem = doc.createElement("item");
+            if(inv.get(i) != null) {
+                Attr id = doc.createAttribute("id");
+                id.setValue(Integer.toString(inv.get(i).getId()));
+                iItem.setAttributeNode(id);
+                inventory.appendChild(iItem);
+                temp--;
+            }
+            i++;
         }
 
 
