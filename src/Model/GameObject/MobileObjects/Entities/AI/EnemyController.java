@@ -30,6 +30,7 @@ public class EnemyController extends AIController {
     @Override
     public void tick() {
         if(targetinView()) {
+            System.out.println("target in view");
             followThenAttackinRange();
         }
         else{
