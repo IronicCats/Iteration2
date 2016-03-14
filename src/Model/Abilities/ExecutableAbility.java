@@ -12,8 +12,8 @@ public abstract class ExecutableAbility extends Abilities {
     private int skillLevel;
 
     //constructor
-    public ExecutableAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int skilLevel, int range) {
-        super(name, description, effects, requirement, cost, range);
+    public ExecutableAbility(String name, String description, Effect effects, Requirement requirement, Effect cost, int skilLevel, int range, int cooldown) {
+        super(name, description, effects, requirement, cost, range, cooldown);
         this.skillLevel = skilLevel;
     }
 

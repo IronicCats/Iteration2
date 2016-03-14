@@ -20,7 +20,6 @@ character will need.
 
 public class Player extends Character{
 
-    Pet pet;
     Vehicle vehicle;
 
     public Player() {
@@ -32,7 +31,6 @@ public class Player extends Character{
         super(location, id, occupation, inventory);
         inventory.addObserver(this);
     } // end constructor
-
 
     public void examinePack() {
         inventory.examine();
