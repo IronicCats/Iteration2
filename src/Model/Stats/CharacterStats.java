@@ -210,6 +210,7 @@ public class CharacterStats extends Stats implements Subject {
         baseAgi *= statMultiplier;
         baseIntel *= statMultiplier;
         baseHard *= statMultiplier;
+        baseMovement += (level / 10) + 1;
         baseLife = baseHard + level;
         baseMana = baseIntel + level;
 
@@ -217,6 +218,7 @@ public class CharacterStats extends Stats implements Subject {
         agility = baseAgi;
         intellect = baseIntel;
         hardiness = baseHard;
+        movement = baseMovement;
 
         life = baseLife;
         mana = baseMana;
@@ -546,6 +548,8 @@ public class CharacterStats extends Stats implements Subject {
     public int getBaseMovement() {
         return baseMovement;
     }
+
+    public int getMovement() { return movement; }
 
     public int getXpThreshhold() {
         return xpThreshold;
