@@ -51,7 +51,9 @@ public class Assets {
     public static BufferedImage SHIELD;
     public static BufferedImage CHEST_KEY;
     public static BufferedImage HOUSE;
-    public static BufferedImage CATNIP;
+    public static BufferedImage SMALL_CATNIP;
+    public static BufferedImage MEDIUM_CATNIP;
+    public static BufferedImage LARGE_CATNIP;
     public static BufferedImage TUNA;
     public static BufferedImage SUSHI;
     public static BufferedImage VERT_FENCE;
@@ -141,6 +143,9 @@ public class Assets {
         SpriteSheet chestPlateSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ChestPlate.png"));
         CHESTPLATE = chestPlateSheet.crop(0, 0, 32, 32);
 
+        SpriteSheet platelegsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ArmoredPants.png"));
+        PLATELEGS = platelegsSheet.crop(0, 0, 32, 32);
+
         SpriteSheet pantsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Pants.png"));
         PANTS = pantsSheet.crop(0, 0, 32, 32);
 
@@ -159,8 +164,14 @@ public class Assets {
         SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
         HOUSE = houseSheet.crop(0, 0, 32, 32);
 
-        SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
-        CATNIP = moneySheet.crop(0, 0, 32, 32);
+        SpriteSheet smallCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SmallCatnip.png"));
+        SMALL_CATNIP = smallCatnipSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet mediumCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MediumCatnip.png"));
+        MEDIUM_CATNIP = mediumCatnipSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet largeCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LargeCatnip.png"));
+        LARGE_CATNIP = largeCatnipSheet.crop(0, 0, 32, 32);
 
         SpriteSheet tunaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Tuna.png"));
         TUNA = tunaSheet.crop(0,0,32,32);

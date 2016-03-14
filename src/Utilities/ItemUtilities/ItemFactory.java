@@ -70,6 +70,10 @@ public class ItemFactory {
         Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 2));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
+        // stick greatsword
+        Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
+        initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
+
         // helmet
         Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
         initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
@@ -77,6 +81,10 @@ public class ItemFactory {
         // chest armor
         Item chestPlate = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, new Location(5, 5));
         initItems.put(chestPlate, ItemFactory.makeAsset(ItemsEnum.CHESTPLATE, chestPlate));
+
+        // chest armor
+        Item platelegs = ItemFactory.makeItem(ItemsEnum.PLATELEGS, new Location(5, 4));
+        initItems.put(platelegs, ItemFactory.makeAsset(ItemsEnum.PLATELEGS, platelegs));
 
         // pants
         Item pants = ItemFactory.makeItem(ItemsEnum.PANTS, new Location(6, 5));
@@ -573,6 +581,7 @@ public class ItemFactory {
             case STICK_SWORD:
                 return new ItemView(item, Assets.STICK_SWORD);
             case STICK_GREATSWORD:
+                return new ItemView(item, Assets.STICK_GREATSWORD);
             case SWORDFISH_DAGGER:
             case SWORDFISH_LANCE:
             case PUFFER_FISH_MACE:
@@ -597,6 +606,7 @@ public class ItemFactory {
             case PANTS:
                 return new ItemView(item, Assets.PANTS);
             case PLATELEGS:
+                return new ItemView(item, Assets.PLATELEGS);
             case GAUNTLETS:
                 return new ItemView(item, Assets.GAUNTLETS);
             case BOOTS:
@@ -610,9 +620,11 @@ public class ItemFactory {
             case SUSHI:
                 return new ItemView(item, Assets.SUSHI);
             case SMALL_COIN_STACK:
+                return new ItemView(item, Assets.SMALL_CATNIP);
             case MEDIUM_COIN_STACK:
+                return new ItemView(item, Assets.MEDIUM_CATNIP);
             case LARGE_COIN_STACK:
-                return new ItemView(item, Assets.CATNIP);
+                return new ItemView(item, Assets.LARGE_CATNIP);
             case HORIZ_FENCE_ODD:
                 return new ItemView(item, Assets.HORIZ_FENCE_ODD);
             case HORIZ_FENCE_EVEN:
