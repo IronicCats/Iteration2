@@ -49,6 +49,12 @@ public class Astar {
 
         //The while loop below gets the path starting from the end node and following its parents until it reaches the starting tile
 
+
+        if(parent[end.getX()][end.getY()] == null){
+            path.add(start);
+            path.add(start);
+            return path;
+        }
         Tile current = map.getTile(end.getX(), end.getY());
         path.add(current.getLocation());
         while (current != map.getTile(start.getX(), start.getY())) {
@@ -92,10 +98,6 @@ public class Astar {
                     path.get(i).setDir(315);
                 }
             }
-        }
-        if(path.get(0) == null || path.get(1) == null){
-            path.add(start);
-            path.add(start);
         }
         return path;
     }
