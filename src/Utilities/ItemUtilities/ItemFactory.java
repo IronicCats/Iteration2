@@ -37,7 +37,7 @@ public class ItemFactory {
 
         HashMap<Item, ItemView> initItems = new HashMap<>();
 
-
+        /*
         // potion stack
         Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
@@ -59,18 +59,20 @@ public class ItemFactory {
 
         Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));
         initItems.put(sp, ItemFactory.makeAsset(ItemsEnum.STRENGTH_POTION, sp));
+        */
 
         // closed treasure chest
-        Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
+        Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(4, 16));
         initItems.put(closedTreasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, closedTreasureChest));
 
+        /*
         // stick sword
         Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 0));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // stick greatsword
-        Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
-        initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
+        //Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
+        //initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
 
         // wooden gloves
         Item woodenGloves = ItemFactory.makeItem(ItemsEnum.WOODEN_GLOVES, new Location(4, 2));
@@ -160,6 +162,8 @@ public class ItemFactory {
         // sushi
         Item sushi = ItemFactory.makeItem(ItemsEnum.SUSHI, new Location(8, 8));
         initItems.put(sushi, ItemFactory.makeAsset(ItemsEnum.SUSHI, sushi));
+
+        */
 
         // Vertical fence
         Item vertFence1 = ItemFactory.makeItem(ItemsEnum.VERT_FENCE, new Location(12, 13));

@@ -24,7 +24,6 @@ public class Assets {
     public static BufferedImage SNEAK;
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
-    public static ArrayList<BufferedImage> PET;
     public static ArrayList<BufferedImage> BLUE_NPC;
     public static ArrayList<BufferedImage> CAT_NPC;
     public static ArrayList<BufferedImage> DAVE_PET;
@@ -273,7 +272,7 @@ public class Assets {
 
         // End of items
 
-        //Vehciles
+        //Vehicles
         ROOMBA = new ArrayList<>();
         SpriteSheet roomba1 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));
         SpriteSheet roomba2 = new SpriteSheet(new ImageLoader().loadImage("/Vehicles/Roomba.png"));

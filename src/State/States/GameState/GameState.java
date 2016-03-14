@@ -32,6 +32,7 @@ import View.Views.*;
 import View.Views.MessageBox.DisplayMessage;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -45,6 +46,7 @@ public class GameState extends State {
     public HashMap<Item, ItemView> mapItems;
     public HashMap<AreaEffect, DecalView> decals;
     public HashMap<MobileObject, MobileObjectView> mobileObjects;
+    private ArrayList<AreaEffect> areaEffects = new ArrayList<>();
     public static Map map;
     public Camera camera;
     public MapView mapView;
@@ -69,12 +71,8 @@ public class GameState extends State {
         setController(new GameController(this));
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT, map);
-/*
-        //creating a new player
-        player = MobileObjectFactory.Player();
-        player.setInitialLevel(5);
-        MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
-*/
+
+        // creating player
         player = MobileObjectFactory.makeSmasher();
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
 
@@ -82,7 +80,7 @@ public class GameState extends State {
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
-        // initializing NPC'selection
+        // initializing NPC's
         mobileObjects = MobileObjectFactory.Init(map, player);
 
         // adding player to hash map
@@ -99,18 +97,13 @@ public class GameState extends State {
         map.setMobileObjects(mobileObjects);
 
         //area effect
-        AreaEffect a = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(3, 2));
-        AreaEffect b = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(6, 4));
-        AreaEffect c = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(4, 4));
-        AreaEffect d = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(10, 2));
-        TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,4), new Location(3,3));
-        AreaEffect f = AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(2, 5));
-        map.placeAreaEffect(a);
-        map.placeAreaEffect(b);
-        map.placeAreaEffect(c);
-        map.placeAreaEffect(d);
+        areaEffects = AreaEffectFactory.init();
+        TeleportAreaEffect e = AreaEffectFactory.makeTeleportAreaEffect(new Location(8,6), new Location(10,10));
         map.placeTeleportAreaEffectBeginning(e);
-        map.placeAreaEffect(f);
+
+        for(AreaEffect effect: areaEffects){
+            map.placeAreaEffect(effect);
+        }
 
         map.setMapItems(mapItems);
 
@@ -272,8 +265,21 @@ public class GameState extends State {
     public void setPlayer(Player player) {
         GameState.player = player;
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+
+        // initializing NPC'selection
+        mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
 
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet) {
+                player.setPet((Pet) key);
+            }
+        }
+
+        //mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+/*
         for (MobileObject key : mobileObjects.keySet()) {
             if(key instanceof Pet){
                 ((Pet) key).setTarget(player);
@@ -282,7 +288,7 @@ public class GameState extends State {
                 ((HostileNPC) key).setTarget(player);
             }
         }
-
+*/
         map.setMobileObjects(mobileObjects);
 
     } // end setPlayer

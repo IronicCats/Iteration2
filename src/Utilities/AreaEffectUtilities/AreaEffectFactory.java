@@ -8,11 +8,25 @@ import Model.Location;
 import View.ViewUtilities.Graphics.Assets;
 import View.Views.DecalView;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by mazumderm on 3/6/2016.
  */
 public class AreaEffectFactory {
+
+    public static ArrayList<AreaEffect> init(){
+        ArrayList<AreaEffect> initial = new ArrayList<>();
+
+        initial.add(AreaEffectFactory.makeAreaEffect(AreaEffectEnum.LEVELUP, new Location(10, 5)));
+        initial.add(AreaEffectFactory.makeAreaEffect(AreaEffectEnum.HEAL, new Location(10, 12)));
+        initial.add(AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DAMAGE, new Location(10, 6)));
+        initial.add(AreaEffectFactory.makeAreaEffect(AreaEffectEnum.DEATH, new Location(10, 8)));
+        initial.add(AreaEffectFactory.makeAreaEffect(AreaEffectEnum.TRAP, new Location(8, 9)));
+
+        return initial;
+    }
 
     public static AreaEffect makeAreaEffect(AreaEffectEnum a, Location location) {
         switch (a) {
