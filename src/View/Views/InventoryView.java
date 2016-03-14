@@ -52,6 +52,12 @@ public class InventoryView implements Renderable, Observer {
         for (int i = 0; i < 16; ++i) itemView[i] = null;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+        pack = player.getPack();
+    }
+
+
     @Override
     public void render(Graphics g) {
 

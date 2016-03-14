@@ -37,7 +37,7 @@ public class MenuController extends Controller {
         }
         if(e.getKeyCode() == 10) {
             if (currentState == 1){
-                state.switchState(State.GAMESTATE);
+                state.switchState(State.CREATESTATE);
             }
             else if(currentState==2){
                 State.LOADSTATE.setLastState(0);
