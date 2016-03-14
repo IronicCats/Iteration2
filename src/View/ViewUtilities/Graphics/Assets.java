@@ -48,8 +48,10 @@ public class Assets {
     public static BufferedImage WOODEN_GLOVES;
     public static BufferedImage SWORDFISH_DAGGER;
     public static BufferedImage SWORDFISH_LANCE;
+    public static BufferedImage SWORDFISH_GAUNTLETS;
     public static BufferedImage PUFFER_FISH_MACE;
     public static BufferedImage PUFFER_FISH_FLAIL;
+    public static BufferedImage PUFFER_FISH_KNUCKLES;
     public static BufferedImage MOUSE_ON_A_STRING_WAND;
     public static BufferedImage CATNIP_STAFF;
     public static BufferedImage FISH_BOOMERANG;
@@ -160,11 +162,17 @@ public class Assets {
         SpriteSheet swordfishLanceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishLance.png"));
         SWORDFISH_LANCE = swordfishLanceSheet.crop(0, 0, 32, 32);
 
+        SpriteSheet swordfishGauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishGauntlets.png"));
+        SWORDFISH_GAUNTLETS = swordfishGauntletsSheet.crop(0, 0, 32, 32);
+
         SpriteSheet pufferfishMaceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishMace.png"));
         PUFFER_FISH_MACE = pufferfishMaceSheet.crop(0, 0, 32, 32);
 
         SpriteSheet pufferfishFlailSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishFlail.png"));
         PUFFER_FISH_FLAIL = pufferfishFlailSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet pufferfishKnucklesSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishKnuckles.png"));
+        PUFFER_FISH_KNUCKLES = pufferfishKnucklesSheet.crop(0, 0, 32, 32);
 
         SpriteSheet mouseOnAStringWandSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MouseWand.png"));
         MOUSE_ON_A_STRING_WAND = mouseOnAStringWandSheet.crop(0, 0, 32, 32);

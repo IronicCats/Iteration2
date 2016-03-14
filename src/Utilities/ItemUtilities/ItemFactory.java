@@ -82,6 +82,10 @@ public class ItemFactory {
         Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
         initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
 
+        // swordfish lance
+        Item swordfishGauntlets = ItemFactory.makeItem(ItemsEnum.SWORDFISH_GAUNTLETS, new Location(3, 2));
+        initItems.put(swordfishGauntlets, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_GAUNTLETS, swordfishGauntlets));
+
         // pufferfish mace
         Item pufferfishMace = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, new Location(2, 0));
         initItems.put(pufferfishMace, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_MACE, pufferfishMace));
@@ -89,6 +93,10 @@ public class ItemFactory {
         // pufferfish flail
         Item pufferfishFlail = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, new Location(2, 1));
         initItems.put(pufferfishFlail, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_FLAIL, pufferfishFlail));
+
+        // pufferfish knuckles
+        Item pufferfishKnuckles = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_KNUCKLES, new Location(2, 2));
+        initItems.put(pufferfishKnuckles, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_KNUCKLES, pufferfishKnuckles));
 
         // mouse wand
         Item mouseOnAStringWand = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, new Location(5, 0));
@@ -648,11 +656,13 @@ public class ItemFactory {
             case SWORDFISH_LANCE:
                 return new ItemView(item, Assets.SWORDFISH_LANCE);
             case SWORDFISH_GAUNTLETS:
+                return new ItemView(item, Assets.SWORDFISH_GAUNTLETS);
             case PUFFER_FISH_MACE:
                 return new ItemView(item, Assets.PUFFER_FISH_MACE);
             case PUFFER_FISH_FLAIL:
                 return new ItemView(item, Assets.PUFFER_FISH_FLAIL);
             case PUFFER_FISH_KNUCKLES:
+                return new ItemView(item, Assets.PUFFER_FISH_KNUCKLES);
             case MOUSE_ON_A_STRING_WAND:
                 return new ItemView(item, Assets.MOUSE_ON_A_STRING_WAND);
             case CATNIP_STAFF:
