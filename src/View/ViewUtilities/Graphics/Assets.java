@@ -156,7 +156,7 @@ public class Assets {
         SpriteSheet bootsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Boots.png"));
         BOOTS = bootsSheet.crop(0, 0, 32, 32);
 
-        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gauntlets.png"));
+        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gloves.png"));
         GAUNTLETS = gauntletsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
