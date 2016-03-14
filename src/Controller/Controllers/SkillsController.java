@@ -3,6 +3,7 @@ package Controller.Controllers;
 import Controller.Controller;
 import Model.Abilities.CommandsEnum;
 import State.State;
+import State.States.GameState.SettingState;
 import State.States.GameState.SkillsState;
 import Utilities.Settings;
 
@@ -32,12 +33,21 @@ public class SkillsController extends Controller {
         } else if (e.getKeyCode() == Settings.DOWN_RIGHT ||     /* cursor right */
                 e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             ((SkillsState)state).right();
-        } else if (e.getKeyCode() == Settings.INTERACT) {       /* assign skill point */
+        } else if (e.getKeyCode() == Settings.INTERACT||e.getKeyCode()==Settings.ENTER) {       /* assign skill point */
             ((SkillsState)state).executePlayerCommand(CommandsEnum.interact);
         } else if (e.getKeyCode() == Settings.SKILLS) {         /* exit to gamestate */
             state.switchState(State.GAMESTATE);
         } else if (e.getKeyCode() == Settings.ESC) {            /* open pausestate */
             state.switchState(State.PAUSESTATE);
+        }
+        else if (e.getKeyCode() == Settings.ONE) {            /* open pausestate */
+            ((SkillsState) state).set();
+        }
+        else if (e.getKeyCode() == Settings.TWO) {            /* open pausestate */
+            ((SkillsState) state).set();
+        }
+        else if (e.getKeyCode() == Settings.THREE) {            /* open pausestate */
+            ((SkillsState) state).set();
         }
         /**
          * add code to reassign hotkeys for abilities

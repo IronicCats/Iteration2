@@ -53,7 +53,7 @@ public void renderClass(Graphics g) {
 
         FontMetrics fm = g.getFontMetrics();
         int circleWidth = ((int) mX * 100);
-        int totalWidth = (fm.stringWidth(player.getOccupation().getName()));
+        int totalWidth = (fm.stringWidth("Lvl "+player.getStats().getLevel()+" "+player.getOccupation().getName()));
 
         Image image;
         if(player.getOccupation().getName() == "Summoner") {
@@ -71,7 +71,7 @@ public void renderClass(Graphics g) {
         //TEXT FOR CLASS
         g.setColor(Color.WHITE);
         tempMove= (width - ((int)(mX)*125)) + (circleWidth/2 - totalWidth/2);
-        g.drawString(player.getOccupation().getName(), tempMove, 25 );
+        g.drawString("Lvl "+player.getStats().getLevel()+" "+player.getOccupation().getName(), tempMove, 25 );
         ///Cicrcle DESIGN
         g.drawImage(Assets.CIRCLE, (width - ((int)(mX)*125)), 25,(int) mX * 100, (int) mX * 100, null);
     }

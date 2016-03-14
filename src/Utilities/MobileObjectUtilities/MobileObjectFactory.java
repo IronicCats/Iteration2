@@ -173,6 +173,7 @@ public class MobileObjectFactory {
         return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
     } // end makeSummoner
 
+
     public static Player makeSneak() {
         return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Sneak(), new Inventory());
     } // end makeSneak
