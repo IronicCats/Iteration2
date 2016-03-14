@@ -406,7 +406,7 @@ public class Assets {
         smasherArt=new ArrayList<>();
         smasherArt.add(new ImageLoader().loadImage("/Spells/One.png"));
         smasherArt.add(new ImageLoader().loadImage("/Spells/Two.png"));
-        smasherArt.add(new ImageLoader().loadImage("/Spells/Brawl.jpg"));
+        smasherArt.add(new ImageLoader().loadImage("/Spells/Brawl.png"));
         //this is where i literally pass out and say eff it
         sneakArt=new ArrayList<>();
         sneakArt.add(new ImageLoader().loadImage("/Spells/Trap.png"));
@@ -421,15 +421,16 @@ public class Assets {
         summonerArt.add(new ImageLoader().loadImage("/Spells/Staff.png"));
         //spells for summoner
         spellArt=new ArrayList<>();
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
-        spellArt.add(new ImageLoader().loadImage("/Spells/Bane.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Hairball.png"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Water.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Fire.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Superheal.png"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Damage.jpg"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Speed.png"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Sleep.png"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Hostile.png"));
+        spellArt.add(new ImageLoader().loadImage("/Spells/SumSpell/Ignore.jpg"));
+
 
 
     }

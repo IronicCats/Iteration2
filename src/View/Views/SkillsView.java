@@ -93,6 +93,8 @@ public class SkillsView implements Renderable, Observer {
 
             }
             //render descriptions
+            g.setColor(Color.BLACK);
+            g.fillRect(width*1/4,height*2/3+height/12,width/2,height/6-height/24);
         }
         else if(player.getOccupation() instanceof Summoner){
             SkillsEnum arrayylmao[]={SkillsEnum.BANE,SkillsEnum.BOON,SkillsEnum.ENCHANT,SkillsEnum.STAFF};
@@ -101,35 +103,35 @@ public class SkillsView implements Renderable, Observer {
             tempY+=size*4/3;
             tempX=resetX;
             int e=0;int f=0;
-            for(int i=3;i<16;++i){
+            for(int i=3;i<16;++i) {
                 //print box
-                if(cursor==i){g.setColor(Color.BLUE);}
-                else g.setColor(new Color(12, 12, 12, 170));
-                g.fillRect(tempX,tempY,size,size);
+                if (cursor == i) {
+                    g.setColor(Color.BLUE);
+                } else g.setColor(new Color(12, 12, 12, 170));
+                g.fillRect(tempX, tempY, size, size);
                 g.setColor(new Color(255, 255, 255, 255));
-                if(i%4==3){
-                    g.drawImage(Assets.summonerArt.get(e),tempX+size*1/12,tempY+size*1/12,size*10/12,size*10/12,null);
-                    g.drawString(""+player.getOccupation().getOccupationalSkillsValue(arrayylmao[e]),tempX,tempY+width/12);
+                if (i % 4 == 3) {
+                    g.drawImage(Assets.summonerArt.get(e), tempX + size * 1 / 12, tempY + size * 1 / 12, size * 10 / 12, size * 10 / 12, null);
+                    g.drawString("" + player.getOccupation().getOccupationalSkillsValue(arrayylmao[e]), tempX, tempY + width / 12);
                     e++;
-                }
-                else{
-                    g.drawImage(Assets.spellArt.get(e),tempX+size*1/12,tempY+size*1/12,size*10/12,size*10/12,null);
+                } else {
+                    g.drawImage(Assets.spellArt.get(f), tempX + size * 1 / 12, tempY + size * 1 / 12, size * 10 / 12, size * 10 / 12, null);
                     f++;
                 }
 
 
-                if(i%4==3){
-                    tempX+=size*3/2;
-                }
-                else{
+                if (i % 4 == 3) {
+                    tempX += size * 3 / 2;
+                } else {
                     //add barely anything
-                    tempX+=size*7/6;
+                    tempX += size * 7 / 6;
                 }
-                if(i%4==2){
-                    tempX=resetX;
-                    tempY+=size*7/6;
+                if (i % 4 == 2) {
+                    tempX = resetX;
+                    tempY += size * 7 / 6;
                 }
             }
+
             //render descriptions
         }
         else if(player.getOccupation()instanceof Smasher){
@@ -147,6 +149,10 @@ public class SkillsView implements Renderable, Observer {
                 g.drawString(""+player.getOccupation().getBasicSkillValue(ayy[i-3]),tempX,tempY+width /12);
                 tempX+=width/6;
             }
+            g.setColor(Color.BLACK);
+            g.fillRect(width*1/4,height*2/3,width/2,height/6);
+            if(cursor<3){}
+            else{}
 
             //render descriptions
         }
