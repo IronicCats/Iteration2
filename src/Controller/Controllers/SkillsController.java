@@ -41,13 +41,13 @@ public class SkillsController extends Controller {
             state.switchState(State.PAUSESTATE);
         }
         else if (e.getKeyCode() == Settings.ONE) {            /* open pausestate */
-            ((SkillsState) state).set();
+            ((SkillsState) state).set(1);
         }
         else if (e.getKeyCode() == Settings.TWO) {            /* open pausestate */
-            ((SkillsState) state).set();
+            ((SkillsState) state).set(2);
         }
         else if (e.getKeyCode() == Settings.THREE) {            /* open pausestate */
-            ((SkillsState) state).set();
+            ((SkillsState) state).set(3);
         }
         /**
          * add code to reassign hotkeys for abilities
