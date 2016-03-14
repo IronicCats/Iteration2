@@ -174,9 +174,10 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
-            //Observe o = new Observe((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.OBSERVATION)));
+            //System.out.println((((Player)(object)).getOccupation().getBasicSkillValue(SkillsEnum.OBSERVATION)));
+            //Observe o = new Observe((((Player)(object)).getOccupation().getBasicSkillValue(SkillsEnum.OBSERVATION)));
             ArrayList<Tile> tilesToBeChecked = FindTilesAround.find(object.getLocation(), object.getMap(), 2, object.getViewLocation());
-            //o.checkSurroundingTiles(tilesToBeChecked);
+           // o.checkSurroundingTiles(tilesToBeChecked);
             if((((Player)(object)).getOccupation() instanceof Sneak)){
                 DetectTrap d = new DetectTrap((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.DRTRAP)));
                 d.checkSurroundingTiles(tilesToBeChecked);
