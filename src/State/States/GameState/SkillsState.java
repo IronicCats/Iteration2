@@ -66,6 +66,88 @@ public class SkillsState extends State {
                 right();
                 break;
             case interact:
+
+                if(occupation.getUnassignedSkillPoints()>0) {
+                    switch (occupation.getName()) {
+                        case "Smasher":
+                            if (cursor ==0) {
+                               occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
+                            }
+                            else if (cursor == 1) {
+                                occupation.incrementSkill(SkillsEnum.BARGAIN);
+                            }
+                            else if (cursor == 2) {
+                                occupation.incrementSkill(SkillsEnum.OBSERVATION);
+                            }
+                            else if (cursor == 3) {
+                                occupation.incrementSkill(SkillsEnum.TWOHANDWEAP);
+                            }
+                            else if (cursor == 4) {
+                                occupation.incrementSkill(SkillsEnum.ONEHANDWEAP);
+                            }
+                            else if (cursor == 5) {
+                                occupation.incrementSkill(SkillsEnum.BRAWL);
+                            }
+
+
+                            break;
+                        case "Summoner":
+                            if (cursor ==0) {
+                                occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
+                            }
+                            else if (cursor == 1) {
+                                occupation.incrementSkill(SkillsEnum.BARGAIN);
+                            }
+                            else if (cursor == 2) {
+                                occupation.incrementSkill(SkillsEnum.OBSERVATION);
+                            }
+                            else if (cursor == 3) {
+                                occupation.incrementSkill(SkillsEnum.BANE);
+                            }
+                            else if (cursor == 7) {
+                                occupation.incrementSkill(SkillsEnum.BOON);
+                            }
+                            else if (cursor == 11) {
+                                occupation.incrementSkill(SkillsEnum.ENCHANT);
+                            }
+                            else if (cursor == 15) {
+                                occupation.incrementSkill(SkillsEnum.STAFF);
+                            }
+
+                            break;
+                        case "Sneak":
+                            if (cursor ==0) {
+                                occupation.incrementSkill(SkillsEnum.BINDWOUNDS);
+                            }
+                            else if (cursor == 1) {
+                                occupation.incrementSkill(SkillsEnum.BARGAIN);
+                            }
+                            else if (cursor == 2) {
+                                occupation.incrementSkill(SkillsEnum.OBSERVATION);
+                            }
+                            else if (cursor == 3) {
+                                occupation.incrementSkill(SkillsEnum.DRTRAP);
+                            }
+                            else if (cursor == 4) {
+                                occupation.incrementSkill(SkillsEnum.CREEP);
+                            }
+                            else if (cursor == 5) {
+                                occupation.incrementSkill(SkillsEnum.RANGEWEAP);
+                            }
+                            else if (cursor == 6) {
+                                occupation.incrementSkill(SkillsEnum.PICKPOCK);
+                            }
+
+
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+
+
+
                 break;
             default:
                 System.out.println("Don't send that command to the SkillsState");

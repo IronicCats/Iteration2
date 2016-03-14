@@ -32,7 +32,7 @@ public class SkillsController extends Controller {
         } else if (e.getKeyCode() == Settings.DOWN_RIGHT ||     /* cursor right */
                 e.getKeyCode() == Settings.UP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             ((SkillsState)state).right();
-        } else if (e.getKeyCode() == Settings.INTERACT) {       /* assign skill point */
+        } else if (e.getKeyCode() == Settings.INTERACT||e.getKeyCode()==Settings.ENTER) {       /* assign skill point */
             ((SkillsState)state).executePlayerCommand(CommandsEnum.interact);
         } else if (e.getKeyCode() == Settings.SKILLS) {         /* exit to gamestate */
             state.switchState(State.GAMESTATE);

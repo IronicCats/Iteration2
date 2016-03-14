@@ -1,5 +1,6 @@
 package View.Views;
 
+import Model.Abilities.BargainAbility;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.Inventory.Pack;
@@ -22,8 +23,9 @@ public class TradeView implements Renderable, Observer {
     Pack shopPack;
     double mX, mY;
     ItemView itemView[] = new ItemView[32];
-
-    public TradeView(Pack playerPack, Pack shopPack) {
+    private BargainAbility bargain;
+    public TradeView(Pack playerPack, Pack shopPack, BargainAbility bargain) {
+        this.bargain=bargain;
         for (int i = 0; i < 32; ++i) itemView[i] = null;
         this.playerPack = playerPack;
         this.shopPack = shopPack;
@@ -176,7 +178,7 @@ public class TradeView implements Renderable, Observer {
         g.setFont(new Font("Arial", Font.PLAIN, 14*intY/10));
         y+=intY*1.5;
         if(s<16 && playerPack.get(s)!=null) {
-            g.drawString("Q - Sell item for "+(int)(playerPack.get(s).getValue()*.9)+" Catnip!",width-width * 3 / 20-width*6/20+width/20,height * 31 / 40+height/20);
+            g.drawString("Q - Sell item for "+bargain.bargain((int)(playerPack.get(s).getValue()*.9), true)+" Catnip!",width-width * 3 / 20-width*6/20+width/20,height * 31 / 40+height/20);
             g.drawString("Name: " + playerPack.get(s).getName(), x, y);
             y += 2 * intY;
             g.drawString("Description: " + playerPack.get(s).getDescription(), x, y);
@@ -186,7 +188,7 @@ public class TradeView implements Renderable, Observer {
         }
         else if(s>15 && shopPack.get(s-16)!=null){
             s-=16;
-            g.drawString("Q - Buy item for "+(int)(shopPack.get(s).getValue()*1.1)+" Catnip!",width-width * 3 / 20-width*6/20+width/20,height * 31 / 40+height/20);
+            g.drawString("Q - Buy item for "+bargain.bargain((int)(shopPack.get(s).getValue()*1.1),true)+" Catnip!",width-width * 3 / 20-width*6/20+width/20,height * 31 / 40+height/20);
             g.drawString("Name: " + shopPack.get(s).getName(), x, y);
             y += 2 * intY;
             g.drawString("Description: " + shopPack.get(s).getDescription(), x, y);
