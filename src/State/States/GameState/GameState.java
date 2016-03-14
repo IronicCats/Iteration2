@@ -202,7 +202,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
-        statusView.render(g);
+        if(State.getCurrentState() == GAMESTATE)statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {
