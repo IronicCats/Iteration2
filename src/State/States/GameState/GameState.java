@@ -8,6 +8,8 @@ import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
+import Model.GameObject.MobileObjects.Entities.Characters.NPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
@@ -270,22 +272,30 @@ public class GameState extends State {
     public void setPlayer(Player player) {
         GameState.player = player;
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+
+        // initializing NPC'selection
+        mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
         mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
-        /*
-        Iterator it = mobileObjects.entrySet().iterator();
-        while (it.hasNext()) {
-            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
-            //System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
-            //MobileObject a = (MobileObject)pair.getKey();
-            // MobileObjectView ab = (MobileObjectView)pair.getValue();
-            //int x = a.getX();
-            //int y = a.getY();
-            map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
-            ((MobileObject) pair.getKey()).registerTile(((MobileObject)pair.getKey()).getLocation());
 
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet) {
+                player.setPet((Pet) key);
+            }
+        }
 
-            //it.remove(); ??? Says it avoids CurrentModificationException
-        }*/
+        //mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+/*
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet){
+                ((Pet) key).setTarget(player);
+                player.setPet((Pet)key);
+            } else if(key instanceof HostileNPC) {
+                ((HostileNPC) key).setTarget(player);
+            }
+        }
+*/
         map.setMobileObjects(mobileObjects);
 
     } // end setPlayer

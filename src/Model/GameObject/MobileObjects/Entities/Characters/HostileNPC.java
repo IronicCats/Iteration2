@@ -2,6 +2,7 @@ package Model.GameObject.MobileObjects.Entities.Characters;
 
 import Model.GameObject.MobileObjects.Entities.AI.EnemyController;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Inventory.Inventory;
 import Model.Location;
 import Utilities.MobileObjectUtilities.RespawnQueue;
@@ -47,6 +48,8 @@ public class HostileNPC extends NPC {
     public EnemyController getController(){
         return enemyController;
     }
+    public void setTarget(MobileObject mobileObject) { enemyController.setTarget(mobileObject);
+        enemyController.setAI(this); }
 
     @Override
     public String toString() {
@@ -64,5 +67,7 @@ public class HostileNPC extends NPC {
         return this.sleeping;
     }
 
-
+    public int getHostilityRating() {
+        return hostilityRating;
+    }
 } // end class HostileNPC
