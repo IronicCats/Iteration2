@@ -44,15 +44,10 @@ public class Projectile extends MobileObject {
     }
 
     public void execute(Location base) {
-        Tile current = map.getTile(Location.newLocation(base.getDir(),base));
-       System.out.println(current.hasObject());
-        System.out.println(!(current.getObject() instanceof Projectile));
-        if(current.hasObject() && !(current.getObject() instanceof Projectile)){
-            current.receiveProjectileAttack(this);
-        }
-        else{
-            move(this.getLocation().getDir());
-            current = this.getTile();
+
+        Tile infront = map.getTile(Location.newLocation(base.getDir(),base));
+        if(infront.hasObject()){
+
         }
 
     }
