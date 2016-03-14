@@ -8,43 +8,27 @@ import State.States.GameState.GameState;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
 import View.Views.CreateView;
 
+import java.awt.*;
+
 /**
  * Created by broskj on 3/13/16.
  */
 public class CreateState extends State {
     private CreateView createView;
-    private int cursor;
 
     public CreateState() {
         createView = new CreateView();
         setController(new CreateController(this));
-        cursor = 0;
     } // end constructor
 
     @Override
     public void tick() {
-
+        return;
     }
 
-    public void up() {
-        if(cursor == 0) {
-            cursor = 2;
-        } else {
-            cursor--;
-        }
-    } // end up
-
-    public void down() {
-        if(cursor == 2) {
-            cursor = 0;
-        } else {
-            cursor++;
-        }
-    } // end down
-
-    public void makeSelection() {
+    public void makeSelection(int s) {
         Player player;
-        switch (cursor) {
+        switch (s) {
             case 0:         /* smasher */
                 player = MobileObjectFactory.makeSmasher();
                 break;
@@ -64,7 +48,17 @@ public class CreateState extends State {
         State.SKILLSSTATE.setPlayer(player);
         switchState(GAMESTATE);
     } // end makeSelection
-    //public void moveUp() { createView.previous(); }
-    //public void moveDown() { createView.next(); }
-    //public void render(Graphics g) { createView.render(g); }
+
+
+    public void moveUp() {
+        createView.previous();
+    }
+
+    public void moveDown() {
+        createView.next();
+    }
+
+    public void render(Graphics g) {
+        createView.render(g);
+    }
 } // end class CreateState
