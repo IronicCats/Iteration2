@@ -80,6 +80,19 @@ public class GameState extends State {
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
+        // initializing NPC'selection
+        mobileObjects = MobileObjectFactory.Init(map, player);
+
+        // adding player to hash map
+        mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+
+        // syncing pet with player
+        for (MobileObject key : mobileObjects.keySet()) {
+            if(key instanceof Pet){
+                player.setPet((Pet)key);
+            }
+        }
+
         // syncing mobile objects with map
         map.setMobileObjects(mobileObjects);
 
@@ -223,7 +236,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
-        statusView.render(g);
+        if(State.getCurrentState() == GAMESTATE)statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {
