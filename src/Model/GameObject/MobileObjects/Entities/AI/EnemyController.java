@@ -5,6 +5,7 @@ import Model.GameObject.MobileObjects.Entities.AI.AIController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
+import Model.GameObject.MobileObjects.MobileObject;
 import Model.Map.Map;
 import Utilities.AIUtilities.DirectionofTarget;
 import Utilities.AIUtilities.DistanceFromFaceableTarget;
@@ -18,7 +19,9 @@ public class EnemyController extends AIController {
 
     HostileNPC enemy;
     protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
+    protected static int sneakingTime = (int) (System.currentTimeMillis() /  1000L);
     boolean imAttacking;
+    MobileObject previousTarget;
 
     public EnemyController(Map map) {
         super(map);
@@ -31,13 +34,21 @@ public class EnemyController extends AIController {
 
     @Override
     public void tick() {
-        if(!enemy.getSleep()) {
-            if (targetinView()) {
-                followThenAttackinRange();
-            }
-            else {
+        if(target != null) {
+            if (!enemy.getSleep()) {
+                if (targetinView()) {
+                    followThenAttackinRange();
+                }
                 randomlyMoveinRange();
             }
+        }
+        else {
+            if(((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= 5) ){
+                target = previousTarget;
+                target.getStats().setMovement(target.getMovement() + 8);
+
+                }
+            randomlyMoveinRange();
         }
     }
 
@@ -47,7 +58,6 @@ public class EnemyController extends AIController {
         System.out.println("using enemy follow");
     }
 
-    //TODO: add delay to attacks based off of speed
     public void followThenAttackinRange() {
         int temp = random.nextInt(enemy.getHostilityRating() * 10);
         if (temp == 1 || imAttacking) {
@@ -75,6 +85,12 @@ public class EnemyController extends AIController {
             }
         }
         }
+
+    public void takeAwaytarget(){
+        previousTarget = target;
+        target = null;
+        sneakingTime = (int) (System.currentTimeMillis() / 1000L);
+    }
 
         @Override
         public void update() {
