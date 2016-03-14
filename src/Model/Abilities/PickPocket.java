@@ -13,7 +13,7 @@ public class PickPocket extends ExecutableAbility {
 
     //constructor
     public PickPocket(String name, String description, Effect effects, Requirement requirement, Effect cost, int skillLevel) {
-        super(name, description, effects, requirement, cost, skillLevel, 1);
+        super(name, description, effects, requirement, cost, skillLevel, 1, 0);
     }
 
     //operations

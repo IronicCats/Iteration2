@@ -1,11 +1,17 @@
 package State.States.GameState;
 
 import Controller.Controllers.TradeController;
+import Model.Abilities.BargainAbility;
 import Model.Abilities.CommandsEnum;
+import Model.Effects.Effect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Takables.Quest;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.Inventory.Pack;
+import Model.Requirement;
+import Model.Stats.StatStructure;
+import Model.Stats.StatsEnum;
 import State.State;
 import Utilities.ItemUtilities.ItemFactory;
 import View.Views.ItemView;
@@ -24,6 +30,7 @@ public class TradeState extends State {
     Player player;
     private TradeView tradeView;
     private int selector;
+    private BargainAbility bargain;
 
     public TradeState(Player player, Pack shopPack) {
         setController(new TradeController(this));
@@ -31,6 +38,13 @@ public class TradeState extends State {
         this.player = player;
         this.playerPack = player.getPack();
         this.shopPack = shopPack;
+        this.bargain = new BargainAbility("Bargain",
+                "Get a better deal",
+                new Effect(new StatStructure(StatsEnum.LIFE, 0)),
+                new Requirement(0),
+                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                player.getBasicSkillsValue(SkillsEnum.BARGAIN),
+                0);
         playerItems = new HashMap<>();
         shopItems = new HashMap<>();
         setController(new TradeController(this));
@@ -115,6 +129,7 @@ public class TradeState extends State {
             if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;
             newValue = (int) (good.getValue() * 0.9);
+            newValue = bargain.bargain(newValue, true);
 
             if (shopPack.getMoney() >= newValue) {
                 /*
@@ -130,6 +145,7 @@ public class TradeState extends State {
             if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;
             newValue = (int) (good.getValue() * 1.1);
+            newValue = bargain.bargain(newValue, false);
 
             if (playerPack.getMoney() >= newValue) {
                 /*

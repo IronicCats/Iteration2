@@ -18,8 +18,9 @@ public abstract class Abilities {
     Requirement requirement;
     Effect cost;
     int range;
+    int cooldown;
     //constructor
-    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost, int range) {
+    public Abilities(String name, String description, Effect effects, Requirement requirement, Effect cost, int range, int cooldown) {
 
         this.name = name;
         this.description = description;
@@ -27,6 +28,7 @@ public abstract class Abilities {
         this.requirement = requirement;
         this.cost = cost;
         this.range = range;
+        this.cooldown = cooldown;
     }
 
     //accessor
@@ -63,6 +65,10 @@ public abstract class Abilities {
 
     public void setRange(int range){
         this.range = range;
+    }
+
+    public int getCooldown(){
+        return this.cooldown;
     }
 
 }
