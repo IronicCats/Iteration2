@@ -15,6 +15,8 @@ import Utilities.Observer;
 import Utilities.Settings;
 import Utilities.Subject;
 import View.Views.ItemView;
+import View.Views.MessageBox.DisplayMessage;
+import View.Views.MessageBox.GameMessage;
 import View.Views.MobileObjectView;
 
 import java.util.HashMap;
@@ -143,6 +145,13 @@ public class Map implements Subject {
                     for (int i = 0; i < t.length; i++) {
                         t[i].receiveAttack(c, a);
                     }
+                }
+            }
+            else if(a instanceof RemoveTrap){
+                System.out.println("Remove Trap");
+                if(a.getSkillLevel() == 2)
+                {
+                    getTile(Location.newLocation(c.getDir(), c.getLocation())).removeAreaEffect();
                 }
             }
             else {
