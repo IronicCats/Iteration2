@@ -5,9 +5,11 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
 import Model.Location;
+import Utilities.AIUtilities.FindTilesAround;
 import Utilities.MapUtilities.Neighbors;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
 import Utilities.MobileObjectUtilities.MobileObjectFactory;
@@ -19,6 +21,7 @@ import View.Views.MessageBox.DisplayMessage;
 import View.Views.MessageBox.GameMessage;
 import View.Views.MobileObjectView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -110,17 +113,15 @@ public class Map implements Subject {
     }
 
     public void carryAttack(Character c, Abilities a) {
-        if(a.getManaCost() > c.getStats().getMana()){
+        if (a.getManaCost() > c.getStats().getMana()) {
             System.out.println("You can't afford to use this ability");
-        }
-        else{
+        } else {
             if (a instanceof DirectAbility) { //when using direct ability
                 getTile(Location.newLocation(c.getDir(), c.getLocation())).receiveAttack(c, a);
             } else if (a instanceof SelfAbility) {  //using a self ability
                 System.out.println("This is a self ability");
                 getTile(c.getLocation()).receiveAttack(c, a);
-            }
-        else if (a instanceof ProjectileAbility) { //using a projectile ability
+            } else if (a instanceof ProjectileAbility) { //using a projectile ability
 
                 System.out.println("Projectile Ability Set");
                 Tile infront = getTile(Location.newLocation(c.getDir(), c.getLocation()));
@@ -132,8 +133,15 @@ public class Map implements Subject {
                     mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
                     ((ProjectileAbility) a).getProjectile().execute();
                 }
-            }
-            else if(a instanceof AOEAbility) { //using an area of effect ability
+            } else if (a instanceof EnchantmentAbility) {
+                System.out.println("using enchantment ability");
+                ArrayList<Tile> range = FindTilesAround.find(c.getLocation(), this, a.getRange(), c.getViewLocation());
+                for (Tile tile : range) {
+                    if (tile.getObject() instanceof HostileNPC) {
+                        ((HostileNPC) tile.getObject()).makeSleep();
+                    }
+                }
+            } else if (a instanceof AOEAbility) { //using an area of effect ability
                 System.out.println("AOEAbility");
                 if (((AOEAbility) (a)).getDegreeMovement() == 60) {
                     Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
@@ -146,6 +154,7 @@ public class Map implements Subject {
                         t[i].receiveAttack(c, a);
                     }
                 }
+
             }
             else if(a instanceof RemoveTrap){
                 System.out.println("Remove Trap");
@@ -156,9 +165,8 @@ public class Map implements Subject {
             }
             else {
                 System.out.println("Not a Direct Ability");
+                c.applyEffect(a.getCost());
             }
-
-            c.applyEffect(a.getCost());
         }
     }
 
