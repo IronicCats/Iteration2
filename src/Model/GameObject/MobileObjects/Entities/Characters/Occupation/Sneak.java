@@ -33,7 +33,7 @@ public class Sneak extends Occupation {
                 "Basic attack of sneak",
                 new Effect(new StatStructure(StatsEnum.LIFE, -1 * (getStats().getOffensiveRating()))),
                 new Requirement(0),
-                new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                0,
                 2
         ));
 
@@ -42,7 +42,7 @@ public class Sneak extends Occupation {
                                          "Helps you steal another entity's money",
                                           new Effect(new StatStructure(StatsEnum.LIFE, 0)),
                                           new Requirement(0),
-                                          new Effect(new StatStructure(StatsEnum.MANA, 0)),
+                                          0,
                                           getOccupationalSkillsValue(SkillsEnum.PICKPOCK)));
     }
 
