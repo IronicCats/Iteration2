@@ -4,6 +4,7 @@ import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
@@ -398,18 +399,13 @@ public class SaveLoad {
                 }
                 //load inventory FIXME
                 Inventory inv = new Inventory();
+                loadInventory(pl,inv);
+
                 Player peer = new Player(l,2,occupation,inv); //THIS SHOULD BE WORKING
                 loadStats(peer.getStats(),pl);
+
                 player = peer;
-                //^ this will be location,occupation,inventory,stats
 
-
-                   /* loadStats(avatar.getStats(), entity); //Separate function to handle loading stats
-                    loadInventory(avatar.getInventory(), entity);
-                    loadEquipped(avatar.getEquippedItems(), entity);
-                    //Adds avatar to the map
-                    m.insertEntityAtLocation(x, y, avatar);*/
-                //}
             }
 
             //System.out.println("Finish loading avatar: " + avatar.getLocation()[0] + "," + avatar.getLocation()[1] + "," + avatar.getOrientation());
@@ -417,6 +413,131 @@ public class SaveLoad {
             System.out.println("Problem parsing avatar");
             e.printStackTrace();
         }
+    }
+    public static void loadInventory(Element player,Inventory in){
+        NodeList temp = player.getElementsByTagName("inventory");
+        for(int i = 0; i < temp.getLength();i++) {
+            Location l = new Location(-1,-1);
+            Element prime = (Element) temp.item(i);
+            Element item = (Element)prime.getElementsByTagName("item");
+            String id = item.getAttribute("id");
+            int k = Integer.parseInt("id");
+            //Item a = ItemFactory.makeItem(,l)
+            ItemsEnum tempEnum = ItemsEnum.values()[k];
+            Item a= ItemFactory.makeItem(tempEnum,l);
+            in.place(a);
+
+        }
+
+        NodeList tempEquip = player.getElementsByTagName("equipped");
+        Location equipLoc = new Location(-1,-1);
+        ItemsEnum tempEnumE;
+        Item z;
+        int equipIdint;
+        String equipId;
+
+
+        Element head = (Element) tempEquip.item(0);
+        Element equipItem = (Element)head.getElementsByTagName("item");
+
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+
+        Element chest = (Element) tempEquip.item(1);
+        equipItem = (Element)chest.getElementsByTagName("item");
+
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element gloves = (Element) tempEquip.item(2);
+        equipItem = (Element)gloves.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element boots = (Element) tempEquip.item(3);
+        equipItem = (Element)boots.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element legs = (Element) tempEquip.item(4);
+        equipItem = (Element)legs.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element shield = (Element) tempEquip.item(5);
+        equipItem = (Element)shield.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+        Element mainHand = (Element) tempEquip.item(6);
+        equipItem = (Element)mainHand.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element offHand = (Element) tempEquip.item(7);
+        equipItem = (Element)offHand.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+        Element accessory1 = (Element)tempEquip.item(8);
+        equipItem = (Element)accessory1.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+        Element accessory2 = (Element)tempEquip.item(9);
+        equipItem = (Element)accessory2.getElementsByTagName("item");
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+
     }
 
     private static void loadStats(CharacterStats cStats, Element player) {
@@ -716,16 +837,7 @@ public class SaveLoad {
 
         int temp = inv.getPackSpaceLeft();
         temp = 16 - temp;
-        /*for (int i = 0; i < 16 - inv.getPackSpaceLeft(); i++) {
-            Element iItem = doc.createElement("item");
-            if(inv.get(i) != null) {
-                Attr id = doc.createAttribute("id");
-                id.setValue(Integer.toString(inv.get(i).getId()));
-                iItem.setAttributeNode(id);
-                inventory.appendChild(iItem);
-            }
-            inv.
-        }*/
+
         int i = 0;
         while(temp != 0){
             Element iItem = doc.createElement("item");
