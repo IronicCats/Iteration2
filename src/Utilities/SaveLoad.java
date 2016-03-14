@@ -1,6 +1,7 @@
 package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
+import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
@@ -9,7 +10,6 @@ import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
-import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -26,6 +26,7 @@ import Model.Map.Tiles.Water;
 import Model.Stats.*;
 import State.State;
 import State.States.GameState.*;
+import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
@@ -56,7 +57,7 @@ public class SaveLoad {
 
     private static String currFileName;     //the name of the file that will be saved.
     public static SaveLoad instance = new SaveLoad(); //an instance of SaveLoad, only needs one.
-    private static Entity player;   //will probably need an Entity list
+    private static Player player;   //will probably need an Entity list
     private static Map gameMap;     //list of all maps may be needed
     private static GameState game;
     private static MapView gamemapView;
@@ -73,7 +74,7 @@ public class SaveLoad {
         return gs;
     }
 
-    public static Entity getPlayer(){// this will be changed later
+    public static Player getPlayer(){// this will be changed later
         return player;
 
     }
@@ -91,7 +92,7 @@ public class SaveLoad {
         gameMap = map;
     }
 
-    public static void setPlayer(Entity a) {//sets the current player
+    public static void setPlayer(Player a) {//sets the current player
         player = a;
     }
 
@@ -116,21 +117,41 @@ public class SaveLoad {
 
     //---------------------------------LOAD--------------------------------// ヽ༼ຈل͜ຈ༽ﾉ
     public static void load(String fileName) {
-        //gs = new GameState();
+
+        gs = new GameState(true);
+        State.GAMESTATE = gs;
+
+
+
         currFileName = fileName;
         mapItems = new HashMap<>();
         decals = new HashMap<>();
+
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
+        GameState.map = gameMap;
+
         loadPlayer(filePath);
+        GameState.player = player;
+
+
         loadMobileObjects(filePath);
-        //gs.setMap(gameMap);
-        //gs.setMapView(gamemapView);
+        gs.setMobileObjects(mobileObjects);
 
-        //gs.setPlayer((Player)player);
+        gs.initGameState();
+        for(Item item: mapItems.keySet()){
+            gameMap.getTile(item.getLocation()).addItem(item);
+        }
+        gameMap.setMapItems(mapItems);
+        for(AreaEffect areaEffect: decals.keySet()){
+            gameMap.getTile(areaEffect.getLocation()).setAreaEffectTile(areaEffect);
+        }
 
-        ((Player) player).update();
+        //gameMap setdecals? It should load in properly now.
+
+
+        //((Player) player).update();
         if(mobileObjects.isEmpty()){
             System.out.println("This is empty");
         }
@@ -139,21 +160,15 @@ public class SaveLoad {
         if (gs == null){
             System.out.println("This is null");
         }
-        //gs.setMobileObjects(mobileObjects);
+
 
         System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
-        //gs.setMapView(gamemapView);
 
         System.out.println("Everything has been loaded!");
-        gs = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
-        State.GAMESTATE = null;
-        State.GAMESTATE = gs;
-        //
         State.INVENTORYSTATE  = new InventoryState();//adding the inv state
 
         State.EQUIPMENTSTATE  = new EquipmentState();//adding the equipment state
 
-        //switchState(MENUSTATE);
         State.SKILLSSTATE  = new SkillsState();
 
         State.PAUSESTATE = new PauseState(); // adding pause state
@@ -161,6 +176,7 @@ public class SaveLoad {
         State.SETTINGSTATE  = new SettingState();
         State.SAVESTATE = new SaveState();
         State.LOADSTATE  = new LoadState();
+        gs.toggleloading();
 
 
 
@@ -202,18 +218,21 @@ public class SaveLoad {
 
                     Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0); //other thing has item(0)
                     String terrainType = terrainElement.getAttribute("terrainType");
-                    //how are we telling something that it's a grass/water/mountain?
 
 
-                    AreaEffect areaEffect = null;       //blank areaEffect to fill in
+                    //AreaEffect areaEffect = null;       //blank areaEffect to fill in
                     NodeList areaEffectNodes = tileElement.getElementsByTagName("areaEffect");
                     if (areaEffectNodes.getLength() > 0) {
                         Element areaEffectElement = (Element) areaEffectNodes.item(0);
                         String areaEffectEnum = areaEffectElement.getAttribute("enum");
 
-                        switch (areaEffectEnum) {
-                            //a case for each enum
-                        }
+                        AreaEffect areaEffect1 = null;
+                        AreaEffectEnum a = AreaEffectEnum.valueOf(areaEffectEnum) ;
+                        Location areaLoc = new Location(i,j,270);
+                        System.out.println("This enum is being loaded in:" + areaEffectEnum + " at location " + areaLoc.toString());
+                        areaEffect1 = AreaEffectFactory.makeAreaEffect(a,areaLoc);
+                        decals.put(areaEffect1,AreaEffectFactory.makeAsset(a,areaEffect1));
+
 
                     }
                     //decal stuff but I don't even have that saving yet
@@ -305,7 +324,7 @@ public class SaveLoad {
     public static void loadPlayer(String fileName) {
         // Get the xml filepath string ensuring file separators are specific to the use's OS.
         String file = fileName;
-        Entity avatar = player;
+        Player avatar = player;
         //Map m = IOMediator.getInstance().map;
         try {
             // Create a document from the xml file
@@ -353,11 +372,10 @@ public class SaveLoad {
                         occupation = new Sneak();
                         break;
                 }
-
                 //load inventory FIXME
                 Inventory inv = new Inventory();
                 Player peer = new Player(l,2,occupation,inv); //THIS SHOULD BE WORKING
-
+                loadStats(peer.getStats(),pl);
                 player = peer;
                 //^ this will be location,occupation,inventory,stats
 
@@ -381,23 +399,23 @@ public class SaveLoad {
         NodeList temp = player.getElementsByTagName("primary");
         Element prime = (Element) temp.item(0);
 
-        cStats.setStrength(Integer.parseInt(player.getAttribute("strength")));
-        cStats.setBaseLife(Integer.parseInt(player.getAttribute("baseLife")));
-        cStats.setAgility(Integer.parseInt(player.getAttribute("agility")));
-        cStats.setBaseAgi(Integer.parseInt(player.getAttribute("baseAgi")));
-        cStats.setBaseStr(Integer.parseInt(player.getAttribute("baseStr")));
-        cStats.setIntellect(Integer.parseInt(player.getAttribute("intellect")));
-        cStats.setBaseIntel(Integer.parseInt(player.getAttribute("baseIntel")));
-        cStats.setBaseMana(Integer.parseInt(player.getAttribute("baseMana")));
-        cStats.setExperience(Integer.parseInt(player.getAttribute("experience")));
-        cStats.setBaseLives(Integer.parseInt(player.getAttribute("baseLives")));
-        cStats.setHardiness(Integer.parseInt(player.getAttribute("hardiness")));
-        cStats.setBaseHard(Integer.parseInt(player.getAttribute("baseHard")));
-        cStats.setDefensiveRating(Integer.parseInt(player.getAttribute("defense")));
-        cStats.setOffensiveRating(Integer.parseInt(player.getAttribute("offense")));
-        cStats.setLife(Integer.parseInt(player.getAttribute("life")));
-        cStats.setMana(Integer.parseInt(player.getAttribute("mana")));
-        cStats.setMovement(Integer.parseInt(player.getAttribute("movement")));
+        cStats.setStrength(Integer.parseInt(prime.getAttribute("strength")));
+        cStats.setBaseLife(Integer.parseInt(prime.getAttribute("baseLife")));
+        cStats.setAgility(Integer.parseInt(prime.getAttribute("agility")));
+        cStats.setBaseAgi(Integer.parseInt(prime.getAttribute("baseAgi")));
+        cStats.setBaseStr(Integer.parseInt(prime.getAttribute("baseStr")));
+        cStats.setIntellect(Integer.parseInt(prime.getAttribute("intellect")));
+        cStats.setBaseIntel(Integer.parseInt(prime.getAttribute("baseIntel")));
+        cStats.setBaseMana(Integer.parseInt(prime.getAttribute("baseMana")));
+        cStats.setExperience(Integer.parseInt(prime.getAttribute("experience")));
+        cStats.setBaseLives(Integer.parseInt(prime.getAttribute("baseLives")));
+        cStats.setHardiness(Integer.parseInt(prime.getAttribute("hardiness")));
+        cStats.setBaseHard(Integer.parseInt(prime.getAttribute("baseHard")));
+        cStats.setDefensiveRating(Integer.parseInt(prime.getAttribute("defense")));
+        cStats.setOffensiveRating(Integer.parseInt(prime.getAttribute("offense")));
+        cStats.setLife(Integer.parseInt(prime.getAttribute("life")));
+        cStats.setMana(Integer.parseInt(prime.getAttribute("mana")));
+        cStats.setMovement(Integer.parseInt(prime.getAttribute("movement")));
         //xp threshhold?
 
 
@@ -422,17 +440,12 @@ public class SaveLoad {
         //Stats stats = new Stats();
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
-       // mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
-        //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
-        //FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
-        //a.getController().setBaseLoc(new Location(11, 3));
+        //mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+         //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
+        FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        a.getController().setBaseLoc(new Location(10, 10));
+        mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
 
-        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
-
-        
-       // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
-        //mobileObjects.put(player,)
-        //gameMap.setMobileObjects(mobileObjects);
 
         ////////////////////////////////////// TEST
         Iterator it = mobileObjects.entrySet().iterator();
@@ -817,6 +830,26 @@ public class SaveLoad {
             areaEnum.setValue(t.getAreaEffectEnum().toString());    //sets that attribute as AreaEffectEnum as a string
             areaEffect.setAttributeNode(areaEnum);                  //set AttributeNode of element
             tile.appendChild(areaEffect);                           //appends Node to element;
+        }
+        if(t.getHasTeleportAreaEffect()){
+            Element teleportAreaEffect = doc.createElement("teleportAreaEffect");
+
+            Attr teleportEnumX = doc.createAttribute("locX");
+            Attr teleportEnumY = doc.createAttribute("locY");
+            Attr teleportDestX = doc.createAttribute("destX");
+            Attr teleportDestY = doc.createAttribute("destY");
+
+            teleportEnumX.setValue(Integer.toString(t.getTeleportAreaEffect().getX()));
+            teleportEnumY.setValue(Integer.toString(t.getTeleportAreaEffect().getY()));
+            teleportDestX.setValue(Integer.toString(t.getTeleportAreaEffect().getEndLocation().getX()));
+            teleportDestY.setValue(Integer.toString(t.getTeleportAreaEffect().getEndLocation().getY()));
+
+            teleportAreaEffect.setAttributeNode(teleportEnumX);
+            teleportAreaEffect.setAttributeNode(teleportEnumY);
+            teleportAreaEffect.setAttributeNode(teleportDestX);
+            teleportAreaEffect.setAttributeNode(teleportDestY);
+
+            tile.appendChild(teleportAreaEffect);
         }
         //if(t.)
         //Decal
