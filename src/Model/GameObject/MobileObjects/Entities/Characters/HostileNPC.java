@@ -64,5 +64,7 @@ public class HostileNPC extends NPC {
         return this.sleeping;
     }
 
-
+    public int getHostilityRating() {
+        return hostilityRating;
+    }
 } // end class HostileNPC
