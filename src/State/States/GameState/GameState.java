@@ -46,7 +46,6 @@ public class GameState extends State {
     public static Map map;
     private Camera camera;
     private MapView mapView;
-    //SaveLoad sl = SaveLoad.getInstance();   //TODO remove this line, currently testing
 
     private boolean cameraMoving;
 

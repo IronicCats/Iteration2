@@ -25,7 +25,7 @@ import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
 import Model.Stats.*;
 import State.State;
-import State.States.GameState.GameState;
+import State.States.GameState.*;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
@@ -146,8 +146,28 @@ public class SaveLoad {
 
         System.out.println("Everything has been loaded!");
         gs = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
+        State.GAMESTATE = null;
         State.GAMESTATE = gs;
-        gs.togglePause();
+        //
+        State.INVENTORYSTATE  = new InventoryState();//adding the inv state
+
+        State.EQUIPMENTSTATE  = new EquipmentState();//adding the equipment state
+
+        //switchState(MENUSTATE);
+        State.SKILLSSTATE  = new SkillsState();
+
+        State.PAUSESTATE = new PauseState(); // adding pause state
+
+        State.SETTINGSTATE  = new SettingState();
+        State.SAVESTATE = new SaveState();
+        State.LOADSTATE  = new LoadState();
+
+
+
+
+        //
+        //State.GAMESTATE = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
+        //gs.togglePause();
     }
 
     public static void loadMap(Map inputMap, String fileName) {
@@ -397,16 +417,22 @@ public class SaveLoad {
     }
 
     private static void loadMobileObjects(String filename){
-        Location l = new Location(2,2,0);
+        mobileObjects = new HashMap<>();
+        Location l = new Location(2,3,0);
         //Stats stats = new Stats();
-        //Pet a = MobileObjectFactory.makeNPC();
-        //Pet a = new FriendlyNPC()
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
-        mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+       // mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+        //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
+        FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        a.getController().setBaseLoc(new Location(11, 3));
+
+        mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
+
+        
        // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
         //mobileObjects.put(player,)
-        gameMap.setMobileObjects(mobileObjects);
+        //gameMap.setMobileObjects(mobileObjects);
 
         ////////////////////////////////////// TEST
         Iterator it = mobileObjects.entrySet().iterator();
