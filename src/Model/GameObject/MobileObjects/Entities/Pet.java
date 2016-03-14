@@ -87,7 +87,7 @@ public class Pet extends MobileObject implements Tickable {
     public PetController getController() {
         return controller;
     }
-    public void setTarget(MobileObject mobileObject) { System.out.println("target being set");controller.setTarget(mobileObject); }
+    public void setTarget(MobileObject mobileObject) { controller.setTarget(mobileObject); }
 
     public void setOwnership() {
         owned = true;

@@ -163,8 +163,9 @@ import java.util.Random;
         this.destination = location;
     } // end setDestination
 
-    public void setTarget(MobileObject mobileObject) {
-        this.target = mobileObject; }
+    public void setTarget(MobileObject mobileObject) {System.out.println("target being set");
+        this.target = mobileObject;
+    }
 
     public Location getBaseLoc() {
         return baseLoc;
