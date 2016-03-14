@@ -12,6 +12,7 @@ import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.Location;
 import Model.Map.Map;
+import Model.Stats.Stats;
 import State.State;
 import Utilities.AreaEffectUtilities.AreaEffectFactory;
 import Utilities.ItemUtilities.ItemFactory;
@@ -24,11 +25,8 @@ import Utilities.MobileObjectUtilities.RespawnQueue;
 import Utilities.SaveLoad;
 import Utilities.Settings;
 import View.ViewUtilities.Camera;
-import View.Views.DecalView;
-import View.Views.ItemView;
-import View.Views.MapView;
+import View.Views.*;
 import View.Views.MessageBox.DisplayMessage;
-import View.Views.MobileObjectView;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -39,6 +37,7 @@ import java.util.HashMap;
  */
 public class GameState extends State {
 
+    private StatusView statusView;
     private HashMap<Item, ItemView> mapItems;
     private HashMap<AreaEffect, DecalView> decals;
     private HashMap<MobileObject, MobileObjectView> mobileObjects;
@@ -104,6 +103,8 @@ public class GameState extends State {
         map.placeAreaEffect(f);
 
         map.setMapItems(mapItems);
+
+        statusView = new StatusView(player);
 
     }
 
@@ -193,6 +194,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
+        statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {
