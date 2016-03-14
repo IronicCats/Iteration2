@@ -14,6 +14,7 @@ import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Entity;
 import Model.GameObject.MobileObjects.Vehicle;
@@ -57,6 +58,9 @@ public abstract class Character extends Entity implements Observer{
         if(occupation instanceof Summoner){
             ability1 = occupation.getAbilityAt(0);
             ability2 = occupation.getAbilityAt(1);
+        }
+        if((occupation instanceof Sneak)){
+            ability1 = occupation.getAbilityAt(0);
         }
         //System.out.println(attack);
         getStats().addObserver(this);

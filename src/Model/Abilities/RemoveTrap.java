@@ -7,16 +7,19 @@ import Model.Requirement;
 /**
  * Created by mazumderm on 3/12/2016.
  */
-public class RemoveTrap extends ExecutableAbility{
+public class RemoveTrap extends Abilities {
 
-    //constructor
-    public RemoveTrap(String name, String description, Effect effects, Requirement requirement, int cost, int skillLevel) {
-        super(name, description, effects, requirement, cost, skillLevel, 1, 0);
+    int skillLevel;
+    public RemoveTrap(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown, int skillLevel){
+        super(name, description, effects, requirement, manaCost, range, cooldown);
+        this.skillLevel = skillLevel;
     }
 
-    //operations
+    public int getSkill(){
+        return this.skillLevel;
+    }
 
-    public void execute(MobileObject targeter, MobileObject targeted){
+    public void removeTrap(){
 
     }
 }
