@@ -15,6 +15,7 @@ public class HostileNPC extends NPC {
     EnemyController enemyController;
     boolean sleeping;
     int hostilityRating;
+    protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
 
     public HostileNPC(Location location, int id, Occupation occupation, Inventory inventory, EnemyController enemyController,int hostilityRating) {
         super(location, id, occupation, inventory);
@@ -35,6 +36,11 @@ public class HostileNPC extends NPC {
             if (enemyController != null ) {
                 enemyController.tick();
             }
+            if(sleeping){
+                if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= 5) {
+                    sleeping = false;
+                }
+            }
         }
     } // end tick
 
@@ -49,11 +55,14 @@ public class HostileNPC extends NPC {
                 '}';
     }
 
-    public boolean isSleeping() {
-        return sleeping;
+   public void makeSleep(){
+       this.sleeping = true;
+       lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
+   }
+
+    public boolean getSleep(){
+        return this.sleeping;
     }
 
-    public void setSleeping(boolean sleeping) {
-        this.sleeping = sleeping;
-    }
+
 } // end class HostileNPC
