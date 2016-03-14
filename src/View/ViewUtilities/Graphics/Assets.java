@@ -17,6 +17,9 @@ public class Assets {
     public static BufferedImage WATERHEXTILE;
     public static BufferedImage MOUNTAINHEXTILE;
 
+    public static BufferedImage SMASHER;
+    public static BufferedImage SUMMONER;
+    public static BufferedImage SNEAK;
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
     public static ArrayList<BufferedImage> PET;
@@ -32,6 +35,12 @@ public class Assets {
     public static ArrayList<BufferedImage> TREASURE_CHEST;
     public static ArrayList<BufferedImage> WOODEN_DOOR;
     public static BufferedImage MANA_POTION;
+    public static BufferedImage AGILITY_POTION;
+    public static BufferedImage EXPERIENCE_POTION;
+    public static BufferedImage HARDINESS_POTION;
+    public static BufferedImage INTELLECT_POTION;
+    public static BufferedImage MOVEMENT_POTION;
+    public static BufferedImage STRENGTH_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
     public static BufferedImage PUFFER_FISH_MACE;
@@ -72,6 +81,9 @@ public class Assets {
     public static BufferedImage BOX2;
 
 
+    //DECORATION
+    public static BufferedImage CIRCLE;
+
     public static void init() {
         //Tiles
         //Fog Tiles
@@ -101,6 +113,24 @@ public class Assets {
 
         SpriteSheet potionManaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ManaPotion.png"));
         MANA_POTION = potionManaSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionAgilitySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/AgilityPotion.png"));
+        AGILITY_POTION = potionAgilitySheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionExperienceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ExperiencePotion.png"));
+        EXPERIENCE_POTION = potionExperienceSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionHardinessSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/HardinessPotion.png"));
+        HARDINESS_POTION = potionHardinessSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionIntellectSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/IntellectPotion.png"));
+        INTELLECT_POTION = potionIntellectSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionMovementSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MovementPotion.png"));
+        MOVEMENT_POTION = potionMovementSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet potionStrengthPotion = new SpriteSheet(new ImageLoader().loadImage("/Items/StrengthPotion.png"));
+        STRENGTH_POTION = potionStrengthPotion.crop(0, 0, 32, 32);
 
         SpriteSheet stickSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickSword.png"));
         STICK_SWORD = stickSwordSheet.crop(0, 0, 32, 32);
@@ -206,6 +236,14 @@ public class Assets {
 
 
 
+        //Front Views
+        SpriteSheet smasher = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/smasher.png"));
+        SpriteSheet summoner = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/summoner.png"));
+        SpriteSheet sneak = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/sneaker.png"));
+        SMASHER = smasher.crop(0, 0, 32, 32);
+        SUMMONER = summoner.crop(0, 0, 32, 32);
+        SNEAK = sneak.crop(0, 0, 32, 32);
+
         //Entities
 
         PLAYER = new ArrayList<>();
@@ -251,12 +289,12 @@ public class Assets {
         BLUE_NPC.add(npc6.crop(0, 0, 32, 32));
 
         DAVE_PET = new ArrayList<>();
-        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));
-        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNE.png"));
-        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSE.png"));
-        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSouth.png"));
-        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatSW.png"));
-        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNW.png"));
+        SpriteSheet pet1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorth.png"));
+        SpriteSheet pet2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthEast.png"));
+        SpriteSheet pet3 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthEast.png"));
+        SpriteSheet pet4 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouth.png"));
+        SpriteSheet pet5 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveSouthWest.png"));
+        SpriteSheet pet6 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Pet/TheDaveNorthWest.png"));
         DAVE_PET.add(pet1.crop(0, 0, 32, 32));
         DAVE_PET.add(pet2.crop(0, 0, 32, 32));
         DAVE_PET.add(pet3.crop(0, 0, 32, 32));
@@ -291,6 +329,9 @@ public class Assets {
 
         //SpriteSheet invBox = new SpriteSheet(new ImageLoader().loadImage("/Pics/box.png"));
         //BOX = invBox.crop(0,0,32,32);
+
+        SpriteSheet circle = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/rope.png"));
+        CIRCLE = circle.crop(0, 0, 600, 600);
 
     }
 }

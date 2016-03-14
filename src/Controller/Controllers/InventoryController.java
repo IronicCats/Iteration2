@@ -23,10 +23,10 @@ public class InventoryController extends Controller {
             return;
         }
         if(e.getKeyCode() == Settings.ESC ) {
-            ((InventoryState)state).switchState(State.PAUSESTATE);
+            State.switchState(State.getPreviousState());
         }
         else if(e.getKeyCode() == KeyEvent.VK_I|| e.getKeyCode() == Settings.INVENTORY){
-            state.switchState(State.GAMESTATE);
+            state.switchState(state.getPreviousState());
         }
         else if(e.getKeyCode() == Settings.EQUIP) {
             state.switchState(State.EQUIPMENTSTATE);

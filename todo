@@ -4,25 +4,22 @@
         need to create variables (specific to each Occupation?)
 ### entities
 ##### NPCs
-        NPCs can move, have some AI
-        need to classify friendly vs enemy
+        DONE
 ##### mounts/vehicles
-        can modify player movement on mount/dismount
-        need to render new images
+        DONE
 ##### pets
         need to configure AI, allow for following Player
         configure scavenging, getting into trouble, ...
 ### avatar - NPC interaction
-        tile stuff
+        DONE
 ##### combat
-        need to have Tile interaction between two Entities to send Effects
+        DONE
 ##### dialog
-        need to create dialog, UI
+        DONE(ish?)
 ##### buy/sell items
-        create money
-        add value to items
+        DONE
 ##### use of item/skill on NPC
-        similar Tile interaction as combat
+        DONE
 ### multiple spell, weapon, item, etc. types
         currently have weapon types in game, should be class-specific
         need to create spells
@@ -33,33 +30,10 @@
 ### scrollable viewport
         DONE
 ### traps and teleport area effects
-        area-effects in place
-            create subclass for
+        DONE
 ### distance and influence radius
-        maaaaaaaaaaaath (similar concept as FoW?)
+        DONE
 ### configurable UI
         Settings file in place, need to configure values
 
-Shopkeeping:
-    Shopkeeper as subclass of FriendlyNPC
-        leave dialog, move references to pack and whatnot
-
 Change text on bottom left to not stay open for as long
-Remove NPC fully from map on death
-    Currently you cannot walk on a tile where an NPC has died
-Interact with chests, doors, ...
-
-AI
-    FriendlyAI
-        Wander around base randomly
-        If attacked
-            increase range and poll for new locations faster
-    HostileAI
-        Wander around base randomly
-        If character in sight
-            Follow, attack until out of range
-    PetAI
-        Wander around base randomly
-        If given required item (sushi)
-            register and follow Player
-            then pick up items randomly

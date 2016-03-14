@@ -2,7 +2,9 @@ package Controller.Controllers;
 
 import Controller.Controller;
 import State.State;
+import State.States.GameState.GameState;
 import State.States.GameState.PauseState;
+import State.States.GameState.VehicleState;
 import Utilities.Settings;
 
 import java.awt.event.KeyEvent;
@@ -25,7 +27,7 @@ public class PauseController extends Controller{
             return;
         }
         if (e.getKeyCode() == Settings.ESC) {
-            state.switchState(State.GAMESTATE);
+            state.switchState(state.getPreviousState());
         }
 
         if(e.getKeyCode() == KeyEvent.VK_UP && currentState>1){
@@ -41,7 +43,7 @@ public class PauseController extends Controller{
         if(e.getKeyCode() == 10) {
             switch(currentState){
                 case 1:
-                    state.switchState(State.GAMESTATE);
+                    state.switchState(state.getPreviousState());
                     break;
                 case 2:
                     state.switchState(State.SAVESTATE);

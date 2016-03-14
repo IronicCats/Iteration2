@@ -16,8 +16,8 @@ public class ProjectileAbility extends Abilities {
     Projectile projectile;
     Stats projectileStats;
 
-    public ProjectileAbility(String name, String description, Stats stats, Effect effect, Requirement requirements, Effect cost){
-        super(name, description, effect, requirements, cost,2);
+    public ProjectileAbility(String name, String description, Stats stats, Effect effect, Requirement requirements, Effect cost, int cooldown){
+        super(name, description, effect, requirements, cost,2, cooldown);
         this.projectileStats = stats;
 
     }
