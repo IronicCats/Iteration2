@@ -1,5 +1,7 @@
 package View.ViewUtilities.Graphics;
 
+import sun.awt.image.BufferedImageDevice;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -43,7 +45,16 @@ public class Assets {
     public static BufferedImage STRENGTH_POTION;
     public static BufferedImage STICK_SWORD;
     public static BufferedImage STICK_GREATSWORD;
+    public static BufferedImage WOODEN_GLOVES;
+    public static BufferedImage SWORDFISH_DAGGER;
+    public static BufferedImage SWORDFISH_LANCE;
+    public static BufferedImage SWORDFISH_GAUNTLETS;
     public static BufferedImage PUFFER_FISH_MACE;
+    public static BufferedImage PUFFER_FISH_FLAIL;
+    public static BufferedImage PUFFER_FISH_KNUCKLES;
+    public static BufferedImage MOUSE_ON_A_STRING_WAND;
+    public static BufferedImage CATNIP_STAFF;
+    public static BufferedImage FISH_BOOMERANG;
     public static BufferedImage LASER_POINTER;
     public static BufferedImage HELMET;
     public static BufferedImage CHESTPLATE;
@@ -54,9 +65,13 @@ public class Assets {
     public static BufferedImage SHIELD;
     public static BufferedImage CHEST_KEY;
     public static BufferedImage HOUSE;
-    public static BufferedImage CATNIP;
+    public static BufferedImage SMALL_CATNIP;
+    public static BufferedImage MEDIUM_CATNIP;
+    public static BufferedImage LARGE_CATNIP;
     public static BufferedImage TUNA;
     public static BufferedImage SUSHI;
+    public static BufferedImage OPEN_DOOR;
+    public static BufferedImage CLOSED_DOOR;
     public static BufferedImage VERT_FENCE;
     public static BufferedImage HORIZ_FENCE_ODD;
     public static BufferedImage HORIZ_FENCE_EVEN;
@@ -138,6 +153,36 @@ public class Assets {
         SpriteSheet stickGreatSwordSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/StickGreatSword.png"));
         STICK_GREATSWORD = stickGreatSwordSheet.crop(0, 0, 32, 32);
 
+        SpriteSheet woodenGlovesSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/WoodenGloves.png"));
+        WOODEN_GLOVES = woodenGlovesSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet swordfishDaggerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishDagger.png"));
+        SWORDFISH_DAGGER = swordfishDaggerSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet swordfishLanceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishLance.png"));
+        SWORDFISH_LANCE = swordfishLanceSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet swordfishGauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SwordfishGauntlets.png"));
+        SWORDFISH_GAUNTLETS = swordfishGauntletsSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet pufferfishMaceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishMace.png"));
+        PUFFER_FISH_MACE = pufferfishMaceSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet pufferfishFlailSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishFlail.png"));
+        PUFFER_FISH_FLAIL = pufferfishFlailSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet pufferfishKnucklesSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/PufferfishKnuckles.png"));
+        PUFFER_FISH_KNUCKLES = pufferfishKnucklesSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet mouseOnAStringWandSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MouseWand.png"));
+        MOUSE_ON_A_STRING_WAND = mouseOnAStringWandSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet catnipStaffSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/CatnipStaff.png"));
+        CATNIP_STAFF = catnipStaffSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet fishBoomerangSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FishBoomerang.png"));
+        FISH_BOOMERANG = fishBoomerangSheet.crop(0, 0, 32, 32);
+
         SpriteSheet laserPointerSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LaserPointer.png"));
         LASER_POINTER = laserPointerSheet.crop(0, 0, 32, 32);
 
@@ -147,13 +192,16 @@ public class Assets {
         SpriteSheet chestPlateSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ChestPlate.png"));
         CHESTPLATE = chestPlateSheet.crop(0, 0, 32, 32);
 
+        SpriteSheet platelegsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ArmoredPants.png"));
+        PLATELEGS = platelegsSheet.crop(0, 0, 32, 32);
+
         SpriteSheet pantsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Pants.png"));
         PANTS = pantsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet bootsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Boots.png"));
         BOOTS = bootsSheet.crop(0, 0, 32, 32);
 
-        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gauntlets.png"));
+        SpriteSheet gauntletsSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Gloves.png"));
         GAUNTLETS = gauntletsSheet.crop(0, 0, 32, 32);
 
         SpriteSheet shieldSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Shield.png"));
@@ -165,14 +213,26 @@ public class Assets {
         SpriteSheet houseSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/House.png"));
         HOUSE = houseSheet.crop(0, 0, 32, 32);
 
-        SpriteSheet moneySheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Catnip.png"));
-        CATNIP = moneySheet.crop(0, 0, 32, 32);
+        SpriteSheet smallCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/SmallCatnip.png"));
+        SMALL_CATNIP = smallCatnipSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet mediumCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/MediumCatnip.png"));
+        MEDIUM_CATNIP = mediumCatnipSheet.crop(0, 0, 32, 32);
+
+        SpriteSheet largeCatnipSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/LargeCatnip.png"));
+        LARGE_CATNIP = largeCatnipSheet.crop(0, 0, 32, 32);
 
         SpriteSheet tunaSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Tuna.png"));
         TUNA = tunaSheet.crop(0,0,32,32);
 
         SpriteSheet sushiSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/Sushi.png"));
         SUSHI = sushiSheet.crop(0,0,32,32);
+
+        SpriteSheet openDoorSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/OpenDoor.png"));
+        OPEN_DOOR = openDoorSheet.crop(0,0,32,32);
+
+        SpriteSheet closedDoorSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/ClosedDoor.png"));
+        CLOSED_DOOR = closedDoorSheet.crop(0,0,32,32);
 
         SpriteSheet vertFenceSheet = new SpriteSheet(new ImageLoader().loadImage("/Items/FenceVertical.png"));
         VERT_FENCE = vertFenceSheet.crop(0,0,32,32);

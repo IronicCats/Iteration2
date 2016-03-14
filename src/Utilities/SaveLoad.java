@@ -25,7 +25,7 @@ import Model.Map.Tiles.Mountain;
 import Model.Map.Tiles.Water;
 import Model.Stats.*;
 import State.State;
-import State.States.GameState.GameState;
+import State.States.GameState.*;
 import Utilities.ItemUtilities.ItemFactory;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.MobileObjectUtilities.MobileObjectEnum;
@@ -102,6 +102,9 @@ public class SaveLoad {
     public static void setMobileObjects(HashMap<MobileObject, MobileObjectView> mobileObjectMap) {
         mobileObjects = mobileObjectMap;
     }
+    public static void setMapItems(HashMap<Item,ItemView> mapItemsMap){
+        mapItems = mapItemsMap;
+    }
 
     public static void setCurrFileName(String fileName) {
         currFileName = fileName;
@@ -115,6 +118,8 @@ public class SaveLoad {
     public static void load(String fileName) {
         //gs = new GameState();
         currFileName = fileName;
+        mapItems = new HashMap<>();
+        decals = new HashMap<>();
         //String filePath = filePathExtension + fileName;
         String filePath = "res/saveFiles/" + fileName;
         loadMap(gameMap, filePath);  //gameMap may be wrong, need to check this
@@ -136,16 +141,33 @@ public class SaveLoad {
         }
         //gs.setMobileObjects(mobileObjects);
 
-       // ViewLocation vl = new ViewLocation(player.getLocation().getX(),player.getLocation().getY());
-
-        //player.setViewLocation(vl);
         System.out.println("Player x location:" + player.getLocation().getX() + " Player Y location:" + player.getLocation().getY());
         //gs.setMapView(gamemapView);
 
         System.out.println("Everything has been loaded!");
         gs = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
+        State.GAMESTATE = null;
         State.GAMESTATE = gs;
-        gs.togglePause();
+        //
+        State.INVENTORYSTATE  = new InventoryState();//adding the inv state
+
+        State.EQUIPMENTSTATE  = new EquipmentState();//adding the equipment state
+
+        //switchState(MENUSTATE);
+        State.SKILLSSTATE  = new SkillsState();
+
+        State.PAUSESTATE = new PauseState(); // adding pause state
+
+        State.SETTINGSTATE  = new SettingState();
+        State.SAVESTATE = new SaveState();
+        State.LOADSTATE  = new LoadState();
+
+
+
+
+        //
+        //State.GAMESTATE = new GameState((Player)player,gameMap,gamemapView,mobileObjects,decals,mapItems);
+        //gs.togglePause();
     }
 
     public static void loadMap(Map inputMap, String fileName) {
@@ -212,118 +234,22 @@ public class SaveLoad {
                             l.setY(j);
 
                             //I'm probably going to need some huge if statement or something. Idk
+                            ItemsEnum a = ItemsEnum.values()[id];
+                            itemArray[k] = ItemFactory.makeItem(a,l);
+                            mapItems.put(itemArray[k],ItemFactory.makeAsset(a,itemArray[k]));
+                            System.out.println("Item ID:" + id);
 
-                            switch (id) {
-                                case 0:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, l);
-                                    break;
-                                case 1:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MANA_POTION, l);
-                                    break;
-                                case 2:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, l);
-                                    break;
-                                case 3:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, l);
-                                    break;
-                                case 4:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, l);
-                                    break;
-                                case 5:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, l);
-                                    break;
-                                case 6:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, l);
-                                    break;
-                                case 7:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, l);
-                                    break;
-                                case 8:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, l);
-                                    break;
-                                case 9:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, l);
-                                    break;
-                                case 10:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, l);
-                                    break;
-                                case 11:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, l);
-                                    break;
-                                case 12:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, l);
-                                    break;
-                                case 13:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_FLAIL, l);
-                                    break;
-                                case 14:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MOUSE_ON_A_STRING_WAND, l);
-                                    break;
-                                case 15:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CATNIP_STAFF, l);
-                                    break;
-                                case 17:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, l);
-                                    break;
-                                case 18:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.FISH_BOOMERANG, l);
-                                    break;
-                                case 19:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, l);
-                                    break;
-                                case 20:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_TREASURE_CHEST, l);
-                                    break;
-                                case 21:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, l);
-                                    break;
-                                case 22:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOOR_KEY, l);
-                                    break;
-                                case 23:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.OPEN_DOOR, l);
-                                    break;
-                                case 24:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CLOSED_DOOR, l);
-                                    break;
-                                case 25:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.HELMET, l);
-                                    break;
-                                case 26:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.CHESTPLATE, l);
-                                    break;
-                                case 27:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PLATELEGS, l);
-                                    break;
-                                case 28:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.GAUNTLETS, l);
-                                    break;
-                                case 29:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.BOOTS, l);
-                                    break;
-                                case 30:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.SHIELD, l);
-                                    break;
-                                case 31:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.MILDLY_COOL_RING, l);
-                                    break;
-                                case 32:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.DOPE_RING, l);
-                                    break;
-                                case 33:
-                                    itemArray[k] = ItemFactory.makeItem(ItemsEnum.PANTS, l);
-                                    break;
+                           System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
+                           System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
+                            //mapItems.put(itemArray[k],ItemFactory.makeAsset(ItemsEnum.PANTS,itemArray[k]));
 
-                            }
-                            System.out.println("X item loc:" + Integer.toString(itemArray[k].getLocation().getX()));
-                            System.out.println("Y item loc:" + Integer.toString(itemArray[k].getLocation().getY()));
 
                         }
 
                     }
 
 
-                    ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
+                   // ArrayList itemArrayList = new ArrayList<>(Arrays.asList(itemArray));
                     //THIS ARRAYLIST AND ADDITEMS STUFF WAS RECENTLY ADDED TO SEE IF IT COULD FIX THE THING
 
                     Location lg = new Location(i,j);
@@ -333,7 +259,8 @@ public class SaveLoad {
 
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
 
                     }
                     else if(terrainType.equalsIgnoreCase("water")) {
@@ -341,12 +268,14 @@ public class SaveLoad {
 
                         tiles[i][j] = new Water(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.WATERHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
 
                     } else if (terrainType.equalsIgnoreCase("mountain")) {
                         tiles[i][j] = new Mountain(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.MOUNTAINHEXTILE);
-                        tiles[i][j].addItems(itemArrayList);
+                        //if(!itemArrayList.isEmpty())
+                            //tiles[i][j].addItems(itemArrayList);
                     }
                     //System.out.println(tiles[i][j].toString());
 
@@ -488,16 +417,32 @@ public class SaveLoad {
     }
 
     private static void loadMobileObjects(String filename){
-        Location l = new Location(2,2,0);
+        mobileObjects = new HashMap<>();
+        Location l = new Location(2,3,0);
         //Stats stats = new Stats();
-        //Pet a = MobileObjectFactory.makeNPC();
-        //Pet a = new FriendlyNPC()
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
-        mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
-        mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
+       // mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+        //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
+        //FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        //a.getController().setBaseLoc(new Location(11, 3));
+
+        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
+
+        
+       // mobileObjects.put(player,MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER,player));
         //mobileObjects.put(player,)
-        gameMap.setMobileObjects(mobileObjects);
+        //gameMap.setMobileObjects(mobileObjects);
+
+        ////////////////////////////////////// TEST
+        Iterator it = mobileObjects.entrySet().iterator();
+        while (it.hasNext()) {
+            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
+            System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
+            //it.remove(); ??? Says it avoids CurrentModificationException
+        }
+
+        ///////////////////////////////
     }
 
     //---------------------------------------------------------------------//
