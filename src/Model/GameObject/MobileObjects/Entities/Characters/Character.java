@@ -156,15 +156,12 @@ public abstract class Character extends Entity implements Observer{
 
 
     public void attack(Abilities a) {
-        //leave this here.
-        //System.out.println(getEquippedWeaponInSlot(EquipmentSlotEnum.MAINHAND));
-        EquipmentTypeEnum equipmentType = getEquippedWeaponInSlot(EquipmentSlotEnum.MAINHAND);
-            occupation.setWeaponType(equipmentType);
-            if (a == null) {
-                System.out.println("Ability not set");
-                return;
-            }
-            getTile().sendAttack(this, a);
+        occupation.setWeaponType(getEquippedWeaponInSlot(EquipmentSlotEnum.MAINHAND));
+        if (a == null) {
+            System.out.println("Ability not set");
+            return;
+        }
+        getTile().sendAttack(this, a);
 
     }
 

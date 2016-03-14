@@ -67,20 +67,20 @@ public class GameState extends State {
         setController(new GameController(this));
 
         camera = new Camera(Settings.GAMEWIDTH, Settings.GAMEHEIGHT, map);
-
+/*
         //creating a new player
         player = MobileObjectFactory.Player();
         player.setInitialLevel(5);
+        MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+*/
+        player = MobileObjectFactory.makeSmasher();
         MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
 
         // initializing items
         mapItems = ItemFactory.initMainMap();
         MakeMap.populateItems(mapItems.keySet().toArray(new Item[mapItems.size()]), map);
 
-        //creating a new player
-        player = MobileObjectFactory.Player();
-
-        // initializing NPC's
+        // initializing NPC'selection
         mobileObjects = MobileObjectFactory.Init(map, player);
 
         // adding player to hash map
@@ -236,7 +236,7 @@ public class GameState extends State {
         }
         mapView.render(g, camera.getxOffset(), camera.getyOffset(), player.getLocation());
         DisplayMessage.render(g);
-        statusView.render(g);
+        if(State.getCurrentState() == GAMESTATE)statusView.render(g);
     }
 
     public void executePlayerCommand(CommandsEnum pce) {
@@ -256,9 +256,28 @@ public class GameState extends State {
         return player;
     }
 
-    public static void setPlayer(Player player) {
+    public void setPlayer(Player player) {
         GameState.player = player;
-    }
+        MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player);
+        mobileObjects.put(player, MobileObjectFactory.makeAsset(MobileObjectEnum.PLAYER, player));
+        /*
+        Iterator it = mobileObjects.entrySet().iterator();
+        while (it.hasNext()) {
+            java.util.Map.Entry pair = (java.util.Map.Entry) it.next();
+            //System.out.println(pair.getKey() + "  This is the related view: " + pair.getValue());
+            //MobileObject a = (MobileObject)pair.getKey();
+            // MobileObjectView ab = (MobileObjectView)pair.getValue();
+            //int x = a.getX();
+            //int y = a.getY();
+            map.getTile(((MobileObject)pair.getKey()).getLocation()).register((MobileObject)pair.getKey());
+            ((MobileObject) pair.getKey()).registerTile(((MobileObject)pair.getKey()).getLocation());
+
+
+            //it.remove(); ??? Says it avoids CurrentModificationException
+        }*/
+        map.setMobileObjects(mobileObjects);
+
+    } // end setPlayer
 
     public static void setMap(Map map) {
         GameState.map = map;

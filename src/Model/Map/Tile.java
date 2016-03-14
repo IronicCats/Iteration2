@@ -2,6 +2,8 @@ package Model.Map;
 
 
 import Model.Abilities.Abilities;
+import Model.Abilities.DetectTrap;
+import Model.Abilities.ProjectileAbility;
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
 import Model.GameObject.AreaEffect.TeleportAreaEffect;
@@ -9,6 +11,8 @@ import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
 import Model.GameObject.MobileObjects.Entities.Characters.Character;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.SkillsEnum;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Projectile;
@@ -16,6 +20,7 @@ import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import State.State;
 import State.States.GameState.GameState;
+import Utilities.AIUtilities.FindTilesAround;
 import Utilities.ItemUtilities.ItemsEnum;
 import Utilities.Observer;
 import Utilities.Subject;
@@ -89,7 +94,7 @@ public abstract class Tile implements Subject {
     }
 
     public void receiveAttack(Character c, Abilities a) {
-        if (hasObject() && !(object instanceof Vehicle)) {
+        if (hasObject() && !(object instanceof Vehicle) && !(object instanceof Projectile)) {
             ((Character) object).receiveAttack(c, a);
         }
     }
@@ -99,7 +104,6 @@ public abstract class Tile implements Subject {
         ((Character) object).receiveProjectileAttack(p.getEffect());
 
     }
-
 
     public void addItem(Item item) {
         items.add(item);
@@ -164,6 +168,12 @@ public abstract class Tile implements Subject {
         hasObject = true;
         if (object instanceof Player) {
             visited = true;
+            System.out.println((((Player)(object)).getOccupation()));
+            if((((Player)(object)).getOccupation() instanceof Sneak)){
+                DetectTrap d = new DetectTrap((((Player)(object)).getOccupation().getOccupationalSkillsValue(SkillsEnum.DRTRAP)));
+                ArrayList<Tile> tilesToBeChecked = FindTilesAround.find(object.getLocation(), object.getMap(), 2, object.getViewLocation());
+                d.checkSurroundingTiles(tilesToBeChecked);
+            }
         }
         if(object instanceof Character){
             if (this.getHasAreaEffect()) {

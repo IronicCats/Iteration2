@@ -20,7 +20,7 @@ public class HostileNPC extends NPC {
         super(location, id, occupation, inventory);
         this.enemyController = enemyController;
         enemyController.setAI(this);
-        sleeping = false;
+        sleeping = true;
         this.hostilityRating = hostilityRating;
     } // end constructor
 

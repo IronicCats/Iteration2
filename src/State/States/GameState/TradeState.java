@@ -124,7 +124,7 @@ public class TradeState extends State {
         Item good;
         int newValue;
 
-        if (selector <= 15) {                                /* player's pack */
+        if (selector <= 15) {                                /* player'selection pack */
             good = playerPack.get(selector);                    /* selling item */
             if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;
@@ -140,7 +140,7 @@ public class TradeState extends State {
                 shopPack.modifyMoney(-newValue);
                 shopPack.place(playerPack.remove(selector));
             } // end if
-        } else {                                           /* shopkeeper's pack */
+        } else {                                           /* shopkeeper'selection pack */
             good = shopPack.get(selector - 16);                   /* buying item */
             if (good == null || good instanceof Quest)    /* can't trade quest items */
                 return;

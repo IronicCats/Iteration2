@@ -8,6 +8,7 @@ import Model.GameObject.MobileObjects.Entities.AI.FriendlyController;
 import Model.GameObject.MobileObjects.Entities.AI.PetController;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Smasher;
+import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Sneak;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Summoner;
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
 import Model.GameObject.MobileObjects.Entities.Characters.Shopkeeper;
@@ -64,7 +65,7 @@ public class MobileObjectFactory {
         enemy.getStats().setLife(2);
 
         // pet
-        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(10,10), map, player);
+        Pet davePet = (Pet)makeNPC(MobileObjectEnum.DAVE_PET, new Location(13,13), map, player);
         davePet.getController().setTarget(player);
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
@@ -168,13 +169,17 @@ public class MobileObjectFactory {
         return null;
     } // end makeNPC
 
-    public static Player Player() {
-        // player
+    public static Player makeSummoner() {
+        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
+    } // end makeSummoner
 
-        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
-        //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
-        return player;
-    }
+    public static Player makeSneak() {
+        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Sneak(), new Inventory());
+    } // end makeSneak
+
+    public static Player makeSmasher() {
+        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+    } // end makeSmasher
 
     public static Projectile Hairball(Location location, Effect effect ){
 

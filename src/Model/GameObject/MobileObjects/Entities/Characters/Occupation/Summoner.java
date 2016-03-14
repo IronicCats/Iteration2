@@ -61,9 +61,9 @@ public class Summoner extends Occupation {
                 -7,
                 7
         ));
-        setOccupationalAbilities(new SelfAbility("Defensive Bonus",
-                "Defensive Bonus for 7 seconds",
-                new Effect(new StatStructure(StatsEnum.DEFENSIVE_RATING, getOccupationalSkillsValue(SkillsEnum.BOON) + 5 * 100), ModificationEnum.PERCENT, 7000),
+        setOccupationalAbilities(new SelfAbility("Speed Bonus",
+                "Speed Bonus for 7 seconds",
+                new Effect(new StatStructure(StatsEnum.MOVEMENT, getOccupationalSkillsValue(SkillsEnum.BOON) + 5 * 100), ModificationEnum.PERCENT, 7000),
                 new Requirement(0),
                 -11,
                 5

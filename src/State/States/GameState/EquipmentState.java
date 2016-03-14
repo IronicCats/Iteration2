@@ -32,6 +32,12 @@ public class EquipmentState extends State {
         equipmentView = new EquipmentView(player);
         s=1;
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        equipmentView.setPlayer(player);
+    }
+
     public void up(){
         if(s==1){s+=9;}
         else if(s==3||s==5){s+=6;}
