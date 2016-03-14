@@ -2,7 +2,10 @@ package Utilities;
 
 import Model.GameObject.AreaEffect.AreaEffect;
 import Model.GameObject.AreaEffect.AreaEffectEnum;
+import Model.GameObject.AreaEffect.TeleportAreaEffect;
 import Model.GameObject.Item.Item;
+import Model.GameObject.Item.Items.Takables.Equippable.Armor;
+import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.MobileObjects.Entities.Characters.FriendlyNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.HostileNPC;
 import Model.GameObject.MobileObjects.Entities.Characters.Occupation.Occupation;
@@ -64,6 +67,8 @@ public class SaveLoad {
     private static HashMap<MobileObject, MobileObjectView> mobileObjects;
     private static HashMap<AreaEffect, DecalView> decals;
     private static HashMap<Item, ItemView> mapItems;
+    private static ArrayList<TeleportAreaEffect> teleportAreaEffectsA = new ArrayList<TeleportAreaEffect>();
+
     private static GameState gs;
 
     //private static final String filePathExtension = Utilities.getFileSystemDependentPath("src/res/saveFiles";)
@@ -147,6 +152,9 @@ public class SaveLoad {
         for(AreaEffect areaEffect: decals.keySet()){
             gameMap.getTile(areaEffect.getLocation()).setAreaEffectTile(areaEffect);
         }
+        for(TeleportAreaEffect teleportAreaEffect: teleportAreaEffectsA){
+            gameMap.getTile(teleportAreaEffect.getLocation()).setTeleportAreaEffectTile(teleportAreaEffect);
+        }
 
         //gameMap setdecals? It should load in properly now.
 
@@ -177,6 +185,7 @@ public class SaveLoad {
         State.SAVESTATE = new SaveState();
         State.LOADSTATE  = new LoadState();
         gs.toggleloading();
+        gs.setPlayer(player);
 
 
 
@@ -204,6 +213,8 @@ public class SaveLoad {
             //if there is problem it may be here
             Tile[][] tiles = new Tile[mapWidth][mapHeight]; //this might not be good in our implementation
             TileView[][] tv = new TileView[mapWidth][mapHeight];
+            //TeleportAreaEffect[] teleportAreaEffectsArray;
+            ArrayList<TeleportAreaEffect> teleportAreaEffectsArrayList = new ArrayList<TeleportAreaEffect>();
             //was mapHeight/mapWitdth
 
             NodeList rows = doc.getElementsByTagName("row");
@@ -233,7 +244,22 @@ public class SaveLoad {
                         areaEffect1 = AreaEffectFactory.makeAreaEffect(a,areaLoc);
                         decals.put(areaEffect1,AreaEffectFactory.makeAsset(a,areaEffect1));
 
+                    }
+                    NodeList teleportEffectNode = tileElement.getElementsByTagName("teleportAreaEffect");
+                    if(teleportEffectNode.getLength() > 0)
+                    {
+                        Element teleportEffectElement = (Element)teleportEffectNode.item(0);
+                        String teleX = teleportEffectElement.getAttribute("locX");
+                        String teleY = teleportEffectElement.getAttribute("locY");
+                        String destX = teleportEffectElement.getAttribute("destX");
+                        String destY = teleportEffectElement.getAttribute("destY");
 
+                        Location teleLoc = new Location(Integer.parseInt(teleX),Integer.parseInt(teleY));
+                        Location destLoc = new Location(Integer.parseInt(destX),Integer.parseInt(destY));
+
+                        TeleportAreaEffect tAE = new TeleportAreaEffect(teleLoc,destLoc);
+                        teleportAreaEffectsArrayList.add(tAE);
+                        teleportAreaEffectsA.add(tAE);
                     }
                     //decal stuff but I don't even have that saving yet
 
@@ -278,6 +304,7 @@ public class SaveLoad {
 
                         tiles[i][j] = new Grass(lg);
                         tv[i][j] = new TileView(tiles[i][j], Assets.GRASSHEXTILE);
+
                         //if(!itemArrayList.isEmpty())
                             //tiles[i][j].addItems(itemArrayList);
 
@@ -374,18 +401,13 @@ public class SaveLoad {
                 }
                 //load inventory FIXME
                 Inventory inv = new Inventory();
+                loadInventory(pl,inv);
+
                 Player peer = new Player(l,2,occupation,inv); //THIS SHOULD BE WORKING
                 loadStats(peer.getStats(),pl);
+
                 player = peer;
-                //^ this will be location,occupation,inventory,stats
 
-
-                   /* loadStats(avatar.getStats(), entity); //Separate function to handle loading stats
-                    loadInventory(avatar.getInventory(), entity);
-                    loadEquipped(avatar.getEquippedItems(), entity);
-                    //Adds avatar to the map
-                    m.insertEntityAtLocation(x, y, avatar);*/
-                //}
             }
 
             //System.out.println("Finish loading avatar: " + avatar.getLocation()[0] + "," + avatar.getLocation()[1] + "," + avatar.getOrientation());
@@ -393,6 +415,136 @@ public class SaveLoad {
             System.out.println("Problem parsing avatar");
             e.printStackTrace();
         }
+    }
+    public static void loadInventory(Element player,Inventory in){
+        NodeList temp = player.getElementsByTagName("inventory");
+        System.out.println("TEMP LENGHT" + temp.getLength());
+        if(temp.getLength() != 0) {
+            for (int i = 0; i < temp.getLength(); i++) {
+                Location l = new Location(-1, -1);
+                Element prime = (Element) temp.item(i);
+                Element item = (Element) prime.getElementsByTagName("item").item(0);
+                if(item != null) {
+                    String id = item.getAttribute("id");
+                    System.out.println("i: " + i);
+                    int k = Integer.parseInt(id);
+                    //Item a = ItemFactory.makeItem(,l)
+                    ItemsEnum tempEnum = ItemsEnum.values()[k];
+                    Item a = ItemFactory.makeItem(tempEnum, l);
+                    in.place(a);
+                }
+
+            }
+        }
+        NodeList tempEquip = player.getElementsByTagName("equipped");
+        Location equipLoc = new Location(-1,-1);
+        ItemsEnum tempEnumE;
+        Item z;
+        int equipIdint;
+        String equipId;
+
+
+        Element head = (Element) tempEquip.item(0);
+        Element equipItem = (Element)head.getElementsByTagName("head").item(0);
+
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+
+        Element chest = (Element) tempEquip.item(0);
+        equipItem = (Element)chest.getElementsByTagName("chest").item(0);
+
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element gloves = (Element) tempEquip.item(0);
+        equipItem = (Element)gloves.getElementsByTagName("gloves").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element boots = (Element) tempEquip.item(0);
+        equipItem = (Element)boots.getElementsByTagName("boots").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element legs = (Element) tempEquip.item(0);
+        equipItem = (Element)legs.getElementsByTagName("legs").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+        Element shield = (Element) tempEquip.item(0);
+        equipItem = (Element)shield.getElementsByTagName("shield").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+        Element mainHand = (Element) tempEquip.item(0);
+        equipItem = (Element)mainHand.getElementsByTagName("mainHand").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Weapon) z);
+        }
+
+        Element offHand = (Element) tempEquip.item(0);
+        equipItem = (Element)offHand.getElementsByTagName("offHand").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Weapon) z);
+        }
+        Element accessory1 = (Element)tempEquip.item(0);
+        equipItem = (Element)accessory1.getElementsByTagName("accessory1").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+        Element accessory2 = (Element)tempEquip.item(0);
+        equipItem = (Element)accessory2.getElementsByTagName("accessory2").item(0);
+        equipId = equipItem.getAttribute("id");
+        equipIdint = Integer.parseInt(equipId);
+        if(equipIdint != -1) {
+            tempEnumE = ItemsEnum.values()[equipIdint];
+            z = ItemFactory.makeItem(tempEnumE, equipLoc);
+            in.equip((Armor) z);
+        }
+
+
     }
 
     private static void loadStats(CharacterStats cStats, Element player) {
@@ -440,11 +592,11 @@ public class SaveLoad {
         //Stats stats = new Stats();
         System.out.println("It should be here.");
         //gameMap.setMobileObjects(mobileObjects);
-        //mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
+         mobileObjects = MobileObjectFactory.Init(gameMap,(Player)player);
          //Pet a = new MobileObjectFactory().makeNPC(MobileObjectEnum.DAVE_PET,l,gameMap,(Player)player);
-        FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
-        a.getController().setBaseLoc(new Location(10, 10));
-        mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
+        //FriendlyNPC a = (FriendlyNPC) MobileObjectFactory.makeNPC(MobileObjectEnum.CORGI_SHOPKEEPER,l,gameMap,(Player)player);
+        //a.getController().setBaseLoc(new Location(10, 10));
+        //mobileObjects.put(a,MobileObjectFactory.makeAsset(MobileObjectEnum.CORGI_SHOPKEEPER,a));
 
 
         ////////////////////////////////////// TEST
@@ -690,15 +842,20 @@ public class SaveLoad {
     private static Node getInventory(Document doc, Inventory inv) {
         Element inventory = doc.createElement("inventory");
 
+        int temp = inv.getPackSpaceLeft();
+        temp = 16 - temp;
 
-        for (int i = 0; i < 16 - inv.getPackSpaceLeft(); i++) {
+        int i = 0;
+        while(temp != 0){
             Element iItem = doc.createElement("item");
-
-            Attr id = doc.createAttribute("id");
-            id.setValue(Integer.toString(inv.get(i).getId()));
-            iItem.setAttributeNode(id);
-
-            inventory.appendChild(iItem);
+            if(inv.get(i) != null) {
+                Attr id = doc.createAttribute("id");
+                id.setValue(Integer.toString(inv.get(i).getId()));
+                iItem.setAttributeNode(id);
+                inventory.appendChild(iItem);
+                temp--;
+            }
+            i++;
         }
 
 

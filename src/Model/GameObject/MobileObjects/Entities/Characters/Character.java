@@ -62,6 +62,7 @@ public abstract class Character extends Entity implements Observer{
         }
         if((occupation instanceof Sneak)){
             ability1 = occupation.getAbilityAt(0);
+            ability2 = occupation.getAbilityAt(2);
         }
         //System.out.println(attack);
         getStats().addObserver(this);

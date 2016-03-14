@@ -77,7 +77,15 @@ public class MobileObjectView implements Renderable, Observer {
         this.current = 0;
         this.movement = entity.getMovement();
         if(entity instanceof Player) {
-            playerAnimations = Assets.PLAYERANIMATION;
+            if(((Player) entity).getOccupation().getName() == "Smasher"){
+                playerAnimations = Assets.SMASHERSEQUENCE;
+
+            }else if(((Player) entity).getOccupation().getName() == "Summoner") {
+                playerAnimations = Assets.SUMMONERSEQUENCE;
+
+            }else {
+                playerAnimations = Assets.SNEAKERSEQUENCE;
+            }
         }
     }
 

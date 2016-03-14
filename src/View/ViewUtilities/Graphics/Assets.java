@@ -22,7 +22,10 @@ public class Assets {
     public static BufferedImage SNEAK;
     //NPC's
     public static ArrayList<BufferedImage> PLAYER;
-    public static ArrayList<ArrayList<BufferedImage>> PLAYERANIMATION;
+    public static ArrayList<ArrayList<BufferedImage>> SMASHERSEQUENCE;
+    public static ArrayList<ArrayList<BufferedImage>> SUMMONERSEQUENCE;
+    public static ArrayList<ArrayList<BufferedImage>> SNEAKERSEQUENCE;
+
 
     public static ArrayList<BufferedImage> PET;
     public static ArrayList<BufferedImage> BLUE_NPC;
@@ -312,7 +315,7 @@ public class Assets {
         //Entities
 
         PLAYER = new ArrayList<>();
-        SpriteSheet player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/PlayerNE.png"));
+        SpriteSheet player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/SneakerPlayerNE.png"));
         PLAYER.add(player1.crop(0, 0, 32, 32));
         PLAYER.add(player1.crop(0, 32, 32, 32));
         PLAYER.add(player1.crop(0, 64, 32, 32));
@@ -320,7 +323,7 @@ public class Assets {
         PLAYER.add(player1.crop(0, 128, 32, 32));
         PLAYER.add(player1.crop(0, 160, 32, 32));
 
-        PLAYERANIMATION = new ArrayList<>();
+        SNEAKERSEQUENCE = new ArrayList<>();
         for(int i = 0; i < 6; ++i) {
             ArrayList<BufferedImage> temp = new ArrayList<>();
             temp.add(player1.crop(0, (i*32), 32, 32));
@@ -328,12 +331,55 @@ public class Assets {
             temp.add(player1.crop(64, (i*32), 32, 32));
             temp.add(player1.crop(96, (i*32), 32, 32));
 
-            PLAYERANIMATION.add(temp);
+            SNEAKERSEQUENCE.add(temp);
         }
 
-        System.out.println(PLAYERANIMATION);
+        System.out.println(SNEAKERSEQUENCE);
 
 
+        PLAYER = new ArrayList<>();
+        player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/SummonerPlayerNE.png"));
+        PLAYER.add(player1.crop(0, 0, 32, 32));
+        PLAYER.add(player1.crop(0, 32, 32, 32));
+        PLAYER.add(player1.crop(0, 64, 32, 32));
+        PLAYER.add(player1.crop(0, 96, 32, 32));
+        PLAYER.add(player1.crop(0, 128, 32, 32));
+        PLAYER.add(player1.crop(0, 160, 32, 32));
+
+        SUMMONERSEQUENCE = new ArrayList<>();
+        for(int i = 0; i < 6; ++i) {
+            ArrayList<BufferedImage> temp = new ArrayList<>();
+            temp.add(player1.crop(0, (i*32), 32, 32));
+            temp.add(player1.crop(32, (i*32), 32, 32));
+            temp.add(player1.crop(64, (i*32), 32, 32));
+            temp.add(player1.crop(96, (i*32), 32, 32));
+
+            SUMMONERSEQUENCE.add(temp);
+        }
+
+        System.out.println(SUMMONERSEQUENCE);
+
+        PLAYER = new ArrayList<>();
+        player1 = new SpriteSheet(new ImageLoader().loadImage("/Entities/Player/SmasherPlayerNE.png"));
+        PLAYER.add(player1.crop(0, 0, 32, 32));
+        PLAYER.add(player1.crop(0, 32, 32, 32));
+        PLAYER.add(player1.crop(0, 64, 32, 32));
+        PLAYER.add(player1.crop(0, 96, 32, 32));
+        PLAYER.add(player1.crop(0, 128, 32, 32));
+        PLAYER.add(player1.crop(0, 160, 32, 32));
+
+        SMASHERSEQUENCE = new ArrayList<>();
+        for(int i = 0; i < 6; ++i) {
+            ArrayList<BufferedImage> temp = new ArrayList<>();
+            temp.add(player1.crop(0, (i*32), 32, 32));
+            temp.add(player1.crop(32, (i*32), 32, 32));
+            temp.add(player1.crop(64, (i*32), 32, 32));
+            temp.add(player1.crop(96, (i*32), 32, 32));
+
+            SMASHERSEQUENCE.add(temp);
+        }
+
+        System.out.println(SMASHERSEQUENCE);
 
         CAT_NPC = new ArrayList<>();
         SpriteSheet cat2 = new SpriteSheet(new ImageLoader().loadImage("/Entities/NPC/CatNorth.png"));

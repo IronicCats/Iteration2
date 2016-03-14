@@ -27,16 +27,19 @@ public class DetectTrap extends PassiveAbility {
             if(skillLevel == 0){
                 if(ti.getAreaEffectEnum() == AreaEffectEnum.TRAP){
                     DisplayMessage.addMessage(new GameMessage("Trap in the vicinity", 5));
+                    break;
                 }
             }
             else if(skillLevel == 1 ){
                 if(ti.getAreaEffectEnum() == AreaEffectEnum.TRAP){
                     DisplayMessage.addMessage(new GameMessage("Trap within two tiles", 5));
+                    break;
                 }
             }
             else{
                 if(ti.getAreaEffectEnum() == AreaEffectEnum.TRAP){
                     DisplayMessage.addMessage(new GameMessage("Trap is at tile " + ti.getLocation().getX() + " , " + ti.getLocation().getY(), 5));
+                    break;
                 }
             }
         }

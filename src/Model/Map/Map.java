@@ -133,7 +133,8 @@ public class Map implements Subject {
                     mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
                     ((ProjectileAbility) a).getProjectile().execute();
                 }
-            } else if (a instanceof EnchantmentAbility) {
+            }
+            else if (a instanceof EnchantmentAbility) {
                 System.out.println("using enchantment ability");
                 ArrayList<Tile> range = FindTilesAround.find(c.getLocation(), this, a.getRange(), c.getViewLocation());
                 for (Tile tile : range) {
@@ -141,7 +142,8 @@ public class Map implements Subject {
                         ((HostileNPC) tile.getObject()).makeSleep();
                     }
                 }
-            } else if (a instanceof AOEAbility) { //using an area of effect ability
+            }
+            else if (a instanceof AOEAbility) { //using an area of effect ability
                 System.out.println("AOEAbility");
                 if (((AOEAbility) (a)).getDegreeMovement() == 60) {
                     Tile[] t = Neighbors.neighborsAtSixtyDegrees(c.getTile(), this, c.getDir());
@@ -156,6 +158,17 @@ public class Map implements Subject {
                 }
 
             }
+
+            else if (a instanceof CreepAbility){
+                System.out.println("activating creep ability");
+                c.getStats().setMovement(c.getMovement()-8);
+                for(MobileObject key: mobileObjects.keySet()){
+                    if(key instanceof HostileNPC){
+                        ((HostileNPC) key).takeAwayTarget();
+                    }
+                }
+            }
+
             else if(a instanceof RemoveTrap){
                 System.out.println("Remove Trap");
                 if(a.getSkillLevel() == 2)
