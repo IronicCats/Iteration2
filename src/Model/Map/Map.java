@@ -127,10 +127,6 @@ public class Map implements Subject {
                 ((ProjectileAbility) a).setProjectile(p);
                 mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
                 ((ProjectileAbility) a).getProjectile().execute();
-                System.out.println("do this");
-                mobileObjects.remove(p);
-                p.deregister();
-                System.out.println("deregistered");
             }
 
         }

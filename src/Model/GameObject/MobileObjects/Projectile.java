@@ -45,7 +45,6 @@ public class Projectile extends MobileObject {
     }
 
     public void execute() {
-
         Tile infront = map.getTile(Location.newLocation(this.getDir(), this.getLocation()));
         if (infront.hasObject()) {
             infront.receiveProjectileAttack(this);
