@@ -35,7 +35,9 @@ public class State implements Tickable, Renderable {
     private Controller controller;
 
     public static void switchState(State state) {
-        previousState = currentState;
+        if(currentState instanceof GameState || currentState instanceof VehicleState){
+            previousState = currentState;
+        }
         setState(state);
     }
 
