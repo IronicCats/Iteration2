@@ -189,8 +189,6 @@ public class GameState extends State {
 
     public void move(int degrees) {
         //If camera is moving then movement will be applied to camera, otherwise apply it to the player
-        System.out.println("x:" +Integer.toString(player.getLocation().getX()));
-        System.out.println("y:" +Integer.toString(player.getLocation().getY()));
         /*
         if(player.canMove())
             System.out.println("Player can move.");
