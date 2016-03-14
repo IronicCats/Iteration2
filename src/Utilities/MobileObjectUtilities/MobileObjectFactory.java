@@ -44,7 +44,7 @@ public class MobileObjectFactory {
 
         // Enemy zero
         HostileNPC enemy = (HostileNPC)makeNPC(MobileObjectEnum.KITTEN, new Location(8, 3), map, player);
-        enemy.getController().setBaseLoc(new Location(9,0));
+        enemy.getController().setBaseLoc(new Location(20,20));
         enemy.getController().setEnemy(enemy);
         enemy.getController().setTarget(player);
         enemy.getStats().setLife(2);
@@ -70,7 +70,7 @@ public class MobileObjectFactory {
         objects.put(davePet, makeAsset(MobileObjectEnum.DAVE_PET, davePet));
 
         //vehicle
-        Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(1,1, 45), map, player);
+        Vehicle roomba = (Vehicle) makeNPC(MobileObjectEnum.ROOMBA, new Location(6,10, 45), map, player);
         objects.put(roomba, makeAsset(MobileObjectEnum.ROOMBA,roomba));
 
         return objects;
@@ -170,16 +170,16 @@ public class MobileObjectFactory {
     } // end makeNPC
 
     public static Player makeSummoner() {
-        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
+        return new Player(new Location(5, 10), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
     } // end makeSummoner
 
 
     public static Player makeSneak() {
-        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Sneak(), new Inventory());
+        return new Player(new Location(5, 10), MobileObjectEnum.PLAYER.ordinal(), new Sneak(), new Inventory());
     } // end makeSneak
 
     public static Player makeSmasher() {
-        return new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+        return new Player(new Location(5, 10), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
     } // end makeSmasher
 
     public static Projectile Hairball(Location location, Effect effect ){

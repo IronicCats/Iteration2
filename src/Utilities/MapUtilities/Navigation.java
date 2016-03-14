@@ -1,8 +1,10 @@
 package Utilities.MapUtilities;
 
 import Model.GameObject.MobileObjects.MobileObject;
+import Model.GameObject.MobileObjects.Vehicle;
 import Model.Location;
 import Model.Map.Map;
+import Model.Map.Tiles.Mountain;
 
 /**
  * Created by Wimberley on 3/6/16.
@@ -22,6 +24,9 @@ public class Navigation {
         } else if (location.getX() < 0 || location.getX() >= map.getWidth()) {
             return false;
         } else if (!map.getTile(location.getX(), location.getY()).isWalkable()) {
+            if(map.getTile(location.getX(), location.getY()) instanceof Mountain && type instanceof Vehicle){
+                return true;
+            }
             return false;
         } else {
             return true;

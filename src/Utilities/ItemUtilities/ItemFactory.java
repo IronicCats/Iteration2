@@ -6,6 +6,7 @@ import Model.Effects.ModificationEnum;
 import Model.GameObject.Item.Item;
 import Model.GameObject.Item.Items.Interactable;
 import Model.GameObject.Item.Items.Obstacle;
+import Model.GameObject.Item.Items.Takable;
 import Model.GameObject.Item.Items.Takables.Equippable.Armor;
 import Model.GameObject.Item.Items.Takables.Equippable.Weapon;
 import Model.GameObject.Item.Items.Takables.Money;
@@ -37,56 +38,64 @@ public class ItemFactory {
 
         HashMap<Item, ItemView> initItems = new HashMap<>();
 
+
         // potion stack
-        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(0, 0));        /* health potion */
+        Item hp = ItemFactory.makeItem(ItemsEnum.HEALTH_POTION, new Location(20, 10));
         initItems.put(hp, ItemFactory.makeAsset(ItemsEnum.HEALTH_POTION, hp));
 
-        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(0, 0));       /* agility potion */
+        Item ap = ItemFactory.makeItem(ItemsEnum.AGILITY_POTION, new Location(20, 10));
         initItems.put(ap, ItemFactory.makeAsset(ItemsEnum.AGILITY_POTION, ap));
 
-        Item ep = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, new Location(0, 0));    /* experience potion */
+        /*
+
+        Item ep = ItemFactory.makeItem(ItemsEnum.EXPERIENCE_POTION, new Location(0, 0));
         initItems.put(ep, ItemFactory.makeAsset(ItemsEnum.EXPERIENCE_POTION, ep));
 
-        Item hardp = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, new Location(0, 0));    /* hardiness potion */
+        Item hardp = ItemFactory.makeItem(ItemsEnum.HARDINESS_POTION, new Location(0, 0));
         initItems.put(hardp, ItemFactory.makeAsset(ItemsEnum.HARDINESS_POTION, hardp));
 
-        Item ip = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, new Location(0, 0));    /* intellect potion */
+        Item ip = ItemFactory.makeItem(ItemsEnum.INTELLECT_POTION, new Location(0, 0));
         initItems.put(ip, ItemFactory.makeAsset(ItemsEnum.INTELLECT_POTION, ip));
 
-        Item mp = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, new Location(0, 0));    /* movement potion */
+        Item mp = ItemFactory.makeItem(ItemsEnum.MOVEMENT_POTION, new Location(0, 0));
         initItems.put(mp, ItemFactory.makeAsset(ItemsEnum.MOVEMENT_POTION, mp));
 
-        Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));    /* strength potion */
+        Item sp = ItemFactory.makeItem(ItemsEnum.STRENGTH_POTION, new Location(0, 0));
         initItems.put(sp, ItemFactory.makeAsset(ItemsEnum.STRENGTH_POTION, sp));
 
+        */
+
+
         // closed treasure chest
-        Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(5, 2));
+        Item closedTreasureChest = ItemFactory.makeItem(ItemsEnum.CLOSED_TREASURE_CHEST, new Location(4, 16));
         initItems.put(closedTreasureChest, ItemFactory.makeAsset(ItemsEnum.CLOSED_TREASURE_CHEST, closedTreasureChest));
 
+
         // stick sword
-        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(4, 0));
+        Item stickSword = ItemFactory.makeItem(ItemsEnum.STICK_SWORD, new Location(12, 12));
         initItems.put(stickSword, ItemFactory.makeAsset(ItemsEnum.STICK_SWORD, stickSword));
 
         // stick greatsword
-        Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
-        initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
+        //Item stickGreatsword = ItemFactory.makeItem(ItemsEnum.STICK_GREATSWORD, new Location(4, 1));
+        //initItems.put(stickGreatsword, ItemFactory.makeAsset(ItemsEnum.STICK_GREATSWORD, stickGreatsword));
 
         // wooden gloves
-        Item woodenGloves = ItemFactory.makeItem(ItemsEnum.WOODEN_GLOVES, new Location(4, 2));
+        Item woodenGloves = ItemFactory.makeItem(ItemsEnum.WOODEN_GLOVES, new Location(30, 5));
         initItems.put(woodenGloves, ItemFactory.makeAsset(ItemsEnum.WOODEN_GLOVES, woodenGloves));
 
         // swordfish dagger
-        Item swordfishDagger = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, new Location(3, 0));
-        initItems.put(swordfishDagger, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_DAGGER, swordfishDagger));
+        //Item swordfishDagger = ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, new Location(3, 0));
+        //initItems.put(swordfishDagger, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_DAGGER, swordfishDagger));
 
         // swordfish lance
-        Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
-        initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
+        //Item swordfishLance = ItemFactory.makeItem(ItemsEnum.SWORDFISH_LANCE, new Location(3, 1));
+        //initItems.put(swordfishLance, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_LANCE, swordfishLance));
 
         // swordfish lance
-        Item swordfishGauntlets = ItemFactory.makeItem(ItemsEnum.SWORDFISH_GAUNTLETS, new Location(3, 2));
-        initItems.put(swordfishGauntlets, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_GAUNTLETS, swordfishGauntlets));
+        //Item swordfishGauntlets = ItemFactory.makeItem(ItemsEnum.SWORDFISH_GAUNTLETS, new Location(3, 2));
+        //initItems.put(swordfishGauntlets, ItemFactory.makeAsset(ItemsEnum.SWORDFISH_GAUNTLETS, swordfishGauntlets));
 
+        /*
         // pufferfish mace
         Item pufferfishMace = ItemFactory.makeItem(ItemsEnum.PUFFER_FISH_MACE, new Location(2, 0));
         initItems.put(pufferfishMace, ItemFactory.makeAsset(ItemsEnum.PUFFER_FISH_MACE, pufferfishMace));
@@ -115,8 +124,10 @@ public class ItemFactory {
         Item laserPointer = ItemFactory.makeItem(ItemsEnum.LASER_POINTER, new Location(6, 1));
         initItems.put(laserPointer, ItemFactory.makeAsset(ItemsEnum.LASER_POINTER, laserPointer));
 
+        */
+
         // helmet
-        Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(4, 5));
+        Item helmet = ItemFactory.makeItem(ItemsEnum.HELMET, new Location(11, 12));
         initItems.put(helmet, ItemFactory.makeAsset(ItemsEnum.HELMET, helmet));
 
         // chest armor
@@ -124,9 +135,10 @@ public class ItemFactory {
         initItems.put(chestPlate, ItemFactory.makeAsset(ItemsEnum.CHESTPLATE, chestPlate));
 
         // chest armor
-        Item platelegs = ItemFactory.makeItem(ItemsEnum.PLATELEGS, new Location(5, 4));
+        Item platelegs = ItemFactory.makeItem(ItemsEnum.PLATELEGS, new Location(15, 4));
         initItems.put(platelegs, ItemFactory.makeAsset(ItemsEnum.PLATELEGS, platelegs));
 
+        /*
         // pants
         Item pants = ItemFactory.makeItem(ItemsEnum.PANTS, new Location(6, 5));
         initItems.put(pants, ItemFactory.makeAsset(ItemsEnum.PANTS, pants));
@@ -143,17 +155,19 @@ public class ItemFactory {
         Item shield = ItemFactory.makeItem(ItemsEnum.SHIELD, new Location(9, 5));
         initItems.put(shield, ItemFactory.makeAsset(ItemsEnum.SHIELD, shield));
 
+        */
+
         // key
-        Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(5, 3));
+        Item key = ItemFactory.makeItem(ItemsEnum.CHEST_KEY, new Location(6, 15));
         initItems.put(key, ItemFactory.makeAsset(ItemsEnum.CHEST_KEY, key));
 
         // house
-        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(7, 2));
+        Item house = ItemFactory.makeItem(ItemsEnum.HOUSE, new Location(7, 7));
         initItems.put(house, ItemFactory.makeAsset(ItemsEnum.HOUSE, house));
 
         // tuna
-        /*Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
-        initItems.put(tuna, ItemFactory.makeAsset(ItemsEnum.TUNA, tuna));*/
+        //Item tuna = ItemFactory.makeItem(ItemsEnum.TUNA, new Location(8, 8));
+        //initItems.put(tuna, ItemFactory.makeAsset(ItemsEnum.TUNA, tuna));
 
         // sushi
         Item sushi = ItemFactory.makeItem(ItemsEnum.SUSHI, new Location(8, 8));
@@ -198,11 +212,11 @@ public class ItemFactory {
         Item horizFence3 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(16, 12));
         initItems.put(horizFence3, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence3));
 
-        Item horizFence4 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(17, 12));
-        initItems.put(horizFence4, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence4));
+        Item cornerFenceOdd = ItemFactory.makeItem(ItemsEnum.CORNER_FENCE_ODD, new Location(17, 12));
+        initItems.put(cornerFenceOdd, ItemFactory.makeAsset(ItemsEnum.CORNER_FENCE_ODD, cornerFenceOdd));
 
-        Item horizFence10 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_EVEN, new Location(12, 17));
-        initItems.put(horizFence10, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_EVEN, horizFence10));
+        Item cornerFenceEven = ItemFactory.makeItem(ItemsEnum.CORNER_FENCE_EVEN, new Location(12, 17));
+        initItems.put(cornerFenceEven, ItemFactory.makeAsset(ItemsEnum.CORNER_FENCE_EVEN, cornerFenceEven));
 
         Item horizFence5 = ItemFactory.makeItem(ItemsEnum.HORIZ_FENCE_ODD, new Location(13, 17));
         initItems.put(horizFence5, ItemFactory.makeAsset(ItemsEnum.HORIZ_FENCE_ODD, horizFence5));
@@ -228,9 +242,9 @@ public class ItemFactory {
         initItems.put(doorKey, ItemFactory.makeAsset(ItemsEnum.DOOR_KEY, doorKey));
 
         //coin stacks
-        Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(1, 2));
-        Item money2 = ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, new Location(2, 4));
-        Item money3 = ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, new Location(3, 5));
+        Item money1 = ItemFactory.makeItem(ItemsEnum.SMALL_COIN_STACK, new Location(20, 5));
+        Item money2 = ItemFactory.makeItem(ItemsEnum.MEDIUM_COIN_STACK, new Location(4, 6));
+        Item money3 = ItemFactory.makeItem(ItemsEnum.LARGE_COIN_STACK, new Location(1, 17));
         initItems.put(money1, ItemFactory.makeAsset(ItemsEnum.SMALL_COIN_STACK, money1));
         initItems.put(money2, ItemFactory.makeAsset(ItemsEnum.MEDIUM_COIN_STACK, money2));
         initItems.put(money3, ItemFactory.makeAsset(ItemsEnum.LARGE_COIN_STACK, money3));
@@ -243,10 +257,12 @@ public class ItemFactory {
         Item[] items = new Item[amount];
         for (int i = 0; i < amount; i++) {
             items[i] = ItemFactory.makeItem(ItemsEnum.values()[(int) (Math.random() * ItemsEnum.values().length)], location);
+            if(!(items[i] instanceof Takable)){
+                i--; // removes if item is not takable
+            }
         }
         return items;
     } // end makeRandomItems
-
 
     public static Item makeItem(ItemsEnum itemsEnum, Location location) {
         int id = itemsEnum.ordinal();
@@ -614,6 +630,18 @@ public class ItemFactory {
                         "This fence is blocking the path",
                         100,
                         location);
+            case CORNER_FENCE_EVEN:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
+            case CORNER_FENCE_ODD:
+                return new Obstacle(id,
+                        "Wooden Fence",
+                        "This fence is blocking the path",
+                        100,
+                        location);
             case WOODEN_DOOR:
                 return new Interactable(id,
                         "Wooden Fence",
@@ -676,6 +704,10 @@ public class ItemFactory {
                 return new ItemView(item, Assets.CHEST_KEY);
             case CLOSED_TREASURE_CHEST:
                 return new ItemView(item, Assets.TREASURE_CHEST);
+            case CORNER_FENCE_EVEN:
+                return new ItemView(item, Assets.CORNER_FENCE_EVEN);
+            case CORNER_FENCE_ODD:
+                return new ItemView(item, Assets.CORNER_FENCE_ODD);
             case DOOR_KEY:
                 return new ItemView(item, Assets.DOOR_KEY);
             case OPEN_DOOR:
