@@ -22,6 +22,7 @@ public abstract class Abilities {
     int manaCost;
     int range;
     int cooldown;
+    int skillLevel;
     //constructor
     public Abilities(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown) {
 
@@ -33,6 +34,19 @@ public abstract class Abilities {
         this.range = range;
         this.cooldown = cooldown;
         this.manaCost = manaCost;
+    }
+
+    public Abilities(String name, String description, Effect effects, Requirement requirement, int manaCost, int range, int cooldown, int skillLvel) {
+
+        this.name = name;
+        this.description = description;
+        this.effects = effects;
+        this.requirement = requirement;
+        this.cost = new Effect(new StatStructure(StatsEnum.MANA, manaCost));
+        this.range = range;
+        this.cooldown = cooldown;
+        this.manaCost = manaCost;
+        this.skillLevel = skillLevel;
     }
 
     //accessor
@@ -81,6 +95,14 @@ public abstract class Abilities {
 
     public void setManaCost(int manaCost){
         this.manaCost = manaCost;
+    }
+
+    public int getSkillLevel(){
+        return this.skillLevel;
+    }
+
+    public void setSkillLevel(int s){
+        this.skillLevel = s;
     }
 
 }
