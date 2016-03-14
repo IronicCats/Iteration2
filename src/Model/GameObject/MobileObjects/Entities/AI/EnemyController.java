@@ -17,7 +17,7 @@ import Utilities.AbilitiesUtilities.checkAbilityRange;
 public class EnemyController extends AIController {
 
     HostileNPC enemy;
-
+    protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
 
     public EnemyController(Map map) {
         super(map);
@@ -29,17 +29,17 @@ public class EnemyController extends AIController {
 
     @Override
     public void tick() {
-        if(targetinView()) {
+        if (targetinView()) {
             followThenAttackinRange();
-        }
-        else{
-           randomlyMoveinRange();
+        } else {
+            randomlyMoveinRange();
         }
     }
 
     @Override
-    public void follow(){
+    public void follow() {
         moveTo(target.getLocation());
+        System.out.println("using enemy follow");
     }
 
     //TODO: add delay to attacks based off of speed
@@ -48,33 +48,35 @@ public class EnemyController extends AIController {
             enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
             if (enemy.getOccupation() instanceof Smasher) {
                 if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
-                    //System.out.println("attacking");
-                    enemy.attack(enemy.getAbilities().get(0));
+                    if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= 3) {
+                        System.out.println("attacking");
+                        lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
+                        enemy.attack(enemy.getAbilities().get(0));
+                    }
                 }
-                else if(DistanceFromFaceableTarget.calculate(enemy, target) > 1){
-                    follow();
+                else if (DistanceFromFaceableTarget.calculate(enemy, target) > 1) {
+                        follow();
+                    }
+                } else if (enemy.getOccupation() instanceof Summoner) {
+                    Abilities a = checkAbilityRange.check(enemy.getAbilities());
+                    if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
+                        //enemy.attack(a);
+                    }
                 }
-            }
-            else if (enemy.getOccupation() instanceof Summoner) {
-                Abilities a = checkAbilityRange.check(enemy.getAbilities());
-                if (a.getRange() >= DistanceFromFaceableTarget.calculate(enemy, target)) {
-                    //enemy.attack(a);
-                }
+            } else {
+                follow();
             }
         }
-        else{
-            follow();
+
+        @Override
+        public void update() {
+
+        }
+
+        @Override
+        public void remove() {
+
         }
     }
 
-    @Override
-    public void update(){
-
-    }
-
-    @Override
-    public void remove() {
-
-    }
-}
 

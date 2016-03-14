@@ -320,6 +320,10 @@ public abstract class Character extends Entity implements Observer{
         return ((Weapon)(getWeaponInSlot(s))).getType();
     }
 
+    public int getBasicSkillsValue(SkillsEnum s){
+        return occupation.getBasicSkillValue(s);
+    }
+
     @Override
     public void update() {
 
