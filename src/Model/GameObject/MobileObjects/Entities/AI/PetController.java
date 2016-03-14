@@ -1,6 +1,7 @@
 package Model.GameObject.MobileObjects.Entities.AI;
 
 import Model.GameObject.MobileObjects.Entities.Characters.Player;
+import Model.GameObject.MobileObjects.Entities.Pet;
 import Model.GameObject.MobileObjects.MobileObject;
 import Model.GameObject.MobileObjects.Vehicle;
 import Model.Map.Map;
@@ -10,6 +11,7 @@ import Utilities.AIUtilities.FindTargetinTiles;
  * Created by Aidan on 3/6/2016.
  */
 public class PetController extends AIController {
+    Pet pet;
 
     public PetController(Map map) {
         super(map);
@@ -48,6 +50,7 @@ public class PetController extends AIController {
         else{
             follow(target[0]);
         }
+
     }
 
     //Moves to location of a mobileobject
@@ -56,7 +59,18 @@ public class PetController extends AIController {
             oldTargetLocation = target.getLocation();
         }
         moveTo(oldTargetLocation);
+        tryToPickUpRandomly(2);
     }
+
+    public void tryToPickUpRandomly(int percentPickup) {
+        int temp = random.nextInt(percentPickup);
+        if (map.getTile(AI.getLocation().getX(), AI.getLocation().getY()).hasItems()) {
+            if (temp == 1) {
+                map.getTile(AI.getLocation().getX(), AI.getLocation().getY()).interact();            }
+        }
+    }
+
+
 
     @Override
     public void update() {

@@ -71,6 +71,7 @@ public class Pet extends MobileObject implements Tickable {
         return owned;
     }
 
+
     public ArrayList<Item> takeItems(ArrayList<Item> items) {
         ArrayList<Item> tempItems = new ArrayList<>(items);
         Iterator<Item> it = tempItems.iterator();

@@ -18,9 +18,11 @@ public class EnemyController extends AIController {
 
     HostileNPC enemy;
     protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
+    boolean imAttacking;
 
     public EnemyController(Map map) {
         super(map);
+        imAttacking = false;
     }
 
     public void setEnemy(HostileNPC enemy) {
@@ -32,7 +34,8 @@ public class EnemyController extends AIController {
         if(!enemy.getSleep()) {
             if (targetinView()) {
                 followThenAttackinRange();
-            } else {
+            }
+            else {
                 randomlyMoveinRange();
             }
         }
@@ -46,17 +49,19 @@ public class EnemyController extends AIController {
 
     //TODO: add delay to attacks based off of speed
     public void followThenAttackinRange() {
-        if (canFace()) {
-            enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
-            if (enemy.getOccupation() instanceof Smasher) {
-                if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
-                    if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= enemy.getAbilities().get(0).getCooldown()) {
-                        System.out.println("attacking");
-                        lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
-                        enemy.attack(enemy.getAbilities().get(0));
-                    }
-                }
-                else if (DistanceFromFaceableTarget.calculate(enemy, target) > 1) {
+        int temp = random.nextInt(enemy.getHostilityRating() * 10);
+       // if (temp == 1 || imAttacking) {
+            imAttacking = true;
+            if (canFace()) {
+                enemy.face(DirectionofTarget.getDir(enemy.getLocation(), target.getLocation()));
+                if (enemy.getOccupation() instanceof Smasher) {
+                    if (DistanceFromFaceableTarget.calculate(enemy, target) == 1) {
+                        if ((int) (System.currentTimeMillis() / 1000L) - lastProcessedTime >= enemy.getAbilities().get(0).getCooldown()) {
+                            System.out.println("attacking");
+                            lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
+                            enemy.attack(enemy.getAbilities().get(0));
+                        }
+                    } else if (DistanceFromFaceableTarget.calculate(enemy, target) > 1) {
                         follow();
                     }
                 } else if (enemy.getOccupation() instanceof Summoner) {
@@ -68,6 +73,7 @@ public class EnemyController extends AIController {
             } else {
                 follow();
             }
+       // }
         }
 
         @Override
