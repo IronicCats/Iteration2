@@ -126,8 +126,13 @@ public class Map implements Subject {
                 Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(), c.getLocation()), a.getEffects());
                 ((ProjectileAbility) a).setProjectile(p);
                 mobileObjects.put(p, MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL, p));
-                ((ProjectileAbility) a).getProjectile().execute(infront.getLocation());
+                ((ProjectileAbility) a).getProjectile().execute();
+                System.out.println("do this");
+                mobileObjects.remove(p);
+                p.deregister();
+                System.out.println("deregistered");
             }
+
         }
 
         else if(a instanceof AOEAbility) { //using an area of effect ability
@@ -147,7 +152,6 @@ public class Map implements Subject {
          else {
             System.out.println("Not a Direct Ability");
         }
-        
     }
 
     public void carryInteraction(MobileObject mo) {

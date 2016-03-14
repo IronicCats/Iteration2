@@ -18,6 +18,7 @@ public class Projectile extends MobileObject {
 
     private Effect effects;
     int range;
+    protected static int lastProcessedTime = (int) (System.currentTimeMillis() / 1000L);
 
     //constructor
     public Projectile(Location location, int id, Stats stats, Effect effects, int range) {
@@ -43,13 +44,14 @@ public class Projectile extends MobileObject {
         this.range = r;
     }
 
-    public void execute(Location base) {
+    public void execute() {
 
-        Tile infront = map.getTile(Location.newLocation(base.getDir(),base));
-        if(infront.hasObject()){
-
+        Tile infront = map.getTile(Location.newLocation(this.getDir(), this.getLocation()));
+        if (infront.hasObject()) {
+            infront.receiveProjectileAttack(this);
+            return;
         }
-
+        move(this.getDir());
     }
 
     public void applyEffect() {

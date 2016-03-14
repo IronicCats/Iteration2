@@ -33,7 +33,7 @@ public class PetController extends AIController {
         return FindTargetinTiles.find(getTilesinView(), target);
     }
 
-    @Override
+   @Override
     public void tick() {
 
         if(targetinView(target[0]) || target[0] == null) {
