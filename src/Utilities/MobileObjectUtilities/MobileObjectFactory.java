@@ -171,7 +171,7 @@ public class MobileObjectFactory {
     public static Player Player() {
         // player
 
-        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Smasher(), new Inventory());
+        Player player = new Player(new Location(0, 1), MobileObjectEnum.PLAYER.ordinal(), new Summoner(), new Inventory());
         //player.equip((Weapon) ItemFactory.makeItem(ItemsEnum.SWORDFISH_DAGGER, player.getLocation()));
         return player;
     }
@@ -200,6 +200,8 @@ public class MobileObjectFactory {
                 return new MobileObjectView(mobileObject, Assets.DAVE_PET);
             case ROOMBA:
                 return new MobileObjectView(mobileObject, Assets.ROOMBA);
+            case HAIRBALL:
+                return new MobileObjectView(mobileObject,Assets.HAIRBALL);
             case SHEEP_VEHICLE:
             case LOW_RIDER:
             case SADDLED_DOG:

@@ -119,6 +119,7 @@ public class Map implements Subject {
             System.out.println("Projectile Ability Set");
             Projectile p = MobileObjectFactory.Hairball(Location.newLocation(c.getDir(),c.getLocation()), a.getEffects());
             ((ProjectileAbility) a).setProjectile(p);
+            System.out.println(p.getDir());
             mobileObjects.put(p,MobileObjectFactory.makeAsset(MobileObjectEnum.HAIRBALL,p));
             ((ProjectileAbility) a).getProjectile().execute(c.getLocation());
         }

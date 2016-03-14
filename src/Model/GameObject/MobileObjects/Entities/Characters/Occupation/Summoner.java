@@ -29,7 +29,7 @@ public class Summoner extends Occupation {
         //set occupational skills
         modifyOccupationalSkills(SkillsEnum.ENCHANT, 0);
         modifyOccupationalSkills(SkillsEnum.BOON, 0);
-        modifyOccupationalSkills(SkillsEnum.BANE, 0);
+        modifyOccupationalSkills(SkillsEnum.BANE, 1);
         modifyOccupationalSkills(SkillsEnum.STAFF, 0);
 
 
