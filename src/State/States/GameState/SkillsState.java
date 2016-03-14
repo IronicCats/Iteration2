@@ -121,7 +121,7 @@ public class SkillsState extends State {
             default:
                 break;
         }
-    }
+        }
     public void render(Graphics g) {
         State.GAMESTATE.render(g);
         skillsView.render(g, cursor);
